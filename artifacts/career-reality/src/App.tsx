@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
 import { Switch, Route, useLocation, Router as WouterRouter, Redirect } from 'wouter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { getCheckReadinessDeskAccessQueryKey, useCheckReadinessDeskAccess } from '@workspace/api-client-react';
 
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -11,7 +10,7 @@ const Home = lazy(() => import('@/pages/home'));
 const ProPage = lazy(() => import('@/pages/pro'));
 const Workspace = lazy(() => import('@/pages/workspace'));
 const CatalogReviewPage = lazy(() => import('@/pages/workspace/catalog-review'));
-const ApplicationReadinessDashboard = lazy(() => import('@/pages/admin/application-readiness-dashboard'));
+const ApplicationReadinessRoute = lazy(() => import('@/pages/admin/application-readiness-route'));
 const CareerRealityCompassPage = lazy(() => import('@/pages/compass'));
 const SitemapPage = lazy(() => import('@/pages/sitemap'));
 const MobileAppPage = lazy(() => import('@/pages/mobile-app'));
@@ -56,48 +55,6 @@ function HomeRedirect() {
   return (
     isSignedIn ? <Redirect to="/compass" /> : <Home />
   );
-}
-
-function ApplicationReadinessRoute() {
-  const { isLoaded, isSignedIn } = useAppAuth();
-  const accessQuery = useCheckReadinessDeskAccess({
-    query: {
-      queryKey: getCheckReadinessDeskAccessQueryKey(),
-      enabled: isLoaded && isSignedIn,
-      retry: false,
-    },
-  });
-
-  if (!isLoaded) return <main className="p-8 text-sm text-muted-foreground" role="status">Checking sign-in…</main>;
-  if (!isSignedIn) {
-    return <Redirect to={`/sign-in?redirect_url=${encodeURIComponent("/admin/application-readiness")}`} />;
-  }
-  if (accessQuery.isLoading) return <main className="p-8 text-sm text-muted-foreground" role="status">Checking reviewer access…</main>;
-  if (accessQuery.error) {
-    const status = "status" in accessQuery.error ? accessQuery.error.status : undefined;
-    if (status === 403) {
-      return (
-        <main className="mx-auto max-w-xl px-5 py-20 text-center">
-          <h1 className="font-display text-3xl">Reviewer access required</h1>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            This readiness desk is limited to approved quality reviewers.
-          </p>
-        </main>
-      );
-    }
-    return (
-      <main className="mx-auto max-w-xl px-5 py-20 text-center">
-        <h1 className="font-display text-3xl">Readiness desk unavailable</h1>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Reviewer access could not be confirmed. The internal register has not been loaded.
-        </p>
-        <button className="mt-5 rounded-md border border-border px-3 py-2 text-sm" onClick={() => void accessQuery.refetch()}>
-          Try again
-        </button>
-      </main>
-    );
-  }
-  return <ApplicationReadinessDashboard />;
 }
 
 function AppRoutes() {
