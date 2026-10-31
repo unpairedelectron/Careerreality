@@ -2,7 +2,7 @@ import { ArrowDown, ArrowUpRight, Calculator, Check, CircleHelp, ShieldAlert } f
 import { Link } from 'wouter';
 import { AppNav } from '@/components/shared/app-nav';
 import { LazyLayoffAlertSignup } from '@/components/shared/lazy-layoff-alert-signup';
-import { PublicFooter } from '@/components/shared/public-shell';
+import { PublicFooter } from '@/components/shared/public-footer';
 import { useSeo } from '@/lib/seo';
 import layoffEvents from '@/data/layoff-events.json';
 import './home.css';

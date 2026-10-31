@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Building2, CircleAlert, Compass, LockKeyhole, Smartphone, WalletCards } from "lucide-react";
 import { Link } from "wouter";
 import { AppNav } from "@/components/shared/app-nav";
-import { PublicFooter } from "@/components/shared/public-shell";
+import { PublicFooter } from "@/components/shared/public-footer";
 import { useSeo } from "@/lib/seo";
 
 const briefings = [

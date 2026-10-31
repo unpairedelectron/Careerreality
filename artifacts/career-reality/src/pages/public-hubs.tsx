@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { ArrowDownRight, ArrowUpRight, Search, SlidersHorizontal } from "lucide-react";
 import { Link } from "wouter";
 import { AppNav } from "@/components/shared/app-nav";
-import { PublicFooter } from "@/components/shared/public-shell";
+import { PublicFooter } from "@/components/shared/public-footer";
 import { guideRoutes, toolRoutes } from "@/data/public-routes";
 import { getToolDirectoryCategoryLabel, toolDirectoryCategories, toolDirectoryItems } from "@/data/tool-directory";
 import { useSeo } from "@/lib/seo";

@@ -9,7 +9,7 @@ import { AppNav } from '@/components/shared/app-nav';
 import { LayoffAlertSignup } from '@/components/shared/layoff-alert-signup';
 import { LayoffResponsePlanner } from '@/components/shared/layoff-response-planner';
 import { LayoffRunwayCalculator } from '@/components/shared/layoff-runway-calculator';
-import { PublicFooter } from '@/components/shared/public-shell';
+import { PublicFooter } from '@/components/shared/public-footer';
 import { useSeo } from '@/lib/seo';
 import eventData from '@/data/layoff-events.json';
 import './layoff-hub.css';

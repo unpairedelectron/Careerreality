@@ -5,7 +5,7 @@ import {
   Plus, Trash2, ArrowRight, Loader2, AlertCircle
 } from 'lucide-react';
 import { AppNav } from '@/components/shared/app-nav';
-import { PublicFooter } from '@/components/shared/public-shell';
+import { PublicFooter } from '@/components/shared/public-footer';
 import { 
   useGetWorkspaceSummary, useListSavedDecisions, useListWatchlist, 
   useCreateSavedDecision, useDeleteSavedDecision, useCreateWatchlistItem, 

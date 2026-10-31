@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, Redirect, useParams } from "wouter";
 import { ArrowLeft, ArrowUpRight, BadgeCheck, BookOpen, CircleAlert, Database, FileCheck2, LockKeyhole, MessageSquare, Scale, Search, ShieldCheck } from "lucide-react";
-import { ArticleCard, FreshnessBadge, PublicBreadcrumbs, PublicFooter, PublicPage } from "@/components/shared/public-shell";
+import { ArticleCard, FreshnessBadge, PublicBreadcrumbs, PublicPage } from "@/components/shared/public-shell";
+import { PublicFooter } from "@/components/shared/public-footer";
 import { SaveDecisionButton } from "@/components/shared/public-actions";
 import { AppNav } from "@/components/shared/app-nav";
 import { articleCategories, articles, getArticle, toolsCatalog } from "@/data/public-content";

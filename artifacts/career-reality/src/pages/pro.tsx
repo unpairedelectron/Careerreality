@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { ArrowUpRight, CircleAlert } from "lucide-react";
 import { AppNav } from "@/components/shared/app-nav";
-import { PublicFooter } from "@/components/shared/public-shell";
+import { PublicFooter } from "@/components/shared/public-footer";
 import { useSeo } from "@/lib/seo";
 
 export default function ProPage() {
