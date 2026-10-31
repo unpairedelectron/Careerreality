@@ -3,7 +3,7 @@
 - [Public API route ordering](public-api-route-ordering.md) — mount unauthenticated data routes before the workspace router, whose catch-all auth middleware otherwise returns 401.
 - [Live editorial source fetching](live-editorial-source-fetch.md) — large parallel public-article scrapes can 500; keep source links and brief labeling when extraction is unstable.
 - [Browser regression runner](browser-regression-runner.md) — use the system Chromium executable for Playwright; keep video capture off because ffmpeg is not installed.
-- [GitHub connector upload filter](github-upload-filter.md) — some HTML and workflow writes can hit upstream Cloudflare 403s while ordinary repository files still upload.
+- [GitHub connector limits](github-upload-filter.md) — API upload quirks are separate from Git CLI authentication; use Replit's Git pane for repeatable repo sync.
 - [Media generation fallback](media-generation-fallback.md) — when optional media generation is unavailable, keep the artifact self-contained with a local fallback asset rather than a missing reference.
 - [Decision-suite calculations](decision-suite-calculations.md) — keep new public-tool math client-side and visibly directional until a persisted report contract exists.
 - [Career Reality Index reflection](career-index-diagnosis.md) — keep the reflection fixed and non-diagnostic beside self-reported answers; no score or recommendation.
