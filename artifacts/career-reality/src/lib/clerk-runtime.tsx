@@ -16,6 +16,15 @@ import { useTheme } from "./theme";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+declare global {
+  interface Window {
+    __careerRealityAuthCacheProbe?: {
+      seed: () => void;
+      read: () => unknown;
+    };
+  }
+}
+
 const clerkAppearance = {
   theme: shadcn,
   cssLayerName: "clerk",
@@ -83,6 +92,18 @@ function ClerkQueryClientCacheInvalidator({ queryClient }: { queryClient: QueryC
       crossTabSync.dispose();
     };
   }, [addListener, queryClient]);
+
+  useEffect(() => {
+    if (import.meta.env.VITE_E2E_AUTH_CACHE_PROBE !== "true") return;
+
+    window.__careerRealityAuthCacheProbe = {
+      seed: () => queryClient.setQueryData(["auth-cache-sentinel"], "cached-user-data"),
+      read: () => queryClient.getQueryData(["auth-cache-sentinel"]),
+    };
+    return () => {
+      delete window.__careerRealityAuthCacheProbe;
+    };
+  }, [queryClient]);
 
   return null;
 }

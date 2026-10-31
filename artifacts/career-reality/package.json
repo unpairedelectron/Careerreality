@@ -25,6 +25,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:e2e": "playwright test",
     "test:e2e:auth-deferral": "playwright test --config playwright.auth.config.ts",
+    "test:e2e:real-clerk-cross-tab": "playwright test --config playwright.real-clerk.config.ts",
     "test:e2e:batch": "node scripts/run-e2e-batch.mjs",
     "test:e2e:production": "VITE_E2E=true pnpm run build && PLAYWRIGHT_PRODUCTION=true pnpm exec playwright test --workers=2 --reporter=line",
     "test:e2e:published": "PLAYWRIGHT_PUBLISHED=true PLAYWRIGHT_BASE_URL=https://careerreality.in pnpm exec playwright test tests/seo-foundations.spec.ts tests/article-visuals.spec.ts --grep \"published article\"",
