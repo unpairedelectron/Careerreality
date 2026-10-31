@@ -6,6 +6,7 @@ import "@clerk/themes/shadcn.css";
 import type { QueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { AppAuthProvider } from "./app-auth";
+import { clearQueryCacheOnAuthUserChange } from "./auth-user-cache";
 import { useTheme } from "./theme";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -67,11 +68,7 @@ function ClerkQueryClientCacheInvalidator({ queryClient }: { queryClient: QueryC
 
   useEffect(() => {
     const unsubscribe = addListener(({ user }) => {
-      const userId = user?.id ?? null;
-      if (previousUserId.current !== undefined && previousUserId.current !== userId) {
-        queryClient.clear();
-      }
-      previousUserId.current = userId;
+      clearQueryCacheOnAuthUserChange(queryClient, previousUserId, user?.id ?? null);
     });
     return unsubscribe;
   }, [addListener, queryClient]);

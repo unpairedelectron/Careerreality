@@ -19,7 +19,10 @@ export default function SignInPage() {
   const [, setLocation] = useLocation();
   const { signIn } = useAppAuth();
 
-  if (import.meta.env.VITE_E2E === "true") {
+  if (
+    import.meta.env.VITE_E2E === "true" ||
+    import.meta.env.VITE_E2E_AUTH_RUNTIME === "true"
+  ) {
     return (
       <div className="grain min-h-[100dvh] flex flex-col">
         <header className="flex items-center justify-between px-5 sm:px-8 h-[72px] border-b border-border bg-background/90 backdrop-blur-md">

@@ -39,6 +39,7 @@ import { PublicAppAuthProvider, TestAppAuthProvider, useAppAuth } from '@/lib/ap
 import routeRegistry from '@/data/route-registry';
 
 const isE2e = import.meta.env.VITE_E2E === "true";
+const isClerkRuntimeE2e = import.meta.env.VITE_E2E_AUTH_RUNTIME === "true";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -151,7 +152,7 @@ function DeferredClerkRoutes() {
     let active = true;
     const loadClerk = async () => {
       try {
-        const module = await import("./lib/clerk-runtime");
+        const module = await import("@/lib/clerk-runtime");
         if (active) setClerkRuntime(() => module.default);
       } catch (error) {
         console.error("Authentication could not be loaded.", error);
@@ -188,7 +189,7 @@ function App() {
   const authAvailable = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
   return (
     <WouterRouter base={basePath}>
-      {isE2e || !authAvailable
+      {isE2e || (!authAvailable && !isClerkRuntimeE2e)
         ? <TestAppAuthProvider><AppRoutes /></TestAppAuthProvider>
         : <DeferredClerkRoutes />}
     </WouterRouter>

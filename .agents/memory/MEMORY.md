@@ -55,3 +55,4 @@
 - [Resume and job-link privacy boundary](resume-job-link-boundary.md) — keep uploads and user URL fetching out of production until consent, retention/access, and SSRF controls are approved.
 - [Current-route readiness](tool-readiness-route-alignment.md) — only exact current-route assessments carry scores; similar or redirected legacy tools stay unscored until reviewed.
 - [Evidence excerpt provenance](evidence-excerpt-provenance.md) — keep source labeling separate from evidence status and preserve original line boundaries for attribution context.
+- [Vite test-runtime isolation](vite-test-runtime-isolation.md) — use a test-only Vite alias for alternate auth runtimes; conditional dynamic imports can still ship test code in production.

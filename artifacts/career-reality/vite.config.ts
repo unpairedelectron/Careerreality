@@ -148,15 +148,25 @@ export default defineConfig(async ({ command }) => {
       : []),
   ],
   resolve: {
-    alias: {
-      '@': path.resolve(import.meta.dirname, 'src'),
-      '@assets': path.resolve(
-        import.meta.dirname,
-        '..',
-        '..',
-        'attached_assets',
-      ),
-    },
+    alias: [
+      {
+        find: '@/lib/clerk-runtime',
+        replacement: path.resolve(
+          import.meta.dirname,
+          process.env.VITE_E2E_AUTH_RUNTIME === 'true'
+            ? 'src/lib/clerk-runtime-test.tsx'
+            : 'src/lib/clerk-runtime.tsx',
+        ),
+      },
+      {
+        find: '@assets',
+        replacement: path.resolve(import.meta.dirname, '..', '..', 'attached_assets'),
+      },
+      {
+        find: '@',
+        replacement: path.resolve(import.meta.dirname, 'src'),
+      },
+    ],
     dedupe: ['react', 'react-dom', '@tanstack/react-query'],
   },
   define: {
