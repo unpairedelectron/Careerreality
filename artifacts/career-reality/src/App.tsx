@@ -148,7 +148,7 @@ function DeferredClerkRoutes() {
   const immediateAuth = routeNeedsImmediateAuth(path);
 
   useEffect(() => {
-    if (ClerkRuntime) return;
+    if (ClerkRuntime || !immediateAuth) return;
     let active = true;
     const loadClerk = async () => {
       try {
@@ -159,10 +159,9 @@ function DeferredClerkRoutes() {
         if (active) setAuthLoadFailed(true);
       }
     };
-    const timer = window.setTimeout(() => void loadClerk(), immediateAuth ? 0 : 5000);
+    void loadClerk();
     return () => {
       active = false;
-      window.clearTimeout(timer);
     };
   }, [ClerkRuntime, immediateAuth]);
 

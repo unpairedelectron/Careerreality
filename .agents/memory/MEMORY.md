@@ -13,6 +13,7 @@
 - [Trust center policy pages](trust-center-policy-pages.md) — make policy routes explicit and product-accurate; do not invent retention, SLA, vendor, or legal-entity claims.
 - [Editorial visual integrity](editorial-visual-integrity.md) — use article-specific qualitative frameworks unless a figure has an exact, scoped source-backed measurement.
 - [Production verification](production-verification.md) — verify the published build, custom domain, sitemap, and readiness route separately from the dev preview.
+- [Public-route auth deferral](public-route-auth-deferral.md) — load Clerk only for auth-required routes; avoid timed auth imports on public pages.
 - [Static route boundaries](static-route-boundaries.md) — generate public snapshots and valid app shells; let unknown static paths return real 404s instead of rewriting to the homepage.
 - [Workspace build environment](workspace-build-environment.md) — managed previews use their artifact prefix; published SEO builds use the site root with explicit PORT and BASE_PATH.
 - [Shared report throttling](shared-report-throttling.md) — use an atomic DB bucket and HMAC identities; PostgreSQL expiry predicates should use CURRENT_TIMESTAMP.

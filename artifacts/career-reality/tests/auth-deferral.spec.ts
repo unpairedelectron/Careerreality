@@ -56,17 +56,51 @@ test.describe("deferred Clerk auth regression coverage", () => {
     });
   }
 
-  test("redirects signed-in homepage visitors only after auth finishes loading", async ({ page }) => {
-    await page.goto("/?__e2e_user=first-user");
-    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 9_000 });
-    await expect(page).toHaveURL(/\/\?__e2e_user=first-user$/);
+  test("keeps public pages auth-free until a visitor requests a protected route", async ({ page }) => {
+    let runtimeImports = 0;
+    await page.route("**/*clerk-runtime-test*", async (route) => {
+      runtimeImports += 1;
+      await route.continue();
+    });
+
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+    await page.waitForTimeout(5_500);
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
+    expect(runtimeImports).toBe(0);
+
     await page.route("**/api/**", (route) =>
       route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ error: "Test data unavailable" }) }),
     );
-
+    await page.evaluate(() => {
+      window.history.pushState({}, "", "/compass?__e2e_user=first-user");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 4_500 });
     await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
-    await expect(page).toHaveURL(/\/compass\/?$/, { timeout: 5_000 });
     await expect(page.getByTestId("button-account-menu")).toBeVisible();
+    expect(runtimeImports).toBe(1);
+    await page.evaluate(() => {
+      window.history.pushState({}, "", "/");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    await expect(page).toHaveURL(/\/compass\/?$/, { timeout: 5_000 });
+  });
+
+  test("loads auth when a visitor opens sign-in from a public page", async ({ page }) => {
+    let runtimeImports = 0;
+    await page.route("**/*clerk-runtime-test*", async (route) => {
+      runtimeImports += 1;
+      await route.continue();
+    });
+
+    await page.goto("/");
+    await expect(page.getByTestId("link-sign-in")).toBeVisible();
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
+    await page.getByTestId("link-sign-in").click();
+    await expect(page).toHaveURL(/\/sign-in\/?$/);
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 4_500 });
+    expect(runtimeImports).toBe(1);
   });
 
   test("sign-out and user changes clear the signed-in query cache", async ({ page }) => {

@@ -26,7 +26,8 @@ import {
   useListSalaryBenchmarks,
 } from "@workspace/api-client-react";
 import { AppNav } from "@/components/shared/app-nav";
-import { PublicFooter, SaveDecisionButton } from "@/components/shared/public-shell";
+import { PublicFooter } from "@/components/shared/public-shell";
+import { SaveDecisionButton } from "@/components/shared/public-actions";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { getRouteSeo, useSeo } from "@/lib/seo";
 import { createCompassDecisionReadouts, type CompassDecisionKey } from "@/lib/application-models";

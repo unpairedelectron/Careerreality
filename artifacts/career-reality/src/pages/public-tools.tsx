@@ -11,7 +11,8 @@ import {
   type ListLayoffSignalsParams,
   type PublicDataProvenance,
 } from "@workspace/api-client-react";
-import { PublicPage, FreshnessBadge, SaveDecisionButton, WatchlistButton } from "@/components/shared/public-shell";
+import { PublicPage, FreshnessBadge } from "@/components/shared/public-shell";
+import { SaveDecisionButton, WatchlistButton } from "@/components/shared/public-actions";
 import { ToolEvidence } from "@/components/shared/tool-evidence";
 import {
   parseBoundedNumber,
