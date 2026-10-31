@@ -1,0 +1,10 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="brand-blue" x1="28" y1="22" x2="152" y2="158" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#38bdf8"/>
+    <stop offset="1" stop-color="#0ea5e9"/>
+  </linearGradient>
+</defs>
+<rect x="1" y="1" width="178" height="178" rx="36" fill="url(#brand-blue)" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="2"/>
+<text x="90" y="113" text-anchor="middle" fill="#06060b" font-family="Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="-2">CR</text>
+</svg>

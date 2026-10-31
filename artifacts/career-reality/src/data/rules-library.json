@@ -1,0 +1,242 @@
+{
+  "pages": [
+    {
+      "path": "/rules/employee-pf",
+      "title": "EPF Statutory Wage Ceiling: 2026",
+      "description": "EPFO's official FAQ records a ₹25,000 monthly wage ceiling from 17 September 2026, revised from ₹15,000; individual payroll application depends on the facts.",
+      "intro": "This page summarizes the ceiling revision stated in EPFO's September 2026 FAQ. It does not determine whether a particular employee is covered or calculate contributions from an offer's salary breakup.",
+      "rows": [
+        ["Effective date", "17 September 2026"],
+        ["Previous statutory wage ceiling", "₹15,000 per month"],
+        ["Revised statutory wage ceiling", "₹25,000 per month"]
+      ],
+      "change": "The FAQ says the statutory ceiling rose from ₹15,000 to ₹25,000 per month, effective 17 September 2026.",
+      "plainLanguage": "Treat ₹25,000 as the ceiling stated in this FAQ, not as a personal deduction estimate. Check the full FAQ and your own payroll records for the facts that apply to you.",
+      "sources": [
+        { "label": "EPFO: FAQs on revision of statutory wage ceiling (PDF)", "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "CTC calculator", "url": "/salary-calculator" },
+        { "label": "Read the offer beyond CTC", "url": "/guides/read-the-offer-beyond-ctc" }
+      ]
+    },
+    {
+      "path": "/rules/gratuity-wages",
+      "title": "Gratuity Wage Rules for Fixed-Term Workers",
+      "description": "Official Ministry of Labour FAQs explain the gratuity wage definition, fixed-term eligibility, effective date, and why CTC alone is not enough.",
+      "intro": "The Ministry's 2026 FAQs clarify when the revised wage definition applies to gratuity and what the FAQ says about fixed-term employees. They do not replace the full Code, state-specific rules, or an individual eligibility review.",
+      "rows": [
+        ["Wage definition", "The Ministry says the revised definition of wages applies to gratuity calculations from 21 November 2025"],
+        ["Fixed-term employee", "The FAQ says a fixed-term employee is eligible after one year of service under the contract"],
+        ["Wage components", "Use the inclusions and exclusions in section 2(88) of the Code on Social Security, 2020; the FAQ cautions against adding unspecified components"]
+      ],
+      "change": "The Ministry dates application of the revised wage definition to 21 November 2025, the Codes' implementation date.",
+      "plainLanguage": "Do not estimate from CTC alone. Ask payroll which wage components and service dates it used, then compare them with the Code and the Ministry's FAQ.",
+      "sources": [
+        { "label": "Ministry of Labour and Employment: Additional FAQs on Labour Codes (PDF, 16 March 2026)", "url": "https://labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf" },
+        { "label": "Ministry of Labour and Employment: Payment of Gratuity Act, 1972 (PDF)", "url": "https://labour.gov.in/static/uploads/2025/06/23e3be0e31de495acd1698ed85007ec1.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Gratuity estimator", "url": "/gratuity-estimator" },
+        { "label": "Notice and leave pay worksheet", "url": "/final-pay-estimator" },
+        { "label": "Read the offer beyond CTC", "url": "/guides/read-the-offer-beyond-ctc" }
+      ]
+    },
+    {
+      "path": "/rules/leave-encashment",
+      "title": "Leave Carry-Forward and Encashment Rules",
+      "description": "The Ministry's March 2026 answers on worker leave carry-forward and encashment, with state-law limits noted.",
+      "intro": "These are the Ministry of Labour and Employment's answers as of 16 March 2026. The FAQ distinguishes a worker's Code-based rights from potentially more favourable state-law benefits; it is not a universal payroll calculator.",
+      "rows": [
+        ["Carry-forward", "A worker may carry forward up to 30 days; leave applied for but not granted may be carried forward without that limit"],
+        ["Encashment", "The FAQ says a worker is entitled to leave encashment and states no maximum encashment limit under the OSH&WC Code, 2020"],
+        ["Refused leave", "Leave above 30 days that was applied for but not granted may be encashed"],
+        ["State law", "The Ministry says an employee is entitled to a more favourable state-law benefit where it applies"]
+      ],
+      "change": "The FAQ published in 2026 explains the Labour Codes implemented on 21 November 2025; check the applicable state law rather than assuming it was displaced.",
+      "plainLanguage": "Keep the leave ledger, the dated application, the employer's response, and the applicable state rule. Ask HR to identify whether the policy applies to you as a worker under the Code.",
+      "sources": [
+        { "label": "Ministry of Labour and Employment: Additional FAQs on Labour Codes (PDF, 16 March 2026)", "url": "https://labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Notice and leave pay worksheet", "url": "/final-pay-estimator" },
+        { "label": "Notice periods and return-to-office policies", "url": "/guides/notice-period-and-return-to-office" },
+        { "label": "Layoff recovery and employment documents", "url": "/guides/layoff-recovery-and-employment-documents" }
+      ]
+    },
+    {
+      "path": "/rules/income-tax-new-regime",
+      "title": "New Tax Regime Slabs and Rebate",
+      "description": "A dated guide to AY 2026–27 new-regime slabs and rebate, with official sources and a clear boundary against later years.",
+      "intro": "This page records the Income Tax Department schedule published for Assessment Year 2026–27. It is not a forecast for later years or a complete return computation.",
+      "rows": [
+        ["Up to ₹4 lakh", "Nil rate"],
+        ["₹4–8 lakh", "5% on the amount in this band"],
+        ["₹8–12 lakh", "10% on the amount in this band"],
+        ["₹12–16 lakh", "15% on the amount in this band"],
+        ["₹16–20 lakh", "20% on the amount in this band"],
+        ["₹20–24 lakh", "25% on the amount in this band"],
+        ["Above ₹24 lakh", "30% on the amount in this band"],
+        ["Section 87A", "For an eligible resident individual, total income up to ₹12 lakh; maximum rebate ₹60,000. Special-rate tax is excluded; marginal relief rules apply near the boundary."]
+      ],
+      "change": "The official rate schedule opened for this entry covers AY 2025–26 and AY 2026–27; the linked Finance Act material describes the applicable new-regime bands.",
+      "plainLanguage": "Apply each rate only to the slice of taxable income in that band. Check eligibility, rebate, surcharge, cess, and special-rate income separately.",
+      "sources": [
+        { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
+        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Tax regime comparison", "url": "/tax-regime-comparison" },
+        { "label": "Standard deduction and cess", "url": "/rules/salary-standard-deduction-cess" }
+      ]
+    },
+    {
+      "path": "/rules/income-tax-old-regime",
+      "title": "Old Tax Regime Slabs and Rebate",
+      "description": "Assessment Year 2026–27 old-regime rate bands and rebate boundaries, scoped to the official individual schedule.",
+      "intro": "This reference summarizes the old-regime individual schedule for AY 2026–27. Age, residence, deductions, and income type can change an individual computation.",
+      "rows": [
+        ["Up to ₹2.5 lakh", "Nil rate for the general individual category"],
+        ["₹2.5–5 lakh", "5% on the amount in this band"],
+        ["₹5–10 lakh", "20% on the amount in this band"],
+        ["Above ₹10 lakh", "30% on the amount in this band"],
+        ["Section 87A", "For an eligible resident individual, total income up to ₹5 lakh; rebate is limited to income tax or ₹12,500, whichever is lower"]
+      ],
+      "change": "The official rate page lists AY 2026–27. The old-regime rebate threshold is distinct from surcharge marginal relief and from new-regime rebate rules.",
+      "plainLanguage": "Use the correct age category and year; treat deductions, rebate, surcharge, and cess as separate calculation steps.",
+      "sources": [
+        { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
+        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Tax regime comparison", "url": "/tax-regime-comparison" },
+        { "label": "Standard deduction and cess", "url": "/rules/salary-standard-deduction-cess" }
+      ]
+    },
+    {
+      "path": "/rules/salary-standard-deduction-cess",
+      "title": "Standard Deduction and Health Cess",
+      "description": "How the salary standard deduction and health and education cess fit into the AY 2026–27 tax calculation.",
+      "intro": "A dated explanation of the salary deduction and cess sequence for the income-tax schedule linked below. Verify the year before reusing any amount.",
+      "rows": [
+        ["Standard deduction, new regime", "₹75,000 for the modeled salary case"],
+        ["Standard deduction, old regime", "₹50,000 for the modeled salary case"],
+        ["Health and Education Cess", "4% of income tax plus surcharge where applicable"],
+        ["Calculation order", "Compute income and tax, apply eligible relief, then follow the statutory surcharge and cess sequence"]
+      ],
+      "change": "The AY 2026–27 official salary and rate materials were opened on 10 October 2026; this page does not extend those amounts to later assessment years.",
+      "plainLanguage": "A deduction reduces eligible salary income; cess is applied to computed tax. Neither is a percentage of CTC.",
+      "sources": [
+        { "label": "Income Tax Department: Income from Salary", "url": "https://www.incometaxindia.gov.in/income-from-salary" },
+        { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
+        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Tax regime comparison", "url": "/tax-regime-comparison" },
+        { "label": "New-regime slabs", "url": "/rules/income-tax-new-regime" }
+      ]
+    },
+    {
+      "path": "/rules/professional-tax-states",
+      "title": "Professional Tax: State Payroll Checks",
+      "description": "Official professional-tax portals for major states, plus a practical method to verify the schedule that applies to your payroll.",
+      "intro": "Professional tax schedules are state-specific. This page links official portals for Maharashtra, Karnataka, West Bengal, Telangana, and Gujarat without inventing a single national rate.",
+      "rows": [
+        ["Maharashtra", "MAHAGST rate schedules and Profession Tax notices"],
+        ["Karnataka", "Commercial Taxes Department Profession Tax notifications"],
+        ["West Bengal", "Profession Tax portal and state schedule"],
+        ["Telangana", "Salary/wage earners: up to ₹15,000 nil; ₹15,001–20,000 ₹150/month; above ₹20,000 ₹200/month (official First Schedule)"],
+        ["Gujarat", "Commercial Tax Department Profession Tax Schedule"]
+      ],
+      "change": "State portals and their schedules were opened on 10 October 2026. Check the effective date on the actual state document before comparing a payslip.",
+      "plainLanguage": "Use the employee's governing work location, category, period, and the current state schedule. The portal links do not imply a universal rate.",
+      "sources": [
+        { "label": "Maharashtra: MAHAGST Profession Tax rate schedules", "url": "https://www.mahagst.gov.in/en/profession-tax-and-other-rate-schedule" },
+        { "label": "Karnataka: Profession Tax notifications", "url": "https://gst.karnataka.gov.in/Profession.aspx" },
+        { "label": "West Bengal: Profession Tax portal", "url": "https://professiontax.wb.gov.in/" },
+        { "label": "Telangana: Profession Tax Schedule", "url": "https://tgct.gov.in/tgportal/AllActs/APPT/APPTSchedule.aspx" },
+        { "label": "Gujarat: Profession Tax Schedule", "url": "https://commercialtax.gujarat.gov.in/vatwebsite/schedules/schedulesMain.jsp?viewPageNo=6" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Salary calculator", "url": "/salary-calculator" },
+        { "label": "CTC components", "url": "/rules/ctc-components" }
+      ]
+    },
+    {
+      "path": "/rules/hra-rent-exemption",
+      "title": "HRA and Rent Exemption Basics",
+      "description": "The official HRA exemption comparison, salary-base cautions, documentation, and the limits of a simple rent estimate.",
+      "intro": "The Income Tax Department explains an HRA comparison for the applicable statutory regime. Confirm that the exemption is available for your year and facts.",
+      "rows": [
+        ["Actual HRA", "Amount received for the eligible period"],
+        ["Rent less salary threshold", "Rent paid minus 10% of the defined salary base"],
+        ["Location percentage", "50% for the listed metro cities; 40% otherwise under the cited schedule"],
+        ["Exemption", "Least of the three computed amounts, subject to eligibility"]
+      ],
+      "change": "The official Schedule 10(13A) page and salary guide were opened on 10 October 2026; the formula is not carried forward to a later year without review.",
+      "plainLanguage": "Rent paid is not automatically the exempt amount. Compare the three statutory figures using the defined salary base.",
+      "sources": [
+        { "label": "Income Tax Department: Schedule 10(13A)", "url": "https://www.incometaxindia.gov.in/w/schedule_10_13a" },
+        { "label": "Income Tax Department: Income from Salary", "url": "https://www.incometaxindia.gov.in/income-from-salary" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Tax regime comparison", "url": "/tax-regime-comparison" },
+        { "label": "Read salary and hiring claims", "url": "/guides/how-to-read-salary-and-hiring-claims" }
+      ]
+    },
+    {
+      "path": "/rules/ctc-components",
+      "title": "CTC Components Explained",
+      "description": "Separate fixed cash, variable pay, employer costs, reimbursements, and benefits before comparing an Indian job offer.",
+      "intro": "CTC is a package label, not a guarantee that every listed rupee is monthly cash. Inspect the offer terms and tax classification of each component.",
+      "rows": [
+        ["Fixed salary", "Recurring cash components stated in the offer"],
+        ["Variable pay", "Conditional amount governed by a separate incentive plan"],
+        ["Employer costs", "Provident fund, insurance, gratuity provision, and other stated costs"],
+        ["Benefits and equity", "Value and timing depend on plan terms, eligibility, and tax rules"]
+      ],
+      "change": "The tax treatment references are tied to the official salary guide and statutory material opened on 10 October 2026.",
+      "plainLanguage": "Ask what is paid, when it is paid, what can change, and whether the component is included in the headline CTC.",
+      "sources": [
+        { "label": "Income Tax Department: Income from Salary", "url": "https://www.incometaxindia.gov.in/income-from-salary" },
+        { "label": "Income Tax Department: Section 17, salary and perquisites", "url": "https://www.incometaxindia.gov.in/w/section-17-226" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "Salary calculator", "url": "/salary-calculator" },
+        { "label": "Offer comparison", "url": "/offer-comparison" }
+      ]
+    },
+    {
+      "path": "/rules/salary-benefits-tax",
+      "title": "Salary, Allowances, and Taxable Benefits",
+      "description": "A practical guide to classifying salary, reimbursements, perquisites, and employer benefits using official tax sources.",
+      "intro": "Different payments from one employer can follow different tax rules. Identify the relationship, purpose, evidence, valuation, and year before classifying an item.",
+      "rows": [
+        ["Salary", "Income classified under the statutory employment provisions"],
+        ["Allowance or reimbursement", "Treatment depends on purpose, evidence, and the applicable rule"],
+        ["Perquisite", "Employer-provided benefit valued under its governing provision"],
+        ["Form 16", "Annual employer statement to reconcile with payslips and benefit records"]
+      ],
+      "change": "The Income Tax Department salary guidance and statutory section material were opened on 10 October 2026.",
+      "plainLanguage": "A payroll label is a clue, not the whole analysis. Keep the agreement, approval, payment record, and tax classification together.",
+      "sources": [
+        { "label": "Income Tax Department: Income from Salary", "url": "https://www.incometaxindia.gov.in/income-from-salary" },
+        { "label": "Income Tax Department: Section 17, salary and perquisites", "url": "https://www.incometaxindia.gov.in/w/section-17-226" }
+      ],
+      "verified": "2026-10-10",
+      "related": [
+        { "label": "CTC components", "url": "/rules/ctc-components" },
+        { "label": "Salary calculator", "url": "/salary-calculator" }
+      ]
+    }
+  ]
+}

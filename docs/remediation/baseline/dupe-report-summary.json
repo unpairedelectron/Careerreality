@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-08T05:17:29.127Z",
+  "articleCount": 44,
+  "emptyBodyCount": 0,
+  "duplicateParagraphGroupsAtLeast25": {
+    "withinArticle": 74,
+    "crossArticle": 51
+  },
+  "totalWords": 235598,
+  "uniqueWordsAfterRemovingExactRepeatParagraphs": 121220
+}

@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/career-reality-mobile/"
+title = "CareerReality Mobile"
+description = "A premium dark-first mobile career intelligence command center for Indian professionals, with explainable salary, risk, AI exposure, roadmap, and offer decision tools."
+version = "1.0.0"
+id = "artifacts/career-reality-mobile"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/career-reality-mobile/" ]
+localPort = 19912
+
+[services.development]
+run = "pnpm --filter @workspace/career-reality-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/career-reality-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/career-reality-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "19912"
+BASE_PATH = "/career-reality-mobile/"

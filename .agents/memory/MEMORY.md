@@ -1,0 +1,57 @@
+- [OpenAPI and Zod generation](openapi-integer-generation.md) — avoid OpenAPI integer and email formats while shared validators remain on Zod 3.
+- [Route registry import boundary](route-registry-import-boundary.md) — keep the JSON import attribute behind one TypeScript wrapper for consistent Vite builds and Node tests.
+- [Public API route ordering](public-api-route-ordering.md) — mount unauthenticated data routes before the workspace router, whose catch-all auth middleware otherwise returns 401.
+- [Live editorial source fetching](live-editorial-source-fetch.md) — large parallel public-article scrapes can 500; keep source links and brief labeling when extraction is unstable.
+- [Browser regression runner](browser-regression-runner.md) — use the system Chromium executable for Playwright; keep video capture off because ffmpeg is not installed.
+- [GitHub connector upload filter](github-upload-filter.md) — some HTML and workflow writes can hit upstream Cloudflare 403s while ordinary repository files still upload.
+- [Media generation fallback](media-generation-fallback.md) — when optional media generation is unavailable, keep the artifact self-contained with a local fallback asset rather than a missing reference.
+- [Decision-suite calculations](decision-suite-calculations.md) — keep new public-tool math client-side and visibly directional until a persisted report contract exists.
+- [Career Reality Index reflection](career-index-diagnosis.md) — keep the reflection fixed and non-diagnostic beside self-reported answers; no score or recommendation.
+- [SEO crawler snapshots](seo-crawler-snapshots.md) — generate and verify article HTML after the Vite build so crawlers see route-specific content before hydration.
+- [Editorial reading experience](editorial-reading-experience.md) — vary article figures and source rails through typed metadata while clearly labeling editorial synthesis.
+- [Live evidence recovery](live-evidence-recovery.md) — distinguish source failure from empty results and never show stale public signals as current.
+- [Trust center policy pages](trust-center-policy-pages.md) — make policy routes explicit and product-accurate; do not invent retention, SLA, vendor, or legal-entity claims.
+- [Editorial visual integrity](editorial-visual-integrity.md) — use article-specific qualitative frameworks unless a figure has an exact, scoped source-backed measurement.
+- [Production verification](production-verification.md) — verify the published build, custom domain, sitemap, and readiness route separately from the dev preview.
+- [Static route boundaries](static-route-boundaries.md) — generate public snapshots and valid app shells; let unknown static paths return real 404s instead of rewriting to the homepage.
+- [Workspace build environment](workspace-build-environment.md) — managed previews use their artifact prefix; published SEO builds use the site root with explicit PORT and BASE_PATH.
+- [Shared report throttling](shared-report-throttling.md) — use an atomic DB bucket and HMAC identities; PostgreSQL expiry predicates should use CURRENT_TIMESTAMP.
+- [Canvas placeholder schema](canvas-placeholder-schema.md) — the live canvas callback may expose create/update instead of the documented create-auto action.
+- [Responsive theme regression checks](homepage-dark-mode-regression.md) — exercise the visible mobile theme control and reset persisted theme state between viewport captures.
+- [PDF parser runtime boundaries](node-pdf-parser-boundary.md) — keep Node extraction on the external pdf-parse subpath and browser extraction on PDF.js 4.x for current runtime compatibility.
+- [OpenAPI multipart Zod patch](openapi-multipart-zod-patch.md) — multipart body schemas need post-generation renaming and normalized file endings.
+- [API test runner](api-test-runner.md) — run TypeScript API tests through the scripts workspace's tsx entrypoint, not direct Node.
+- [API client declaration refresh](api-client-declaration-refresh.md) — refresh project-reference declarations when mobile types lag behind checked-in generated API schemas.
+- [Resume processing runtime](resume-processing-runtime.md) — avoid PDF parser dependencies that initialize browser-only globals in the bundled Node API.
+- [Market refresh profile upsert](market-refresh-profile-upsert.md) — sync a local mobile profile before reading its authenticated personalized brief.
+- [Resume parser testing](resume-parser-testing.md) — isolate live market data while exercising real multipart extraction and upload limits.
+- [PDF column extraction](pdf-column-extraction.md) — PDF.js may encode a column gutter as a wide whitespace item, not just a gap between text coordinates.
+- [Expo mobile build port](expo-mobile-build-port.md) — free Metro port 8081 before running the mobile static bundle builder.
+- [Expo API preview origins](expo-api-preview-origins.md) — Expo web previews use a separate origin that must be allowed for API reads.
+- [Managed Clerk providers](clerk-provider-support.md) — Replit-managed Clerk supports Google, GitHub, Apple, and X, not LinkedIn.
+- [Managed Clerk mobile redirects](managed-clerk-mobile-redirects.md) — Expo Google callback registration is automatic across managed Development and Production; physical-device smoke tests still need release hardware.
+- [Mobile auth transition](mobile-auth-transition.md) — wait for confirmed Clerk session and local hydration before routing to avoid native sign-in flicker.
+- [Mobile Plan regression harness](mobile-plan-regression-harness.md) — run deterministic Expo Plan UI coverage through the existing web Playwright dependency and system Chromium.
+- [Mobile Playwright accessibility mapping](mobile-playwright-accessibility.md) — React Native Web may omit ARIA state attributes; assert visible state transitions for mobile browser coverage.
+- [Mobile grouped-route E2E auth](mobile-grouped-route-e2e-auth.md) — Expo tab-group root redirects can drop query params; use the local-storage auth marker as a fixture fallback.
+- [Built mobile auth checks](built-mobile-auth-checks.md) — release bundles keep derived auth selectors as runtime factories; pair bundle markers with mailbox-free transition fixtures.
+- [Job feed boundary](job-feed-boundary.md) — use official ATS feeds or approved providers; keep major job boards outbound-only and show freshness/provenance.
+- [TheirStack provider access](theirstack-provider-access.md) — a stored API key can still receive provider-side 403s; keep that state explicit and preserve last success freshness.
+- [CareerReality trust principle](careerreality-trust-principle.md) — every answer states knowns, meaning, unknowns, and next action; optimize for meaningful weekly career actions, not views.
+- [Layoff planner privacy](layoff-planner-privacy.md) — keep role, report-match, cash, and expense inputs in page memory; never save or send them.
+- [Career decision engine](career-decision-engine.md) — brief interpretations must branch on situation, target, compensation, and evidence quality; never collapse unknown context into promotion advice.
+- [Career brief history](career-brief-history.md) — compare profile, evidence, and interpretation separately; evidence loss is insufficient, not improvement.
+- [Career brief history view](career-brief-history-view.md) — show newest-first entries with chronological comparisons and current provenance on every card.
+- [React Query workspace dedupe](react-query-workspace-dedupe.md) — shared generated hooks can resolve a second React Query context; dedupe it in the app bundler and verify hydration in a browser.
+- [Indexed-route remediation](indexed-route-remediation.md) — protect indexed page contracts while auditing legacy noindex handoffs separately from sitemap eligibility.
+- [Search Console export scope](search-console-export-scope.md) — inspect date and country filters before treating query/page exports as market-specific or comparing time windows.
+- [CareerReality release guardrails](careerreality-release-guardrails.md) — preserve drafts, avoid audit loops, and reserve the single Phase 6 smoke and final note for after publishing.
+- [Gratuity calculation source boundary](gratuity-source-boundary.md) — keep the worksheet scoped to dated monthly-rate arithmetic; do not imply it covers special cases or later rule changes.
+- [Old-regime rebate boundary](old-regime-rebate-boundary.md) — for AY 2026–27, Section 87A old-regime rebate stops above ₹5 lakh taxable income; do not apply surcharge relief to that rebate.
+- [Indian month abbreviations](indian-month-abbreviations.md) — en-IN ICU renders September as “Sept”; browser tests should match the localized output.
+- [HTTP Host-header tests](http-host-header-tests.md) — use `node:http` for integration tests that must send a custom `Host`; built-in fetch ignores the override.
+- [Automated CTC review](automated-ctc-review.md) — verify deterministic tax/PF rules with official sources and regression tests to minimize manual review.
+- [Professional-tax deduction periods](professional-tax-deduction-periods.md) — employment tax is deductible under the new regime in both supported 2026–27 legal periods.
+- [Resume and job-link privacy boundary](resume-job-link-boundary.md) — keep uploads and user URL fetching out of production until consent, retention/access, and SSRF controls are approved.
+- [Current-route readiness](tool-readiness-route-alignment.md) — only exact current-route assessments carry scores; similar or redirected legacy tools stay unscored until reviewed.
+- [Evidence excerpt provenance](evidence-excerpt-provenance.md) — keep source labeling separate from evidence status and preserve original line boundaries for attribution context.

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">CareerReality</title>
+  <desc id="desc">Career intelligence for India</desc>
+  <rect width="1200" height="630" fill="#f5f1e8"/>
+  <circle cx="1010" cy="70" r="290" fill="#d7e9df"/>
+  <circle cx="1080" cy="540" r="230" fill="#e8c5b9"/>
+  <path d="M0 510C240 400 355 595 610 500s360-88 590-35v165H0z" fill="#123e36"/>
+  <text x="84" y="180" fill="#176f5e" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="6">CAREER INTELLIGENCE / INDIA</text>
+  <text x="80" y="300" fill="#1f2e31" font-family="Georgia, serif" font-size="94" font-weight="700">CareerReality</text>
+  <text x="86" y="365" fill="#52605e" font-family="Arial, sans-serif" font-size="30">Make the next move make sense.</text>
+  <text x="86" y="560" fill="#d7e9df" font-family="Arial, sans-serif" font-size="22" font-weight="700">Salary · Companies · Risk · AI exposure</text>
+</svg>

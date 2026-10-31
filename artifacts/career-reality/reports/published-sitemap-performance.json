@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-31T11:19:06.280Z",
+  "audits": [
+    {
+      "generatedAt": "2026-10-29T08:08:57.650Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1690,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-29T08:31:41.279Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 6402,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-29T08:38:51.166Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 18119,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-29T11:43:49.790Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1227,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-29T15:57:51.771Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1017,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-29T16:38:31.241Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1534,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T05:26:31.376Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1552,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T06:46:42.089Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1359,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T06:52:20.178Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1564,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T07:13:19.739Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 2178,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T07:22:55.074Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 6458,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-30T07:35:56.603Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1475,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T07:51:21.820Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1381,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T08:16:52.617Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 3810,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T08:26:31.224Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1728,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-30T14:49:06.168Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 3697,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-31T08:51:34.542Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 11732,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-31T10:31:51.624Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 5999,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-31T10:43:48.311Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 6881,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-31T11:19:06.280Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1471,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    }
+  ]
+}

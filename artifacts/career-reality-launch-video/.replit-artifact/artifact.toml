@@ -1,0 +1,29 @@
+kind = "video"
+videoAspectRatio = "16:9"
+previewPath = "/career-reality-launch-video/"
+title = "CareerReality Launch Video"
+description = "A short animated launch film introducing CareerReality as an evidence-backed decision intelligence desk for Indian professionals facing consequential career moves."
+version = "1.0.0"
+id = "artifacts/career-reality-launch-video"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/career-reality-launch-video/" ]
+localPort = 19596
+
+[services.development]
+run = "pnpm --filter @workspace/career-reality-launch-video run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/career-reality-launch-video", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/career-reality-launch-video/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19596"
+BASE_PATH = "/career-reality-launch-video/"

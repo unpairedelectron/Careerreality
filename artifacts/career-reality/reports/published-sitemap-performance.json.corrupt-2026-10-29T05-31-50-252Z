@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+<<<<<<< ours — property `generatedAt` (S, confidence: medium)
+// refused_by: merge_ladder_exhausted · collision: `"generatedAt": "2026-10-28T18:17:25.437Z"`
+  "generatedAt": "2026-10-29T05:30:14.504Z"
+=======
+  "generatedAt": "2026-10-29T05:25:12.864Z"
+>>>>>>> theirs — property `generatedAt` (S, confidence: medium) · weave: run 'weave explain artifacts/career-reality/reports/published-sitemap-performance.json' for per-hunk detail, 'weave check' to verify your resolution
+  "audits": [
+    {
+      "generatedAt": "2026-10-28T10:07:41.765Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1120,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T12:45:40.700Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1252,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T13:45:18.633Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1335,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:10:39.537Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1198,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:17:23.062Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1884,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:18:33.097Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1546,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:23:58.003Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1647,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:25:07.676Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1525,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T14:25:53.756Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 11648,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-28T14:49:04.564Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1243,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T15:24:47.863Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 5039,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-28T15:28:30.187Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 927,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T16:21:42.193Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1097,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T16:33:15.305Z",
+      "pageCount": 76,
+      "batchSize": 8,
+      "elapsedMs": 1087,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T17:17:54.514Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 927,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T17:25:38.119Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 887,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T17:30:37.600Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 1099,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T17:52:20.384Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 953,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-10-28T18:17:25.437Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 890,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+<<<<<<< ours — scope `inserted statements` in array `audits` (S+F, confidence: low)
+// refused_by: statement_fold · collision: none (no common ancestor text)
+      "generatedAt": "2026-10-29T05:30:14.504Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 6978,
+=======
+      "generatedAt": "2026-10-29T05:25:12.864Z",
+      "pageCount": 77,
+      "batchSize": 8,
+      "elapsedMs": 6949,
+>>>>>>> theirs — scope `inserted statements`
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+# CareerReality
+
+> CareerReality publishes India-focused career decision tools, pillar guides, a rules library, and a source-linked Layoff Hub. Use the linked pages for their inputs, evidence, dates, and limitations.
+
+## Scope and interpretation
+
+The collections below are public, indexable snapshots included in the XML sitemap according to the route registry. Indexable means eligible for indexing, not confirmed search-engine indexing. These links describe the publication scope of this build, not a live availability check.
+
+The published pillar guides are distinct from the archived article corpus, which remains withheld. Do not cite archived article URLs as published guides. Retired routes may redirect to a hub; use the canonical links below.
+
+Calculators produce estimates from entered values and stated assumptions, not payslips, tax filings, eligibility decisions, or forecasts. Cash runway does not predict job-search duration. Reflection tools do not establish individual employment risk, job-search odds, company safety, or future AI job losses. Employer due diligence is a checklist, not a company rating or a market salary benchmark.
+
+The Layoff Hub contains dated, source-linked event records and planning resources. Reported or announced cuts are not necessarily completed exits or current headcounts. Rumours are labelled and excluded from alerts. The separate layoff-runway tool calculates cash runway; it is not a layoff tracker. Do not turn historical reports or scenario estimates into forecasts.
+
+Cite the specific page and its original sources where provided. Preserve source dates, jurisdiction, tax year, assumptions, and uncertainty. Missing evidence is not evidence of safety or demand. Guides and rules are educational context, not personalised financial, tax, legal, or employment advice.
+
+## Canonical hubs
+
+- [Career Decisions in Context](https://careerreality.in/): Career tools for India: compare written job offers, estimate take-home pay with stated tax assumptions, and use sourced guides to plan your next career move.
+- [Career Tools for India](https://careerreality.in/tools/): Explore career tools for India to compare offers, estimate take-home pay and salary tax, and check career costs with transparent inputs, examples and limits.
+- [Career Guides for India](https://careerreality.in/guides/): Browse India career guides on offers, engineering, layoffs and workplace decisions, with source context, practical questions and clear limits on each claim.
+- [Layoff Support Hub for India](https://careerreality.in/layoffs/): India layoff tracker, cash-runway planner, first-day checklist, dated rights questions, and a 90-day plan. Rumours are labelled and excluded from alerts.
+- [Tata Consultancy Services Layoff Report](https://careerreality.in/layoffs/tcs-layoffs/): Dated, source-linked reporting on TCS’s announced FY2026 workforce reduction. This records an announcement, not completed exits or current job security.
+- [Ola Electric Layoff Report](https://careerreality.in/layoffs/ola-electric-layoffs/): Dated Reuters report on Ola Electric workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.
+- [BYJU’S Workforce Reduction Report](https://careerreality.in/layoffs/byjus-workforce-restructuring-2023/): Dated Reuters report on BYJU’S workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.
+- [Swiggy Workforce Reduction Report](https://careerreality.in/layoffs/swiggy-workforce-reduction-2023/): Dated Reuters report on Swiggy workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.
+- [Paytm Workforce Reduction Report](https://careerreality.in/layoffs/paytm-restructuring-2023/): Dated Reuters report on Paytm workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.
+- [Opendoor India Operations Closure Report](https://careerreality.in/layoffs/opendoor-india-operations-closure-2026/): Reuters reported Opendoor’s India closure and 250 affected roles. This dated record links the source and does not describe current hiring or job security.
+- [PayPal India Workforce Reduction Report](https://careerreality.in/layoffs/paypal-india-workforce-reduction-2026/): Reuters reported about 220 PayPal India cuts, citing a source. The estimate is attributed, not company-confirmed; read the dated report and its scope.
+- [Adidas India Technology Team Report](https://careerreality.in/layoffs/adidas-india-technology-reduction-2026/): Reuters reported Adidas India technology role reductions; the company said fewer than 20% of the team was affected. The exact count was not disclosed.
+- [Amazon Stores Workforce Reduction Report](https://careerreality.in/layoffs/amazon-stores-workforce-reduction-2026/): Reuters reported Amazon job cuts affecting employees in India, the US and UK; the global estimate is not an India-specific count. India roles remain unknown.
+- [Amazon Devices and Services Role Reductions](https://careerreality.in/layoffs/amazon-devices-services-reduction-2026/): Reuters reported job cuts in Amazon's U.S. Devices and Services unit. The reported estimate is no more than 250 roles and does not establish an India impact.
+- [Microsoft Voluntary Buyout Offer Report](https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/): BBC News reported a Microsoft voluntary buyout offer across Canada, India, the UK and US. The reported 60,000 figure is an offer reach, not a job-loss count.
+- [HSBC UK Wealth Management Cuts Report](https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/): Reuters reported proposed HSBC cuts in UK wealth management. The percentages are attributed estimates, not a final headcount; India impact is not reported.
+- [Rules and Data Library](https://careerreality.in/rules/): Browse India salary and employment rules with official EPFO, tax and Ministry sources; check dated assumptions and limits before using a career-tool estimate.
+
+## Career tools and calculators
+
+- [CTC Calculator India: Estimate In-Hand Pay](https://careerreality.in/salary-calculator/): Enter fixed pay, target variable, a PF basis and professional tax to estimate Tax Year 2026–27 default-regime in-hand cash; assumptions and limits are shown.
+- [Compare Job Offers: CTC and Take-Home](https://careerreality.in/offer-comparison/): Compare two written CTC breakdowns with separate zero-variable and full-target take-home estimates, employer costs, and entered first-year transition costs.
+- [Compare Old vs New Tax for AY 2026–27](https://careerreality.in/tax-regime-comparison/): Compare Indian salary tax under old and new regimes for AY 2026–27, with deductions and rebate limits for residents under 60; verify against official sources.
+- [Gratuity Worksheet: Limited Formula Illustration](https://careerreality.in/gratuity-estimator/): Test a limited gratuity formula against entered wage and service details, with dated Ministry sources and clear exclusions; it is not an eligibility decision.
+- [Notice Period and Leave Pay Calculator](https://careerreality.in/final-pay-estimator/): Estimate Indian final-pay components from notice days, unused leave and written salary terms. Check the divisor, state leave rules and employer policy first.
+- [Job Loss Runway Calculator: Months of Cash](https://careerreality.in/layoff-runway/): Estimate cash runway after a layoff in India using liquid savings, confirmed income, essential costs and debt payments; results do not predict job-search time.
+- [Home Loan EMI Stress Test with Your Budget](https://careerreality.in/home-loan-stress-test/): Stress-test an Indian home loan by comparing EMI at two rates and checking cash left after household costs; use your loan terms and verify the lender's offer.
+- [Should I Resign or Stay? Decision Worksheet](https://careerreality.in/resign-or-stay/): Resign or stay? Organize cash, health, role scope, location and learning trade-offs for your next India career decision; this worksheet does not choose for you.
+- [Verify an Indian Employer and Job Offer | CareerReality](https://careerreality.in/companies/): Check an Indian employer and job offer privately with official sources, role-specific questions, and evidence notes. No company score, rating, or verdict.
+- [Compare a Job Offer, Move, or Staying](https://careerreality.in/compass/): Compare staying, changing roles or taking an offer in India by recording evidence, constraints and unanswered questions; no combined score or forecast is made.
+- [Salary Change Calculator: Compare Two CTCs](https://careerreality.in/salary-drop/): Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details are excluded.
+- [Career Change Plan: Build a Weekly Checklist](https://careerreality.in/escape-plan/): Build a session-only career action plan for India from your goal, available hours and time window; review practical tasks without predicting job-search success.
+- [Career Reality Check: Questions Before a Move](https://careerreality.in/career-reality-index/): Use four self-reported answers to identify career uncertainties, gather evidence, and open a relevant tool. No score or recommendation is produced here.
+- [Job Posting Reality Check](https://careerreality.in/job-posting-reality-check/): Match resume evidence to job requirements, get an apply-or-pause recommendation, and review why. Missing text alone is not proof you lack the experience.
+- [AI at Work: Questions to Assess Task Changes](https://careerreality.in/ai/): Explore AI at work in India by inspecting a task's inputs, output quality, review, privacy and accountability; this worksheet does not forecast job losses.
+
+## Published pillar guides
+
+- [CTC vs Take-Home Pay: Read a Job Offer](https://careerreality.in/guides/read-the-offer-beyond-ctc/): Read an Indian job offer beyond CTC: separate fixed pay, variable targets, joining bonus and employer PF, then check payout conditions before estimating cash.
+- [Career Change Savings: Runway, Debt and Costs](https://careerreality.in/guides/runway-debt-and-big-decisions/): Plan a career move in India around liquid savings, monthly expenses, debt and employer equity; separate available cash from future promises before committing.
+- [Freelancing in India: Test Income and Client Risk](https://careerreality.in/guides/independent-work-without-romanticising-it/): Test freelancing or a side hustle in India with a paid project; check demand, scope, payment terms and available time before relying on independent income.
+- [Career Switch or Further Study: Cost and Proof](https://careerreality.in/guides/career-switches-and-education/): Compare a career switch or course in India through target tasks, fees, time and skill evidence; test a work sample before committing to a longer programme.
+- [Job Interview Preparation: Evidence and Questions](https://careerreality.in/guides/getting-hired-through-evidence-and-conversations/): Prepare for hiring conversations in India with work examples, portfolio evidence and role questions; check the written offer rather than relying on a referral.
+- [Performance Reviews: Promotion Questions to Ask](https://careerreality.in/guides/performance-reviews-and-career-choices/): Prepare for a performance review in India by documenting impact, clarifying who decides promotions and agreeing on the evidence and timing for your next review.
+- [Software Engineer Career Path: Scope Over Title](https://careerreality.in/guides/engineering-careers-without-the-title-trap/): Compare engineering career paths in India through technical scope, decision authority, mentoring and operations; ask what changes beyond an IC or manager title.
+- [AI at Work: Decide What to Upskill](https://careerreality.in/guides/ai-at-work-questions-to-ask/): Assess AI at work in India through a bounded task experiment; check output quality, privacy, review and accountability before choosing a new upskilling course.
+- [Data Science Jobs in India: Tasks and Claims](https://careerreality.in/guides/data-science-career-claims/): Evaluate data-science career claims in India by checking actual tasks, required skills and dated hiring sources; ask for role evidence before choosing a course.
+- [Cybersecurity and Green Jobs: Verify Requirements](https://careerreality.in/guides/cybersecurity-and-green-work/): Explore cybersecurity and green careers in India by comparing tasks, qualifications and source quality; test role requirements without assuming certain demand.
+- [After a Layoff: Final Pay and Relieving Documents](https://careerreality.in/guides/layoff-recovery-and-employment-documents/): Plan layoff recovery in India with written records for final pay, notice, severance and relieving letters; separate confirmed entitlements from untested claims.
+- [Notice Period in India: Check Exit Terms](https://careerreality.in/guides/notice-period-and-return-to-office/): Check notice-period and return-to-office terms in India against your offer and HR policy; verify buyout, leave, location and relieving steps before resigning.
+- [Remote Job Pay: Location, Currency and Tax](https://careerreality.in/guides/cross-border-and-remote-pay/): Compare cross-border and remote pay for an India career move: check employer identity, work location, currency and costs, then flag tax questions for an expert.
+- [Senior Engineer Roles: Scope and Reliability Work](https://careerreality.in/guides/senior-engineering-and-operations-work/): Compare senior engineering and operations roles in India through system ownership, incident response, technical depth and authority; check on-call expectations.
+- [Career Change: Match Skills to Your Constraints](https://careerreality.in/guides/skills-passion-and-career-constraints/): Choose a career or learning experiment in India that fits your time, finances, strengths and responsibilities; gather work evidence rather than passion slogans.
+- [Product Manager Role: Culture, Work and Authority](https://careerreality.in/guides/culture-fit-and-product-management/): Assess culture-fit and product-management claims in India by asking who sets priorities, owns outcomes and makes decisions; test the role beyond its job title.
+- [Workplace Culture: Check Boundaries and Workload](https://careerreality.in/guides/workplace-culture-and-boundaries/): Assess workplace culture in India through repeated evidence about workload, disagreement and boundaries; ask clear questions instead of judging one busy week.
+- [Salary Claims: Check Source, Date and Role](https://careerreality.in/guides/how-to-read-salary-and-hiring-claims/): Read India salary and hiring claims critically: check dates, job level, location, sample and base pay versus CTC before using a headline to plan your next move.
+- [Notice Period Buyout in India: Terms to Check](https://careerreality.in/guides/notice-period-buyout-india/): Check an India notice buyout against your signed terms, employer policy, written waiver, payment basis, and exit documents before setting a new start date.
+- [Gratuity at 4 Years 8 Months: The Six-Month Rule](https://careerreality.in/guides/gratuity-four-years-eight-months/): Understand how the official gratuity calculation treats service beyond six months, why rounding does not itself confirm eligibility, and what to verify.
+- [First 24 Hours After Layoff: Practical Checklist](https://careerreality.in/guides/first-24-hours-after-layoff/): A first-day layoff checklist in India: preserve personal records, confirm key dates and payments, protect account access, and choose one practical next step.
+- [After a Layoff: Severance, Notice Pay and Leave](https://careerreality.in/guides/severance-notice-leave-after-layoff/): Separate severance, notice pay, and leave after an India layoff; confirm each amount, the written basis, unresolved questions, and where to get advice.
+- [PF After Job Loss: EPFO Withdrawal Rules](https://careerreality.in/guides/pf-withdrawal-after-job-loss/): Review EPFO guidance, account records, claim status, and tax facts before PF withdrawal after job loss; verify current eligibility, amounts, and timelines.
+- [Old vs New Tax Regime: Compare for AY 2026–27](https://careerreality.in/guides/old-vs-new-tax-regime-salaried-india/): Compare the old and new Indian tax regimes for AY 2026–27 using official rules, eligible deductions, salary facts, and separate estimates before choosing.
+- [India Offer Letter Red Flags: Terms to Check](https://careerreality.in/guides/offer-letter-red-flags-india/): Check an India offer letter for fixed-pay clarity, variable conditions, deductions, notice, buyout, location, benefits, and written terms before accepting.
+- [Negotiate a Salary Offer with Numbers](https://careerreality.in/guides/negotiate-salary-offer-with-numbers/): Negotiate an India salary offer with fixed pay, variable targets, benefits, bonus conditions, and a clear ask; confirm figures in writing before accepting.
+- [India Layoffs and Labour Codes: What to Check](https://careerreality.in/guides/labour-codes-and-layoffs-india/): Understand official Labour Code guidance on wages and layoffs, what transition rules leave open, and which contract, service, and state facts to verify.
+- [90-Day Job Search Plan After a Layoff](https://careerreality.in/guides/90-day-post-layoff-job-search/): Use a flexible 90-day job-search plan after an India layoff, with weekly checks for cash runway, role fit, applications, conversations, and next steps.
+
+## Rules library entries
+
+- [EPF Statutory Wage Ceiling: 2026](https://careerreality.in/rules/employee-pf/): EPFO's official FAQ records a ₹25,000 monthly wage ceiling from 17 September 2026, revised from ₹15,000; individual payroll application depends on the facts.
+- [Gratuity Wage Rules for Fixed-Term Workers](https://careerreality.in/rules/gratuity-wages/): Check Indian gratuity wage definitions, fixed-term eligibility and effective dates against official Ministry FAQs; CTC alone cannot establish your entitlement.
+- [Leave Carry-Forward and Encashment Rules](https://careerreality.in/rules/leave-encashment/): Review Indian leave carry-forward and encashment guidance from the Ministry's March 2026 answers; check worker coverage and state-law limits before estimating.
+- [New Tax Regime Slabs and Rebate](https://careerreality.in/rules/income-tax-new-regime/): Check India's AY 2026–27 new-regime income-tax slabs and rebate using dated official sources; review thresholds and limits before applying them to salary tax.
+- [Old Tax Regime Slabs and Rebate](https://careerreality.in/rules/income-tax-old-regime/): Review India's AY 2026–27 old-regime tax bands and rebate limits; keep age, deductions, surcharge and cess separate when checking salary-tax estimates or forms.
+- [Standard Deduction and Health Cess](https://careerreality.in/rules/salary-standard-deduction-cess/): Understand standard deduction and health and education cess in India's AY 2026–27 salary tax; follow the calculation order and check the official source links.
+- [Professional Tax: State Payroll Checks](https://careerreality.in/rules/professional-tax-states/): Find Indian state professional-tax portals and verify the schedule for your payroll; check salary bands, payment periods and exemptions before entering a total.
+- [HRA and Rent Exemption Basics](https://careerreality.in/rules/hra-rent-exemption/): Check India's HRA rent-exemption comparison using the required salary base, rent records and official guidance; check eligibility before relying on an estimate.
+- [CTC Components Explained](https://careerreality.in/rules/ctc-components/): Read Indian CTC components by separating fixed cash, variable pay, employer costs, reimbursements and benefits; compare written offers without double counting.
+- [Salary, Allowances, and Taxable Benefits](https://careerreality.in/rules/salary-benefits-tax/): Classify Indian salary benefits, reimbursements and perquisites with official tax guidance; match each item to written records before estimating taxable income.
+
+## About, standards, sources, and policies
+
+- [About CareerReality](https://careerreality.in/about/): Explore CareerReality's practical career decision tools and editorial guides, review their scope, and find a contact address.
+- [Editorial Attribution Status](https://careerreality.in/team/): Review the status of author, reviewer, publication-date, and substantive-update records for CareerReality's editorial pages.
+- [Editorial Standards](https://careerreality.in/editorial/): See how CareerReality separates source-backed facts, editorial analysis, assumptions, and uncertainty when evidence is incomplete or disputed.
+- [Corrections and Updates](https://careerreality.in/corrections/): Learn how to submit a correction, what the public correction record does and does not show, and what evidence supports a published change.
+- [Tools and Calculation Methods](https://careerreality.in/methodology/): Review each tool's inputs, formulas, worked examples, dated assumptions, and limits, including what its results cannot establish.
+- [Sources and Data](https://careerreality.in/sources/): Browse official and primary materials used for CareerReality calculations and guides, with source dates and provenance limits stated where known.
+- [Privacy Information: Data Use and Deletion](https://careerreality.in/privacy-policy/): Learn what information CareerReality’s public tools and contact form process, where inputs go, and which deletion controls are available for your data.
+- [Terms of Use and Limits](https://careerreality.in/terms/): Review the limits of CareerReality's educational tools, their assumptions, and what visitors should verify independently before relying on a result.
+- [Contact CareerReality](https://careerreality.in/contact/): Email hello@careerreality.in or use the contact form for corrections, privacy requests, and general messages; receipts confirm storage only.
+
+## Policy and access boundaries
+
+Public policy pages describe their own limits: privacy information is not an owner-approved privacy policy, and the terms page does not establish approved legal terms. The contact page provides an email address and a form; a form receipt confirms storage, not review, fulfilment, or a response time. Do not infer verified author or reviewer identities from the attribution-status page.
+
+Account, workspace, search, alert-confirmation, and unsubscribe routes are not public content recommendations. Archived and noindex routes are excluded from the lists above.
+
+- [XML sitemap](https://careerreality.in/sitemap.xml): Canonical routes approved for sitemap inclusion in this build.
+
+llms.txt is voluntary discovery guidance, not a robots directive, access permission, or a guarantee of indexing or AI citation.

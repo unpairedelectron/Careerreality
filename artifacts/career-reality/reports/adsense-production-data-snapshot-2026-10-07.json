@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-10-07",
+  "source": "Replit production PostgreSQL read-only replica; aggregate SELECT only",
+  "queryFile": "adsense-production-data-snapshot-2026-10-07.sql",
+  "ageComparisonDays": 30,
+  "tables": [
+    {
+      "dataset": "company_signals",
+      "rowCount": 26,
+      "missingSourceUrl": 26,
+      "malformedSourceUrl": 0,
+      "olderThan30Days": 26,
+      "latestRefreshedAt": "2026-09-05T19:32:23.696346Z"
+    },
+    {
+      "dataset": "layoff_signals",
+      "rowCount": 6,
+      "missingSourceUrl": 6,
+      "malformedSourceUrl": 0,
+      "olderThan30Days": 6,
+      "latestRefreshedAt": "2026-09-04T19:35:42.267045Z"
+    },
+    {
+      "dataset": "salary_benchmarks",
+      "rowCount": 360,
+      "missingSourceUrl": 360,
+      "malformedSourceUrl": 0,
+      "olderThan30Days": 360,
+      "latestRefreshedAt": "2026-09-05T19:32:23.698381Z"
+    }
+  ]
+}

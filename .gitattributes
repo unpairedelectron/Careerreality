@@ -1,0 +1,4 @@
+artifacts/career-reality/test-results/save-and-watch-save-and-wa-2c71d--source-fails-independently/trace.zip filter=lfs diff=lfs merge=lfs -text
+artifacts/career-reality/test-results/save-and-watch-save-and-wa-68e02-snapshot-and-watchlist-loop/trace.zip filter=lfs diff=lfs merge=lfs -text
+artifacts/career-reality/test-results/save-and-watch-save-and-wa-f8a57-ad-when-the-company-changes/trace.zip filter=lfs diff=lfs merge=lfs -text
+docs/work/URL_DECISIONS.csv whitespace=cr-at-eol

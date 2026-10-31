@@ -1,0 +1,28 @@
+{
+  "capturedAt": "2026-10-08T05:17:29.127Z",
+  "sitemapUrls": 69,
+  "crawledUrls": 95,
+  "allHttp200": true,
+  "fetchFailures": 0,
+  "missingCanonical": 0,
+  "canonicalCount": 95,
+  "selfCanonicalCount": 94,
+  "noindex": 26,
+  "indexable": 69,
+  "avgSsrWords": 2592,
+  "avgRenderedWords": 2948,
+  "toolSsr": {
+    "/compass/": 131,
+    "/layoff-radar/": 175,
+    "/salary-reality/": 193,
+    "/salary-calculator/": 178
+  },
+  "productionRows": 392,
+  "productionRowsByTable": {
+    "salary_benchmarks": 360,
+    "company_signals": 26,
+    "layoff_signals": 6
+  },
+  "articles": 44,
+  "liveArticleWords": 235598
+}

@@ -1,0 +1,29 @@
+# CTC calculator source and calculation verification
+
+**Accessed:** 2026-10-09  
+**Scope:** The public CTC estimate uses the new regime for tax year 2026–27. This is source verification, not independent professional approval.
+
+## Official rules applied
+
+| Rule | Official source and checked passage | Model treatment |
+| --- | --- | --- |
+| New-regime rates | [Income-tax Act 2025, Section 202 (Year 2026)](https://www.incometaxindia.gov.in/w/section-202-78), subsection (1): nil through ₹4,00,000; 5% ₹4,00,001–₹8,00,000; 10% ₹8,00,001–₹12,00,000; 15% ₹12,00,001–₹16,00,000; 20% ₹16,00,001–₹20,00,000; 25% ₹20,00,001–₹24,00,000; 30% above ₹24,00,000. | Progressive bands in the shared calculator module. The tax table is for tax year 2026–27, not the legacy AY 2026–27 table under the Income-tax Act 1961. |
+| Standard deduction | [Income-tax Act 2025, Section 19 (Year 2026)](https://www.incometaxindia.gov.in/w/section-19-206), Table item 2(a): ₹75,000 or salary, whichever is less, where tax is computed under Section 202(1). | Deduct the lesser of gross salary and ₹75,000. |
+| New-regime rebate and marginal relief | [Income-tax Act 2025, Section 156 (Year 2026)](https://www.incometaxindia.gov.in/w/section-156-88), subsection (2): for a resident individual taxed under Section 202(1), total income up to ₹12 lakh receives a rebate limited to tax payable or ₹60,000; above ₹12 lakh, relief limits post-rebate tax to the amount by which income exceeds ₹12 lakh. | Apply the ₹60,000 ceiling and marginal relief calculation; boundary tests cover both sides of the threshold. |
+| Surcharge, surcharge marginal relief and cess | [Memorandum to Finance Bill 2026](https://www.incometaxindia.gov.in/documents/81799/11848482/memo-2026.pdf), “Tax rates under section 202” and following items. For tax year 2026–27 it describes 10% surcharge above ₹50 lakh through ₹1 crore, 15% above ₹1 crore through ₹2 crore, and 25% above ₹2 crore for income excluding specified dividend/capital-gains amounts; it restricts the 37% rate above ₹5 crore to 25%, provides marginal relief where surcharge applies, and states 4% Health and Education Cess on tax including surcharge. | For the modeled salary-only case, apply the 10%, 15% and 25% bands, surcharge marginal relief, and 4% cess on tax plus surcharge. Apply the 25% cap above ₹5 crore. |
+| EPFO ceiling, rates and examples | [EPFO FAQ: Revision of EPFO Statutory Wage Ceiling](https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf), official EPFO CDN PDF retrieved 2026-10-09; SHA-256 `47c22e56faaf6735bb8bd0b70db502e2f86efd4adb654cc4593ff85be6eb1052`. Questions 1–6 describe the ₹25,000 monthly wage ceiling effective 17 September 2026 and coverage subject to scheme provisions; Questions 7, 12 and 13 give contribution examples, including 12% employee and employer shares and the illustrated 8.33% EPS / 3.67% EPF split. The [23 September 2026 PIB release](https://www.pib.gov.in/PressReleasePage.aspx?PRID=2314111&reg=48&lang=2) independently reports the notified ceiling. | The official rates and examples are recorded but not applied by the calculator. The FAQ does not resolve every individual membership case or how a particular offer's components map to statutory EPF wages. |
+
+## Rules deliberately not inferred
+
+- The official EPFO wage-ceiling FAQ PDF was retrieved and read on 2026-10-09; its hash is recorded above. It provides contribution examples and rates, but it does not by itself settle every membership-specific rule or establish how an individual offer's CTC/basic-pay components map to statutory EPF wages. No statutory employee/employer PF amount is inferred by the calculator.
+- Employee PF, employer PF, employer PF inclusion in CTC, gratuity-in-CTC, other employer costs and professional tax are entered from the user's offer/payroll information. State/UT is context only; the calculator does not look up a professional-tax amount. The basic-pay percentage is an offer split, not an input to an automatic PF calculation. The CTC remainder stays unallocated rather than being assigned to an invented component.
+- The public UI offers only the new regime. The module contains an old-regime helper branch, but that branch is not exposed by this calculator and is not covered by this source-verification record. Do not expose it without a separate primary-source review and qualified approval.
+- The calculation assumes a resident salaried individual below age 60, only the salary inputs represented in the form, no special-rate income, and no unentered exemption or deduction. It is an estimate, not a return calculation, payslip, TDS determination or tax/payroll advice.
+- The official Tax Rates page for AY 2026–27 describes provisions of the Income-tax Act 1961. It is deliberately not used as the source for the new Income-tax Act 2025 tax-year 2026–27 calculator.
+
+## Examples and tests
+
+- Worked examples are generated from the same calculation module used by the UI and route snapshots. They are hypothetical examples, not typical or recommended compensation.
+- Four examples use ₹8L, ₹12L, ₹20L and ₹40L CTC. Their fixed/target-variable split, 50% basic-pay input, manual PF, professional-tax and other employer-cost inputs are recorded in `CLAIM_REGISTER.csv`.
+- Tax tests passed 14/14, including tax-band/rebate boundaries, zero/full target-variable cases, PF handling, surcharge cases and the ₹20L illustration. The example outputs are covered by the shared-model tests.
+- No qualified Indian tax/payroll reviewer has signed off. Keep the calculator `noindex` until an independent reviewer checks the rules, assumptions, edge cases and examples.

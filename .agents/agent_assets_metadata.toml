@@ -1,0 +1,72 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "M5Phhs8MzKSO976jXcp3W"
+uri = "file://screenshots/career-reality-premium-palette.jpg"
+type = "image"
+title = "CareerReality premium palette preview"
+description = "Live 402×874 mobile preview showing the refined mineral-paper, deep-teal, and clay accent palette on the authentication screen."
+logical_id = "b6471e19-6b35-44c9-98b1-3a1878e97239"
+content_hash = "sha256:f6bb0564cf98e61cfcaa19b6dfe26f68694a360dc390515de5eb50bce17a5930"
+size = 39005
+mtime_ms = 1789019379839
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:550f1a95-3316-4c4f-8c0d-2fef08d3b25f/b6471e19-6b35-44c9-98b1-3a1878e97239/03f41251-48cb-4409-bd38-45a914dc2ecb"
+storage_version_token = "1789019403115348"
+content_type = "image/jpeg"
+
+[[outputs]]
+id = "grSsU-lfWb-AjvMf3T3Ry"
+uri = "file://artifacts/career-reality/reports/careerreality-traffic-seo-audit-2026-09-28.html"
+type = "html"
+title = "CareerReality traffic & search recovery audit"
+description = "Updated with the supplied Search Console evidence, India-focused opportunities, legacy URL checks, citations and a staged recovery roadmap."
+logical_id = "5f1a250d-58b2-4ec3-b53e-669fe4b49096"
+content_hash = "sha256:28f35bd0b4417ccbb217ac7e0cd31d183759673c45dbfb08efec585331c454c3"
+size = 116124
+mtime_ms = 1790596806538
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:550f1a95-3316-4c4f-8c0d-2fef08d3b25f/5f1a250d-58b2-4ec3-b53e-669fe4b49096/7d243db8-994f-4930-9100-cbe06a3b6e1a"
+storage_version_token = "1790596843367106"
+content_type = "text/html"
+
+[[outputs]]
+id = "kawNLVL2yN-zPSj7lukXW"
+uri = "file://.local/outputs/careerreality-pageviews-7d.chart.html"
+type = "text"
+title = "Google is a visible early referrer"
+description = "CareerReality root-site pageviews per day for Sep 22–28, 2026. The /career-reality-launch-video route is excluded; Sep 28 is a partial UTC day."
+logical_id = "43afdefb-2340-47c7-a924-37043130b674"
+content_hash = "sha256:df9496a2ac848de7042a876d693592ff5c7a7f464f3c742bcc187853b03093e2"
+size = 3802
+mtime_ms = 1790618917785
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:550f1a95-3316-4c4f-8c0d-2fef08d3b25f/43afdefb-2340-47c7-a924-37043130b674/bc92d559-3553-4815-b70a-952394bc16f6"
+storage_version_token = "1790618919549618"
+content_type = "text/html;profile=replit-chart"
+
+[[outputs]]
+id = "jKo-LpPFxADufQG4vxZmE"
+uri = "file://.local/outputs/careerreality-pageviews-sep29.chart.html"
+type = "text"
+title = "Traffic is at 4 pageviews so far today after yesterday’s 75-pageview spike"
+description = "Daily CareerReality website pageviews through Sep 29, with today marked as partial; the launch-video route is excluded."
+logical_id = "c7441e6c-2570-4aed-a710-da903b015502"
+content_hash = "sha256:cdcb94333fcae6a80dcb4eec141a2022d2a392697a2507e97f0ea9f9eebe50c5"
+size = 3582
+mtime_ms = 1790664062844
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:550f1a95-3316-4c4f-8c0d-2fef08d3b25f/c7441e6c-2570-4aed-a710-da903b015502/d8291d8f-376f-4ec2-bbd0-175130c18a5f"
+storage_version_token = "1790664065056782"
+content_type = "text/html;profile=replit-chart"
+
+[[outputs]]
+id = "zZqffPEMUIanQcuPYXTTB"
+uri = "file://docs/application-readiness-report.md"
+type = "text"
+title = "CareerReality Application Readiness Report"
+description = "Staging-only readiness scores, verification results, security findings, and remaining release blockers."
+logical_id = "e6d58219-a412-41e1-b747-67aba7c8bbf5"
+content_hash = "sha256:bde1119d50c32d9dd37c56080c6c8462d23cfee024897014a8f7b258038e8418"
+size = 6778
+mtime_ms = 1791485054041
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:550f1a95-3316-4c4f-8c0d-2fef08d3b25f/e6d58219-a412-41e1-b747-67aba7c8bbf5/441511f9-15f5-4b66-8607-24974d91696c"
+storage_version_token = "1791485102903552"
+content_type = "text/markdown"

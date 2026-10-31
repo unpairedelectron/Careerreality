@@ -1,0 +1,138 @@
+[
+  {
+    "id": "mca-master-data",
+    "label": "MCA Company and LLP Master Data",
+    "url": "https://www.mca.gov.in/content/mca/global/en/mca/master-data/MDS.html",
+    "purpose": "Search a company or LLP by legal name, CIN, or LLPIN; inspect official master data.",
+    "checkedOn": "2026-10-28",
+    "check": "The official MCA registry page was available on 28 Oct 2026."
+  },
+  {
+    "id": "mca-find-cin",
+    "label": "MCA Find CIN",
+    "url": "https://www.mca.gov.in/content/mca/global/en/mca/fo-llp-services/findCinFinalSingleCom.html",
+    "purpose": "Find a CIN using the company name or registration details.",
+    "checkedOn": "2026-10-28",
+    "check": "MCA lets you search for the company, but the pages checked do not explain how to decode each part of a CIN."
+  },
+  {
+    "id": "gst-search",
+    "label": "GST Search Taxpayer",
+    "url": "https://services.gst.gov.in/services/searchtp",
+    "purpose": "Check GSTIN/UIN, legal name, registration status, and principal place of business.",
+    "checkedOn": "2026-10-28",
+    "check": "The official GST search page was available on 28 Oct 2026."
+  },
+  {
+    "id": "gst-manual",
+    "label": "GST taxpayer search guide",
+    "url": "https://tutorial.gst.gov.in/userguide/taxpayersdashboard/Search_Taxpayer_manual.htm",
+    "purpose": "Official instructions for using the GST taxpayer search.",
+    "checkedOn": "2026-10-28",
+    "check": "The official GST guide was available on 28 Oct 2026."
+  },
+  {
+    "id": "udyam-verify",
+    "label": "Udyam Registration verification",
+    "url": "https://udyamregistration.gov.in/udyam_verify.aspx",
+    "purpose": "Check an MSME Udyam registration number.",
+    "checkedOn": "2026-10-28",
+    "check": "The official Udyam verification page was available on 28 Oct 2026."
+  },
+  {
+    "id": "epfo-establishment",
+    "label": "EPFO Establishment Search",
+    "url": "https://unifiedportal-emp.epfindia.gov.in/publicPortal/no-auth/misReport/home/loadEstSearchHome",
+    "purpose": "Search by part of the establishment name or its seven-digit code.",
+    "checkedOn": "2026-10-28",
+    "check": "The official EPFO search page was available on 28 Oct 2026."
+  },
+  {
+    "id": "epfo-passbook",
+    "label": "EPFO member passbook",
+    "url": "https://passbook.epfindia.gov.in/MemberPassBook/login",
+    "purpose": "After joining, members can check their own PF passbook; it is not an employer pre-joining verification tool.",
+    "checkedOn": "2026-10-28",
+    "check": "Official EPFO destination; check current access and instructions before use."
+  },
+  {
+    "id": "esic-employer",
+    "label": "ESIC Employer Search",
+    "url": "https://portal.esic.gov.in/EmployerSearch",
+    "purpose": "Search ESIC employer records by state, district, code, or name.",
+    "checkedOn": "2026-10-28",
+    "check": "The official ESIC search page was available on 28 Oct 2026."
+  },
+  {
+    "id": "nse-filings",
+    "label": "NSE corporate filings and announcements",
+    "url": "https://www.nseindia.com/companies-listing/corporate-filings-announcements",
+    "purpose": "Review disclosures for an NSE-listed company.",
+    "checkedOn": "2026-10-28",
+    "check": "The official NSE filings page was available on 28 Oct 2026."
+  },
+  {
+    "id": "bse-announcements",
+    "label": "BSE corporate announcements",
+    "url": "https://www.bseindia.com/corporates/ann",
+    "purpose": "Review disclosures for a BSE-listed company.",
+    "checkedOn": "2026-10-28",
+    "check": "The official BSE announcements page was available on 28 Oct 2026."
+  },
+  {
+    "id": "ibbi-announcements",
+    "label": "IBBI Public Announcements",
+    "url": "https://ibbi.gov.in/public-announcement",
+    "purpose": "Search insolvency-related public announcements by corporate debtor.",
+    "checkedOn": "2026-10-28",
+    "check": "The official IBBI announcements page was available on 28 Oct 2026."
+  },
+  {
+    "id": "nclt-party-search",
+    "label": "NCLT search by party name",
+    "url": "https://nclt.gov.in/party-name-wise",
+    "purpose": "Search Tribunal case records by party name and bench.",
+    "checkedOn": "2026-10-28",
+    "check": "The official NCLT search page was available on 28 Oct 2026."
+  },
+  {
+    "id": "ecourts",
+    "label": "eCourts Services",
+    "url": "https://services.ecourts.gov.in/ecourtindia_v6/casestatus",
+    "purpose": "Search case status by party name; inspect matching cases individually.",
+    "checkedOn": "2026-10-28",
+    "check": "Opened on 28 Oct 2026. The page supports party-name case-status searches and identifies the eCommittee of the Supreme Court of India and NIC as its owners and maintainers."
+  },
+  {
+    "id": "sebi-orders",
+    "label": "SEBI Orders",
+    "url": "https://www.sebi.gov.in/enforcement/orders.html",
+    "purpose": "Search regulator enforcement orders and proceedings.",
+    "checkedOn": "2026-10-28",
+    "check": "The official SEBI orders page was available on 28 Oct 2026."
+  },
+  {
+    "id": "cybercrime-portal",
+    "label": "National Cyber Crime Reporting Portal",
+    "url": "https://cybercrime.gov.in/",
+    "purpose": "Report cybercrime; call 1930 promptly for financial cyber fraud.",
+    "checkedOn": "2026-10-28",
+    "check": "We could not confirm the current page or instructions on 28 Oct 2026. Check that the portal and guidance are current before using them."
+  },
+  {
+    "id": "cybercrime-job-advisory",
+    "label": "Cyber Crime Portal job-fraud advisory",
+    "url": "https://cybercrime.gov.in/pdf/Job%20Fraud%20Brochure%20Final.pdf",
+    "purpose": "Read official fake-job and recruitment-scam advisories.",
+    "checkedOn": "2026-10-28",
+    "check": "We could not confirm this document's contents on 28 Oct 2026. Check the portal for a current copy before relying on it."
+  },
+  {
+    "id": "whatsapp-share",
+    "label": "WhatsApp share",
+    "url": "https://wa.me/",
+    "purpose": "Open the user-initiated share composer.",
+    "checkedOn": "2026-10-28",
+    "check": "The WhatsApp share destination was available on 28 Oct 2026."
+  }
+]

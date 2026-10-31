@@ -1,0 +1,3237 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-30T14:49:06.201Z",
+  "origin": "https://careerreality.in",
+  "alternateOrigins": [
+    "https://www.careerreality.in",
+    "https://indigo-bowed-megabyte.replit.app"
+  ],
+  "observations": {
+    "primary": {
+      "/search/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/search/",
+        "canonical": "https://careerreality.in/search/",
+        "ogUrl": "https://careerreality.in/search/",
+        "robots": "noindex, follow",
+        "hasBreadcrumbs": true,
+        "hasRealityCheck": false,
+        "hasDecisionSummary": false,
+        "hasArticleSchema": false
+      },
+      "/sitemap.xml": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/sitemap.xml",
+        "locationCount": 79,
+        "locationOrigins": [
+          "https://careerreality.in"
+        ],
+        "includesSearch": false
+      },
+      "/robots.txt": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/robots.txt",
+        "sitemapLine": "Sitemap: https://careerreality.in/sitemap.xml",
+        "containsLegacyOrigin": false
+      },
+      "/article/indian-it-layoff-cycle-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+        "canonical": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+        "ogUrl": "https://careerreality.in/",
+        "robots": "noindex, follow",
+        "hasBreadcrumbs": false,
+        "hasRealityCheck": false,
+        "hasDecisionSummary": false,
+        "hasArticleSchema": false
+      },
+      "/editorial/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/editorial/",
+        "canonical": "https://careerreality.in/editorial/",
+        "ogUrl": "https://careerreality.in/editorial/",
+        "robots": "index, follow",
+        "hasBreadcrumbs": true,
+        "hasRealityCheck": false,
+        "hasDecisionSummary": false,
+        "hasArticleSchema": false
+      }
+    },
+    "alternates": {
+      "https://www.careerreality.in": {
+        "/search/": {
+          "status": 200,
+          "finalUrl": "https://careerreality.in/search/",
+          "canonical": "https://careerreality.in/search/",
+          "ogUrl": "https://careerreality.in/search/",
+          "robots": "noindex, follow",
+          "hasBreadcrumbs": true,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        },
+        "/sitemap.xml": {
+          "status": 200,
+          "finalUrl": "https://careerreality.in/sitemap.xml",
+          "locationCount": 79,
+          "locationOrigins": [
+            "https://careerreality.in"
+          ],
+          "includesSearch": false
+        },
+        "/robots.txt": {
+          "status": 200,
+          "finalUrl": "https://careerreality.in/robots.txt",
+          "sitemapLine": "Sitemap: https://careerreality.in/sitemap.xml",
+          "containsLegacyOrigin": false
+        },
+        "/article/indian-it-layoff-cycle-2026/": {
+          "status": 200,
+          "finalUrl": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+          "canonical": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+          "ogUrl": "https://careerreality.in/",
+          "robots": "noindex, follow",
+          "hasBreadcrumbs": false,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        },
+        "/editorial/": {
+          "status": 200,
+          "finalUrl": "https://careerreality.in/editorial/",
+          "canonical": "https://careerreality.in/editorial/",
+          "ogUrl": "https://careerreality.in/editorial/",
+          "robots": "index, follow",
+          "hasBreadcrumbs": true,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        }
+      },
+      "https://indigo-bowed-megabyte.replit.app": {
+        "/search/": {
+          "status": 200,
+          "finalUrl": "https://indigo-bowed-megabyte.replit.app/search/",
+          "canonical": "https://careerreality.in/search/",
+          "ogUrl": "https://careerreality.in/search/",
+          "robots": "noindex, follow",
+          "hasBreadcrumbs": true,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        },
+        "/sitemap.xml": {
+          "status": 200,
+          "finalUrl": "https://indigo-bowed-megabyte.replit.app/sitemap.xml",
+          "locationCount": 79,
+          "locationOrigins": [
+            "https://careerreality.in"
+          ],
+          "includesSearch": false
+        },
+        "/robots.txt": {
+          "status": 200,
+          "finalUrl": "https://indigo-bowed-megabyte.replit.app/robots.txt",
+          "sitemapLine": null,
+          "containsLegacyOrigin": false
+        },
+        "/article/indian-it-layoff-cycle-2026/": {
+          "status": 200,
+          "finalUrl": "https://indigo-bowed-megabyte.replit.app/article/indian-it-layoff-cycle-2026/",
+          "canonical": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+          "ogUrl": "https://careerreality.in/",
+          "robots": "noindex, follow",
+          "hasBreadcrumbs": false,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        },
+        "/editorial/": {
+          "status": 200,
+          "finalUrl": "https://indigo-bowed-megabyte.replit.app/editorial/",
+          "canonical": "https://careerreality.in/editorial/",
+          "ogUrl": "https://careerreality.in/editorial/",
+          "robots": "index, follow",
+          "hasBreadcrumbs": true,
+          "hasRealityCheck": false,
+          "hasDecisionSummary": false,
+          "hasArticleSchema": false
+        }
+      }
+    },
+    "sitemapPages": {
+      "https://careerreality.in/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/",
+        "indexable": true,
+        "titleLength": 43,
+        "canonical": "https://careerreality.in/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/about/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/about/",
+        "indexable": true,
+        "titleLength": 35,
+        "canonical": "https://careerreality.in/about/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/ai/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/ai/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/ai/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/career-reality-index/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/career-reality-index/",
+        "indexable": true,
+        "titleLength": 61,
+        "canonical": "https://careerreality.in/career-reality-index/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/companies/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/companies/",
+        "indexable": true,
+        "titleLength": 55,
+        "canonical": "https://careerreality.in/companies/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/compass/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/compass/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/compass/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/contact/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/contact/",
+        "indexable": true,
+        "titleLength": 37,
+        "canonical": "https://careerreality.in/contact/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/corrections/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/corrections/",
+        "indexable": true,
+        "titleLength": 39,
+        "canonical": "https://careerreality.in/corrections/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/editorial/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/editorial/",
+        "indexable": true,
+        "titleLength": 35,
+        "canonical": "https://careerreality.in/editorial/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/escape-plan/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/escape-plan/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/escape-plan/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/final-pay-estimator/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/final-pay-estimator/",
+        "indexable": true,
+        "titleLength": 54,
+        "canonical": "https://careerreality.in/final-pay-estimator/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/gratuity-estimator/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/gratuity-estimator/",
+        "indexable": true,
+        "titleLength": 64,
+        "canonical": "https://careerreality.in/gratuity-estimator/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/",
+        "indexable": true,
+        "titleLength": 39,
+        "canonical": "https://careerreality.in/guides/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/90-day-post-layoff-job-search/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/90-day-post-layoff-job-search/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/guides/90-day-post-layoff-job-search/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/ai-at-work-questions-to-ask/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/ai-at-work-questions-to-ask/",
+        "indexable": true,
+        "titleLength": 50,
+        "canonical": "https://careerreality.in/guides/ai-at-work-questions-to-ask/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/career-switches-and-education/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/career-switches-and-education/",
+        "indexable": true,
+        "titleLength": 62,
+        "canonical": "https://careerreality.in/guides/career-switches-and-education/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/cross-border-and-remote-pay/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/cross-border-and-remote-pay/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/guides/cross-border-and-remote-pay/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/culture-fit-and-product-management/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/culture-fit-and-product-management/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/culture-fit-and-product-management/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/cybersecurity-and-green-work/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/cybersecurity-and-green-work/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/cybersecurity-and-green-work/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/data-science-career-claims/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/data-science-career-claims/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/guides/data-science-career-claims/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/engineering-careers-without-the-title-trap/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/engineering-careers-without-the-title-trap/",
+        "indexable": true,
+        "titleLength": 63,
+        "canonical": "https://careerreality.in/guides/engineering-careers-without-the-title-trap/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/first-24-hours-after-layoff/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/first-24-hours-after-layoff/",
+        "indexable": true,
+        "titleLength": 64,
+        "canonical": "https://careerreality.in/guides/first-24-hours-after-layoff/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/getting-hired-through-evidence-and-conversations/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/getting-hired-through-evidence-and-conversations/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/getting-hired-through-evidence-and-conversations/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/gratuity-four-years-eight-months/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/gratuity-four-years-eight-months/",
+        "indexable": true,
+        "titleLength": 64,
+        "canonical": "https://careerreality.in/guides/gratuity-four-years-eight-months/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/how-to-read-salary-and-hiring-claims/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/how-to-read-salary-and-hiring-claims/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/guides/how-to-read-salary-and-hiring-claims/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/independent-work-without-romanticising-it/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/independent-work-without-romanticising-it/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/independent-work-without-romanticising-it/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/labour-codes-and-layoffs-india/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/labour-codes-and-layoffs-india/",
+        "indexable": true,
+        "titleLength": 61,
+        "canonical": "https://careerreality.in/guides/labour-codes-and-layoffs-india/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/layoff-recovery-and-employment-documents/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/layoff-recovery-and-employment-documents/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/layoff-recovery-and-employment-documents/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/negotiate-salary-offer-with-numbers/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/negotiate-salary-offer-with-numbers/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/guides/negotiate-salary-offer-with-numbers/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/notice-period-and-return-to-office/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/notice-period-and-return-to-office/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/guides/notice-period-and-return-to-office/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/notice-period-buyout-india/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/notice-period-buyout-india/",
+        "indexable": true,
+        "titleLength": 61,
+        "canonical": "https://careerreality.in/guides/notice-period-buyout-india/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/offer-letter-red-flags-india/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/offer-letter-red-flags-india/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/guides/offer-letter-red-flags-india/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/old-vs-new-tax-regime-salaried-india/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/old-vs-new-tax-regime-salaried-india/",
+        "indexable": true,
+        "titleLength": 61,
+        "canonical": "https://careerreality.in/guides/old-vs-new-tax-regime-salaried-india/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/performance-reviews-and-career-choices/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/performance-reviews-and-career-choices/",
+        "indexable": true,
+        "titleLength": 63,
+        "canonical": "https://careerreality.in/guides/performance-reviews-and-career-choices/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/pf-withdrawal-after-job-loss/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/pf-withdrawal-after-job-loss/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/guides/pf-withdrawal-after-job-loss/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/read-the-offer-beyond-ctc/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/read-the-offer-beyond-ctc/",
+        "indexable": true,
+        "titleLength": 54,
+        "canonical": "https://careerreality.in/guides/read-the-offer-beyond-ctc/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/runway-debt-and-big-decisions/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/runway-debt-and-big-decisions/",
+        "indexable": true,
+        "titleLength": 61,
+        "canonical": "https://careerreality.in/guides/runway-debt-and-big-decisions/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/senior-engineering-and-operations-work/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/senior-engineering-and-operations-work/",
+        "indexable": true,
+        "titleLength": 65,
+        "canonical": "https://careerreality.in/guides/senior-engineering-and-operations-work/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/severance-notice-leave-after-layoff/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/severance-notice-leave-after-layoff/",
+        "indexable": true,
+        "titleLength": 63,
+        "canonical": "https://careerreality.in/guides/severance-notice-leave-after-layoff/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/skills-passion-and-career-constraints/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/skills-passion-and-career-constraints/",
+        "indexable": true,
+        "titleLength": 63,
+        "canonical": "https://careerreality.in/guides/skills-passion-and-career-constraints/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/guides/workplace-culture-and-boundaries/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/guides/workplace-culture-and-boundaries/",
+        "indexable": true,
+        "titleLength": 64,
+        "canonical": "https://careerreality.in/guides/workplace-culture-and-boundaries/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/home-loan-stress-test/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/home-loan-stress-test/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/home-loan-stress-test/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/job-posting-reality-check/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/job-posting-reality-check/",
+        "indexable": true,
+        "titleLength": 41,
+        "canonical": "https://careerreality.in/job-posting-reality-check/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoff-runway/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoff-runway/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/layoff-runway/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/",
+        "indexable": true,
+        "titleLength": 44,
+        "canonical": "https://careerreality.in/layoffs/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/adidas-india-technology-reduction-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/adidas-india-technology-reduction-2026/",
+        "indexable": true,
+        "titleLength": 51,
+        "canonical": "https://careerreality.in/layoffs/adidas-india-technology-reduction-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/amazon-devices-services-reduction-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/amazon-devices-services-reduction-2026/",
+        "indexable": true,
+        "titleLength": 59,
+        "canonical": "https://careerreality.in/layoffs/amazon-devices-services-reduction-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/amazon-stores-workforce-reduction-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/amazon-stores-workforce-reduction-2026/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/layoffs/amazon-stores-workforce-reduction-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/byjus-workforce-restructuring-2023/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/byjus-workforce-restructuring-2023/",
+        "indexable": true,
+        "titleLength": 49,
+        "canonical": "https://careerreality.in/layoffs/byjus-workforce-restructuring-2023/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/",
+        "indexable": true,
+        "titleLength": 55,
+        "canonical": "https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/ola-electric-layoffs/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/ola-electric-layoffs/",
+        "indexable": true,
+        "titleLength": 42,
+        "canonical": "https://careerreality.in/layoffs/ola-electric-layoffs/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/opendoor-india-operations-closure-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/opendoor-india-operations-closure-2026/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/layoffs/opendoor-india-operations-closure-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/paypal-india-workforce-reduction-2026/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/paypal-india-workforce-reduction-2026/",
+        "indexable": true,
+        "titleLength": 55,
+        "canonical": "https://careerreality.in/layoffs/paypal-india-workforce-reduction-2026/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/paytm-restructuring-2023/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/paytm-restructuring-2023/",
+        "indexable": true,
+        "titleLength": 48,
+        "canonical": "https://careerreality.in/layoffs/paytm-restructuring-2023/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/swiggy-workforce-reduction-2023/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/swiggy-workforce-reduction-2023/",
+        "indexable": true,
+        "titleLength": 49,
+        "canonical": "https://careerreality.in/layoffs/swiggy-workforce-reduction-2023/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/layoffs/tcs-layoffs/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/layoffs/tcs-layoffs/",
+        "indexable": true,
+        "titleLength": 55,
+        "canonical": "https://careerreality.in/layoffs/tcs-layoffs/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/methodology/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/methodology/",
+        "indexable": true,
+        "titleLength": 45,
+        "canonical": "https://careerreality.in/methodology/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/offer-comparison/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/offer-comparison/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/offer-comparison/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/privacy-policy/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/privacy-policy/",
+        "indexable": true,
+        "titleLength": 35,
+        "canonical": "https://careerreality.in/privacy-policy/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/resign-or-stay/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/resign-or-stay/",
+        "indexable": true,
+        "titleLength": 59,
+        "canonical": "https://careerreality.in/resign-or-stay/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/",
+        "indexable": true,
+        "titleLength": 38,
+        "canonical": "https://careerreality.in/rules/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/ctc-components/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/ctc-components/",
+        "indexable": true,
+        "titleLength": 40,
+        "canonical": "https://careerreality.in/rules/ctc-components/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/employee-pf/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/employee-pf/",
+        "indexable": true,
+        "titleLength": 48,
+        "canonical": "https://careerreality.in/rules/employee-pf/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/gratuity-wages/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/gratuity-wages/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/rules/gratuity-wages/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/hra-rent-exemption/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/hra-rent-exemption/",
+        "indexable": true,
+        "titleLength": 45,
+        "canonical": "https://careerreality.in/rules/hra-rent-exemption/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/income-tax-new-regime/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/income-tax-new-regime/",
+        "indexable": true,
+        "titleLength": 47,
+        "canonical": "https://careerreality.in/rules/income-tax-new-regime/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/income-tax-old-regime/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/income-tax-old-regime/",
+        "indexable": true,
+        "titleLength": 47,
+        "canonical": "https://careerreality.in/rules/income-tax-old-regime/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/leave-encashment/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/leave-encashment/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/rules/leave-encashment/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/professional-tax-states/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/professional-tax-states/",
+        "indexable": true,
+        "titleLength": 54,
+        "canonical": "https://careerreality.in/rules/professional-tax-states/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/salary-benefits-tax/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/salary-benefits-tax/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/rules/salary-benefits-tax/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/rules/salary-standard-deduction-cess/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/rules/salary-standard-deduction-cess/",
+        "indexable": true,
+        "titleLength": 50,
+        "canonical": "https://careerreality.in/rules/salary-standard-deduction-cess/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/salary-calculator/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/salary-calculator/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/salary-calculator/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/salary-drop/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/salary-drop/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/salary-drop/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/sources/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/sources/",
+        "indexable": true,
+        "titleLength": 32,
+        "canonical": "https://careerreality.in/sources/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/tax-regime-comparison/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/tax-regime-comparison/",
+        "indexable": true,
+        "titleLength": 53,
+        "canonical": "https://careerreality.in/tax-regime-comparison/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/team/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/team/",
+        "indexable": true,
+        "titleLength": 44,
+        "canonical": "https://careerreality.in/team/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/terms/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/terms/",
+        "indexable": true,
+        "titleLength": 39,
+        "canonical": "https://careerreality.in/terms/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/tools/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/tools/",
+        "indexable": true,
+        "titleLength": 38,
+        "canonical": "https://careerreality.in/tools/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      }
+    }
+  },
+  "checks": [
+    {
+      "label": "Legacy article registry contains no invalid mappings",
+      "passed": true,
+      "expected": "each registered legacy mapping is a single-hop 301 to an indexable guide",
+      "observed": "0 mappings; 0 invalid",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local SEO origin is the apex domain",
+      "passed": true,
+      "expected": "https://careerreality.in",
+      "observed": "https://careerreality.in",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build Mobile app noindex",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build Pro noindex",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build archived article stays on editorial hold",
+      "passed": true,
+      "expected": "noindex, follow hold shell",
+      "observed": "noindex, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build archived candidate stays on editorial hold",
+      "passed": true,
+      "expected": "noindex, follow hold shell",
+      "observed": "noindex, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build contains no legacy article snapshots",
+      "passed": true,
+      "expected": "no legacy article snapshots",
+      "observed": "absent",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build retired company route absent",
+      "passed": true,
+      "expected": "no generated company snapshot",
+      "observed": "absent",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build search snapshot",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build trust route Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build trust route canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build trust route robots",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local build trust route visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local sitemap contains apex URLs only",
+      "passed": true,
+      "expected": "all <loc> entries use https://careerreality.in",
+      "observed": "79 apex URLs",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local sitemap includes indexable trust route",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "present",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local sitemap matches registered indexable snapshots",
+      "passed": true,
+      "expected": "79 registered routes; no article URLs",
+      "observed": "79 URLs; legacy article absent",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "Local snapshots contain no www internal links",
+      "passed": true,
+      "expected": "no absolute www.careerreality.in links",
+      "observed": "none",
+      "kind": "local",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "passed": true,
+      "expected": "200 noindex hold",
+      "observed": "200 https://careerreality.in/article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /article/indian-it-layoff-cycle-2026/",
+      "passed": true,
+      "expected": "200 noindex hold",
+      "observed": "200 https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /companies/groww/",
+      "passed": true,
+      "expected": "2xx response or mapped 301",
+      "observed": "301 https://careerreality.in/companies/groww/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /editorial/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/editorial/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /mobile-app/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/mobile-app/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /pro/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/pro/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /robots.txt",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/robots.txt",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /search/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/search/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP /sitemap.xml",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/sitemap.xml",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Mobile app Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/mobile-app/",
+      "observed": "https://careerreality.in/mobile-app/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Mobile app canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/mobile-app/",
+      "observed": "https://careerreality.in/mobile-app/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Mobile app robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Mobile app title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Mobile app visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Pro Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/pro/",
+      "observed": "https://careerreality.in/pro/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Pro canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/pro/",
+      "observed": "https://careerreality.in/pro/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Pro robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Pro title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published Pro visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/10x-developer-myth-productivity-killing-careers/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/10x-developer-myth-productivity-killing-careers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/ai-job-market-2026-india-show-your-working/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/ai-job-market-2026-india-show-your-working/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/american-dream-indian-engineers/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/american-dream-indian-engineers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/broke-at-30-money-mistakes-nobody-warned/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/broke-at-30-money-mistakes-nobody-warned/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/career-switch-illusion-changing-jobs-not-career/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/career-switch-illusion-changing-jobs-not-career/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/culture-fit-trap-hiring-reality/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/culture-fit-trap-hiring-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/cybersecurity-privacy-careers-beyond-tech-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/cybersecurity-privacy-careers-beyond-tech-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/data-science-bubble-excel-work-reality/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/data-science-bubble-excel-work-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/devops-sre-reality-india-oncall/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/devops-sre-reality-india-oncall/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/engineering-career-ceiling-peak-at-35/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/engineering-career-ceiling-peak-at-35/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/freelancing-reality-india-freedom-myth/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/freelancing-reality-india-freedom-myth/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/gcc-gold-rush-india-captive-center-reality/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/gcc-gold-rush-india-captive-center-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/gcc-return-to-office-hybrid-reality-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/gcc-return-to-office-hybrid-reality-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/green-careers-esg-renewable-sustainability-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/green-careers-esg-renewable-sustainability-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/home-loan-trap-dream-house-financial-prison/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/home-loan-trap-dream-house-financial-prison/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/hr-conversations-what-matters-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/hr-conversations-what-matters-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/humour-in-workplace-culture-2026-joke-is-on-promotion/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/humour-in-workplace-culture-2026-joke-is-on-promotion/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/indian-education-trap-degree-career-mistake/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/indian-education-trap-degree-career-mistake/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/indian-it-layoff-cycle-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/job-hopping-stops-working-after-35/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/job-hopping-stops-working-after-35/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/joining-bonus-clawback-offer-letter-traps-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/joining-bonus-clawback-offer-letter-traps-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/junior-data-scientist-reality-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/junior-data-scientist-reality-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/layoff-recovery-timeline-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/layoff-recovery-timeline-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/manager-vs-ic-career-path-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/manager-vs-ic-career-path-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/mba-reality-india-worth-it-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/mba-reality-india-worth-it-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/networking-reality-india-introverts/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/networking-reality-india-introverts/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/passion-luxury-not-strategy-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/passion-luxury-not-strategy-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/performance-review-reality-ratings-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/performance-review-reality-ratings-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/pm-prestige-trap-escape-from-engineering/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/pm-prestige-trap-escape-from-engineering/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/portfolio-first-hiring-gig-economy-careers-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/portfolio-first-hiring-gig-economy-careers-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/relieving-letter-hostage-notice-period-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/relieving-letter-hostage-notice-period-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/remote-work-salary-trap-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/remote-work-salary-trap-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/salary-transparency-india-2026-number-in-room/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/salary-transparency-india-2026-number-in-room/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/self-learning-trap-online-courses-expensive-entertainment/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/self-learning-trap-online-courses-expensive-entertainment/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/senior-developer-salary-ceiling-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/senior-developer-salary-ceiling-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/side-hustle-myth-india-reality/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/side-hustle-myth-india-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/staff-engineer-promotion-freeze-india-2026/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/staff-engineer-promotion-freeze-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/startup-equity-esop-reality-india/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/startup-equity-esop-reality-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/tech-lead-trap-responsibility-authority/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/tech-lead-trap-responsibility-authority/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/ux-salary-myth-design-careers-plateau/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/ux-salary-myth-design-careers-plateau/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/what-20-lpa-actually-feels-like-india-purchasing-power/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/what-20-lpa-actually-feels-like-india-purchasing-power/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/why-upskilling-stops-working-career-trap/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/why-upskilling-stops-working-career-trap/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold /article/work-life-balance-myth-high-performers/",
+      "passed": true,
+      "expected": "200 noindex hold with self-canonical and no Article schema",
+      "observed": "200; robots=noindex, follow; canonical=https://careerreality.in/article/work-life-balance-myth-high-performers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article hold inventory",
+      "passed": true,
+      "expected": "44 archived article slugs checked",
+      "observed": "44 archived slugs",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/10x-developer-myth-productivity-killing-careers",
+      "passed": true,
+      "expected": "301 to /article/10x-developer-myth-productivity-killing-careers/",
+      "observed": "301 /article/10x-developer-myth-productivity-killing-careers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/ai-job-market-2026-india-show-your-working",
+      "passed": true,
+      "expected": "301 to /article/ai-job-market-2026-india-show-your-working/",
+      "observed": "301 /article/ai-job-market-2026-india-show-your-working/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/ai-upskilling-trap-india-api-wrapper-reality",
+      "passed": true,
+      "expected": "301 to /article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "observed": "301 /article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/american-dream-indian-engineers",
+      "passed": true,
+      "expected": "301 to /article/american-dream-indian-engineers/",
+      "observed": "301 /article/american-dream-indian-engineers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/broke-at-30-money-mistakes-nobody-warned",
+      "passed": true,
+      "expected": "301 to /article/broke-at-30-money-mistakes-nobody-warned/",
+      "observed": "301 /article/broke-at-30-money-mistakes-nobody-warned/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/career-switch-illusion-changing-jobs-not-career",
+      "passed": true,
+      "expected": "301 to /article/career-switch-illusion-changing-jobs-not-career/",
+      "observed": "301 /article/career-switch-illusion-changing-jobs-not-career/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/culture-fit-trap-hiring-reality",
+      "passed": true,
+      "expected": "301 to /article/culture-fit-trap-hiring-reality/",
+      "observed": "301 /article/culture-fit-trap-hiring-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/cybersecurity-privacy-careers-beyond-tech-india-2026",
+      "passed": true,
+      "expected": "301 to /article/cybersecurity-privacy-careers-beyond-tech-india-2026/",
+      "observed": "301 /article/cybersecurity-privacy-careers-beyond-tech-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/data-science-bubble-excel-work-reality",
+      "passed": true,
+      "expected": "301 to /article/data-science-bubble-excel-work-reality/",
+      "observed": "301 /article/data-science-bubble-excel-work-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/devops-sre-reality-india-oncall",
+      "passed": true,
+      "expected": "301 to /article/devops-sre-reality-india-oncall/",
+      "observed": "301 /article/devops-sre-reality-india-oncall/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/engineering-career-ceiling-peak-at-35",
+      "passed": true,
+      "expected": "301 to /article/engineering-career-ceiling-peak-at-35/",
+      "observed": "301 /article/engineering-career-ceiling-peak-at-35/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/freelancing-reality-india-freedom-myth",
+      "passed": true,
+      "expected": "301 to /article/freelancing-reality-india-freedom-myth/",
+      "observed": "301 /article/freelancing-reality-india-freedom-myth/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/gcc-gold-rush-india-captive-center-reality",
+      "passed": true,
+      "expected": "301 to /article/gcc-gold-rush-india-captive-center-reality/",
+      "observed": "301 /article/gcc-gold-rush-india-captive-center-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/gcc-return-to-office-hybrid-reality-india-2026",
+      "passed": true,
+      "expected": "301 to /article/gcc-return-to-office-hybrid-reality-india-2026/",
+      "observed": "301 /article/gcc-return-to-office-hybrid-reality-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/green-careers-esg-renewable-sustainability-india-2026",
+      "passed": true,
+      "expected": "301 to /article/green-careers-esg-renewable-sustainability-india-2026/",
+      "observed": "301 /article/green-careers-esg-renewable-sustainability-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/home-loan-trap-dream-house-financial-prison",
+      "passed": true,
+      "expected": "301 to /article/home-loan-trap-dream-house-financial-prison/",
+      "observed": "301 /article/home-loan-trap-dream-house-financial-prison/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/hr-conversations-what-matters-india",
+      "passed": true,
+      "expected": "301 to /article/hr-conversations-what-matters-india/",
+      "observed": "301 /article/hr-conversations-what-matters-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/humour-in-workplace-culture-2026-joke-is-on-promotion",
+      "passed": true,
+      "expected": "301 to /article/humour-in-workplace-culture-2026-joke-is-on-promotion/",
+      "observed": "301 /article/humour-in-workplace-culture-2026-joke-is-on-promotion/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/indian-education-trap-degree-career-mistake",
+      "passed": true,
+      "expected": "301 to /article/indian-education-trap-degree-career-mistake/",
+      "observed": "301 /article/indian-education-trap-degree-career-mistake/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/indian-it-layoff-cycle-2026",
+      "passed": true,
+      "expected": "301 to /article/indian-it-layoff-cycle-2026/",
+      "observed": "301 /article/indian-it-layoff-cycle-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/job-hopping-stops-working-after-35",
+      "passed": true,
+      "expected": "301 to /article/job-hopping-stops-working-after-35/",
+      "observed": "301 /article/job-hopping-stops-working-after-35/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/joining-bonus-clawback-offer-letter-traps-2026",
+      "passed": true,
+      "expected": "301 to /article/joining-bonus-clawback-offer-letter-traps-2026/",
+      "observed": "301 /article/joining-bonus-clawback-offer-letter-traps-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/junior-data-scientist-reality-india",
+      "passed": true,
+      "expected": "301 to /article/junior-data-scientist-reality-india/",
+      "observed": "301 /article/junior-data-scientist-reality-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/layoff-recovery-timeline-india",
+      "passed": true,
+      "expected": "301 to /article/layoff-recovery-timeline-india/",
+      "observed": "301 /article/layoff-recovery-timeline-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/manager-vs-ic-career-path-india",
+      "passed": true,
+      "expected": "301 to /article/manager-vs-ic-career-path-india/",
+      "observed": "301 /article/manager-vs-ic-career-path-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/mba-reality-india-worth-it-2026",
+      "passed": true,
+      "expected": "301 to /article/mba-reality-india-worth-it-2026/",
+      "observed": "301 /article/mba-reality-india-worth-it-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/networking-reality-india-introverts",
+      "passed": true,
+      "expected": "301 to /article/networking-reality-india-introverts/",
+      "observed": "301 /article/networking-reality-india-introverts/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/passion-luxury-not-strategy-india",
+      "passed": true,
+      "expected": "301 to /article/passion-luxury-not-strategy-india/",
+      "observed": "301 /article/passion-luxury-not-strategy-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/performance-review-reality-ratings-india",
+      "passed": true,
+      "expected": "301 to /article/performance-review-reality-ratings-india/",
+      "observed": "301 /article/performance-review-reality-ratings-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/pm-prestige-trap-escape-from-engineering",
+      "passed": true,
+      "expected": "301 to /article/pm-prestige-trap-escape-from-engineering/",
+      "observed": "301 /article/pm-prestige-trap-escape-from-engineering/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/portfolio-first-hiring-gig-economy-careers-india-2026",
+      "passed": true,
+      "expected": "301 to /article/portfolio-first-hiring-gig-economy-careers-india-2026/",
+      "observed": "301 /article/portfolio-first-hiring-gig-economy-careers-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/relieving-letter-hostage-notice-period-india-2026",
+      "passed": true,
+      "expected": "301 to /article/relieving-letter-hostage-notice-period-india-2026/",
+      "observed": "301 /article/relieving-letter-hostage-notice-period-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/remote-work-salary-trap-india",
+      "passed": true,
+      "expected": "301 to /article/remote-work-salary-trap-india/",
+      "observed": "301 /article/remote-work-salary-trap-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/salary-transparency-india-2026-number-in-room",
+      "passed": true,
+      "expected": "301 to /article/salary-transparency-india-2026-number-in-room/",
+      "observed": "301 /article/salary-transparency-india-2026-number-in-room/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/self-learning-trap-online-courses-expensive-entertainment",
+      "passed": true,
+      "expected": "301 to /article/self-learning-trap-online-courses-expensive-entertainment/",
+      "observed": "301 /article/self-learning-trap-online-courses-expensive-entertainment/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/senior-developer-salary-ceiling-india",
+      "passed": true,
+      "expected": "301 to /article/senior-developer-salary-ceiling-india/",
+      "observed": "301 /article/senior-developer-salary-ceiling-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/side-hustle-myth-india-reality",
+      "passed": true,
+      "expected": "301 to /article/side-hustle-myth-india-reality/",
+      "observed": "301 /article/side-hustle-myth-india-reality/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/staff-engineer-promotion-freeze-india-2026",
+      "passed": true,
+      "expected": "301 to /article/staff-engineer-promotion-freeze-india-2026/",
+      "observed": "301 /article/staff-engineer-promotion-freeze-india-2026/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/startup-equity-esop-reality-india",
+      "passed": true,
+      "expected": "301 to /article/startup-equity-esop-reality-india/",
+      "observed": "301 /article/startup-equity-esop-reality-india/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/tech-lead-trap-responsibility-authority",
+      "passed": true,
+      "expected": "301 to /article/tech-lead-trap-responsibility-authority/",
+      "observed": "301 /article/tech-lead-trap-responsibility-authority/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/ux-salary-myth-design-careers-plateau",
+      "passed": true,
+      "expected": "301 to /article/ux-salary-myth-design-careers-plateau/",
+      "observed": "301 /article/ux-salary-myth-design-careers-plateau/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/what-20-lpa-actually-feels-like-india-purchasing-power",
+      "passed": true,
+      "expected": "301 to /article/what-20-lpa-actually-feels-like-india-purchasing-power/",
+      "observed": "301 /article/what-20-lpa-actually-feels-like-india-purchasing-power/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/why-upskilling-stops-working-career-trap",
+      "passed": true,
+      "expected": "301 to /article/why-upskilling-stops-working-career-trap/",
+      "observed": "301 /article/why-upskilling-stops-working-career-trap/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published archived article slash-normalization /article/work-life-balance-myth-high-performers",
+      "passed": true,
+      "expected": "301 to /article/work-life-balance-myth-high-performers/",
+      "observed": "301 /article/work-life-balance-myth-high-performers/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published retired article noindex hold",
+      "passed": true,
+      "expected": "200 noindex, follow at the original article URL",
+      "observed": "200 noindex, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published retired article title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published retired candidate article noindex hold",
+      "passed": true,
+      "expected": "200 noindex, follow at the original article URL",
+      "observed": "200 noindex, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published retired candidate article title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published retired company route noindex hold or registered handoff",
+      "passed": true,
+      "expected": "noindex hold or 301 to /companies/",
+      "observed": "301 /companies/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published robots has no legacy origin",
+      "passed": true,
+      "expected": "no replit.app URL",
+      "observed": "absent",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published robots sitemap",
+      "passed": true,
+      "expected": "Sitemap: https://careerreality.in/sitemap.xml",
+      "observed": "Sitemap: https://careerreality.in/sitemap.xml",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published search Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published search canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published search robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published search title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap excludes /mobile-app/",
+      "passed": true,
+      "expected": "no https://careerreality.in/mobile-app/",
+      "observed": "absent",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap excludes /pro/",
+      "passed": true,
+      "expected": "no https://careerreality.in/pro/",
+      "observed": "absent",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap excludes retired article",
+      "passed": true,
+      "expected": "no https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "observed": "absent",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap excludes search",
+      "passed": true,
+      "expected": "no /search/ URL",
+      "observed": "absent",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap includes indexable trust route",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "present",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap matches local route set",
+      "passed": true,
+      "expected": "79 canonical URLs matching the local build",
+      "observed": "79 live URLs; missing 0; unexpected 0",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published sitemap origin",
+      "passed": true,
+      "expected": "https://careerreality.in",
+      "observed": "all URLs use the custom origin",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published trust route Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published trust route canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published trust route robots",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published trust route title length",
+      "passed": true,
+      "expected": "30-65 characters for indexable page",
+      "observed": "35 characters: Editorial Standards | CareerReality",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Published trust route visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/about/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/ai/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/career-reality-index/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/companies/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/compass/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/contact/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/corrections/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/editorial/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/escape-plan/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/final-pay-estimator/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/gratuity-estimator/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/90-day-post-layoff-job-search/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/ai-at-work-questions-to-ask/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/career-switches-and-education/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/cross-border-and-remote-pay/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/culture-fit-and-product-management/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/cybersecurity-and-green-work/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/data-science-career-claims/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/engineering-careers-without-the-title-trap/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/first-24-hours-after-layoff/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/getting-hired-through-evidence-and-conversations/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/gratuity-four-years-eight-months/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/how-to-read-salary-and-hiring-claims/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/independent-work-without-romanticising-it/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/labour-codes-and-layoffs-india/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/layoff-recovery-and-employment-documents/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/negotiate-salary-offer-with-numbers/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/notice-period-and-return-to-office/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/notice-period-buyout-india/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/offer-letter-red-flags-india/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/old-vs-new-tax-regime-salaried-india/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/performance-reviews-and-career-choices/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/pf-withdrawal-after-job-loss/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/read-the-offer-beyond-ctc/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/runway-debt-and-big-decisions/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/senior-engineering-and-operations-work/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/severance-notice-leave-after-layoff/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/skills-passion-and-career-constraints/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/guides/workplace-culture-and-boundaries/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/home-loan-stress-test/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/job-posting-reality-check/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoff-runway/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/adidas-india-technology-reduction-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/amazon-devices-services-reduction-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/amazon-stores-workforce-reduction-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/byjus-workforce-restructuring-2023/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/ola-electric-layoffs/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/opendoor-india-operations-closure-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/paypal-india-workforce-reduction-2026/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/paytm-restructuring-2023/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/swiggy-workforce-reduction-2023/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/layoffs/tcs-layoffs/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/methodology/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/offer-comparison/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/privacy-policy/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/resign-or-stay/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/ctc-components/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/employee-pf/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/gratuity-wages/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/hra-rent-exemption/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/income-tax-new-regime/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/income-tax-old-regime/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/leave-encashment/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/professional-tax-states/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/salary-benefits-tax/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/rules/salary-standard-deduction-cess/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/salary-calculator/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/salary-drop/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/sources/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/tax-regime-comparison/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/team/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/terms/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/tools/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app legacy article has no Article schema",
+      "passed": true,
+      "expected": "no Article schema",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app legacy article hold canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "observed": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app legacy article hold path",
+      "passed": true,
+      "expected": "/article/indian-it-layoff-cycle-2026",
+      "observed": "/article/indian-it-layoff-cycle-2026",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app legacy article hold robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app robots has no legacy origin",
+      "passed": true,
+      "expected": "no replit.app URL",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app robots policy",
+      "passed": true,
+      "expected": "Disallow: /",
+      "observed": "Disallow: /",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app search Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app search canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app search robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app search title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app sitemap excludes search",
+      "passed": true,
+      "expected": "no /search/ URL",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app sitemap origin",
+      "passed": true,
+      "expected": "https://careerreality.in",
+      "observed": "all URLs use the primary origin",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app trust route Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app trust route canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app trust route robots",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app trust route title length",
+      "passed": true,
+      "expected": "30-65 characters for indexable page",
+      "observed": "35 characters: Editorial Standards | CareerReality",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app trust route visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app/editorial/ redirects or canonicalizes to primary",
+      "passed": true,
+      "expected": "redirect to https://careerreality.in or canonical https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://indigo-bowed-megabyte.replit.app/search/ redirects or canonicalizes to primary",
+      "passed": true,
+      "expected": "redirect to https://careerreality.in or canonical https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in legacy article has no Article schema",
+      "passed": true,
+      "expected": "no Article schema",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in legacy article hold canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "observed": "https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in legacy article hold path",
+      "passed": true,
+      "expected": "/article/indian-it-layoff-cycle-2026",
+      "observed": "/article/indian-it-layoff-cycle-2026",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in legacy article hold robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in robots has no legacy origin",
+      "passed": true,
+      "expected": "no replit.app URL",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in robots policy",
+      "passed": true,
+      "expected": "Sitemap: https://careerreality.in/sitemap.xml",
+      "observed": "Sitemap: https://careerreality.in/sitemap.xml",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in search Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in search canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/search/",
+      "observed": "https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in search robots",
+      "passed": true,
+      "expected": "noindex, follow",
+      "observed": "noindex, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in search title validation exemption",
+      "passed": true,
+      "expected": "intentional exemption for noindex page",
+      "observed": "noindex, follow; title length check skipped intentionally",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in sitemap excludes search",
+      "passed": true,
+      "expected": "no /search/ URL",
+      "observed": "absent",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in sitemap origin",
+      "passed": true,
+      "expected": "https://careerreality.in",
+      "observed": "all URLs use the primary origin",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in trust route Open Graph URL",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in trust route canonical",
+      "passed": true,
+      "expected": "https://careerreality.in/editorial/",
+      "observed": "https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in trust route robots",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in trust route title length",
+      "passed": true,
+      "expected": "30-65 characters for indexable page",
+      "observed": "35 characters: Editorial Standards | CareerReality",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in trust route visible breadcrumbs",
+      "passed": true,
+      "expected": "Breadcrumb navigation",
+      "observed": "present or missing",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in/editorial/ redirects or canonicalizes to primary",
+      "passed": true,
+      "expected": "redirect to https://careerreality.in or canonical https://careerreality.in/editorial/",
+      "observed": "redirected to https://careerreality.in",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Alternate https://www.careerreality.in/search/ redirects or canonicalizes to primary",
+      "passed": true,
+      "expected": "redirect to https://careerreality.in or canonical https://careerreality.in/search/",
+      "observed": "redirected to https://careerreality.in",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Apex destination does not redirect /",
+      "passed": true,
+      "expected": "200 with no further Location",
+      "observed": "200 (no Location)",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Apex destination does not redirect /companies/",
+      "passed": true,
+      "expected": "200 with no further Location",
+      "observed": "200 (no Location)",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Apex destination does not redirect /guides/read-the-offer-beyond-ctc/",
+      "passed": true,
+      "expected": "200 with no further Location",
+      "observed": "200 (no Location)",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Apex destination does not redirect /offer-comparison/",
+      "passed": true,
+      "expected": "200 with no further Location",
+      "observed": "200 (no Location)",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "Apex destination does not redirect /salary-calculator/",
+      "passed": true,
+      "expected": "200 with no further Location",
+      "observed": "200 (no Location)",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://indigo-bowed-megabyte.replit.app/article/indian-it-layoff-cycle-2026/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://indigo-bowed-megabyte.replit.app/article/indian-it-layoff-cycle-2026/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://indigo-bowed-megabyte.replit.app/editorial/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://indigo-bowed-megabyte.replit.app/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://indigo-bowed-megabyte.replit.app/robots.txt",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://indigo-bowed-megabyte.replit.app/robots.txt",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://indigo-bowed-megabyte.replit.app/search/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://indigo-bowed-megabyte.replit.app/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://indigo-bowed-megabyte.replit.app/sitemap.xml",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://indigo-bowed-megabyte.replit.app/sitemap.xml",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://www.careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/article/indian-it-layoff-cycle-2026/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://www.careerreality.in/editorial/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/editorial/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://www.careerreality.in/robots.txt",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/robots.txt",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://www.careerreality.in/search/",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/search/",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "HTTP https://www.careerreality.in/sitemap.xml",
+      "passed": true,
+      "expected": "2xx response",
+      "observed": "200 https://careerreality.in/sitemap.xml",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "www primary-host signal /",
+      "passed": true,
+      "expected": "301 to https://careerreality.in/?utm_source=apex-host-check or 200 with apex canonical https://careerreality.in/",
+      "observed": "301 https://careerreality.in/?utm_source=apex-host-check",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "www primary-host signal /companies/",
+      "passed": true,
+      "expected": "301 to https://careerreality.in/companies/?source=company-check or 200 with apex canonical https://careerreality.in/companies/",
+      "observed": "301 https://careerreality.in/companies/?source=company-check",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "www primary-host signal /guides/read-the-offer-beyond-ctc/",
+      "passed": true,
+      "expected": "301 to https://careerreality.in/guides/read-the-offer-beyond-ctc/?ref=article-check or 200 with apex canonical https://careerreality.in/guides/read-the-offer-beyond-ctc/",
+      "observed": "301 https://careerreality.in/guides/read-the-offer-beyond-ctc/?ref=article-check",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "www primary-host signal /offer-comparison/",
+      "passed": true,
+      "expected": "301 to https://careerreality.in/offer-comparison/?source=tool-check or 200 with apex canonical https://careerreality.in/offer-comparison/",
+      "observed": "301 https://careerreality.in/offer-comparison/?source=tool-check",
+      "kind": "alternate",
+      "status": "pass"
+    },
+    {
+      "label": "www primary-host signal /salary-calculator/",
+      "passed": true,
+      "expected": "301 to https://careerreality.in/salary-calculator/?utm_campaign=tool-check&view=monthly or 200 with apex canonical https://careerreality.in/salary-calculator/",
+      "observed": "301 https://careerreality.in/salary-calculator/?utm_campaign=tool-check&view=monthly",
+      "kind": "alternate",
+      "status": "pass"
+    }
+  ]
+}

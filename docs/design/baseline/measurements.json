@@ -1,0 +1,3170 @@
+{
+  "generatedAt": "2026-10-08T14:59:03.149Z",
+  "baseURL": "http://127.0.0.1:20339",
+  "routes": [
+    {
+      "viewport": "desktop",
+      "route": "/",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [
+        "Make your nextmove make sense."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 5836,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Open film",
+          "w": 60,
+          "h": 14
+        },
+        {
+          "tag": "INPUT",
+          "label": "Offered annual CTC",
+          "w": 208,
+          "h": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open the Compass",
+          "w": 419,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the ₹20 LPA take-home illustration",
+          "w": 206,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/compass",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [
+        "Make the next movemake sense."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 1993,
+      "smallTargets": [
+        {
+          "tag": "BUTTON",
+          "label": "Suggest an entry",
+          "w": 102,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Show breakdown",
+          "w": 102,
+          "h": 15
+        },
+        {
+          "tag": "INPUT",
+          "label": "Notice period in days",
+          "w": 495,
+          "h": 4
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Contact",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/salary-calculator",
+      "status": 200,
+      "title": "Indian CTC Calculator: Take-Home Pay | CareerReality",
+      "h1": [
+        "Decode the offer before you accept it."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2340,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Compare the market range",
+          "w": 157,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the company signal",
+          "w": 147,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Model a lower offer",
+          "w": 115,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/salary-reality",
+      "status": 200,
+      "title": "Salary Reality by Role, City and Experience | CareerReality",
+      "h1": [
+        "What does your role actually pay here?"
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2476,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode this offer",
+          "w": 113,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Decode the offer",
+          "w": 103,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read company stability",
+          "w": 138,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Compare a salary drop",
+          "w": 133,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/resignation-risk",
+      "status": 200,
+      "title": "Resignation Risk Calculator for India | CareerReality",
+      "h1": [
+        "Should you resign now, or prepare first?"
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2317,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode the next offer",
+          "w": 129,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Build an escape plan",
+          "w": 122,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Compass",
+          "w": 107,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/layoff-radar",
+      "status": 200,
+      "title": "Layoff Radar for Indian Companies | CareerReality",
+      "h1": [
+        "Layoffs are a pattern before they are a headline."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2156,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Research company stability",
+          "w": 161,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Check resignation risk",
+          "w": 133,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the IT layoff cycle",
+          "w": 135,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/salary-drop",
+      "status": 200,
+      "title": "Salary Cut Calculator: Is It Worth It? | CareerReality",
+      "h1": [
+        "Make the next salary benchmark less imaginary."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2546,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode monthly cash",
+          "w": 129,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Plan the next move",
+          "w": 115,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Benchmark the market",
+          "w": 135,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/escape-plan",
+      "status": 200,
+      "title": "Career Escape Plan: Turn Stuck Into Next Steps | CareerReality",
+      "h1": [
+        "A way out is easier to trust when it has a sequence."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2372,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Check resignation timing",
+          "w": 148,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Compass",
+          "w": 107,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read career strategy",
+          "w": 125,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/career-reality-index",
+      "status": 200,
+      "title": "Career Reality Index: Find Your Next Move | CareerReality",
+      "h1": [
+        "A career decision should end in a clearer question, not a prettier number."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2693,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Compare salary reality",
+          "w": 134,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Research companies",
+          "w": 125,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Start with Compass",
+          "w": 119,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/ai",
+      "status": 200,
+      "title": "AI Career Impact by Role in India | CareerReality",
+      "h1": [
+        "Start with the task, not a role-level AI score."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2256,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Build an escape plan",
+          "w": 122,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the AI upskilling trap",
+          "w": 152,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Index",
+          "w": 87,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/tools",
+      "status": 200,
+      "title": "Career Tools and Decision Directory for India | CareerReality",
+      "h1": [
+        "Every useful door, in one place."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "scrollHeight": 2518,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Contact",
+          "w": 251,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy",
+          "w": 35,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 29,
+          "h": 15
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [
+        "Make your nextmove make sense."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 9142,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Open film",
+          "w": 60,
+          "h": 14
+        },
+        {
+          "tag": "INPUT",
+          "label": "Offered annual CTC",
+          "w": 266,
+          "h": 20
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Preview",
+          "w": 38,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open",
+          "w": 41,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Open the Compass",
+          "w": 292,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the ₹20 LPA take-home illustration",
+          "w": 206,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/compass",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [
+        "Make the next movemake sense."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4050,
+      "smallTargets": [
+        {
+          "tag": "BUTTON",
+          "label": "Suggest an entry",
+          "w": 102,
+          "h": 15
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Show breakdown",
+          "w": 102,
+          "h": 15
+        },
+        {
+          "tag": "INPUT",
+          "label": "Notice period in days",
+          "w": 308,
+          "h": 4
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Contact",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/salary-calculator",
+      "status": 200,
+      "title": "Indian CTC Calculator: Take-Home Pay | CareerReality",
+      "h1": [
+        "Decode the offer before you accept it."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4306,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Compare the market range",
+          "w": 157,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the company signal",
+          "w": 147,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Model a lower offer",
+          "w": 115,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/salary-reality",
+      "status": 200,
+      "title": "Salary Reality by Role, City and Experience | CareerReality",
+      "h1": [
+        "What does your role actually pay here?"
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4464,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode this offer",
+          "w": 113,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Decode the offer",
+          "w": 103,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read company stability",
+          "w": 138,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Compare a salary drop",
+          "w": 133,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/resignation-risk",
+      "status": 200,
+      "title": "Resignation Risk Calculator for India | CareerReality",
+      "h1": [
+        "Should you resign now, or prepare first?"
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3877,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode the next offer",
+          "w": 129,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Build an escape plan",
+          "w": 122,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Compass",
+          "w": 107,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/layoff-radar",
+      "status": 200,
+      "title": "Layoff Radar for Indian Companies | CareerReality",
+      "h1": [
+        "Layoffs are a pattern before they are a headline."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3268,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Research company stability",
+          "w": 161,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Check resignation risk",
+          "w": 133,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the IT layoff cycle",
+          "w": 135,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/salary-drop",
+      "status": 200,
+      "title": "Salary Cut Calculator: Is It Worth It? | CareerReality",
+      "h1": [
+        "Make the next salary benchmark less imaginary."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4339,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Decode monthly cash",
+          "w": 129,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Plan the next move",
+          "w": 115,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Benchmark the market",
+          "w": 135,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/escape-plan",
+      "status": 200,
+      "title": "Career Escape Plan: Turn Stuck Into Next Steps | CareerReality",
+      "h1": [
+        "A way out is easier to trust when it has a sequence."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3975,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Check resignation timing",
+          "w": 148,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Compass",
+          "w": 107,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read career strategy",
+          "w": 125,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/career-reality-index",
+      "status": 200,
+      "title": "Career Reality Index: Find Your Next Move | CareerReality",
+      "h1": [
+        "A career decision should end in a clearer question, not a prettier number."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4273,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Compare salary reality",
+          "w": 134,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Research companies",
+          "w": 125,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Start with Compass",
+          "w": 119,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/ai",
+      "status": 200,
+      "title": "AI Career Impact by Role in India | CareerReality",
+      "h1": [
+        "Start with the task, not a role-level AI score."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3916,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Build an escape plan",
+          "w": 122,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Read the AI upskilling trap",
+          "w": 152,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Use the Index",
+          "w": 87,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/tools",
+      "status": 200,
+      "title": "Career Tools and Decision Directory for India | CareerReality",
+      "h1": [
+        "Every useful door, in one place."
+      ],
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3876,
+      "smallTargets": [
+        {
+          "tag": "A",
+          "label": "Home",
+          "w": 28,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "View the full sitemap",
+          "w": 131,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app · coming soon",
+          "w": 154,
+          "h": 17
+        },
+        {
+          "tag": "A",
+          "label": "CTC decoder",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary reality",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Resignation risk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Layoff radar",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Salary drop",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "The journal",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Topic clusters",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Search the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Company intelligence",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Mobile app",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "About the desk",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Editorial standards",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy policy",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Contact",
+          "w": 350,
+          "h": 18
+        },
+        {
+          "tag": "A",
+          "label": "Privacy",
+          "w": 35,
+          "h": 15
+        },
+        {
+          "tag": "A",
+          "label": "Terms",
+          "w": 29,
+          "h": 15
+        }
+      ],
+      "imagesMissingAlt": 0,
+      "unlabeledInputs": 0,
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop-no-js",
+      "route": "/",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [],
+      "bodyTextLength": 0
+    },
+    {
+      "viewport": "desktop-no-js",
+      "route": "/compass",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [],
+      "bodyTextLength": 0
+    },
+    {
+      "viewport": "desktop-no-js",
+      "route": "/salary-calculator",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [],
+      "bodyTextLength": 0
+    },
+    {
+      "viewport": "desktop-no-js",
+      "route": "/salary-reality",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [],
+      "bodyTextLength": 0
+    },
+    {
+      "viewport": "desktop-no-js",
+      "route": "/layoff-radar",
+      "status": 200,
+      "title": "Career Intelligence for India | CareerReality",
+      "h1": [],
+      "bodyTextLength": 0
+    }
+  ]
+}

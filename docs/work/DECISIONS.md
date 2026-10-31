@@ -1,0 +1,15 @@
+# Execution decisions
+
+- State recovery: `docs/work/PROGRESS.md` was absent, so reconstruct its task checklist from the master prompt, existing remediation evidence, and fresh production observations instead of repeating completed local work; 2026-10-09.
+- Production discrepancy: fresh crawl found 44 article URLs still linked but all noindex, 0 generic hub blurbs, only 3 sitemap URLs, and 30/44 Appendix-threshold duplicates versus the older 42/44 note; use the fresh export and preserve the mismatch in the baseline; 2026-10-09.
+- Article gate: quarantine all 44 articles because the fresh any-length exact-paragraph audit finds duplicates within and across every page, and current production metadata has no author or verified publication/update dates; 2026-10-09.
+- Company provenance: classify all 392 market rows as LEGACY and unverified because none has a source URL or recorded row-level source provenance; retain the database rows unchanged and keep them suppressed; 2026-10-09.
+- Static removal status: the web artifact is published as static and current missing paths return HTTP 404; Replit docs do not describe per-path 301/410 responses for this mode, so remove snapshots and record observed 404s without calling them 410s; 2026-10-09.
+- URL action register: use 410 as the editorial removal decision for quarantined article, company, category, and editorial-hub URLs, but record the static-host implementation as a 404 fallback rather than claiming a 410 or redirect; verify production after publish; 2026-10-09.
+- Content triage: quarantine all 44 articles at the hard-gate stage; assign conservative before-scores for triage only, with no after-score because no article remains published; 2026-10-09.
+- Tool portfolio: feature only the CTC calculator and keep it live as an estimate-only, noindex page while tax review is pending; all other tools stay unlinked and noindex until evidence and methods pass their gate; 2026-10-09.
+- Market data: classify the 392 source-URL-missing rows as LEGACY, suppress them, and preserve the database unchanged; 2026-10-09.
+- Local close-out: retain only `/` and `/tools/` in the generated sitemap; keep the CTC calculator and remaining tool pages `noindex` while review blockers remain. The four `/ai/:slug` files are generic noindex handoffs canonicalized to `/ai/`, not copies of the quarantined article corpus; 2026-10-09.
+- Published-state discrepancy: the later captured read-only `published-seo` output found 69 live sitemap URLs (66 outside the then-local set) and sampled two article routes as `index, follow`, conflicting with the earlier three-URL/noindex baseline. No local remediation was deployed, so neither observation verifies the current local build on production; 2026-10-09.
+- Measurement: web-search results are a directional sample only; the search callback exposes neither a device nor a verified India-localized Google SERP. Do not report ranking positions or search gains; 2026-10-09.
+- Ad policy: do not add or enable ad code or submit to AdSense. Local source/public assets have no ad-network markers; a bundled `onDoubleClick` identifier is an unrelated React event name; 2026-10-09.

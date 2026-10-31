@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --color-primary: #114c43;
+  --color-primary-deep: #092f2b;
+  --color-paper: #f3eee4;
+  --color-paper-dark: #d9d0c2;
+  --color-ink: #132d2a;
+  --color-muted: #95aaa0;
+  --color-accent: #e97862;
+  --color-saffron: #e5ad56;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-primary-deep);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.video-media-frame {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.video-media-frame > :is(img, video) {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.video-media-frame[data-media-fit='contain'] > :is(img, video) {
+  object-fit: contain;
+}
+
+.video-media-frame[data-media-position='top'] > :is(img, video) {
+  object-position: top;
+}
+
+.video-media-frame[data-media-position='right'] > :is(img, video) {
+  object-position: right;
+}
+
+.video-media-frame[data-media-position='bottom'] > :is(img, video) {
+  object-position: bottom;
+}
+
+.video-media-frame[data-media-position='left'] > :is(img, video) {
+  object-position: left;
+}
+
+.video-controls-bar {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .video-controls-bar {
+    gap: .25rem;
+    padding: .375rem .5rem;
+  }
+
+  .video-controls-bar > button {
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+
+  .video-playback-status {
+    display: grid;
+    grid-template-areas:
+      'count timer'
+      'progress progress';
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: .25rem .5rem;
+  }
+
+  .video-playback-status > div:first-child {
+    grid-area: progress;
+  }
+
+  .video-playback-status > div:nth-child(2) {
+    grid-area: count;
+    font-size: .7rem;
+  }
+
+  .video-playback-status > div:nth-child(3) {
+    grid-area: timer;
+    min-width: 0;
+    font-size: .7rem;
+  }
+}
+
+.film-noise {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  opacity: .065;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.74' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.film-grid {
+  background-image: linear-gradient(rgba(242,238,228,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(242,238,228,.08) 1px, transparent 1px);
+  background-size: 4.8vw 4.8vw;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 80%);
+}
+
+.film-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(3,20,19,.3) 100%);
+}
+
+.wordmark {
+  font-family: var(--font-body);
+  letter-spacing: -0.055em;
+  font-weight: 800;
+}
+
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.045em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: .08em;
+}
+
+.paper-card {
+  background: linear-gradient(135deg, rgba(247,242,232,.98), rgba(225,217,204,.98));
+  color: var(--color-ink);
+  box-shadow: 0 2.2vw 5vw rgba(1, 17, 16, .24);
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229,173,86,.8), transparent);
+  animation: scanline 4.8s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-12vh); opacity: 0; }
+  10% { opacity: .6; }
+  90% { opacity: .6; }
+  100% { transform: translateY(112vh); opacity: 0; }
+}

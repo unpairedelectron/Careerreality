@@ -1,0 +1,2256 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: contact
+    description: Public contact messages
+  - name: workspace
+    description: Authenticated career workspace operations
+  - name: public-data
+    description: Public career signal datasets with freshness and methodology
+  - name: resume
+    description: Private, transient resume intelligence processing
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /storage/public-objects:
+    get:
+      operationId: getPublicAsset
+      tags: [public-data]
+      summary: Serve a public application asset
+      parameters:
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 512
+          description: Relative path within the configured public asset search paths.
+      responses:
+        "200":
+          description: Public asset bytes
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Invalid asset path
+        "404":
+          description: Asset not found
+        "503":
+          description: Public asset storage is unavailable
+  /contact/messages:
+    post:
+      operationId: submitContactMessage
+      tags: [contact]
+      summary: Submit a contact message
+      description: Stores only the submitted contact fields and server receipt time. Client IP addresses and tool inputs are not stored with the message.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactMessageInput"
+      responses:
+        "201":
+          description: Message received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactMessageReceipt"
+        "400":
+          description: Invalid contact message
+        "503":
+          description: Contact message storage is unavailable
+  /public/layoff-alerts/subscriptions:
+    post:
+      operationId: createLayoffAlertSubscription
+      tags: [public-data]
+      summary: Request double opt-in for layoff alerts
+      description: Stores an email address for alerts only after the recipient confirms the request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LayoffAlertSubscriptionInput"
+      responses:
+        "202":
+          description: Confirmation email sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoffAlertMessage"
+        "400":
+          description: Invalid subscription request
+        "429":
+          description: Too many requests
+        "503":
+          description: Email could not be sent
+  /public/layoff-alerts/confirm:
+    post:
+      operationId: confirmLayoffAlertSubscription
+      tags: [public-data]
+      summary: Confirm a layoff alert subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LayoffAlertTokenInput"
+      responses:
+        "200":
+          description: Subscription confirmed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoffAlertMessage"
+        "400":
+          description: Invalid or expired confirmation token
+  /public/layoff-alerts/unsubscribe:
+    post:
+      operationId: unsubscribeLayoffAlerts
+      tags: [public-data]
+      summary: Unsubscribe from layoff alerts
+      parameters:
+        - in: query
+          name: token
+          required: true
+          schema: { type: string, minLength: 32, maxLength: 128 }
+          description: One-click unsubscribe token
+      responses:
+        "200":
+          description: Subscription removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoffAlertMessage"
+        "400":
+          description: Invalid unsubscribe token
+  /workspace/summary:
+    get:
+      operationId: getWorkspaceSummary
+      tags: [workspace]
+      summary: Get the signed-in user's workspace summary
+      responses:
+        "200":
+          description: Workspace summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceSummary"
+        "401":
+          description: Unauthorized
+  /resume/intelligence:
+    post:
+      operationId: processResumeIntelligence
+      tags: [resume]
+      summary: Extract career intelligence from a resume
+      description: >
+        Accepts a PDF or DOCX only from an authenticated user after an explicit,
+        unchecked-by-default consent action. File bytes and extracted text are
+        processed in server memory and are not persisted by the API. The response
+        contains derived career information; clients must not persist filenames or
+        derived resume fields without separate approval and disclosure. Production
+        clients must not send files while this route remains disabled pending
+        verification of logging, tracing, backups, and access controls.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: X-Resume-Intelligence-Consent
+          required: true
+          schema:
+            type: string
+            enum: [accepted-v1]
+          description: Present only after the user has seen the upload disclosure and affirmatively consented.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                role:
+                  type: string
+                  maxLength: 160
+                city:
+                  type: string
+                  maxLength: 120
+                target:
+                  type: string
+                  maxLength: 160
+                currentCompany:
+                  type: string
+                  maxLength: 160
+              required: [file]
+      responses:
+        "200":
+          description: Parsed resume intelligence and current market context
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResumeIntelligence"
+        "400":
+          description: Missing or invalid upload
+        "401":
+          description: Authentication required
+        "404":
+          description: Resume processing is unavailable while production privacy controls remain unverified
+        "413":
+          description: Resume exceeds the 5 MB limit
+        "415":
+          description: Unsupported resume format
+        "422":
+          description: Resume could not be extracted
+        "428":
+          description: Explicit consent is required
+        "429":
+          description: Resume processing rate limit exceeded
+  /saved-decisions:
+    get:
+      operationId: listSavedDecisions
+      tags: [workspace]
+      summary: List the signed-in user's saved career decisions
+      responses:
+        "200":
+          description: Saved decisions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedDecision"
+        "401":
+          description: Unauthorized
+    post:
+      operationId: createSavedDecision
+      tags: [workspace]
+      summary: Save a career decision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedDecisionInput"
+      responses:
+        "201":
+          description: Saved decision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedDecision"
+        "400":
+          description: Invalid saved decision
+        "401":
+          description: Unauthorized
+  /saved-decisions/{id}:
+    delete:
+      operationId: deleteSavedDecision
+      tags: [workspace]
+      summary: Delete one saved career decision
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          description: Unauthorized
+        "404":
+          description: Saved decision not found
+  /watchlist:
+    get:
+      operationId: listWatchlist
+      tags: [workspace]
+      summary: List the signed-in user's company watchlist
+      responses:
+        "200":
+          description: Watchlist items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WatchlistItem"
+        "401":
+          description: Unauthorized
+    post:
+      operationId: createWatchlistItem
+      tags: [workspace]
+      summary: Add a company to the watchlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WatchlistInput"
+      responses:
+        "201":
+          description: Watchlist item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WatchlistItem"
+        "400":
+          description: Invalid watchlist item
+        "401":
+          description: Unauthorized
+  /watchlist/{id}:
+    delete:
+      operationId: deleteWatchlistItem
+      tags: [workspace]
+      summary: Remove a company from the watchlist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "401":
+          description: Unauthorized
+        "404":
+          description: Watchlist item not found
+  /public/salary-benchmarks:
+    get:
+      operationId: listSalaryBenchmarks
+      tags: [public-data]
+      summary: List salary benchmarks
+      description: Returns explainable salary ranges with source and freshness metadata
+      parameters:
+        - name: role
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: city
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+        - name: experienceBand
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 50
+      responses:
+        "200":
+          description: Salary benchmark dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalaryBenchmarksResponse"
+  /public/companies:
+    get:
+      operationId: listPublicCompanySignals
+      tags: [public-data]
+      summary: List company intelligence signals
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+      responses:
+        "200":
+          description: Company signal dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicCompanySignalsResponse"
+  /public/companies/{slug}:
+    get:
+      operationId: getPublicCompanySignal
+      tags: [public-data]
+      summary: Get one company intelligence signal
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 120
+            pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      responses:
+        "200":
+          description: Company signal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicCompanySignalResponse"
+        "404":
+          description: Company signal not found
+  /public/layoff-signals:
+    get:
+      operationId: listLayoffSignals
+      tags: [public-data]
+      summary: List layoff and hiring signals
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Layoff, Hiring freeze, Hiring signal, Restructure]
+      responses:
+        "200":
+          description: Layoff signal dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoffSignalsResponse"
+  /public/layoff-signal-reports:
+    post:
+      operationId: createLayoffSignalReport
+      tags: [public-data]
+      summary: Submit a layoff or hiring signal for moderation
+      description: Accepts an anonymous or signed-in community signal. The server redacts direct contact details before persistence and keeps the report private until approved.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LayoffSignalReportInput"
+      responses:
+        "201":
+          description: Signal queued for moderation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LayoffSignalReportResponse"
+        "400":
+          description: Invalid report
+        "429":
+          description: Too many reports from this client
+        "503":
+          description: Report submissions are temporarily unavailable while shared throttling recovers
+          headers:
+            Retry-After:
+              description: Minimum number of seconds before retrying
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                required: [error]
+        "500":
+          description: Unable to queue report
+  /public/career-catalog-suggestions:
+    post:
+      operationId: createCareerCatalogSuggestion
+      tags: [public-data]
+      summary: Suggest a missing company or job position for the career catalog
+      description: Queues one or both community suggestions for moderation. Suggestions are not used as trusted market evidence until approved.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareerCatalogSuggestionInput"
+      responses:
+        "201":
+          description: Suggestion queued for moderation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerCatalogSuggestionResponse"
+        "400":
+          description: Invalid suggestion
+        "429":
+          description: Too many suggestions
+        "503":
+          description: Suggestion submissions are temporarily unavailable
+  /public/career-catalog:
+    get:
+      operationId: listPublicCareerCatalog
+      tags: [public-data]
+      summary: List approved community catalog entries
+      description: Returns approved company and position names for catalog context. These entries are not trusted market evidence by themselves.
+      parameters:
+        - name: entityType
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [company, position]
+      responses:
+        "200":
+          description: Approved career catalog entries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicCareerCatalogResponse"
+  /public/job-links/fetch:
+    post:
+      operationId: fetchPublicJobLink
+      tags: [public-data]
+      summary: Fetch a reviewed public job page
+      description: Fetches only allowlisted public HTTPS job pages after explicit consent. Content is processed transiently and is not stored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublicJobLinkFetchInput"
+      responses:
+        "200":
+          description: Extracted public job-page text
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicJobLinkFetchResponse"
+        "400":
+          description: Invalid URL or missing consent
+        "403":
+          description: Host is not an approved public job-page provider
+        "413":
+          description: Page exceeds the response limit
+        "415":
+          description: Unsupported page content type
+        "422":
+          description: Page contains no readable text
+        "502":
+          description: Page could not be fetched safely
+        "503":
+          description: Job-link fetching is not enabled
+  /workspace/catalog-suggestions:
+    get:
+      operationId: listCatalogSuggestions
+      tags: [workspace]
+      summary: List catalog suggestions for an authorized editor
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [pending, approved, rejected]
+            default: pending
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+      responses:
+        "200":
+          description: Catalog suggestions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogSuggestionListResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Catalog editor access required
+  /workspace/readiness-access:
+    get:
+      operationId: checkReadinessDeskAccess
+      tags: [workspace]
+      summary: Check access to the internal readiness desk
+      responses:
+        "200":
+          description: Readiness desk access confirmed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadinessDeskAccessResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Quality reviewer access required
+  /workspace/readiness-data:
+    get:
+      operationId: getReadinessDeskData
+      tags: [workspace]
+      summary: Get internal application readiness records
+      responses:
+        "200":
+          description: Readiness records for authorized reviewers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadinessDeskDataResponse"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Quality reviewer access required
+  /workspace/catalog-suggestions/{id}:
+    patch:
+      operationId: reviewCatalogSuggestion
+      tags: [workspace]
+      summary: Approve or reject one catalog suggestion
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatalogSuggestionReviewInput"
+      responses:
+        "200":
+          description: Reviewed catalog suggestion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerCatalogSuggestion"
+        "400":
+          description: Invalid review
+        "401":
+          description: Unauthorized
+        "403":
+          description: Catalog editor access required
+        "404":
+          description: Catalog suggestion not found
+        "409":
+          description: An approved catalog entry with the same normalized name already exists
+  /career/profile:
+    get:
+      operationId: getCareerProfile
+      tags: [career]
+      summary: Get the signed-in user's career profile
+      responses:
+        "200":
+          description: Career profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerProfile"
+        "401":
+          description: Unauthorized
+    put:
+      operationId: updateCareerProfile
+      tags: [career]
+      summary: Create or update the signed-in user's career profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareerProfileInput"
+      responses:
+        "200":
+          description: Updated career profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerProfile"
+        "400":
+          description: Invalid career profile
+        "401":
+          description: Unauthorized
+  /career/resume:
+    post:
+      operationId: processCareerResume
+      tags: [career]
+      summary: Process a career resume
+      description: Accepts a bounded PDF or Word document as multipart form data, extracts structured signals, and discards the uploaded bytes after processing.
+      responses:
+        "200":
+          description: Resume processing result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResumeProcessingResponse"
+        "400":
+          description: Invalid or unsupported resume
+        "401":
+          description: Unauthorized
+        "413":
+          description: Resume is too large
+    delete:
+      operationId: deleteCareerResume
+      tags: [career]
+      summary: Remove saved resume-derived profile data for the signed-in user
+      description: Clears the profile's extracted resume fields. Previously generated career brief history is retained separately.
+      responses:
+        "200":
+          description: Resume-derived profile data cleared
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResumeRemovalResponse"
+        "401":
+          description: Unauthorized
+  /career/compensation:
+    post:
+      operationId: analyzeCompensationDocument
+      tags: [career]
+      summary: Extract offer or payslip compensation signals
+      description: Accepts a bounded PDF or Word offer letter or payslip, extracts labeled compensation figures in memory, and discards the uploaded bytes after analysis.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                documentType:
+                  type: string
+                  enum: [offer, payslip]
+              required: [file, documentType]
+      responses:
+        "200":
+          description: Compensation analysis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompensationAnalysis"
+        "400":
+          description: Invalid or unsupported compensation document
+        "401":
+          description: Unauthorized
+        "413":
+          description: Compensation document is too large
+  /career/brief:
+    get:
+      operationId: getCareerBrief
+      tags: [career]
+      summary: Get a personalized, evidence-backed career brief
+      responses:
+        "200":
+          description: Personalized career brief
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerBrief"
+        "401":
+          description: Unauthorized
+  /career/brief/history:
+    get:
+      operationId: listCareerBriefHistory
+      tags: [career]
+      summary: List the signed-in user's career brief history
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+            default: 12
+      responses:
+        "200":
+          description: Private career brief history
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerBriefHistoryResponse"
+        "401":
+          description: Unauthorized
+  /career/jobs:
+    get:
+      operationId: listCareerJobRecommendations
+      tags: [career]
+      summary: List legitimate job recommendations for the signed-in user
+      description: Returns ranked jobs from configured official ATS feeds, excluding jobs the user has already applied to or dismissed. LinkedIn, Naukri, Wellfound, and Monster are represented as outbound search links unless an approved feed is configured.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+      responses:
+        "200":
+          description: Job recommendations and feed freshness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobRecommendationsResponse"
+        "401":
+          description: Unauthorized
+  /career/jobs/readiness:
+    get:
+      operationId: checkCareerJobProviderReadiness
+      tags: [career]
+      summary: Check broad job provider readiness
+      description: Performs a fixed India and remote TheirStack sample check, records provider health, and blocks broad-coverage sign-off when the provider is not authorized or returns no valid sample. The response never includes provider credentials.
+      responses:
+        "200":
+          description: TheirStack returned a valid India or remote sample
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TheirStackReadiness"
+        "503":
+          description: TheirStack is not configured, unauthorized, unavailable, or returned no valid India or remote sample
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TheirStackReadiness"
+  /career/jobs/{id}/apply:
+    post:
+      operationId: markCareerJobApplied
+      tags: [career]
+      summary: Mark a job as applied and remove it from recommendations
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Application state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobApplicationState"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Job not found
+  /career/jobs/{id}/dismiss:
+    post:
+      operationId: dismissCareerJob
+      tags: [career]
+      summary: Dismiss a job and remove it from recommendations
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Dismissal state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobApplicationState"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Job not found
+  /career/ask:
+    post:
+      operationId: askCareerReality
+      tags: [career]
+      summary: Ask CareerReality for a cited directional answer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareerQuestionInput"
+      responses:
+        "200":
+          description: Cited answer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerAnswer"
+        "400":
+          description: Invalid question
+        "401":
+          description: Unauthorized
+  /career/promotion-readiness:
+    get:
+      operationId: getPromotionReadiness
+      tags: [career]
+      summary: Get the signed-in user's promotion readiness
+      responses:
+        "200":
+          description: Promotion readiness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromotionReadiness"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Promotion readiness has not been started
+    put:
+      operationId: updatePromotionReadiness
+      tags: [career]
+      summary: Save the signed-in user's promotion readiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PromotionReadinessInput"
+      responses:
+        "200":
+          description: Updated promotion readiness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromotionReadiness"
+        "400":
+          description: Invalid promotion readiness
+        "401":
+          description: Unauthorized
+  /career/promotion-readiness/history:
+    get:
+      operationId: listPromotionReadinessHistory
+      tags: [career]
+      summary: List the user's promotion readiness snapshots
+      responses:
+        "200":
+          description: Promotion readiness history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PromotionReadinessSnapshot"
+        "401":
+          description: Unauthorized
+  /career/promotion-evidence:
+    get:
+      operationId: listPromotionEvidence
+      tags: [career]
+      summary: List evidence linked to the user's promotion readiness
+      responses:
+        "200":
+          description: Promotion evidence
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PromotionEvidence"
+        "401":
+          description: Unauthorized
+    post:
+      operationId: createPromotionEvidence
+      tags: [career]
+      summary: Add evidence to the user's promotion readiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PromotionEvidenceInput"
+      responses:
+        "201":
+          description: Promotion evidence
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromotionEvidence"
+        "400":
+          description: Invalid promotion evidence
+        "401":
+          description: Unauthorized
+  /career/promotion-evidence/{id}:
+    delete:
+      operationId: deletePromotionEvidence
+      tags: [career]
+      summary: Remove promotion evidence
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Promotion evidence removed
+        "401":
+          description: Unauthorized
+        "404":
+          description: Promotion evidence not found
+  /career/actions:
+    get:
+      operationId: listCareerActions
+      tags: [career]
+      summary: List the user's career actions
+      responses:
+        "200":
+          description: Career actions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareerAction"
+        "401":
+          description: Unauthorized
+    post:
+      operationId: createCareerAction
+      tags: [career]
+      summary: Save a personalized career action
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareerActionInput"
+      responses:
+        "201":
+          description: Career action
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerAction"
+        "400":
+          description: Invalid career action
+        "401":
+          description: Unauthorized
+  /career/actions/{id}:
+    patch:
+      operationId: updateCareerAction
+      tags: [career]
+      summary: Update a career action's schedule or status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CareerActionUpdateInput"
+      responses:
+        "200":
+          description: Updated career action
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CareerAction"
+        "400":
+          description: Invalid career action update
+        "401":
+          description: Unauthorized
+        "404":
+          description: Career action not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ContactMessageInput:
+      type: object
+      additionalProperties: false
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        email:
+          type: string
+          maxLength: 254
+          pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        topic:
+          type: string
+          enum: [general, correction, privacy, account, other]
+        message: { type: string, minLength: 20, maxLength: 5000 }
+      required: [name, email, topic, message]
+    ContactMessageReceipt:
+      type: object
+      properties:
+        message: { type: string }
+        receivedAt: { type: string, format: date-time }
+      required: [message, receivedAt]
+    LayoffAlertSubscriptionInput:
+      type: object
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+          maxLength: 254
+          pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        city: { type: string, maxLength: 80 }
+        sector:
+          type: string
+          enum:
+            - Consumer goods / Technology
+            - Delivery / E-commerce
+            - Education technology
+            - Electric vehicles
+            - Fintech
+            - Information technology
+            - Real estate technology
+            - Technology / Retail
+      required: [email]
+    LayoffAlertTokenInput:
+      type: object
+      additionalProperties: false
+      properties:
+        token: { type: string, minLength: 32, maxLength: 128 }
+      required: [token]
+    LayoffAlertMessage:
+      type: object
+      properties:
+        message: { type: string }
+      required: [message]
+    CareerProfileInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 1, maxLength: 120 }
+        situation: { type: string, minLength: 1, maxLength: 300 }
+        role: { type: string, minLength: 1, maxLength: 160 }
+        company: { type: string, minLength: 1, maxLength: 160 }
+        city: { type: string, minLength: 1, maxLength: 120 }
+        experience: { type: string, minLength: 1, maxLength: 80 }
+        ctc: { type: string, minLength: 1, maxLength: 80 }
+        target: { type: string, minLength: 1, maxLength: 160 }
+      required: [name, situation, role, company, city, experience, ctc, target]
+    CareerProfile:
+      allOf:
+        - $ref: "#/components/schemas/CareerProfileInput"
+        - type: object
+          properties:
+            id: { type: string }
+            resumeName:
+              anyOf:
+                - { type: string }
+                - { type: "null" }
+            resumeStatus:
+              type: string
+              enum: [not_added, processing, ready, failed]
+            resumeData:
+              anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: "null"
+            resumeError:
+              anyOf:
+                - { type: string }
+                - { type: "null" }
+            resumeUpdatedAt:
+              anyOf:
+                - { type: string, format: date-time }
+                - { type: "null" }
+            createdAt: { type: string, format: date-time }
+            updatedAt: { type: string, format: date-time }
+          required: [id, resumeName, resumeStatus, resumeData, resumeError, resumeUpdatedAt, createdAt, updatedAt]
+    ResumeProcessingResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ready, failed]
+        resumeName: { type: string }
+        extracted:
+          type: object
+          additionalProperties: true
+        message: { type: string }
+      required: [status, resumeName, extracted, message]
+    ResumeRemovalResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [deleted]
+      required: [status]
+    CompensationFinding:
+      type: object
+      properties:
+        category:
+          type: string
+          enum: [guaranteed_cash, variable_pay, deductions, take_home, equity, ambiguity]
+        label: { type: string }
+        value: { type: string }
+        interpretation: { type: string }
+        confidence:
+          type: string
+          enum: [High, Medium, Low]
+        evidence: { type: string }
+      required: [category, label, value, interpretation, confidence, evidence]
+    CompensationAnalysis:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ready]
+        documentType:
+          type: string
+          enum: [offer, payslip]
+        fileName: { type: string }
+        processedAt:
+          type: string
+          format: date-time
+        extractedCharacters: { type: number }
+        headline: { type: string }
+        summary: { type: string }
+        findings:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompensationFinding"
+        nextActions:
+          type: array
+          items: { type: string }
+        qualityNotes:
+          type: array
+          items: { type: string }
+      required: [status, documentType, fileName, processedAt, extractedCharacters, headline, summary, findings, nextActions, qualityNotes]
+    CareerEvidence:
+      type: object
+      properties:
+        label: { type: string }
+        value: { type: string }
+        source: { type: string }
+        freshness: { type: string }
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+      required: [label, value, source, freshness, confidence]
+    CareerBrief:
+      type: object
+      properties:
+        headline: { type: string }
+        diagnosis: { type: string }
+        nextMove: { type: string }
+        freshness: { type: string }
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerEvidence"
+        whatChanged:
+          $ref: "#/components/schemas/CareerBriefChange"
+      required: [headline, diagnosis, nextMove, freshness, confidence, evidence, whatChanged]
+    CareerBriefChangeDetail:
+      type: object
+      properties:
+        category: { type: string }
+        summary: { type: string }
+        source: { type: string }
+        freshness: { type: string }
+      required: [category, summary, source, freshness]
+    CareerBriefChange:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [initial, changed, unchanged, insufficient]
+        summary: { type: string }
+        details:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerBriefChangeDetail"
+      required: [status, summary, details]
+    CareerBriefHistoryEntry:
+      type: object
+      properties:
+        id: { type: string }
+        createdAt: { type: string, format: date-time }
+        headline: { type: string }
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerEvidence"
+        change:
+          $ref: "#/components/schemas/CareerBriefChange"
+      required: [id, createdAt, headline, confidence, evidence, change]
+    CareerBriefHistoryResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerBriefHistoryEntry"
+      required: [entries]
+    JobRecommendation:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        company: { type: string }
+        location: { type: string }
+        remoteType:
+          type: string
+          enum: [onsite, hybrid, remote, unknown]
+        source: { type: string }
+        sourceName: { type: string }
+        provenance:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobRecommendationProvenance"
+        canonicalUrl: { type: string, pattern: "^https://" }
+        applyUrl: { type: string, pattern: "^https://" }
+        publishedAt:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        lastVerifiedAt: { type: string, format: date-time }
+        matchScore: { type: number, minimum: 0, maximum: 100 }
+        matchReason: { type: string }
+        matchEvidence:
+          type: array
+          items: { type: string }
+        unknowns:
+          type: array
+          items: { type: string }
+        applicationGuidance: { type: string }
+      required: [id, title, company, location, remoteType, source, sourceName, provenance, canonicalUrl, applyUrl, publishedAt, lastVerifiedAt, matchScore, matchReason, matchEvidence, unknowns, applicationGuidance]
+    JobRecommendationProvenance:
+      type: object
+      properties:
+        source: { type: string }
+        sourceName: { type: string }
+        canonicalUrl: { type: string, pattern: "^https://" }
+      required: [source, sourceName, canonicalUrl]
+    JobFeedStatus:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        provider: { type: string }
+        status:
+          type: string
+          enum: [healthy, empty, unauthorized, unavailable, not_configured]
+        lastCheckedAt:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        message: { type: string }
+      required: [id, name, provider, status, lastCheckedAt, message]
+    TheirStackReadiness:
+      type: object
+      properties:
+        provider: { type: string, enum: [theirstack] }
+        status:
+          type: string
+          enum: [healthy, empty, unauthorized, unavailable, not_configured]
+        checkedAt: { type: string, format: date-time }
+        sampleSize: { type: number, minimum: 0 }
+        message: { type: string }
+        broadCoverageReady: { type: boolean }
+      required: [provider, status, checkedAt, sampleSize, message, broadCoverageReady]
+    JobSearchLink:
+      type: object
+      properties:
+        name: { type: string }
+        url: { type: string, pattern: "^https://" }
+      required: [name, url]
+    JobRecommendationsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobRecommendation"
+        feeds:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobFeedStatus"
+        searchLinks:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobSearchLink"
+        lastRefreshedAt:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        nextRefreshAt:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        deduplication:
+          $ref: "#/components/schemas/JobDeduplicationSummary"
+        profileContext:
+          $ref: "#/components/schemas/JobProfileContext"
+      required: [jobs, feeds, searchLinks, lastRefreshedAt, nextRefreshAt, deduplication, profileContext]
+    JobProfileContext:
+      type: object
+      properties:
+        role: { type: string }
+        level:
+          anyOf:
+            - type: string
+            - type: "null"
+        city: { type: string }
+        experience: { type: string }
+        compensation: { type: string }
+        targetDirection: { type: string }
+      required: [role, level, city, experience, compensation, targetDirection]
+    JobDeduplicationProviderSummary:
+      type: object
+      properties:
+        providerClass:
+          type: string
+          enum: [direct_ats, broad_provider]
+        rawListings: { type: number, minimum: 0, description: Non-negative whole-number listing count. }
+        mergedRoles: { type: number, minimum: 0, description: Non-negative whole-number canonical-role count. }
+        duplicateGroups: { type: number, minimum: 0, description: Non-negative whole-number duplicate-group count. }
+      required: [providerClass, rawListings, mergedRoles, duplicateGroups]
+    JobDeduplicationSummary:
+      type: object
+      properties:
+        rawListings: { type: number, minimum: 0, description: Non-negative whole-number listing count. }
+        mergedRoles: { type: number, minimum: 0, description: Non-negative whole-number canonical-role count. }
+        duplicateGroups: { type: number, minimum: 0, description: Non-negative whole-number duplicate-group count. }
+        byProviderClass:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobDeduplicationProviderSummary"
+      required: [rawListings, mergedRoles, duplicateGroups, byProviderClass]
+    JobApplicationState:
+      type: object
+      properties:
+        jobId: { type: string }
+        status:
+          type: string
+          enum: [applied, dismissed]
+        actedAt: { type: string, format: date-time }
+        applyUrl:
+          anyOf:
+            - type: string
+              pattern: "^https://"
+            - type: "null"
+      required: [jobId, status, actedAt, applyUrl]
+    CareerQuestionInput:
+      type: object
+      properties:
+        question: { type: string, minLength: 3, maxLength: 1000 }
+      required: [question]
+    CareerAnswer:
+      type: object
+      properties:
+        answer: { type: string }
+        assumptions:
+          type: array
+          items: { type: string }
+        nextActions:
+          type: array
+          items: { type: string }
+        evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerEvidence"
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+      required: [answer, assumptions, nextActions, evidence, confidence]
+    PromotionReadinessInput:
+      type: object
+      properties:
+        scopeScore: { type: number, minimum: 1, maximum: 5 }
+        impactScore: { type: number, minimum: 1, maximum: 5 }
+        skillsScore: { type: number, minimum: 1, maximum: 5 }
+        sponsorshipScore: { type: number, minimum: 1, maximum: 5 }
+        pathStatus:
+          type: string
+          enum: [clear, unclear, blocked]
+        pathNotes: { type: string, minLength: 1, maxLength: 800 }
+        proofPoint: { type: string, minLength: 1, maxLength: 1200 }
+        targetDate:
+          anyOf:
+            - type: string
+              pattern: '^\d{4}-\d{2}-\d{2}$'
+            - type: "null"
+        managerCheckInDate:
+          anyOf:
+            - type: string
+              pattern: '^\d{4}-\d{2}-\d{2}$'
+            - type: "null"
+      required: [scopeScore, impactScore, skillsScore, sponsorshipScore, pathStatus, pathNotes, proofPoint]
+    PromotionReadiness:
+      allOf:
+        - $ref: "#/components/schemas/PromotionReadinessInput"
+        - type: object
+          properties:
+            id: { type: string }
+            createdAt: { type: string, format: date-time }
+            updatedAt: { type: string, format: date-time }
+          required: [id, createdAt, updatedAt]
+    PromotionReadinessSnapshot:
+      allOf:
+        - $ref: "#/components/schemas/PromotionReadinessInput"
+        - type: object
+          properties:
+            id: { type: string }
+            capturedAt: { type: string, format: date-time }
+          required: [id, capturedAt]
+    PromotionEvidenceInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1, maxLength: 200 }
+        detail: { type: string, minLength: 1, maxLength: 1200 }
+        actionId:
+          anyOf:
+            - type: string
+            - type: "null"
+      required: [title, detail]
+    PromotionEvidence:
+      allOf:
+        - $ref: "#/components/schemas/PromotionEvidenceInput"
+        - type: object
+          properties:
+            id: { type: string }
+            createdAt: { type: string, format: date-time }
+          required: [id, createdAt]
+    CareerActionInput:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: [brief, decision, skill, application, profile]
+        title: { type: string, minLength: 1, maxLength: 200 }
+        body: { type: string, minLength: 1, maxLength: 2000 }
+        source: { type: string, minLength: 1, maxLength: 200 }
+        dueDate:
+          anyOf:
+            - type: string
+              pattern: '^\d{4}-\d{2}-\d{2}$'
+            - type: "null"
+        marketChangeId:
+          anyOf:
+            - type: string
+              minLength: 1
+              maxLength: 120
+            - type: "null"
+      required: [kind, title, body, source]
+    CareerActionUpdateInput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [open, completed, skipped]
+        dueDate:
+          anyOf:
+            - type: string
+              pattern: '^\d{4}-\d{2}-\d{2}$'
+            - type: "null"
+        marketChangeId:
+          anyOf:
+            - type: string
+              minLength: 1
+              maxLength: 120
+            - type: "null"
+    CareerAction:
+      allOf:
+        - $ref: "#/components/schemas/CareerActionInput"
+        - type: object
+          properties:
+            id: { type: string }
+            status:
+              type: string
+              enum: [open, completed, skipped]
+            dueDate:
+              anyOf:
+                - type: string
+                  pattern: '^\d{4}-\d{2}-\d{2}$'
+                - type: "null"
+            marketChangeId:
+              anyOf:
+                - type: string
+                  minLength: 1
+                  maxLength: 120
+                - type: "null"
+            createdAt: { type: string, format: date-time }
+            completedAt:
+              anyOf:
+                - { type: string, format: date-time }
+                - { type: "null" }
+      required: [id, status, dueDate, createdAt, completedAt]
+    WorkspaceSummary:
+      type: object
+      properties:
+        savedDecisionCount:
+          type: number
+        watchlistCount:
+          type: number
+        latestDecision:
+          anyOf:
+            - $ref: "#/components/schemas/SavedDecision"
+            - type: "null"
+        latestWatchlistItem:
+          anyOf:
+            - $ref: "#/components/schemas/WatchlistItem"
+            - type: "null"
+      required:
+        - savedDecisionCount
+        - watchlistCount
+        - latestDecision
+        - latestWatchlistItem
+    SavedDecision:
+      type: object
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+          enum: [salary, risk, company, ai]
+        title:
+          type: string
+        summary:
+          type: string
+        signal:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - kind
+        - title
+        - summary
+        - signal
+        - createdAt
+    SavedDecisionInput:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum: [salary, risk, company, ai]
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        summary:
+          type: string
+          minLength: 1
+          maxLength: 5000
+        signal:
+          type: string
+          minLength: 1
+          maxLength: 1000
+      required:
+        - kind
+        - title
+        - summary
+        - signal
+    WatchlistItem:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        note:
+          type: string
+        signal:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - company
+        - note
+        - signal
+        - createdAt
+    WatchlistInput:
+      type: object
+      properties:
+        company:
+          type: string
+          minLength: 1
+          maxLength: 200
+        note:
+          type: string
+          minLength: 1
+          maxLength: 5000
+        signal:
+          type: string
+          minLength: 1
+          maxLength: 1000
+      required:
+        - company
+        - note
+        - signal
+    DatasetMeta:
+      type: object
+      properties:
+        dataset:
+          type: string
+        refreshedAt:
+          type:
+            - string
+            - "null"
+          format: date-time
+        source:
+          type: string
+        methodology:
+          type: string
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        sampleSize:
+          type: number
+        coverage:
+          type: string
+          enum: [complete, partial, empty]
+        qualityNotes:
+          type: array
+          items:
+            type: string
+      required:
+        - dataset
+        - refreshedAt
+        - source
+        - methodology
+        - confidence
+        - sampleSize
+        - coverage
+        - qualityNotes
+    SalaryBenchmark:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        city:
+          type: string
+        experienceBand:
+          type: string
+        p25:
+          type: number
+        median:
+          type: number
+        p75:
+          type: number
+        sampleSize:
+          type: number
+        source:
+          type: string
+        sourceUrl:
+          anyOf:
+            - type: string
+            - type: "null"
+        provenance:
+          $ref: "#/components/schemas/PublicDataProvenance"
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        observedAt:
+          type: string
+          format: date-time
+        refreshedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - role
+        - city
+        - experienceBand
+        - p25
+        - median
+        - p75
+        - sampleSize
+        - source
+        - sourceUrl
+        - provenance
+        - confidence
+        - observedAt
+        - refreshedAt
+    PublicDataProvenance:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [VERIFIED, DERIVED, ESTIMATED]
+        sourceType:
+          type: string
+          minLength: 1
+        publicationDate:
+          type: string
+          format: date
+        retrievedDate:
+          type: string
+          format: date
+        reviewedAt:
+          type: string
+          format: date-time
+        metric:
+          type: string
+          minLength: 1
+        transformation:
+          type: string
+          minLength: 1
+        methodologyName:
+          type: string
+          minLength: 1
+        methodologyVersion:
+          type: string
+          minLength: 1
+        methodologyInputs:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+        methodologyCalculation:
+          type: string
+          minLength: 1
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        limitations:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+      required:
+        - status
+        - sourceType
+        - publicationDate
+        - retrievedDate
+        - reviewedAt
+        - metric
+        - transformation
+        - methodologyName
+        - methodologyVersion
+        - methodologyInputs
+        - methodologyCalculation
+        - confidence
+        - limitations
+    CompanySignal:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        sector:
+          type: string
+        stability:
+          type: number
+        momentum:
+          type: string
+        signal:
+          type: string
+        source:
+          type: string
+        sourceUrl:
+          anyOf:
+            - type: string
+            - type: "null"
+        provenance:
+          $ref: "#/components/schemas/PublicDataProvenance"
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        observedAt:
+          type: string
+          format: date-time
+        refreshedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - slug
+        - name
+        - sector
+        - stability
+        - momentum
+        - signal
+        - source
+        - sourceUrl
+        - provenance
+        - confidence
+        - observedAt
+        - refreshedAt
+    LayoffSignal:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        signal:
+          type: string
+        type:
+          type: string
+          enum: [Layoff, Hiring freeze, Hiring signal, Restructure]
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed]
+        source:
+          type: string
+        sourceUrl:
+          anyOf:
+            - type: string
+            - type: "null"
+        provenance:
+          $ref: "#/components/schemas/PublicDataProvenance"
+        observedAt:
+          type: string
+          format: date-time
+        refreshedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - company
+        - signal
+        - type
+        - confidence
+        - source
+        - sourceUrl
+        - provenance
+        - observedAt
+        - refreshedAt
+    SalaryBenchmarksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/SalaryBenchmark"
+        meta:
+          $ref: "#/components/schemas/DatasetMeta"
+      required:
+        - data
+        - meta
+    PublicCompanySignalsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompanySignal"
+        meta:
+          $ref: "#/components/schemas/DatasetMeta"
+      required:
+        - data
+        - meta
+    PublicCompanySignalResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/CompanySignal"
+        meta:
+          $ref: "#/components/schemas/DatasetMeta"
+      required:
+        - data
+        - meta
+    LayoffSignalsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/LayoffSignal"
+        meta:
+          $ref: "#/components/schemas/DatasetMeta"
+      required:
+        - data
+        - meta
+    LayoffSignalReportInput:
+      type: object
+      properties:
+        company:
+          type: string
+          minLength: 2
+          maxLength: 120
+        description:
+          type: string
+          minLength: 15
+          maxLength: 2000
+        confidence:
+          type: string
+          enum: [Low, Medium, High]
+      required:
+        - company
+        - description
+        - confidence
+    LayoffSignalReportResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending_review]
+        message:
+          type: string
+      required:
+        - status
+        - message
+    CareerCatalogSuggestionInput:
+      type: object
+      properties:
+        companyName:
+          type: string
+          minLength: 2
+          maxLength: 120
+        positionTitle:
+          type: string
+          minLength: 2
+          maxLength: 160
+        sector:
+          type: string
+          minLength: 2
+          maxLength: 80
+        jobFunction:
+          type: string
+          minLength: 2
+          maxLength: 80
+      required: [sector, jobFunction]
+    CareerCatalogSuggestionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending_review]
+        acceptedEntities:
+          type: array
+          items:
+            type: string
+            enum: [company, position]
+        message:
+          type: string
+      required: [status, acceptedEntities, message]
+    PublicJobLinkFetchInput:
+      type: object
+      additionalProperties: false
+      properties:
+        url: { type: string, minLength: 1, maxLength: 2048 }
+        consent: { type: boolean }
+      required: [url, consent]
+    PublicJobLinkFetchResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        text: { type: string, minLength: 1, maxLength: 20000 }
+        truncated: { type: boolean }
+      required: [text, truncated]
+    CareerCatalogSuggestion:
+      type: object
+      properties:
+        id: { type: string }
+        entityType:
+          type: string
+          enum: [company, position]
+        name: { type: string }
+        normalizedName: { type: string }
+        sector: { type: string }
+        jobFunction: { type: string }
+        moderationStatus:
+          type: string
+          enum: [pending, approved, rejected]
+        submittedByUserId:
+          anyOf:
+            - { type: string }
+            - { type: "null" }
+        createdAt: { type: string, format: date-time }
+        reviewedAt:
+          anyOf:
+            - { type: string, format: date-time }
+            - { type: "null" }
+        reviewedByUserId:
+          anyOf:
+            - { type: string }
+            - { type: "null" }
+        reviewNote:
+          anyOf:
+            - { type: string }
+            - { type: "null" }
+      required: [id, entityType, name, normalizedName, sector, jobFunction, moderationStatus, submittedByUserId, createdAt, reviewedAt, reviewedByUserId, reviewNote]
+    PublicCareerCatalogEntry:
+      type: object
+      properties:
+        id: { type: string }
+        entityType:
+          type: string
+          enum: [company, position]
+        name: { type: string }
+        sector: { type: string }
+        jobFunction: { type: string }
+        approvedAt: { type: string, format: date-time }
+      required: [id, entityType, name, sector, jobFunction, approvedAt]
+    PublicCareerCatalogResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicCareerCatalogEntry"
+      required: [data]
+    CatalogSuggestionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerCatalogSuggestion"
+      required: [data]
+    CatalogSuggestionReviewInput:
+      type: object
+      properties:
+        moderationStatus:
+          type: string
+          enum: [approved, rejected]
+        reviewNote:
+          type: string
+          maxLength: 500
+      required: [moderationStatus]
+    ReadinessDeskAccessResponse:
+      type: object
+      properties:
+        authorized:
+          type: boolean
+          enum: [true]
+      required: [authorized]
+    ReadinessDeskDataResponse:
+      type: object
+      properties:
+        records:
+          type: string
+          description: JSON-encoded application readiness records
+      required: [records]
+    ResumeEvidence:
+      type: object
+      properties:
+        name:
+          type: string
+        confidence:
+          type: string
+          enum: [High, Medium, Low]
+        evidence:
+          type: string
+      required: [name, confidence, evidence]
+    IntelligenceSource:
+      type: object
+      properties:
+        label:
+          type: string
+        source:
+          type: string
+        refreshedAt:
+          type: string
+          format: date-time
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed, Directional]
+      required: [label, source, refreshedAt, confidence]
+    ResumeJobMatch:
+      type: object
+      properties:
+        company:
+          type: string
+        role:
+          type: string
+        reason:
+          type: string
+        confidence:
+          type: string
+          enum: [High, Medium, Low, Mixed, Directional]
+      required: [company, role, reason, confidence]
+    ResumeIntelligence:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ready]
+        fileName:
+          type: string
+        fileType:
+          type: string
+          enum: [PDF, DOCX]
+        processedAt:
+          type: string
+          format: date-time
+        extractedCharacters:
+          type: number
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResumeEvidence"
+        employers:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResumeEvidence"
+        progression:
+          type: string
+        relatedNews:
+          type: string
+        marketSummary:
+          type: string
+        jobMatches:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResumeJobMatch"
+        sources:
+          type: array
+          items:
+            $ref: "#/components/schemas/IntelligenceSource"
+        qualityNotes:
+          type: array
+          items:
+            type: string
+      required:
+        - status
+        - fileName
+        - fileType
+        - processedAt
+        - extractedCharacters
+        - skills
+        - employers
+        - progression
+        - relatedNews
+        - marketSummary
+        - jobMatches
+        - sources
+        - qualityNotes

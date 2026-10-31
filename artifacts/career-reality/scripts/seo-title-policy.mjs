@@ -1,0 +1,2 @@
+export const STATIC_TITLE_MIN_LENGTH = 30;
+export const STATIC_TITLE_MAX_LENGTH = 65;

@@ -1,0 +1,30 @@
+kind = "web"
+previewPath = "/"
+title = "CareerReality"
+description = "An evidence-backed career intelligence platform for Indian professionals, combining salary reality, career risk analysis, company intelligence, layoff signals, and personalized next steps in one trusted decision hub."
+version = "1.0.0"
+id = "artifacts/career-reality"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20339
+
+[services.development]
+run = "pnpm --filter @workspace/career-reality run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/career-reality", "run", "build" ]
+[services.production.run]
+args = ["node", "--enable-source-maps", "artifacts/career-reality/scripts/serve-published.mjs"]
+
+[services.production.run.env]
+PORT = "20339"
+BASE_PATH = "/"
+NODE_ENV = "production"
+
+
+[services.env]
+PORT = "20339"
+BASE_PATH = "/"
