@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 declare global {
   interface Window {
@@ -21,6 +21,21 @@ const immediateAuthRoutes = [
     marker: "Welcome back",
   },
 ];
+
+const publicAuthDeferralRoutes = [
+  { path: "/", name: "homepage" },
+  { path: "/salary-calculator", name: "salary calculator" },
+  { path: "/guides/offer-letter-red-flags-india", name: "guide" },
+  { path: "/layoffs", name: "layoff hub" },
+];
+
+function trackClerkRuntimeRequests(page: Page): number[] {
+  const requestTimes: number[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes("clerk-runtime-test")) requestTimes.push(Date.now());
+  });
+  return requestTimes;
+}
 
 test.describe("deferred Clerk auth regression coverage", () => {
   test("keeps workspace and catalog review hidden when the Clerk runtime fails to load", async ({ page }) => {
@@ -45,10 +60,33 @@ test.describe("deferred Clerk auth regression coverage", () => {
     }
   });
 
+  for (const route of publicAuthDeferralRoutes) {
+    test(`defers Clerk runtime requests on the public ${route.name}`, async ({ page }) => {
+      const clerkRuntimeRequestTimes = trackClerkRuntimeRequests(page);
+      const navigationStartedAt = Date.now();
+
+      await page.goto(route.path);
+      await expect(page.locator("body")).toBeVisible();
+      await page.waitForTimeout(1_000);
+      expect(clerkRuntimeRequestTimes).toHaveLength(0);
+
+      await page.waitForTimeout(3_500);
+      expect(clerkRuntimeRequestTimes).toHaveLength(0);
+      await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 2_500 });
+      expect(clerkRuntimeRequestTimes).toHaveLength(1);
+      expect(clerkRuntimeRequestTimes[0] - navigationStartedAt).toBeGreaterThanOrEqual(5_000);
+    });
+  }
+
   for (const route of immediateAuthRoutes) {
     test(`initializes the auth runtime immediately for ${route.path}`, async ({ page }) => {
+      const clerkRuntimeRequestTimes = trackClerkRuntimeRequests(page);
+      const navigationStartedAt = Date.now();
+
       await page.goto(route.path);
       await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 4_500 });
+      expect(clerkRuntimeRequestTimes).toHaveLength(1);
+      expect(clerkRuntimeRequestTimes[0] - navigationStartedAt).toBeLessThan(5_000);
 
       await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
       await expect(page).toHaveURL(new RegExp(`${route.loadedPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/?$`));
@@ -56,16 +94,17 @@ test.describe("deferred Clerk auth regression coverage", () => {
     });
   }
 
-  test("keeps public pages auth-free until a visitor requests a protected route", async ({ page }) => {
+  test("keeps public pages auth-deferred until a visitor requests a protected route", async ({ page }) => {
     let runtimeImports = 0;
     await page.route("**/*clerk-runtime-test*", async (route) => {
       runtimeImports += 1;
       await route.continue();
     });
 
+    const navigationStartedAt = Date.now();
     await page.goto("/");
     await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
-    await page.waitForTimeout(5_500);
+    expect(Date.now() - navigationStartedAt).toBeLessThan(5_000);
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
     expect(runtimeImports).toBe(0);
 

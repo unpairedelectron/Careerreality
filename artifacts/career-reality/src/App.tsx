@@ -40,6 +40,7 @@ import routeRegistry from '@/data/route-registry';
 
 const isE2e = import.meta.env.VITE_E2E === "true";
 const isClerkRuntimeE2e = import.meta.env.VITE_E2E_AUTH_RUNTIME === "true";
+const PUBLIC_AUTH_DELAY_MS = 5_000;
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -148,10 +149,11 @@ function DeferredClerkRoutes() {
   const immediateAuth = routeNeedsImmediateAuth(path);
 
   useEffect(() => {
-    if (ClerkRuntime || !immediateAuth) return;
+    if (ClerkRuntime) return;
     let active = true;
     const loadClerk = async () => {
       try {
+        // This shared auth runtime loads the Clerk SDK; keep it deferred on public routes.
         const module = await import("@/lib/clerk-runtime");
         if (active) setClerkRuntime(() => module.default);
       } catch (error) {
@@ -159,9 +161,10 @@ function DeferredClerkRoutes() {
         if (active) setAuthLoadFailed(true);
       }
     };
-    void loadClerk();
+    const timer = window.setTimeout(() => void loadClerk(), immediateAuth ? 0 : PUBLIC_AUTH_DELAY_MS);
     return () => {
       active = false;
+      window.clearTimeout(timer);
     };
   }, [ClerkRuntime, immediateAuth]);
 

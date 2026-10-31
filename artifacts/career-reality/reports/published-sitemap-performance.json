@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T15:35:39.360Z",
+  "generatedAt": "2026-10-31T16:01:41.078Z",
   "audits": [
-    {
-      "generatedAt": "2026-10-30T06:46:42.089Z",
-      "pageCount": 77,
-      "batchSize": 8,
-      "elapsedMs": 1359,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
-    {
-      "generatedAt": "2026-10-30T06:52:20.178Z",
-      "pageCount": 77,
-      "batchSize": 8,
-      "elapsedMs": 1564,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
     {
       "generatedAt": "2026-10-30T07:13:19.739Z",
       "pageCount": 77,
@@ -181,6 +163,24 @@
       "warningThresholdMs": 5000,
       "workerFailures": 0,
       "slow": false
+    },
+    {
+      "generatedAt": "2026-10-31T15:40:52.697Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 6592,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-10-31T16:01:41.078Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 26339,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
     }
   ]
 }
