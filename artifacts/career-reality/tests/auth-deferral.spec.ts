@@ -23,6 +23,28 @@ const immediateAuthRoutes = [
 ];
 
 test.describe("deferred Clerk auth regression coverage", () => {
+  test("keeps workspace and catalog review hidden when the Clerk runtime fails to load", async ({ page }) => {
+    let failedRuntimeImports = 0;
+    await page.route("**/*clerk-runtime-test*", async (route) => {
+      failedRuntimeImports += 1;
+      await route.abort();
+    });
+
+    const protectedRoutes = ["/workspace", "/workspace/catalog"];
+    for (const [index, path] of protectedRoutes.entries()) {
+      await page.goto(path);
+      const failureMessage = page.getByRole("alert");
+      await expect(failureMessage).toContainText(
+        "Sign-in could not be loaded. Check your connection and reload this page.",
+      );
+      await expect(page.getByRole("button", { name: "Reload page" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
+      await expect(page.getByRole("heading", { name: "Review what is missing." })).toHaveCount(0);
+      await expect(page.getByText("Private area / catalog desk")).toHaveCount(0);
+      expect(failedRuntimeImports).toBe(index + 1);
+    }
+  });
+
   for (const route of immediateAuthRoutes) {
     test(`initializes the auth runtime immediately for ${route.path}`, async ({ page }) => {
       await page.goto(route.path);
