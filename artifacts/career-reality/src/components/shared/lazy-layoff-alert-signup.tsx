@@ -3,6 +3,9 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 const LayoffAlertSignup = lazy(() =>
   import("./layoff-alert-signup").then((module) => ({ default: module.LayoffAlertSignup })),
 );
+const QueryRuntime = lazy(() =>
+  import("@/lib/query-runtime").then((module) => ({ default: module.QueryRuntime })),
+);
 
 export function LazyLayoffAlertSignup() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,7 +35,9 @@ export function LazyLayoffAlertSignup() {
     <div ref={containerRef}>
       {shouldLoad && (
         <Suspense fallback={<div className="min-h-64" aria-hidden="true" />}>
-          <LayoffAlertSignup />
+          <QueryRuntime>
+            <LayoffAlertSignup />
+          </QueryRuntime>
         </Suspense>
       )}
     </div>

@@ -1,12 +1,13 @@
 import { expect, test } from "./fixtures";
 
-test("homepage surfaces the latest HSBC and Amazon sourced records", async ({ page }) => {
+test("homepage surfaces the latest sourced event records", async ({ page }) => {
   await page.goto("/");
+  await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
 
-  await expect(page.getByTestId("card-layoff-event-hsbc-uk-wealth-restructuring-2026")).toContainText("HSBC");
-  await expect(page.getByTestId("card-layoff-event-amazon-stores-workforce-reduction-2026")).toContainText("Amazon");
-  await expect(page.getByTestId("link-layoff-event-source-hsbc-uk-wealth-restructuring-2026"))
-    .toHaveAttribute("href", /reuters\.com/);
+  await expect(page.getByTestId("card-layoff-event-amazon-devices-services-reduction-2026")).toContainText("Amazon");
+  await expect(page.getByTestId("card-layoff-event-microsoft-voluntary-buyout-offer-2026")).toContainText("Microsoft");
+  await expect(page.getByTestId("link-layoff-event-source-amazon-devices-services-reduction-2026"))
+    .toHaveAttribute("href", /usnews\.com/);
 });
 
 test("HSBC detail offers a private role- and runway-aware plan", async ({ page }) => {

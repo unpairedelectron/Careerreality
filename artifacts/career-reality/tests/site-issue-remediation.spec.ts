@@ -2,6 +2,7 @@ import { expect, test } from "./fixtures";
 
 test("homepage exposes the layoff update block and alert form", async ({ page }) => {
   await page.goto("/");
+  await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
   await expect(page.getByRole("heading", { name: /If work changes/i })).toBeVisible();
   await expect(page.getByTestId("form-layoff-alert-signup")).toBeVisible();
   await expect(page.getByTestId("link-home-layoff-hub")).toBeVisible();
@@ -32,6 +33,9 @@ test("Layoff Hub deep links scroll to the event and alert sections", async ({ pa
 test("shared footer keeps all six tool links on the primary public pages", async ({ page }) => {
   for (const route of ["/", "/layoffs/", "/companies/", "/salary-calculator/", "/guides/"]) {
     await page.goto(route);
+    if (route === "/") {
+      await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
+    }
     const footerTools = page.locator('[data-section="tools"] a');
     await expect(footerTools).toHaveCount(6);
   }

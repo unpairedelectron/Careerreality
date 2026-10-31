@@ -6,6 +6,8 @@ import "@clerk/themes/shadcn.css";
 import type { QueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { AppAuthProvider } from "./app-auth";
+import { queryClient } from "./query-runtime";
+import { QueryClientProvider } from "@tanstack/react-query";
 import {
   clearQueryCacheOnAuthUserChange,
   createCrossTabAuthUserChangeSync,
@@ -87,10 +89,8 @@ function ClerkQueryClientCacheInvalidator({ queryClient }: { queryClient: QueryC
 
 export default function ClerkRuntime({
   children,
-  queryClient,
 }: {
   children: ReactNode;
-  queryClient: QueryClient;
 }) {
   const [, setLocation] = useLocation();
   const { theme } = useTheme();
@@ -118,23 +118,25 @@ export default function ClerkRuntime({
   );
 
   return (
-    <ClerkProvider
-      publishableKey={publishableKey}
-      proxyUrl={import.meta.env.VITE_CLERK_PROXY_URL}
-      appearance={appearance}
-      signInUrl={`${basePath}/sign-in`}
-      signUpUrl={`${basePath}/sign-up`}
-      localization={{
-        signIn: { start: { title: "Welcome back", subtitle: "Make your next move with clarity" } },
-        signUp: { start: { title: "Build your career advantage", subtitle: "Start with the truth about your next move" } },
-      }}
-      routerPush={(to) => setLocation(to.startsWith(basePath) ? to.slice(basePath.length) || "/" : to)}
-      routerReplace={(to) => setLocation(to.startsWith(basePath) ? to.slice(basePath.length) || "/" : to, { replace: true })}
-    >
-      <AppAuthProvider>
-        <ClerkQueryClientCacheInvalidator queryClient={queryClient} />
-        {children}
-      </AppAuthProvider>
-    </ClerkProvider>
+    <QueryClientProvider client={queryClient}>
+      <ClerkProvider
+        publishableKey={publishableKey}
+        proxyUrl={import.meta.env.VITE_CLERK_PROXY_URL}
+        appearance={appearance}
+        signInUrl={`${basePath}/sign-in`}
+        signUpUrl={`${basePath}/sign-up`}
+        localization={{
+          signIn: { start: { title: "Welcome back", subtitle: "Make your next move with clarity" } },
+          signUp: { start: { title: "Build your career advantage", subtitle: "Start with the truth about your next move" } },
+        }}
+        routerPush={(to) => setLocation(to.startsWith(basePath) ? to.slice(basePath.length) || "/" : to)}
+        routerReplace={(to) => setLocation(to.startsWith(basePath) ? to.slice(basePath.length) || "/" : to, { replace: true })}
+      >
+        <AppAuthProvider>
+          <ClerkQueryClientCacheInvalidator queryClient={queryClient} />
+          {children}
+        </AppAuthProvider>
+      </ClerkProvider>
+    </QueryClientProvider>
   );
 }

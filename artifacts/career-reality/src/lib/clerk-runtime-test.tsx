@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import type { QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { AppAuthContext, type AppAuthValue } from "./app-auth-context";
+import { queryClient } from "./query-runtime";
 import {
   clearQueryCacheOnAuthUserChange,
   createCrossTabAuthUserChangeSync,
@@ -20,10 +21,8 @@ declare global {
 
 export default function ClerkRuntimeTest({
   children,
-  queryClient,
 }: {
   children: ReactNode;
-  queryClient: QueryClient;
 }) {
   const [, setLocation] = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -88,9 +87,11 @@ export default function ClerkRuntimeTest({
   );
 
   return (
-    <AppAuthContext.Provider value={value}>
-      {isBridgeReady && <span hidden data-testid="e2e-clerk-runtime-ready" />}
-      {children}
-    </AppAuthContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <AppAuthContext.Provider value={value}>
+        {isBridgeReady && <span hidden data-testid="e2e-clerk-runtime-ready" />}
+        {children}
+      </AppAuthContext.Provider>
+    </QueryClientProvider>
   );
 }

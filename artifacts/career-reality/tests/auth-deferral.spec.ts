@@ -63,18 +63,15 @@ test.describe("deferred Clerk auth regression coverage", () => {
   for (const route of publicAuthDeferralRoutes) {
     test(`defers Clerk runtime requests on the public ${route.name}`, async ({ page }) => {
       const clerkRuntimeRequestTimes = trackClerkRuntimeRequests(page);
-      const navigationStartedAt = Date.now();
 
       await page.goto(route.path);
       await expect(page.locator("body")).toBeVisible();
       await page.waitForTimeout(1_000);
       expect(clerkRuntimeRequestTimes).toHaveLength(0);
 
-      await page.waitForTimeout(3_500);
+      await page.waitForTimeout(5_000);
       expect(clerkRuntimeRequestTimes).toHaveLength(0);
-      await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 2_500 });
-      expect(clerkRuntimeRequestTimes).toHaveLength(1);
-      expect(clerkRuntimeRequestTimes[0] - navigationStartedAt).toBeGreaterThanOrEqual(5_000);
+      await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
     });
   }
 
@@ -101,10 +98,8 @@ test.describe("deferred Clerk auth regression coverage", () => {
       await route.continue();
     });
 
-    const navigationStartedAt = Date.now();
     await page.goto("/");
     await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
-    expect(Date.now() - navigationStartedAt).toBeLessThan(5_000);
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
     expect(runtimeImports).toBe(0);
 

@@ -3,6 +3,7 @@ import { expect, test } from "./fixtures";
 test.describe("homepage entry points", () => {
   test("opens the CTC calculator without carrying salary inputs in the URL", async ({ page }) => {
     await page.goto("/");
+    await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
 
     await expect(page.getByTestId("form-home-ctc")).toContainText("does not collect or pass salary amounts");
     await expect(page.getByTestId("button-home-calculator")).toHaveAttribute("href", "/salary-calculator");

@@ -165,7 +165,7 @@ const staticRouteMeta = Object.fromEntries(
 ) as Record<string, StaticRouteMeta>;
 const homepageMeta: StaticRouteMeta = {
   ...staticRouteMeta["/"],
-  heading: "Look past the headline CTC. Keep it yours.",
+  heading: "Make your next move make sense.",
 };
 if (!homepageMeta.title || !homepageMeta.description) {
   throw new Error("The route registry must define the homepage title and description.");
@@ -1045,7 +1045,7 @@ function renderStaticPage(
   const excerpt = content.lead === meta.description || content.sections.some((section) => section.body === meta.description)
     ? ""
     : `<p class="snapshot-excerpt">${escapeHtml(meta.description)}</p>`;
-  const body = `<div class="snapshot-shell">
+  const body = `<div class="snapshot-shell${route === "/" ? " snapshot-home" : ""}">
     ${renderSnapshotBreadcrumbs(breadcrumbs)}
     <header class="snapshot-header">
       <p class="snapshot-kicker">${escapeHtml(meta.eyebrow)}</p>
@@ -1085,6 +1085,7 @@ function renderStaticPage(
     .snapshot-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#176f5e}
     .snapshot-navigation{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;border-top:1px solid #d8dedb;margin-top:32px;padding-top:24px;font:14px/1.8 system-ui,sans-serif}.snapshot-navigation h2{font-size:16px}.snapshot-navigation ul{list-style:none;padding:0}.snapshot-navigation a{color:#176f5e}
     .snapshot-shell h1{font-family:Georgia,serif;font-size:clamp(42px,7vw,80px);line-height:.94;letter-spacing:-.05em;margin:24px 0}
+    .snapshot-home h1{max-width:13.5ch;font-size:clamp(3.8rem,16.5vw,5.2rem);line-height:.84;text-wrap:balance}
     .snapshot-excerpt{font-size:18px;line-height:1.7;color:#66727a;max-width:700px}.snapshot-shell main{font-family:Georgia,serif;font-size:18px;line-height:1.9}.snapshot-lead{font-size:21px}.snapshot-related{display:flex;flex-wrap:wrap;gap:18px;border-top:1px solid #d8dedb;margin-top:56px;padding-top:24px;font-size:13px}.snapshot-related a{color:#176f5e;font-weight:700}
      .snapshot-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}.snapshot-table-hint{font:12px/1.5 system-ui,sans-serif;color:#66727a}.snapshot-table-wrap table{min-width:760px;border-collapse:collapse;font:14px/1.5 system-ui,sans-serif}.snapshot-table-wrap caption{text-align:left;font-weight:700;padding:8px 0}.snapshot-table-wrap th,.snapshot-table-wrap td{border:1px solid #d8dedb;padding:10px;text-align:left;vertical-align:top}.snapshot-table-wrap thead th{background:#f0f3f1}.snapshot-table-wrap tbody th{white-space:nowrap}
   </style></head>`);
