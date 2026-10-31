@@ -7,6 +7,8 @@ declare global {
       setUser: (userId: string | null) => void;
       seedCache: () => void;
       cachedValue: () => unknown;
+      readQueryData: (queryKey: readonly unknown[]) => unknown;
+      startWorkspaceQuery: () => Promise<unknown>;
     };
   }
 }
@@ -180,6 +182,116 @@ test.describe("deferred Clerk auth regression coverage", () => {
     await page.evaluate(() => window.__careerRealityAuthTest?.seedCache());
     await secondTab.evaluate(() => window.__careerRealityAuthTest?.setUser(null));
     await expect.poll(() => page.evaluate(() => window.__careerRealityAuthTest?.cachedValue())).toBeUndefined();
+    await secondTab.close();
+  });
+
+  test("does not restore in-flight Compass or workspace data after another tab switches accounts", async ({
+    page,
+    context,
+  }) => {
+    let releaseSalaryResponse!: () => void;
+    let releaseWorkspaceResponse!: () => void;
+    let markSalaryStarted!: () => void;
+    let markWorkspaceStarted!: () => void;
+    let markSalaryResponseSent!: () => void;
+    let markWorkspaceResponseSent!: () => void;
+    const salaryResponseGate = new Promise<void>((resolve) => {
+      releaseSalaryResponse = resolve;
+    });
+    const workspaceResponseGate = new Promise<void>((resolve) => {
+      releaseWorkspaceResponse = resolve;
+    });
+    const salaryRequestStarted = new Promise<void>((resolve) => {
+      markSalaryStarted = resolve;
+    });
+    const workspaceRequestStarted = new Promise<void>((resolve) => {
+      markWorkspaceStarted = resolve;
+    });
+    const salaryResponseSent = new Promise<void>((resolve) => {
+      markSalaryResponseSent = resolve;
+    });
+    const workspaceResponseSent = new Promise<void>((resolve) => {
+      markWorkspaceResponseSent = resolve;
+    });
+
+    await context.route("**/api/**", async (route) => {
+      const pathname = new URL(route.request().url()).pathname;
+      if (pathname === "/api/public/salary-benchmarks") {
+        markSalaryStarted();
+        await salaryResponseGate;
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ marker: "old-user-compass-response" }),
+        });
+        markSalaryResponseSent();
+        return;
+      }
+      if (pathname === "/api/workspace/summary") {
+        markWorkspaceStarted();
+        await workspaceResponseGate;
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ marker: "old-user-workspace-response" }),
+        });
+        markWorkspaceResponseSent();
+        return;
+      }
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "Test data unavailable" }),
+      });
+    });
+
+    await page.goto("/compass?__e2e_user=first-user");
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await expect(page.getByTestId("button-account-menu")).toBeVisible();
+    await salaryRequestStarted;
+
+    const workspaceQuery = page.evaluate(() => window.__careerRealityAuthTest?.startWorkspaceQuery());
+    await workspaceRequestStarted;
+
+    const secondTab = await context.newPage();
+    await secondTab.goto("/sign-in?__e2e_user=first-user");
+    await expect(secondTab.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.setUser("second-user"));
+
+    const salaryQueryKey = [
+      "/api/public/salary-benchmarks",
+      { role: "Software engineer", city: "Bengaluru", experienceBand: "5–8 years" },
+    ] as const;
+    const workspaceQueryKey = ["/api/workspace/summary"] as const;
+    await expect
+      .poll(() =>
+        page.evaluate(
+          ({ salaryKey, workspaceKey }) => ({
+            salary: window.__careerRealityAuthTest?.readQueryData(salaryKey),
+            workspace: window.__careerRealityAuthTest?.readQueryData(workspaceKey),
+          }),
+          { salaryKey: salaryQueryKey, workspaceKey: workspaceQueryKey },
+        ),
+      )
+      .toEqual({ salary: undefined, workspace: undefined });
+
+    releaseSalaryResponse();
+    releaseWorkspaceResponse();
+    await workspaceQuery;
+    await Promise.all([salaryResponseSent, workspaceResponseSent]);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          ({ salaryKey, workspaceKey }) => ({
+            salary: window.__careerRealityAuthTest?.readQueryData(salaryKey),
+            workspace: window.__careerRealityAuthTest?.readQueryData(workspaceKey),
+          }),
+          { salaryKey: salaryQueryKey, workspaceKey: workspaceQueryKey },
+        ),
+      )
+      .toEqual({ salary: undefined, workspace: undefined });
     await secondTab.close();
   });
 });

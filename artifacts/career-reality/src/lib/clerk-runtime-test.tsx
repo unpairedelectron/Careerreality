@@ -15,6 +15,8 @@ declare global {
       setUser: (userId: string | null) => void;
       seedCache: () => void;
       cachedValue: () => unknown;
+      readQueryData: (queryKey: readonly unknown[]) => unknown;
+      startWorkspaceQuery: () => Promise<unknown>;
     };
   }
 }
@@ -55,6 +57,16 @@ export default function ClerkRuntimeTest({
       setUser: setUserId,
       seedCache: () => queryClient.setQueryData(["auth-cache-sentinel"], "cached-user-data"),
       cachedValue: () => queryClient.getQueryData(["auth-cache-sentinel"]),
+      readQueryData: (queryKey) => queryClient.getQueryData(queryKey),
+      startWorkspaceQuery: () =>
+        queryClient.fetchQuery({
+          queryKey: ["/api/workspace/summary"],
+          queryFn: async ({ signal }) => {
+            const response = await fetch("/api/workspace/summary", { signal });
+            if (!response.ok) throw new Error("Workspace query failed");
+            return response.json();
+          },
+        }).catch(() => undefined),
     };
     setIsBridgeReady(true);
     return () => {
