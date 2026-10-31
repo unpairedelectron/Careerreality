@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUpRight, Calculator, Check, CircleHelp, ShieldAlert } from 'lucide-react';
 import { Link } from 'wouter';
 import { AppNav } from '@/components/shared/app-nav';
-import { LayoffAlertSignup } from '@/components/shared/layoff-alert-signup';
+import { LazyLayoffAlertSignup } from '@/components/shared/lazy-layoff-alert-signup';
 import { PublicFooter } from '@/components/shared/public-shell';
 import { useSeo } from '@/lib/seo';
 import layoffEvents from '@/data/layoff-events.json';
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
               <p className="home-layoff-disclaimer">Reports can be incomplete or outdated. Rumours are excluded. Check the source date and record context before drawing conclusions.</p>
             </div>
-            <LayoffAlertSignup />
+            <LazyLayoffAlertSignup />
           </div>
         </section>
 

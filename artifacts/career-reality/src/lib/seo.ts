@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { categoryMeta } from "@/data/category-meta";
-import { ARTICLE_TITLE_SUFFIX } from "@/data/editorial-metadata";
-import { formatSeoTitle } from "@/data/seo-title";
+import { ARTICLE_TITLE_SUFFIX, formatSeoTitle } from "@/data/seo-title";
 import routeRegistry from "@/data/route-registry";
 import { createSiteOrganization } from "@/data/seo-organization";
 

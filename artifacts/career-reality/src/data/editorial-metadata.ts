@@ -1,5 +1,8 @@
 import type { ArticleCategory } from "./content";
 import { editorialPrimaryIntents } from "./editorial-briefs";
+import { ARTICLE_TITLE_SUFFIX } from "./seo-title";
+
+export { ARTICLE_TITLE_SUFFIX } from "./seo-title";
 
 export type EditorialSource = {
   publisher: string;
@@ -60,7 +63,6 @@ export type EditorialMetadata = {
   verifyQuestions: string[];
 };
 
-export const ARTICLE_TITLE_SUFFIX = " | CareerReality Journal";
 export const ARTICLE_TITLE_MAX_LENGTH = 65;
 
 const sourceLibrary = {
