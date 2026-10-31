@@ -72,7 +72,7 @@
 }
 
 .home-copy {
-  animation: home-arrive .75s cubic-bezier(.22, 1, .36, 1) both;
+  animation: none;
 }
 
 .home-overline {
