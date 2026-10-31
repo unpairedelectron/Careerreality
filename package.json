@@ -1,0 +1,29 @@
+{
+  "name": "workspace",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "build": "pnpm run validate:dependency-lock && pnpm run test:report-rate-limit && pnpm run typecheck && pnpm -r --if-present run build",
+    "validate:dependency-lock": "node scripts/test-validate-dependency-lock.mjs && pnpm install --lockfile-only --frozen-lockfile --ignore-scripts --reporter=append-only && node scripts/validate-dependency-lock.mjs",
+    "test:report-rate-limit": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/report-rate-limiter.test.ts",
+    "test:resume-intelligence": "DATABASE_URL=postgresql://resume-test:resume-test@127.0.0.1:5432/resume-test pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/resume-intelligence.test.ts",
+    "test:resume-storage": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/career-profile-storage.test.ts",
+    "test:market-refresh": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/freshness-cache.test.ts ../artifacts/api-server/tests/market-refresh.test.ts",
+    "test:compensation-corrections": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/compensation-corrections.test.ts",
+    "test:job-feeds": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/job-feeds.test.ts",
+    "test:job-posting-reality": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/career-reality/tests/job-posting-analysis.test.ts",
+    "test:job-posting-reality-benchmark": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/career-reality/tests/job-posting-analysis-benchmark.test.ts",
+    "verify:careerreality-local": "node scripts/verify-careerreality-local.mjs",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+  },
+  "private": true,
+  "dependencies": {
+    "@replit/connectors-sdk": "^0.4.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "typescript": "~5.9.3"
+  }
+}
