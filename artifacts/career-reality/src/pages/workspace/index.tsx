@@ -26,7 +26,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import { trackEvent } from '@/lib/analytics';
-import { useAppAuth } from '@/lib/app-auth';
+import { useAppAuth } from '@/lib/app-auth-context';
 import { useSeo } from '@/lib/seo';
 import {
   AlertDialog,

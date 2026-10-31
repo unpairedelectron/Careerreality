@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { useAppAuth } from "@/lib/app-auth";
+import { useAppAuth } from "@/lib/app-auth-context";
 import { trackEvent } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
 

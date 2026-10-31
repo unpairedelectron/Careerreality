@@ -12,7 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { Article } from "@/data/public-content";
 import { AppNav, Logo } from "@/components/shared/app-nav";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
-import { useAppAuth } from "@/lib/app-auth";
+import { useAppAuth } from "@/lib/app-auth-context";
 import { publicSiteMap } from "@/data/site-map";
 import routeRegistry from "@/data/route-registry";
 import { getRouteSeo, useSeo, type Breadcrumb, type SeoConfig } from "@/lib/seo";

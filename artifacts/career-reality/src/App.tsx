@@ -1,9 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, type ComponentType } from "react";
+import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
 import { Switch, Route, useLocation, Router as WouterRouter, Redirect } from 'wouter';
-import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
-import { ClerkProvider, useClerk } from '@clerk/react';
-import { publishableKeyFromHost } from '@clerk/react/internal';
-import { shadcn } from '@clerk/themes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getCheckReadinessDeskAccessQueryKey, useCheckReadinessDeskAccess } from '@workspace/api-client-react';
 
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -39,8 +36,7 @@ const CompaniesVerificationPage = lazy(() => import('@/pages/companies-verificat
 const PillarGuidePage = lazy(() => import('@/pages/pillar-guide-page').then((module) => ({ default: module.PillarGuidePage })));
 const RulesLibraryPage = lazy(() => import('@/pages/rules-library').then((module) => ({ default: module.RulesLibraryPage })));
 const LayoffHubPage = lazy(() => import('@/pages/layoff-hub'));
-import { AppAuthProvider, TestAppAuthProvider, useAppAuth } from '@/lib/app-auth';
-import { useTheme } from '@/lib/theme';
+import { PublicAppAuthProvider, TestAppAuthProvider, useAppAuth } from '@/lib/app-auth-context';
 import routeRegistry from '@/data/route-registry';
 
 const isE2e = import.meta.env.VITE_E2E === "true";
@@ -53,92 +49,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const clerkPubKey = publishableKeyFromHost(
-  window.location.hostname,
-  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
-);
-
-const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-function stripBase(path: string): string {
-  return basePath && path.startsWith(basePath)
-    ? path.slice(basePath.length) || "/"
-    : path;
-}
-
-const clerkAppearance = {
-  theme: shadcn,
-  cssLayerName: "clerk",
-  options: {
-    logoPlacement: "inside" as const,
-    logoLinkUrl: basePath || "/",
-    logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
-    socialButtonsPlacement: "top" as const,
-    socialButtonsVariant: "blockButton" as const,
-  },
-  variables: {
-    colorPrimary: 'hsl(164, 71%, 22%)',
-    colorForeground: 'hsl(221, 29%, 18%)',
-    colorMutedForeground: 'hsl(218, 13%, 47%)',
-    colorDanger: 'hsl(5, 60%, 48%)',
-    colorBackground: 'hsl(42, 33%, 98%)',
-    colorInput: 'hsl(38, 22%, 82%)',
-    colorInputForeground: 'hsl(221, 29%, 18%)',
-    colorNeutral: 'hsl(38, 22%, 85%)',
-    fontFamily: 'Manrope, sans-serif',
-    borderRadius: '0.8rem',
-  },
-  elements: {
-    rootBox: "w-full flex justify-center",
-    cardBox: "bg-card rounded-2xl w-[440px] max-w-full overflow-hidden",
-    card: "!shadow-[0_14px_30px_hsl(var(--foreground)/.08)] !border !border-border !bg-transparent !rounded-none",
-    footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
-    headerTitle: "font-display text-2xl text-foreground",
-    headerSubtitle: "text-muted-foreground font-data text-xs uppercase tracking-wider",
-    socialButtonsBlockButtonText: "text-foreground font-semibold",
-    formFieldLabel: "font-semibold text-foreground",
-    footerActionLink: "text-primary font-bold hover:underline",
-    footerActionText: "text-muted-foreground",
-    dividerText: "text-muted-foreground",
-    identityPreviewEditButton: "text-primary",
-    formFieldSuccessText: "text-primary",
-    alertText: "text-destructive",
-    logoBox: "flex items-center justify-center",
-    logoImage: "h-8 w-auto",
-    socialButtonsBlockButton: "border-border hover:bg-muted transition-colors",
-    formButtonPrimary: "bg-primary text-primary-foreground font-bold text-xs hover:opacity-90 transition-opacity",
-    formFieldInput: "bg-background border-border text-foreground",
-    footerAction: "flex items-center gap-2",
-    dividerLine: "bg-border",
-    alert: "bg-destructive/10 text-destructive border-destructive/20",
-    otpCodeFieldInput: "bg-background border-border text-foreground",
-    formFieldRow: "gap-2",
-    main: "w-full",
-  },
-};
-
-function ClerkQueryClientCacheInvalidator() {
-  const { addListener } = useClerk();
-  const qc = useQueryClient();
-  const prevUserIdRef = useRef<string | null | undefined>(undefined);
-
-  useEffect(() => {
-    const unsubscribe = addListener(({ user }) => {
-      const userId = user?.id ?? null;
-      if (
-        prevUserIdRef.current !== undefined &&
-        prevUserIdRef.current !== userId
-      ) {
-        qc.clear();
-      }
-      prevUserIdRef.current = userId;
-    });
-    return unsubscribe;
-  }, [addListener, qc]);
-
-  return null;
-}
 
 function HomeRedirect() {
   const { isSignedIn } = useAppAuth();
@@ -189,7 +100,7 @@ function ApplicationReadinessRoute() {
   return <ApplicationReadinessDashboard />;
 }
 
-function AppRoutes({ includeClerkCacheInvalidator = false }: { includeClerkCacheInvalidator?: boolean }) {
+function AppRoutes() {
   const routeComponents: Record<string, ComponentType<any>> = {
     home: HomeRedirect,
     toolsHub: ToolsHubPage,
@@ -242,7 +153,6 @@ function AppRoutes({ includeClerkCacheInvalidator = false }: { includeClerkCache
 
   return (
     <QueryClientProvider client={queryClient}>
-      {includeClerkCacheInvalidator && <ClerkQueryClientCacheInvalidator />}
       <TooltipProvider>
         <ErrorBoundary>
           <Suspense fallback={<main className="p-8 text-sm text-muted-foreground" role="status">Loading page…</main>}>
@@ -264,59 +174,66 @@ function AppRoutes({ includeClerkCacheInvalidator = false }: { includeClerkCache
   );
 }
 
-function ClerkProviderWithRoutes() {
-  const [, setLocation] = useLocation();
-  const { theme } = useTheme();
-  const appearance = {
-    ...clerkAppearance,
-    variables: {
-      ...clerkAppearance.variables,
-      ...(theme === "dark" ? {
-        colorPrimary: 'hsl(164, 61%, 35%)',
-        colorForeground: 'hsl(42, 33%, 96%)',
-        colorMutedForeground: 'hsl(218, 13%, 68%)',
-        colorBackground: 'hsl(221, 26%, 16%)',
-        colorInput: 'hsl(221, 20%, 29%)',
-        colorInputForeground: 'hsl(42, 33%, 96%)',
-        colorNeutral: 'hsl(221, 20%, 25%)',
-      } : {}),
-    },
-  };
+type ClerkRuntimeComponent = ComponentType<{
+  children: React.ReactNode;
+  queryClient: QueryClient;
+}>;
 
-  return (
-    <ClerkProvider
-      publishableKey={clerkPubKey}
-      proxyUrl={clerkProxyUrl}
-      appearance={appearance}
-      signInUrl={`${basePath}/sign-in`}
-      signUpUrl={`${basePath}/sign-up`}
-      localization={{
-        signIn: { start: { title: "Welcome back", subtitle: "Make your next move with clarity" } },
-        signUp: { start: { title: "Build your career advantage", subtitle: "Start with the truth about your next move" } },
-      }}
-      routerPush={(to) => setLocation(stripBase(to))}
-      routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
-    >
-      <AppAuthProvider>
-        <AppRoutes includeClerkCacheInvalidator />
-      </AppAuthProvider>
-    </ClerkProvider>
-  );
+function routeNeedsImmediateAuth(path: string): boolean {
+  return /^\/(?:sign-in|sign-up|compass|pro|workspace(?:\/|$)|admin\/application-readiness(?:\/|$))/.test(path);
 }
 
-function E2eProviderWithRoutes() {
-  return (
-    <TestAppAuthProvider>
-      <AppRoutes />
-    </TestAppAuthProvider>
-  );
+function DeferredClerkRoutes() {
+  const [path] = useLocation();
+  const [ClerkRuntime, setClerkRuntime] = useState<ClerkRuntimeComponent | null>(null);
+  const [authLoadFailed, setAuthLoadFailed] = useState(false);
+  const immediateAuth = routeNeedsImmediateAuth(path);
+
+  useEffect(() => {
+    if (ClerkRuntime) return;
+    let active = true;
+    const loadClerk = async () => {
+      try {
+        const module = await import("./lib/clerk-runtime");
+        if (active) setClerkRuntime(() => module.default);
+      } catch (error) {
+        console.error("Authentication could not be loaded.", error);
+        if (active) setAuthLoadFailed(true);
+      }
+    };
+    const timer = window.setTimeout(() => void loadClerk(), immediateAuth ? 0 : 5000);
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, [ClerkRuntime, immediateAuth]);
+
+  if (ClerkRuntime) {
+    return <ClerkRuntime queryClient={queryClient}><AppRoutes /></ClerkRuntime>;
+  }
+  if (immediateAuth) {
+    if (authLoadFailed) {
+      return (
+        <main className="mx-auto max-w-lg p-8 text-center" role="alert">
+          <p className="text-sm text-muted-foreground">Sign-in could not be loaded. Check your connection and reload this page.</p>
+          <button className="mt-4 rounded-md border border-border px-3 py-2 text-sm" onClick={() => window.location.reload()}>
+            Reload page
+          </button>
+        </main>
+      );
+    }
+    return <main className="p-8 text-sm text-muted-foreground" role="status">Loading sign-in…</main>;
+  }
+  return <PublicAppAuthProvider><AppRoutes /></PublicAppAuthProvider>;
 }
 
 function App() {
-  const authAvailable = Boolean(clerkPubKey);
+  const authAvailable = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
   return (
     <WouterRouter base={basePath}>
-      {isE2e || !authAvailable ? <E2eProviderWithRoutes /> : <ClerkProviderWithRoutes />}
+      {isE2e || !authAvailable
+        ? <TestAppAuthProvider><AppRoutes /></TestAppAuthProvider>
+        : <DeferredClerkRoutes />}
     </WouterRouter>
   );
 }

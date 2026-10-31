@@ -1,7 +1,7 @@
 import { SignIn } from '@clerk/react';
 import { Link, useLocation } from 'wouter';
 import { Logo } from '@/components/shared/app-nav';
-import { useAppAuth } from '@/lib/app-auth';
+import { useAppAuth } from '@/lib/app-auth-context';
 import { useSeo } from '@/lib/seo';
 import { AuthFrame } from '@/components/shared/auth-frame';
 

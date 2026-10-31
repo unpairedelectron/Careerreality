@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { ArrowUpRight, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { primaryRoutes, searchRoute, ctcCalculatorRoute } from "@/data/public-routes";
-import { useAppAuth } from "@/lib/app-auth";
+import { useAppAuth } from "@/lib/app-auth-context";
 import { useTheme } from "@/lib/theme";
 import "./public-chrome.css";
 

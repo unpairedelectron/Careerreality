@@ -21,7 +21,7 @@ import {
   usableLayoffSignals,
 } from "@/lib/public-evidence";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
-import { useAppAuth } from "@/lib/app-auth";
+import { useAppAuth } from "@/lib/app-auth-context";
 import { getLegacyCompanyReplacement } from "@/data/legacy-routes";
 import { experienceGuidance, roleOptions, roleProfiles, type RoleName } from "@/data/role-profiles";
 import {
