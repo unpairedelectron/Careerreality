@@ -6,7 +6,10 @@ import "@clerk/themes/shadcn.css";
 import type { QueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { AppAuthProvider } from "./app-auth";
-import { clearQueryCacheOnAuthUserChange } from "./auth-user-cache";
+import {
+  clearQueryCacheOnAuthUserChange,
+  createCrossTabAuthUserChangeSync,
+} from "./auth-user-cache";
 import { useTheme } from "./theme";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -67,10 +70,16 @@ function ClerkQueryClientCacheInvalidator({ queryClient }: { queryClient: QueryC
   const previousUserId = useRef<string | null | undefined>(undefined);
 
   useEffect(() => {
+    const crossTabSync = createCrossTabAuthUserChangeSync(queryClient);
     const unsubscribe = addListener(({ user }) => {
-      clearQueryCacheOnAuthUserChange(queryClient, previousUserId, user?.id ?? null);
+      if (clearQueryCacheOnAuthUserChange(queryClient, previousUserId, user?.id ?? null)) {
+        crossTabSync.notify();
+      }
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      crossTabSync.dispose();
+    };
   }, [addListener, queryClient]);
 
   return null;

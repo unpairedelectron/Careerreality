@@ -2,7 +2,10 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { QueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { AppAuthContext, type AppAuthValue } from "./app-auth-context";
-import { clearQueryCacheOnAuthUserChange } from "./auth-user-cache";
+import {
+  clearQueryCacheOnAuthUserChange,
+  createCrossTabAuthUserChangeSync,
+} from "./auth-user-cache";
 
 declare global {
   interface Window {
@@ -29,10 +32,21 @@ export default function ClerkRuntimeTest({
     new URLSearchParams(window.location.search).get("__e2e_user"),
   );
   const previousUserId = useRef<string | null | undefined>(undefined);
+  const crossTabSync = useRef<ReturnType<typeof createCrossTabAuthUserChangeSync> | null>(null);
+
+  useEffect(() => {
+    crossTabSync.current = createCrossTabAuthUserChangeSync(queryClient);
+    return () => {
+      crossTabSync.current?.dispose();
+      crossTabSync.current = null;
+    };
+  }, [queryClient]);
 
   useEffect(() => {
     if (isLoaded) {
-      clearQueryCacheOnAuthUserChange(queryClient, previousUserId, userId);
+      if (clearQueryCacheOnAuthUserChange(queryClient, previousUserId, userId)) {
+        crossTabSync.current?.notify();
+      }
     }
   }, [isLoaded, queryClient, userId]);
 
