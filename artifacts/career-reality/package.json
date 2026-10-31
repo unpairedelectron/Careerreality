@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-pillar-guides.mjs",
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "verify:aa-contrast": "node scripts/verify-aa-contrast.mjs",
     "prebuild": "node scripts/generate-pillar-guides.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-llms-guide.mjs",

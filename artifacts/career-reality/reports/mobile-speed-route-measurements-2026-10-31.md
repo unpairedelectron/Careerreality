@@ -41,3 +41,17 @@ Because the Lighthouse trace timings and the separate browser check disagree, an
 These are single-run diagnostics, not field data or a release gate. The Lighthouse CLI and DevTools capture channels differ, and Lighthouse results vary between runs. Use the route captures to identify work, not to claim a precise before/after improvement.
 
 For another capture, use Lighthouse 13.4.1 against each route above with mobile form factor, the supplied throttle and user-agent settings, `--screenEmulation.disabled`, `--only-categories=performance`, and JSON output. The original homepage report is `attached_assets/careerreality.in-20261031T074131_1793457899263.json`.
+
+## Local production-build comparison
+
+**Captured:** 2026-10-31, after the guide data split
+**Source:** Local Vite production preview, before and after the source change; not the published site
+**Method:** Lighthouse 13.4.1, mobile form factor, 150 ms RTT, 1,638.4 Kbps throughput, 4× CPU slowdown, the same Android 11 / Moto G Power user agent and viewport profile, with screen emulation disabled. One run per route per build. JavaScript transfer is the sum of script `transferSize` values.
+
+| Page | LCP before → after | TBT before → after | Speed Index before → after | JavaScript transfer before → after |
+| --- | ---: | ---: | ---: | ---: |
+| CTC calculator | 5.17 s → 5.17 s | 111 ms → 280 ms | 1.74 s → 1.58 s | 182,258 B → 182,306 B |
+| CTC vs take-home guide | 4.72 s → 4.41 s | 87 ms → 111 ms | 1.56 s → 1.57 s | 243,102 B → 173,002 B |
+| Layoff support hub | 4.58 s → 3.86 s | 101 ms → 42 ms | 1.61 s → 1.51 s | 170,931 B → 170,972 B |
+
+The guide route transfers 70,100 fewer JavaScript bytes (28.8%). Its former all-guides page chunk transferred 82,676 bytes; the route now transfers the 8,484-byte page chunk and the 4,046-byte guide-data chunk for this guide only. The calculator and layoff route transfers are effectively unchanged. Their timing differences, and the guide timing differences, should not be attributed to the code change from these single runs. The local and published measurements are not interchangeable: the local preview does not reproduce the Clerk requests observed in the published captures.

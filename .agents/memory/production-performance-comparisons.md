@@ -8,3 +8,9 @@ Do not call a local production build faster than live unless both audits load th
 **Why:** A local mobile Lighthouse run scored higher than live while making no Clerk requests; live runs made ten. Repeated candidate runs also showed wide timing variance, and a Newsreader preload started earlier without improving LCP. These results show why network equivalence and repeated measurements matter more than a single score or resource start time.
 
 **How to apply:** Before comparing scores, confirm relevant network requests and auth behavior in both traces, use identical mobile throttling, run multiple captures, and report ranges for noisy live results. Separate the public-home optimization result from any matched auth-route control.
+
+When reducing an entry bundle, inspect the full request set for every target route. A registry removed from the entry can reappear in a shared SEO or page-shell chunk, increasing total route transfer even while the entry metric improves.
+
+**Why:** A route-manifest extraction reduced the entry file but moved metadata into a shared public chunk; calculator and layoff routes then transferred more JavaScript overall.
+
+**How to apply:** Keep a chunking change only when the actual route-level script transfer improves, not just the entry or largest-chunk size.

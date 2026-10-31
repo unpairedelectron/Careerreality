@@ -24,3 +24,12 @@ test("guide metadata does not attach unsupported author or reviewer identities",
     assert.equal("reviewer" in guide, false);
   }
 });
+
+test("per-guide runtime chunks match the generated catalog", () => {
+  for (const guide of guideData.guides) {
+    const splitGuide = JSON.parse(
+      readFileSync(new URL(`../src/data/generated-pillar-guides/by-slug/${guide.slug}.json`, import.meta.url), "utf8"),
+    );
+    assert.deepEqual(splitGuide, guide, `${guide.slug} runtime chunk`);
+  }
+});

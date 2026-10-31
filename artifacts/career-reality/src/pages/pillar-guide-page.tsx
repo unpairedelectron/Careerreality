@@ -1,12 +1,13 @@
+import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 import { useLocation, Link } from "wouter";
 import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
-import guideData from "@/data/generated-pillar-guides.json";
+import type guideCatalog from "@/data/generated-pillar-guides.json";
 import routeRegistry from "@/data/route-registry";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 
 type GuideSource = { url: string; label: string; year?: string };
-type GuideRecord = (typeof guideData.guides)[number];
+type GuideRecord = (typeof guideCatalog.guides)[number];
 type Guide = Omit<GuideRecord, "sources" | "sections"> & {
   lastVerified?: string;
   sources: GuideSource[];
@@ -15,15 +16,45 @@ type Guide = Omit<GuideRecord, "sources" | "sections"> & {
   relatedLinks?: GuideSource[];
 };
 
+const guideLoaders = import.meta.glob<GuideRecord>(
+  "../data/generated-pillar-guides/by-slug/*.json",
+  { import: "default" },
+);
+const guidePageComponents = new Map<string, LazyExoticComponent<ComponentType>>();
+
+function getGuidePageComponent(slug: string) {
+  const existing = guidePageComponents.get(slug);
+  if (existing) return existing;
+
+  const loadGuide = guideLoaders[`../data/generated-pillar-guides/by-slug/${slug}.json`];
+  if (!loadGuide) return null;
+
+  const GuidePage = lazy(async () => {
+    const guide = await loadGuide();
+    return {
+      default: () => <PillarGuideContent slug={slug} guide={guide as Guide} />,
+    };
+  });
+  guidePageComponents.set(slug, GuidePage);
+  return GuidePage;
+}
+
 export function PillarGuidePage() {
   const [location] = useLocation();
-  const slug = location.replace(/\/+$/, "").split("/").at(-1);
-  const guide = guideData.guides.find((item) => item.slug === slug) as Guide | undefined;
+  const slug = location.replace(/\/+$/, "").split("/").at(-1) ?? "";
+  const GuidePage = getGuidePageComponent(slug);
+  if (!GuidePage) {
+    return <main className="p-8 text-sm text-muted-foreground" role="status">This guide is not available.</main>;
+  }
+  return <GuidePage />;
+}
+
+function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
   const route = routeRegistry.routes.find((item) => item.kind === "guide" && item.guideSlug === slug);
   const workedExample = slug ? guideWorkedExamples[slug as keyof typeof guideWorkedExamples] : undefined;
   const toolLink = slug ? guideToolLinks[slug] : undefined;
 
-  if (!guide || !route) {
+  if (!route) {
     return <main className="p-8 text-sm text-muted-foreground" role="status">This guide is not available.</main>;
   }
 

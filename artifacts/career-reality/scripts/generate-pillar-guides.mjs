@@ -8,6 +8,7 @@ const workspaceDir = path.resolve(artifactDir, "../..");
 const registryPath = path.join(artifactDir, "src/data/route-registry.json");
 const sourceMapPath = path.join(artifactDir, "src/data/pillar-guide-sources.json");
 const outputPath = path.join(artifactDir, "src/data/generated-pillar-guides.json");
+const splitOutputDir = path.join(artifactDir, "src/data/generated-pillar-guides/by-slug");
 const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
 const sourceMap = JSON.parse(fs.readFileSync(sourceMapPath, "utf8"));
 const authoredBatch = {
@@ -428,4 +429,16 @@ const result = {
   guides,
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`);
+fs.mkdirSync(splitOutputDir, { recursive: true });
+const generatedGuideFiles = new Set();
+for (const guide of guides) {
+  const guidePath = path.join(splitOutputDir, `${guide.slug}.json`);
+  generatedGuideFiles.add(path.basename(guidePath));
+  fs.writeFileSync(guidePath, `${JSON.stringify(guide)}\n`);
+}
+for (const fileName of fs.readdirSync(splitOutputDir)) {
+  if (fileName.endsWith(".json") && !generatedGuideFiles.has(fileName)) {
+    fs.unlinkSync(path.join(splitOutputDir, fileName));
+  }
+}
 process.stdout.write(`Generated ${guides.length} editorial guides without republishing archived article body text.\n`);
