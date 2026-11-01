@@ -1,16 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T05:14:53.249Z",
+  "generatedAt": "2026-11-01T06:22:11.153Z",
   "audits": [
-    {
-      "generatedAt": "2026-10-30T08:16:52.617Z",
-      "pageCount": 77,
-      "batchSize": 8,
-      "elapsedMs": 3810,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
     {
       "generatedAt": "2026-10-30T08:26:31.224Z",
       "pageCount": 77,
@@ -181,6 +172,15 @@
       "warningThresholdMs": 5000,
       "workerFailures": 0,
       "slow": true
+    },
+    {
+      "generatedAt": "2026-11-01T06:22:11.153Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1884,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
     }
   ]
 }
