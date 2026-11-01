@@ -40,6 +40,31 @@ function trackClerkRuntimeRequests(page: Page): number[] {
 }
 
 test.describe("deferred Clerk auth regression coverage", () => {
+  test("production build fails closed when its deferred Clerk chunk cannot load", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "The hashed Clerk chunk is checked against the production build.",
+    );
+
+    const failedClerkChunks: string[] = [];
+    await page.route(/\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/, async (route) => {
+      failedClerkChunks.push(route.request().url());
+      await route.abort();
+    });
+
+    await page.goto("/workspace/");
+    await expect(page.getByRole("alert")).toContainText(
+      "Sign-in could not be loaded. Check your connection and reload this page.",
+    );
+    await expect(page.getByRole("button", { name: "Reload page" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
+    await expect(page.getByText("Private area / catalog desk")).toHaveCount(0);
+    expect(failedClerkChunks).toHaveLength(1);
+    expect(new URL(failedClerkChunks[0]).pathname).toMatch(
+      /^\/assets\/clerk-runtime-test-[\w-]+\.js$/,
+    );
+  });
+
   test("keeps workspace and catalog review hidden when the Clerk runtime fails to load", async ({ page }) => {
     let failedRuntimeImports = 0;
     await page.route("**/*clerk-runtime-test*", async (route) => {
