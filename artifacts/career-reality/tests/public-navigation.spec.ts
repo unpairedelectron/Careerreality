@@ -3,7 +3,8 @@ import { publicSiteMap, sitemapSections } from "../src/data/site-map";
 
 test("public navigation survives React rendering and client-side navigation", async ({ page }) => {
   await page.goto("/");
-  // This React-only footer class is absent from the generated snapshot.
+  await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
+  // The footer is React-only and the homepage mounts it after the section is reached.
   await expect(page.locator("footer.cr-public-footer")).toBeAttached();
   const navigation = page.getByRole("navigation", { name: "Public CareerReality navigation", exact: true });
 
