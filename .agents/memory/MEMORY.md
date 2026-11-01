@@ -58,4 +58,5 @@
 - [Evidence excerpt provenance](evidence-excerpt-provenance.md) — keep source labeling separate from evidence status and preserve original line boundaries for attribution context.
 - [Vite test-runtime isolation](vite-test-runtime-isolation.md) — use a test-only Vite alias for alternate auth runtimes; conditional dynamic imports can still ship test code in production.
 - [Home-page dev performance](home-page-dev-performance.md) — keep heavy editorial data and below-fold API forms out of the initial Vite module graph.
+- [Homepage CSS and hydration](homepage-css-hydration.md) — deferred CSS reduced LCP but caused unacceptable layout shift; retain blocking CSS unless critical styles are complete.
 - [Production performance comparisons](production-performance-comparisons.md) — compare repeated mobile runs only when local and live builds load equivalent auth and third-party code.

@@ -1,20 +1,14 @@
-import { createRoot } from 'react-dom/client';
+import "./index.css";
 
-import App from './App';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { ThemeProvider } from '@/lib/theme';
+function startApp() {
+  void import("./client-entry").catch((error) => {
+    console.error("CareerReality could not finish loading.", error);
+  });
+}
 
-import './index.css';
-
-createRoot(document.getElementById('root')!, {
-  // Keeps caught errors off reportError(), which would raise the dev overlay.
-  onCaughtError: (error, errorInfo) => {
-    console.error(error, errorInfo.componentStack);
-  },
-}).render(
-  <ErrorBoundary>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </ErrorBoundary>,
-);
+if (document.querySelector("#root .snapshot-home")) {
+  // Let the complete, crawlable homepage snapshot paint before React replaces it.
+  window.setTimeout(startApp, 1200);
+} else {
+  startApp();
+}
