@@ -62,6 +62,28 @@ test.describe("deferred Clerk auth regression coverage", () => {
     }
   });
 
+  for (const route of [
+    { path: "/compass", protectedHeading: /Make the next move/ },
+    { path: "/pro", protectedHeading: "Membership is not available in this release candidate." },
+    { path: "/admin/application-readiness", protectedHeading: "Application readiness" },
+  ]) {
+    test(`keeps ${route.path} hidden when the Clerk runtime fails to load`, async ({ page }) => {
+      let failedRuntimeImports = 0;
+      await page.route("**/*clerk-runtime-test*", async (requestRoute) => {
+        failedRuntimeImports += 1;
+        await requestRoute.abort();
+      });
+
+      await page.goto(route.path);
+      await expect(page.getByRole("alert")).toContainText(
+        "Sign-in could not be loaded. Check your connection and reload this page.",
+      );
+      await expect(page.getByRole("button", { name: "Reload page" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: route.protectedHeading })).toHaveCount(0);
+      expect(failedRuntimeImports).toBe(1);
+    });
+  }
+
   for (const route of publicAuthDeferralRoutes) {
     test(`defers Clerk runtime requests on the public ${route.name}`, async ({ page }) => {
       const clerkRuntimeRequestTimes = trackClerkRuntimeRequests(page);
