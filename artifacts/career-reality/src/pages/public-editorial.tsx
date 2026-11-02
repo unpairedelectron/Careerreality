@@ -811,18 +811,18 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   about: {
     eyebrow: "About / the work",
     title: "CareerReality, made for consequential decisions.",
-    intro: "CareerReality publishes career decision tools and guides. It is operated by Doffysoft pvt. Limited. The registered legal name has not yet been independently confirmed.",
+    intro: "CareerReality publishes career decision tools and guides. It is operated by Doffysoft pvt. Limited.",
     seoTitle: "About CareerReality",
     seoDescription: "Learn what CareerReality publishes and find its contact email.",
     path: "/about",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
   },
   team: {
-    eyebrow: "Editorial attribution / status",
-    title: "Author and review details.",
-    intro: "Shiv Mishra is identified as the owner, affiliated with Doffysoft pvt. Limited. No author or reviewer role is claimed without a verified record.",
-    seoTitle: "Editorial Attribution | CareerReality",
-    seoDescription: "See the current status of author, reviewer, and date records for CareerReality editorial pages.",
+    eyebrow: "Team / affiliation",
+    title: "People behind CareerReality.",
+    intro: "Shiv Mishra — Doffysoft pvt. Limited.",
+    seoTitle: "Team and Affiliation | CareerReality",
+    seoDescription: "Find the affiliation stated for Shiv Mishra and contact CareerReality by email.",
     path: "/team",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Team", path: "/team" }],
   },
@@ -840,7 +840,7 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
     title: "Tell us what needs correcting.",
     intro: "Email hello@careerreality.in to report an error or request a correction. No response-time promise is made.",
     seoTitle: "Corrections and Updates | CareerReality",
-    seoDescription: "How to submit a correction and what the current public correction record does and does not show.",
+    seoDescription: "How to report an error and see material corrections to CareerReality content.",
     path: "/corrections",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Corrections", path: "/corrections" }],
   },
@@ -849,7 +849,7 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
     title: "Contact CareerReality Editorial.",
     intro: "Use hello@careerreality.in for general queries, corrections, privacy requests, security reports, press, or complaints. No response-time promise is made.",
     seoTitle: "Contact CareerReality",
-    seoDescription: "Send a correction, privacy request, or general message to CareerReality Editorial.",
+    seoDescription: "Contact CareerReality by email for general queries, corrections, privacy requests, security reports, press, or complaints.",
     path: "/contact",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }],
   },
@@ -874,16 +874,16 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   privacy: {
     eyebrow: "Privacy / data practices",
     title: "Privacy and data handling.",
-    intro: "This notice describes observed product data flows and their limits. Contact hello@careerreality.in for privacy requests. It does not claim that every legal or operational control has been verified.",
+    intro: "This notice explains information handled when you use CareerReality's tools, contact the team, or sign in. For privacy requests, email hello@careerreality.in.",
     seoTitle: "Privacy Information: Data Use and Deletion | CareerReality",
-    seoDescription: "Review CareerReality's observed data flows, account controls, contact options, and unverified privacy retention details.",
+    seoDescription: "Learn how CareerReality handles information from public tools, contact messages, and sign-in, and how to make privacy requests.",
     path: "/privacy-policy",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Privacy", path: "/privacy-policy" }],
   },
   terms: {
     eyebrow: "Terms / limits of use",
     title: "Limits and use of CareerReality.",
-    intro: "CareerReality's tools and guides provide general educational information. The operator is Doffysoft pvt. Limited. Governing law is India; any city-specific jurisdiction clause remains for counsel review.",
+    intro: "CareerReality is operated by Doffysoft pvt. Limited. The tools and guides provide general educational information. Governing law is India.",
     seoTitle: "Terms of Use | CareerReality",
     seoDescription: "Understand the limits of CareerReality's educational tools and what to verify independently.",
     path: "/terms",
@@ -892,9 +892,9 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   accessibility: {
     eyebrow: "Accessibility / known limits",
     title: "Accessibility information.",
-    intro: "We aim to make CareerReality usable with keyboards, screen readers, zoom, and mobile layouts. This page does not claim independently verified WCAG conformance.",
+    intro: "Accessibility checks cover automated page rules and keyboard navigation on selected public pages. These checks are not a WCAG conformance audit.",
     seoTitle: "Accessibility Statement | CareerReality",
-    seoDescription: "Read CareerReality's accessibility approach, current verification limits, and how to report a barrier by email.",
+    seoDescription: "Read about accessibility checks on CareerReality and report a barrier by email.",
     path: "/accessibility",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Accessibility", path: "/accessibility" }],
   },
@@ -917,18 +917,18 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p>The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. The checklist creates no employer score, and the salary evidence worksheet creates no private-sector benchmark.</p>
         </TrustSection>
         <TrustSection id="identity" title="Operator details">
-          <p>CareerReality is operated by Doffysoft pvt. Limited. The owner supplied this exact entity string; MCA master-data verification was not completed. The supplied address is Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
+          <p>CareerReality is operated by Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
         </TrustSection>
       </>}
-      {kind === "team" && <TrustSection id="authors" title="Attribution status">
-        <p>Shiv Mishra — affiliation: Doffysoft pvt. Limited. No editorial role, biography, or reviewer status is asserted here.</p>
+      {kind === "team" && <TrustSection id="authors" title="Affiliation">
+        <p>Shiv Mishra — Doffysoft pvt. Limited.</p>
       </TrustSection>}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
           <p>Legal, tax, payroll, and market claims require a relevant source, an access date when known, and a clear statement of scope. When a source does not support a claim, the claim is removed, qualified, or withheld.</p>
         </TrustSection>
         <TrustSection id="attribution" title="Authorship and assembly">
-          <p>Author, reviewer, original publication date, and substantive update details are published only when supported by owner-approved records. No independent review is implied without a record of an actual review. Source links identify material used; they do not establish authorship or review.</p>
+          <p>Authorship, review, publication dates, and substantive updates are identified where available. Source links identify references used; they do not by themselves mean a source author reviewed the page.</p>
         </TrustSection>
         <TrustSection id="uncertainty" title="Interpretation and uncertainty">
           <p>Editorial framing, checklists, and prompts are not reported facts. A source date appears only when stated in the preserved note. A missing result is not evidence of safety, demand, or a future outcome.</p>
@@ -936,7 +936,7 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
       </>}
       {kind === "corrections" && <>
         <TrustSection id="log" title="Available correction record">
-          <p>No verified historical correction entries were supplied for this release. That is an incomplete record, not a statement that the site has never corrected an error.</p>
+          <p>When a material correction is made, the affected claim, change, and supporting evidence are described here.</p>
         </TrustSection>
         <TrustSection id="request" title="What to include">
           <p>Email hello@careerreality.in. Identify the page and claim, explain what appears wrong, and include a supporting public source where possible. Do not send credentials or confidential documents. A public entry will identify a verified change and its evidence.</p>
@@ -946,7 +946,7 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
       {kind === "contact" && <>
         <TrustSection id="email" title="Email and operator">
           <p><a className="font-bold text-primary underline" href="mailto:hello@careerreality.in">hello@careerreality.in</a></p>
-          <p className="mt-4">Operator: Doffysoft pvt. Limited (owner-supplied string; MCA registration not verified). Address: Hinjewadi Phase 3, Pune.</p>
+          <p className="mt-4">Operator: Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune.</p>
         </TrustSection>
         <TrustSection id="contact-purpose" title="Contact by purpose">
           <ul className="list-disc space-y-2 pl-5">
@@ -964,7 +964,7 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p className="mt-4"><Link href="/salary-calculator" className="font-bold text-primary">Open the CTC calculator <ArrowUpRight size={13} className="inline" /></Link></p>
         </TrustSection>
         <TrustSection id="gratuity" title="Gratuity">
-          <p>The limited monthly-rate worksheet uses the 15/26 formula and displays the ₹20 lakh maximum stated as current in the Ministry’s Labour Codes FAQ published 30 December 2025. The March 2026 FAQ states that the revised wage definition applies from 21 November 2025. This worksheet does not cover fixed-term, deceased-employee, piece-rated, or seasonal calculations; establish eligibility or wage base; or verify whether a later notification changed the ceiling. The page is noindex while these coverage limits remain.</p>
+          <p>The limited monthly-rate worksheet uses the 15/26 formula and displays the ₹20 lakh maximum stated as current in the Ministry’s Labour Codes FAQ published 30 December 2025. The March 2026 FAQ states that the revised wage definition applies from 21 November 2025. This worksheet does not cover fixed-term, deceased-employee, piece-rated, or seasonal calculations, establish eligibility or wage base, or account for later rule changes.</p>
           <p className="mt-4"><Link href="/gratuity-estimator" className="font-bold text-primary">Open the gratuity worksheet <ArrowUpRight size={13} className="inline" /></Link></p>
         </TrustSection>
         <TrustSection id="other-tools" title="Other worksheets and checklist">
@@ -996,26 +996,25 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
       </>}
       {kind === "privacy" && <>
         <TrustSection id="calculator" title="Public calculator inputs">
-          <p>Pure calculation worksheets calculate in the browser. Their entered amounts are not added to the URL or included in the privacy-reviewed analytics dimensions. Some pages request live or account data from the application API; avoid entering confidential information unless the page expressly requires it.</p>
+          <p>Pure calculation worksheets run on your device. In the salary-calculator checks, entered amounts were not sent off the device or placed in the web address. Account and live-data features may send information to the services they need.</p>
         </TrustSection>
         <TrustSection id="contact-record" title="Contact message records">
-          <p>The public contact form has been withdrawn; new messages should be sent by email. Earlier form submissions may remain in the application database. Their current count, retention period, access controls, and deletion status have not been independently verified. The API endpoint is being retired and no new contact form submissions should be made.</p>
+          <p>The contact form is closed; use email instead. The former form stored a name, email address, topic, message, and submission time. The production records checked on 2 November 2026 contained no contact submissions. No retention period is established for any copies in backups or logs.</p>
         </TrustSection>
         <TrustSection id="layoff-alerts" title="Layoff alert subscriptions">
           <p>If you request layoff alerts, the subscription database stores your email address, an email hash, your optional city and sector preferences, confirmation status, and the timestamps and token hashes needed to manage confirmation and unsubscribe links. Resend is used to deliver confirmation and alert emails. Alerts begin only after double opt-in and include Confirmed or Reported events, never Rumours. Unsubscribing changes the record to an unsubscribed status so it is no longer eligible for alerts; the record is retained in the database, and a separate retention period has not been established.</p>
         </TrustSection>
         <TrustSection id="account" title="Account and resume features">
-          <p>Sign-in is provided through Clerk. Signed-in features can store profile fields and career-brief history in the application database; “Clear saved intelligence” clears the profile fields and current account-scoped device insights but does not clear prior brief history. Resume-upload and user-submitted job-link processing are not represented as live public services pending operational safeguards. Local storage, backups, provider retention, and broader deletion processes have not been independently verified.</p>
+          <p>Clerk provides sign-in and session authentication on sign-in, sign-up, and account-required pages. The public pages reviewed here did not load Clerk. When you sign in, your browser contacts Clerk through CareerReality's website; this involves account identity and session information. Signed-in features store profile fields and career-brief history in CareerReality's systems. “Clear saved intelligence” clears profile fields and current account-scoped device insights but does not clear prior brief history. Resume uploads and submitted job-link processing are not offered as public services.</p>
         </TrustSection>
         <TrustSection id="analytics" title="Analytics and technical requests">
-          <p>A development browser capture observed requests to Google Fonts at fonts.googleapis.com and fonts.gstatic.com on the sampled page types. Clerk loaded from a development Clerk host on the workspace route. Application code can call an optional Umami browser analytics object with event names and selected route or category labels; privacy tests exclude salary amounts and free text from reviewed events, and no analytics-provider request appeared in this capture. Production analytics configuration, cookies/identifiers, recipients, and retention have not been verified. Layoff-alert email delivery uses Resend; contact email handling outside the application is not verified.</p>
-          <p className="mt-4">The same development capture exposed the local-storage key <code>career-reality-theme</code>; it found no JavaScript-visible cookies or session-storage keys and no consent or opt-out prompt. This is not proof about production or HttpOnly cookies.</p>
+          <p>Fonts are served from CareerReality's own site. The six public pages checked did not load Google Fonts or an analytics provider. The site host sets a cookie named GAESA that expires after 30 days. CareerReality does not read this cookie, and its purpose is not identified here. Layoff-alert email is delivered by Resend after double opt-in.</p>
         </TrustSection>
         <TrustSection id="dpdp" title="India data-protection law status">
-          <p>As checked on 2 November 2026, the DPDP Act and Rules have staged commencement. Core notice, consent, rights, grievance, breach, and child-data provisions in Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled to commence 18 months after 13 November 2025 (13 May 2027). Rule 4 and Act section 6(9) / section 27(1)(d) are scheduled after one year (13 November 2026). Rules 1, 2, and 17–21 took effect on 13 November 2025. This is a date-based summary, not a claim of compliance or legal advice; counsel should confirm applicability and later notifications.</p>
+          <p>As of 2 November 2026, the DPDP Act and Rules have staged commencement. Core notice, consent, rights, grievance, breach, and child-data provisions in Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled to commence on 13 May 2027. Rule 4 and Act section 6(9) / section 27(1)(d) are scheduled for 13 November 2026. Rules 1, 2, and 17–21 took effect on 13 November 2025. This is a date-based summary, not legal advice.</p>
         </TrustSection>
         <TrustSection id="rights-requests" title="Privacy requests and retention">
-          <p>Email hello@careerreality.in to ask about access, correction, or deletion. There is no self-service privacy-request workflow or promised response time. The exact legal process, response deadlines, retention periods, backup deletion and account-data export have not been verified. Unsubscribed alert records are retained in the database; a separate retention period has not been established.</p>
+          <p>Email hello@careerreality.in to ask about access, correction, or deletion. There is no self-service request form or promised response time. No retention period is established for contact-form backups or unsubscribed alert records. Unsubscribed alert records remain in the database so they are not reactivated accidentally.</p>
         </TrustSection>
       </>}
       {kind === "terms" && <>
@@ -1026,12 +1025,15 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p>Check written offer terms, current official rules, and source dates that apply to your case. Do not treat a target bonus, employer checklist, guide, or worksheet as a promise or professional recommendation.</p>
         </TrustSection>
         <TrustSection id="legal-operator" title="Operator details">
-          <p>Operator: Doffysoft pvt. Limited (owner-supplied spelling; registered name not independently verified). Address: Hinjewadi Phase 3, Pune. Governing law: India. A city-specific court jurisdiction clause is omitted pending counsel review. Contact hello@careerreality.in. These terms do not create a professional advisory relationship.</p>
+          <p>Operator: Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Governing law: India. Contact hello@careerreality.in. These terms do not create a professional advisory relationship.</p>
         </TrustSection>
       </>}
       {kind === "accessibility" && <>
         <TrustSection id="approach" title="What we aim to support">
-          <p>Pages should expose semantic headings, keyboard-operable controls, visible focus, readable contrast, text alternatives, responsive reflow, and labels for form controls. No complete inventory of known barriers has been verified. Automated checks and component tests are not a complete WCAG 2.2 audit; no conformance level is claimed.</p>
+          <p>On 2 November 2026, axe-core 4.10.3 checked 11 public trust pages at 1440 × 900 and 390 × 844 against WCAG 2.0, 2.1, and 2.2 A/AA rules. It found no automated violations; one check per page needs manual review. Keyboard Tab navigation showed a visible focus indicator on the first link on each page. These checks do not assess every success criterion, screen-reader behavior, or native mobile use. No conformance level is claimed.</p>
+        </TrustSection>
+        <TrustSection id="known-issues" title="Known issues from these checks">
+          <p>No automated violations were found in the checks described above. Manual review and assistive-technology testing remain incomplete.</p>
         </TrustSection>
         <TrustSection id="report" title="Report an accessibility barrier">
           <p>Email <a className="font-bold text-primary underline" href="mailto:hello@careerreality.in">hello@careerreality.in</a> with the page, device/browser, assistive technology if relevant, and the barrier. Do not include sensitive personal information. No response deadline is promised.</p>
@@ -1058,7 +1060,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
     {
       "@type": "Organization",
       "@id": organizationId,
-      name: "Doffysoft pvt. Limited",
+      name: "Doffysoft pvt. Limited.",
       alternateName: "CareerReality",
       url: siteOrigin,
       email: "hello@careerreality.in",
@@ -1086,7 +1088,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
       }}
     >
       <div className="mb-6 rounded-xl border border-border bg-muted/30 p-4 text-sm">
-        <p><strong>Last reviewed:</strong> 2 November 2026. <strong>Change log:</strong> initial trust-page review; owner-supplied identity details are identified as unverified where appropriate.</p>
+        <p><strong>Information updated:</strong> 2 November 2026.</p>
       </div>
       <PublishedTrustBody kind={kind} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />

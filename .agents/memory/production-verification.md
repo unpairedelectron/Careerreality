@@ -38,3 +38,9 @@ Keep live observations separate from local remediation. A read-only release work
 **Why:** During the CareerReality remediation, the earlier baseline recorded three sitemap URLs and sampled article routes as noindex; a later captured run reported 69 URLs and sampled article routes as indexable, although no remediation deployment occurred.
 
 **How to apply:** Record both observation dates and their exact scope, preserve the failed run, and mark production verification unresolved until a deliberate post-deploy crawl matches the current build. Do not rerun live checks just to overwrite an unexplained discrepancy.
+
+When the release validator compares the live sitemap with the current route registry, a local addition of indexable pages can create an expected published-only failure until the new build is deployed. Keep intended local routes and record the exact missing live paths; do not remove routes merely to make the stale production sitemap match.
+
+**Why:** The local contract can be correct while production still serves the prior sitemap; the mismatch is evidence of deployment lag, not a reason to weaken the local route set.
+
+**How to apply:** Report local and published counts separately, name missing and unexpected URLs, and leave production state unchanged unless publishing is explicitly approved.

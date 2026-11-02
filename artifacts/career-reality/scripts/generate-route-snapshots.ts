@@ -495,39 +495,39 @@ function getTrustSnapshotContent(route: string): SnapshotContent | undefined {
 function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefined {
   const content: Record<string, SnapshotContent> = {
     "/about": {
-      lead: "CareerReality publishes practical career decision tools and editorial guides. Operator: Doffysoft pvt. Limited, an owner-supplied name not independently verified through MCA.",
+      lead: "CareerReality publishes practical career decision tools and editorial guides. Operator: Doffysoft pvt. Limited.",
       sections: [
         { heading: "Current public scope", body: "The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. No employer score or private-sector salary benchmark is published." },
-        { heading: "Operator and contact", body: "Address: Hinjewadi Phase 3, Pune. Owner attribution: Shiv Mishra, affiliated with Doffysoft pvt. Limited; no editorial title is asserted. Contact hello@careerreality.in." },
+        { heading: "Operator and contact", body: "Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in." },
       ],
     },
     "/editorial": {
       lead: "CareerReality separates source-backed claims from editorial interpretation, user-entered assumptions, and questions that remain unresolved.",
       sections: [
         { heading: "Evidence before conclusion", body: "Legal, tax, payroll, and market claims require a relevant source, an access date when known, and a clear statement of scope. If a source does not support a claim, the claim is removed, qualified, or withheld." },
-        { heading: "Authorship and review", body: "Author, reviewer, original publication date, and substantive update details are published only when supported by owner-approved records. No independent review is implied without a record of an actual review. Source links do not establish authorship or review." },
+        { heading: "Authorship and review", body: "Authorship, review, publication dates, and substantive updates are identified where available. Source links identify references used; they do not by themselves mean a source author reviewed the page." },
         { heading: "Interpretation and uncertainty", body: "Editorial framing, checklists, and prompts are not reported facts. A source date appears only when stated in the preserved note. A missing result is not evidence of safety, demand, or a future outcome." },
       ],
     },
     "/team": {
-      lead: "Shiv Mishra is listed by name with an affiliation to Doffysoft pvt. Limited. No editorial role or reviewer status is claimed.",
+      lead: "Shiv Mishra — Doffysoft pvt. Limited.",
       sections: [
-        { heading: "Attribution", body: "Shiv Mishra — affiliation: Doffysoft pvt. Limited. No title, biography, author credit, or reviewer status is asserted." },
+        { heading: "Affiliation", body: "Shiv Mishra — Doffysoft pvt. Limited." },
       ],
     },
     "/corrections": {
       lead: "Email hello@careerreality.in to report an error or request a correction. No response-time promise is made.",
       sections: [
-        { heading: "Available correction record", body: "No verified historical correction entries were supplied for this release. That is an incomplete record, not a statement that the site has never corrected an error." },
+        { heading: "Public correction entries", body: "When a material correction is made, the affected claim, change, and supporting evidence are described here." },
         { heading: "What to include", body: "Identify the page and claim, explain what appears wrong, and include a supporting public source where possible. Do not send credentials or confidential documents." },
-        { heading: "Public correction entries", body: "A correction entry should identify the page, the corrected claim, what changed, the change date, and the evidence. No correction date or reviewer is invented." },
+        { heading: "Correction details", body: "A correction entry identifies the page, the corrected claim, what changed, the change date, and supporting evidence." },
       ],
       relatedLinks: [{ href: publicPath("/contact"), label: "Send a correction request" }],
     },
     "/contact": {
       lead: "Use hello@careerreality.in for general queries, corrections, privacy requests, security reports, press, or complaints. No response-time promise is made.",
       sections: [
-        { heading: "Email", html: '<p><a href="mailto:hello@careerreality.in">hello@careerreality.in</a></p><p>Operator: Doffysoft pvt. Limited (owner-supplied string, registration unverified). Address: Hinjewadi Phase 3, Pune.</p>' },
+        { heading: "Email", html: '<p><a href="mailto:hello@careerreality.in">hello@careerreality.in</a></p><p>Operator: Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune.</p>' },
         { heading: "Contact route", body: "Email is the only published contact route. Do not include account credentials, resumes, confidential work documents, or sensitive personal information." },
       ],
     },
@@ -535,14 +535,14 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
       lead: "Each tool states what it calculates, which values it expects, and what it cannot establish. Entered values remain in the browser unless a page explicitly submits them.",
       sections: [
         { heading: "Offer, tax, and salary worksheets", body: "Offer comparison separates fixed cash from target variable pay. Tax-regime comparison estimates old and new salary-only tax for AY 2026–27 from the entered salary and deduction assumptions; compare its results with the current Income Tax Department calculator. Salary evidence comparison uses only amounts entered by the visitor and does not publish a private-sector benchmark." },
-        { heading: "Gratuity worksheet", body: "The limited monthly-rate illustration uses 15/26 of the stated wage base, exact-month pro-rata arithmetic for fixed-term expiry and deceased employees, and the greater-than-six-month rounding rule for ordinary service and disablement. The Ministry FAQ published 30 December 2025 states a ₹20 lakh maximum as then current; the worksheet has not verified a later notification. The March 2026 FAQ states that the revised wage definition applies from 21 November 2025. It does not model piece-rated or seasonal cases, decide eligibility, or establish the applicable wage base. It remains noindex because scope and current-law coverage are limited." },
+        { heading: "Gratuity worksheet", body: "The limited monthly-rate illustration uses 15/26 of the stated wage base, exact-month pro-rata arithmetic for fixed-term expiry and deceased employees, and the greater-than-six-month rounding rule for ordinary service and disablement. The Ministry FAQ published 30 December 2025 states a ₹20 lakh maximum as then current. The March 2026 FAQ states that the revised wage definition applies from 21 November 2025. It does not model piece-rated or seasonal cases, decide eligibility, or establish the applicable wage base." },
         { heading: "Cash and decision worksheets", body: "The notice and leave worksheet uses the daily-rate divisor and days entered by the visitor. The runway planner divides stated funds by stated monthly costs and predicts no re-employment date. The home-loan stress test uses standard EMI arithmetic at entered rates and term. The resign-or-stay worksheet displays visitor-entered weighted values and makes no recommendation." },
         { heading: "Employer checklist and limits", body: "The employer checklist prompts visitors to verify legal identity, official filings, employment terms, and role details. It creates no company record, rating, financial-health claim, or job-security estimate. These tools are educational worksheets, not tax, payroll, legal, investment, credit, or employment advice." },
       ],
       relatedLinks: [{ href: publicPath("/tools"), label: "Browse all tools" }],
     },
     "/sources": {
-      lead: "Official sources support the tool references shown here. The guides provide editorial framing and practical prompts, not verified current rules or market facts.",
+      lead: "Official sources support the tool references shown here. Guides provide editorial framing and practical prompts.",
       sections: [
         { heading: "Official tools and due-diligence sources", html: `<ul>
           <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: salaried-individual tax and return guidance</a>.</li>
@@ -559,28 +559,29 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
       ],
     },
     "/privacy-policy": {
-      lead: "This notice describes observed product data flows. It does not claim complete verification of production processors, retention, backups, or legal compliance. Contact hello@careerreality.in for privacy requests.",
+      lead: "This notice explains information handled when you use CareerReality's tools, contact the team, or sign in. For privacy requests, email hello@careerreality.in.",
       sections: [
-        { heading: "Decision-tool inputs", body: "Pure calculation worksheets run in the browser; amounts are not added to the URL or privacy-reviewed analytics dimensions. Some pages request live or account data from the application API." },
-        { heading: "Contact messages", body: "The public form is withdrawn and the API handler returns HTTP 410 when reached. Earlier form records may remain in the database; their count, access, retention, and deletion status have not been verified." },
+        { heading: "Decision-tool inputs", body: "Pure calculation worksheets run on your device. In salary-calculator checks, entered amounts were not sent off the device or placed in the web address. Account and live-data features may send information to the services they need." },
+        { heading: "Contact messages", body: "The contact form is closed; use email instead. The former form stored a name, email address, topic, message, and submission time. The production records checked on 2 November 2026 contained no contact submissions. No retention period is established for copies in backups or logs." },
         { heading: "Layoff alert subscriptions", body: "Layoff alert subscriptions store an email address, an email hash, optional city and sector preferences, confirmation status, and the token hashes and timestamps needed to manage confirmation and unsubscribe links. Resend delivers confirmation and alert emails. Alerts start only after double opt-in and include Confirmed or Reported events, never Rumours. Unsubscribe changes the record to an unsubscribed status so it is no longer eligible for alerts; the database record remains, and a separate retention period has not been established." },
-        { heading: "Account and resume features", body: "Clerk provides sign-in. Signed-in features can store profile fields and career-brief history in the application database. Resume upload and user-submitted job-link processing are not represented as live public services pending safeguards. Backup and retention details remain unverified." },
-        { heading: "Analytics and external requests", body: "A development browser capture of six page types on 2 November 2026 observed Google Fonts requests to fonts.googleapis.com and fonts.gstatic.com; Clerk requests to a development Clerk host occurred on the workspace page. No analytics-provider request was observed in that capture. Production provider configuration, cookies, consent/opt-out, and retention remain unverified." },
-        { heading: "Requests and staged law", body: "Email privacy requests to hello@careerreality.in; no response time or deletion-from-backups promise is made. As of 2 November 2026, DPDP Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled for 13 May 2027; Act section 6(9), section 27(1)(d), and Rule 4 are scheduled for 13 November 2026. Rules 1, 2, and 17–21 have applied since 13 November 2025. Counsel should confirm later notifications and applicability." },
+        { heading: "Account and sign-in", body: "Clerk provides sign-in and session authentication on sign-in, sign-up, and account-required pages. The public pages reviewed here did not load Clerk. When you sign in, your browser contacts Clerk through CareerReality's website; this involves account identity and session information. Signed-in features store profile fields and career-brief history in CareerReality's systems." },
+        { heading: "Fonts, cookies, and email", body: "Fonts are served from CareerReality's own site. The six public pages checked did not load Google Fonts or an analytics provider. The site host sets a cookie named GAESA that expires after 30 days. CareerReality does not read this cookie, and its purpose is not identified here. Resend delivers layoff-alert email after double opt-in." },
+        { heading: "Requests and staged law", body: "Email hello@careerreality.in to request access, correction, or deletion. No response time is promised. No retention period is established for contact-form backups or unsubscribed alert records. As of 2 November 2026, DPDP Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled for 13 May 2027; Act section 6(9), section 27(1)(d), and Rule 4 are scheduled for 13 November 2026. Rules 1, 2, and 17–21 have applied since 13 November 2025. This is a date-based summary, not legal advice." },
       ],
     },
     "/terms": {
-      lead: "CareerReality's tools and guides provide general educational information, not individualized professional advice. Operator: Doffysoft pvt. Limited, as supplied by the owner and not independently MCA-verified.",
+      lead: "CareerReality's tools and guides provide general educational information, not individualized professional advice. Operator: Doffysoft pvt. Limited.",
       sections: [
         { heading: "Tools and guides", body: "Calculations use the inputs and assumptions shown on each page. Results may not reflect your complete tax, payroll, legal, financial, or employment situation. No tool predicts hiring, job security, market pay, or a guaranteed outcome." },
         { heading: "Verify before acting", body: "Check written offer terms, current official rules, and source dates that apply to your case. Do not treat a target bonus, employer checklist, guide, or worksheet as a promise or professional recommendation." },
-        { heading: "Operator details", body: "Address: Hinjewadi Phase 3, Pune. Governing law: India. Any city-specific jurisdiction term is omitted pending counsel review. Contact hello@careerreality.in." },
+        { heading: "Operator details", body: "Address: Hinjewadi Phase 3, Pune. Governing law: India. Contact hello@careerreality.in." },
       ],
     },
     "/accessibility": {
-      lead: "We aim to support keyboard, screen-reader, zoom, and mobile use. No independently verified WCAG 2.2 conformance level is claimed.",
+      lead: "Accessibility checks cover automated page rules and keyboard navigation on selected public pages. These checks are not a WCAG conformance audit.",
       sections: [
-        { heading: "Accessibility approach", body: "Pages should use semantic headings, visible focus, readable contrast, text alternatives, responsive reflow, and labelled controls. Automated checks do not replace a manual audit." },
+        { heading: "Accessibility checks", body: "On 2 November 2026, axe-core 4.10.3 checked 11 public trust pages at 1440 × 900 and 390 × 844 against WCAG 2.0, 2.1, and 2.2 A/AA rules. It found no automated violations; one check per page needs manual review. Keyboard Tab navigation showed a visible focus indicator on the first link on each page. These checks do not assess every success criterion, screen-reader behavior, or native mobile use. No conformance level is claimed." },
+        { heading: "Known issues", body: "No automated violations were found in this sample. Manual review and assistive-technology testing remain incomplete." },
         { heading: "Report a barrier", html: '<p>Email <a href="mailto:hello@careerreality.in">hello@careerreality.in</a> with the page, device/browser, assistive technology if relevant, and the barrier. No response deadline is promised.</p>' },
       ],
     },

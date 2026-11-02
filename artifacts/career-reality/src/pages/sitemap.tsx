@@ -50,7 +50,7 @@ export default function SitemapPage() {
             <div>
               <h3 className="text-sm font-semibold">Tools</h3>
               <p className="mt-2 text-base leading-7 text-muted-foreground">
-                Tool inputs stay in the browser except the contact form. Each worksheet explains its own limits and does not generate employment forecasts or unsupported benchmarks.
+                Pure calculation worksheets run in the browser. Each worksheet explains its own limits and does not generate employment forecasts or unsupported benchmarks.
               </p>
             </div>
             <div>

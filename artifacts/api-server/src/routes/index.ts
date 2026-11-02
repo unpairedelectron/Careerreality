@@ -14,6 +14,7 @@ import jobLinksRouter from "./job-links";
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(contactRouter);
 router.use(publicAssetsRouter);
 router.use(publicDataRouter);
 router.use(layoffAlertsRouter);
@@ -22,7 +23,6 @@ router.use(catalogRouter);
 router.use(resumeIntelligenceRouter);
 router.use(careerRouter);
 router.use(jobsRouter);
-router.use(contactRouter);
 router.use(workspaceRouter);
 
 export default router;

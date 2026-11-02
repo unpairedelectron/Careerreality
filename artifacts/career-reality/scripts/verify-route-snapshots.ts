@@ -38,7 +38,11 @@ const criticalAssets = [
 ].map(({ label, tag }) => {
   const assetUrl = tag?.match(/\b(?:src|href)="([^"]+)"/i)?.[1];
   if (!assetUrl) throw new Error(`Missing ${label} reference in the built entry HTML.`);
-  const file = path.join(distRoot, "assets", path.basename(assetUrl.split("?")[0]));
+  const assetPath = new URL(assetUrl, "http://careerreality.local").pathname.replace(/^\/+/, "");
+  const file = path.resolve(distRoot, assetPath);
+  if (!file.startsWith(`${path.resolve(distRoot)}${path.sep}`)) {
+    throw new Error(`Built ${label} resolves outside the public output directory.`);
+  }
   if (!fs.existsSync(file)) throw new Error(`Missing built ${label}: ${file}`);
   return { label, gzipBytes: gzipSync(fs.readFileSync(file)).byteLength };
 });
@@ -278,16 +282,16 @@ const legacyDestinations: Record<string, string> = {
 
 const routeContentChecks: Record<string, string[]> = {
   "/salary-calculator": ["Questions worth checking", "employer PF, gratuity, and other costs that you enter from the offer", "id=\"method\"", "For Tax Year 2026–27", "estimated month by month from a user-entered start date", "incometax.gov.in/iec/foportal/help/individual/return-applicable-1", "Salaried Individuals for AY 2026–27"],
-  "/about": ["Doffysoft pvt. Limited", "Hinjewadi Phase 3, Pune", "not independently verified through MCA"],
-  "/team": ["Shiv Mishra", "affiliation: Doffysoft pvt. Limited", "No title, biography, author credit, or reviewer status is asserted"],
-  "/editorial": ["Author, reviewer, original publication date, and substantive update details are published only when supported by owner-approved records", "No independent review is implied"],
-  "/corrections": ["No verified historical correction entries were supplied"],
+  "/about": ["Doffysoft pvt. Limited", "Hinjewadi Phase 3, Pune"],
+  "/team": ["Shiv Mishra", "Doffysoft pvt. Limited"],
+  "/editorial": ["Authorship, review, publication dates, and substantive updates are identified where available"],
+  "/corrections": ["When a material correction is made"],
   "/methodology": ["estimates old and new salary-only tax for AY 2026–27", "limited monthly-rate illustration uses 15/26", "₹20 lakh maximum as then current", "piece-rated or seasonal cases"],
   "/sources": ["revised EPFO ceiling", "Guides provide editorial framing and practical prompts", "incometax.gov.in/iec/foportal/help/individual/return-applicable-1", "Tax Year 2026–27 under the 2025 Act"],
-  "/privacy-policy": ["not added to the URL", "hello@careerreality.in", "Production provider configuration", "13 May 2027"],
-  "/terms": ["Governing law: India", "city-specific jurisdiction term is omitted pending counsel review"],
+  "/privacy-policy": ["web address", "hello@careerreality.in", "GAESA", "13 May 2027"],
+  "/terms": ["Governing law: India", "Doffysoft pvt. Limited"],
   "/contact": ["Use hello@careerreality.in", "Email is the only published contact route"],
-  "/accessibility": ["No independently verified WCAG 2.2 conformance level is claimed", "Report a barrier"],
+  "/accessibility": ["axe-core 4.10.3", "no automated violations", "Report a barrier"],
   "/security": ["Report a security concern", "No response-time, bounty, or safe-harbor commitment is made", "security.txt"],
   "/escape-plan": ["5-action checklist", "The total is arithmetic", "refreshing clears them"],
   "/career-reality-index": ["Use four self-reported answers to identify career uncertainties", "No score or recommendation is produced here"],

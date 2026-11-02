@@ -99,15 +99,15 @@ Cite the specific page and its original sources where provided. Preserve source 
 ## About, standards, sources, and policies
 
 - [About CareerReality](https://careerreality.in/about/): Explore CareerReality's practical career decision tools and editorial guides, review their scope, and find a contact address.
-- [Editorial Attribution Status](https://careerreality.in/team/): Review the status of author, reviewer, publication-date, and substantive-update records for CareerReality's editorial pages.
+- [Team and Affiliation | CareerReality](https://careerreality.in/team/): Read about Shiv Mishra's affiliation with Doffysoft pvt. Limited. Contact CareerReality by email with editorial questions.
 - [Editorial Standards](https://careerreality.in/editorial/): See how CareerReality separates source-backed facts, editorial analysis, assumptions, and uncertainty when evidence is incomplete or disputed.
-- [Corrections and Updates](https://careerreality.in/corrections/): Learn how to submit a correction, what the public correction record does and does not show, and what evidence supports a published change.
+- [Corrections and Updates](https://careerreality.in/corrections/): Email CareerReality to report an error, learn what information to include, and see how material corrections are described.
 - [Tools and Calculation Methods](https://careerreality.in/methodology/): Review each tool's inputs, formulas, worked examples, dated assumptions, and limits, including what its results cannot establish.
 - [Sources and Data](https://careerreality.in/sources/): Browse official and primary materials used for CareerReality calculations and guides, with source dates and provenance limits stated where known.
-- [Privacy Information: Data Use and Deletion](https://careerreality.in/privacy-policy/): Review CareerReality's observed data flows, account controls, contact options, and unverified privacy retention details.
+- [Privacy Information: Data Use and Deletion](https://careerreality.in/privacy-policy/): Learn what information CareerReality handles through public tools, contact messages, and sign-in, and how to make a privacy request.
 - [Terms of Use and Limits](https://careerreality.in/terms/): Review the limits of CareerReality's educational tools, their assumptions, and what visitors should verify independently before relying on a result.
 - [Contact CareerReality](https://careerreality.in/contact/): Contact CareerReality by email for general queries, corrections, privacy requests, security reports, press, or complaints.
-- [Accessibility Statement | CareerReality](https://careerreality.in/accessibility/): Read CareerReality's accessibility approach, current verification limits, and how to report a barrier by email.
+- [Accessibility Statement | CareerReality](https://careerreality.in/accessibility/): Review accessibility checks on CareerReality's public pages and find an email address for reporting a barrier.
 - [Security Reporting | CareerReality](https://careerreality.in/security/): Report a security concern to CareerReality by email, review safe reporting steps, and see current disclosure limits.
 
 ## Policy and access boundaries

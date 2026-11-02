@@ -11,3 +11,6 @@ Prepared 2 November 2026. This is an issue list for qualified Indian counsel, no
 7. Decide retention and deletion for legacy contact-form records and layoff-alert records; neither is assigned a public retention period without evidence.
 8. Review terms, liability limits, complaint handling and security-reporting language. No safe-harbor, response-time or bounty commitment is made.
 9. Review accessibility statement wording against a manual WCAG 2.2 audit; current copy does not claim conformance.
+10. Identify the purpose of the production `GAESA` cookie set by the site host and locate the corresponding platform privacy documentation.
+11. Confirm Clerk account fields, provider retention, and account deletion behavior; the production sign-in capture did not submit credentials.
+12. Confirm backup and log retention for historical contact submissions. A read-only production count found zero rows in `contact_messages` on 2 November 2026; copies outside that table were not inspected.

@@ -5,7 +5,7 @@ export function createSiteOrganization(siteUrl: string, assetBasePath = "") {
   return {
     "@type": "Organization",
     "@id": `${origin}/#organization`,
-    name: "Doffysoft pvt. Limited",
+    name: "Doffysoft pvt. Limited.",
     alternateName: "CareerReality",
     url: origin,
     logo: new URL(`${base ? `/${base}` : ""}/logo.svg`, `${origin}/`).href,
