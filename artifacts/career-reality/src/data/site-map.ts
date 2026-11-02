@@ -46,6 +46,8 @@ export const siteMap: SiteMapSection[] = [
       { label: "Privacy policy", href: "/privacy-policy" },
       { label: "Terms", href: "/terms" },
       { label: "Contact", href: "/contact" },
+      { label: "Accessibility", href: "/accessibility" },
+      { label: "Security", href: "/security" },
     ],
   },
 ];

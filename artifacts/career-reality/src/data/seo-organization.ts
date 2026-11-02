@@ -5,9 +5,24 @@ export function createSiteOrganization(siteUrl: string, assetBasePath = "") {
   return {
     "@type": "Organization",
     "@id": `${origin}/#organization`,
-    name: "CareerReality",
+    name: "Doffysoft pvt. Limited",
+    alternateName: "CareerReality",
     url: origin,
     logo: new URL(`${base ? `/${base}` : ""}/logo.svg`, `${origin}/`).href,
     email: "hello@careerreality.in",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Hinjewadi Phase 3, Pune",
+      addressCountry: "IN",
+    },
+    publishingPrinciples: `${origin}/editorial`,
+    correctionsPolicy: `${origin}/corrections`,
+    privacyPolicy: `${origin}/privacy-policy`,
+    ethicsPolicy: `${origin}/editorial`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "general, corrections, privacy, security, press, and complaints",
+      email: "hello@careerreality.in",
+    },
   };
 }

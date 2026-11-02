@@ -11,6 +11,7 @@
 - [Editorial reading experience](editorial-reading-experience.md) — vary article figures and source rails through typed metadata while clearly labeling editorial synthesis.
 - [Live evidence recovery](live-evidence-recovery.md) — distinguish source failure from empty results and never show stale public signals as current.
 - [Trust center policy pages](trust-center-policy-pages.md) — make policy routes explicit and product-accurate; do not invent retention, SLA, vendor, or legal-entity claims.
+- [CareerReality trust owner inputs](careerreality-trust-owner-inputs.md) — preserve the owner-approved entity string, address, affiliation, contact scope, and legal limits.
 - [Editorial visual integrity](editorial-visual-integrity.md) — use article-specific qualitative frameworks unless a figure has an exact, scoped source-backed measurement.
 - [Production verification](production-verification.md) — verify the published build, custom domain, sitemap, and readiness route separately from the dev preview.
 - [Public-route auth deferral](public-route-auth-deferral.md) — load Clerk only for auth-required routes; avoid timed auth imports on public pages.

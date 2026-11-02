@@ -120,12 +120,28 @@ function assertSharedSchema(html: string, route: string): void {
   for (const requiredType of ["WebSite", "Organization", "BreadcrumbList"]) {
     if (!types.has(requiredType)) throw new Error(`Missing ${requiredType} structured data on ${route}`);
   }
-  if (types.has("Person")) throw new Error(`Unverified person structured data found on ${route}`);
   const nodes = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
     .flatMap((match) => {
       const schema = JSON.parse(match[1]) as Record<string, unknown>;
       return Array.isArray(schema["@graph"]) ? schema["@graph"] as Array<Record<string, unknown>> : [schema];
     });
+  const people = nodes.filter((node) => node["@type"] === "Person");
+  if (route !== "/team" && people.length) {
+    throw new Error(`Person structured data is not approved on ${route}`);
+  }
+  if (route === "/team") {
+    const person = people[0];
+    const affiliation = person?.affiliation as Record<string, unknown> | undefined;
+    const allowed = new Set(["@type", "@id", "name", "affiliation"]);
+    if (
+      people.length !== 1 ||
+      person?.name !== "Shiv Mishra" ||
+      affiliation?.["@id"] !== `${siteUrl}/#organization` ||
+      Object.keys(person ?? {}).some((key) => !allowed.has(key))
+    ) {
+      throw new Error("Team Person schema must contain only the owner-approved name and organization affiliation");
+    }
+  }
   assertArticlePublisherLogos(nodes, createSiteOrganization(siteUrl, process.env.BASE_PATH || "/").logo, route);
 }
 

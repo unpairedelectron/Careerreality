@@ -106,7 +106,9 @@ Cite the specific page and its original sources where provided. Preserve source 
 - [Sources and Data](https://careerreality.in/sources/): Browse official and primary materials used for CareerReality calculations and guides, with source dates and provenance limits stated where known.
 - [Privacy Information: Data Use and Deletion](https://careerreality.in/privacy-policy/): Learn what information CareerReality’s public tools and contact form process, where inputs go, and which deletion controls are available for your data.
 - [Terms of Use and Limits](https://careerreality.in/terms/): Review the limits of CareerReality's educational tools, their assumptions, and what visitors should verify independently before relying on a result.
-- [Contact CareerReality](https://careerreality.in/contact/): Email hello@careerreality.in or use the contact form for corrections, privacy requests, and general messages; receipts confirm storage only.
+- [Contact CareerReality](https://careerreality.in/contact/): Contact CareerReality by email for general queries, corrections, privacy requests, security reports, press, or complaints.
+- [Accessibility Statement | CareerReality](https://careerreality.in/accessibility/): Read CareerReality's accessibility approach, current verification limits, and how to report a barrier by email.
+- [Security Reporting | CareerReality](https://careerreality.in/security/): Report a security concern to CareerReality by email, review safe reporting steps, and see current disclosure limits.
 
 ## Policy and access boundaries
 

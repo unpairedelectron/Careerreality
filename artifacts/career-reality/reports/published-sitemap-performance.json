@@ -1,43 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T06:52:36.044Z",
+  "generatedAt": "2026-11-02T09:27:43.289Z",
   "audits": [
-    {
-      "generatedAt": "2026-10-30T14:49:06.168Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 3697,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
-    {
-      "generatedAt": "2026-10-31T08:51:34.542Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 11732,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": true
-    },
-    {
-      "generatedAt": "2026-10-31T10:31:51.624Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 5999,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": true
-    },
-    {
-      "generatedAt": "2026-10-31T10:43:48.311Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 6881,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": true
-    },
     {
       "generatedAt": "2026-10-31T11:19:06.280Z",
       "pageCount": 79,
@@ -178,6 +142,42 @@
       "pageCount": 79,
       "batchSize": 8,
       "elapsedMs": 1283,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-01T17:19:26.294Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1084,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-02T07:14:09.723Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1404,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-02T09:15:49.565Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1800,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-02T09:27:43.289Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 1548,
       "warningThresholdMs": 5000,
       "workerFailures": 0,
       "slow": false

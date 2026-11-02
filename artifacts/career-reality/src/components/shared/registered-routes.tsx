@@ -65,6 +65,8 @@ const routeComponents: Record<string, ComponentType<any>> = {
   privacy: () => <TrustPage kind="privacy" />,
   terms: () => <TrustPage kind="terms" />,
   contact: () => <TrustPage kind="contact" />,
+  accessibility: () => <TrustPage kind="accessibility" />,
+  security: () => <TrustPage kind="security" />,
   signIn: SignInPage,
   signUp: SignUpPage,
   articleDetail: ArticleDetailPage,

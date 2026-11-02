@@ -1,0 +1,19 @@
+{
+  "name": "CareerReality trust and standards sources",
+  "lastReviewed": "2026-11-02",
+  "sources": [
+    {"id":"google-search-essentials","title":"Google Search Essentials","url":"https://developers.google.com/search/docs/essentials","publisher":"Google Search Central","accessed":"2026-11-02","scope":"Search technical and spam policies; not a ranking guarantee."},
+    {"id":"google-helpful-content","title":"Creating helpful, reliable, people-first content","url":"https://developers.google.com/search/docs/fundamentals/creating-helpful-content","publisher":"Google Search Central","accessed":"2026-11-02","scope":"Content quality guidance; not a legal or editorial certification."},
+    {"id":"google-rater-guidelines","title":"Search Quality Rater Guidelines","url":"https://static.googleusercontent.com/media/guidelines.raterhub.com/en//searchqualityevaluatorguidelines.pdf","publisher":"Google","accessed":"2026-11-02","scope":"Evaluation guidance; raters do not directly control rankings."},
+    {"id":"schema-organization","title":"Organization","url":"https://schema.org/Organization","publisher":"Schema.org","accessed":"2026-11-02","scope":"Structured-data vocabulary; does not establish identity verification."},
+    {"id":"schema-publishing-principles","title":"publishingPrinciples","url":"https://schema.org/publishingPrinciples","publisher":"Schema.org","accessed":"2026-11-02","scope":"Property definition for editorial-principles documents."},
+    {"id":"trust-project","title":"The Trust Project Transparency Standards","url":"https://thetrustproject.org/","publisher":"The Trust Project","accessed":"2026-11-02","scope":"Transparency framework; no certification or affiliation claimed."},
+    {"id":"wcag22","title":"Web Content Accessibility Guidelines (WCAG) 2.2","url":"https://www.w3.org/TR/WCAG22/","publisher":"W3C","accessed":"2026-11-02","scope":"Accessibility standard; this site makes no conformance claim."},
+    {"id":"rfc9116","title":"RFC 9116: A File Format to Aid in Security Vulnerability Disclosure","url":"https://www.rfc-editor.org/rfc/rfc9116.html","publisher":"RFC Editor","accessed":"2026-11-02","scope":"security.txt format and conventions."},
+    {"id":"dpdp-act","title":"Digital Personal Data Protection Act, 2023","url":"https://www.meity.gov.in/static/uploads/2024/02/Digital-Personal-Data-Protection-Act-2023.pdf","publisher":"MeitY, Government of India","accessed":"2026-11-02","scope":"Statute; commencement is staged by G.S.R. 843(E)."},
+    {"id":"dpdp-commencement","title":"G.S.R. 843(E), 13 November 2025","url":"https://www.meity.gov.in/static/uploads/2025/11/c56ceae6c383460ca69577428d36828b.pdf","publisher":"MeitY, Government of India","accessed":"2026-11-02","scope":"DPDP Act phased commencement dates."},
+    {"id":"dpdp-rules","title":"Digital Personal Data Protection Rules, 2025","url":"https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf","publisher":"MeitY, Government of India","accessed":"2026-11-02","scope":"Rules and their staged commencement."},
+    {"id":"mca-master-data","title":"MCA Master Data Services","url":"https://www.mca.gov.in/content/mca/global/en/mca/master-data.html","publisher":"Ministry of Corporate Affairs, Government of India","accessed":"2026-11-02","scope":"Official lookup entry point; the entity name was not verified through the interactive service."},
+    {"id":"it-rules","title":"Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules","url":"https://www.meity.gov.in/","publisher":"MeitY, Government of India","accessed":"2026-11-02","scope":"Applicability and grievance-officer obligations require counsel review."}
+  ]
+}
