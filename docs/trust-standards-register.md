@@ -11,7 +11,7 @@ Reviewed 2 November 2026. This is an internal mapping, not a certification.
 | WCAG 2.2 | Accessibility success criteria | Accessibility statement and existing automated/component checks | No conformance claim; manual assistive-technology audit outstanding |
 | RFC 9116 | security.txt syntax, contact, policy, expiry, canonical | `public/.well-known/security.txt` | Added; verify published response after deployment |
 | DPDP Act 2023, Rules 2025, G.S.R. 843(E) | Staged commencement | Privacy page states schedule as of 2026-11-02 and separates current observed flows from future obligations | Counsel applicability review required |
-| MCA master-data services | Verify legal identity | Official lookup service was reachable as a page, but interactive search did not establish the registered entity name | Unverified; retain owner-provided string and flag for counsel |
+| MCA master-data services | Verify legal identity | Official service entry point identified; automated fetch returned 403 and interactive search did not establish the registered entity name | Unverified; retain owner-provided string and flag for counsel |
 | IT Rules | Grievance and intermediary obligations | No statutory officer named; no applicability assertion | Counsel review required |
 
 Source records and access dates are in `artifacts/career-reality/public/sources.json`.

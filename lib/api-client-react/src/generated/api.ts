@@ -36,8 +36,6 @@ import type {
   CatalogSuggestionListResponse,
   CatalogSuggestionReviewInput,
   CompensationAnalysis,
-  ContactMessageInput,
-  ContactMessageReceipt,
   CreateLayoffSignalReport503,
   GetPublicAssetParams,
   HealthStatus,
@@ -270,78 +268,6 @@ export function useGetPublicAsset<TData = Awaited<ReturnType<typeof getPublicAss
 
 
 
-
-export const getSubmitContactMessageUrl = () => {
-
-
-
-
-  return `/api/contact/messages`
-}
-
-/**
- * Stores only the submitted contact fields and server receipt time. Client IP addresses and tool inputs are not stored with the message.
- * @summary Submit a contact message
- */
-export const submitContactMessage = async (contactMessageInput: ContactMessageInput, options?: Parameters<typeof customFetch>[1]): Promise<ContactMessageReceipt> => {
-
-  return customFetch<ContactMessageReceipt>(getSubmitContactMessageUrl(),
-  {
-    ...options,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
-    body: JSON.stringify(contactMessageInput)
-  }
-);}
-
-
-
-
-
-export const getSubmitContactMessageMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitContactMessage>>, TError,{data: BodyType<ContactMessageInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
-): UseMutationOptions<Awaited<ReturnType<typeof submitContactMessage>>, TError,{data: BodyType<ContactMessageInput>}, TContext> => {
-
-const mutationKey = ['submitContactMessage'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof submitContactMessage>>, {data: BodyType<ContactMessageInput>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  submitContactMessage(data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type SubmitContactMessageMutationResult = NonNullable<Awaited<ReturnType<typeof submitContactMessage>>>
-    export type SubmitContactMessageMutationBody = BodyType<ContactMessageInput>
-    export type SubmitContactMessageMutationError = ErrorType<void>
-
-    /**
- * @summary Submit a contact message
- */
-export const useSubmitContactMessage = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitContactMessage>>, TError,{data: BodyType<ContactMessageInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
- ): UseMutationResult<
-        Awaited<ReturnType<typeof submitContactMessage>>,
-        TError,
-        {data: BodyType<ContactMessageInput>},
-        TContext
-      > => {
-      return useMutation(getSubmitContactMessageMutationOptions(options));
-    }
 
 export const getCreateLayoffAlertSubscriptionUrl = () => {
 

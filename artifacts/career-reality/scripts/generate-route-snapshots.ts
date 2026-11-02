@@ -463,7 +463,7 @@ function getTrustSnapshotContent(route: string): SnapshotContent | undefined {
       lead: "A source label is not enough. This page lists official materials opened for the CTC estimate and explains why unlinked market records remain unpublished.",
       sections: [
       { heading: "Official sources opened 9 October 2026", html: `<ul>
-          <li><a href="https://www.incometaxindia.gov.in/tax-rates" target="_blank" rel="noopener noreferrer">Income Tax Department: tax rates for AY 2026–27</a> — old- and new-regime rate schedules.</li>
+          <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: salaried-individual tax and return guidance</a> — official starting point for AY 2026–27.</li>
           <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: Salaried Individuals for AY 2026–27</a> — regime options and salary-tax context.</li>
           <li>The Department distinguishes AY 2026–27, for income earned in FY 2025–26 under the 1961 Act, from Tax Year 2026–27 under the 2025 Act, which begins for income earned from 1 April 2026.</li>
           <li><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2314111&amp;lang=2&amp;reg=48" target="_blank" rel="noopener noreferrer">Ministry of Labour and Employment press release</a> — revised ₹25,000 monthly EPFO coverage/contribution ceiling, effective 17 September 2026.</li>
@@ -495,10 +495,10 @@ function getTrustSnapshotContent(route: string): SnapshotContent | undefined {
 function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefined {
   const content: Record<string, SnapshotContent> = {
     "/about": {
-      lead: "CareerReality publishes practical tools and editorial guides for career decisions in India. Contact hello@careerreality.in. No legal entity name is published.",
+      lead: "CareerReality publishes practical career decision tools and editorial guides. Operator: Doffysoft pvt. Limited, an owner-supplied name not independently verified through MCA.",
       sections: [
-        { heading: "Current public scope", body: "The public site includes calculation worksheets, an employer due-diligence checklist, and 18 editorial guides assembled from 44 preserved article drafts. The original drafts remain archived as drafts. No employer score or private-sector salary benchmark is published." },
-        { heading: "People and contact", body: "No owner-approved individual author or reviewer record is available for publication. No legal entity name is published. Contact hello@careerreality.in." },
+        { heading: "Current public scope", body: "The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. No employer score or private-sector salary benchmark is published." },
+        { heading: "Operator and contact", body: "Address: Hinjewadi Phase 3, Pune. Owner attribution: Shiv Mishra, affiliated with Doffysoft pvt. Limited; no editorial title is asserted. Contact hello@careerreality.in." },
       ],
     },
     "/editorial": {
@@ -510,27 +510,25 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
       ],
     },
     "/team": {
-      lead: "Individual author and reviewer details are not published because the available records do not verify those attributions.",
+      lead: "Shiv Mishra is listed by name with an affiliation to Doffysoft pvt. Limited. No editorial role or reviewer status is claimed.",
       sections: [
-        { heading: "Attribution status", body: "Individual author and reviewer names, roles, and biographies are not published because the available records do not verify those details." },
+        { heading: "Attribution", body: "Shiv Mishra — affiliation: Doffysoft pvt. Limited. No title, biography, author credit, or reviewer status is asserted." },
       ],
     },
     "/corrections": {
-      lead: "Email hello@careerreality.in or use the contact form to report an error or request a correction. A receipt confirms storage, not review or a response deadline.",
+      lead: "Email hello@careerreality.in to report an error or request a correction. No response-time promise is made.",
       sections: [
         { heading: "Available correction record", body: "No verified historical correction entries were supplied for this release. That is an incomplete record, not a statement that the site has never corrected an error." },
-        { heading: "What to include", body: "Identify the page and claim, explain what appears wrong, and include a supporting source or document where possible. Do not submit credentials, confidential documents, or salary calculations." },
+        { heading: "What to include", body: "Identify the page and claim, explain what appears wrong, and include a supporting public source where possible. Do not send credentials or confidential documents." },
         { heading: "Public correction entries", body: "A correction entry should identify the page, the corrected claim, what changed, the change date, and the evidence. No correction date or reviewer is invented." },
       ],
       relatedLinks: [{ href: publicPath("/contact"), label: "Send a correction request" }],
     },
     "/contact": {
-      lead: "Email hello@careerreality.in or use the form for corrections, privacy requests, or general messages.",
+      lead: "Use hello@careerreality.in for general queries, corrections, privacy requests, security reports, press, or complaints. No response-time promise is made.",
       sections: [
-        { heading: "Email", html: '<p><a href="mailto:hello@careerreality.in">hello@careerreality.in</a></p>' },
-        { heading: "What the form stores", body: "A successful submission stores the name, email address, selected topic, message, and server receipt time. The contact record does not include a raw client IP address. Tool calculations and values are not part of this form." },
-        { heading: "What the receipt means", body: "The receipt confirms that the message was recorded. It does not promise a response time or establish that a request has been reviewed." },
-        { heading: "Please do not send", body: "Do not include account credentials, resumes, confidential work documents, or sensitive personal information." },
+        { heading: "Email", html: '<p><a href="mailto:hello@careerreality.in">hello@careerreality.in</a></p><p>Operator: Doffysoft pvt. Limited (owner-supplied string, registration unverified). Address: Hinjewadi Phase 3, Pune.</p>' },
+        { heading: "Contact route", body: "Email is the only published contact route. Do not include account credentials, resumes, confidential work documents, or sensitive personal information." },
       ],
     },
     "/methodology": {
@@ -547,36 +545,51 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
       lead: "Official sources support the tool references shown here. The guides provide editorial framing and practical prompts, not verified current rules or market facts.",
       sections: [
         { heading: "Official tools and due-diligence sources", html: `<ul>
-          <li><a href="https://www.incometaxindia.gov.in/tax-rates" target="_blank" rel="noopener noreferrer">Income Tax Department: tax rates for AY 2026–27</a>.</li>
+          <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: salaried-individual tax and return guidance</a>.</li>
           <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: Salaried Individuals for AY 2026–27</a>.</li>
           <li>The Department distinguishes AY 2026–27 for income earned in FY 2025–26 from Tax Year 2026–27 under the 2025 Act, which begins for income earned from 1 April 2026.</li>
           <li><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2314111&amp;lang=2&amp;reg=48" target="_blank" rel="noopener noreferrer">Ministry of Labour and Employment press release</a> — revised EPFO ceiling and contribution split.</li>
           <li><a href="https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation wage-ceiling FAQ</a>.</li>
           <li><a href="https://www.labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf" target="_blank" rel="noopener noreferrer">Ministry of Labour and Employment: Additional FAQs on Labour Codes, 16 March 2026</a>.</li>
           <li><a href="https://www.indiacode.nic.in/indiacode/bitstream/123456789/16823/1/aA2020-36.pdf" target="_blank" rel="noopener noreferrer">India Code: Code on Social Security, 2020</a>.</li>
-          <li><a href="https://www.mca.gov.in/content/mca/global/en/mca/master-data/MDS/company-master-info.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: company master data</a>.</li>
+          <li><a href="https://www.mca.gov.in/content/mca/global/en/mca/master-data.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: master-data services</a>.</li>
           <li><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements" target="_blank" rel="noopener noreferrer">National Stock Exchange: corporate filings and announcements</a>.</li>
-          <li><a href="https://www.epfindia.gov.in/site_en/index.php" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation</a>.</li>
-        </ul><p>The CTC calculator's official tax and EPFO references were checked 9 October 2026. The links are starting points; they do not establish that a source applies to a particular employment relationship.</p>` },
+        </ul><p>The CTC calculator's official tax and EPFO references were checked 9 October 2026. The links are starting points; they do not establish that a source applies to a particular employment relationship.</p><p><a href="${escapeHtml(publicPath("/sources.json"))}">Download the machine-readable trust sources register</a>.</p>` },
         { heading: "Guide limits", body: "Guides provide editorial framing and practical prompts. They do not establish current legal, tax, compensation, or job-market facts; verify those claims against an official source for the specific rule." },
       ],
     },
     "/privacy-policy": {
-      lead: "This notice describes public tools and the contact form; it is not a complete privacy policy. CareerReality does not publish a legal entity name. Contact hello@careerreality.in with privacy questions.",
+      lead: "This notice describes observed product data flows. It does not claim complete verification of production processors, retention, backups, or legal compliance. Contact hello@careerreality.in for privacy requests.",
       sections: [
-        { heading: "Decision-tool inputs", body: "Public decision worksheets calculate in the browser. Their inputs are not sent to the API, added to the URL, or included in analytics events." },
-        { heading: "Contact messages", body: "A contact submission stores the name, email address, topic, message, and server receipt time. The contact record does not store a raw client IP address. Messages are not used as analytics events." },
+        { heading: "Decision-tool inputs", body: "Pure calculation worksheets run in the browser; amounts are not added to the URL or privacy-reviewed analytics dimensions. Some pages request live or account data from the application API." },
+        { heading: "Contact messages", body: "The public form is withdrawn and the API handler returns HTTP 410 when reached. Earlier form records may remain in the database; their count, access, retention, and deletion status have not been verified." },
         { heading: "Layoff alert subscriptions", body: "Layoff alert subscriptions store an email address, an email hash, optional city and sector preferences, confirmation status, and the token hashes and timestamps needed to manage confirmation and unsubscribe links. Resend delivers confirmation and alert emails. Alerts start only after double opt-in and include Confirmed or Reported events, never Rumours. Unsubscribe changes the record to an unsubscribed status so it is no longer eligible for alerts; the database record remains, and a separate retention period has not been established." },
-        { heading: "Account and resume features", body: "The application also includes sign-in, saved-workspace, profile, and resume-processing features. Their retention, deletion, vendors, backups, and data-request processes have not been fully verified for this release; this page makes no retention promises for them." },
-        { heading: "Requests", body: "Use the contact form to make a privacy request. A receipt confirms storage only and does not promise a response time." },
+        { heading: "Account and resume features", body: "Clerk provides sign-in. Signed-in features can store profile fields and career-brief history in the application database. Resume upload and user-submitted job-link processing are not represented as live public services pending safeguards. Backup and retention details remain unverified." },
+        { heading: "Analytics and external requests", body: "A development browser capture of six page types on 2 November 2026 observed Google Fonts requests to fonts.googleapis.com and fonts.gstatic.com; Clerk requests to a development Clerk host occurred on the workspace page. No analytics-provider request was observed in that capture. Production provider configuration, cookies, consent/opt-out, and retention remain unverified." },
+        { heading: "Requests and staged law", body: "Email privacy requests to hello@careerreality.in; no response time or deletion-from-backups promise is made. As of 2 November 2026, DPDP Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled for 13 May 2027; Act section 6(9), section 27(1)(d), and Rule 4 are scheduled for 13 November 2026. Rules 1, 2, and 17–21 have applied since 13 November 2025. Counsel should confirm later notifications and applicability." },
       ],
     },
     "/terms": {
-      lead: "CareerReality's tools and guides provide general educational information, not individualized professional advice. No legal entity name is published.",
+      lead: "CareerReality's tools and guides provide general educational information, not individualized professional advice. Operator: Doffysoft pvt. Limited, as supplied by the owner and not independently MCA-verified.",
       sections: [
         { heading: "Tools and guides", body: "Calculations use the inputs and assumptions shown on each page. Results may not reflect your complete tax, payroll, legal, financial, or employment situation. No tool predicts hiring, job security, market pay, or a guaranteed outcome." },
         { heading: "Verify before acting", body: "Check written offer terms, current official rules, and source dates that apply to your case. Do not treat a target bonus, employer checklist, guide, or worksheet as a promise or professional recommendation." },
-        { heading: "Operator details", body: "CareerReality does not publish a legal entity name. This page describes product limits and is not a complete legal agreement. Contact hello@careerreality.in with questions." },
+        { heading: "Operator details", body: "Address: Hinjewadi Phase 3, Pune. Governing law: India. Any city-specific jurisdiction term is omitted pending counsel review. Contact hello@careerreality.in." },
+      ],
+    },
+    "/accessibility": {
+      lead: "We aim to support keyboard, screen-reader, zoom, and mobile use. No independently verified WCAG 2.2 conformance level is claimed.",
+      sections: [
+        { heading: "Accessibility approach", body: "Pages should use semantic headings, visible focus, readable contrast, text alternatives, responsive reflow, and labelled controls. Automated checks do not replace a manual audit." },
+        { heading: "Report a barrier", html: '<p>Email <a href="mailto:hello@careerreality.in">hello@careerreality.in</a> with the page, device/browser, assistive technology if relevant, and the barrier. No response deadline is promised.</p>' },
+      ],
+    },
+    "/security": {
+      lead: "Report a security concern to hello@careerreality.in. Do not include credentials, personal data, or destructive exploit details.",
+      sections: [
+        { heading: "Responsible reporting", body: "Include the affected URL, impact, and safe reproduction steps. Do not access or alter another person's data, disrupt service, or use social engineering. Stop once the issue is demonstrated." },
+        { heading: "Disclosure limits", body: "No response-time, bounty, or safe-harbor commitment is made. Coordinate before public disclosure." },
+        { heading: "Machine-readable contact", html: '<p><a href="/.well-known/security.txt">View security.txt</a></p>' },
       ],
     },
   };
@@ -791,7 +804,7 @@ function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotConte
         { id: "method", heading: "How the estimate works", body: "For Tax Year 2026–27, the model estimates ordinary salary income for a resident individual under age 60 in the new regime. It applies the standard deduction, rebate and marginal relief, surcharge rules, and 4% cess. Professional tax reduces cash but is entered from payroll or a verified state schedule. PF can be entered manually, or estimated month by month from a user-entered start date. The statutory ceiling is ₹15,000 through 16 September 2026 and ₹25,000 from 17 September; September is split by the official 16/14-day periods. Calculated employer shares use 8.33% EPS and the balance to EPF, subject to eligibility. Employer contributions count toward CTC only when marked included. Gratuity and other costs are not inferred." },
         { heading: "Limits to the estimate", body: "This is not a payslip, tax filing, or approved payroll guidance. It excludes special-rate income, exemptions not entered, other income, employer-specific treatment, and exact payroll rules. The employment start date affects the PF estimate only, not income tax or other annual salary amounts. Verify membership and contribution treatment with qualified payroll advice." },
         { heading: "Official references", html: `<ul>
-          <li><a href="https://www.incometaxindia.gov.in/tax-rates" target="_blank" rel="noopener noreferrer">Income Tax Department: tax rates for AY 2026–27</a></li>
+          <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: salaried-individual tax and return guidance</a></li>
           <li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: Salaried Individuals for AY 2026–27</a></li>
           <li><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2314111&amp;lang=2&amp;reg=48" target="_blank" rel="noopener noreferrer">Ministry of Labour and Employment: revised ₹25,000 monthly EPFO ceiling and contribution split</a> — effective 17 September 2026</li>
           <li><a href="https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation: wage-ceiling FAQ</a> — questions 7 and 9 show September contribution examples and the transition-period calculation.</li>
@@ -872,7 +885,7 @@ function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotConte
   if (routePolicy?.component === "toolSuite" || routePolicy?.component === "companyDueDiligence") {
     const toolId = routePolicy.toolId;
     const sourceLinks = toolId === "employer-due-diligence"
-      ? `<li><a href="https://www.mca.gov.in/content/mca/global/en/mca/master-data/MDS/company-master-info.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: company master data</a></li><li><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements" target="_blank" rel="noopener noreferrer">National Stock Exchange: corporate filings and announcements</a></li><li><a href="https://www.epfindia.gov.in/site_en/index.php" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation</a></li>`
+      ? `<li><a href="https://www.mca.gov.in/content/mca/global/en/mca/master-data.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: master-data services</a></li><li><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements" target="_blank" rel="noopener noreferrer">National Stock Exchange: corporate filings and announcements</a></li>`
       : toolId === "tax-regime-comparison"
         ? `<li><a href="https://www.incometaxindia.gov.in/w/tax-rates%E2%80%8B" target="_blank" rel="noopener noreferrer">Income Tax Department: tax rates for AY 2026–27</a></li><li><a href="https://www.incometaxindia.gov.in/w/deductions-allowable-to-tax-payer" target="_blank" rel="noopener noreferrer">Income Tax Department: AY 2026–27 deductions, including salary standard deduction</a></li><li><a href="https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1" target="_blank" rel="noopener noreferrer">Income Tax Department: salaried individuals and deductions</a></li><li><a href="https://www.incometaxindia.gov.in/income-tax-calculator" target="_blank" rel="noopener noreferrer">Income Tax Department: official tax calculator</a></li>`
       : toolId === "gratuity-estimator"

@@ -1,6 +1,6 @@
 # Trust-page data-flow inventory
 
-Updated 2 November 2026. This documents source-code observations. A browser request capture against the changed development build and production configuration remains a release gate; dev behavior cannot prove production cookies, analytics, retention, or provider settings.
+Updated 2 November 2026. A Playwright request capture ran against the changed development build for six page types: about, guide, pure calculator, layoff planner, contact, and workspace. All returned HTTP 200. The browser exposed no JS-visible cookies or session-storage keys; it stored `career-reality-theme` in local storage. Google Fonts requests to `fonts.googleapis.com` and `fonts.gstatic.com` occurred on the sampled routes. Clerk's development host was requested on the workspace route. No analytics-provider request, consent prompt, or opt-out control was observed. This does not establish production configuration or HttpOnly-cookie behavior.
 
 | Page/feature type | Input and observed handling | External or persistent boundary | Unverified |
 |---|---|---|---|
@@ -11,6 +11,6 @@ Updated 2 November 2026. This documents source-code observations. A browser requ
 | Account/workspace | Clerk sign-in; profile and career-brief records are account-scoped in application code | Clerk and application API/database | Live Clerk provider settings, cookies, data region, backups and deletion semantics |
 | Resume and submitted job links | Not represented as live public functionality pending operational safeguards | Routes/code are guarded and require separate production approval | Confirm production behavior with safe no-content checks before re-enabling |
 | Analytics | Optional `window.umami` helper emits event names and selected labels; privacy tests reject sensitive amount/free-text dimensions | External analytics only if a provider script is configured | Production script, cookies/identifiers, recipients, consent/opt-out, retention |
-| Static editorial and trust pages | Page requests load site assets and any shared application bundles | First-party site origin; no form submission on page load | Live third-party requests and browser storage must be captured on each page family |
+| Static editorial and trust pages | Page requests load site assets and any shared application bundles | First-party site origin plus Google Fonts in the dev capture; no form submission on page load | Production third-party requests and browser storage remain unverified |
 
-The Playwright network-capture test records requested origins, response status, cookie names, local/session storage keys, and route results without submitting personal data. Review its run output before treating it as evidence. Do not treat local development capture as proof of live deployment behavior.
+The Playwright network-capture test records requested origins, response status, cookie names, local/session storage keys, and route results without submitting personal data. A local POST probe to the contact endpoint was blocked by development auth middleware (403) before reaching the route handler; the handler source returns 410. Verify production behavior only after an authorized release; do not submit test messages containing real personal data.

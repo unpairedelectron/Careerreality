@@ -9,41 +9,6 @@ export interface HealthStatus {
   status: string;
 }
 
-export type ContactMessageInputTopic = typeof ContactMessageInputTopic[keyof typeof ContactMessageInputTopic];
-
-
-export const ContactMessageInputTopic = {
-  general: 'general',
-  correction: 'correction',
-  privacy: 'privacy',
-  account: 'account',
-  other: 'other',
-} as const;
-
-export interface ContactMessageInput {
-  /**
-     * @minLength 1
-     * @maxLength 100
-     */
-  name: string;
-  /**
-     * @maxLength 254
-     * @pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$
-     */
-  email: string;
-  topic: ContactMessageInputTopic;
-  /**
-     * @minLength 20
-     * @maxLength 5000
-     */
-  message: string;
-}
-
-export interface ContactMessageReceipt {
-  message: string;
-  receivedAt: string;
-}
-
 export type LayoffAlertSubscriptionInputSector = typeof LayoffAlertSubscriptionInputSector[keyof typeof LayoffAlertSubscriptionInputSector];
 
 

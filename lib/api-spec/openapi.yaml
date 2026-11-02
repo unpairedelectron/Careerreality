@@ -60,29 +60,6 @@ paths:
           description: Asset not found
         "503":
           description: Public asset storage is unavailable
-  /contact/messages:
-    post:
-      operationId: submitContactMessage
-      tags: [contact]
-      summary: Submit a contact message
-      description: Stores only the submitted contact fields and server receipt time. Client IP addresses and tool inputs are not stored with the message.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ContactMessageInput"
-      responses:
-        "201":
-          description: Message received
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ContactMessageReceipt"
-        "400":
-          description: Invalid contact message
-        "503":
-          description: Contact message storage is unavailable
   /public/layoff-alerts/subscriptions:
     post:
       operationId: createLayoffAlertSubscription
@@ -1088,26 +1065,6 @@ components:
           type: string
       required:
         - status
-    ContactMessageInput:
-      type: object
-      additionalProperties: false
-      properties:
-        name: { type: string, minLength: 1, maxLength: 100 }
-        email:
-          type: string
-          maxLength: 254
-          pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
-        topic:
-          type: string
-          enum: [general, correction, privacy, account, other]
-        message: { type: string, minLength: 20, maxLength: 5000 }
-      required: [name, email, topic, message]
-    ContactMessageReceipt:
-      type: object
-      properties:
-        message: { type: string }
-        receivedAt: { type: string, format: date-time }
-      required: [message, receivedAt]
     LayoffAlertSubscriptionInput:
       type: object
       additionalProperties: false

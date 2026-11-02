@@ -32,34 +32,6 @@ export const GetPublicAssetResponse = zod.unknown()
 
 
 /**
- * Stores only the submitted contact fields and server receipt time. Client IP addresses and tool inputs are not stored with the message.
- * @summary Submit a contact message
- */
-export const submitContactMessageBodyNameMax = 100;
-
-export const submitContactMessageBodyEmailMax = 254;
-
-
-export const submitContactMessageBodyEmailRegExp = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
-export const submitContactMessageBodyMessageMin = 20;
-export const submitContactMessageBodyMessageMax = 5000;
-
-
-
-export const SubmitContactMessageBody = zod.object({
-  "name": zod.string().min(1).max(submitContactMessageBodyNameMax),
-  "email": zod.string().max(submitContactMessageBodyEmailMax).regex(submitContactMessageBodyEmailRegExp),
-  "topic": zod.enum(['general', 'correction', 'privacy', 'account', 'other']),
-  "message": zod.string().min(submitContactMessageBodyMessageMin).max(submitContactMessageBodyMessageMax)
-})
-
-export const SubmitContactMessageResponse = zod.object({
-  "message": zod.string(),
-  "receivedAt": zod.coerce.date()
-})
-
-
-/**
  * Stores an email address for alerts only after the recipient confirms the request.
  * @summary Request double opt-in for layoff alerts
  */

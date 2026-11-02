@@ -11,7 +11,6 @@ import routeRegistry from "@/data/route-registry";
 import { getLegacyArticleReplacement } from "@/data/legacy-routes";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
-import { ContactMessageForm } from "@/pages/contact-message-form";
 
 export function TopicClustersPage() {
   const [selected, setSelected] = useState("all");
@@ -877,7 +876,7 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
     title: "Privacy and data handling.",
     intro: "This notice describes observed product data flows and their limits. Contact hello@careerreality.in for privacy requests. It does not claim that every legal or operational control has been verified.",
     seoTitle: "Privacy Information: Data Use and Deletion | CareerReality",
-    seoDescription: "Review observed data flows, account controls, contact options, and unverified retention details.",
+    seoDescription: "Review CareerReality's observed data flows, account controls, contact options, and unverified privacy retention details.",
     path: "/privacy-policy",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Privacy", path: "/privacy-policy" }],
   },
@@ -984,9 +983,8 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
             <li><a className="font-bold text-primary underline" href="https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation wage-ceiling FAQ</a>.</li>
             <li><a className="font-bold text-primary underline" href="https://www.labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf" target="_blank" rel="noopener noreferrer">Ministry of Labour and Employment: Additional FAQs on Labour Codes (16 March 2026)</a>.</li>
             <li><a className="font-bold text-primary underline" href="https://www.indiacode.nic.in/indiacode/bitstream/123456789/16823/1/aA2020-36.pdf" target="_blank" rel="noopener noreferrer">India Code: Code on Social Security, 2020</a>.</li>
-            <li><a className="font-bold text-primary underline" href="https://www.mca.gov.in/content/mca/global/en/mca/master-data/MDS/company-master-info.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: company master data</a>.</li>
+            <li><a className="font-bold text-primary underline" href="https://www.mca.gov.in/content/mca/global/en/mca/master-data.html" target="_blank" rel="noopener noreferrer">Ministry of Corporate Affairs: master-data services</a>.</li>
             <li><a className="font-bold text-primary underline" href="https://www.nseindia.com/companies-listing/corporate-filings-announcements" target="_blank" rel="noopener noreferrer">National Stock Exchange: corporate filings and announcements</a>.</li>
-            <li><a className="font-bold text-primary underline" href="https://www.epfindia.gov.in/site_en/index.php" target="_blank" rel="noopener noreferrer">Employees' Provident Fund Organisation</a>.</li>
           </ul>
           <p className="mt-4">The CTC calculator's official tax and EPFO references were checked 9 October 2026. Links are starting points and do not establish that a source applies to an individual employment relationship.</p>
           <p className="mt-4"><a className="font-bold text-primary underline" href="/sources.json">Download the machine-readable trust sources register</a>.</p>
@@ -1010,10 +1008,14 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p>Sign-in is provided through Clerk. Signed-in features can store profile fields and career-brief history in the application database; “Clear saved intelligence” clears the profile fields and current account-scoped device insights but does not clear prior brief history. Resume-upload and user-submitted job-link processing are not represented as live public services pending operational safeguards. Local storage, backups, provider retention, and broader deletion processes have not been independently verified.</p>
         </TrustSection>
         <TrustSection id="analytics" title="Analytics and technical requests">
-          <p>Application code can call an optional Umami browser analytics object with event names and selected route or category labels; privacy tests exclude salary amounts and free-text inputs from reviewed events. Whether an analytics provider is enabled in production, and its cookies, identifiers, retention, and recipients, has not been verified. Clerk and the application API receive requests when their features are used. Layoff-alert email delivery uses Resend; contact email handling outside the application is not verified.</p>
+          <p>A development browser capture observed requests to Google Fonts at fonts.googleapis.com and fonts.gstatic.com on the sampled page types. Clerk loaded from a development Clerk host on the workspace route. Application code can call an optional Umami browser analytics object with event names and selected route or category labels; privacy tests exclude salary amounts and free text from reviewed events, and no analytics-provider request appeared in this capture. Production analytics configuration, cookies/identifiers, recipients, and retention have not been verified. Layoff-alert email delivery uses Resend; contact email handling outside the application is not verified.</p>
+          <p className="mt-4">The same development capture exposed the local-storage key <code>career-reality-theme</code>; it found no JavaScript-visible cookies or session-storage keys and no consent or opt-out prompt. This is not proof about production or HttpOnly cookies.</p>
         </TrustSection>
         <TrustSection id="dpdp" title="India data-protection law status">
-          <p>As checked on 2 November 2026, the DPDP Act and Rules have staged commencement. Core notice, consent, rights, grievance, breach, and child-data provisions in Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled to commence 18 months after 13 November 2025 (13 May 2027). Rule 4 and Act section 6(9) / section 27(1)(d) are scheduled after one year (13 November 2026). This is a date-based summary, not a claim of compliance or legal advice; counsel should confirm applicability and later notifications.</p>
+          <p>As checked on 2 November 2026, the DPDP Act and Rules have staged commencement. Core notice, consent, rights, grievance, breach, and child-data provisions in Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled to commence 18 months after 13 November 2025 (13 May 2027). Rule 4 and Act section 6(9) / section 27(1)(d) are scheduled after one year (13 November 2026). Rules 1, 2, and 17–21 took effect on 13 November 2025. This is a date-based summary, not a claim of compliance or legal advice; counsel should confirm applicability and later notifications.</p>
+        </TrustSection>
+        <TrustSection id="rights-requests" title="Privacy requests and retention">
+          <p>Email hello@careerreality.in to ask about access, correction, or deletion. There is no self-service privacy-request workflow or promised response time. The exact legal process, response deadlines, retention periods, backup deletion and account-data export have not been verified. Unsubscribed alert records are retained in the database; a separate retention period has not been established.</p>
         </TrustSection>
       </>}
       {kind === "terms" && <>
@@ -1029,7 +1031,7 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
       </>}
       {kind === "accessibility" && <>
         <TrustSection id="approach" title="What we aim to support">
-          <p>Pages should expose semantic headings, keyboard-operable controls, visible focus, readable contrast, text alternatives, responsive reflow, and labels for form controls. Automated checks and component tests are not a complete WCAG 2.2 audit; no conformance level is claimed.</p>
+          <p>Pages should expose semantic headings, keyboard-operable controls, visible focus, readable contrast, text alternatives, responsive reflow, and labels for form controls. No complete inventory of known barriers has been verified. Automated checks and component tests are not a complete WCAG 2.2 audit; no conformance level is claimed.</p>
         </TrustSection>
         <TrustSection id="report" title="Report an accessibility barrier">
           <p>Email <a className="font-bold text-primary underline" href="mailto:hello@careerreality.in">hello@careerreality.in</a> with the page, device/browser, assistive technology if relevant, and the barrier. Do not include sensitive personal information. No response deadline is promised.</p>
