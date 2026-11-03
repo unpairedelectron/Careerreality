@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Bookmark, Check, ArrowUpRight } from "lucide-react";
 import {
@@ -11,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { useAppAuth } from "@/lib/app-auth-context";
+import { captureAuthUserMutation, isAuthUserMutationCurrent } from "@/lib/auth-user-cache";
 
 export function SaveDecisionButton({
   slug,
@@ -41,12 +42,19 @@ export function SaveDecisionButton({
   className?: string;
   confidenceBand?: string;
 }) {
-  const { isSignedIn } = useAppAuth();
+  const { isSignedIn, userId } = useAppAuth();
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
   const save = useCreateSavedDecision();
+  const currentUserId = useRef(userId);
+  currentUserId.current = userId;
   const [saved, setSaved] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setSaved(false);
+    setErrorMessage("");
+  }, [userId]);
 
   const handleSave = () => {
     if (!isSignedIn) {
@@ -54,14 +62,17 @@ export function SaveDecisionButton({
       return;
     }
     setErrorMessage("");
+    const authSnapshot = captureAuthUserMutation(userId);
     save.mutate({ data: { kind, title, summary, signal } }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         setSaved(true);
         trackEvent(eventName, { content_kind: kind, route: window.location.pathname });
         queryClient.invalidateQueries({ queryKey: getListSavedDecisionsQueryKey() });
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
       onError: (error) => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         const status = typeof error === "object" && error !== null && "status" in error
           ? (error as { status?: number }).status
           : undefined;
@@ -108,12 +119,19 @@ export function WatchlistButton({
   nextCatalogSlug?: string;
   className?: string;
 }) {
-  const { isSignedIn } = useAppAuth();
+  const { isSignedIn, userId } = useAppAuth();
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
   const add = useCreateWatchlistItem();
+  const currentUserId = useRef(userId);
+  currentUserId.current = userId;
   const [saved, setSaved] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setSaved(false);
+    setErrorMessage("");
+  }, [userId]);
 
   const handleWatch = () => {
     if (!isSignedIn) {
@@ -121,8 +139,10 @@ export function WatchlistButton({
       return;
     }
     setErrorMessage("");
+    const authSnapshot = captureAuthUserMutation(userId);
     add.mutate({ data: { company, signal, note } }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         setSaved(true);
         trackEvent("company_added_to_watchlist", {
           location: analyticsLocation,
@@ -132,6 +152,7 @@ export function WatchlistButton({
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
       onError: (error) => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         const status = typeof error === "object" && error !== null && "status" in error
           ? (error as { status?: number }).status
           : undefined;

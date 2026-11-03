@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Redirect } from 'wouter';
 import { 
   BarChart3, Building2, TrendingDown, BrainCircuit, 
@@ -27,6 +27,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import { trackEvent } from '@/lib/analytics';
 import { useAppAuth } from '@/lib/app-auth-context';
+import { captureAuthUserMutation, isAuthUserMutationCurrent } from '@/lib/auth-user-cache';
 import { useSeo } from '@/lib/seo';
 import {
   AlertDialog,
@@ -160,6 +161,9 @@ function WorkspaceOverview() {
 function DecisionsManager() {
   const { data: decisions, isLoading, isError, refetch } = useListSavedDecisions();
   const queryClient = useQueryClient();
+  const { userId } = useAppAuth();
+  const currentUserId = useRef(userId);
+  currentUserId.current = userId;
   const { toast } = useToast();
   const deleteDecision = useDeleteSavedDecision();
 
@@ -172,10 +176,21 @@ function DecisionsManager() {
   
   const createDecision = useCreateSavedDecision();
 
+  useEffect(() => {
+    setOpen(false);
+    setDeleteTarget(null);
+    setKind('salary');
+    setTitle('');
+    setSummary('');
+    setSignal('');
+  }, [userId]);
+
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
+    const authSnapshot = captureAuthUserMutation(userId);
     createDecision.mutate({ data: { kind, title, summary, signal } }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         toast({ title: 'Decision saved', description: 'Your intelligence has been added.' });
         trackEvent('workspace_decision_created', { location: 'workspace' });
         setOpen(false);
@@ -185,7 +200,10 @@ function DecisionsManager() {
         queryClient.invalidateQueries({ queryKey: getListSavedDecisionsQueryKey() });
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
-      onError: () => toast({ variant: 'destructive', title: 'Failed to save', description: 'Check your inputs and try again.' })
+      onError: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
+        toast({ variant: 'destructive', title: 'Failed to save', description: 'Check your inputs and try again.' });
+      }
     });
   };
 
@@ -197,13 +215,18 @@ function DecisionsManager() {
     if (!deleteTarget) return;
     const id = deleteTarget;
     setDeleteTarget(null);
+    const authSnapshot = captureAuthUserMutation(userId);
     deleteDecision.mutate({ id }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         toast({ title: 'Deleted', description: 'Decision removed from workspace.' });
         queryClient.invalidateQueries({ queryKey: getListSavedDecisionsQueryKey() });
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
-      onError: () => toast({ variant: 'destructive', title: 'Failed to delete', description: 'Please try again.' })
+      onError: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
+        toast({ variant: 'destructive', title: 'Failed to delete', description: 'Please try again.' });
+      }
     });
   };
 
@@ -324,6 +347,9 @@ function DecisionsManager() {
 function WatchlistManager() {
   const { data: watchlist, isLoading, isError, refetch } = useListWatchlist();
   const queryClient = useQueryClient();
+  const { userId } = useAppAuth();
+  const currentUserId = useRef(userId);
+  currentUserId.current = userId;
   const { toast } = useToast();
   const deleteItem = useDeleteWatchlistItem();
   const createItem = useCreateWatchlistItem();
@@ -334,10 +360,20 @@ function WatchlistManager() {
   const [note, setNote] = useState('');
   const [signal, setSignal] = useState('');
 
+  useEffect(() => {
+    setOpen(false);
+    setDeleteTarget(null);
+    setCompany('');
+    setNote('');
+    setSignal('');
+  }, [userId]);
+
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
+    const authSnapshot = captureAuthUserMutation(userId);
     createItem.mutate({ data: { company, note, signal } }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         toast({ title: 'Added to watchlist', description: `${company} is now tracked.` });
         trackEvent('watchlist_item_created', { location: 'workspace' });
         setOpen(false);
@@ -347,7 +383,10 @@ function WatchlistManager() {
         queryClient.invalidateQueries({ queryKey: getListWatchlistQueryKey() });
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
-      onError: () => toast({ variant: 'destructive', title: 'Failed to add', description: 'Check inputs and try again.' })
+      onError: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
+        toast({ variant: 'destructive', title: 'Failed to add', description: 'Check inputs and try again.' });
+      }
     });
   };
 
@@ -359,13 +398,18 @@ function WatchlistManager() {
     if (!deleteTarget) return;
     const id = deleteTarget;
     setDeleteTarget(null);
+    const authSnapshot = captureAuthUserMutation(userId);
     deleteItem.mutate({ id }, {
       onSuccess: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
         toast({ title: 'Removed', description: 'Company removed from watchlist.' });
         queryClient.invalidateQueries({ queryKey: getListWatchlistQueryKey() });
         queryClient.invalidateQueries({ queryKey: getGetWorkspaceSummaryQueryKey() });
       },
-      onError: () => toast({ variant: 'destructive', title: 'Failed to delete', description: 'Please try again.' })
+      onError: () => {
+        if (!isAuthUserMutationCurrent(authSnapshot, currentUserId.current)) return;
+        toast({ variant: 'destructive', title: 'Failed to delete', description: 'Please try again.' });
+      }
     });
   };
 

@@ -341,4 +341,113 @@ test.describe("deferred Clerk auth regression coverage", () => {
       .toEqual({ salary: undefined, workspace: undefined });
     await secondTab.close();
   });
+
+  test("does not show a workspace save that finishes after another tab switches accounts", async ({
+    page,
+    context,
+  }) => {
+    let releaseSave!: () => void;
+    let markSaveStarted!: () => void;
+    let markSaveResponseSent!: () => void;
+    const saveGate = new Promise<void>((resolve) => {
+      releaseSave = resolve;
+    });
+    const saveRequestStarted = new Promise<void>((resolve) => {
+      markSaveStarted = resolve;
+    });
+    const saveResponseSent = new Promise<void>((resolve) => {
+      markSaveResponseSent = resolve;
+    });
+
+    await context.route("**/api/**", async (route) => {
+      const request = route.request();
+      const pathname = new URL(request.url()).pathname;
+      if (pathname === "/api/saved-decisions" && request.method() === "POST") {
+        markSaveStarted();
+        await saveGate;
+        await route.fulfill({
+          status: 201,
+          contentType: "application/json",
+          body: JSON.stringify({
+            id: "late-old-user-decision",
+            kind: "salary",
+            title: "Old account decision",
+            summary: "Should not enter the new account workspace.",
+            signal: "Delayed save",
+            createdAt: "2026-10-01T00:00:00.000Z",
+          }),
+        });
+        markSaveResponseSent();
+        return;
+      }
+      if (pathname === "/api/saved-decisions" && request.method() === "GET") {
+        await route.fulfill({ status: 200, contentType: "application/json", body: "[]" });
+        return;
+      }
+      if (pathname === "/api/watchlist" && request.method() === "GET") {
+        await route.fulfill({ status: 200, contentType: "application/json", body: "[]" });
+        return;
+      }
+      if (pathname === "/api/workspace/summary" && request.method() === "GET") {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            savedDecisionCount: 0,
+            watchlistCount: 0,
+            latestDecision: null,
+            latestWatchlistItem: null,
+          }),
+        });
+        return;
+      }
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "Test data unavailable" }),
+      });
+    });
+
+    await page.goto("/workspace?__e2e_user=first-user");
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await page.getByTestId("tab-decisions").click();
+    await page.getByTestId("button-new-decision").click();
+    await page.getByPlaceholder("e.g. Acme Corp Offer").fill("Old account decision");
+    await page.getByPlaceholder("e.g. +14% above market, strong pipeline").fill("Delayed save");
+    await page.getByPlaceholder("What does this mean for your next move?").fill("Should not enter the new account workspace.");
+    await page.getByRole("button", { name: "Save decision" }).click();
+    await saveRequestStarted;
+
+    const secondTab = await context.newPage();
+    await secondTab.goto("/sign-in?__e2e_user=first-user");
+    await expect(secondTab.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.setUser("second-user"));
+    await page.evaluate(() => window.__careerRealityAuthTest?.setUser("second-user"));
+
+    await expect(page.getByText("No decisions recorded yet.")).toBeVisible();
+    releaseSave();
+    await saveResponseSent;
+
+    await expect(page.getByText("Old account decision")).toHaveCount(0);
+    await expect(page.getByText("Decision saved")).toHaveCount(0);
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const decisions = window.__careerRealityAuthTest?.readQueryData(["/api/saved-decisions"]);
+          const summary = window.__careerRealityAuthTest?.readQueryData(["/api/workspace/summary"]);
+          return {
+            decisions,
+            summaryContainsOldSave: JSON.stringify(summary ?? "").includes("Old account decision"),
+          };
+        }),
+      )
+      .toEqual({
+        decisions: [],
+        summaryContainsOldSave: false,
+      });
+
+    await secondTab.close();
+  });
 });
