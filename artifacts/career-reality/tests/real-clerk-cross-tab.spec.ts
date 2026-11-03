@@ -91,15 +91,19 @@ test("real Clerk account switching clears Compass cache in both tabs", async ({
   page,
   context,
 }) => {
-  test.setTimeout(60_000);
+  test.setTimeout(90_000);
 
-  await context.route("**/api/**", (route) =>
-    route.fulfill({
+  let salaryRequests = 0;
+  await context.route("**/api/**", async (route) => {
+    if (new URL(route.request().url()).pathname === "/api/public/salary-benchmarks") {
+      salaryRequests += 1;
+    }
+    await route.fulfill({
       status: 503,
       contentType: "application/json",
       body: JSON.stringify({ error: "Test data unavailable" }),
-    }),
-  );
+    });
+  });
 
   await page.goto("/compass");
   await expectSignedIn(page);
@@ -108,10 +112,13 @@ test("real Clerk account switching clears Compass cache in both tabs", async ({
   await secondTab.goto("/compass");
   await expectSignedIn(secondTab);
 
-  const originalUserId = await page.evaluate(() => {
-    return (window as Window & { Clerk?: ClerkBrowser }).Clerk?.user?.id;
+  const originalSession = await page.evaluate(() => {
+    const clerk = (window as Window & { Clerk?: ClerkBrowser }).Clerk;
+    const userId = clerk?.user?.id;
+    return clerk?.client?.sessions?.find((session) => session.userId === userId) ?? null;
   });
-  expect(originalUserId, "The real Clerk session should identify its signed-in user").toBeTruthy();
+  expect(originalSession, "The real Clerk session should identify its signed-in user").toBeTruthy();
+  const originalUserId = originalSession!.userId;
   await expect
     .poll(() =>
       secondTab.evaluate(() => (window as Window & { Clerk?: ClerkBrowser }).Clerk?.user?.id),
@@ -175,6 +182,41 @@ test("real Clerk account switching clears Compass cache in both tabs", async ({
   await page.getByTestId("link-workspace").click();
   await expect(page).toHaveURL(/\/workspace(?:\/|$)/);
   await expect(page).not.toHaveURL(/\/sign-in(?:\?|$)/);
+
+  await page.goto("/compass");
+  await expectSignedIn(page);
+  await expect.poll(() => salaryRequests).toBeGreaterThan(0);
+  const salaryRequestsBeforeSignOut = salaryRequests;
+  await secondTab.getByTestId("button-account-menu").click();
+  await secondTab.getByRole("menuitem", { name: "Sign out" }).click();
+  await expect(secondTab).toHaveURL(/\/$/);
+  await expect(page.getByTestId("button-account-menu")).toHaveCount(0, { timeout: 20_000 });
+  await expect(secondTab.getByTestId("button-account-menu")).toHaveCount(0, { timeout: 20_000 });
+  await expect
+    .poll(() => page.evaluate(() => window.__careerRealityAuthCacheProbe?.read()))
+    .toBeUndefined();
+  await expect
+    .poll(() => secondTab.evaluate(() => window.__careerRealityAuthCacheProbe?.read()))
+    .toBeUndefined();
+
+  await page.evaluate(async (sessionId) => {
+    const clerk = (window as Window & { Clerk?: ClerkBrowser }).Clerk;
+    if (!clerk) throw new Error("Clerk did not remain available after cross-tab sign-out");
+    await clerk.setActive({ session: sessionId });
+  }, originalSession!.id);
+  await expectSignedIn(page);
+  await expectSignedIn(secondTab);
+  await expect
+    .poll(() =>
+      page.evaluate(() => (window as Window & { Clerk?: ClerkBrowser }).Clerk?.user?.id),
+    )
+    .toBe(originalUserId);
+  await expect
+    .poll(() =>
+      secondTab.evaluate(() => (window as Window & { Clerk?: ClerkBrowser }).Clerk?.user?.id),
+    )
+    .toBe(originalUserId);
+  await expect.poll(() => salaryRequests).toBeGreaterThan(salaryRequestsBeforeSignOut);
 
   await secondTab.close();
 });
