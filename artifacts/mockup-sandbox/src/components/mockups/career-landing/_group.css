@@ -1,0 +1,41 @@
+@import url("../../../../public/careerreality-fonts/careerreality-fonts.css");
+@import "./home-extracted.css";
+
+.career-landing {
+  --background: 45 25% 94%;
+  --foreground: 201 32% 14%;
+  --border: 135 10% 85%;
+  --primary: 175 65% 26%;
+  --primary-foreground: 90 27% 96%;
+  --secondary: 130 12% 90%;
+  --muted-foreground: 190 9% 38%;
+  --accent: 10 36% 43%;
+  --app-font-sans: 'Manrope', sans-serif;
+  --app-font-serif: 'Newsreader', Georgia, serif;
+  --app-font-mono: 'DM Mono', monospace;
+  min-height: 100vh;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: var(--app-font-sans);
+}
+
+.career-landing *,
+.career-landing *::before,
+.career-landing *::after {
+  box-sizing: border-box;
+}
+
+.career-landing .home-page {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-landing *,
+  .career-landing *::before,
+  .career-landing *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -56,7 +56,7 @@ export default function Home() {
     <div className="home-page">
       <AppNav />
       <main>
-        <section className="home-opening" aria-labelledby="home-title">
+        <section className="home-opening home-opening-layered" aria-labelledby="home-title">
           <div className="home-opening-inner">
             <div className="home-kicker"><span /> Career decisions, in context</div>
             <div className="home-hero-grid">
