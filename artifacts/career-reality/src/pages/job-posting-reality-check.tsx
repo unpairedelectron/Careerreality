@@ -112,7 +112,7 @@ export default function JobPostingRealityCheckPage() {
     if (status in counts) counts[status as keyof typeof counts] += 1;
     return counts;
   }, { direct: 0, transferable: 0, partial: 0, "not-documented": 0, "confirmed-gap": 0 });
-  const { score, verdict, nextAction, mandatoryGapConfirmedByUser } = readiness;
+  const { score, mustHaveScore, responsibilityScore, verdict, nextAction, mandatoryGapConfirmedByUser } = readiness;
   const highlightedRequirements = [...includedRequirements]
     .sort((left, right) => {
       const leftStatus = overrides[left.id] ?? left.evidenceStatus;
@@ -594,7 +594,7 @@ export default function JobPostingRealityCheckPage() {
             <div className="overflow-hidden rounded-[24px] border border-border bg-card shadow-sm">
               <div className="grid gap-6 p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(220px,.62fr)] md:items-center">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[.14em] text-primary">Resume evidence match</p>
+                  <p className="text-xs font-bold uppercase tracking-[.14em] text-primary">Overall evidence match</p>
                   <h2 id="job-check-results-title" className="mt-2 font-display text-3xl leading-tight sm:text-4xl" data-testid="job-check-verdict">{verdict}</h2>
                   <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{nextAction}</p>
                 </div>
@@ -605,12 +605,24 @@ export default function JobPostingRealityCheckPage() {
                       : <><span className="font-data text-3xl font-medium leading-none">{score}</span><span className="mt-1 text-[10px] font-bold uppercase tracking-wider">of 100</span></>}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold">Resume evidence match</p>
+                    <p className="text-sm font-semibold">Overall evidence match</p>
                     <p className="mt-1 text-xs leading-5 text-muted-foreground">
                       {includedRequirements.length} included · {excludedCount} excluded from {analysis.requirements.length} extracted
                     </p>
                     <p className="mt-1 text-xs leading-5 text-muted-foreground">This reflects evidence in the supplied wording, not your ability or hiring odds. Apply/pause cutoffs are judgment-based, not validated hiring thresholds.</p>
                   </div>
+                </div>
+              </div>
+              <div className="grid gap-3 border-t border-border p-5 sm:grid-cols-2 sm:p-6" data-testid="job-check-category-scores">
+                <div className="rounded-xl border border-border bg-background/70 p-4" data-testid="job-check-must-have-score">
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Must-have evidence</p>
+                  <p className="mt-1 font-display text-2xl">{mustHaveScore === null ? "Not scored" : `${mustHaveScore}%`}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">Based only on clearly identified mandatory items.</p>
+                </div>
+                <div className="rounded-xl border border-border bg-background/70 p-4" data-testid="job-check-responsibility-score">
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Responsibility evidence</p>
+                  <p className="mt-1 font-display text-2xl">{responsibilityScore === null ? "Not scored" : `${responsibilityScore}%`}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">Based on clear day-to-day duties, not a claim that they are mandatory.</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 border-t border-border bg-muted/25 md:grid-cols-5" data-testid="job-check-breakdown">
@@ -678,7 +690,7 @@ export default function JobPostingRealityCheckPage() {
                 <details className="rounded-xl border border-border/80 bg-background/60 px-4 py-3">
                   <summary className="cursor-pointer text-sm font-semibold">How to read this score</summary>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    Rule-based and based only on extracted posting requirements and the wording in your resume. It is not a validated prediction, hiring odds, or a judgment of capability. Mandatory requirements count twice; preferred items and clear day-to-day responsibilities count once. Ambiguous skills, contextual tools, unclear wording, and unresolved items are excluded. Direct evidence counts fully, transferable 75%, partial 50%; not documented and confirmed gaps count zero.
+                    Rule-based and based only on extracted posting requirements and the wording in your resume. It is not a validated prediction, hiring odds, or a judgment of capability. The overall score weights mandatory requirements twice and preferred items or clear day-to-day responsibilities once. The separate scores show must-have evidence and responsibility evidence. Ambiguous skills, contextual tools, unclear wording, and unresolved items are excluded. Direct evidence counts fully, transferable 75%, partial 50%; not documented and confirmed gaps count zero.
                   </p>
                 </details>
               </div>

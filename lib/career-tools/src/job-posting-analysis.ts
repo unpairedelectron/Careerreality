@@ -55,7 +55,10 @@ const headings = new Set([
   "what you will bring", "requirements", "qualifications", "must have",
   "required qualifications", "minimum qualifications", "required skills",
   "minimum requirements", "nice to have", "preferred qualifications",
-  "preferred skills", "our expectations",
+  "preferred skills", "our expectations", "about the company", "about us",
+  "our company", "company overview", "what you'll do", "what you'll bring",
+  "what we are looking for", "what we're looking for", "what we offer",
+  "benefits", "how to apply", "equal opportunity",
 ]);
 
 const stopWords = new Set([

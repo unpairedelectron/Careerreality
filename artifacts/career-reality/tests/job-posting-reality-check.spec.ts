@@ -128,7 +128,9 @@ test("reviews requirements, allows a manual confirmed gap, and does not submit t
   await expect(page.getByTestId("job-check-score")).toContainText("100");
   await expect(page.getByTestId("job-check-verdict")).toHaveText("Go for it");
   await expect(page.getByTestId("job-check-breakdown")).toContainText("Direct");
-  await expect(results).toContainText("Resume evidence match");
+  await expect(results).toContainText("Overall evidence match");
+  await expect(page.getByTestId("job-check-must-have-score")).toContainText("100%");
+  await expect(page.getByTestId("job-check-responsibility-score")).toContainText("Not scored");
   await expect(page.getByTestId("job-requirement-0")).toContainText("Built Python data pipelines");
   await expect(page.getByTestId("job-requirement-0")).toContainText("Evidence source: Candidate-authored");
   await expect(page.getByTestId("select-evidence-status-0")).toHaveValue("direct");
@@ -153,12 +155,15 @@ test("changes the visible score when a different role and resume are analyzed", 
   await posting.fill("Responsibilities\n- Build SQL queries for finance reporting.");
   await analyze.click();
   await expect(score).toContainText("100");
+  await expect(page.getByTestId("job-check-must-have-score")).toContainText("Not scored");
+  await expect(page.getByTestId("job-check-responsibility-score")).toContainText("100%");
 
   await resume.fill("Wrote customer support guides and managed help-center updates.");
   await posting.fill("Responsibilities\n- Build Python data pipelines for finance reporting.");
   await analyze.click();
   await expect(score).toContainText("0");
-  await expect(page.getByTestId("job-check-verdict")).not.toHaveText("Not enough clear requirements to score");
+  await expect(page.getByTestId("job-check-responsibility-score")).toContainText("0%");
+  await expect(page.getByTestId("job-check-verdict")).toHaveText("Review fit for listed role criteria");
 });
 
 test("politely announces recalculated match results only after evidence status changes", async ({ page }) => {

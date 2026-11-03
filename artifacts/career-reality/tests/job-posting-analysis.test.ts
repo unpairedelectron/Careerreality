@@ -50,7 +50,24 @@ test("scores clear responsibilities and changes the result with the supplied res
   const unrelatedReadiness = calculateJobPostingReadiness(unrelated.requirements);
   assert.equal(relevantReadiness.includedRequirements.length, 2);
   assert.equal(relevantReadiness.score, 50);
+  assert.equal(relevantReadiness.mustHaveScore, null);
+  assert.equal(relevantReadiness.responsibilityScore, 50);
+  assert.equal(relevantReadiness.verdict, "Strengthen evidence for listed role criteria");
+  assert.match(relevantReadiness.nextAction, /unstated must-haves/i);
   assert.equal(unrelatedReadiness.score, 0);
+  assert.equal(unrelatedReadiness.verdict, "Review fit for listed role criteria");
+});
+
+test("reports mandatory and responsibility evidence separately", () => {
+  const analysis = analyzeJobPosting(
+    "Must have SQL experience.\nResponsibilities\n- Build Python data pipelines.",
+    "Built SQL queries for finance dashboards.",
+  );
+  const result = calculateJobPostingReadiness(analysis.requirements);
+
+  assert.equal(result.mustHaveScore, 100);
+  assert.equal(result.responsibilityScore, 0);
+  assert.equal(result.score, 67);
 });
 
 test("uses explicit requirements and preferred section headings as signals", () => {
@@ -69,6 +86,31 @@ test("uses explicit requirements and preferred section headings as signals", () 
   assert.equal(sql?.signal, "mandatory");
   assert.equal(sql?.evidenceStatus, "direct");
   assert.equal(kubernetes?.signal, "preferred");
+});
+
+test("handles mixed posting formats without leaking section signals", () => {
+  const result = analyzeJobPosting(
+    [
+      "## Required Qualifications",
+      "1. SQL experience",
+      "### Preferred Skills:",
+      "- Kubernetes experience",
+      "## About the company",
+      "Our internal prototype uses Python in a reporting script.",
+      "## What You'll Do",
+      "- Build finance data pipelines",
+    ].join("\n"),
+    "Built SQL queries for finance dashboards.",
+  );
+  const sql = result.requirements.find(({ text }) => /sql/i.test(text));
+  const kubernetes = result.requirements.find(({ text }) => /kubernetes/i.test(text));
+  const pipelines = result.requirements.find(({ text }) => /data pipelines/i.test(text));
+
+  assert.equal(result.requirements.length, 3, "company-context tools are not job requirements");
+  assert.equal(sql?.signal, "mandatory");
+  assert.equal(kubernetes?.signal, "preferred");
+  assert.equal(pipelines?.signal, "ambiguous");
+  assert.equal(pipelines?.category, "responsibility");
 });
 
 test("does not extract incidental tools from company context", () => {

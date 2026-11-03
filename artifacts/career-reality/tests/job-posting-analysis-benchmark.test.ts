@@ -206,6 +206,30 @@ const benchmarkCases: BenchmarkCase[] = [
     jobText: `Our internal platform is accountable for prototype maintenance ${"across internal support teams and regional product groups with long planning cycles and varied operating workflows ".repeat(3)}`,
     resumeText: "Built finance dashboards for the operations team.",
   },
+  {
+    id: "markdown-required-qualifications",
+    jobText: "## Required Qualifications\n1. SQL experience",
+    resumeText: "Built SQL queries for finance dashboards.",
+    expected: {
+      text: "SQL experience",
+      category: "essential-competency",
+      signal: "mandatory",
+      evidenceStatus: "direct",
+      rationale: "A Markdown section and numbered item preserve the required signal.",
+    },
+  },
+  {
+    id: "markdown-preferred-skills",
+    jobText: "### Preferred Skills:\n- Kubernetes experience",
+    resumeText: "Built Python services for reporting.",
+    expected: {
+      text: "Kubernetes experience",
+      category: "preferred",
+      signal: "preferred",
+      evidenceStatus: "not-documented",
+      rationale: "A preferred section remains optional even without repeated preference wording.",
+    },
+  },
 ];
 
 const statuses: Array<ExpectedRequirement["evidenceStatus"]> = [
