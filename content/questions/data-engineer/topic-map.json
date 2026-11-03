@@ -94,12 +94,30 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-04",
           "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Transaction Isolation",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/transaction-iso.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Explicit Locking",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/explicit-locking.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
         }
       ]
     },
     {
       "topic": "Streaming systems",
-      "subtopics": ["partitions", "offsets", "delivery semantics", "late data"],
+      "subtopics": ["partitions", "offsets", "delivery semantics", "late data", "compaction", "tombstones", "consumer offset commits"],
       "sources": [
         {
           "title": "Apache Kafka Design",
@@ -109,6 +127,24 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-03",
           "versions_checked": "Apache Kafka 4.4 documentation page"
+        },
+        {
+          "title": "Topic Configs",
+          "publisher": "Apache Kafka",
+          "url": "https://kafka.apache.org/44/configuration/topic-configs/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Kafka 4.4 topic configuration documentation"
+        },
+        {
+          "title": "Distribution: Consumer Offset Tracking",
+          "publisher": "Apache Kafka",
+          "url": "https://kafka.apache.org/44/implementation/distribution/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Kafka 4.4 implementation documentation"
         },
         {
           "title": "Structured Streaming: Sources and Partition Discovery",
