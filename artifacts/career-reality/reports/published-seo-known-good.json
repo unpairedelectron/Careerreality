@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T13:18:15.972Z",
+  "generatedAt": "2026-11-03T16:30:05.293Z",
   "origin": "https://careerreality.in",
   "alternateOrigins": [
     "https://www.careerreality.in",
@@ -22,7 +22,7 @@
       "/sitemap.xml": {
         "status": 200,
         "finalUrl": "https://careerreality.in/sitemap.xml",
-        "locationCount": 79,
+        "locationCount": 81,
         "locationOrigins": [
           "https://careerreality.in"
         ],
@@ -73,7 +73,7 @@
         "/sitemap.xml": {
           "status": 200,
           "finalUrl": "https://careerreality.in/sitemap.xml",
-          "locationCount": 79,
+          "locationCount": 81,
           "locationOrigins": [
             "https://careerreality.in"
           ],
@@ -123,7 +123,7 @@
         "/sitemap.xml": {
           "status": 200,
           "finalUrl": "https://indigo-bowed-megabyte.replit.app/sitemap.xml",
-          "locationCount": 79,
+          "locationCount": 81,
           "locationOrigins": [
             "https://careerreality.in"
           ],
@@ -176,6 +176,16 @@
         "indexable": true,
         "titleLength": 35,
         "canonical": "https://careerreality.in/about/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/accessibility/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/accessibility/",
+        "indexable": true,
+        "titleLength": 39,
+        "canonical": "https://careerreality.in/accessibility/",
         "passed": true,
         "attempts": 1,
         "retryOutcome": "not-needed"
@@ -900,6 +910,16 @@
         "attempts": 1,
         "retryOutcome": "not-needed"
       },
+      "https://careerreality.in/security/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/security/",
+        "indexable": true,
+        "titleLength": 34,
+        "canonical": "https://careerreality.in/security/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
       "https://careerreality.in/sources/": {
         "status": 200,
         "finalUrl": "https://careerreality.in/sources/",
@@ -924,7 +944,7 @@
         "status": 200,
         "finalUrl": "https://careerreality.in/team/",
         "indexable": true,
-        "titleLength": 44,
+        "titleLength": 36,
         "canonical": "https://careerreality.in/team/",
         "passed": true,
         "attempts": 1,
@@ -1061,7 +1081,7 @@
       "label": "Local sitemap contains apex URLs only",
       "passed": true,
       "expected": "all <loc> entries use https://careerreality.in",
-      "observed": "79 apex URLs",
+      "observed": "81 apex URLs",
       "kind": "local",
       "status": "pass"
     },
@@ -1076,8 +1096,8 @@
     {
       "label": "Local sitemap matches registered indexable snapshots",
       "passed": true,
-      "expected": "79 registered routes; no article URLs",
-      "observed": "79 URLs; legacy article absent",
+      "expected": "81 registered routes; no article URLs",
+      "observed": "81 URLs; legacy article absent",
       "kind": "local",
       "status": "pass"
     },
@@ -2084,8 +2104,8 @@
     {
       "label": "Published sitemap matches local route set",
       "passed": true,
-      "expected": "79 canonical URLs matching the local build",
-      "observed": "79 live URLs; missing 0; unexpected 0",
+      "expected": "81 canonical URLs matching the local build",
+      "observed": "81 live URLs; missing 0; unexpected 0",
       "kind": "live",
       "status": "pass"
     },
@@ -2147,6 +2167,14 @@
     },
     {
       "label": "https://careerreality.in/about/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/accessibility/ indexability",
       "passed": true,
       "expected": "index, follow",
       "observed": "index, follow",
@@ -2723,6 +2751,14 @@
     },
     {
       "label": "https://careerreality.in/salary-drop/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/security/ indexability",
       "passed": true,
       "expected": "index, follow",
       "observed": "index, follow",

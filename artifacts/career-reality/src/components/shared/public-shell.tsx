@@ -81,11 +81,18 @@ export function PublicPage({
           { name: "Tools", path: "/tools" },
           { name: "Employer check", path: currentPath },
         ]
+      : routeDefinition?.kind === "tool"
+        ? [
+            { name: "Home", path: "/" },
+            { name: "Tools", path: "/tools" },
+            { name: routeDefinition.title, path: currentPath },
+          ]
       : [
           { name: "Home", path: "/" },
           { name: routeDefinition?.title ?? title, path: currentPath },
         ]
   );
+  const isToolPage = routeDefinition?.kind === "tool";
   const pageIntro = routeDefinition && (routeDefinition.kind === "tool" || routeDefinition.kind === "guide")
     ? routeDefinition.description
     : intro;
@@ -106,13 +113,14 @@ export function PublicPage({
       <AppNav />
       <main className="mx-auto max-w-[1240px] px-5 py-14 sm:px-8 sm:py-20">
         <PublicBreadcrumbs items={breadcrumbs} />
-        <div className="reveal relative">
-          <div className="pointer-events-none absolute -left-20 -top-24 size-72 rounded-full bg-secondary/45 blur-3xl" />
+        <div className={`reveal relative ${isToolPage ? "overflow-hidden rounded-[24px] border border-border/80 bg-[linear-gradient(135deg,hsl(var(--card)/.94),hsl(var(--secondary)/.38)_62%,hsl(var(--card)/.72))] px-5 py-7 shadow-[0_20px_60px_hsl(var(--foreground)/.06),inset_0_1px_hsl(var(--primary-foreground)/.7)] sm:px-8 sm:py-9" : ""}`}>
+          {isToolPage && <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-36 size-80 rounded-full border border-primary/10 bg-primary/[.025] shadow-[0_0_0_28px_hsl(var(--primary)/.02),0_0_0_72px_hsl(var(--accent)/.025)]" />}
+          <div className={`pointer-events-none absolute -left-20 -top-24 size-72 rounded-full bg-secondary/45 blur-3xl ${isToolPage ? "opacity-60" : ""}`} />
           <p className="relative font-data text-[10px] uppercase tracking-[.2em] text-primary">{eyebrow}</p>
           <h1 className="relative mt-4 max-w-[820px] font-display text-[52px] leading-[.92] tracking-[-.05em] sm:text-[78px]">{title}</h1>
-          {pageIntro && <p className="mt-6 max-w-[640px] text-[14px] leading-[1.75] text-muted-foreground">{pageIntro}</p>}
+          {pageIntro && <p className="relative mt-6 max-w-[640px] text-[14px] leading-[1.75] text-muted-foreground">{pageIntro}</p>}
         </div>
-        <div className="reveal reveal-3 mt-12">{children}</div>
+        <div className={`reveal reveal-3 ${isToolPage ? "mt-8 sm:mt-10" : "mt-12"}`}>{children}</div>
         {relatedPages && <nav className="mt-10 rounded-2xl border border-border bg-card p-5" aria-label="Related guides and rules"><h2 className="font-display text-2xl">Related guides and rules</h2><ul className="mt-3 flex flex-wrap gap-x-5 gap-y-3 text-sm">{relatedPages.map((page) => <li key={page.href}><Link href={page.href} className="font-semibold text-primary underline underline-offset-4">{page.label}</Link></li>)}</ul></nav>}
         {toolGuide && <ToolGuideSection guide={toolGuide} />}
       </main>
