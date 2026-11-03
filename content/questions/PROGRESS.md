@@ -1,24 +1,24 @@
 # Interview question banks — progress
 
-As of 2026-11-03, the structured content framework and one source-checked pilot item per role are in place. This is a research and validation pilot, not a public release.
+As of 2026-11-04, the structured content framework, one source-checked pilot item per non-data-engineering role, and fifty Data Engineer items are in place. This remains a research and validation draft, not a public release.
 
 The first production build and type check passed with the question-bank validator included in the normal prebuild sequence. The build completed the existing site's route snapshot checks; existing Vite source-map and large-chunk warnings were emitted.
 
 ## Resume point
 
-Continue with Data Engineer, adding a roughly 20-item batch. For each item: verify current primary sources, record exact versions and retrieval date, independently re-derive the answer, execute any code in a pinned local environment, run schema and near-duplicate validation, then update the role manifest and report before moving to Data Scientist.
+The Data Engineer bank has reached the requested 50-item initial floor. Next, run the final validator and reconcile its findings; the bank remains below the specification's 150-item minimum, and the other role banks remain pilots.
 
 ## Current counts and shortfalls
 
 | Bank | Current | Minimum | Target | Status |
 | --- | ---: | ---: | ---: | --- |
-| Data Engineer | 1 | 150 | 240 | Shortfall; SQL pilot only |
+| Data Engineer | 50 | 150 | 240 | Shortfall; SQL, streaming, orchestration, storage, lakehouse pilots |
 | Data Scientist | 1 | 150 | 240 | Shortfall; evaluation pilot only |
 | AI/ML Engineer | 1 | 140 | 220 | Shortfall; reproducibility pilot only |
 | Generative AI Engineer | 1 | 140 | 220 | Shortfall; RAG pilot only |
 | Agentic AI Engineer | 1 | 110 | 180 | Shortfall; architecture pilot only |
 
-No code-bearing item is included, so code execution is not applicable to these five pilot entries. All five entries have source retrieval records and a separate independent re-derivation record, including caveats; independent expert review remains pending.
+No code-bearing item is included, so code execution is not applicable to the fifty Data Engineer items and four other pilot entries. All fifty-four entries have source retrieval records and separate independent re-derivation records, including caveats; independent expert review remains pending.
 
 ## Not implemented or not verified
 

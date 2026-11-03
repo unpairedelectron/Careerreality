@@ -54,8 +54,9 @@ for (const bank of banks) {
   const counts = { topics: {}, levels: {}, types: {} };
   for (const [index, item] of items.entries()) {
     const where = `${bank.id}/items.json[${index}]`;
-    const keys = schema.required;
-    if (!checkKeys(item, keys, keys, where)) continue;
+    const requiredKeys = schema.required;
+    const allowedKeys = Object.keys(schema.properties);
+    if (!checkKeys(item, requiredKeys, allowedKeys, where)) continue;
     if (item.bank !== bank.id) addFailure(where, "bank does not match containing directory");
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(item.id)) addFailure(where, "id is not a kebab-case slug");
     for (const field of ["topic", "subtopic", "question", "what_is_assessed", "short_answer", "deep_explanation", "versions_checked"]) {
@@ -76,6 +77,11 @@ for (const bank of banks) {
         checkKeys(followUp, ["question", "short_answer"], ["question", "short_answer"], followWhere);
         if (!followUp.question?.trim() || !followUp.short_answer?.trim()) addFailure(followWhere, "question and short_answer must be non-empty");
       });
+    }
+    if (item.visual_aid !== undefined && item.visual_aid !== null) {
+      checkKeys(item.visual_aid, ["kind", "alt", "content"], ["kind", "alt", "content"], `${where}.visual_aid`);
+      if (!["diagram", "timeline", "comparison-table"].includes(item.visual_aid.kind)) addFailure(where, "invalid visual_aid kind");
+      if (!item.visual_aid.alt?.trim() || !item.visual_aid.content?.trim()) addFailure(where, "visual aid requires descriptive alt text and content");
     }
     if (item.code !== null) {
       checkKeys(item.code, ["language", "sample", "executed", "output"], ["language", "sample", "executed", "output"], `${where}.code`);

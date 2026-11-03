@@ -38,6 +38,15 @@
         }
       }
     },
+    "visual_aid": {
+      "type": ["object", "null"],
+      "required": ["kind", "alt", "content"],
+      "properties": {
+        "kind": { "enum": ["diagram", "timeline", "comparison-table"] },
+        "alt": { "type": "string", "minLength": 1 },
+        "content": { "type": "string", "minLength": 1 }
+      }
+    },
     "code": {
       "type": ["object", "null"],
       "required": ["language", "sample", "executed", "output"],

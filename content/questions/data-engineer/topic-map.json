@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "SQL",
-      "subtopics": ["joins", "window functions", "query plans", "indexing"],
+      "subtopics": ["joins", "window functions", "query plans", "indexing", "aggregates", "set operations", "subqueries"],
       "sources": [
         {
           "title": "PostgreSQL 18 documentation",
@@ -12,6 +12,87 @@
           "retrieved_date": "2026-11-03",
           "volatility": "Stable",
           "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Using EXPLAIN",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/using-explain.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Table Expressions: Joined Tables",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/queries-table-expressions.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Introduction to Indexes",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/indexes-intro.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Index Types: B-tree",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/indexes-types.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Indexes and ORDER BY",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/indexes-ordering.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Aggregate Functions",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/functions-aggregate.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Combining Queries: UNION",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/queries-union.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Subquery Expressions",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/functions-subquery.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "Multicolumn Indexes",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/indexes-multicolumn.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
           "versions_checked": "PostgreSQL 18"
         }
       ]
@@ -28,6 +109,96 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-03",
           "versions_checked": "Apache Kafka 4.4 documentation page"
+        },
+        {
+          "title": "Structured Streaming: Sources and Partition Discovery",
+          "publisher": "Apache Spark",
+          "url": "https://spark.apache.org/docs/latest/streaming/apis-on-dataframes-and-datasets.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Current Spark Structured Streaming guide; validate deployed Spark version"
+        },
+        {
+          "title": "Structured Streaming Overview and Processing Modes",
+          "publisher": "Apache Spark",
+          "url": "https://spark.apache.org/docs/latest/streaming/index.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Current Spark Structured Streaming guide; validate deployed Spark version"
+        }
+      ]
+    },
+    {
+      "topic": "Orchestration",
+      "subtopics": ["retry safety", "idempotency", "backfills"],
+      "sources": [
+        {
+          "title": "Best Practices",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/best-practices.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "DAG Runs: Data Interval",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/core-concepts/dag-run.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Airflow 3.3.2"
+        }
+      ]
+    },
+    {
+      "topic": "Storage formats",
+      "subtopics": ["columnar storage", "compression", "encoding"],
+      "sources": [
+        {
+          "title": "Motivation",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/overview/motivation/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Parquet format overview"
+        }
+      ]
+    },
+    {
+      "topic": "Lakehouse table formats",
+      "subtopics": ["partition evolution", "mixed historical layouts", "table maintenance"],
+      "sources": [
+        {
+          "title": "Evolution",
+          "publisher": "Apache Iceberg",
+          "url": "https://iceberg.apache.org/docs/latest/evolution/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Iceberg latest documentation; no runtime version asserted"
+        },
+        {
+          "title": "Partitioning: Hidden Partitioning",
+          "publisher": "Apache Iceberg",
+          "url": "https://iceberg.apache.org/docs/latest/partitioning/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Iceberg latest partitioning guide; no runtime version asserted"
+        },
+        {
+          "title": "Maintenance",
+          "publisher": "Apache Iceberg",
+          "url": "https://iceberg.apache.org/docs/latest/maintenance/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Iceberg latest documentation; no runtime version asserted"
         }
       ]
     }
