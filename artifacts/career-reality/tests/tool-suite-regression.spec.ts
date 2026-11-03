@@ -37,6 +37,10 @@ test("offer comparison keeps optional payroll and transition details out of the 
 test("tax comparison calculates a salary-only AY example and shows its boundaries", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/tax-regime-comparison");
+  await expect(page.getByTestId("field-groups-tax-regime-comparison")).toBeVisible();
+  await expect(page.getByTestId("field-group-salary")).toContainText("gross salary");
+  await expect(page.getByTestId("field-group-deductions")).toContainText("Eligible deductions");
+  await expect(page.getByTestId("field-group-hra")).toContainText("House rent allowance");
   await page.getByTestId("input-grossSalary").fill("1800000");
   await page.getByTestId("input-section80C").fill("150000");
   await page.getByTestId("input-section80D").fill("25000");
@@ -135,6 +139,10 @@ test("home-loan stress test calculates a rate change and clear resets the result
 test("resign-or-stay compares entered values without recommending an outcome", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/resign-or-stay");
+  await expect(page.getByTestId("field-groups-resign-or-stay")).toBeVisible();
+  await expect(page.getByTestId("field-group-cash")).toContainText("Cash and obligations");
+  await expect(page.getByTestId("field-group-health")).toContainText("Health and energy");
+  await expect(page.getByTestId("field-group-location")).toContainText("Location and daily life");
   for (const factor of ["cash", "health", "scope", "learning", "location"]) {
     await page.getByTestId(`input-${factor}Importance`).fill("5");
     await page.getByTestId(`input-${factor}Stay`).fill("5");

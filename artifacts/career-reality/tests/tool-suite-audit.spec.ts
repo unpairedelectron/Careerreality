@@ -1,23 +1,11 @@
 import { expect, test } from "./fixtures";
+import routeRegistry from "../src/data/route-registry";
 
-const auditedToolRoutes = [
-  "/salary-calculator",
-  "/offer-comparison",
-  "/tax-regime-comparison",
-  "/gratuity-estimator",
-  "/final-pay-estimator",
-  "/layoff-runway",
-  "/home-loan-stress-test",
-  "/resign-or-stay",
-  "/companies",
-  "/compass",
-  "/salary-drop",
-  "/escape-plan",
-  "/career-reality-index",
-  "/ai",
-];
+const auditedToolRoutes = routeRegistry.routes
+  .filter((route) => route.kind === "tool" && route.indexability === "indexable")
+  .map((route) => route.path);
 
-test("all 14 in-scope tools render at phone width with named inputs and no page overflow", async ({
+test("all active tools render at phone width with named inputs and no page overflow", async ({
   page,
   request,
 }) => {

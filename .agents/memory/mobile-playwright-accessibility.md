@@ -14,3 +14,9 @@ React Native Web can expose repeated text nodes from its rendered tree, and off-
 **Why:** Broad text locators otherwise create strict-mode failures or false visibility failures in otherwise-correct mobile flows.
 
 **How to apply:** Scope assertions to a specific state container where possible; when validating a long personalized result, scroll to the exact server-returned text before checking visibility.
+
+For long route-by-route mobile web audits, use one Playwright worker when repeated page loads time out under concurrent browser tests.
+
+**Why:** Concurrent navigation made a route-shell visibility assertion time out once, while the same complete route audit passed serially.
+
+**How to apply:** If a multi-route smoke test has a transient shell-readiness failure under parallel load, rerun that audit with one worker before treating the route as broken.

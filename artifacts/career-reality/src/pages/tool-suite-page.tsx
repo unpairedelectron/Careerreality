@@ -26,6 +26,13 @@ type Field = {
   options?: Array<{ value: string; label: string }>;
 };
 
+type FieldGroup = {
+  id: string;
+  title: string;
+  description: string;
+  fieldKeys: string[];
+};
+
 const decisionFields: Field[] = [
   ["cash", "Cash and obligations"],
   ["health", "Health and energy"],
@@ -112,6 +119,61 @@ const fieldsByTool: Record<CareerToolId, Field[]> = {
   "resign-or-stay": decisionFields,
   "employer-due-diligence": [
     { key: "employerName", label: "Employer or legal entity name", type: "text" },
+  ],
+};
+
+const fieldGroupsByTool: Partial<Record<CareerToolId, FieldGroup[]>> = {
+  "tax-regime-comparison": [
+    {
+      id: "salary",
+      title: "Salary",
+      description: "Start with the annual gross salary for the assessment year.",
+      fieldKeys: ["grossSalary"],
+    },
+    {
+      id: "deductions",
+      title: "Eligible deductions",
+      description: "Enter only amounts you have checked; blank optional amounts are treated as zero.",
+      fieldKeys: ["section80C", "section80D", "nps80ccd1b", "oldRegimeDeductions"],
+    },
+    {
+      id: "hra",
+      title: "House rent allowance",
+      description: "Add these figures only if you want the worksheet to estimate an HRA exemption.",
+      fieldKeys: ["annualBasicSalary", "annualHraReceived", "annualRentPaid", "hraCityType"],
+    },
+  ],
+  "resign-or-stay": [
+    {
+      id: "cash",
+      title: "Cash and obligations",
+      description: "Rate importance, then your staying and moving options from 1 to 5.",
+      fieldKeys: ["cashImportance", "cashStay", "cashMove"],
+    },
+    {
+      id: "health",
+      title: "Health and energy",
+      description: "Rate importance, then your staying and moving options from 1 to 5.",
+      fieldKeys: ["healthImportance", "healthStay", "healthMove"],
+    },
+    {
+      id: "scope",
+      title: "Work scope and authority",
+      description: "Rate importance, then your staying and moving options from 1 to 5.",
+      fieldKeys: ["scopeImportance", "scopeStay", "scopeMove"],
+    },
+    {
+      id: "learning",
+      title: "Learning and future proof",
+      description: "Rate importance, then your staying and moving options from 1 to 5.",
+      fieldKeys: ["learningImportance", "learningStay", "learningMove"],
+    },
+    {
+      id: "location",
+      title: "Location and daily life",
+      description: "Rate importance, then your staying and moving options from 1 to 5.",
+      fieldKeys: ["locationImportance", "locationStay", "locationMove"],
+    },
   ],
 };
 
@@ -297,6 +359,7 @@ export function ToolSuitePage() {
     return <main className="p-8 text-sm text-muted-foreground" role="status">This tool is not available.</main>;
   }
   const activeToolId = toolId;
+  const fieldGroups = fieldGroupsByTool[activeToolId];
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -471,7 +534,31 @@ export function ToolSuitePage() {
                 </details>
               </div>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2">{fields.map(renderField)}</div>
+              fieldGroups ? (
+                <div className="grid gap-4" data-testid={`field-groups-${activeToolId}`}>
+                  {fieldGroups.map((group, index) => (
+                    <fieldset
+                      key={group.id}
+                      data-testid={`field-group-${group.id}`}
+                      className="min-w-0 rounded-2xl border border-border bg-background/60 p-4 sm:p-5"
+                    >
+                      <legend className="px-2 font-display text-xl">{group.title}</legend>
+                      <p className="mb-4 text-xs leading-5 text-muted-foreground">{group.description}</p>
+                      <div className={`grid gap-4 ${activeToolId === "resign-or-stay" ? "sm:grid-cols-2 xl:grid-cols-3" : "sm:grid-cols-2"}`}>
+                        {group.fieldKeys.map((key) => {
+                          const field = fields.find((candidate) => candidate.key === key);
+                          return field ? renderField(field) : null;
+                        })}
+                      </div>
+                      <span className="mt-4 block font-data text-[9px] uppercase tracking-[.14em] text-muted-foreground">
+                        {String(index + 1).padStart(2, "0")} / {String(fieldGroups.length).padStart(2, "0")}
+                      </span>
+                    </fieldset>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2">{fields.map(renderField)}</div>
+              )
             )}
             {activeToolId === "gratuity-estimator" && (
               <p className="rounded-xl bg-muted/50 p-3 text-xs leading-5 text-muted-foreground">
