@@ -2,11 +2,11 @@
   "bank": "data-engineer",
   "target": 240,
   "minimum": 150,
-  "itemCount": 50,
-  "countsByTopic": { "SQL": 17, "Streaming systems": 19, "Orchestration": 2, "Storage formats": 3, "Lakehouse table formats": 9 },
-  "countsByLevel": { "L1": 6, "L2": 35, "L3": 9 },
-  "countsByType": { "concept": 13, "scenario": 13, "debugging": 16, "trade-off": 8 },
-  "status": { "schemaValid": 50, "sourcesVerified": 50, "rederived": 50, "codeExecuted": 0, "expertReviewPending": 50 },
+  "itemCount": 64,
+  "countsByTopic": { "SQL": 17, "Streaming systems": 19, "Orchestration": 10, "Storage formats": 9, "Lakehouse table formats": 9 },
+  "countsByLevel": { "L1": 8, "L2": 44, "L3": 12 },
+  "countsByType": { "concept": 17, "scenario": 16, "debugging": 20, "trade-off": 11 },
+  "status": { "schemaValid": 64, "sourcesVerified": 64, "rederived": 64, "codeExecuted": 0, "expertReviewPending": 64 },
   "itemStatus": {
     "de-window-functions-retain-rows": {
       "schemaValid": true,
@@ -352,6 +352,104 @@
       "expertReview": "pending"
     },
     "de-spark-stream-distinct-support-limit": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-trigger-rules-branch-skip": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-xcom-small-metadata": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-runtime-task-mapping-limit": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-pool-concurrency-slots": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-sensor-poke-reschedule-tradeoff": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-deferrable-worker-release": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-leaf-state-dag-run-status": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-airflow-depends-on-past-sequencing": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-row-group-column-chunk-pages": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-row-group-size-throughput-buffering": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-page-index-reader-compatibility": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-page-size-granularity-overhead": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-dictionary-encoding-cardinality-fallback": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-parquet-encoding-versus-compression": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

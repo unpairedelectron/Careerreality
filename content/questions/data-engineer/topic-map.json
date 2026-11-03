@@ -132,7 +132,7 @@
     },
     {
       "topic": "Orchestration",
-      "subtopics": ["retry safety", "idempotency", "backfills"],
+      "subtopics": ["retry safety", "idempotency", "backfills", "branching", "task mapping", "inter-task data", "concurrency", "sensors"],
       "sources": [
         {
           "title": "Best Practices",
@@ -151,12 +151,66 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-03",
           "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "DAGs and Trigger Rules",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/core-concepts/dags.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "XComs",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/core-concepts/xcoms.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "Dynamic Task Mapping",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/authoring-and-scheduling/dynamic-task-mapping.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "Pools",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/administration-and-deployment/pools.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "Sensors",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/core-concepts/sensors.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
+        },
+        {
+          "title": "Deferrable Operators and Triggers",
+          "publisher": "Apache Airflow",
+          "url": "https://airflow.apache.org/docs/apache-airflow/3.3.2/authoring-and-scheduling/deferring.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Airflow 3.3.2"
         }
       ]
     },
     {
       "topic": "Storage formats",
-      "subtopics": ["columnar storage", "compression", "encoding"],
+      "subtopics": ["columnar storage", "compression", "encoding", "row groups", "pages", "page indexes"],
       "sources": [
         {
           "title": "Motivation",
@@ -166,6 +220,60 @@
           "volatility": "Stable",
           "last_verified": "2026-11-03",
           "versions_checked": "Apache Parquet format overview"
+        },
+        {
+          "title": "Concepts",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/concepts/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet format concepts documentation"
+        },
+        {
+          "title": "Configurations",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/file-format/configurations/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet format configuration guidance"
+        },
+        {
+          "title": "Column Chunks",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/file-format/data-pages/columnchunks/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet file-format documentation"
+        },
+        {
+          "title": "Compression",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/file-format/data-pages/compression/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet compression specification"
+        },
+        {
+          "title": "Encodings",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/file-format/data-pages/encodings/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet encoding specification"
+        },
+        {
+          "title": "Page Index",
+          "publisher": "Apache Parquet",
+          "url": "https://parquet.apache.org/docs/file-format/pageindex/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Apache Parquet page-index specification"
         }
       ]
     },
