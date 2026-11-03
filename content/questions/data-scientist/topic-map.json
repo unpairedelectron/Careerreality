@@ -1,0 +1,20 @@
+{
+  "bank": "data-scientist",
+  "topics": [
+    {
+      "topic": "Model evaluation",
+      "subtopics": ["cross-validation", "leakage", "metrics", "calibration"],
+      "sources": [
+        {
+          "title": "Cross-validation: evaluating estimator performance",
+          "publisher": "scikit-learn developers",
+          "url": "https://scikit-learn.org/1.9/modules/cross_validation.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "scikit-learn 1.9.1"
+        }
+      ]
+    }
+  ]
+}

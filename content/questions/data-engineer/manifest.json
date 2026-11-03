@@ -1,0 +1,19 @@
+{
+  "bank": "data-engineer",
+  "target": 240,
+  "minimum": 150,
+  "itemCount": 1,
+  "countsByTopic": { "SQL": 1 },
+  "countsByLevel": { "L1": 1 },
+  "countsByType": { "concept": 1 },
+  "status": { "schemaValid": 1, "sourcesVerified": 1, "rederived": 1, "codeExecuted": 0, "expertReviewPending": 1 },
+  "itemStatus": {
+    "de-window-functions-retain-rows": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    }
+  }
+}

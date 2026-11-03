@@ -1,0 +1,63 @@
+[
+  {
+    "id": "agentic-workflow-before-autonomous-agent",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent architecture",
+    "subtopic": "Workflows versus agents",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A team proposes an autonomous agent for a repeatable approval process. What would you ask before accepting that design?",
+    "what_is_assessed": "Whether the candidate evaluates the need for model-directed control against predictability, cost, latency, and operational risk.",
+    "short_answer": "I would first map the allowed inputs, decisions, side effects, and exception paths. If the process is well-defined, a workflow with explicit steps and bounded model calls may be easier to test and control than an agent that chooses its own next actions. I would use agentic control only where the task genuinely needs flexible decomposition or tool selection, and compare it against the simplest baseline on task success, errors, latency, and cost. Any consequential action needs least-privilege tools, explicit limits, and human approval where the risk requires it.",
+    "deep_explanation": "An agent is not automatically better because it can choose tools or steps. For stable, repeatable tasks, explicit control flow makes behavior easier to predict, test, and constrain. A repeatable process may still have ambiguous exceptions, so map those cases and decide whether they need a bounded human escalation or genuinely flexible decisions. Agentic behavior may be justified when subtasks are not known in advance or flexibility materially improves results, but it can introduce variable paths and harder-to-bound failure modes. Anthropic's engineering guidance distinguishes predefined workflows from systems where a model dynamically directs its process and recommends starting with the simplest solution; the article also notes that parts of its tooling landscape have changed since publication. Treat it as conceptual guidance, not a current framework feature claim. Define permissions, budgets, stopping conditions, rollback, and an evaluation set before expanding autonomy.",
+    "strong_answer_signals": [
+      "Compares an agent against a simpler workflow baseline.",
+      "States the task property that would justify dynamic control.",
+      "Names permissions, budget limits, stop conditions, and risk-based approval."
+    ],
+    "weak_answer_signals": [
+      "Assumes autonomy is always more capable or efficient.",
+      "Discusses model quality but ignores side effects and rollback."
+    ],
+    "common_mistakes": [
+      "Using an agent where deterministic business rules can route the work.",
+      "Treating human approval as sufficient without controlling what the tool can do before approval."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is a useful first evaluation?",
+        "short_answer": "Compare a workflow and agent on the same representative tasks, including success, unsafe actions, latency, and cost."
+      },
+      {
+        "question": "Where should approval occur?",
+        "short_answer": "Before consequential or irreversible side effects, with the proposed action and evidence visible to the reviewer."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Building Effective AI Agents",
+        "publisher": "Anthropic Engineering",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "retrieved_date": "2026-11-03"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Conceptual engineering article published 2024-12-19; its own current-page note says tooling descriptions have changed.",
+    "last_verified": "2026-11-03",
+    "verification": {
+      "sources_checked": [
+        "https://www.anthropic.com/engineering/building-effective-agents"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation agreed with the workflow-versus-agent distinction and simple-baseline recommendation. Approval authority, exception handling, human review, and evaluation questions are editorial due-diligence recommendations; the 2024 source warns that its tooling descriptions have changed."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
+]

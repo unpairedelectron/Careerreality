@@ -1,0 +1,63 @@
+[
+  {
+    "id": "ds-separate-selection-and-final-test",
+    "bank": "data-scientist",
+    "topic": "Machine learning evaluation",
+    "subtopic": "Model selection and held-out evaluation",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "Why should the final test set not guide repeated model or hyperparameter choices?",
+    "what_is_assessed": "Understanding of overfitting to evaluation data and the distinct roles of validation and final testing.",
+    "short_answer": "Repeatedly choosing models based on a test set makes the test set part of the learning process. The selected model can become tuned to quirks in that set, so its reported score is no longer an untouched estimate of performance on new data. I would use training data to fit, validation or cross-validation to compare choices, and reserve a representative test set for a final check. I would also keep preprocessing inside each training fold to avoid leakage.",
+    "deep_explanation": "A test set is useful only to the extent that it is not repeatedly used to make modeling decisions. If many alternatives are tried and the best-looking test result is chosen, selection has implicitly used information from the test outcomes. A separate validation process supports model and parameter selection; a final held-out test set is evaluated after those choices are fixed. The split must reflect the data-generating structure: grouped users or time-ordered events may need group-aware or temporal splits rather than random shuffling. Preprocessing learned from data should be fit within each training fold, because fitting it before splitting can leak information. The scikit-learn guide explicitly warns against learning and testing on the same data and describes holding out test data.",
+    "strong_answer_signals": [
+      "Explains the test-set contamination caused by repeated decisions.",
+      "Separates training, validation/model selection, and final evaluation.",
+      "Connects split design and preprocessing to leakage risk."
+    ],
+    "weak_answer_signals": [
+      "Treats a single test score as an unbiased guarantee of deployment performance.",
+      "Uses the test set to repeatedly tune until the score improves."
+    ],
+    "common_mistakes": [
+      "Calling the validation set an untouched final test after using it for selection.",
+      "Applying preprocessing to the full dataset before cross-validation."
+    ],
+    "follow_ups": [
+      {
+        "question": "What if the data contains repeated records per customer?",
+        "short_answer": "Keep customers grouped across folds so related records do not leak between train and evaluation."
+      },
+      {
+        "question": "What if the model predicts future demand?",
+        "short_answer": "Use time-respecting splits so evaluation does not train on information from the future."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "3.1. Cross-validation: evaluating estimator performance",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/1.9/modules/cross_validation.html",
+        "retrieved_date": "2026-11-03"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable documentation.",
+    "last_verified": "2026-11-03",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/1.9/modules/cross_validation.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation confirmed the test-contamination risk. Clarified that the principle is not a literal requirement to access a test set exactly once; test results must not guide model choices if they are to remain an independent final evaluation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
+]

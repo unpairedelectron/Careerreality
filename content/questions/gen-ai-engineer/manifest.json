@@ -1,0 +1,19 @@
+{
+  "bank": "gen-ai-engineer",
+  "target": 220,
+  "minimum": 140,
+  "itemCount": 1,
+  "countsByTopic": { "Retrieval-augmented generation": 1 },
+  "countsByLevel": { "L2": 1 },
+  "countsByType": { "scenario": 1 },
+  "status": { "schemaValid": 1, "sourcesVerified": 1, "rederived": 1, "codeExecuted": 0, "expertReviewPending": 1 },
+  "itemStatus": {
+    "genai-rag-retrieval-is-not-proof-of-grounding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "ml-seed-does-not-guarantee-reproducibility",
+    "bank": "ai-ml-engineer",
+    "topic": "Training and reproducibility",
+    "subtopic": "Randomness and deterministic execution",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A training run uses the same random seed but produces a different result. Does that prove the seed was ignored?",
+    "what_is_assessed": "Ability to distinguish seeded random sources from end-to-end reproducibility across kernels, devices, and software environments.",
+    "short_answer": "No. A seed controls particular pseudorandom streams, but it does not guarantee that every operation is deterministic or that runs match across platforms and software versions. I would first confirm that all relevant random generators and data-loader workers are seeded, then check whether operations have nondeterministic implementations. I would record the framework version, device, libraries, data order, and configuration. If strict repeatability is required, I would enable supported deterministic behavior and test it in the actual target environment, while documenting its limits and possible performance cost.",
+    "deep_explanation": "Reproducibility is a property of the whole experiment, not just one seed value. Randomness can enter through framework, numerical-library, data-loader, augmentation, and application-level generators. Parallel execution and device-specific kernels may also produce nondeterministic results. PyTorch's reproducibility note says results are not guaranteed to be identical across releases, platforms, or CPU/GPU execution, and documents controls for randomness and deterministic algorithms. The practical debugging sequence is to fix and record the environment, enumerate random sources, enable deterministic algorithms where supported, and then compare repeated runs locally. This does not imply bitwise portability to a different stack.",
+    "strong_answer_signals": [
+      "Does not equate a seed with universal deterministic execution.",
+      "Names environment and data-order factors to record.",
+      "Describes an empirical repeat-run check on the target stack."
+    ],
+    "weak_answer_signals": [
+      "Claims that one global seed guarantees identical results on every machine.",
+      "Changes the seed repeatedly without checking nondeterministic operations."
+    ],
+    "common_mistakes": [
+      "Omitting data-loader or library randomness from the investigation.",
+      "Claiming cross-version or CPU/GPU bitwise equivalence without evidence."
+    ],
+    "follow_ups": [
+      {
+        "question": "What would you record to reproduce a run?",
+        "short_answer": "Code and data versions, framework and library versions, device, configuration, seeds, and data order."
+      },
+      {
+        "question": "What is the trade-off of deterministic algorithms?",
+        "short_answer": "Some operations may be slower or unavailable; measure in the target environment and state the remaining limits."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Reproducibility",
+        "publisher": "PyTorch",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/randomness.html",
+        "retrieved_date": "2026-11-03"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 stable documentation.",
+    "last_verified": "2026-11-03",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/notes/randomness.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation confirmed that seeds do not promise cross-platform or cross-version reproducibility and that nondeterministic operations and additional RNGs matter. Deterministic controls remain scoped to supported operations and environments."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "de-window-functions-retain-rows",
+    "bank": "data-engineer",
+    "topic": "SQL",
+    "subtopic": "Window functions and aggregation",
+    "level": "L1",
+    "type": "concept",
+    "question": "What is the key difference between a window calculation and a grouped aggregate?",
+    "what_is_assessed": "Whether the candidate can explain output grain and choose a SQL construct that preserves row-level records.",
+    "short_answer": "A grouped aggregate combines rows into one result per group. A window function calculates across related rows while keeping each input row in the result. I would use GROUP BY when the desired output grain is the group, and a window expression when I need both row-level detail and a group-level or ranked value. I would make the window partition and ordering explicit, then check that the result still has the intended grain.",
+    "deep_explanation": "For example, a monthly sales GROUP BY can return one row per month. A windowed SUM partitioned by month can attach that monthly total to every sale row in the month, so the original sale-level rows remain available. This distinction affects joins, row counts, and downstream aggregation: summing a repeated window total later can multiply the measure. The right choice follows the required output grain, not a general preference for one syntax. The PostgreSQL tutorial describes window functions as calculations over related rows and contrasts them with grouped aggregates that reduce rows.",
+    "strong_answer_signals": [
+      "States that grouped aggregates reduce output rows to group grain.",
+      "States that window functions retain the input rows while adding a calculation.",
+      "Mentions partitioning, ordering, and downstream double-counting risk."
+    ],
+    "weak_answer_signals": [
+      "Says window functions are only a faster form of GROUP BY.",
+      "Cannot describe how output row count or grain changes."
+    ],
+    "common_mistakes": [
+      "Treating a windowed total repeated on each row as additive downstream.",
+      "Assuming every window requires ORDER BY or that its default frame always matches the intended calculation."
+    ],
+    "follow_ups": [
+      {
+        "question": "How would you show each sale beside its monthly total?",
+        "short_answer": "Use SUM(amount) OVER (PARTITION BY month); each sale row remains present."
+      },
+      {
+        "question": "Why might summing that result later be wrong?",
+        "short_answer": "The same monthly total is repeated on each sale, so a later sum can multiply it."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "3.5. Window Functions",
+        "publisher": "PostgreSQL Global Development Group",
+        "url": "https://www.postgresql.org/docs/18/tutorial-window.html",
+        "retrieved_date": "2026-11-03"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "PostgreSQL 18 documentation; version 19 is listed as development, not used for this item.",
+    "last_verified": "2026-11-03",
+    "verification": {
+      "sources_checked": [
+        "https://www.postgresql.org/docs/18/tutorial-window.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation confirmed the row-retention contrast. Nuance added: windows operate on the query's virtual table, which may already be grouped or filtered; ordered default frames can produce running values rather than a whole-partition total."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
+]

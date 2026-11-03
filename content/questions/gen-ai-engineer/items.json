@@ -1,0 +1,63 @@
+[
+  {
+    "id": "genai-rag-retrieval-is-not-proof-of-grounding",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Retrieval and answer evaluation",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A RAG assistant retrieved relevant passages but gave an unsupported answer. What would you investigate?",
+    "what_is_assessed": "Ability to treat retrieval and generation as separate failure surfaces and propose measurable checks without claiming retrieval guarantees correctness.",
+    "short_answer": "I would not treat relevant retrieval as proof that the answer is supported. I would inspect whether the retrieved passages actually entail each answer claim, whether contradictory or stale passages were included, and whether the model followed the evidence rather than prior knowledge. I would score retrieval relevance and answer faithfulness separately on a reviewed test set, trace the exact context supplied, and add cases for conflicting and insufficient evidence. If support is missing, the system should abstain or ask for clarification rather than invent a citation.",
+    "deep_explanation": "Retrieval-augmented generation combines a non-parametric retrieval component with a generator, so the pipeline has distinct opportunities to fail: retrieval can omit or mis-rank evidence, context assembly can lose qualifications, and generation can make claims not supported by the context. A relevance judgment is weaker than entailment: a passage can concern the right topic without proving the answer. Evaluation should preserve query, retrieved document identifiers and versions, context order, answer, and citation mapping. Use separate retrieval measures and claim-level support review, with examples for stale records, conflicting sources, and no-answer cases. The original RAG paper describes models combining parametric memory with retrieved non-parametric memory and reports results for specific research tasks; it does not establish that retrieval alone guarantees grounded output or prescribe a production debugging checklist. The diagnostic steps here are engineering recommendations based on the architecture, not a tested procedure from that paper.",
+    "strong_answer_signals": [
+      "Separates retrieval relevance from claim-level support.",
+      "Proposes inspecting and versioning the exact retrieved context.",
+      "Includes abstention or clarification for insufficient evidence."
+    ],
+    "weak_answer_signals": [
+      "Assumes a relevant document makes the generated answer factual.",
+      "Measures only answer fluency or a single aggregate score."
+    ],
+    "common_mistakes": [
+      "Treating a citation's presence as proof that the cited passage supports the claim.",
+      "Improving chunking before determining whether retrieval, context assembly, or generation caused the failure."
+    ],
+    "follow_ups": [
+      {
+        "question": "How would you test a permission-aware retrieval change?",
+        "short_answer": "Use synthetic identities and documents, assert unauthorized records never enter retrieved context, and test direct identifiers and filter bypass cases."
+      },
+      {
+        "question": "What should happen when sources conflict?",
+        "short_answer": "Expose the conflict with provenance and dates, or abstain under a defined policy; do not silently blend incompatible claims."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "publisher": "arXiv (Lewis et al.), version 4",
+        "url": "https://arxiv.org/abs/2005.11401",
+        "retrieved_date": "2026-11-03"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Original RAG paper arXiv:2005.11401v4; no vendor API or current model behavior is asserted.",
+    "last_verified": "2026-11-03",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2005.11401"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation agreed with the core distinction but found that the paper supports the architecture, not the production diagnosis checklist. Added an explicit boundary: evaluation and debugging steps are editorial recommendations, and the paper's findings are task- and architecture-specific."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
+]

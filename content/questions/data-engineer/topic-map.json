@@ -1,0 +1,35 @@
+{
+  "bank": "data-engineer",
+  "topics": [
+    {
+      "topic": "SQL",
+      "subtopics": ["joins", "window functions", "query plans", "indexing"],
+      "sources": [
+        {
+          "title": "PostgreSQL 18 documentation",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Stable",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PostgreSQL 18"
+        }
+      ]
+    },
+    {
+      "topic": "Streaming systems",
+      "subtopics": ["partitions", "offsets", "delivery semantics", "late data"],
+      "sources": [
+        {
+          "title": "Apache Kafka Design",
+          "publisher": "Apache Kafka",
+          "url": "https://kafka.apache.org/44/design/design/",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "Apache Kafka 4.4 documentation page"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "bank": "ai-ml-engineer",
+  "topics": [
+    {
+      "topic": "Training and reproducibility",
+      "subtopics": ["randomness", "deterministic operations", "environment capture"],
+      "sources": [
+        {
+          "title": "Reproducibility",
+          "publisher": "PyTorch",
+          "url": "https://docs.pytorch.org/docs/2.15/notes/randomness.html",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-03",
+          "versions_checked": "PyTorch 2.15.0"
+        }
+      ]
+    }
+  ]
+}

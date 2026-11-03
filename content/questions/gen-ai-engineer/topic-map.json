@@ -1,0 +1,20 @@
+{
+  "bank": "gen-ai-engineer",
+  "topics": [
+    {
+      "topic": "Retrieval-augmented generation",
+      "subtopics": ["retriever and generator roles", "retrieval evaluation", "grounded answers"],
+      "sources": [
+        {
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+          "publisher": "arXiv (Lewis et al.)",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "retrieved_date": "2026-11-03",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-03",
+          "versions_checked": "arXiv:2005.11401v4"
+        }
+      ]
+    }
+  ]
+}

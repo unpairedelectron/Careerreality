@@ -1,0 +1,19 @@
+{
+  "bank": "ai-ml-engineer",
+  "target": 220,
+  "minimum": 140,
+  "itemCount": 1,
+  "countsByTopic": { "Training and reproducibility": 1 },
+  "countsByLevel": { "L2": 1 },
+  "countsByType": { "debugging": 1 },
+  "status": { "schemaValid": 1, "sourcesVerified": 1, "rederived": 1, "codeExecuted": 0, "expertReviewPending": 1 },
+  "itemStatus": {
+    "ml-seed-does-not-guarantee-reproducibility": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    }
+  }
+}
