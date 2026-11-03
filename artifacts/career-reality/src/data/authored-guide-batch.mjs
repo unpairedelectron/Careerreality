@@ -72,6 +72,7 @@ Q: Which tool should I use? A: Use the CTC calculator for an assumption-based pa
     ],
   },
   "runway-debt-and-big-decisions": {
+    dateModified: "2026-10-31",
     editorialFrame: "A job change can look affordable in an annual package and still strain a household month by month. Put accessible cash, recurring bills, loan payments and employer-linked equity in separate columns. Then test what changes if income arrives late, falls, or stops; do not treat unvested or illiquid value as an emergency fund.",
     lead: "",
     sections: [
@@ -129,6 +130,7 @@ Q: What should I bring to a loan review? A: Keep the sanction letter, repayment 
     ],
   },
   "independent-work-without-romanticising-it": {
+    dateModified: "2026-10-31",
     editorialFrame: "Freelancing is a change in how work is found, scoped, delivered and paid; it is not an automatic increase in freedom or income. Test a small piece of paid demand, protect the time needed to deliver it, and write down what happens if the client delays, expands the scope or does not return.",
     lead: "",
     sections: [
@@ -241,6 +243,7 @@ Q: When should I pause a programme? A: Revisit the decision before a new financi
     ],
   },
   "getting-hired-through-evidence-and-conversations": {
+    dateModified: "2026-10-31",
     editorialFrame: "A strong interview is a clear account of what you did, how you decided, and what the evidence cannot show. Prepare a few work examples, protect confidential information, and use the conversation to test the role as well as present yourself. A portfolio, referral or polished answer can open a discussion; none guarantees a hire.",
     lead: "",
     sections: [
@@ -296,6 +299,7 @@ Q: Does a referral guarantee a job? A: No. It can create a conversation; the tea
     ],
   },
   "performance-reviews-and-career-choices": {
+    dateModified: "2026-10-31",
     editorialFrame: "A promotion decision is easier to evaluate when the scope, decision-maker and evidence are explicit. Do not reduce readiness to a rating or title. Ask what work would demonstrate the next level, who will review it, what support is available, and when the decision will be revisited.",
     lead: "",
     sections: [

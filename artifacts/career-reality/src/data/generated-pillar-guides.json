@@ -145,6 +145,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1099,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "What counts as liquid money?",
@@ -181,8 +182,7 @@
           "label": "Read the offer beyond CTC"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "independent-work-without-romanticising-it",
@@ -229,6 +229,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1071,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Should I quit before testing freelance demand?",
@@ -261,8 +262,7 @@
           "label": "Getting hired through evidence and conversations"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "career-switches-and-education",
@@ -393,6 +393,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1049,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Do I need a public portfolio?",
@@ -425,8 +426,7 @@
           "label": "Read the offer beyond CTC"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "performance-reviews-and-career-choices",
@@ -473,6 +473,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1093,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does a strong review guarantee promotion?",
@@ -509,8 +510,7 @@
           "label": "Getting hired through evidence and conversations"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "engineering-careers-without-the-title-trap",
@@ -601,6 +601,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1089,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does management mean less technical work?",
@@ -629,8 +630,7 @@
           "label": "Career experiment planner"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "ai-at-work-questions-to-ask",
@@ -721,6 +721,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1110,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Will AI replace my role?",
@@ -749,8 +750,7 @@
           "label": "Bounded learning experiment"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "data-science-career-claims",
@@ -841,6 +841,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1064,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does a data-science title guarantee modelling work?",
@@ -869,8 +870,7 @@
           "label": "Compare written offers"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "cybersecurity-and-green-work",
@@ -961,6 +961,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1050,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Are these fields guaranteed career paths?",
@@ -989,8 +990,7 @@
           "label": "Plan a bounded experiment"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "layoff-recovery-and-employment-documents",
@@ -1293,7 +1293,13 @@
         {
           "heading": "Identify the actual arrangement",
           "content": "Start with the contract, not the job-board label “remote.” Ask which legal entity signs, whether you are an employee or contractor, where services are performed, which currency and pay period apply, and who handles payroll and benefits. A company headquartered abroad can hire through a local entity, use an intermediary or contract directly; those arrangements are not interchangeable. Get the proposed structure in writing before comparing totals.\n\nRecord residence and work location separately. A temporary trip, a move, a permanent home and a payroll location may raise different questions. Do not guess how a tax treaty, withholding rule or employment law applies to your facts. Ask the employer which adviser can explain the arrangement, and consult a qualified professional for your own residency, filing and cross-border obligations. This guide does not calculate a personal tax result.",
-          "sourceLinks": [],
+          "sourceLinks": [
+            {
+              "url": "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/non-resident",
+              "label": "Income Tax Department — Non-resident and tax-residency guidance",
+              "year": "2026"
+            }
+          ],
           "sourceTitle": "CareerReality Editorial",
           "sourceSlug": "authored-cross-border-and-remote-pay-1",
           "sourceNotes": []
@@ -1355,6 +1361,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1074,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Is remote gross pay the same as take-home?",
@@ -1387,8 +1394,7 @@
           "label": "Review tax-tool scope"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "senior-engineering-and-operations-work",
@@ -1479,6 +1485,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1047,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does a senior title guarantee decision authority?",
@@ -1511,8 +1518,7 @@
           "label": "Plan a bounded role investigation"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "skills-passion-and-career-constraints",
@@ -1731,6 +1737,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1015,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does a product manager own the roadmap?",
@@ -1763,8 +1770,7 @@
           "label": "Plan a bounded role test"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "workplace-culture-and-boundaries",
@@ -1855,6 +1861,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1024,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Does one bad joke prove a toxic culture?",
@@ -1887,8 +1894,7 @@
           "label": "Plan a bounded conversation"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "how-to-read-salary-and-hiring-claims",
@@ -1979,6 +1985,7 @@
       "sources": [],
       "sourceDisclosure": "",
       "wordCount": 1017,
+      "dateModified": "2026-10-31",
       "faqs": [
         {
           "question": "Is an advertised salary range a promise?",
@@ -2007,8 +2014,7 @@
           "label": "Estimate payroll assumptions"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "notice-period-buyout-india",
@@ -2289,7 +2295,18 @@
         {
           "heading": "Confirm money and benefits as separate questions",
           "content": "Ask for an itemised final-pay statement and the expected date for salary, approved expenses, leave treatment, any severance, and other amounts. Request the document or clause that explains each line. Confirm when health or other benefits end and whether you must take any action. Do not assume every item is due on the same date, or that one gross amount is the same as cash after tax and deductions.\n\nRecord amounts as confirmed, pending, or disputed. Keep a copy of the latest payslip and benefit portal details you are permitted to retain. If a payment depends on a condition, write down that condition and who will confirm it. A question about statutory entitlement, tax treatment, or a disputed deduction should be directed to a qualified adviser or the relevant official source with your actual documents.",
-          "sourceLinks": [],
+          "sourceLinks": [
+            {
+              "url": "https://labour.gov.in/en/faqs-labour-codes",
+              "label": "Ministry of Labour and Employment — FAQs on Labour Codes",
+              "year": "2026"
+            },
+            {
+              "url": "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1?Id=292",
+              "label": "Income Tax Department — Salaried Individuals for AY 2026–27",
+              "year": "2026"
+            }
+          ],
           "sourceTitle": "CareerReality Editorial",
           "sourceSlug": "authored-first-24-hours-after-layoff-3",
           "sourceNotes": []

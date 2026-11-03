@@ -1,7 +1,13 @@
 const editorial = (heading, content, sourceLinks = []) => ({ heading, content, sourceLinks });
+const incomeTaxResidence = {
+  url: "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/non-resident",
+  label: "Income Tax Department — Non-resident and tax-residency guidance",
+  year: "2026",
+};
 
 export default {
   "engineering-careers-without-the-title-trap": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Choose an engineering path by the decisions you can own and the consequences you can manage, not by whether the title says individual contributor or manager. Compare scope, authority, mentoring and operational work in the actual role.",
     sections: [
@@ -39,6 +45,7 @@ Agree on a follow-up date and the work that can reasonably produce the evidence.
     ],
   },
   "ai-at-work-questions-to-ask": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Decide what to learn by examining a real workflow: which task changes, how the output is checked, what information may be exposed and who remains answerable. A tool demonstration is not evidence that an entire job will disappear or improve.",
     sections: [
@@ -78,6 +85,7 @@ If the process changes, update the task map and get approval for the new handlin
     ],
   },
   "data-science-career-claims": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "A data-science title does not reveal the daily work. Ask what a junior person will clean, measure, explain or maintain, and use a reproducible sample to show how you reason rather than claiming expertise from a polished chart.",
     sections: [
@@ -117,6 +125,7 @@ Also decide whether the conditions suit your learning style. Some people want fr
     ],
   },
   "cybersecurity-and-green-work": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Cybersecurity and environmental work are broad labels, not guaranteed routes into stable jobs. Verify the actual tasks, entry requirements, funding and authority in a specific role before investing in a credential or treating a sector headline as a personal forecast.",
     sections: [
@@ -246,12 +255,13 @@ If you need a reference, ask who can provide it and what details they are comfor
     ],
   },
   "cross-border-and-remote-pay": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Compare a remote or cross-border offer only after identifying who employs you, where you will work, what currency the contract uses and which obligations require qualified tax advice. A converted headline is not a net-pay estimate.",
     sections: [
       editorial("Identify the actual arrangement", `Start with the contract, not the job-board label “remote.” Ask which legal entity signs, whether you are an employee or contractor, where services are performed, which currency and pay period apply, and who handles payroll and benefits. A company headquartered abroad can hire through a local entity, use an intermediary or contract directly; those arrangements are not interchangeable. Get the proposed structure in writing before comparing totals.
 
-Record residence and work location separately. A temporary trip, a move, a permanent home and a payroll location may raise different questions. Do not guess how a tax treaty, withholding rule or employment law applies to your facts. Ask the employer which adviser can explain the arrangement, and consult a qualified professional for your own residency, filing and cross-border obligations. This guide does not calculate a personal tax result.`),
+Record residence and work location separately. A temporary trip, a move, a permanent home and a payroll location may raise different questions. Do not guess how a tax treaty, withholding rule or employment law applies to your facts. Ask the employer which adviser can explain the arrangement, and consult a qualified professional for your own residency, filing and cross-border obligations. This guide does not calculate a personal tax result.`, [incomeTaxResidence]),
       editorial("Normalize the offer before comparing", `Create separate lines for gross compensation, currency, pay frequency, payment date, variable terms, benefits, employer contributions, insurance, expenses and fees you may carry yourself. Note who bears exchange conversion costs and which rate or date is used if a payment is converted. A spot conversion of a headline does not account for changes in rates, deductions or benefits. Keep a same-currency view before considering any conversion.
 
 Use the offer-comparison tool only with amounts that share a currency and period. Its headline comparison cannot model a foreign payroll, worker classification or personal tax. The tax-regime comparison has its own eligibility and input limits; it is not a cross-border calculator. A useful table labels each missing item as unknown rather than turning an incomplete offer into a precise-looking take-home figure.`),
@@ -286,6 +296,7 @@ Build a month-by-month view using confirmed dates and mark uncertain items visib
     ],
   },
   "senior-engineering-and-operations-work": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Assess a senior engineering or operations role by the systems it owns, the incidents it must absorb, its authority to prevent recurrence and the time left for deep work. Salary or title alone cannot show whether the operating model is sustainable.",
     sections: [
@@ -368,6 +379,7 @@ Record the opportunity cost in plain language. What will receive less time while
     ],
   },
   "culture-fit-and-product-management": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Test a product role by the decisions it owns, the evidence that changes priorities and the relationships that make delivery possible. Replace vague culture-fit claims with observable practices instead of trying to guess whether you resemble the team.",
     sections: [
@@ -408,6 +420,7 @@ If stakeholders disagree, find out who resolves the conflict and how the decisio
     ],
   },
   "workplace-culture-and-boundaries": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Assess culture through repeated evidence about workload, disagreement and boundaries. One joke, one intense week or one polished interview cannot establish how a team will treat people across ordinary work.",
     sections: [
@@ -448,6 +461,7 @@ If you are already employed, choose a low-risk way to clarify expectations: ask 
     ],
   },
   "how-to-read-salary-and-hiring-claims": {
+    dateModified: "2026-10-31",
     keepDecisionSupport: true,
     editorialFrame: "Read a salary or hiring claim by checking its source, date, level, location, sample and definition. Keep market context separate from a written offer and never turn a headline into a personal pay promise.",
     sections: [
