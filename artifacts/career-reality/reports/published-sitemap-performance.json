@@ -1,25 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T10:28:26.469Z",
+  "generatedAt": "2026-11-03T13:25:32.405Z",
   "audits": [
-    {
-      "generatedAt": "2026-10-31T14:36:34.225Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 2024,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
-    {
-      "generatedAt": "2026-10-31T15:04:07.535Z",
-      "pageCount": 79,
-      "batchSize": 8,
-      "elapsedMs": 6875,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": true
-    },
     {
       "generatedAt": "2026-10-31T15:16:13.170Z",
       "pageCount": 79,
@@ -178,6 +160,24 @@
       "pageCount": 79,
       "batchSize": 8,
       "elapsedMs": 2088,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-02T12:38:38.839Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 13420,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": true
+    },
+    {
+      "generatedAt": "2026-11-03T13:25:32.405Z",
+      "pageCount": 79,
+      "batchSize": 8,
+      "elapsedMs": 2461,
       "warningThresholdMs": 5000,
       "workerFailures": 0,
       "slow": false
