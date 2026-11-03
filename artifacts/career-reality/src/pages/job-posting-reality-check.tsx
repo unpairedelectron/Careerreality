@@ -335,7 +335,7 @@ export default function JobPostingRealityCheckPage() {
     <PublicPage
       eyebrow="Decision tool / evidence first"
       title="Job Posting Reality Check"
-      intro="Compare resume evidence with a role’s must-haves. Get a match score and a practical apply-or-pause next step; missing text alone is not proof you lack a skill."
+      intro="Compare resume evidence with a role’s must-haves and day-to-day responsibilities. Get a match score and a practical apply-or-pause next step; missing text alone is not proof you lack a skill."
       seo={{
         title: "Job Posting Reality Check | CareerReality",
         description: "Match resume evidence to job requirements, get an apply-or-pause recommendation, and review why. Missing text alone is not proof you lack the experience.",
@@ -678,7 +678,7 @@ export default function JobPostingRealityCheckPage() {
                 <details className="rounded-xl border border-border/80 bg-background/60 px-4 py-3">
                   <summary className="cursor-pointer text-sm font-semibold">How to read this score</summary>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    Rule-based and based only on extracted posting requirements and the wording in your resume. It is not a validated prediction, hiring odds, or a judgment of capability. Mandatory requirements count twice; preferred count once. Ambiguous, unclear, contextual-tool, and unresolved items are excluded. Direct evidence counts fully, transferable 75%, partial 50%; not documented and confirmed gaps count zero.
+                    Rule-based and based only on extracted posting requirements and the wording in your resume. It is not a validated prediction, hiring odds, or a judgment of capability. Mandatory requirements count twice; preferred items and clear day-to-day responsibilities count once. Ambiguous skills, contextual tools, unclear wording, and unresolved items are excluded. Direct evidence counts fully, transferable 75%, partial 50%; not documented and confirmed gaps count zero.
                   </p>
                 </details>
               </div>

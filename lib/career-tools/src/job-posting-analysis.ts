@@ -53,7 +53,9 @@ export class ResumeTextNeedsReviewError extends Error {
 const headings = new Set([
   "about the role", "about you", "responsibilities", "what you will do",
   "what you will bring", "requirements", "qualifications", "must have",
-  "nice to have", "preferred qualifications", "our expectations",
+  "required qualifications", "minimum qualifications", "required skills",
+  "minimum requirements", "nice to have", "preferred qualifications",
+  "preferred skills", "our expectations",
 ]);
 
 const stopWords = new Set([
@@ -166,18 +168,38 @@ function normalize(value: string): string {
 }
 
 function isHeading(line: string): boolean {
-  return headings.has(line.toLocaleLowerCase().replace(/[:.]+$/, "").trim());
+  return headings.has(line.toLocaleLowerCase().replace(/^#+\s*/, "").replace(/[:.]+$/, "").trim());
 }
 
 const MAX_REQUIREMENT_CLAUSE_LENGTH = 280;
 const explicitCandidateDutyStartPattern = /\b(?:(?:you|the\s+(?:successful\s+)?candidate|candidates?|applicants?)\s+(?:(?:will|must|should|are|is\s+expected\s+to|are\s+expected\s+to)\s+)?|(?:this|the)\s+(?:role|position)\s+(?:(?:will|must|should|is|are\s+expected\s+to)\s+)?)(?:be\s+)?(?:own|build|design|develop|deliver|lead|manage|operate|maintain|analy[sz]e|drive|implement|support|mentor|coordinate|create|improve|reduce|increase|scale|launch|gather|write|communicate|responsible\s+for|accountable\s+for|take\s+ownership\s+of)\b/i;
 
-function statementParts(text: string): { parts: string[]; overlongRequirementCount: number } {
-  const parts: string[] = [];
+type RequirementCandidate = {
+  text: string;
+  signal?: JobRequirement["signal"];
+};
+
+function signalForHeading(line: string): JobRequirement["signal"] | undefined {
+  const heading = line.toLocaleLowerCase().replace(/^#+\s*/, "").replace(/[:.]+$/, "").trim();
+  if ([
+    "requirements", "qualifications", "must have", "required qualifications",
+    "minimum qualifications", "required skills", "minimum requirements",
+  ].includes(heading)) return "mandatory";
+  if (["nice to have", "preferred qualifications", "preferred skills"].includes(heading)) return "preferred";
+  return undefined;
+}
+
+function statementParts(text: string): { parts: RequirementCandidate[]; overlongRequirementCount: number } {
+  const parts: RequirementCandidate[] = [];
   let overlongRequirementCount = 0;
+  let sectionSignal: JobRequirement["signal"] | undefined;
   for (const rawLine of text.normalize("NFKC").split(/\r?\n/)) {
     const line = rawLine.replace(/^\s*(?:[-*•‣▪]|\d+[.)])\s*/, "").trim();
-    if (!line || isHeading(line)) continue;
+    if (!line) continue;
+    if (isHeading(line)) {
+      sectionSignal = signalForHeading(line);
+      continue;
+    }
     if (injectionPattern.test(line)) continue;
     const sentences = line.split(/(?<=[.!?])\s+(?=[\p{L}\d])/u);
     for (const sentence of sentences) {
@@ -198,7 +220,7 @@ function statementParts(text: string): { parts: string[]; overlongRequirementCou
             continue;
           }
           if (cleaned.length >= 12 && looksLikeRequirement(cleaned)) {
-            parts.push(cleaned);
+            parts.push({ text: cleaned, signal: sectionSignal });
           } else if (cleaned !== original && looksLikeRequirement(original)) {
             overlongRequirementCount += 1;
           }
@@ -209,17 +231,12 @@ function statementParts(text: string): { parts: string[]; overlongRequirementCou
   return { parts, overlongRequirementCount };
 }
 
-type RequirementCandidate = {
-  text: string;
-  signal?: JobRequirement["signal"];
-};
-
-function requirementCandidates(statement: string): RequirementCandidate[] {
+function requirementCandidates(statement: string, sectionSignal?: JobRequirement["signal"]): RequirementCandidate[] {
   const prefix = statement.match(/^(?:responsibilities|requirements|preferred|nice to have|required)\s*:\s*/i)?.[0] ?? "";
   const content = statement.slice(prefix.length).trim();
   const signal: JobRequirement["signal"] | undefined = preferredPattern.test(statement)
     ? "preferred"
-    : mandatoryPattern.test(statement) ? "mandatory" : undefined;
+    : mandatoryPattern.test(statement) ? "mandatory" : sectionSignal;
   const splitItems = content.includes(",")
     ? content.replace(/,\s*and\s+/gi, ",").split(",").map((item) => item.trim().replace(/^and\s+/i, ""))
     : [content];
@@ -605,7 +622,7 @@ export function analyzeJobPosting(
   const statements = extractedStatements.parts;
   const grouped = new Map<string, { text: string; duplicates: number; signal?: JobRequirement["signal"] }>();
   for (const statement of statements) {
-    for (const candidate of requirementCandidates(statement)) {
+    for (const candidate of requirementCandidates(statement.text, statement.signal)) {
       const key = requirementKey(candidate.text);
       if (!key) continue;
       const existing = grouped.get(key);

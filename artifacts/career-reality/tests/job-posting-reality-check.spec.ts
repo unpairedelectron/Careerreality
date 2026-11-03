@@ -142,6 +142,25 @@ test("reviews requirements, allows a manual confirmed gap, and does not submit t
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
+test("changes the visible score when a different role and resume are analyzed", async ({ page }) => {
+  await page.goto("/job-posting-reality-check");
+  const resume = page.getByTestId("input-job-check-resume");
+  const posting = page.getByTestId("input-job-check-description");
+  const analyze = page.getByTestId("button-analyze-job-posting");
+  const score = page.getByTestId("job-check-score");
+
+  await resume.fill("Built SQL queries for finance dashboards and reporting.");
+  await posting.fill("Responsibilities\n- Build SQL queries for finance reporting.");
+  await analyze.click();
+  await expect(score).toContainText("100");
+
+  await resume.fill("Wrote customer support guides and managed help-center updates.");
+  await posting.fill("Responsibilities\n- Build Python data pipelines for finance reporting.");
+  await analyze.click();
+  await expect(score).toContainText("0");
+  await expect(page.getByTestId("job-check-verdict")).not.toHaveText("Not enough clear requirements to score");
+});
+
 test("politely announces recalculated match results only after evidence status changes", async ({ page }) => {
   await page.goto("/job-posting-reality-check");
   await page.getByTestId("input-job-check-resume").fill("Built Python data pipelines for monthly reporting.");

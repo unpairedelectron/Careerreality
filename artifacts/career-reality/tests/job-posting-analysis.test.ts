@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   analyzeJobPosting,
+  calculateJobPostingReadiness,
   isResumeTextLikelyGarbled,
   JOB_POSTING_TEXT_LIMIT,
   ResumeTextNeedsReviewError,
@@ -30,6 +31,44 @@ test("maps action-backed resume wording to direct evidence", () => {
   assert.equal(result.requirements[0].evidenceStatus, "direct");
   assert.match(result.requirements[0].evidenceQuote ?? "", /Built Python data pipelines/);
   assert.equal(result.requirements[0].evidenceQuoteSource, "candidate-authored");
+});
+
+test("scores clear responsibilities and changes the result with the supplied resume", () => {
+  const jobText = [
+    "Responsibilities",
+    "- Build Python data pipelines for finance reporting.",
+    "- Manage stakeholder communication.",
+  ].join("\n");
+  const relevantResume = "Built Python data pipelines for monthly finance reporting.";
+  const unrelatedResume = "Created social media campaigns and wrote product copy.";
+  const relevant = analyzeJobPosting(jobText, relevantResume);
+  const unrelated = analyzeJobPosting(jobText, unrelatedResume);
+
+  assert.deepEqual(relevant.requirements.map(({ signal }) => signal), ["ambiguous", "ambiguous"]);
+  assert.deepEqual(relevant.requirements.map(({ category }) => category), ["responsibility", "responsibility"]);
+  const relevantReadiness = calculateJobPostingReadiness(relevant.requirements);
+  const unrelatedReadiness = calculateJobPostingReadiness(unrelated.requirements);
+  assert.equal(relevantReadiness.includedRequirements.length, 2);
+  assert.equal(relevantReadiness.score, 50);
+  assert.equal(unrelatedReadiness.score, 0);
+});
+
+test("uses explicit requirements and preferred section headings as signals", () => {
+  const result = analyzeJobPosting(
+    [
+      "## Requirements",
+      "- SQL experience.",
+      "### Nice to have:",
+      "- Kubernetes experience.",
+    ].join("\n"),
+    "Built SQL queries for finance dashboards.",
+  );
+  const sql = result.requirements.find(({ text }) => /sql/i.test(text));
+  const kubernetes = result.requirements.find(({ text }) => /kubernetes/i.test(text));
+
+  assert.equal(sql?.signal, "mandatory");
+  assert.equal(sql?.evidenceStatus, "direct");
+  assert.equal(kubernetes?.signal, "preferred");
 });
 
 test("does not extract incidental tools from company context", () => {

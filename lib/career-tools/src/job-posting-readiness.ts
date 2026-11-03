@@ -27,7 +27,9 @@ export function calculateJobPostingReadiness<T extends ReadinessRequirement>(
 ): Omit<JobPostingReadiness, "includedRequirements"> & { includedRequirements: T[] } {
   const includedRequirements = requirements.filter((requirement) => {
     const status = overrides[requirement.id] ?? requirement.evidenceStatus;
-    return (requirement.signal === "mandatory" || requirement.signal === "preferred")
+    const isScorableResponsibility = requirement.signal === "ambiguous"
+      && requirement.category === "responsibility";
+    return (requirement.signal === "mandatory" || requirement.signal === "preferred" || isScorableResponsibility)
       && requirement.category !== "contextual-tool"
       && requirement.category !== "unclear"
       && status !== "unresolved";
