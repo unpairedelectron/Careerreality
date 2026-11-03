@@ -2,7 +2,8 @@ const editorial = (heading, content, sourceLinks = []) => ({ heading, content, s
 
 export default {
   "read-the-offer-beyond-ctc": {
-    editorialFrame: "A CTC headline is not a monthly salary. Compare the written fixed-pay terms, conditional pay, employer costs, reimbursements and deductions separately; then reconcile the first payslip with the offer. Use the ₹20 lakh example below as arithmetic, not as a promise about your own payroll.",
+    dateModified: "2026-11-03",
+    editorialFrame: "A CTC headline is not a monthly salary. Compare the written fixed-pay terms, conditional pay, employer costs, reimbursements and deductions separately; then reconcile the first payslip with the offer. This guide focuses on translating compensation into dependable cash; for broader questions about role scope, location, recovery clauses, and other offer terms, see the offer-letter checklist. Use the ₹20 lakh example below as arithmetic, not as a promise about your own payroll.",
     lead: "",
     sections: [
       editorial("Start with the document, not the headline", `Open the signed offer and every annexure that describes compensation. Make one row for each component and copy the document’s own name, amount, payment frequency, condition and responsible entity. Keep an “unknown” column. If a recruiter says a figure is standard but the letter is silent, mark it unknown rather than silently treating it as guaranteed.
@@ -67,6 +68,7 @@ Q: Which tool should I use? A: Use the CTC calculator for an assumption-based pa
       { url: "/offer-comparison", label: "Offer comparison" },
       { url: "/rules/employee-pf", label: "EPF rules and source" },
       { url: "/guides/runway-debt-and-big-decisions/", label: "Runway, debt and big decisions" },
+      { url: "/guides/offer-letter-red-flags-india", label: "Review the wider offer terms" },
     ],
   },
   "runway-debt-and-big-decisions": {
@@ -182,7 +184,8 @@ Q: How should I evaluate a side project? A: Compare the planned hours with actua
     ],
   },
   "career-switches-and-education": {
-    editorialFrame: "A course is one possible route into different work, not the outcome itself. Before paying or leaving a role, name the tasks you want to do, find out how newcomers demonstrate competence, and create a small work sample. Compare learning routes by cost, time, feedback and the evidence they leave behind.",
+    dateModified: "2026-11-03",
+    editorialFrame: "A course is one possible route into different work, not the outcome itself. Before paying or leaving a role, name the tasks you want to do, find out how newcomers demonstrate competence, and create a small work sample. This guide compares education routes and their costs; for a broader plan shaped around time, money, and personal responsibilities, see the career-constraints guide. Compare learning routes by cost, time, feedback and the evidence they leave behind.",
     lead: "",
     sections: [
       editorial("Begin with the work, then choose the learning route", `Replace a broad destination such as “move into technology” with a set of tasks you want to perform. A role title can hide very different work across employers. Read actual role descriptions, speak with people who do the work, and ask what occupies an ordinary week, which decisions are owned, and what a beginner is expected to do without supervision. Write down what you heard separately from what you inferred.
@@ -234,6 +237,7 @@ Q: When should I pause a programme? A: Revisit the decision before a new financi
       { url: "/escape-plan", label: "Career experiment planner" },
       { url: "/compass", label: "Career decision compass" },
       { url: "/guides/getting-hired-through-evidence-and-conversations/", label: "Getting hired through evidence and conversations" },
+      { url: "/guides/skills-passion-and-career-constraints", label: "Plan around career constraints" },
     ],
   },
   "getting-hired-through-evidence-and-conversations": {

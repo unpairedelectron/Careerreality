@@ -24,9 +24,9 @@ const labourPage = {
   year: "2026",
 };
 const epfo = {
-  url: "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-  label: "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-  year: "2025",
+  url: "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+  label: "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+  year: "2026",
 };
 const verified = "Last verified against the listed official sources on 28 October 2026.";
 const disclaimer = "General editorial information only. Check current official rules and your own documents; this guide is not individualized tax, legal, or financial advice.";
@@ -71,9 +71,9 @@ export default {
   "offer-letter-red-flags-india": {
     keepDecisionSupport: false,
     datePublished: null,
-    dateModified: "2026-10-28",
+    dateModified: "2026-11-03",
     lastVerified: "28 October 2026",
-    editorialFrame: "An offer letter can look attractive while leaving important parts of the work or pay unclear. A red flag is not proof that an employer is acting improperly; it is a reason to ask a specific question and get the answer in a document. Compare the written offer with your interview notes, the compensation breakup, and any policy it refers to. Do not sign based only on a recruiter’s verbal summary.",
+    editorialFrame: "An offer letter can look attractive while leaving important parts of the work or pay unclear. A red flag is not proof that an employer is acting improperly; it is a reason to ask a specific question and get the answer in a document. This guide covers the wider terms and conditions; for detailed fixed-versus-variable pay and payslip comparisons, see the CTC guide. Compare the written offer with your interview notes, the compensation breakup, and any policy it refers to. Do not sign based only on a recruiter’s verbal summary.",
     lead: `${verified} The checklist highlights questions, not a legal verdict about an employer or clause.`,
     sections: [
       editorial("Check who is making the offer", `Confirm the legal employer name, work location, reporting manager, job title, employment type, proposed start date, and offer expiry. Ask who will issue payroll and benefits documents if a group company or staffing provider is involved. Make sure the signatory has authority and that the contact details come from a channel you can independently verify. A polished logo does not answer who is responsible for the employment relationship.`, `If you received the offer through a third party, confirm the employer directly before sharing identity or bank details. Be wary of requests for an upfront fee, a deposit, or sensitive credentials as a condition of joining. Those concerns are practical verification triggers; investigate the specific facts rather than treating a single formatting issue as conclusive evidence of fraud.`),
@@ -181,7 +181,7 @@ export default {
   "90-day-post-layoff-job-search": {
     keepDecisionSupport: false,
     datePublished: null,
-    dateModified: "2026-10-28",
+    dateModified: "2026-11-03",
     lastVerified: "28 October 2026",
     editorialFrame: "A 90-day plan is a planning window, not a claim that most people find work in that time. The aim is to make the next three months easier to review: protect cash, assemble evidence, choose a small set of role targets, and adjust the search based on real responses. Your responsibilities, location, health, industry, and financial runway may require a different pace or support.",
     lead: `${verified} The schedule is flexible and does not predict hiring outcomes.`,

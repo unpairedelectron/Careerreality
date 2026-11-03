@@ -7,7 +7,7 @@
       "title": "CTC vs Take-Home Pay: Read a Job Offer",
       "description": "Read an Indian job offer beyond CTC: separate fixed pay, variable targets, joining bonus and employer PF, then check payout conditions before estimating cash.",
       "lead": "",
-      "editorialFrame": "A CTC headline is not a monthly salary. Compare the written fixed-pay terms, conditional pay, employer costs, reimbursements and deductions separately; then reconcile the first payslip with the offer. Use the ₹20 lakh example below as arithmetic, not as a promise about your own payroll.",
+      "editorialFrame": "A CTC headline is not a monthly salary. Compare the written fixed-pay terms, conditional pay, employer costs, reimbursements and deductions separately; then reconcile the first payslip with the offer. This guide focuses on translating compensation into dependable cash; for broader questions about role scope, location, recovery clauses, and other offer terms, see the offer-letter checklist. Use the ₹20 lakh example below as arithmetic, not as a promise about your own payroll.",
       "sections": [
         {
           "heading": "Start with the document, not the headline",
@@ -56,7 +56,8 @@
       "nextSteps": [],
       "sources": [],
       "sourceDisclosure": "",
-      "wordCount": 1058,
+      "wordCount": 1084,
+      "dateModified": "2026-11-03",
       "faqs": [
         {
           "question": "Is CTC the same as take-home pay?",
@@ -91,10 +92,13 @@
         {
           "url": "/guides/runway-debt-and-big-decisions/",
           "label": "Runway, debt and big decisions"
+        },
+        {
+          "url": "/guides/offer-letter-red-flags-india",
+          "label": "Review the wider offer terms"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "runway-debt-and-big-decisions",
@@ -266,7 +270,7 @@
       "title": "Career Switch or Further Study: Cost and Proof",
       "description": "Compare a career switch or course in India through target tasks, fees, time and skill evidence; test a work sample before committing to a longer programme.",
       "lead": "",
-      "editorialFrame": "A course is one possible route into different work, not the outcome itself. Before paying or leaving a role, name the tasks you want to do, find out how newcomers demonstrate competence, and create a small work sample. Compare learning routes by cost, time, feedback and the evidence they leave behind.",
+      "editorialFrame": "A course is one possible route into different work, not the outcome itself. Before paying or leaving a role, name the tasks you want to do, find out how newcomers demonstrate competence, and create a small work sample. This guide compares education routes and their costs; for a broader plan shaped around time, money, and personal responsibilities, see the career-constraints guide. Compare learning routes by cost, time, feedback and the evidence they leave behind.",
       "sections": [
         {
           "heading": "Begin with the work, then choose the learning route",
@@ -304,7 +308,8 @@
       "nextSteps": [],
       "sources": [],
       "sourceDisclosure": "",
-      "wordCount": 1072,
+      "wordCount": 1095,
+      "dateModified": "2026-11-03",
       "faqs": [
         {
           "question": "Is a degree better than a short course?",
@@ -335,10 +340,13 @@
         {
           "url": "/guides/getting-hired-through-evidence-and-conversations/",
           "label": "Getting hired through evidence and conversations"
+        },
+        {
+          "url": "/guides/skills-passion-and-career-constraints",
+          "label": "Plan around career constraints"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "getting-hired-through-evidence-and-conversations",
@@ -990,7 +998,7 @@
       "title": "After a Layoff: Final Pay and Relieving Documents",
       "description": "Plan layoff recovery in India with written records for final pay, notice, severance and relieving letters; separate confirmed entitlements from untested claims.",
       "lead": "Use these prompts to identify the evidence and questions that matter in your situation.",
-      "editorialFrame": "After a layoff, first separate confirmed pay, unresolved amounts, documents and next decisions. Reconcile each item against the contract and employer records; general guidance cannot determine your individual entitlement or guarantee a recovery timeline.",
+      "editorialFrame": "After a layoff, first separate confirmed pay, unresolved amounts, documents and next decisions. This guide organizes records and follow-up; for a focused breakdown of severance, notice pay, leave, and deductions, see the final-pay guide. Reconcile each item against the contract and employer records; general guidance cannot determine your individual entitlement or guarantee a recovery timeline.",
       "sections": [
         {
           "heading": "A practical decision test",
@@ -1081,7 +1089,8 @@
       ],
       "sources": [],
       "sourceDisclosure": "",
-      "wordCount": 1050,
+      "wordCount": 1071,
+      "dateModified": "2026-11-03",
       "faqs": [
         {
           "question": "Does a final-pay worksheet decide what I am owed?",
@@ -1116,10 +1125,13 @@
         {
           "url": "/rules/gratuity-wages",
           "label": "Gratuity wage rules"
+        },
+        {
+          "url": "/guides/severance-notice-leave-after-layoff",
+          "label": "Break down final-pay items"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "notice-period-and-return-to-office",
@@ -1127,7 +1139,7 @@
       "title": "Notice Period in India: Check Exit Terms",
       "description": "Check notice-period and return-to-office terms in India against your offer and HR policy; verify buyout, leave, location and relieving steps before resigning.",
       "lead": "Use these prompts to identify the evidence and questions that matter in your situation.",
-      "editorialFrame": "Before resigning or changing work location, read the operative written terms for notice, buyout, leave, attendance and exit documents. Ask the employer to resolve conflicts in writing; a general guide cannot interpret your individual contract.",
+      "editorialFrame": "Before resigning or changing work location, read the operative written terms for notice, buyout, leave, attendance and exit documents. This guide covers the broader exit and location terms; for the specific approval, calculation, and timing of a notice buyout, see the buyout guide. Ask the employer to resolve conflicts in writing; a general guide cannot interpret your individual contract.",
       "sections": [
         {
           "heading": "A practical decision test",
@@ -1214,7 +1226,8 @@
       ],
       "sources": [],
       "sourceDisclosure": "",
-      "wordCount": 1028,
+      "wordCount": 1052,
+      "dateModified": "2026-11-03",
       "faqs": [
         {
           "question": "Can unused leave automatically shorten notice?",
@@ -1245,10 +1258,13 @@
         {
           "url": "/resign-or-stay",
           "label": "Resign-or-stay worksheet"
+        },
+        {
+          "url": "/guides/notice-period-buyout-india",
+          "label": "Check notice buyout terms"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "cross-border-and-remote-pay",
@@ -1504,7 +1520,7 @@
       "title": "Career Change: Match Skills to Your Constraints",
       "description": "Choose a career or learning experiment in India that fits your time, finances, strengths and responsibilities; gather work evidence rather than passion slogans.",
       "lead": "Use these prompts to identify the evidence and questions that matter in your situation.",
-      "editorialFrame": "A useful career experiment fits the time, money and responsibilities you actually have. Start with a task you want to try, then choose the smallest learning step that can produce evidence without pretending that interest alone guarantees a job.",
+      "editorialFrame": "A useful career experiment fits the time, money and responsibilities you actually have. This guide helps shape an experiment around those constraints; if you are deciding whether to pay for a course or credential, see the education-route guide. Start with a task you want to try, then choose the smallest learning step that can produce evidence without pretending that interest alone guarantees a job.",
       "sections": [
         {
           "heading": "A practical decision test",
@@ -1586,7 +1602,8 @@
       ],
       "sources": [],
       "sourceDisclosure": "",
-      "wordCount": 1070,
+      "wordCount": 1095,
+      "dateModified": "2026-11-03",
       "faqs": [
         {
           "question": "Should I choose passion or employability?",
@@ -1617,10 +1634,13 @@
         {
           "url": "/resign-or-stay",
           "label": "Review a stay-or-move decision"
+        },
+        {
+          "url": "/guides/career-switches-and-education",
+          "label": "Compare education routes"
         }
       ],
-      "datePublished": null,
-      "dateModified": null
+      "datePublished": null
     },
     {
       "slug": "culture-fit-and-product-management",
@@ -1996,7 +2016,7 @@
       "title": "Notice Period Buyout in India: Terms to Check",
       "description": "Check an India notice buyout against your signed terms, employer policy, written waiver, payment basis, and exit documents before setting a new start date.",
       "lead": "Last verified against the listed official sources on 28 October 2026. The official sources below do not establish one universal private-sector buyout term.",
-      "editorialFrame": "A notice-period buyout is not a number you can safely infer from a job title or a colleague's experience. Start with your own signed documents, the current written policy, and a dated answer from the employer. The rules can depend on your role, location, contract, and applicable law. Treat this guide as a checklist for a clearer conversation, not a promise that either side can end notice in one particular way.",
+      "editorialFrame": "A notice-period buyout is not a number you can safely infer from a job title or a colleague's experience. Start with your own signed documents, the current written policy, and a dated answer from the employer. The rules can depend on your role, location, contract, and applicable law. This guide focuses on buyout and waiver terms; for broader notice, attendance, and return-to-office questions, see the notice and location guide. Treat this as a checklist for a clearer conversation, not a promise that either side can end notice in one particular way.",
       "sections": [
         {
           "heading": "Separate the notice obligation from a buyout request",
@@ -2074,9 +2094,9 @@
         }
       ],
       "sourceDisclosure": "General editorial information only. Contract terms, state rules, worker coverage, and individual legal questions require review against current documents and qualified advice.",
-      "wordCount": 1111,
+      "wordCount": 1131,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {
@@ -2324,15 +2344,15 @@
           "year": "2026"
         },
         {
-          "url": "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-          "label": "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-          "year": "2025"
+          "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+          "label": "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+          "year": "2026"
         }
       ],
       "sourceDisclosure": "A practical checklist, not legal, tax, financial, or mental-health advice. Preserve only records you may lawfully keep and seek qualified support for individual questions.",
       "wordCount": 1074,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {
@@ -2373,7 +2393,7 @@
       "title": "After a Layoff: Severance, Notice Pay and Leave",
       "description": "Separate severance, notice pay, and leave after an India layoff; confirm each amount, the written basis, unresolved questions, and where to get advice.",
       "lead": "Last verified against the listed official sources on 28 October 2026. The guide does not provide a universal severance formula or promise a particular payment.",
-      "editorialFrame": "A final settlement can place severance, notice pay, earned salary, leave treatment, reimbursements, and deductions next to one another. That does not make them the same entitlement or guarantee that each is payable in every case. Start with the written termination notice, contract, payroll records, and the employer's itemised statement. Separate what is confirmed from what depends on a clause, a rule, or a disputed fact.",
+      "editorialFrame": "A final settlement can place severance, notice pay, earned salary, leave treatment, reimbursements, and deductions next to one another. This guide itemizes those payment questions; for broader record-keeping and post-layoff follow-up, see the employment-documents guide. That does not make the items the same entitlement or guarantee that each is payable in every case. Start with the written termination notice, contract, payroll records, and the employer's itemised statement. Separate what is confirmed from what depends on a clause, a rule, or a disputed fact.",
       "sections": [
         {
           "heading": "Name each payment instead of accepting one total",
@@ -2471,9 +2491,9 @@
         }
       ],
       "sourceDisclosure": "General information only, not legal or tax advice. Entitlements, tax treatment, and deadlines depend on current rules, documents, worker coverage, and individual facts.",
-      "wordCount": 1007,
+      "wordCount": 1024,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {
@@ -2505,6 +2525,10 @@
         {
           "url": "/guides/pf-withdrawal-after-job-loss",
           "label": "Separate PF from final pay"
+        },
+        {
+          "url": "/guides/layoff-recovery-and-employment-documents",
+          "label": "Organize wider exit records"
         }
       ]
     },
@@ -2526,7 +2550,7 @@
         },
         {
           "heading": "Check current unemployment conditions at filing time",
-          "content": "EPFO materials describe withdrawal and settlement conditions that depend on the reason for leaving, the time since employment ended, and the kind of benefit claimed. These conditions have been discussed in official FAQs and later reform announcements. Because rules can change, use the current EPFO member portal and dated official circulars or releases when you file. Do not reuse an old blog's percentage or waiting period without confirming it against the current official source.\n\nThe press brief linked below is dated 15 October 2025 and describes a particular reform announcement, not a guarantee that every member's claim will be approved under identical facts. Check whether a later notification or scheme amendment applies. Save the source date and claim submission date so you can explain which guidance you relied on if the portal wording changes.",
+          "content": "EPFO materials describe withdrawal and settlement conditions that depend on the reason for leaving, the time since employment ended, and the kind of benefit claimed. These conditions have been discussed in official FAQs and later reform announcements. Because rules can change, use the current EPFO member portal and dated official circulars or releases when you file. Do not reuse an old blog's percentage or waiting period without confirming it against the current official source.\n\nThe EPFO FAQ linked below was issued with the September 2026 wage-ceiling revision and includes a summary of the revised withdrawal framework. It is an overview, not a claim decision or a substitute for the applicable Scheme provisions and notifications. Check the official portal and current rules for your claim type and service facts, and save the source date and claim submission date.",
           "sourceLinks": [],
           "sourceTitle": "CareerReality Editorial",
           "sourceSlug": "authored-pf-withdrawal-after-job-loss-2",
@@ -2566,12 +2590,12 @@
         },
         {
           "heading": "Last verified and source boundary",
-          "content": "Last verified against the listed official sources on 28 October 2026. The official EPFO press brief cited here is dated 15 October 2025. It is not a substitute for the latest scheme text, notification, portal instructions, or a review of your service record.\n\nUse the official source link below to reach current member services, then check for newer official updates before filing. The Income Tax Department guide is included for tax context only. This guide avoids a fixed withdrawal percentage or processing promise because those details require confirmation against current official rules and individual facts.",
+          "content": "Last verified against the listed official sources on 28 October 2026. The EPFO FAQ cited here summarizes the withdrawal framework alongside a wage-ceiling update; it does not determine whether your specific claim qualifies. Check the latest Scheme text, notifications, portal instructions, and service record before filing.\n\nUse the official source links below to reach EPFO member guidance and current tax context. This guide avoids a fixed withdrawal percentage or processing promise because those details require confirmation against current official rules and individual facts.",
           "sourceLinks": [
             {
-              "url": "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-              "label": "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-              "year": "2025"
+              "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+              "label": "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+              "year": "2026"
             },
             {
               "url": "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1?Id=292",
@@ -2591,9 +2615,9 @@
       ],
       "sources": [
         {
-          "url": "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-          "label": "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-          "year": "2025"
+          "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+          "label": "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+          "year": "2026"
         },
         {
           "url": "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1?Id=292",
@@ -2602,9 +2626,9 @@
         }
       ],
       "sourceDisclosure": "General information only, not a guarantee of eligibility, amount, processing time, or tax outcome. Check current EPFO scheme materials and qualified advice for individual facts.",
-      "wordCount": 1057,
+      "wordCount": 1048,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {
@@ -2784,7 +2808,7 @@
       "title": "India Offer Letter Red Flags: Terms to Check",
       "description": "Check an India offer letter for fixed-pay clarity, variable conditions, deductions, notice, buyout, location, benefits, and written terms before accepting.",
       "lead": "Last verified against the listed official sources on 28 October 2026. The checklist highlights questions, not a legal verdict about an employer or clause.",
-      "editorialFrame": "An offer letter can look attractive while leaving important parts of the work or pay unclear. A red flag is not proof that an employer is acting improperly; it is a reason to ask a specific question and get the answer in a document. Compare the written offer with your interview notes, the compensation breakup, and any policy it refers to. Do not sign based only on a recruiter’s verbal summary.",
+      "editorialFrame": "An offer letter can look attractive while leaving important parts of the work or pay unclear. A red flag is not proof that an employer is acting improperly; it is a reason to ask a specific question and get the answer in a document. This guide covers the wider terms and conditions; for detailed fixed-versus-variable pay and payslip comparisons, see the CTC guide. Compare the written offer with your interview notes, the compensation breakup, and any policy it refers to. Do not sign based only on a recruiter’s verbal summary.",
       "sections": [
         {
           "heading": "Check who is making the offer",
@@ -2896,9 +2920,9 @@
         }
       ],
       "sourceDisclosure": "General editorial information only. Check current official rules and your own documents; this guide is not individualized tax, legal, or financial advice.",
-      "wordCount": 1235,
+      "wordCount": 1254,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {
@@ -3285,9 +3309,9 @@
               "year": "2026"
             },
             {
-              "url": "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-              "label": "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-              "year": "2025"
+              "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+              "label": "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+              "year": "2026"
             },
             {
               "url": "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1?Id=292",
@@ -3312,9 +3336,9 @@
           "year": "2026"
         },
         {
-          "url": "https://www.epfindia.gov.in/site_docs/PDFs/EPFO_PRESS_RELEASES/PressBrief_MOL&EEmphasizesBenefitsOfEPFOReforms_15102025.pdf",
-          "label": "EPFO — Ministry press brief on EPFO reforms, 15 October 2025",
-          "year": "2025"
+          "url": "https://pmvbry-cdn.epfindia.gov.in/wp-content/uploads/2026/09/EPFO_Wage_Ceiling_FAQs.pdf",
+          "label": "EPFO — FAQs on revised wage ceiling and withdrawal framework",
+          "year": "2026"
         },
         {
           "url": "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1?Id=292",
@@ -3325,7 +3349,7 @@
       "sourceDisclosure": "General editorial information only. Check current official rules and your own documents; this guide is not individualized tax, legal, or financial advice.",
       "wordCount": 1033,
       "datePublished": null,
-      "dateModified": "2026-10-28",
+      "dateModified": "2026-11-03",
       "lastVerified": "28 October 2026",
       "faqs": [
         {

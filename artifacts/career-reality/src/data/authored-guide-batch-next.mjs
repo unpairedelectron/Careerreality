@@ -157,7 +157,8 @@ When you speak with a practitioner, ask what a newcomer did that made the team t
   },
   "layoff-recovery-and-employment-documents": {
     keepDecisionSupport: true,
-    editorialFrame: "After a layoff, first separate confirmed pay, unresolved amounts, documents and next decisions. Reconcile each item against the contract and employer records; general guidance cannot determine your individual entitlement or guarantee a recovery timeline.",
+    dateModified: "2026-11-03",
+    editorialFrame: "After a layoff, first separate confirmed pay, unresolved amounts, documents and next decisions. This guide organizes records and follow-up; for a focused breakdown of severance, notice pay, leave, and deductions, see the final-pay guide. Reconcile each item against the contract and employer records; general guidance cannot determine your individual entitlement or guarantee a recovery timeline.",
     sections: [
       editorial("Make a dated record before chasing answers", `Save the termination notice, offer and amendments, recent payslips, leave balance, benefits statements, tax records and messages about the end date. Keep original files and note when each was received. Do not forward confidential company material to a personal portfolio. If access is being removed, ask which permitted records you may retain and where employment documents will be delivered.
 
@@ -197,11 +198,13 @@ A layoff can also affect routines and confidence. Choose an immediate next actio
       { url: "/layoff-runway", label: "Layoff runway planner" },
       { url: "/rules/leave-encashment", label: "Leave encashment rules" },
       { url: "/rules/gratuity-wages", label: "Gratuity wage rules" },
+      { url: "/guides/severance-notice-leave-after-layoff", label: "Break down final-pay items" },
     ],
   },
   "notice-period-and-return-to-office": {
     keepDecisionSupport: true,
-    editorialFrame: "Before resigning or changing work location, read the operative written terms for notice, buyout, leave, attendance and exit documents. Ask the employer to resolve conflicts in writing; a general guide cannot interpret your individual contract.",
+    dateModified: "2026-11-03",
+    editorialFrame: "Before resigning or changing work location, read the operative written terms for notice, buyout, leave, attendance and exit documents. This guide covers the broader exit and location terms; for the specific approval, calculation, and timing of a notice buyout, see the buyout guide. Ask the employer to resolve conflicts in writing; a general guide cannot interpret your individual contract.",
     sections: [
       editorial("Collect the documents that control your decision", `Put the signed offer, later amendments, current employment policy, location letter and relevant written instructions together. Note which version is current and who issued it. A company announcement can describe a broad direction while the individual terms or a later agreement set details for a particular role. Do not assume a conversation has changed a written condition unless the employer confirms it through the proper process.
 
@@ -239,6 +242,7 @@ If you need a reference, ask who can provide it and what details they are comfor
       { url: "/final-pay-estimator", label: "Final-pay estimator" },
       { url: "/rules/leave-encashment", label: "Leave encashment rules" },
       { url: "/resign-or-stay", label: "Resign-or-stay worksheet" },
+      { url: "/guides/notice-period-buyout-india", label: "Check notice buyout terms" },
     ],
   },
   "cross-border-and-remote-pay": {
@@ -323,7 +327,8 @@ During a peer conversation, ask what work the person stopped doing after moving 
   },
   "skills-passion-and-career-constraints": {
     keepDecisionSupport: true,
-    editorialFrame: "A useful career experiment fits the time, money and responsibilities you actually have. Start with a task you want to try, then choose the smallest learning step that can produce evidence without pretending that interest alone guarantees a job.",
+    dateModified: "2026-11-03",
+    editorialFrame: "A useful career experiment fits the time, money and responsibilities you actually have. This guide helps shape an experiment around those constraints; if you are deciding whether to pay for a course or credential, see the education-route guide. Start with a task you want to try, then choose the smallest learning step that can produce evidence without pretending that interest alone guarantees a job.",
     sections: [
       editorial("Separate interest from evidence and feasibility", `Write three separate notes: work that holds your attention, skills you can demonstrate, and conditions the next step must fit. The lists may overlap, but they answer different questions. Enjoying a topic does not prove there are suitable roles nearby; having a skill does not mean you want to use it every day. Treat each as a hypothesis that can be tested.
 
@@ -359,6 +364,7 @@ Record the opportunity cost in plain language. What will receive less time while
       { url: "/career-reality-index", label: "Career decision compass" },
       { url: "/escape-plan", label: "Career experiment planner" },
       { url: "/resign-or-stay", label: "Review a stay-or-move decision" },
+      { url: "/guides/career-switches-and-education", label: "Compare education routes" },
     ],
   },
   "culture-fit-and-product-management": {
