@@ -101,21 +101,33 @@ test.describe("deferred Clerk auth regression coverage", () => {
       "Hashed Clerk chunk requests are checked against the production build.",
     );
 
+    const clerkChunkPattern = /\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/;
     const clerkRequests: string[] = [];
     page.on("request", (request) => {
-      if (/\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/.test(new URL(request.url()).pathname)) {
+      if (clerkChunkPattern.test(new URL(request.url()).pathname)) {
         clerkRequests.push(request.url());
       }
     });
 
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
-    await page.waitForTimeout(1_000);
-    expect(clerkRequests).toHaveLength(0);
+    for (const route of publicAuthDeferralRoutes) {
+      const response = await page.goto(route.path);
+      expect(response?.status(), `public ${route.name} route should load`).toBe(200);
+      await expect(page.locator("body")).toBeVisible();
+      await page.waitForTimeout(1_000);
+      expect(clerkRequests, `public ${route.name} should not request Clerk`).toHaveLength(0);
+    }
 
+    const clerkChunkResponse = page.waitForResponse(
+      (response) =>
+        clerkChunkPattern.test(new URL(response.url()).pathname) && response.ok(),
+    );
     await page.goto("/compass?__e2e_user=first-user");
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
+    await clerkChunkResponse;
     expect(clerkRequests).toHaveLength(1);
+    expect(new URL(clerkRequests[0]).pathname).toMatch(
+      /^\/assets\/clerk-runtime-test-[\w-]+\.js$/,
+    );
   });
 
   test("production build keeps account-menu chunk failures local and offers reload recovery", async ({ page }) => {
