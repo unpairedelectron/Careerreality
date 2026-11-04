@@ -2,6 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 declare global {
   interface Window {
+    __careerRealityLayoutShiftTotal?: number;
     __careerRealityAuthTest?: {
       loadAuth: () => void;
       setUser: (userId: string | null) => void;
@@ -40,6 +41,143 @@ function trackClerkRuntimeRequests(page: Page): number[] {
 }
 
 test.describe("deferred Clerk auth regression coverage", () => {
+  test("production build reload recovers after the Clerk chunk becomes available", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "Recovery after a hashed Clerk chunk failure is checked against the production build.",
+    );
+
+    const clerkChunkPattern = /\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/;
+    let failedChunks = 0;
+    await page.route(clerkChunkPattern, async (route) => {
+      failedChunks += 1;
+      await route.abort();
+    });
+
+    await page.goto("/workspace/");
+    await expect(page.getByRole("alert")).toContainText(
+      "Sign-in could not be loaded. Check your connection and reload this page.",
+    );
+    await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
+    expect(failedChunks).toBe(1);
+
+    await page.unroute(clerkChunkPattern);
+    await page.getByRole("button", { name: "Reload page" }).click();
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
+    await expect(page.getByRole("alert")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
+    await page.goto("/sign-in/");
+    await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
+  });
+
+  test("production build keeps public pages free of Clerk chunks until protected navigation", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "Hashed Clerk chunk requests are checked against the production build.",
+    );
+
+    const clerkRequests: string[] = [];
+    page.on("request", (request) => {
+      if (/\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/.test(new URL(request.url()).pathname)) {
+        clerkRequests.push(request.url());
+      }
+    });
+
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+    await page.waitForTimeout(1_000);
+    expect(clerkRequests).toHaveLength(0);
+
+    await page.goto("/compass?__e2e_user=first-user");
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
+    expect(clerkRequests).toHaveLength(1);
+  });
+
+  test("production build keeps account-menu chunk failures local and offers reload recovery", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "The hashed account-menu chunk is checked against the production build.",
+    );
+
+    const accountChunkPattern = /\/assets\/account-menu-[\w-]+\.js(?:\?.*)?$/;
+    let failedChunks = 0;
+    await page.route(accountChunkPattern, async (route) => {
+      failedChunks += 1;
+      await route.abort();
+    });
+
+    await page.goto("/compass?__e2e_user=first-user");
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
+    await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await expect(page.getByRole("alert")).toContainText("Account menu could not be loaded.");
+    await expect(page.getByRole("heading", { name: /Make the next move/ })).toBeVisible();
+    expect(failedChunks).toBe(1);
+
+    await page.unroute(accountChunkPattern);
+    await page.getByRole("button", { name: "Reload page" }).click();
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
+    await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await expect(page.getByTestId("button-account-menu")).toBeVisible();
+  });
+
+  test("production build keeps unused route chunks off the mobile homepage", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "Production chunk boundaries are checked against the production build.",
+    );
+    await page.setViewportSize({ width: 402, height: 874 });
+
+    const scriptRequests: string[] = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "script" && new URL(request.url()).pathname.includes("/assets/")) {
+        scriptRequests.push(new URL(request.url()).pathname);
+      }
+    });
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+    await page.waitForTimeout(1_000);
+
+    const initialRequests = [...scriptRequests];
+    expect(initialRequests.join("\n")).not.toMatch(
+      /account-menu|clerk-runtime|query-runtime|registered-routes|compass|workspace|sign-in/i,
+    );
+    await page.getByTestId("button-mobile-menu").click();
+    await expect(
+      page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Sign in" }),
+    ).toBeVisible();
+    await page.getByTestId("button-mobile-menu").click();
+    await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
+    await expect.poll(() => scriptRequests.length).toBeGreaterThan(initialRequests.length);
+    await expect(page.getByTestId("form-home-ctc")).toBeVisible();
+  });
+
+  test("production build keeps mobile homepage hydration layout shift within budget", async ({ page }) => {
+    test.skip(
+      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+      "Hydration layout shift is checked against the production build.",
+    );
+    await page.setViewportSize({ width: 402, height: 874 });
+    await page.addInitScript(() => {
+      window.__careerRealityLayoutShiftTotal = 0;
+      new PerformanceObserver((entries) => {
+        for (const entry of entries.getEntries() as Array<PerformanceEntry & { hadRecentInput?: boolean; value?: number }>) {
+          if (!entry.hadRecentInput) {
+            window.__careerRealityLayoutShiftTotal =
+              (window.__careerRealityLayoutShiftTotal ?? 0) + (entry.value ?? 0);
+          }
+        }
+      }).observe({ type: "layout-shift", buffered: true });
+    });
+
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+    await page.waitForTimeout(3_000);
+    const cumulativeLayoutShift = await page.evaluate(
+      () => window.__careerRealityLayoutShiftTotal ?? 0,
+    );
+    expect(cumulativeLayoutShift).toBeLessThanOrEqual(0.1);
+  });
+
   test("production build fails closed when its deferred Clerk chunk cannot load", async ({ page }) => {
     test.skip(
       process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",

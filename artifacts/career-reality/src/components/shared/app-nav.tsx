@@ -4,9 +4,21 @@ import { ArrowUpRight, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { primaryRoutes, searchRoute, ctcCalculatorRoute } from "@/data/navigation-routes";
 import { useAppAuth } from "@/lib/app-auth-context";
 import { useTheme } from "@/lib/theme";
+import { ErrorBoundary } from "@/components/error-boundary";
 import "./public-chrome.css";
 
 const AccountMenu = lazy(() => import("./account-menu"));
+
+function AccountMenuLoadFailure() {
+  return (
+    <div role="alert" className="flex items-center gap-2 text-xs">
+      <span>Account menu could not be loaded.</span>
+      <button type="button" className="underline" onClick={() => window.location.reload()}>
+        Reload page
+      </button>
+    </div>
+  );
+}
 
 export function Logo() {
   return (
@@ -94,7 +106,9 @@ export function AppNav() {
             <div className="cr-account">
               {ctcCalculatorRoute && <Link href={ctcCalculatorRoute.path} className="cr-nav-cta" data-testid="link-start-reading-auth">Read your offer <ArrowUpRight size={14} aria-hidden="true" /></Link>}
               <Suspense fallback={<button type="button" className="cr-account-button" aria-label="Loading account menu" disabled />}>
-                <AccountMenu />
+                <ErrorBoundary FallbackComponent={AccountMenuLoadFailure}>
+                  <AccountMenu />
+                </ErrorBoundary>
               </Suspense>
             </div>
           )}
