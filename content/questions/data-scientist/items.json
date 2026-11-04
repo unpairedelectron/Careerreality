@@ -86,4 +86,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "ds-isotonic-calibration-small-sample-overfit",
+    "bank": "data-scientist",
+    "topic": "Machine learning evaluation",
+    "subtopic": "Probability calibration",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "You have limited calibration data and are choosing between sigmoid and isotonic calibration. What trade-off matters?",
+    "what_is_assessed": "Whether the candidate weighs calibrator flexibility against overfitting risk and validates the choice on appropriate data.",
+    "short_answer": "Isotonic calibration can fit a more flexible monotonic mapping, but it is more prone to overfitting on small calibration datasets. Sigmoid calibration is more constrained and may be preferable when calibration data is limited. I would compare both with held-out or cross-validated predictions, ensure the calibrator does not see the model's training predictions as independent data, and assess calibration and ranking metrics for the intended use.",
+    "deep_explanation": "Scikit-learn describes isotonic regression as more general than sigmoid calibration because it can correct arbitrary monotonic distortions, but it is more prone to overfitting on small datasets. Its guide gives roughly 1,000 calibration samples as a rule of thumb for isotonic to perform as well as or better than sigmoid, not a universal threshold. The choice should be validated on representative data; isotonic may also introduce tied probabilities that can change ranking metrics such as ROC-AUC.",
+    "visual_aid": { "kind": "comparison-table", "alt": "Isotonic calibration is flexible but can overfit small calibration sets; sigmoid calibration is more constrained.", "content": "Sigmoid: more constrained mapping; useful when calibration data is limited\\nIsotonic: flexible monotonic mapping; higher small-sample overfit risk\\nCompare using held-out predictions; ~1,000 samples is a guide, not a guarantee" },
+    "strong_answer_signals": ["Names isotonic's flexibility and small-data overfitting risk.", "Treats the sample-count note as a rule of thumb, not a universal cutoff.", "Evaluates with predictions separated from base-model training."],
+    "weak_answer_signals": ["Assumes isotonic is always better because it is more flexible.", "Treats 1,000 samples as a guaranteed pass/fail threshold."],
+    "common_mistakes": ["Fitting the calibrator on in-sample model predictions and overestimating its performance.", "Ignoring that isotonic ties can affect ranking metrics."],
+    "follow_ups": [{ "question": "What limitation does the guide note for isotonic?", "short_answer": "It is more prone to overfitting, especially on small datasets." }, { "question": "Does the approximate sample threshold guarantee a better calibrator?", "short_answer": "No. It is guidance; compare performance on representative held-out predictions." }],
+    "code": null,
+    "references": [{ "title": "Probability Calibration", "publisher": "scikit-learn developers", "url": "https://scikit-learn.org/stable/modules/calibration.html", "retrieved_date": "2026-11-04" }],
+    "volatility": "Moderate",
+    "versions_checked": "scikit-learn 1.9.1 stable calibration documentation.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://scikit-learn.org/stable/modules/calibration.html"], "rederivation_agreement": true, "rederivation_notes": ["Independent derivation confirmed the flexibility/overfitting trade-off and preserved the source's approximate sample-count caveat as a rule of thumb, not a universal cutoff. Ranking effects from isotonic ties are also noted."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": ["ds-brier-score-does-not-isolate-calibration"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

@@ -2284,4 +2284,30 @@
     "related": ["de-postgres-logical-slot-consumer-replay"],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "de-postgres-cte-folding-versus-materialization",
+    "bank": "data-engineer",
+    "topic": "SQL",
+    "subtopic": "CTE optimization",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A PostgreSQL query became slower after a common table expression was referenced twice. What would you inspect?",
+    "what_is_assessed": "Whether the candidate understands when a side-effect-free CTE may be materialized and the trade-off of forcing inlining.",
+    "short_answer": "Inspect the execution plan and whether the CTE is materialized. PostgreSQL can fold a non-recursive, side-effect-free CTE referenced once into its parent query, but multiple references normally favor separate calculation. `NOT MATERIALIZED` can enable joint optimization and push filters into the CTE, but may repeat the computation; `MATERIALIZED` can avoid duplicate work but may block useful optimization. Benchmark both for the actual query.",
+    "deep_explanation": "PostgreSQL 18 documents CTE folding for non-recursive, side-effect-free SELECTs. By default a singly referenced CTE can be merged into the parent; a multiply referenced CTE is not folded by default. `NOT MATERIALIZED` forces merging and risks duplicate computation, while separate materialization can prevent parent filters from reducing the CTE's work. The right choice depends on CTE cost, reuse, and pushdown opportunities; an EXPLAIN plan and representative measurements are needed.",
+    "visual_aid": { "kind": "comparison-table", "alt": "Inlining can push filters into a CTE but repeat work; materialization can reuse results but limit parent-query optimization.", "content": "NOT MATERIALIZED → joint optimization / possible repeated work\\nMATERIALIZED → compute separately / possible reuse, but less predicate pushdown\\nChoose from the plan and measured workload" },
+    "strong_answer_signals": ["Checks the actual plan rather than assuming all CTEs are temporary tables.", "Explains the reuse-versus-predicate-pushdown trade-off.", "Treats NOT MATERIALIZED as a measured option, not an automatic fix."],
+    "weak_answer_signals": ["Claims every PostgreSQL CTE is always materialized.", "Adds NOT MATERIALIZED without considering duplicate evaluation."],
+    "common_mistakes": ["Ignoring whether a CTE is volatile or recursive.", "Generalizing PostgreSQL's documented rules to other database engines."],
+    "follow_ups": [{ "question": "When does PostgreSQL normally fold a CTE?", "short_answer": "A non-recursive, side-effect-free CTE referenced once can be folded into the parent query." }, { "question": "What is the risk of NOT MATERIALIZED?", "short_answer": "The CTE may be computed repeatedly when referenced multiple times." }],
+    "code": null,
+    "references": [{ "title": "7.8. WITH Queries (Common Table Expressions)", "publisher": "PostgreSQL Global Development Group", "url": "https://www.postgresql.org/docs/18/queries-with.html", "retrieved_date": "2026-11-04" }],
+    "volatility": "Stable",
+    "versions_checked": "PostgreSQL 18 documentation; CTE folding and materialization behavior is version-scoped.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://www.postgresql.org/docs/18/queries-with.html"], "rederivation_agreement": true, "rederivation_notes": ["Separate derivation confirmed the documented default distinction for singly versus multiply referenced, non-recursive, side-effect-free CTEs. The answer describes MATERIALIZED and NOT MATERIALIZED as a workload trade-off and avoids generalizing to other engines."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

@@ -2,11 +2,11 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 110,
-  "itemCount": 2,
-  "countsByTopic": { "Agent architecture": 2 },
-  "countsByLevel": { "L2": 2 },
-  "countsByType": { "trade-off": 1, "scenario": 1 },
-  "status": { "schemaValid": 2, "sourcesVerified": 2, "rederived": 2, "codeExecuted": 0, "expertReviewPending": 2 },
+  "itemCount": 3,
+  "countsByTopic": { "Agent architecture": 3 },
+  "countsByLevel": { "L2": 3 },
+  "countsByType": { "trade-off": 1, "scenario": 2 },
+  "status": { "schemaValid": 3, "sourcesVerified": 3, "rederived": 3, "codeExecuted": 0, "expertReviewPending": 3 },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
       "schemaValid": true,
@@ -16,6 +16,13 @@
       "expertReview": "pending"
     },
     "agentic-sensitive-tool-action-human-approval": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-route-specialized-prompts-for-clear-categories": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

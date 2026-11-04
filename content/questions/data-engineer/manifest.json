@@ -2,11 +2,11 @@
   "bank": "data-engineer",
   "target": 240,
   "minimum": 150,
-  "itemCount": 75,
-  "countsByTopic": { "SQL": 20, "Streaming systems": 26, "Orchestration": 11, "Storage formats": 9, "Lakehouse table formats": 9 },
-  "countsByLevel": { "L1": 8, "L2": 52, "L3": 15 },
-  "countsByType": { "concept": 18, "scenario": 20, "debugging": 26, "trade-off": 11 },
-  "status": { "schemaValid": 75, "sourcesVerified": 75, "rederived": 75, "codeExecuted": 0, "expertReviewPending": 75 },
+  "itemCount": 76,
+  "countsByTopic": { "SQL": 21, "Streaming systems": 26, "Orchestration": 11, "Storage formats": 9, "Lakehouse table formats": 9 },
+  "countsByLevel": { "L1": 8, "L2": 53, "L3": 15 },
+  "countsByType": { "concept": 18, "scenario": 20, "debugging": 27, "trade-off": 11 },
+  "status": { "schemaValid": 76, "sourcesVerified": 76, "rederived": 76, "codeExecuted": 0, "expertReviewPending": 76 },
   "itemStatus": {
     "de-window-functions-retain-rows": {
       "schemaValid": true,
@@ -527,6 +527,13 @@
       "expertReview": "pending"
     },
     "de-postgres-logical-slot-wal-retention": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "de-postgres-cte-folding-versus-materialization": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

@@ -86,4 +86,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "ml-best-state-dict-reference-mutates",
+    "bank": "ai-ml-engineer",
+    "topic": "Training and reproducibility",
+    "subtopic": "Checkpoint selection",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A saved 'best validation' PyTorch model matches the final, overfit epoch. What could have gone wrong?",
+    "what_is_assessed": "Whether the candidate recognizes that state_dict() returns references and preserves a snapshot when selecting the best checkpoint.",
+    "short_answer": "The code may have assigned `best_state = model.state_dict()` and continued training. PyTorch documents that this returns references to the model's state rather than an independent copy, so later updates can change the supposed best state. Serialize the checkpoint at selection time or deep-copy the state dict, then reload the saved state before evaluation.",
+    "deep_explanation": "A variable named `best_state` is not automatically an immutable snapshot. PyTorch's saving/loading tutorial warns that assigning `model.state_dict()` keeps a reference whose values continue to update during subsequent training. As a result, the selected best model can silently become the final model. The documented remedies are to serialize the state at selection time or use `deepcopy(model.state_dict())`; validation-based selection should then be tested by comparing saved and reloaded weights.",
+    "visual_aid": { "kind": "timeline", "alt": "A state dictionary reference continues reflecting later optimizer updates unless serialized or copied.", "content": "Epoch 8 best validation → best_state = model.state_dict() (reference)\\nEpochs 9–20 update model → referenced best_state changes too\\nFix: serialize at epoch 8 or deep-copy state_dict()" },
+    "strong_answer_signals": ["Identifies the reference-versus-copy behavior.", "Proposes serialization or deepcopy at the best-checkpoint moment.", "Reloads and verifies the selected checkpoint rather than trusting the variable name."],
+    "weak_answer_signals": ["Assumes state_dict() automatically freezes the model state.", "Changes validation logic without checking whether the saved weights were mutated."],
+    "common_mistakes": ["Keeping the in-memory state dict reference while continuing training.", "Saving the checkpoint only after training finishes."],
+    "follow_ups": [{ "question": "What happens to the referenced state during later training?", "short_answer": "It can reflect subsequent model updates rather than the earlier best epoch." }, { "question": "How can you preserve the selected weights?", "short_answer": "Serialize them immediately or deep-copy the state dict when selecting the checkpoint." }],
+    "code": null,
+    "references": [{ "title": "Saving and Loading Models: Best Model State", "publisher": "PyTorch", "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html", "retrieved_date": "2026-11-04" }],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial; the referenced-state warning is stated in the model checkpoint section.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"], "rederivation_agreement": true, "rederivation_notes": ["Separate pass confirmed the tutorial warns that state_dict() returns a reference, not a copy, and explicitly recommends serialization or deepcopy to preserve the best checkpoint."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": ["ml-resume-training-needs-optimizer-state"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

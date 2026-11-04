@@ -86,4 +86,30 @@
     "related": ["genai-rag-retrieval-is-not-proof-of-grounding"],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "genai-faithfulness-does-not-prove-source-correctness",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Faithfulness metric boundaries",
+    "level": "L2",
+    "type": "concept",
+    "question": "A RAG answer scores highly for faithfulness to its retrieved context. What important quality claim remains unproven?",
+    "what_is_assessed": "Whether the candidate distinguishes consistency with retrieved text from truth, retrieval adequacy, and task usefulness.",
+    "short_answer": "A high faithfulness score supports that the answer is consistent with the supplied context under the evaluator's method. It does not prove that the context itself is correct, that the retriever found all necessary evidence, or that the answer fully addresses the user's question. Check source quality, retrieval coverage, and answer relevance separately, and validate automated judge scores against human-reviewed examples.",
+    "deep_explanation": "The Ragas paper separates the usefulness and focus of retrieved passages from the generator's faithful use of those passages and the quality of the final answer. A faithfulness proxy is conditional on the context supplied; it cannot establish that the corpus is authoritative or that omitted passages would change the answer. The paper presents reference-free metrics as proxies in settings where human references may not be available, not as a universal factuality guarantee.",
+    "visual_aid": { "kind": "diagram", "alt": "Faithfulness checks answer-to-context consistency, while source truth, retrieval coverage, and answer usefulness require separate evaluation.", "content": "Retrieved context → Is it authoritative and sufficient?\\nAnswer vs context → Is the answer supported by this context?\\nAnswer vs task → Is it complete and useful?\\nA strong faithfulness signal answers only the middle question" },
+    "strong_answer_signals": ["Limits the score to consistency with the supplied context and evaluator.", "Separately checks source quality, retrieval coverage, and answer relevance.", "Treats automated metrics as proxies to validate, not ground truth."],
+    "weak_answer_signals": ["Equates faithfulness with factual correctness.", "Assumes a supported answer must be complete or relevant."],
+    "common_mistakes": ["Evaluating generated text without inspecting the retrieved context.", "Using the same automated judge as the sole authority for its own metric."],
+    "follow_ups": [{ "question": "What can a high faithfulness score not validate?", "short_answer": "Whether the retrieved source is true or complete." }, { "question": "What should be measured separately?", "short_answer": "Retrieval quality, answer faithfulness, and task relevance or usefulness." }],
+    "code": null,
+    "references": [{ "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation", "publisher": "arXiv (Es et al.)", "url": "https://arxiv.org/abs/2309.15217v2", "retrieved_date": "2026-11-04" }],
+    "volatility": "Fast-moving",
+    "versions_checked": "Ragas paper version 2 (arXiv:2309.15217v2); metrics are proxies and remain task-dependent.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://arxiv.org/abs/2309.15217v2"], "rederivation_agreement": true, "rederivation_notes": ["Independent derivation confirmed the source distinguishes faithful use of context from retrieval usefulness and answer quality. The answer states that a context-conditioned metric cannot establish source truth or coverage."], "disagreements": [], "code_executed": "n.a.", "confidence": "medium" },
+    "related": ["genai-evaluate-retrieval-separately-from-generation"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

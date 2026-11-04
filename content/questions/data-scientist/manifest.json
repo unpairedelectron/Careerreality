@@ -2,11 +2,11 @@
   "bank": "data-scientist",
   "target": 240,
   "minimum": 150,
-  "itemCount": 2,
-  "countsByTopic": { "Machine learning evaluation": 2 },
-  "countsByLevel": { "L2": 2 },
-  "countsByType": { "trade-off": 1, "concept": 1 },
-  "status": { "schemaValid": 2, "sourcesVerified": 2, "rederived": 2, "codeExecuted": 0, "expertReviewPending": 2 },
+  "itemCount": 3,
+  "countsByTopic": { "Machine learning evaluation": 3 },
+  "countsByLevel": { "L2": 3 },
+  "countsByType": { "trade-off": 2, "concept": 1 },
+  "status": { "schemaValid": 3, "sourcesVerified": 3, "rederived": 3, "codeExecuted": 0, "expertReviewPending": 3 },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
       "schemaValid": true,
@@ -16,6 +16,13 @@
       "expertReview": "pending"
     },
     "ds-brier-score-does-not-isolate-calibration": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-isotonic-calibration-small-sample-overfit": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

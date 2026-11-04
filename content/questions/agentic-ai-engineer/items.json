@@ -86,4 +86,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "agentic-route-specialized-prompts-for-clear-categories",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent architecture",
+    "subtopic": "Routing workflows",
+    "level": "L2",
+    "type": "scenario",
+    "question": "Support requests fall into billing, account-access, and technical categories. When would routing to specialized prompts help?",
+    "what_is_assessed": "Whether the candidate identifies clear input categories and evaluates the routing classifier separately from specialized handling.",
+    "short_answer": "Routing can help when requests fall into distinct categories that benefit from separate prompts or handlers, and the classifier can assign them accurately. I would measure classification errors and end-to-end quality against one general prompt, define a safe fallback for uncertain or out-of-scope requests, and check whether the extra routing step improves results enough to justify its latency and operational complexity.",
+    "deep_explanation": "Anthropic's agent-design article describes routing as classifying an input and directing it to a specialized follow-up task. It says the pattern is useful when categories are distinct and classification can be handled accurately by an LLM or a traditional classifier. This article is conceptual guidance, not a current benchmark or a guarantee that routing improves any particular support system; comparative evaluation should use representative requests and include misroutes.",
+    "visual_aid": { "kind": "diagram", "alt": "A classifier directs clear request categories to specialized handlers, with an explicit fallback for uncertain cases.", "content": "Incoming request → classify category\\nBilling → billing handler | Access → account handler | Technical → support handler\\nUncertain / new category → general fallback or human queue" },
+    "strong_answer_signals": ["Names category separation and classification accuracy as prerequisites.", "Measures routing and end-to-end errors against a simpler baseline.", "Defines behavior for uncertain or unhandled categories."],
+    "weak_answer_signals": ["Adds a router without evidence that request categories need different handling.", "Assumes specialized prompts eliminate classification errors."],
+    "common_mistakes": ["Measuring only handler quality while ignoring misroutes.", "Creating increasingly narrow routes without a fallback or monitoring."],
+    "follow_ups": [{ "question": "What should be measured for a router?", "short_answer": "Classification accuracy and downstream task quality, including the cost of misroutes." }, { "question": "When is one general prompt preferable?", "short_answer": "When categories overlap or routing errors and added complexity outweigh specialization benefits." }],
+    "code": null,
+    "references": [{ "title": "Building Effective Agents: Routing", "publisher": "Anthropic Engineering", "url": "https://www.anthropic.com/engineering/building-effective-agents", "retrieved_date": "2026-11-04" }],
+    "volatility": "Fast-moving",
+    "versions_checked": "Anthropic Engineering article first published 2024-12-19; current page notes tooling descriptions have changed.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://www.anthropic.com/engineering/building-effective-agents"], "rederivation_agreement": true, "rederivation_notes": ["Separate pass confirmed the article defines routing as classifying inputs into specialized follow-up tasks and conditions usefulness on distinct categories and accurate classification. Latency, fallback, and evaluation guidance are labeled as engineering recommendations."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": ["agentic-workflow-before-autonomous-agent"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

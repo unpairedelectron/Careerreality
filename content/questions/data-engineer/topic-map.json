@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "SQL",
-      "subtopics": ["joins", "window functions", "query plans", "indexing", "aggregates", "set operations", "subqueries"],
+      "subtopics": ["joins", "window functions", "query plans", "indexing", "aggregates", "set operations", "subqueries", "CTE optimization"],
       "sources": [
         {
           "title": "PostgreSQL 18 documentation",
@@ -108,6 +108,15 @@
           "title": "Explicit Locking",
           "publisher": "PostgreSQL Global Development Group",
           "url": "https://www.postgresql.org/docs/18/explicit-locking.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18"
+        },
+        {
+          "title": "7.8. WITH Queries (Common Table Expressions)",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/queries-with.html",
           "retrieved_date": "2026-11-04",
           "volatility": "Stable",
           "last_verified": "2026-11-04",
