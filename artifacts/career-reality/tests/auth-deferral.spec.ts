@@ -147,14 +147,20 @@ test.describe("deferred Clerk auth regression coverage", () => {
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
     await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
     await expect(page.getByRole("alert")).toContainText("Account menu could not be loaded.");
+    await expect(page.getByRole("navigation", { name: "Primary navigation" })).toBeVisible();
     await expect(page.getByRole("heading", { name: /Make the next move/ })).toBeVisible();
+    await expect(page.getByRole("banner").getByTestId("link-logo")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Reload page" })).toBeVisible();
     expect(failedChunks).toBe(1);
 
     await page.unroute(accountChunkPattern);
+    const pageReloaded = page.waitForEvent("load");
     await page.getByRole("button", { name: "Reload page" }).click();
+    await pageReloaded;
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
     await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
     await expect(page.getByTestId("button-account-menu")).toBeVisible();
+    await expect(page).toHaveURL(/\/compass\/?\?__e2e_user=first-user$/);
   });
 
   test("production build keeps unused route chunks off the mobile homepage", async ({ page }) => {

@@ -33,6 +33,12 @@ For release-suite timing on this runner, run one Playwright command at a time. A
 
 **How to apply:** Finish focused checks before starting the full production suite; do not launch screenshot or route-audit runs concurrently.
 
+When a production dynamic import fails, recreating a React `lazy()` wrapper for the same module URL does not reliably trigger a fresh network request; the browser can retain the rejected module load. Use a page reload as the account-menu recovery path unless the chunk URL itself can be safely varied.
+
+**Why:** The failed-chunk experiment timed out without a second request after the lazy component was recreated; a full reload recovered the original route and loaded the chunk.
+
+**How to apply:** Keep the failed menu isolated behind its local error boundary, and verify reload recovery after removing the test network failure.
+
 The local web E2E suite also needs the API Server workflow available on port 8080 before running browser batches.
 
 **Why:** The Vite test server proxies public evidence requests to that service, and unavailable endpoints produce browser 500 errors that route-hydration tests correctly fail on.
