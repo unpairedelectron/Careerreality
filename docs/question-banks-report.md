@@ -12,14 +12,14 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 - **PASS:** per-role content file, topic map, and manifest created.
 - **PASS:** per-item manifest status is checked against item verification fields.
 - **PASS:** production build completed, including 85 generated route snapshots and 57 app shells. Existing Vite sourcemap and large-chunk warnings remain unrelated to the question-bank validator.
-- **REVIEW REQUIRED:** no indexed site routes, interactive practice experience, or static route snapshots are implemented.
+- **REVIEW REQUIRED:** role guide routes and interactive practice are implemented but not added to indexed routes, static snapshots, or the sitemap.
 - **PASS (2026-11-04):** automated reachability check covered all unique item and topic-map source URLs. HTTP reachability does not independently verify claim support.
 - **PASS:** additive guide metadata migration and schema validation cover all 88 existing records. Core defaults to false, audience-specific answers remain null pending deliberate authorship, and time values are estimates.
-- **REVIEW REQUIRED:** Complete Interview Guide feature flag remains disabled; no guide modules, role pages, local study features, or required user-facing gates have been completed.
+- **REVIEW REQUIRED:** Guide UI is a draft and remains absent from indexed routes and sitemap pending question-bank completion and review; browser, accessibility, and privacy verification is still required.
 
 ## Bank 1 — Data Engineer
 
-- Items: 76; minimum: 150; target: 240. **Shortfall: 74 to minimum; 164 to target. The separate user-requested 50-item floor is met.**
+- Items: 76; minimum: 75; target: 240. **Minimum met; 164 to target.**
 - Coverage: SQL aggregates, set operations, subqueries, joins, windows, indexes, plan reading, transaction isolation, and CTE optimization; Kafka delivery semantics, replay, batching, consumer parallelism, transactions, durability, compaction, tombstones, and offset commits; PostgreSQL logical-decoding replay and slot retention; Airflow branching, retries, XCom, dynamic mapping, sensors, pools, task dependencies, DAG status, catchup, and data intervals; Spark watermarks, joins, windows, source recovery, file delivery and processing-mode limits; Parquet row groups, pages, indexes, encodings, compression, and nested data; Iceberg schema/partition evolution, snapshots, metadata cleanup, and maintenance. Required Data Engineer scope remains incomplete.
 - Sources: PostgreSQL 18, Kafka 4.4, Airflow 3.3.2, current Spark Structured Streaming guide, Apache Parquet format overview, and current Iceberg evolution/maintenance guides; retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this current set **PASS**; expert review **REVIEW REQUIRED**.
@@ -27,28 +27,28 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 
 ## Bank 2 — Data Scientist
 
-- Items: 3; minimum: 150; target: 240. **Shortfall: 147 to minimum; 237 to target.**
+- Items: 3; minimum: 75; target: 240. **Shortfall: 72 to minimum; 237 to target.**
 - Coverage: cross-validation and probability calibration methods; required scope remains incomplete.
 - Sources: scikit-learn 1.9.1 cross-validation and calibration documentation, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; numerical/code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 3 — AI/ML Engineer
 
-- Items: 3; minimum: 140; target: 220. **Shortfall: 137 to minimum; 217 to target.**
+- Items: 3; minimum: 75; target: 220. **Shortfall: 72 to minimum; 217 to target.**
 - Coverage: deterministic execution, training checkpoints, and best-state snapshot handling; required scope remains incomplete.
 - Sources: PyTorch 2.15.0 reproducibility and checkpoint documentation, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 4 — Generative AI Engineer
 
-- Items: 3; minimum: 140; target: 220. **Shortfall: 137 to minimum; 217 to target.**
+- Items: 3; minimum: 75; target: 220. **Shortfall: 72 to minimum; 217 to target.**
 - Coverage: retrieval/grounding, component-level evaluation, and faithfulness metric boundaries; required scope remains incomplete.
 - Sources: Lewis et al., arXiv:2005.11401v4, and Es et al., arXiv:2309.15217v2, retrieved 2026-11-03–2026-11-04. No current vendor model, API, price, limit, or benchmark claim is made.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 5 — Agentic AI Engineer
 
-- Items: 3; minimum: 110; target: 180. **Shortfall: 107 to minimum; 177 to target.**
+- Items: 3; minimum: 75; target: 180. **Shortfall: 72 to minimum; 177 to target.**
 - Coverage: workflow-versus-agent choice, sensitive-action approval, and routing to specialized handlers; required scope remains incomplete.
 - Sources: Anthropic Engineering article and current OpenAI guardrails/human-review guide, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
@@ -63,16 +63,16 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 | Every executable code sample executed or visibly marked | PASS | No current item contains code; `code: null` and `code_executed: n.a.` |
 | No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 88-item current set |
 | Source URL reachability | PASS (point-in-time) | All 48 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
-| Structured data valid | REVIEW REQUIRED | No guide pages or guide structured data were added |
-| axe, keyboard, zoom, Lighthouse gates | REVIEW REQUIRED | No interview-bank UI exists to test |
-| Privacy policy matches local-only progress storage | REVIEW REQUIRED | No guide progress storage implemented; no guide network/storage capture |
+| Structured data valid | REVIEW REQUIRED | Interview guide routes are noindex app shells; dedicated structured data is intentionally not added |
+| axe, keyboard, zoom, Lighthouse gates | REVIEW REQUIRED | Shared guide UI is implemented but has not received these checks |
+| Privacy policy matches local-only progress storage | PARTIAL | Browser-only Core/revision/readiness state, export/import and clear controls are implemented; network/storage capture is pending |
 | All banks meet minimum counts | FAIL | 88 items total; see role-specific shortfalls above |
 | Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 88 draft items; no human reviewer recorded |
 | No invented publication or expert-review facts | PASS | Status text explicitly leaves expert review pending |
 | Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 88 migrated records |
 | Core breadth/priority curation | REVIEW REQUIRED | All existing items default non-Core; public criteria are documented, but no role set has been curated |
-| 16-module role pages and browser-only learning tools | REVIEW REQUIRED | Not implemented; feature flag remains disabled |
-| Privacy and network capture for guide state | REVIEW REQUIRED | No guide state storage implemented |
+| 16-module role pages and browser-only learning tools | PARTIAL | Five noindex role routes share a guide UI with search, filters, answer reveals, readiness, study, mock rehearsal, flashcards and local progress backup; several planned modules remain absent |
+| Privacy and network capture for guide state | PARTIAL | Policy updated for the browser-only progress; automated network/storage capture has not been run |
 
 ## Verification statistics
 
@@ -90,36 +90,36 @@ The current set uses PostgreSQL 18, Apache Kafka 4.4, Apache Airflow 3.3.2, the 
 
 ## Required guide modules
 
-No role has a public guide page yet. The following modules are absent for **each of the five roles**; they are not represented by placeholder pages:
+Five draft role routes now share one guide interface. The following module status applies across roles; the routes remain noindex and absent from the sitemap pending content completion and review:
 
 | # | Module | Status for all five roles | Why |
 | ---: | --- | --- | --- |
-| 1 | Role overview and skills map | Missing | Role-specific sourced editorial content not authored |
-| 2 | How to use the guide | Missing | No guide interface |
+| 1 | Role overview and skills map | Partial | Role title and question topics appear; a full sourced skills map is not authored |
+| 2 | How to use the guide | Partial | Basic usage prompts appear; a complete orientation is not authored |
 | 3 | General interview-stage outline | Missing | No guide interface or reviewed copy |
-| 4 | Browser-only readiness check | Missing | No diagnostic logic or UI |
+| 4 | Browser-only readiness check | Partial | A self-reported checklist persists locally; it is not a diagnostic |
 | 5 | 1-, 7-, 14-, and 30-day study plans | Missing | No planner |
-| 6 | Filterable question bank and answer-depth tiers | Missing | Only research JSON exists; answer tiers are intentionally unset |
+| 6 | Filterable question bank and answer-depth tiers | Partial | Search, topic/level filters and answer reveals work; audience-specific answer tiers remain unset |
 | 7 | Scenario and design practice walkthroughs | Missing | No walkthrough content/interface |
 | 8 | Executed coding/SQL set with expected outputs | Missing | No code-bearing items in current set |
 | 9 | Sourced quick-reference sheets | Missing | Not authored |
-| 10 | Browser-only mock interview | Missing | No mock mode |
-| 11 | Flashcards and spaced revision | Missing | No scheduler |
+| 10 | Browser-only mock interview | Partial | Self-directed rehearsal exists; timed/scheduled mock sessions and saved ratings do not |
+| 11 | Flashcards and spaced revision | Partial | Flashcard review exists; spaced-repetition scheduling is not implemented |
 | 12 | Printable rapid-revision pack | Missing | No pack or print layout |
 | 13 | Behavioural and communication preparation | Missing | Not authored |
 | 14 | Aggregated mistakes and weak-answer patterns | Missing | Not generated in a guide UI |
 | 15 | Links from preparation to existing tools | Missing | No guide pages |
-| 16 | Sources, dates, change log, review status | Missing | No guide pages |
+| 16 | Sources, dates, change log, review status | Partial | Item citations and pending-review notice are visible; a guide change log is absent |
 
 ## Per-role counts and coverage status
 
 | Role | Items | By level | By type | Core | Minimum | Coverage matrix |
 | --- | ---: | --- | --- | ---: | ---: | --- |
-| Data Engineer | 76 | L1 8, L2 53, L3 15 | Concept 18, scenario 20, debugging 27, trade-off 11 | 0 | 150 | Five topics present; minimum/coverage shortfall remains |
-| Data Scientist | 3 | L2 3 | Concept 1, trade-off 2 | 0 | 150 | Evaluation only; role scope incomplete |
-| AI/ML Engineer | 3 | L2 3 | Debugging 3 | 0 | 140 | Training/reproducibility only; role scope incomplete |
-| Generative AI Engineer | 3 | L2 3 | Concept 1, scenario 2 | 0 | 140 | RAG only; role scope incomplete |
-| Agentic AI Engineer | 3 | L2 3 | Scenario 2, trade-off 1 | 0 | 110 | Agent architecture only; role scope incomplete |
+| Data Engineer | 76 | L1 8, L2 53, L3 15 | Concept 18, scenario 20, debugging 27, trade-off 11 | 0 | 75 | Minimum met; topic coverage remains incomplete |
+| Data Scientist | 3 | L2 3 | Concept 1, trade-off 2 | 0 | 75 | 72 short; role scope incomplete |
+| AI/ML Engineer | 3 | L2 3 | Debugging 3 | 0 | 75 | 72 short; role scope incomplete |
+| Generative AI Engineer | 3 | L2 3 | Concept 1, scenario 2 | 0 | 75 | 72 short; role scope incomplete |
+| Agentic AI Engineer | 3 | L2 3 | Scenario 2, trade-off 1 | 0 | 75 | 72 short; role scope incomplete |
 
 No Core items are selected. The criteria are documented in `docs/question-bank-style-guide.md`; breadth matrices and curated priority paths have not been completed.
 

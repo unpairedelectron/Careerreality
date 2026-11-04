@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState, type ComponentType } from "react";
 import { useLocation, Router as WouterRouter, Redirect } from "wouter";
 
 const Home = lazy(() => import("@/pages/home"));
+const InterviewGuidePage = lazy(() => import("@/pages/interview-guide-page").then((module) => ({ default: module.InterviewGuidePage })));
 const RegisteredRoutes = lazy(() => import("@/components/shared/registered-routes"));
 const QueryRuntime = lazy(() =>
   import("@/lib/query-runtime").then((module) => ({ default: module.QueryRuntime })),
@@ -25,6 +26,9 @@ function HomeRedirect() {
 
 function AppRoutes() {
   const [path] = useLocation();
+  if (path === "/interview-guides" || path.startsWith("/interview-guides/")) {
+    return <Suspense fallback={<main className="p-8 text-sm text-muted-foreground" role="status">Loading interview guide…</main>}><InterviewGuidePage /></Suspense>;
+  }
   if (path === "/") {
     return (
       <Suspense fallback={<main className="p-8 text-sm text-muted-foreground" role="status">Loading page…</main>}>

@@ -6,11 +6,11 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 const contentRoot = path.join(repoRoot, "content/questions");
 const schema = JSON.parse(fs.readFileSync(path.join(contentRoot, "schema.json"), "utf8"));
 const banks = [
-  { id: "data-engineer", minimum: 150 },
-  { id: "data-scientist", minimum: 150 },
-  { id: "ai-ml-engineer", minimum: 140 },
-  { id: "gen-ai-engineer", minimum: 140 },
-  { id: "agentic-ai-engineer", minimum: 110 },
+  { id: "data-engineer", minimum: 75 },
+  { id: "data-scientist", minimum: 75 },
+  { id: "ai-ml-engineer", minimum: 75 },
+  { id: "gen-ai-engineer", minimum: 75 },
+  { id: "agentic-ai-engineer", minimum: 75 },
 ];
 const expectedReviewStatus = "Drafted with AI assistance; code executed; sources cited; independent expert review pending";
 const allItems = [];

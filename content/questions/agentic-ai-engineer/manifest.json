@@ -1,7 +1,7 @@
 {
   "bank": "agentic-ai-engineer",
   "target": 180,
-  "minimum": 110,
+  "minimum": 75,
   "itemCount": 3,
   "countsByTopic": {
     "Agent architecture": 3

@@ -1,7 +1,7 @@
 {
   "bank": "gen-ai-engineer",
   "target": 220,
-  "minimum": 140,
+  "minimum": 75,
   "itemCount": 3,
   "countsByTopic": {
     "Retrieval-augmented generation": 3

@@ -998,6 +998,9 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
         <TrustSection id="calculator" title="Public calculator inputs">
           <p>Pure calculation worksheets run on your device. In the salary-calculator checks, entered amounts were not sent off the device or placed in the web address. Account and live-data features may send information to the services they need.</p>
         </TrustSection>
+        <TrustSection id="interview-guide-progress" title="Interview-guide study progress">
+          <p>The interview guides store your selected Core questions, revised markers, and readiness checks in this browser's local storage. Those values are not sent to CareerReality's servers and are not tied to your account. You can export or import a JSON backup from a role guide, or clear the saved progress there. Exported files are saved wherever your browser normally downloads files; protect or delete those files yourself. Search text, answer reveals, and practice-session position are temporary page state. Do not enter confidential interview material or personal information into the guides.</p>
+        </TrustSection>
         <TrustSection id="contact-record" title="Contact message records">
           <p>The contact form is closed; use email instead. The former form stored a name, email address, topic, message, and submission time. The production records checked on 2 November 2026 contained no contact submissions. No retention period is established for any copies in backups or logs.</p>
         </TrustSection>

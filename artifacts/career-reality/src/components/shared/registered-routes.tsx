@@ -21,6 +21,7 @@ const EscapePlanPage = lazy(() => import("@/pages/public-tools").then((module) =
 const CareerRealityIndexPage = lazy(() => import("@/pages/public-tools").then((module) => ({ default: module.CareerRealityIndexPage })));
 const AiPulsePage = lazy(() => import("@/pages/public-tools").then((module) => ({ default: module.AiPulsePage })));
 const SearchPage = lazy(() => import("@/pages/public-editorial").then((module) => ({ default: module.SearchPage })));
+const InterviewGuidePage = lazy(() => import("@/pages/interview-guide-page").then((module) => ({ default: module.InterviewGuidePage })));
 const TrustPage = lazy(() => import("@/pages/public-editorial").then((module) => ({ default: module.TrustPage })));
 const ArticleDetailPage = lazy(() => import("@/pages/public-editorial").then((module) => ({ default: module.ArticleDetailPage })));
 const ToolsHubPage = lazy(() => import("@/pages/public-hubs").then((module) => ({ default: module.ToolsHubPage })));
@@ -56,6 +57,7 @@ const routeComponents: Record<string, ComponentType<any>> = {
   careerRealityIndex: CareerRealityIndexPage,
   aiPrompts: AiPulsePage,
   search: SearchPage,
+  interviewGuide: InterviewGuidePage,
   about: () => <TrustPage kind="about" />,
   team: () => <TrustPage kind="team" />,
   editorial: () => <TrustPage kind="editorial" />,

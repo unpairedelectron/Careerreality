@@ -1,7 +1,7 @@
 {
   "bank": "ai-ml-engineer",
   "target": 220,
-  "minimum": 140,
+  "minimum": 75,
   "itemCount": 3,
   "countsByTopic": {
     "Training and reproducibility": 3

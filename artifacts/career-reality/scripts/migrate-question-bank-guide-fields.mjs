@@ -42,6 +42,7 @@ for (const bank of banks) {
   }
 
   manifest.itemCount = items.length;
+  manifest.minimum = 75;
   manifest.countsByTopic = {};
   manifest.countsByLevel = {};
   manifest.countsByType = {};

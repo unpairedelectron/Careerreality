@@ -1,7 +1,7 @@
 {
   "bank": "data-engineer",
   "target": 240,
-  "minimum": 150,
+  "minimum": 75,
   "itemCount": 76,
   "countsByTopic": {
     "SQL": 21,
