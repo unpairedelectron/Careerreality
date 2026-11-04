@@ -49,6 +49,21 @@ test.describe("deferred Clerk auth regression coverage", () => {
 
     const clerkChunkPattern = /\/assets\/clerk-runtime-test-[\w-]+\.js(?:\?.*)?$/;
     let failedChunks = 0;
+    const clerkChunkRequests: string[] = [];
+    const availableChunkResponses: string[] = [];
+    page.on("request", (request) => {
+      if (clerkChunkPattern.test(new URL(request.url()).pathname)) {
+        clerkChunkRequests.push(request.url());
+      }
+    });
+    page.on("response", (response) => {
+      if (
+        clerkChunkPattern.test(new URL(response.url()).pathname) &&
+        response.ok()
+      ) {
+        availableChunkResponses.push(response.url());
+      }
+    });
     await page.route(clerkChunkPattern, async (route) => {
       failedChunks += 1;
       await route.abort();
@@ -58,14 +73,24 @@ test.describe("deferred Clerk auth regression coverage", () => {
     await expect(page.getByRole("alert")).toContainText(
       "Sign-in could not be loaded. Check your connection and reload this page.",
     );
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
     expect(failedChunks).toBe(1);
+    expect(clerkChunkRequests).toHaveLength(1);
 
     await page.unroute(clerkChunkPattern);
+    const pageReloaded = page.waitForEvent("load");
+    const clerkChunkRecovered = page.waitForResponse((response) =>
+      clerkChunkPattern.test(new URL(response.url()).pathname) && response.ok(),
+    );
     await page.getByRole("button", { name: "Reload page" }).click();
+    await Promise.all([pageReloaded, clerkChunkRecovered]);
+    expect(clerkChunkRequests).toHaveLength(2);
+    expect(availableChunkResponses).toHaveLength(1);
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached();
     await expect(page.getByRole("alert")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Your Desk" })).toHaveCount(0);
+    await expect(page.getByText("Private area / catalog desk")).toHaveCount(0);
     await page.goto("/sign-in/");
     await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
   });
