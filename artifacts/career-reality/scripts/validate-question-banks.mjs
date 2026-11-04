@@ -106,6 +106,25 @@ for (const bank of banks) {
     if (!["Stable", "Moderate", "Fast-moving"].includes(item.volatility)) addFailure(where, "invalid volatility");
     if (!isDate(item.last_verified)) addFailure(where, "last_verified must be a valid ISO date");
     if (item.review_status !== expectedReviewStatus) addFailure(where, "review_status must preserve the exact pending-expert-review wording");
+    if (typeof item.core !== "boolean") addFailure(where, "core must be a boolean");
+    if (!Number.isInteger(item.priority) || item.priority < 1 || item.priority > 3) addFailure(where, "priority must be an integer from 1 to 3");
+    if (!Number.isInteger(item.estimated_reading_minutes) || item.estimated_reading_minutes < 1) {
+      addFailure(where, "estimated_reading_minutes must be a positive integer");
+    }
+    if (!Number.isInteger(item.estimated_practice_minutes) || item.estimated_practice_minutes < 0) {
+      addFailure(where, "estimated_practice_minutes must be a non-negative integer");
+    }
+    if (
+      !item.answer_tiers ||
+      typeof item.answer_tiers !== "object" ||
+      !("fresher_level" in item.answer_tiers) ||
+      !("senior_level" in item.answer_tiers) ||
+      ![item.answer_tiers.fresher_level, item.answer_tiers.senior_level]
+        .every((answer) => answer === null || (typeof answer === "string" && answer.trim()))
+    ) {
+      addFailure(where, "answer_tiers must contain authored text or null for each audience");
+    }
+    if (item.content_tier !== "complete-guide") addFailure(where, "content_tier must be complete-guide");
     const itemStatus = manifest.itemStatus?.[item.id];
     if (!itemStatus) {
       addFailure(`${bank.id}/manifest.json`, `missing per-item status for ${item.id}`);
@@ -146,6 +165,18 @@ for (const bank of banks) {
   })) {
     if (JSON.stringify(value) !== JSON.stringify(manifest[key])) addFailure(`${bank.id}/manifest.json`, `${key} does not match item content`);
   }
+  if (manifest.coreItemCount !== items.filter((item) => item.core === true).length) {
+    addFailure(`${bank.id}/manifest.json`, "coreItemCount does not match item content");
+  }
+}
+
+const guideConfig = JSON.parse(fs.readFileSync(path.join(contentRoot, "guide-config.json"), "utf8"));
+if (
+  guideConfig.contentTier !== "complete-guide" ||
+  guideConfig.completeInterviewGuidesEnabled !== false ||
+  guideConfig.progressStorage !== "local-only"
+) {
+  addFailure("guide-config.json", "guide tier, disabled feature flag, and local-only storage boundary must be explicit");
 }
 
 // Documented near-duplicate gate: Jaccard similarity over normalized question tokens; reject > 0.82.

@@ -58,9 +58,17 @@
       "confidence": "medium"
     },
     "related": [],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "genai-evaluate-retrieval-separately-from-generation",
     "bank": "gen-ai-engineer",
@@ -72,21 +80,72 @@
     "what_is_assessed": "Whether the candidate evaluates retrieval context quality separately from the generator's use of that context.",
     "short_answer": "Inspect the retrieved passages against the query and an appropriate relevance reference to see whether the right evidence was found. Separately check whether the answer is supported by the supplied context and whether it addresses the question. A single end-to-end score can hide which component failed, so evaluate retrieval and answer behavior independently as well as together, using representative cases and human-labeled references where available.",
     "deep_explanation": "The Ragas paper frames RAG evaluation as several dimensions: retrieving relevant, focused passages; using those passages faithfully; and producing a useful answer. It proposes metrics for different dimensions, including settings without human ground-truth annotations. That does not make reference-free measures a substitute for all task-specific evaluation. A practical diagnosis keeps component metrics distinct and validates them against the product's intended questions and available judgments.",
-    "visual_aid": { "kind": "diagram", "alt": "A RAG failure should be decomposed into retrieval relevance, answer faithfulness to context, and task usefulness.", "content": "Question → Retriever → Retrieved context → Generator → Answer\\nEvaluate: relevant/focused context | supported answer | answer usefulness\\nThen compare component results with end-to-end task outcomes" },
-    "strong_answer_signals": ["Separates retrieval relevance from answer faithfulness and usefulness.", "Uses cases where the retrieved context and generated answer can be inspected.", "Treats automated reference-free scores as proxies, not universal truth."],
-    "weak_answer_signals": ["Treats one aggregate answer score as a diagnosis of the retriever.", "Assumes relevant retrieval guarantees a grounded or useful response."],
-    "common_mistakes": ["Changing retriever and generator together, making the cause of a quality change unclear.", "Treating an LLM-based evaluator as ground truth without calibration or human checks."],
-    "follow_ups": [{ "question": "What indicates a retrieval failure?", "short_answer": "The needed evidence is missing, irrelevant, or too unfocused in the retrieved context." }, { "question": "What indicates a generation-grounding failure?", "short_answer": "The answer is not supported by the context that was actually provided." }],
+    "visual_aid": {
+      "kind": "diagram",
+      "alt": "A RAG failure should be decomposed into retrieval relevance, answer faithfulness to context, and task usefulness.",
+      "content": "Question → Retriever → Retrieved context → Generator → Answer\\nEvaluate: relevant/focused context | supported answer | answer usefulness\\nThen compare component results with end-to-end task outcomes"
+    },
+    "strong_answer_signals": [
+      "Separates retrieval relevance from answer faithfulness and usefulness.",
+      "Uses cases where the retrieved context and generated answer can be inspected.",
+      "Treats automated reference-free scores as proxies, not universal truth."
+    ],
+    "weak_answer_signals": [
+      "Treats one aggregate answer score as a diagnosis of the retriever.",
+      "Assumes relevant retrieval guarantees a grounded or useful response."
+    ],
+    "common_mistakes": [
+      "Changing retriever and generator together, making the cause of a quality change unclear.",
+      "Treating an LLM-based evaluator as ground truth without calibration or human checks."
+    ],
+    "follow_ups": [
+      {
+        "question": "What indicates a retrieval failure?",
+        "short_answer": "The needed evidence is missing, irrelevant, or too unfocused in the retrieved context."
+      },
+      {
+        "question": "What indicates a generation-grounding failure?",
+        "short_answer": "The answer is not supported by the context that was actually provided."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation", "publisher": "arXiv (Es et al.)", "url": "https://arxiv.org/abs/2309.15217v2", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+        "publisher": "arXiv (Es et al.)",
+        "url": "https://arxiv.org/abs/2309.15217v2",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "Ragas paper version 2 (arXiv:2309.15217v2); evaluation methods remain task- and metric-dependent.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://arxiv.org/abs/2309.15217v2"], "rederivation_agreement": true, "rederivation_notes": ["Separate derivation confirmed the paper treats retrieval relevance, faithful use of context, and generation quality as distinct evaluation dimensions. The diagnosis procedure is an engineering recommendation; the paper's reference-free metrics are not asserted as universal ground truth."], "disagreements": [], "code_executed": "n.a.", "confidence": "medium" },
-    "related": ["genai-rag-retrieval-is-not-proof-of-grounding"],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2309.15217v2"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Separate derivation confirmed the paper treats retrieval relevance, faithful use of context, and generation quality as distinct evaluation dimensions. The diagnosis procedure is an engineering recommendation; the paper's reference-free metrics are not asserted as universal ground truth."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [
+      "genai-rag-retrieval-is-not-proof-of-grounding"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "genai-faithfulness-does-not-prove-source-correctness",
     "bank": "gen-ai-engineer",
@@ -98,18 +157,70 @@
     "what_is_assessed": "Whether the candidate distinguishes consistency with retrieved text from truth, retrieval adequacy, and task usefulness.",
     "short_answer": "A high faithfulness score supports that the answer is consistent with the supplied context under the evaluator's method. It does not prove that the context itself is correct, that the retriever found all necessary evidence, or that the answer fully addresses the user's question. Check source quality, retrieval coverage, and answer relevance separately, and validate automated judge scores against human-reviewed examples.",
     "deep_explanation": "The Ragas paper separates the usefulness and focus of retrieved passages from the generator's faithful use of those passages and the quality of the final answer. A faithfulness proxy is conditional on the context supplied; it cannot establish that the corpus is authoritative or that omitted passages would change the answer. The paper presents reference-free metrics as proxies in settings where human references may not be available, not as a universal factuality guarantee.",
-    "visual_aid": { "kind": "diagram", "alt": "Faithfulness checks answer-to-context consistency, while source truth, retrieval coverage, and answer usefulness require separate evaluation.", "content": "Retrieved context → Is it authoritative and sufficient?\\nAnswer vs context → Is the answer supported by this context?\\nAnswer vs task → Is it complete and useful?\\nA strong faithfulness signal answers only the middle question" },
-    "strong_answer_signals": ["Limits the score to consistency with the supplied context and evaluator.", "Separately checks source quality, retrieval coverage, and answer relevance.", "Treats automated metrics as proxies to validate, not ground truth."],
-    "weak_answer_signals": ["Equates faithfulness with factual correctness.", "Assumes a supported answer must be complete or relevant."],
-    "common_mistakes": ["Evaluating generated text without inspecting the retrieved context.", "Using the same automated judge as the sole authority for its own metric."],
-    "follow_ups": [{ "question": "What can a high faithfulness score not validate?", "short_answer": "Whether the retrieved source is true or complete." }, { "question": "What should be measured separately?", "short_answer": "Retrieval quality, answer faithfulness, and task relevance or usefulness." }],
+    "visual_aid": {
+      "kind": "diagram",
+      "alt": "Faithfulness checks answer-to-context consistency, while source truth, retrieval coverage, and answer usefulness require separate evaluation.",
+      "content": "Retrieved context → Is it authoritative and sufficient?\\nAnswer vs context → Is the answer supported by this context?\\nAnswer vs task → Is it complete and useful?\\nA strong faithfulness signal answers only the middle question"
+    },
+    "strong_answer_signals": [
+      "Limits the score to consistency with the supplied context and evaluator.",
+      "Separately checks source quality, retrieval coverage, and answer relevance.",
+      "Treats automated metrics as proxies to validate, not ground truth."
+    ],
+    "weak_answer_signals": [
+      "Equates faithfulness with factual correctness.",
+      "Assumes a supported answer must be complete or relevant."
+    ],
+    "common_mistakes": [
+      "Evaluating generated text without inspecting the retrieved context.",
+      "Using the same automated judge as the sole authority for its own metric."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can a high faithfulness score not validate?",
+        "short_answer": "Whether the retrieved source is true or complete."
+      },
+      {
+        "question": "What should be measured separately?",
+        "short_answer": "Retrieval quality, answer faithfulness, and task relevance or usefulness."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation", "publisher": "arXiv (Es et al.)", "url": "https://arxiv.org/abs/2309.15217v2", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+        "publisher": "arXiv (Es et al.)",
+        "url": "https://arxiv.org/abs/2309.15217v2",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "Ragas paper version 2 (arXiv:2309.15217v2); metrics are proxies and remain task-dependent.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://arxiv.org/abs/2309.15217v2"], "rederivation_agreement": true, "rederivation_notes": ["Independent derivation confirmed the source distinguishes faithful use of context from retrieval usefulness and answer quality. The answer states that a context-conditioned metric cannot establish source truth or coverage."], "disagreements": [], "code_executed": "n.a.", "confidence": "medium" },
-    "related": ["genai-evaluate-retrieval-separately-from-generation"],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2309.15217v2"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Independent derivation confirmed the source distinguishes faithful use of context from retrieval usefulness and answer quality. The answer states that a context-conditioned metric cannot establish source truth or coverage."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [
+      "genai-evaluate-retrieval-separately-from-generation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

@@ -35,6 +35,8 @@
     "audit:search-console-exports": "node scripts/audit-search-console-exports.mjs",
     "test:search-console-exports": "node --test tests/search-console-exports.test.mjs",
     "audit:editorial-metadata": "node scripts/audit-editorial-metadata.mjs",
+    "write:needs-sme-review": "node scripts/generate-needs-sme-review.mjs",
+    "migrate:question-bank-guide-fields": "node scripts/migrate-question-bank-guide-fields.mjs",
     "validate:question-banks": "node scripts/validate-question-banks.mjs",
     "check:question-bank-links": "node scripts/check-question-bank-links.mjs",
     "test:pillar-guide-metadata": "node --test tests/pillar-guide-metadata.test.mjs",

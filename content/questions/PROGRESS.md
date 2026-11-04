@@ -1,8 +1,12 @@
 # Interview question banks — progress
 
-As of 2026-11-04, the structured content framework and eighty-eight source-checked items across five role banks are in place. This remains a research and validation draft, not a public release.
+As of 2026-11-04, the structured content framework and eighty-eight source-checked items across five role banks are in place. Additive Complete Interview Guide metadata has been migrated, but the role guides and interactive modules are not implemented. This remains a research and validation draft, not a public release.
 
 The first production build and type check passed with the question-bank validator included in the normal prebuild sequence. The build completed the existing site's route snapshot checks; existing Vite source-map and large-chunk warnings were emitted.
+
+The additive guide-field migration and current schema/duplicate validator pass on all 88 items. Existing items remain non-Core; audience-specific fresher/senior answers remain unset until authored. Reading and practice times are documented estimates, not measured durations. The Complete Interview Guide feature flag remains disabled.
+
+The report now includes the 16-module shortfall checklist, per-role counts, gate statuses, and explicit competitive/privacy gaps. `docs/needs-sme-review.md` is generated from source records and lists all 88 items; none is marked approved.
 
 ## Resume point
 
@@ -28,5 +32,6 @@ No code-bearing item is included, so code execution is not applicable to the eig
 - Privacy-policy update and network/storage capture for local-only progress.
 - Structured-data validation, axe/keyboard/zoom checks, and mobile Lighthouse thresholds. A point-in-time check of all cited URLs is recorded in the report.
 - Question bank count targets and required topic coverage.
+- Guide migration plan and editorial style/depth rubric are documented. Public role pages, all 16 modules, Core curation, readiness tools, study plans, mock interviews, flashcards, print packs, and their accessibility/privacy/SEO/performance gates remain unimplemented or unverified.
 
 Do not index or present these pilot files as completed public banks. Do not infer expert review from the AI-assisted verification records.

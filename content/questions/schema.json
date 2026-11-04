@@ -8,7 +8,9 @@
     "what_is_assessed", "short_answer", "deep_explanation",
     "strong_answer_signals", "weak_answer_signals", "common_mistakes",
     "follow_ups", "code", "references", "volatility", "versions_checked",
-    "last_verified", "verification", "related", "review_status"
+    "last_verified", "verification", "related", "review_status",
+    "core", "priority", "estimated_reading_minutes", "estimated_practice_minutes",
+    "answer_tiers", "content_tier"
   ],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
@@ -89,7 +91,21 @@
       }
     },
     "related": { "type": "array", "items": { "type": "string" } },
-    "review_status": { "const": "Drafted with AI assistance; code executed; sources cited; independent expert review pending" }
+    "review_status": { "const": "Drafted with AI assistance; code executed; sources cited; independent expert review pending" },
+    "core": { "type": "boolean" },
+    "priority": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "estimated_reading_minutes": { "type": "integer", "minimum": 1 },
+    "estimated_practice_minutes": { "type": "integer", "minimum": 0 },
+    "answer_tiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fresher_level", "senior_level"],
+      "properties": {
+        "fresher_level": { "type": ["string", "null"] },
+        "senior_level": { "type": ["string", "null"] }
+      }
+    },
+    "content_tier": { "enum": ["complete-guide"] }
   },
   "$defs": {
     "nonEmptyStrings": {

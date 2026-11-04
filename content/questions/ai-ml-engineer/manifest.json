@@ -3,10 +3,22 @@
   "target": 220,
   "minimum": 140,
   "itemCount": 3,
-  "countsByTopic": { "Training and reproducibility": 3 },
-  "countsByLevel": { "L2": 3 },
-  "countsByType": { "debugging": 3 },
-  "status": { "schemaValid": 3, "sourcesVerified": 3, "rederived": 3, "codeExecuted": 0, "expertReviewPending": 3 },
+  "countsByTopic": {
+    "Training and reproducibility": 3
+  },
+  "countsByLevel": {
+    "L2": 3
+  },
+  "countsByType": {
+    "debugging": 3
+  },
+  "status": {
+    "schemaValid": 3,
+    "sourcesVerified": 3,
+    "rederived": 3,
+    "codeExecuted": 0,
+    "expertReviewPending": 3
+  },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
       "schemaValid": true,
@@ -29,5 +41,6 @@
       "codeExecution": "n.a.",
       "expertReview": "pending"
     }
-  }
+  },
+  "coreItemCount": 0
 }

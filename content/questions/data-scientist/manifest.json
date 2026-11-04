@@ -3,10 +3,23 @@
   "target": 240,
   "minimum": 150,
   "itemCount": 3,
-  "countsByTopic": { "Machine learning evaluation": 3 },
-  "countsByLevel": { "L2": 3 },
-  "countsByType": { "trade-off": 2, "concept": 1 },
-  "status": { "schemaValid": 3, "sourcesVerified": 3, "rederived": 3, "codeExecuted": 0, "expertReviewPending": 3 },
+  "countsByTopic": {
+    "Machine learning evaluation": 3
+  },
+  "countsByLevel": {
+    "L2": 3
+  },
+  "countsByType": {
+    "trade-off": 2,
+    "concept": 1
+  },
+  "status": {
+    "schemaValid": 3,
+    "sourcesVerified": 3,
+    "rederived": 3,
+    "codeExecuted": 0,
+    "expertReviewPending": 3
+  },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
       "schemaValid": true,
@@ -29,5 +42,6 @@
       "codeExecution": "n.a.",
       "expertReview": "pending"
     }
-  }
+  },
+  "coreItemCount": 0
 }

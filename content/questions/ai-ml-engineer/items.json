@@ -58,9 +58,17 @@
       "confidence": "high"
     },
     "related": [],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "ml-resume-training-needs-optimizer-state",
     "bank": "ai-ml-engineer",
@@ -72,21 +80,70 @@
     "what_is_assessed": "Whether the candidate distinguishes an inference artifact from the broader state needed to resume optimization.",
     "short_answer": "Check whether the checkpoint restores the optimizer state as well as the model parameters. Optimizers can contain momentum buffers and other evolving state, so loading weights alone can change the next updates. Also restore the epoch or step and relevant scheduler state; for a stronger reproducibility goal, preserve random-number-generator and data-sampler progress where the training setup requires them.",
     "deep_explanation": "PyTorch's general-checkpoint example saves both model_state_dict and optimizer_state_dict, along with the epoch and loss. Its documentation explains that optimizer state includes buffers and parameters updated during training, so a model-only state is not equivalent to resuming the same optimization process. Scheduler, random-number, and sampler state are additional engineering considerations when exact continuation is required; the example does not promise bitwise-identical resumption across hardware or software environments.",
-    "visual_aid": { "kind": "comparison-table", "alt": "An inference checkpoint can hold model weights; a training-resume checkpoint also needs optimizer progress and other run state.", "content": "Inference: model parameters\\nResume training: model + optimizer state + step/epoch (+ scheduler, RNG, sampler as needed)\\nWeights-only reload ≠ continuation of the same optimizer trajectory" },
-    "strong_answer_signals": ["Names optimizer state as a key missing component.", "Distinguishes inference loading from continued optimization.", "Scopes scheduler, RNG, and sampler state to the reproducibility requirement."],
-    "weak_answer_signals": ["Assumes model weights encode optimizer momentum.", "Claims a checkpoint guarantees identical runs across all hardware and versions."],
-    "common_mistakes": ["Saving only the final model state when interruption recovery is needed.", "Restoring optimizer state but silently restarting a scheduler or data-order state that affects the run."],
-    "follow_ups": [{ "question": "What does the optimizer state capture?", "short_answer": "Optimizer-maintained buffers and parameters that evolve during training, such as momentum." }, { "question": "Does restoring model and optimizer state guarantee bitwise reproducibility?", "short_answer": "No; environment, kernels, RNGs, and data order may still affect execution." }],
+    "visual_aid": {
+      "kind": "comparison-table",
+      "alt": "An inference checkpoint can hold model weights; a training-resume checkpoint also needs optimizer progress and other run state.",
+      "content": "Inference: model parameters\\nResume training: model + optimizer state + step/epoch (+ scheduler, RNG, sampler as needed)\\nWeights-only reload ≠ continuation of the same optimizer trajectory"
+    },
+    "strong_answer_signals": [
+      "Names optimizer state as a key missing component.",
+      "Distinguishes inference loading from continued optimization.",
+      "Scopes scheduler, RNG, and sampler state to the reproducibility requirement."
+    ],
+    "weak_answer_signals": [
+      "Assumes model weights encode optimizer momentum.",
+      "Claims a checkpoint guarantees identical runs across all hardware and versions."
+    ],
+    "common_mistakes": [
+      "Saving only the final model state when interruption recovery is needed.",
+      "Restoring optimizer state but silently restarting a scheduler or data-order state that affects the run."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the optimizer state capture?",
+        "short_answer": "Optimizer-maintained buffers and parameters that evolve during training, such as momentum."
+      },
+      {
+        "question": "Does restoring model and optimizer state guarantee bitwise reproducibility?",
+        "short_answer": "No; environment, kernels, RNGs, and data order may still affect execution."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Saving and Loading Models: General Checkpoint", "publisher": "PyTorch", "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Saving and Loading Models: General Checkpoint",
+        "publisher": "PyTorch",
+        "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15.0 tutorial; checkpoint fields are documented in the general resuming-training example.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"], "rederivation_agreement": true, "rederivation_notes": ["The independent pass confirmed the source's model-plus-optimizer checkpoint example and the role of optimizer buffers. Scheduler/RNG/sampler fields are presented as setup-dependent reproducibility advice, not as fields explicitly required by that example."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "The independent pass confirmed the source's model-plus-optimizer checkpoint example and the role of optimizer buffers. Scheduler/RNG/sampler fields are presented as setup-dependent reproducibility advice, not as fields explicitly required by that example."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
     "related": [],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "ml-best-state-dict-reference-mutates",
     "bank": "ai-ml-engineer",
@@ -98,18 +155,70 @@
     "what_is_assessed": "Whether the candidate recognizes that state_dict() returns references and preserves a snapshot when selecting the best checkpoint.",
     "short_answer": "The code may have assigned `best_state = model.state_dict()` and continued training. PyTorch documents that this returns references to the model's state rather than an independent copy, so later updates can change the supposed best state. Serialize the checkpoint at selection time or deep-copy the state dict, then reload the saved state before evaluation.",
     "deep_explanation": "A variable named `best_state` is not automatically an immutable snapshot. PyTorch's saving/loading tutorial warns that assigning `model.state_dict()` keeps a reference whose values continue to update during subsequent training. As a result, the selected best model can silently become the final model. The documented remedies are to serialize the state at selection time or use `deepcopy(model.state_dict())`; validation-based selection should then be tested by comparing saved and reloaded weights.",
-    "visual_aid": { "kind": "timeline", "alt": "A state dictionary reference continues reflecting later optimizer updates unless serialized or copied.", "content": "Epoch 8 best validation → best_state = model.state_dict() (reference)\\nEpochs 9–20 update model → referenced best_state changes too\\nFix: serialize at epoch 8 or deep-copy state_dict()" },
-    "strong_answer_signals": ["Identifies the reference-versus-copy behavior.", "Proposes serialization or deepcopy at the best-checkpoint moment.", "Reloads and verifies the selected checkpoint rather than trusting the variable name."],
-    "weak_answer_signals": ["Assumes state_dict() automatically freezes the model state.", "Changes validation logic without checking whether the saved weights were mutated."],
-    "common_mistakes": ["Keeping the in-memory state dict reference while continuing training.", "Saving the checkpoint only after training finishes."],
-    "follow_ups": [{ "question": "What happens to the referenced state during later training?", "short_answer": "It can reflect subsequent model updates rather than the earlier best epoch." }, { "question": "How can you preserve the selected weights?", "short_answer": "Serialize them immediately or deep-copy the state dict when selecting the checkpoint." }],
+    "visual_aid": {
+      "kind": "timeline",
+      "alt": "A state dictionary reference continues reflecting later optimizer updates unless serialized or copied.",
+      "content": "Epoch 8 best validation → best_state = model.state_dict() (reference)\\nEpochs 9–20 update model → referenced best_state changes too\\nFix: serialize at epoch 8 or deep-copy state_dict()"
+    },
+    "strong_answer_signals": [
+      "Identifies the reference-versus-copy behavior.",
+      "Proposes serialization or deepcopy at the best-checkpoint moment.",
+      "Reloads and verifies the selected checkpoint rather than trusting the variable name."
+    ],
+    "weak_answer_signals": [
+      "Assumes state_dict() automatically freezes the model state.",
+      "Changes validation logic without checking whether the saved weights were mutated."
+    ],
+    "common_mistakes": [
+      "Keeping the in-memory state dict reference while continuing training.",
+      "Saving the checkpoint only after training finishes."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens to the referenced state during later training?",
+        "short_answer": "It can reflect subsequent model updates rather than the earlier best epoch."
+      },
+      {
+        "question": "How can you preserve the selected weights?",
+        "short_answer": "Serialize them immediately or deep-copy the state dict when selecting the checkpoint."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Saving and Loading Models: Best Model State", "publisher": "PyTorch", "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Saving and Loading Models: Best Model State",
+        "publisher": "PyTorch",
+        "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15.0 tutorial; the referenced-state warning is stated in the model checkpoint section.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"], "rederivation_agreement": true, "rederivation_notes": ["Separate pass confirmed the tutorial warns that state_dict() returns a reference, not a copy, and explicitly recommends serialization or deepcopy to preserve the best checkpoint."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
-    "related": ["ml-resume-training-needs-optimizer-state"],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Separate pass confirmed the tutorial warns that state_dict() returns a reference, not a copy, and explicitly recommends serialization or deepcopy to preserve the best checkpoint."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-resume-training-needs-optimizer-state"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

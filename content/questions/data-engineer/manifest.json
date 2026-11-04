@@ -3,10 +3,31 @@
   "target": 240,
   "minimum": 150,
   "itemCount": 76,
-  "countsByTopic": { "SQL": 21, "Streaming systems": 26, "Orchestration": 11, "Storage formats": 9, "Lakehouse table formats": 9 },
-  "countsByLevel": { "L1": 8, "L2": 53, "L3": 15 },
-  "countsByType": { "concept": 18, "scenario": 20, "debugging": 27, "trade-off": 11 },
-  "status": { "schemaValid": 76, "sourcesVerified": 76, "rederived": 76, "codeExecuted": 0, "expertReviewPending": 76 },
+  "countsByTopic": {
+    "SQL": 21,
+    "Streaming systems": 26,
+    "Orchestration": 11,
+    "Storage formats": 9,
+    "Lakehouse table formats": 9
+  },
+  "countsByLevel": {
+    "L1": 8,
+    "L2": 53,
+    "L3": 15
+  },
+  "countsByType": {
+    "concept": 18,
+    "scenario": 20,
+    "debugging": 27,
+    "trade-off": 11
+  },
+  "status": {
+    "schemaValid": 76,
+    "sourcesVerified": 76,
+    "rederived": 76,
+    "codeExecuted": 0,
+    "expertReviewPending": 76
+  },
   "itemStatus": {
     "de-window-functions-retain-rows": {
       "schemaValid": true,
@@ -540,5 +561,6 @@
       "codeExecution": "n.a.",
       "expertReview": "pending"
     }
-  }
+  },
+  "coreItemCount": 0
 }

@@ -58,9 +58,17 @@
       "confidence": "high"
     },
     "related": [],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "agentic-sensitive-tool-action-human-approval",
     "bank": "agentic-ai-engineer",
@@ -72,21 +80,70 @@
     "what_is_assessed": "Whether the candidate distinguishes automatic validation from human authorization for sensitive side effects.",
     "short_answer": "Validate the proposed action and its arguments, then pause for an authorized person or explicit policy decision before a sensitive side effect. The approval step should show the action and relevant context, and support both approval and rejection without letting the agent silently continue. Automatic guardrails can catch invalid inputs or tool behavior, but they are not the same as approval authority.",
     "deep_explanation": "OpenAI's agent guidance distinguishes guardrails, which automatically validate input, output, or tool behavior, from human review, which pauses a run so a person or policy can approve or reject a sensitive action. For cancellation or refund tools, a system should define which actions require review, what information the reviewer sees, and how rejection terminates or redirects the run. The source describes a control pattern, not a guarantee that approval alone prevents every misuse; permissions and tool-side checks remain important design considerations.",
-    "visual_aid": { "kind": "diagram", "alt": "A sensitive tool call is validated, paused for authorization, and only then executed or rejected.", "content": "Agent proposes refund → validate arguments → pause for authorized review\\nApprove → execute scoped action\\nReject → stop or return a safe explanation; do not silently retry" },
-    "strong_answer_signals": ["Separates automatic guardrails from human authorization.", "Makes approval an actual pause before the side effect.", "Defines rejection behavior and the action context shown to the reviewer."],
-    "weak_answer_signals": ["Assumes a prompt instruction is equivalent to enforced approval.", "Runs the side effect before asking a person to confirm it."],
-    "common_mistakes": ["Using broad approval for a batch of unrelated actions.", "Treating a passed input guardrail as permission to execute an irreversible action."],
-    "follow_ups": [{ "question": "What is the difference between a guardrail and human review?", "short_answer": "A guardrail automatically validates; human review pauses for an approval or rejection decision." }, { "question": "What should happen on rejection?", "short_answer": "The run must not execute the action; stop or follow a defined safe alternative." }],
+    "visual_aid": {
+      "kind": "diagram",
+      "alt": "A sensitive tool call is validated, paused for authorization, and only then executed or rejected.",
+      "content": "Agent proposes refund → validate arguments → pause for authorized review\\nApprove → execute scoped action\\nReject → stop or return a safe explanation; do not silently retry"
+    },
+    "strong_answer_signals": [
+      "Separates automatic guardrails from human authorization.",
+      "Makes approval an actual pause before the side effect.",
+      "Defines rejection behavior and the action context shown to the reviewer."
+    ],
+    "weak_answer_signals": [
+      "Assumes a prompt instruction is equivalent to enforced approval.",
+      "Runs the side effect before asking a person to confirm it."
+    ],
+    "common_mistakes": [
+      "Using broad approval for a batch of unrelated actions.",
+      "Treating a passed input guardrail as permission to execute an irreversible action."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the difference between a guardrail and human review?",
+        "short_answer": "A guardrail automatically validates; human review pauses for an approval or rejection decision."
+      },
+      {
+        "question": "What should happen on rejection?",
+        "short_answer": "The run must not execute the action; stop or follow a defined safe alternative."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Guardrails and Human Review", "publisher": "OpenAI", "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Guardrails and Human Review",
+        "publisher": "OpenAI",
+        "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "Current OpenAI Agents SDK guide retrieved 2026-11-04; the control distinction is conceptual, not a claim about a particular SDK version.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"], "rederivation_agreement": true, "rederivation_notes": ["The source explicitly distinguishes automated validation from pausing for human or policy approval. The action-context and rejection details are safety design recommendations and are not presented as specific SDK guarantees."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "The source explicitly distinguishes automated validation from pausing for human or policy approval. The action-context and rejection details are safety design recommendations and are not presented as specific SDK guarantees."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
     "related": [],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
-  }
-,
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
   {
     "id": "agentic-route-specialized-prompts-for-clear-categories",
     "bank": "agentic-ai-engineer",
@@ -98,18 +155,70 @@
     "what_is_assessed": "Whether the candidate identifies clear input categories and evaluates the routing classifier separately from specialized handling.",
     "short_answer": "Routing can help when requests fall into distinct categories that benefit from separate prompts or handlers, and the classifier can assign them accurately. I would measure classification errors and end-to-end quality against one general prompt, define a safe fallback for uncertain or out-of-scope requests, and check whether the extra routing step improves results enough to justify its latency and operational complexity.",
     "deep_explanation": "Anthropic's agent-design article describes routing as classifying an input and directing it to a specialized follow-up task. It says the pattern is useful when categories are distinct and classification can be handled accurately by an LLM or a traditional classifier. This article is conceptual guidance, not a current benchmark or a guarantee that routing improves any particular support system; comparative evaluation should use representative requests and include misroutes.",
-    "visual_aid": { "kind": "diagram", "alt": "A classifier directs clear request categories to specialized handlers, with an explicit fallback for uncertain cases.", "content": "Incoming request → classify category\\nBilling → billing handler | Access → account handler | Technical → support handler\\nUncertain / new category → general fallback or human queue" },
-    "strong_answer_signals": ["Names category separation and classification accuracy as prerequisites.", "Measures routing and end-to-end errors against a simpler baseline.", "Defines behavior for uncertain or unhandled categories."],
-    "weak_answer_signals": ["Adds a router without evidence that request categories need different handling.", "Assumes specialized prompts eliminate classification errors."],
-    "common_mistakes": ["Measuring only handler quality while ignoring misroutes.", "Creating increasingly narrow routes without a fallback or monitoring."],
-    "follow_ups": [{ "question": "What should be measured for a router?", "short_answer": "Classification accuracy and downstream task quality, including the cost of misroutes." }, { "question": "When is one general prompt preferable?", "short_answer": "When categories overlap or routing errors and added complexity outweigh specialization benefits." }],
+    "visual_aid": {
+      "kind": "diagram",
+      "alt": "A classifier directs clear request categories to specialized handlers, with an explicit fallback for uncertain cases.",
+      "content": "Incoming request → classify category\\nBilling → billing handler | Access → account handler | Technical → support handler\\nUncertain / new category → general fallback or human queue"
+    },
+    "strong_answer_signals": [
+      "Names category separation and classification accuracy as prerequisites.",
+      "Measures routing and end-to-end errors against a simpler baseline.",
+      "Defines behavior for uncertain or unhandled categories."
+    ],
+    "weak_answer_signals": [
+      "Adds a router without evidence that request categories need different handling.",
+      "Assumes specialized prompts eliminate classification errors."
+    ],
+    "common_mistakes": [
+      "Measuring only handler quality while ignoring misroutes.",
+      "Creating increasingly narrow routes without a fallback or monitoring."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be measured for a router?",
+        "short_answer": "Classification accuracy and downstream task quality, including the cost of misroutes."
+      },
+      {
+        "question": "When is one general prompt preferable?",
+        "short_answer": "When categories overlap or routing errors and added complexity outweigh specialization benefits."
+      }
+    ],
     "code": null,
-    "references": [{ "title": "Building Effective Agents: Routing", "publisher": "Anthropic Engineering", "url": "https://www.anthropic.com/engineering/building-effective-agents", "retrieved_date": "2026-11-04" }],
+    "references": [
+      {
+        "title": "Building Effective Agents: Routing",
+        "publisher": "Anthropic Engineering",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "Anthropic Engineering article first published 2024-12-19; current page notes tooling descriptions have changed.",
     "last_verified": "2026-11-04",
-    "verification": { "sources_checked": ["https://www.anthropic.com/engineering/building-effective-agents"], "rederivation_agreement": true, "rederivation_notes": ["Separate pass confirmed the article defines routing as classifying inputs into specialized follow-up tasks and conditions usefulness on distinct categories and accurate classification. Latency, fallback, and evaluation guidance are labeled as engineering recommendations."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
-    "related": ["agentic-workflow-before-autonomous-agent"],
-    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+    "verification": {
+      "sources_checked": [
+        "https://www.anthropic.com/engineering/building-effective-agents"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Separate pass confirmed the article defines routing as classifying inputs into specialized follow-up tasks and conditions usefulness on distinct categories and accurate classification. Latency, fallback, and evaluation guidance are labeled as engineering recommendations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-workflow-before-autonomous-agent"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 3,
+    "estimated_reading_minutes": 1,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]
