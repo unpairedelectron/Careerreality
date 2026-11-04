@@ -2,7 +2,6 @@ import { expect, test, type Page } from "@playwright/test";
 
 declare global {
   interface Window {
-    __careerRealityLayoutShiftTotal?: number;
     __careerRealityAuthTest?: {
       loadAuth: () => void;
       setUser: (userId: string | null) => void;
@@ -235,33 +234,6 @@ test.describe("deferred Clerk auth regression coverage", () => {
       await expect(page.getByTestId("form-home-ctc")).toBeVisible();
       await expect.poll(() => scriptRequests.some((request) => /home-below-fold/i.test(request))).toBe(true);
     });
-  });
-
-  test("production build keeps mobile homepage hydration layout shift within budget", async ({ page }) => {
-    test.skip(
-      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
-      "Hydration layout shift is checked against the production build.",
-    );
-    await page.setViewportSize({ width: 402, height: 874 });
-    await page.addInitScript(() => {
-      window.__careerRealityLayoutShiftTotal = 0;
-      new PerformanceObserver((entries) => {
-        for (const entry of entries.getEntries() as Array<PerformanceEntry & { hadRecentInput?: boolean; value?: number }>) {
-          if (!entry.hadRecentInput) {
-            window.__careerRealityLayoutShiftTotal =
-              (window.__careerRealityLayoutShiftTotal ?? 0) + (entry.value ?? 0);
-          }
-        }
-      }).observe({ type: "layout-shift", buffered: true });
-    });
-
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
-    await page.waitForTimeout(3_000);
-    const cumulativeLayoutShift = await page.evaluate(
-      () => window.__careerRealityLayoutShiftTotal ?? 0,
-    );
-    expect(cumulativeLayoutShift).toBeLessThanOrEqual(0.1);
   });
 
   test("production build fails closed when its deferred Clerk chunk cannot load", async ({ page }) => {

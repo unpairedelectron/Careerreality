@@ -25,6 +25,7 @@
     "serve": "node scripts/serve-published.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:e2e": "playwright test",
+    "test:e2e:homepage-hydration:production": "PORT=4174 BASE_PATH=/ VITE_E2E=false VITE_E2E_AUTH_RUNTIME=false pnpm run build && PLAYWRIGHT_HYDRATION=true pnpm exec playwright test --config playwright.hydration.config.ts",
     "test:e2e:auth-deferral": "playwright test --config playwright.auth.config.ts",
     "test:e2e:auth-deferral:production": "VITE_E2E=false VITE_E2E_AUTH_RUNTIME=true pnpm run build && PLAYWRIGHT_AUTH_PRODUCTION=true pnpm exec playwright test --config playwright.auth.config.ts --grep \"production build\" --workers=1",
     "test:e2e:mobile-homepage:production": "VITE_E2E=false VITE_E2E_AUTH_RUNTIME=true pnpm run build && PLAYWRIGHT_AUTH_PRODUCTION=true PLAYWRIGHT_PRODUCTION=true pnpm exec playwright test tests/auth-deferral.spec.ts --grep \"production build (keeps unused route chunks off the mobile homepage|loads below-fold homepage content only when reached)\" --workers=1",
