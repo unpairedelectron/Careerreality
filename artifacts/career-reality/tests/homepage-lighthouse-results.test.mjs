@@ -1,15 +1,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { evaluateAudits, range } from "../scripts/homepage-lighthouse-results.mjs";
+import { defaultClsBudget, evaluateAudits, range } from "../scripts/homepage-lighthouse-results.mjs";
 
-function run(lcp = 1000, url = "http://127.0.0.1/assets/home.js") {
+function run(lcp = 1000, url = "http://127.0.0.1/assets/home.js", cls = 0.001) {
   return {
     report: {
       categories: { performance: { score: 0.97 } },
       audits: {
         "largest-contentful-paint": { numericValue: lcp },
         "first-contentful-paint": { numericValue: 900 },
-        "cumulative-layout-shift": { numericValue: 0.001 },
+        "cumulative-layout-shift": { numericValue: cls },
       },
     },
     devtoolsLog: [{ method: "Network.requestWillBeSent", params: { request: { url } } }],
@@ -32,6 +32,19 @@ test("fails above the budget, accepts its exact boundary, and supports explicit 
   assert.equal(evaluateAudits([run(), run(), run()], 999).failures.length, 1);
 });
 
+test("fails when any CLS run exceeds the budget and accepts its exact boundary", () => {
+  assert.equal(defaultClsBudget, 0.1);
+  const passing = evaluateAudits([run(), run(), run()], 2000, 0.1);
+  assert.equal(passing.maxCls, 0.001);
+  assert.deepEqual(passing.failures, []);
+
+  const failing = evaluateAudits([run(), run(), run(1000, undefined, 0.101)], 2000, 0.1);
+  assert.equal(failing.maxCls, 0.101);
+  assert.match(failing.failures[0], /CLS 0\.101 exceeded.*in at least one run/);
+  const boundary = evaluateAudits([run(1000), run(1000), run(1000, undefined, 0.1)], 2000, 0.1);
+  assert.deepEqual(boundary.failures, []);
+});
+
 test("any Clerk attempt fails, including a failed request without a completed-resource entry", () => {
   for (const url of [
     "https://example.clerk.accounts.dev/v1/client",
@@ -52,6 +65,9 @@ test("fails closed on incomplete or invalid audit data", () => {
   assert.throws(() => evaluateAudits([run(), run()]), /three/);
   for (const budget of [NaN, 0, -1, Infinity]) {
     assert.throws(() => evaluateAudits([run(), run(), run()], budget), /budget/);
+  }
+  for (const budget of [NaN, -0.01, Infinity]) {
+    assert.throws(() => evaluateAudits([run(), run(), run()], 2000, budget), /CLS budget/);
   }
   for (const mutate of [
     (r) => { r.report.audits["largest-contentful-paint"].numericValue = NaN; },

@@ -9,6 +9,7 @@
     "verify:aa-contrast": "node scripts/verify-aa-contrast.mjs",
     "prebuild": "node scripts/validate-question-banks.mjs && node scripts/generate-pillar-guides.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-llms-guide.mjs",
     "build": "vite build --config vite.config.ts",
+    "build:release": "pnpm run build && pnpm run verify:mobile-homepage-lighthouse",
     "postbuild": "node scripts/inject-static-site-meta.mjs && tsx scripts/generate-route-snapshots.ts && tsx scripts/verify-route-snapshots.ts && node scripts/generate-llms-guide.mjs --check --dist",
     "test:llms-guide": "node --test tests/llms-guide.test.mjs",
     "test:layoff-cashflow": "tsx --test tests/layoff-cashflow.test.ts",

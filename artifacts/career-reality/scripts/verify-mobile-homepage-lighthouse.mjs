@@ -2,12 +2,13 @@ import { spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { defaultLcpBudgetMs, evaluateAudits, observationWindowMs, range, runCount } from "./homepage-lighthouse-results.mjs";
+import { defaultClsBudget, defaultLcpBudgetMs, evaluateAudits, observationWindowMs, range, runCount } from "./homepage-lighthouse-results.mjs";
 
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const previewPort = Number(process.env.LIGHTHOUSE_PREVIEW_PORT ?? 4175);
 const baseUrl = `http://127.0.0.1:${previewPort}/`;
 const lcpBudgetMs = Number(process.env.HOMEPAGE_LCP_BUDGET_MS ?? defaultLcpBudgetMs);
+const clsBudget = Number(process.env.HOMEPAGE_CLS_BUDGET ?? defaultClsBudget);
 const chromePath = process.env.CHROME_PATH ?? "/repl/tools/bin/chromium";
 // Never audit a fixture-auth build or inherit the managed preview's path prefix.
 const productionEnv = {
@@ -110,6 +111,9 @@ if (!Number.isInteger(previewPort) || previewPort < 1 || previewPort > 65535) {
 if (!Number.isFinite(lcpBudgetMs) || lcpBudgetMs <= 0) {
   throw new Error("HOMEPAGE_LCP_BUDGET_MS must be a positive number.");
 }
+if (!Number.isFinite(clsBudget) || clsBudget < 0) {
+  throw new Error("HOMEPAGE_CLS_BUDGET must be a non-negative number.");
+}
 
 const reportsRoot = path.resolve(packageRoot, "../../generated-artifacts/homepage-lighthouse");
 await mkdir(reportsRoot, { recursive: true });
@@ -127,14 +131,15 @@ try {
     console.log(`Completed mobile Lighthouse run ${index + 1}/${runCount}.`);
   }
 
-  const result = evaluateAudits(runs, lcpBudgetMs);
-  const { scores, lcp, fcp, cls, medianLcpMs, failures } = result;
+  const result = evaluateAudits(runs, lcpBudgetMs, clsBudget);
+  const { scores, lcp, fcp, cls, medianLcpMs, maxCls, failures } = result;
   await writeFile(path.join(outputDir, "summary.json"), JSON.stringify({
     ...result,
     homepage: baseUrl,
     lighthouseVersion: runs[0].report.lighthouseVersion,
     profile: lighthouseOptions,
     runs: runCount,
+    clsBudget,
   }, null, 2));
 
   console.log(`Homepage: ${baseUrl}`);
@@ -143,13 +148,13 @@ try {
   console.log(`Performance score range: ${range(scores, 1, 0)} / 100`);
   console.log(`LCP range: ${range(lcp, 1_000)} s; median: ${(medianLcpMs / 1_000).toFixed(2)} s; budget: ${(lcpBudgetMs / 1_000).toFixed(2)} s`);
   console.log(`FCP range: ${range(fcp, 1_000)} s`);
-  console.log(`CLS range: ${range(cls, 1, 3)}`);
+  console.log(`CLS range: ${range(cls, 1, 3)}; worst run: ${maxCls.toFixed(3)}; budget: ${clsBudget.toFixed(3)}`);
 
   if (failures.length > 0) {
     console.error(`FAIL: ${failures.join("; ")}`);
     process.exitCode = 1;
   } else {
-    console.log("PASS: median LCP is within budget and no Clerk requests were observed.");
+    console.log("PASS: median LCP and every CLS run are within budget; no Clerk requests were observed.");
   }
 } finally {
   preview.child.kill("SIGTERM");

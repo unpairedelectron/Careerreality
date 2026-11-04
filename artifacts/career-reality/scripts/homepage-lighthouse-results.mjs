@@ -1,4 +1,5 @@
 export const defaultLcpBudgetMs = 2_000;
+export const defaultClsBudget = 0.1;
 export const runCount = 3;
 export const observationWindowMs = 8_000;
 
@@ -18,9 +19,10 @@ function numeric(value, label) {
   return value;
 }
 
-export function evaluateAudits(runs, lcpBudgetMs = defaultLcpBudgetMs) {
+export function evaluateAudits(runs, lcpBudgetMs = defaultLcpBudgetMs, clsBudget = defaultClsBudget) {
   if (runs.length < runCount) throw new Error("At least three Lighthouse runs are required.");
   if (!Number.isFinite(lcpBudgetMs) || lcpBudgetMs <= 0) throw new Error("Invalid LCP budget.");
+  if (!Number.isFinite(clsBudget) || clsBudget < 0) throw new Error("Invalid CLS budget.");
   const metrics = { scores: [], lcp: [], fcp: [], cls: [] };
   const clerkUrls = new Set();
   for (const { report, devtoolsLog } of runs) {
@@ -43,10 +45,14 @@ export function evaluateAudits(runs, lcpBudgetMs = defaultLcpBudgetMs) {
     }
   }
   const medianLcpMs = median(metrics.lcp);
+  const maxCls = Math.max(...metrics.cls);
   const failures = [];
   if (medianLcpMs > lcpBudgetMs) {
     failures.push(`median LCP ${(medianLcpMs / 1000).toFixed(2)} s exceeded the ${(lcpBudgetMs / 1000).toFixed(2)} s budget`);
   }
+  if (maxCls > clsBudget) {
+    failures.push(`CLS ${maxCls.toFixed(3)} exceeded the ${clsBudget.toFixed(3)} budget in at least one run`);
+  }
   if (clerkUrls.size) failures.push(`Clerk request(s) observed: ${[...clerkUrls].join(", ")}`);
-  return { ...metrics, medianLcpMs, lcpBudgetMs, clerkUrls: [...clerkUrls], failures };
+  return { ...metrics, medianLcpMs, maxCls, lcpBudgetMs, clsBudget, clerkUrls: [...clerkUrls], failures };
 }

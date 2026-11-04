@@ -15,7 +15,7 @@ localPort = 20339
 run = "pnpm --filter @workspace/career-reality run dev"
 
 [services.production]
-build = [ "pnpm", "--filter", "@workspace/career-reality", "run", "build" ]
+build = [ "pnpm", "--filter", "@workspace/career-reality", "run", "build:release" ]
 [services.production.run]
 args = ["node", "--enable-source-maps", "artifacts/career-reality/scripts/serve-published.mjs"]
 
