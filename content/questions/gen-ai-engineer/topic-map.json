@@ -13,6 +13,15 @@
           "volatility": "Fast-moving",
           "last_verified": "2026-11-03",
           "versions_checked": "arXiv:2005.11401v4"
+        },
+        {
+          "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+          "publisher": "arXiv (Es et al.)",
+          "url": "https://arxiv.org/abs/2309.15217v2",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv:2309.15217v2"
         }
       ]
     }

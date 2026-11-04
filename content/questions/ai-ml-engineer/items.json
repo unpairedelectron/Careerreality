@@ -60,4 +60,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "ml-resume-training-needs-optimizer-state",
+    "bank": "ai-ml-engineer",
+    "topic": "Training and reproducibility",
+    "subtopic": "Checkpoints and resuming training",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A training job resumes from model weights but its learning trajectory changes sharply. What checkpoint state might be missing?",
+    "what_is_assessed": "Whether the candidate distinguishes an inference artifact from the broader state needed to resume optimization.",
+    "short_answer": "Check whether the checkpoint restores the optimizer state as well as the model parameters. Optimizers can contain momentum buffers and other evolving state, so loading weights alone can change the next updates. Also restore the epoch or step and relevant scheduler state; for a stronger reproducibility goal, preserve random-number-generator and data-sampler progress where the training setup requires them.",
+    "deep_explanation": "PyTorch's general-checkpoint example saves both model_state_dict and optimizer_state_dict, along with the epoch and loss. Its documentation explains that optimizer state includes buffers and parameters updated during training, so a model-only state is not equivalent to resuming the same optimization process. Scheduler, random-number, and sampler state are additional engineering considerations when exact continuation is required; the example does not promise bitwise-identical resumption across hardware or software environments.",
+    "visual_aid": { "kind": "comparison-table", "alt": "An inference checkpoint can hold model weights; a training-resume checkpoint also needs optimizer progress and other run state.", "content": "Inference: model parameters\\nResume training: model + optimizer state + step/epoch (+ scheduler, RNG, sampler as needed)\\nWeights-only reload ≠ continuation of the same optimizer trajectory" },
+    "strong_answer_signals": ["Names optimizer state as a key missing component.", "Distinguishes inference loading from continued optimization.", "Scopes scheduler, RNG, and sampler state to the reproducibility requirement."],
+    "weak_answer_signals": ["Assumes model weights encode optimizer momentum.", "Claims a checkpoint guarantees identical runs across all hardware and versions."],
+    "common_mistakes": ["Saving only the final model state when interruption recovery is needed.", "Restoring optimizer state but silently restarting a scheduler or data-order state that affects the run."],
+    "follow_ups": [{ "question": "What does the optimizer state capture?", "short_answer": "Optimizer-maintained buffers and parameters that evolve during training, such as momentum." }, { "question": "Does restoring model and optimizer state guarantee bitwise reproducibility?", "short_answer": "No; environment, kernels, RNGs, and data order may still affect execution." }],
+    "code": null,
+    "references": [{ "title": "Saving and Loading Models: General Checkpoint", "publisher": "PyTorch", "url": "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html", "retrieved_date": "2026-11-04" }],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial; checkpoint fields are documented in the general resuming-training example.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"], "rederivation_agreement": true, "rederivation_notes": ["The independent pass confirmed the source's model-plus-optimizer checkpoint example and the role of optimizer buffers. Scheduler/RNG/sampler fields are presented as setup-dependent reproducibility advice, not as fields explicitly required by that example."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

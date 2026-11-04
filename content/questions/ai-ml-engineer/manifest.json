@@ -2,13 +2,20 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 140,
-  "itemCount": 1,
-  "countsByTopic": { "Training and reproducibility": 1 },
-  "countsByLevel": { "L2": 1 },
-  "countsByType": { "debugging": 1 },
-  "status": { "schemaValid": 1, "sourcesVerified": 1, "rederived": 1, "codeExecuted": 0, "expertReviewPending": 1 },
+  "itemCount": 2,
+  "countsByTopic": { "Training and reproducibility": 2 },
+  "countsByLevel": { "L2": 2 },
+  "countsByType": { "debugging": 2 },
+  "status": { "schemaValid": 2, "sourcesVerified": 2, "rederived": 2, "codeExecuted": 0, "expertReviewPending": 2 },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-resume-training-needs-optimizer-state": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

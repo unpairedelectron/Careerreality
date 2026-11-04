@@ -13,6 +13,15 @@
           "volatility": "Fast-moving",
           "last_verified": "2026-11-03",
           "versions_checked": "2024-12-19 article; current page notes tooling has changed"
+        },
+        {
+          "title": "Guardrails and Human Review",
+          "publisher": "OpenAI",
+          "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Current OpenAI Agents SDK guide; no SDK version claim"
         }
       ]
     }

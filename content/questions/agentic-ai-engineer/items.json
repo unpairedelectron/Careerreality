@@ -60,4 +60,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "agentic-sensitive-tool-action-human-approval",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent architecture",
+    "subtopic": "Human approval for sensitive tool actions",
+    "level": "L2",
+    "type": "scenario",
+    "question": "An agent can cancel accounts and issue refunds. What should happen before it executes a high-impact tool call?",
+    "what_is_assessed": "Whether the candidate distinguishes automatic validation from human authorization for sensitive side effects.",
+    "short_answer": "Validate the proposed action and its arguments, then pause for an authorized person or explicit policy decision before a sensitive side effect. The approval step should show the action and relevant context, and support both approval and rejection without letting the agent silently continue. Automatic guardrails can catch invalid inputs or tool behavior, but they are not the same as approval authority.",
+    "deep_explanation": "OpenAI's agent guidance distinguishes guardrails, which automatically validate input, output, or tool behavior, from human review, which pauses a run so a person or policy can approve or reject a sensitive action. For cancellation or refund tools, a system should define which actions require review, what information the reviewer sees, and how rejection terminates or redirects the run. The source describes a control pattern, not a guarantee that approval alone prevents every misuse; permissions and tool-side checks remain important design considerations.",
+    "visual_aid": { "kind": "diagram", "alt": "A sensitive tool call is validated, paused for authorization, and only then executed or rejected.", "content": "Agent proposes refund → validate arguments → pause for authorized review\\nApprove → execute scoped action\\nReject → stop or return a safe explanation; do not silently retry" },
+    "strong_answer_signals": ["Separates automatic guardrails from human authorization.", "Makes approval an actual pause before the side effect.", "Defines rejection behavior and the action context shown to the reviewer."],
+    "weak_answer_signals": ["Assumes a prompt instruction is equivalent to enforced approval.", "Runs the side effect before asking a person to confirm it."],
+    "common_mistakes": ["Using broad approval for a batch of unrelated actions.", "Treating a passed input guardrail as permission to execute an irreversible action."],
+    "follow_ups": [{ "question": "What is the difference between a guardrail and human review?", "short_answer": "A guardrail automatically validates; human review pauses for an approval or rejection decision." }, { "question": "What should happen on rejection?", "short_answer": "The run must not execute the action; stop or follow a defined safe alternative." }],
+    "code": null,
+    "references": [{ "title": "Guardrails and Human Review", "publisher": "OpenAI", "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals", "retrieved_date": "2026-11-04" }],
+    "volatility": "Fast-moving",
+    "versions_checked": "Current OpenAI Agents SDK guide retrieved 2026-11-04; the control distinction is conceptual, not a claim about a particular SDK version.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"], "rederivation_agreement": true, "rederivation_notes": ["The source explicitly distinguishes automated validation from pausing for human or policy approval. The action-context and rejection details are safety design recommendations and are not presented as specific SDK guarantees."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

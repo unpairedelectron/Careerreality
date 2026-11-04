@@ -60,4 +60,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "genai-evaluate-retrieval-separately-from-generation",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Component-level evaluation",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A RAG system gives an unsupported answer. How would you tell whether retrieval or generation caused the failure?",
+    "what_is_assessed": "Whether the candidate evaluates retrieval context quality separately from the generator's use of that context.",
+    "short_answer": "Inspect the retrieved passages against the query and an appropriate relevance reference to see whether the right evidence was found. Separately check whether the answer is supported by the supplied context and whether it addresses the question. A single end-to-end score can hide which component failed, so evaluate retrieval and answer behavior independently as well as together, using representative cases and human-labeled references where available.",
+    "deep_explanation": "The Ragas paper frames RAG evaluation as several dimensions: retrieving relevant, focused passages; using those passages faithfully; and producing a useful answer. It proposes metrics for different dimensions, including settings without human ground-truth annotations. That does not make reference-free measures a substitute for all task-specific evaluation. A practical diagnosis keeps component metrics distinct and validates them against the product's intended questions and available judgments.",
+    "visual_aid": { "kind": "diagram", "alt": "A RAG failure should be decomposed into retrieval relevance, answer faithfulness to context, and task usefulness.", "content": "Question → Retriever → Retrieved context → Generator → Answer\\nEvaluate: relevant/focused context | supported answer | answer usefulness\\nThen compare component results with end-to-end task outcomes" },
+    "strong_answer_signals": ["Separates retrieval relevance from answer faithfulness and usefulness.", "Uses cases where the retrieved context and generated answer can be inspected.", "Treats automated reference-free scores as proxies, not universal truth."],
+    "weak_answer_signals": ["Treats one aggregate answer score as a diagnosis of the retriever.", "Assumes relevant retrieval guarantees a grounded or useful response."],
+    "common_mistakes": ["Changing retriever and generator together, making the cause of a quality change unclear.", "Treating an LLM-based evaluator as ground truth without calibration or human checks."],
+    "follow_ups": [{ "question": "What indicates a retrieval failure?", "short_answer": "The needed evidence is missing, irrelevant, or too unfocused in the retrieved context." }, { "question": "What indicates a generation-grounding failure?", "short_answer": "The answer is not supported by the context that was actually provided." }],
+    "code": null,
+    "references": [{ "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation", "publisher": "arXiv (Es et al.)", "url": "https://arxiv.org/abs/2309.15217v2", "retrieved_date": "2026-11-04" }],
+    "volatility": "Fast-moving",
+    "versions_checked": "Ragas paper version 2 (arXiv:2309.15217v2); evaluation methods remain task- and metric-dependent.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://arxiv.org/abs/2309.15217v2"], "rederivation_agreement": true, "rederivation_notes": ["Separate derivation confirmed the paper treats retrieval relevance, faithful use of context, and generation quality as distinct evaluation dimensions. The diagnosis procedure is an engineering recommendation; the paper's reference-free metrics are not asserted as universal ground truth."], "disagreements": [], "code_executed": "n.a.", "confidence": "medium" },
+    "related": ["genai-rag-retrieval-is-not-proof-of-grounding"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

@@ -60,4 +60,30 @@
     "related": [],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
   }
+,
+  {
+    "id": "ds-brier-score-does-not-isolate-calibration",
+    "bank": "data-scientist",
+    "topic": "Machine learning evaluation",
+    "subtopic": "Probability calibration",
+    "level": "L2",
+    "type": "concept",
+    "question": "A classifier has a lower Brier loss than a baseline. Does that prove its probabilities are better calibrated?",
+    "what_is_assessed": "Whether the candidate separates calibration from other components of probabilistic prediction quality.",
+    "short_answer": "No. Brier loss reflects calibration, discrimination, and outcome uncertainty together, so a lower value can result from stronger discrimination even if calibration worsens. I would inspect a reliability diagram on held-out predictions and report the evaluation population and bin counts. If decisions depend on probabilities, I would also evaluate calibration in the relevant slices and after any recalibration procedure.",
+    "deep_explanation": "A reliability diagram groups predicted probabilities and compares each bin's average prediction with its observed positive rate. Scikit-learn notes that proper scores such as Brier loss and log loss combine reliability, resolution, and uncertainty; a lower Brier loss alone does not guarantee better calibration. Calibration should therefore be evaluated with a plot or decomposition suited to the question, not inferred from one aggregate score. Binning choices and sample counts also affect how stable a calibration curve appears.",
+    "visual_aid": { "kind": "comparison-table", "alt": "A lower Brier score can reflect discrimination and uncertainty as well as calibration; a reliability plot directly compares predicted and observed rates by bin.", "content": "Brier loss: one aggregate score combining multiple properties\\nReliability diagram: mean predicted probability vs observed positive fraction per bin\\nQuestion: are 0.8 predictions correct about 80% of the time?" },
+    "strong_answer_signals": ["Rejects the claim that Brier loss isolates calibration.", "Describes predicted-versus-observed comparison by probability bin.", "Keeps evaluation data representative and reports uncertainty or bin counts."],
+    "weak_answer_signals": ["Treats any lower Brier loss as proof of calibration improvement.", "Uses calibration data to tune and report the same final result without separation."],
+    "common_mistakes": ["Confusing calibration with ranking or discrimination.", "Reading sparse extreme-probability bins as precise estimates."],
+    "follow_ups": [{ "question": "What does a reliability diagram compare?", "short_answer": "Average predicted probability with the observed positive fraction in each bin." }, { "question": "What can a Brier score tell you alone?", "short_answer": "Overall probabilistic loss, but not whether a change came specifically from calibration." }],
+    "code": null,
+    "references": [{ "title": "Probability Calibration", "publisher": "scikit-learn developers", "url": "https://scikit-learn.org/stable/modules/calibration.html", "retrieved_date": "2026-11-04" }],
+    "volatility": "Moderate",
+    "versions_checked": "scikit-learn 1.9.1 stable calibration documentation.",
+    "last_verified": "2026-11-04",
+    "verification": { "sources_checked": ["https://scikit-learn.org/stable/modules/calibration.html"], "rederivation_agreement": true, "rederivation_notes": ["An independent derivation confirmed that Brier loss combines reliability, resolution, and uncertainty, and therefore cannot by itself identify calibration changes. The reliability-plot explanation follows the source's predicted-bin versus observed-fraction definition."], "disagreements": [], "code_executed": "n.a.", "confidence": "high" },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending"
+  }
 ]

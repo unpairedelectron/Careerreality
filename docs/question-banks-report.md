@@ -1,7 +1,7 @@
 # CareerReality interview question banks — pilot report
 
 **As of:** 2026-11-04
-**Scope:** framework, pilot items across roles, and an in-progress Data Engineer content set. This report is not a completion claim; no bank is ready for public integration.
+**Scope:** framework, pilot items across roles, and in-progress content sets. This report is not a completion claim; no bank is ready for public integration.
 
 ## Phase 0 — framework
 
@@ -15,38 +15,38 @@
 
 ## Bank 1 — Data Engineer
 
-- Items: 73; minimum: 150; target: 240. **Shortfall: 77 to minimum; 167 to target. The separate user-requested 50-item floor is met.**
-- Coverage: SQL aggregates, set operations, subqueries, joins, windows, indexes, plan reading, and transaction isolation; Kafka delivery semantics, replay, batching, consumer parallelism, transactions, durability, compaction, tombstones, and offset commits; Airflow branching, retries, XCom, dynamic mapping, sensors, pools, task dependencies, DAG status, catchup, and data intervals; Spark watermarks, joins, windows, source recovery, file delivery and processing-mode limits; Parquet row groups, pages, indexes, encodings, compression, and nested data; Iceberg schema/partition evolution, snapshots, metadata cleanup, and maintenance. Required Data Engineer scope remains incomplete.
+- Items: 75; minimum: 150; target: 240. **Shortfall: 75 to minimum; 165 to target. The separate user-requested 50-item floor is met.**
+- Coverage: SQL aggregates, set operations, subqueries, joins, windows, indexes, plan reading, and transaction isolation; Kafka delivery semantics, replay, batching, consumer parallelism, transactions, durability, compaction, tombstones, and offset commits; PostgreSQL logical-decoding replay and slot retention; Airflow branching, retries, XCom, dynamic mapping, sensors, pools, task dependencies, DAG status, catchup, and data intervals; Spark watermarks, joins, windows, source recovery, file delivery and processing-mode limits; Parquet row groups, pages, indexes, encodings, compression, and nested data; Iceberg schema/partition evolution, snapshots, metadata cleanup, and maintenance. Required Data Engineer scope remains incomplete.
 - Sources: PostgreSQL 18, Kafka 4.4, Airflow 3.3.2, current Spark Structured Streaming guide, Apache Parquet format overview, and current Iceberg evolution/maintenance guides; retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this current set **PASS**; expert review **REVIEW REQUIRED**.
-- No code sample was presented as executed. All 73 Data Engineer items include a structured text diagram or comparison table; these aids are not yet rendered by a public UI.
+- No code sample was presented as executed. All 75 Data Engineer items include a structured text visual aid; these aids are not yet rendered by a public UI.
 
 ## Bank 2 — Data Scientist
 
-- Items: 1; minimum: 150; target: 240. **Shortfall: 149 to minimum; 239 to target.**
-- Coverage: one model evaluation concept only; required scope is otherwise uncovered.
-- Pilot source: scikit-learn 1.9.1 cross-validation documentation, retrieved 2026-11-03.
+- Items: 2; minimum: 150; target: 240. **Shortfall: 148 to minimum; 238 to target.**
+- Coverage: cross-validation and probability calibration; required scope remains incomplete.
+- Sources: scikit-learn 1.9.1 cross-validation and calibration documentation, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; numerical/code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 3 — AI/ML Engineer
 
-- Items: 1; minimum: 140; target: 220. **Shortfall: 139 to minimum; 219 to target.**
-- Coverage: one reproducibility debugging concept only; required scope is otherwise uncovered.
-- Pilot source: PyTorch 2.15.0 reproducibility documentation, retrieved 2026-11-03.
+- Items: 2; minimum: 140; target: 220. **Shortfall: 138 to minimum; 218 to target.**
+- Coverage: deterministic execution and training checkpoints; required scope remains incomplete.
+- Sources: PyTorch 2.15.0 reproducibility and checkpoint documentation, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 4 — Generative AI Engineer
 
-- Items: 1; minimum: 140; target: 220. **Shortfall: 139 to minimum; 219 to target.**
-- Coverage: one RAG retrieval/grounding scenario only; required scope is otherwise uncovered.
-- Pilot source: Lewis et al., arXiv:2005.11401v4, retrieved 2026-11-03. No current vendor model, API, price, limit, or benchmark claim is made.
+- Items: 2; minimum: 140; target: 220. **Shortfall: 138 to minimum; 218 to target.**
+- Coverage: retrieval/grounding and component-level evaluation; required scope remains incomplete.
+- Sources: Lewis et al., arXiv:2005.11401v4, and Es et al., arXiv:2309.15217v2, retrieved 2026-11-03–2026-11-04. No current vendor model, API, price, limit, or benchmark claim is made.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Bank 5 — Agentic AI Engineer
 
-- Items: 1; minimum: 110; target: 180. **Shortfall: 109 to minimum; 179 to target.**
-- Coverage: one workflow-versus-agent trade-off only; required scope is otherwise uncovered.
-- Pilot source: Anthropic Engineering article retrieved 2026-11-03. The item notes the article's warning that tooling descriptions have changed since publication.
+- Items: 2; minimum: 110; target: 180. **Shortfall: 108 to minimum; 178 to target.**
+- Coverage: workflow-versus-agent choice and human approval for sensitive tool actions; required scope remains incomplete.
+- Sources: Anthropic Engineering article and current OpenAI guardrails/human-review guide, retrieved 2026-11-03–2026-11-04.
 - Gates: schema **PASS**; cited source/retrieval date **PASS**; independent re-derivation **PASS**; code execution **N/A**; count/coverage **FAIL**; near-duplicate check across this pilot **PASS**; expert review **REVIEW REQUIRED**.
 
 ## Consolidated gates
@@ -54,35 +54,35 @@
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Every included item matches schema | PASS | `pnpm --filter @workspace/career-reality run validate:question-banks` |
-| Every included item has a cited source and retrieval date | PASS | 77 item records across five role maps |
-| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 77 |
+| Every included item has a cited source and retrieval date | PASS | 83 item records across five role maps |
+| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 83 |
 | Every executable code sample executed or visibly marked | PASS | No current item contains code; `code: null` and `code_executed: n.a.` |
-| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 77-item current set |
+| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 83-item current set |
 | Link checker clean | REVIEW REQUIRED | URLs were fetched for research; no automated full-register link check exists |
 | Structured data valid | REVIEW REQUIRED | No public pages or structured data were added |
 | axe, keyboard, zoom, Lighthouse gates | REVIEW REQUIRED | No interview-bank UI exists to test |
 | Privacy policy matches local-only progress storage | REVIEW REQUIRED | No progress storage implemented; no network/storage capture |
-| All banks meet minimum counts | FAIL | Each role has one pilot item; see shortfalls above |
+| All banks meet minimum counts | FAIL | 83 items total; see role-specific shortfalls above |
 | Expert review | REVIEW REQUIRED | No human reviewer recorded |
 | No invented publication or expert-review facts | PASS | Status text explicitly leaves expert review pending |
 
 ## Verification statistics
 
-- Current items: 77 (73 Data Engineer and one for each other role).
-- Source records retrieved: 77; each includes publisher, version/context, and retrieval date.
-- Independent re-derivation: 77 agreements; no retained core-answer disagreements. The Data Engineer passes item-specific limitations, including partition-level ordering, PostgreSQL concurrency/retry behavior, watermark state trade-offs, streaming-state bounds, offset/tombstone behavior, catchup behavior, row-group sizing, and snapshot expiration versus orphan-file cleanup.
-- Code examples: 0; executed 0; not applicable 77.
+- Current items: 83 (75 Data Engineer and two for each other role).
+- Source records retrieved: 83; each includes publisher, version/context, and retrieval date.
+- Independent re-derivation: 83 agreements; no retained core-answer disagreements. The Data Engineer set includes item-specific limitations for SQL concurrency, streaming replay and slot retention, watermark state trade-offs, offset/tombstone behavior, orchestration, Parquet, and Iceberg.
+- Code examples: 0; executed 0; not applicable 83.
 - Dropped items: 0.
 - Human expert reviews: 0.
 - Near-duplicate threshold: 0.82 Jaccard similarity over normalized question terms; the current set is still too small to establish future coverage.
 
 ## Sources register summary
 
-The current set uses PostgreSQL 18, Apache Kafka 4.4, Apache Airflow 3.3.2, the current Apache Spark Structured Streaming guide, Apache Parquet format documentation, Apache Iceberg evolution/maintenance guides, scikit-learn 1.9.1, PyTorch 2.15.0, the RAG paper arXiv:2005.11401v4, and Anthropic's 2024 agent-design article. These sources support only the included claims and do not establish complete topic coverage.
+The current set uses PostgreSQL 18, Apache Kafka 4.4, Apache Airflow 3.3.2, the current Apache Spark Structured Streaming guide, Apache Parquet format documentation, Apache Iceberg evolution/maintenance guides, scikit-learn 1.9.1, PyTorch 2.15.0, RAG papers arXiv:2005.11401v4 and arXiv:2309.15217v2, Anthropic's 2024 agent-design article, and OpenAI's current human-review guidance. These sources support only the included claims and do not establish complete topic coverage.
 
 ## `docs/needs-sme-review.md`
 
-Not created. No disputed item was retained; all 77 entries still require independent expert review before public use. The entire question-bank set remains unsuitable for publication due to count and coverage shortfalls.
+Not created. No disputed item was retained; all 83 entries still require independent expert review before public use. The entire question-bank set remains unsuitable for publication due to count and coverage shortfalls.
 
 ## Assumptions
 
@@ -93,6 +93,6 @@ Not created. No disputed item was retained; all 77 entries still require indepen
 
 ## Files changed and diff summary
 
-- Added the shared structured question schema, one content file, five manifests, five topic maps, and the validation gate in earlier work; the Data Engineer file now contains 73 source-checked records.
+- Added the shared structured question schema, five content files, five manifests, five topic maps, and the validation gate across prior and current work; the Data Engineer file contains 75 source-checked records.
 - Added this report and `content/questions/PROGRESS.md`; both distinguish content readiness from public-product implementation.
 - No existing tool logic, homepage styles, design tokens, shared navigation/footer, privacy policy, route registry, sitemap, or deployment settings were changed.

@@ -117,7 +117,7 @@
     },
     {
       "topic": "Streaming systems",
-      "subtopics": ["partitions", "offsets", "delivery semantics", "late data", "compaction", "tombstones", "consumer offset commits"],
+      "subtopics": ["partitions", "offsets", "delivery semantics", "late data", "compaction", "tombstones", "consumer offset commits", "logical decoding and replay", "replication slot operations"],
       "sources": [
         {
           "title": "Apache Kafka Design",
@@ -163,6 +163,24 @@
           "volatility": "Fast-moving",
           "last_verified": "2026-11-03",
           "versions_checked": "Current Spark Structured Streaming guide; validate deployed Spark version"
+        },
+        {
+          "title": "Logical Decoding Concepts",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/logicaldecoding-explanation.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18 logical-decoding documentation"
+        },
+        {
+          "title": "The pg_replication_slots View",
+          "publisher": "PostgreSQL Global Development Group",
+          "url": "https://www.postgresql.org/docs/18/view-pg-replication-slots.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "PostgreSQL 18 system-view documentation"
         }
       ]
     },
