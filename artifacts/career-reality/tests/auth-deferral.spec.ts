@@ -163,35 +163,78 @@ test.describe("deferred Clerk auth regression coverage", () => {
     await expect(page).toHaveURL(/\/compass\/?\?__e2e_user=first-user$/);
   });
 
-  test("production build keeps unused route chunks off the mobile homepage", async ({ page }) => {
-    test.skip(
-      process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
-      "Production chunk boundaries are checked against the production build.",
-    );
-    await page.setViewportSize({ width: 402, height: 874 });
-
-    const scriptRequests: string[] = [];
-    page.on("request", (request) => {
-      if (request.resourceType() === "script" && new URL(request.url()).pathname.includes("/assets/")) {
-        scriptRequests.push(new URL(request.url()).pathname);
-      }
+  test.describe("mobile homepage production checks", () => {
+    test.use({
+      viewport: { width: 402, height: 874 },
+      deviceScaleFactor: 2,
+      isMobile: true,
+      hasTouch: true,
     });
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
-    await page.waitForTimeout(1_000);
 
-    const initialRequests = [...scriptRequests];
-    expect(initialRequests.join("\n")).not.toMatch(
-      /account-menu|clerk-runtime|query-runtime|registered-routes|compass|workspace|sign-in/i,
-    );
-    await page.getByTestId("button-mobile-menu").click();
-    await expect(
-      page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Sign in" }),
-    ).toBeVisible();
-    await page.getByTestId("button-mobile-menu").click();
-    await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
-    await expect.poll(() => scriptRequests.length).toBeGreaterThan(initialRequests.length);
-    await expect(page.getByTestId("form-home-ctc")).toBeVisible();
+    test("production build keeps unused route chunks off the mobile homepage", async ({ page }) => {
+      test.skip(
+        process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+        "Production chunk boundaries are checked against the production build.",
+      );
+
+      const scriptRequests: string[] = [];
+      page.on("request", (request) => {
+        if (request.resourceType() === "script" && new URL(request.url()).pathname.includes("/assets/")) {
+          scriptRequests.push(new URL(request.url()).pathname);
+        }
+      });
+      await page.goto("/");
+      await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+      await page.waitForTimeout(1_000);
+
+      const initialRequests = [...scriptRequests];
+      const forbiddenHomepageChunks = [
+        { label: "account menu", pattern: /account-menu/i },
+        { label: "authentication runtime", pattern: /clerk-runtime|auth-runtime|auth-frame|auth-user-cache/i },
+        { label: "query runtime", pattern: /query-runtime|queryclientprovider|tanstack|react-query/i },
+        {
+          label: "route-only page",
+          pattern: /registered-routes|legacy-routes|route-registry|route-ui-providers|application-models|application-readiness-route|catalog-review|companies-verification|compass|job-posting-reality-check|layoff-hub|mobile-app|not-found|pillar-guide-page|pro-[\w-]+\.js|public-editorial|public-hubs|public-tools|rules-library|salary-calculator-page|sign-in|sign-up|sitemap|tool-directory|tool-suite-page|workspace/i,
+        },
+      ];
+      for (const chunk of forbiddenHomepageChunks) {
+        expect(
+          initialRequests.filter((request) => chunk.pattern.test(request)),
+          `signed-out homepage should not request the ${chunk.label} chunk`,
+        ).toEqual([]);
+      }
+
+      await page.getByTestId("button-mobile-menu").click();
+      const mobileNavigation = page.getByRole("navigation", { name: "Mobile navigation" });
+      await expect(mobileNavigation.getByRole("link", { name: "Sign in" })).toBeVisible();
+      await mobileNavigation.getByRole("link", { name: "Career Tools for India" }).click();
+      await expect(page).toHaveURL(/\/tools\/?$/);
+      await expect(page.locator("main h1").first()).toBeVisible();
+    });
+
+    test("production build loads below-fold homepage content only when reached", async ({ page }) => {
+      test.skip(
+        process.env.PLAYWRIGHT_AUTH_PRODUCTION !== "true",
+        "Lazy homepage content is checked against the production build.",
+      );
+
+      const scriptRequests: string[] = [];
+      page.on("request", (request) => {
+        if (request.resourceType() === "script" && new URL(request.url()).pathname.includes("/assets/")) {
+          scriptRequests.push(new URL(request.url()).pathname);
+        }
+      });
+
+      await page.goto("/");
+      await expect(page.getByRole("heading", { name: /Make your next move/ })).toBeVisible();
+      await expect(page.getByTestId("form-home-ctc")).toHaveCount(0);
+      const initialRequests = [...scriptRequests];
+      expect(initialRequests.join("\n")).not.toMatch(/home-below-fold/i);
+
+      await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
+      await expect(page.getByTestId("form-home-ctc")).toBeVisible();
+      await expect.poll(() => scriptRequests.some((request) => /home-below-fold/i.test(request))).toBe(true);
+    });
   });
 
   test("production build keeps mobile homepage hydration layout shift within budget", async ({ page }) => {

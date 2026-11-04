@@ -26,6 +26,7 @@
     "test:e2e": "playwright test",
     "test:e2e:auth-deferral": "playwright test --config playwright.auth.config.ts",
     "test:e2e:auth-deferral:production": "VITE_E2E=false VITE_E2E_AUTH_RUNTIME=true pnpm run build && PLAYWRIGHT_AUTH_PRODUCTION=true pnpm exec playwright test --config playwright.auth.config.ts --grep \"production build\" --workers=1",
+    "test:e2e:mobile-homepage:production": "VITE_E2E=false VITE_E2E_AUTH_RUNTIME=true pnpm run build && PLAYWRIGHT_AUTH_PRODUCTION=true PLAYWRIGHT_PRODUCTION=true pnpm exec playwright test tests/auth-deferral.spec.ts --grep \"production build (keeps unused route chunks off the mobile homepage|loads below-fold homepage content only when reached)\" --workers=1",
     "test:e2e:real-clerk-cross-tab": "playwright test --config playwright.real-clerk.config.ts",
     "test:e2e:batch": "node scripts/run-e2e-batch.mjs",
     "test:e2e:production": "VITE_E2E=true pnpm run build && PLAYWRIGHT_PRODUCTION=true pnpm exec playwright test --workers=2 --reporter=line",
