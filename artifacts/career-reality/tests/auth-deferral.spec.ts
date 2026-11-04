@@ -349,6 +349,7 @@ test.describe("deferred Clerk auth regression coverage", () => {
     await page.context().route("**/api/**", (route) =>
       route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ error: "Test data unavailable" }) }),
     );
+    expect(await page.evaluate(() => typeof BroadcastChannel)).toBe("function");
     await page.goto("/compass?__e2e_user=first-user");
     await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
     await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
@@ -356,6 +357,39 @@ test.describe("deferred Clerk auth regression coverage", () => {
 
     const secondTab = await page.context().newPage();
     await secondTab.goto("/compass?__e2e_user=first-user");
+    await expect(secondTab.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await expect(secondTab.getByTestId("button-account-menu")).toBeVisible();
+
+    await page.evaluate(() => window.__careerRealityAuthTest?.seedCache());
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.setUser("second-user"));
+    await expect.poll(() => page.evaluate(() => window.__careerRealityAuthTest?.cachedValue())).toBeUndefined();
+
+    await page.evaluate(() => window.__careerRealityAuthTest?.seedCache());
+    await secondTab.evaluate(() => window.__careerRealityAuthTest?.setUser(null));
+    await expect.poll(() => page.evaluate(() => window.__careerRealityAuthTest?.cachedValue())).toBeUndefined();
+    await secondTab.close();
+  });
+
+  test("clears cached Compass data across tabs without BroadcastChannel", async ({ page }) => {
+    await page.context().addInitScript(() => {
+      Object.defineProperty(window, "BroadcastChannel", {
+        configurable: true,
+        value: undefined,
+      });
+    });
+    await page.context().route("**/api/**", (route) =>
+      route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ error: "Test data unavailable" }) }),
+    );
+    await page.goto("/compass?__e2e_user=first-user");
+    expect(await page.evaluate(() => typeof BroadcastChannel)).toBe("undefined");
+    await expect(page.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
+    await page.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
+    await expect(page.getByTestId("button-account-menu")).toBeVisible();
+
+    const secondTab = await page.context().newPage();
+    await secondTab.goto("/compass?__e2e_user=first-user");
+    expect(await secondTab.evaluate(() => typeof BroadcastChannel)).toBe("undefined");
     await expect(secondTab.getByTestId("e2e-clerk-runtime-ready")).toBeAttached({ timeout: 3_000 });
     await secondTab.evaluate(() => window.__careerRealityAuthTest?.loadAuth());
     await expect(secondTab.getByTestId("button-account-menu")).toBeVisible();

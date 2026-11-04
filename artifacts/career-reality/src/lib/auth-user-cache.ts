@@ -2,7 +2,9 @@ import type { QueryClient } from "@tanstack/react-query";
 
 const AUTH_USER_CHANGE_CHANNEL = "career-reality-auth-user-change";
 const AUTH_USER_CHANGE_MESSAGE = "user-changed";
+const AUTH_USER_CHANGE_STORAGE_KEY = "career-reality-auth-user-change";
 let authUserChangeVersion = 0;
+let authUserChangeStorageSequence = 0;
 
 export type AuthUserMutationSnapshot = {
   userId: string | null;
@@ -41,27 +43,47 @@ export function clearQueryCacheOnAuthUserChange(
 }
 
 export function createCrossTabAuthUserChangeSync(queryClient: QueryClient) {
-  if (typeof BroadcastChannel === "undefined") {
+  const clearForRemoteAuthChange = () => {
+    authUserChangeVersion += 1;
+    cancelAndClearQueryCache(queryClient);
+  };
+
+  if (typeof BroadcastChannel !== "undefined") {
+    const channel = new BroadcastChannel(AUTH_USER_CHANGE_CHANNEL);
+    const onMessage = (event: MessageEvent<unknown>) => {
+      if (event.data === AUTH_USER_CHANGE_MESSAGE) {
+        clearForRemoteAuthChange();
+      }
+    };
+    channel.addEventListener("message", onMessage);
+
     return {
-      notify: () => {},
-      dispose: () => {},
+      notify: () => channel.postMessage(AUTH_USER_CHANGE_MESSAGE),
+      dispose: () => {
+        channel.removeEventListener("message", onMessage);
+        channel.close();
+      },
     };
   }
 
-  const channel = new BroadcastChannel(AUTH_USER_CHANGE_CHANNEL);
-  const onMessage = (event: MessageEvent<unknown>) => {
-    if (event.data === AUTH_USER_CHANGE_MESSAGE) {
-      authUserChangeVersion += 1;
-      cancelAndClearQueryCache(queryClient);
+  const onStorage = (event: StorageEvent) => {
+    if (
+      event.key === AUTH_USER_CHANGE_STORAGE_KEY &&
+      event.newValue?.startsWith(`${AUTH_USER_CHANGE_MESSAGE}:`)
+    ) {
+      clearForRemoteAuthChange();
     }
   };
-  channel.addEventListener("message", onMessage);
+  window.addEventListener("storage", onStorage);
 
   return {
-    notify: () => channel.postMessage(AUTH_USER_CHANGE_MESSAGE),
-    dispose: () => {
-      channel.removeEventListener("message", onMessage);
-      channel.close();
+    notify: () => {
+      authUserChangeStorageSequence += 1;
+      window.localStorage.setItem(
+        AUTH_USER_CHANGE_STORAGE_KEY,
+        `${AUTH_USER_CHANGE_MESSAGE}:${Date.now()}:${authUserChangeStorageSequence}:${window.crypto.randomUUID?.() ?? Math.random().toString(36).slice(2)}`,
+      );
     },
+    dispose: () => window.removeEventListener("storage", onStorage),
   };
 }
