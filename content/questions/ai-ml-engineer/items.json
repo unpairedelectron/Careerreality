@@ -220,5 +220,75 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-training-serving-skew-and-model-drift",
+    "bank": "ai-ml-engineer",
+    "topic": "Production ML testing and monitoring",
+    "subtopic": "Training-serving skew and prediction drift",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An online model's business quality has fallen while its offline test score remains stable. How would you distinguish training-serving skew from changing production data?",
+    "what_is_assessed": "A production diagnosis that separates feature-pipeline inconsistency from distribution change and uses delayed labels carefully.",
+    "short_answer": "First verify that serving applies the same feature definitions, units, defaults, and transformations used during training. Compare sampled serving-feature statistics with the training baseline and trend them over time. If ground-truth labels arrive, join them to predictions for continuous evaluation by time and relevant slices. A drift alert is evidence to investigate, not proof that retraining is the right fix.",
+    "deep_explanation": "Training-serving skew can arise when the serving path encodes or supplies features differently from the training path. Data drift instead describes changes in the statistical properties of serving inputs; predictive quality may also change when the relationship between inputs and outcomes changes. Instrument feature values and schema at both paths, monitor the serving distribution against the training baseline, and check known-good examples through the production transformation path. Once labels become available, evaluate predictions against them over time and by important segments. Keep alert thresholds tied to the task, and investigate data quality, product changes, and label delay before choosing a mitigation.",
+    "strong_answer_signals": [
+      "Checks feature definitions and transformations for train/serve inconsistencies.",
+      "Compares serving statistics to the training baseline and follows changes over time.",
+      "Uses joined labels for continuous quality evaluation when labels are available."
+    ],
+    "weak_answer_signals": [
+      "Calls every change in input distribution concept drift.",
+      "Automatically retrains as soon as an input-distribution alert fires."
+    ],
+    "common_mistakes": [
+      "Monitoring only aggregate prediction volume rather than feature and quality signals.",
+      "Ignoring delayed or selectively observed labels when interpreting production metrics."
+    ],
+    "follow_ups": [
+      {
+        "question": "What evidence most directly tests for training-serving skew?",
+        "short_answer": "Run the same representative examples through both feature paths and compare the resulting feature values and schema."
+      },
+      {
+        "question": "What changes when labels arrive weeks later?",
+        "short_answer": "Report the label delay and evaluate only mature cohorts, while using input and system signals as earlier but indirect indicators."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud Architecture Center guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Cross-checked the distinction between feature inconsistency and serving-data drift against the source guidance; kept label-based continuous evaluation conditional on labels being available."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": true,
+    "priority": 1,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

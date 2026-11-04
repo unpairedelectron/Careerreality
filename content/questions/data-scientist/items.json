@@ -220,5 +220,82 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-accuracy-hides-rare-class-failure",
+    "bank": "data-scientist",
+    "topic": "Evaluation metrics and experiments",
+    "subtopic": "Rare classes and threshold decisions",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A classifier reports 99% accuracy on a dataset where only 1% of cases are positive, but it misses every positive case. How would you evaluate it?",
+    "what_is_assessed": "Metric selection under class imbalance and the ability to tie evaluation to the decision's error costs.",
+    "short_answer": "The accuracy is uninformative for the stated goal: predicting every case as negative would achieve the same value. I would inspect the confusion matrix and positive-class precision and recall, examine the precision-recall trade-off over thresholds, and choose a threshold against the actual costs and capacity constraints. I would also report the positive prevalence and evaluate on a representative held-out set.",
+    "deep_explanation": "Accuracy aggregates correct predictions across classes and can conceal zero utility on a rare but important class. Precision and recall expose different error types: false positives among predicted positives and false negatives among actual positives. Threshold-dependent curves show trade-offs rather than fixing one operating point. The operating threshold should be selected using the intended use, costs, and available review capacity, then evaluated without repeatedly tuning on the final test set. Report class prevalence and enough class-specific results for readers to see which group drives the aggregate.",
+    "strong_answer_signals": [
+      "Explains why a majority-class baseline can look accurate while failing the positive-class task.",
+      "Uses class-specific metrics and considers threshold-dependent trade-offs.",
+      "Connects threshold choice to error costs and operational capacity."
+    ],
+    "weak_answer_signals": [
+      "Treats 99% accuracy as strong evidence of usefulness.",
+      "Suggests a universal precision or recall target without knowing the decision costs."
+    ],
+    "common_mistakes": [
+      "Reporting only a single aggregate metric.",
+      "Changing the threshold after inspecting the final test set and still calling that result an untouched test."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why might the precision-recall curve be informative here?",
+        "short_answer": "It shows how precision and recall trade off across thresholds for the positive class."
+      },
+      {
+        "question": "What information is needed before choosing an operating threshold?",
+        "short_answer": "The relative costs of false positives and false negatives, plus any operational review limits."
+      }
+    ],
+    "visual_aid": {
+      "kind": "comparison-table",
+      "alt": "Accuracy can hide a missed rare class; class-specific metrics and threshold trade-offs make the failure visible.",
+      "content": "Accuracy: overall fraction correct\\nRecall: positive cases found / all actual positives\\nPrecision: correct positive predictions / all predicted positives\\nThreshold: operational choice informed by error costs"
+    },
+    "code": null,
+    "references": [
+      {
+        "title": "Metrics and scoring: quantifying the quality of predictions",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable model-evaluation documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/model_evaluation.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked that the question distinguishes class-specific metrics and threshold choice from a misleading aggregate accuracy score; no universal threshold is asserted."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-separate-selection-and-final-test"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": true,
+    "priority": 1,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

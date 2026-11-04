@@ -24,6 +24,19 @@
           "versions_checked": "Current OpenAI Agents SDK guide; no SDK version claim"
         }
       ]
+    },
+    {
+      "topic": "Agent evaluation and observability",
+      "subtopics": ["trace grading", "tool choice", "handoff evaluation"],
+      "sources": [{
+        "title": "Evaluate agent workflows",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
+      }]
     }
   ]
 }

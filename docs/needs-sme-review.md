@@ -86,22 +86,26 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ds-separate-selection-and-final-test` — Machine learning evaluation / Model selection and held-out evaluation: Why should the final test set not guide repeated model or hyperparameter choices?
 - `ds-brier-score-does-not-isolate-calibration` — Machine learning evaluation / Probability calibration: A classifier has a lower Brier loss than a baseline. Does that prove its probabilities are better calibrated?
 - `ds-isotonic-calibration-small-sample-overfit` — Machine learning evaluation / Probability calibration: You have limited calibration data and are choosing between sigmoid and isotonic calibration. What trade-off matters?
+- `ds-accuracy-hides-rare-class-failure` — Evaluation metrics and experiments / Rare classes and threshold decisions: A classifier reports 99% accuracy on a dataset where only 1% of cases are positive, but it misses every positive case. How would you evaluate it?
 
 ## AI/ML Engineer
 
 - `ml-seed-does-not-guarantee-reproducibility` — Training and reproducibility / Randomness and deterministic execution: A training run uses the same random seed but produces a different result. Does that prove the seed was ignored?
 - `ml-resume-training-needs-optimizer-state` — Training and reproducibility / Checkpoints and resuming training: A training job resumes from model weights but its learning trajectory changes sharply. What checkpoint state might be missing?
 - `ml-best-state-dict-reference-mutates` — Training and reproducibility / Checkpoint selection: A saved 'best validation' PyTorch model matches the final, overfit epoch. What could have gone wrong?
+- `ml-diagnose-training-serving-skew-and-model-drift` — Production ML testing and monitoring / Training-serving skew and prediction drift: An online model's business quality has fallen while its offline test score remains stable. How would you distinguish training-serving skew from changing production data?
 
 ## Generative AI Engineer
 
 - `genai-rag-retrieval-is-not-proof-of-grounding` — Retrieval-augmented generation / Retrieval and answer evaluation: A RAG assistant retrieved relevant passages but gave an unsupported answer. What would you investigate?
 - `genai-evaluate-retrieval-separately-from-generation` — Retrieval-augmented generation / Component-level evaluation: A RAG system gives an unsupported answer. How would you tell whether retrieval or generation caused the failure?
 - `genai-faithfulness-does-not-prove-source-correctness` — Retrieval-augmented generation / Faithfulness metric boundaries: A RAG answer scores highly for faithfulness to its retrieved context. What important quality claim remains unproven?
+- `genai-eval-summary-objective-dataset-metrics` — Generative AI evaluation / Defining an evaluation workflow: A team is replacing a transcript-summary prompt. How would you build an evaluation that can show whether the change is actually better?
 
 ## Agentic AI Engineer
 
 - `agentic-workflow-before-autonomous-agent` — Agent architecture / Workflows versus agents: A team proposes an autonomous agent for a repeatable approval process. What would you ask before accepting that design?
 - `agentic-sensitive-tool-action-human-approval` — Agent architecture / Human approval for sensitive tool actions: An agent can cancel accounts and issue refunds. What should happen before it executes a high-impact tool call?
 - `agentic-route-specialized-prompts-for-clear-categories` — Agent architecture / Routing workflows: Support requests fall into billing, account-access, and technical categories. When would routing to specialized prompts help?
+- `agentic-trace-grading-catches-wrong-tool-path` — Agent evaluation and observability / Trace-level grading: An agent eventually returns the right answer, but sometimes uses an unrelated tool or misses a required handoff first. What would you evaluate?
 

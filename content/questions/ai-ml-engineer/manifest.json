@@ -2,22 +2,24 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 3,
+  "itemCount": 4,
   "countsByTopic": {
-    "Training and reproducibility": 3
+    "Training and reproducibility": 3,
+    "Production ML testing and monitoring": 1
   },
   "countsByLevel": {
-    "L2": 3
+    "L2": 3,
+    "L3": 1
   },
   "countsByType": {
-    "debugging": 3
+    "debugging": 4
   },
   "status": {
-    "schemaValid": 3,
-    "sourcesVerified": 3,
-    "rederived": 3,
+    "schemaValid": 4,
+    "sourcesVerified": 4,
+    "rederived": 4,
     "codeExecuted": 0,
-    "expertReviewPending": 3
+    "expertReviewPending": 4
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -40,7 +42,14 @@
       "rederivation": "agree",
       "codeExecution": "n.a.",
       "expertReview": "pending"
+    },
+    "ml-diagnose-training-serving-skew-and-model-drift": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
     }
   },
-  "coreItemCount": 0
+  "coreItemCount": 1
 }

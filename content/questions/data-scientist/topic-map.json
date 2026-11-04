@@ -24,6 +24,19 @@
           "versions_checked": "scikit-learn 1.9.1 stable documentation"
         }
       ]
+    },
+    {
+      "topic": "Evaluation metrics and experiments",
+      "subtopics": ["rare classes", "threshold decisions", "precision and recall"],
+      "sources": [{
+        "title": "Metrics and scoring: quantifying the quality of predictions",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "scikit-learn 1.9.1 stable documentation"
+      }]
     }
   ]
 }

@@ -61,6 +61,13 @@ for (const bank of banks) {
       expertReview: "pending",
     };
   }
+  manifest.status = {
+    schemaValid: items.length,
+    sourcesVerified: items.filter((item) => manifest.itemStatus[item.id]?.sourcesVerified === true).length,
+    rederived: items.filter((item) => manifest.itemStatus[item.id]?.rederivation === "agree").length,
+    codeExecuted: items.filter((item) => item.code?.executed === true).length,
+    expertReviewPending: items.filter((item) => manifest.itemStatus[item.id]?.expertReview === "pending").length,
+  };
 
   fs.writeFileSync(itemsPath, `${JSON.stringify(items, null, 2)}\n`);
   fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);

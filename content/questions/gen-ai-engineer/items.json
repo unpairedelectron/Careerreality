@@ -222,5 +222,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-eval-summary-objective-dataset-metrics",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI evaluation",
+    "subtopic": "Defining an evaluation workflow",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A team is replacing a transcript-summary prompt. How would you build an evaluation that can show whether the change is actually better?",
+    "what_is_assessed": "Task-specific evaluation design for variable model outputs, including data selection, criteria, comparison, and ongoing coverage.",
+    "short_answer": "Define what a useful summary means for the intended users, then assemble representative transcripts and reference judgments, including difficult and failure cases. Choose criteria that reflect the task—such as coverage of key facts, factual consistency, and readability—and compare the old and new systems on the same held-out examples. Calibrate any automated grader against human judgments, inspect disagreements, and add newly observed failures to a continuing evaluation set.",
+    "deep_explanation": "An evaluation starts with an explicit objective rather than a convenient metric. The dataset should represent expected use and meaningful edge cases; expert-curated examples, historical cases, and production feedback can contribute, subject to privacy and consent controls. Metrics or graders should operationalize the success criteria, and a fixed comparison set helps distinguish a prompt change from a change in the test examples. Automated or model-based graders need calibration against human evaluations and error analysis. Continuous evaluation should run as the system changes and grow to include newly discovered failure modes; a single aggregate score does not establish universal quality.",
+    "strong_answer_signals": [
+      "Starts from a user-facing objective and defines observable success criteria.",
+      "Uses representative and held-out cases, including known failure examples.",
+      "Calibrates automated grading and inspects disagreements instead of treating the score as ground truth."
+    ],
+    "weak_answer_signals": [
+      "Chooses a metric before defining what a good summary means.",
+      "Tests only a few handpicked examples or assumes a fluent answer is accurate."
+    ],
+    "common_mistakes": [
+      "Leaking examples used for prompt iteration into the only reported evaluation set.",
+      "Treating one aggregate score as a complete description of summary quality."
+    ],
+    "follow_ups": [
+      {
+        "question": "How would you respond if an automated grader disagrees with domain experts?",
+        "short_answer": "Review representative disagreements, refine the rubric or grader, and report the remaining uncertainty."
+      },
+      {
+        "question": "Why keep adding cases after launch?",
+        "short_answer": "New usage reveals failure modes the original evaluation set may not cover."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluation best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OpenAI API evaluation guidance retrieved 2026-11-04; no model-specific performance claim is made.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked the workflow against the source's objective, dataset, metric, comparison, and continuous-evaluation sequence; human calibration is retained as a limitation for automated graders."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-evaluate-retrieval-separately-from-generation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": true,
+    "priority": 1,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

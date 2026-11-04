@@ -30,6 +30,7 @@ export interface InterviewGuideQuestion {
   common_mistakes: string[];
   follow_ups: Array<{ question: string; short_answer: string }>;
   references: InterviewGuideReference[];
+  code: { language: string; sample: string; executed: boolean; output: string } | null;
   core: boolean;
   priority: 1 | 2 | 3;
   estimated_reading_minutes: number;
@@ -48,7 +49,7 @@ export interface InterviewGuideTopic {
   estimated_minutes?: number;
 }
 
-export type InterviewGuideTab = "guide" | "readiness" | "study" | "mocks" | "flashcards";
+export type InterviewGuideTab = "guide" | "readiness" | "study" | "mocks" | "flashcards" | "modules";
 
 export interface InterviewGuideProps {
   roleTitle: string;

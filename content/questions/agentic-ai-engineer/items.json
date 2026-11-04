@@ -220,5 +220,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-trace-grading-catches-wrong-tool-path",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent evaluation and observability",
+    "subtopic": "Trace-level grading",
+    "level": "L2",
+    "type": "debugging",
+    "question": "An agent eventually returns the right answer, but sometimes uses an unrelated tool or misses a required handoff first. What would you evaluate?",
+    "what_is_assessed": "Evaluation of intermediate agent behavior rather than judging only the final response.",
+    "short_answer": "Inspect end-to-end traces that include model calls, tool calls, guardrails, and handoffs. Define separate checks for correct tool selection, required handoffs, policy compliance, and final task success. Grade representative traces, investigate failure clusters, and rerun the evaluation after prompt, routing, tool, or guardrail changes. A correct final answer should not hide an unsafe or unreliable path.",
+    "deep_explanation": "Multi-step agents can fail in ways that are invisible in the final text: an irrelevant tool may be called, a handoff may be skipped, or a guardrail may trigger too late. Trace-level evaluation makes these workflow decisions observable. Structured graders can check the parts of a trace against explicit criteria; a useful evaluation set should include normal paths and cases that exercise important boundaries. Use results to identify whether the issue lies in routing, tool descriptions, instructions, or guardrails. Keep final task success as a distinct outcome and do not let it erase unsafe intermediate behavior.",
+    "strong_answer_signals": [
+      "Evaluates tool choice, handoff, guardrail behavior, and final outcome separately.",
+      "Uses trace-level records to investigate the agent's path.",
+      "Repeats evaluation after changes to prompts, tools, or routing."
+    ],
+    "weak_answer_signals": [
+      "Scores only the final natural-language answer.",
+      "Assumes a correct final answer makes every preceding tool action acceptable."
+    ],
+    "common_mistakes": [
+      "Using a single opaque pass/fail score without identifying which step failed.",
+      "Evaluating only successful traces and missing recovery or handoff cases."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should a trace contain for this investigation?",
+        "short_answer": "The model calls, tool calls and outputs, guardrail events, handoffs, and final result."
+      },
+      {
+        "question": "How can you check whether a routing change helped?",
+        "short_answer": "Compare the same trace-level criteria on representative cases before and after the change."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluate agent workflows",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OpenAI API agent-evaluation guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agent-evals"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked the trace fields and example grading questions against the source guidance; separated workflow correctness from final-answer quality."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-sensitive-tool-action-human-approval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": true,
+    "priority": 1,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Bookmark,
   BookOpen,
+  CalendarDays,
   Check,
   CheckCircle2,
   ChevronDown,
@@ -18,6 +19,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import type { InterviewGuideProps, InterviewGuideTab, InterviewGuideQuestion } from "./types";
+import { StudyModules } from "./StudyModules";
 import "./interview-guide.css";
 
 const tabs: Array<{ id: InterviewGuideTab; label: string; icon: typeof BookOpen }> = [
@@ -26,6 +28,7 @@ const tabs: Array<{ id: InterviewGuideTab; label: string; icon: typeof BookOpen 
   { id: "study", label: "Study plan", icon: Layers3 },
   { id: "mocks", label: "Mock practice", icon: Play },
   { id: "flashcards", label: "Flashcards", icon: RotateCcw },
+  { id: "modules", label: "Study toolkit", icon: CalendarDays },
 ];
 
 const readinessItems = [
@@ -308,9 +311,12 @@ export function InterviewGuide({
             {flashQuestion ? <div className={`ig-flashcard ${flashRevealed ? "is-revealed" : ""}`}><div className="ig-flashcard-top"><span><Layers3 size={14} aria-hidden="true" /> {flashQuestion.topic}</span><span>{flashQuestion.level} · {readableType[flashQuestion.type]}</span></div><div className="ig-flashcard-content"><span>{flashRevealed ? "RECALL CUE" : "PROMPT"}</span><h3>{flashRevealed ? flashQuestion.short_answer : flashQuestion.question}</h3></div><div className="ig-flashcard-bottom"><button type="button" className="ig-text-button" onClick={() => setFlashRevealed(!flashRevealed)} data-testid="button-flash-reveal">{flashRevealed ? "Show question" : "Reveal cue"} <ChevronDown size={15} aria-hidden="true" /></button><div><button type="button" className="ig-secondary-button" onClick={() => { setFlashIndex((flashIndex + Math.max(questions.length, 1) - 1) % Math.max(questions.length, 1)); setFlashRevealed(false); }} data-testid="button-flash-previous">Previous</button><button type="button" className="ig-primary-button" onClick={() => { setFlashIndex((flashIndex + 1) % Math.max(questions.length, 1)); setFlashRevealed(false); }} data-testid="button-flash-next">Next card <ArrowRight size={14} aria-hidden="true" /></button></div></div></div> : <div className="ig-empty">No questions available for flashcards yet.</div>}
           </section>
         )}
+        {activeTab === "modules" && (
+          <StudyModules roleTitle={roleTitle} questions={questions} coreIds={coreIds} />
+        )}
       </div>
 
-      <footer className="ig-footer"><div><span className="ig-footer-mark">CR</span><p><strong>CareerReality</strong><br />A study workspace, not a hiring forecast.</p></div><span>YOUR PROGRESS STAYS IN THIS SESSION UNLESS THE HOST APP SAVES IT.</span></footer>
+      <footer className="ig-footer"><div><span className="ig-footer-mark">CR</span><p><strong>CareerReality</strong><br />A study workspace, not a hiring forecast.</p></div><span>YOUR SELECTED PROGRESS STAYS IN THIS BROWSER.</span></footer>
     </main>
   );
 }

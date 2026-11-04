@@ -14,7 +14,7 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 - **PASS:** production build completed, including 85 generated route snapshots and 57 app shells. Existing Vite sourcemap and large-chunk warnings remain unrelated to the question-bank validator.
 - **REVIEW REQUIRED:** role guide routes and interactive practice are implemented but not added to indexed routes, static snapshots, or the sitemap.
 - **PASS (2026-11-04):** automated reachability check covered all unique item and topic-map source URLs. HTTP reachability does not independently verify claim support.
-- **PASS:** additive guide metadata migration and schema validation cover all 88 existing records. Core defaults to false, audience-specific answers remain null pending deliberate authorship, and time values are estimates.
+- **PASS:** additive guide metadata migration and schema validation cover all 92 records. One researched anchor per short bank is manually marked Core; audience-specific answer tiers remain unset and time values are estimates.
 - **REVIEW REQUIRED:** Guide UI is a draft and remains absent from indexed routes and sitemap pending question-bank completion and review; browser, accessibility, and privacy verification is still required.
 
 ## Bank 1 — Data Engineer
@@ -58,28 +58,28 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Every included item matches schema | PASS | `pnpm --filter @workspace/career-reality run validate:question-banks` |
-| Every included item has a cited source and retrieval date | PASS | 88 item records across five role maps |
-| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 88 |
+| Every included item has a cited source and retrieval date | PASS | 92 item records across five role maps |
+| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 92 |
 | Every executable code sample executed or visibly marked | PASS | No current item contains code; `code: null` and `code_executed: n.a.` |
-| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 88-item current set |
-| Source URL reachability | PASS (point-in-time) | All 48 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
+| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 92-item current set |
+| Source URL reachability | PASS (point-in-time) | All 52 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
 | Structured data valid | REVIEW REQUIRED | Interview guide routes are noindex app shells; dedicated structured data is intentionally not added |
 | axe, keyboard, zoom, Lighthouse gates | REVIEW REQUIRED | Shared guide UI is implemented but has not received these checks |
 | Privacy policy matches local-only progress storage | PARTIAL | Browser-only Core/revision/readiness state, export/import and clear controls are implemented; network/storage capture is pending |
-| All banks meet minimum counts | FAIL | 88 items total; see role-specific shortfalls above |
-| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 88 draft items; no human reviewer recorded |
+| All banks meet minimum counts | FAIL | 92 items total; each of four short banks needs 71 more |
+| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 92 draft items; no human reviewer recorded |
 | No invented publication or expert-review facts | PASS | Status text explicitly leaves expert review pending |
-| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 88 migrated records |
+| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 92 records |
 | Core breadth/priority curation | REVIEW REQUIRED | All existing items default non-Core; public criteria are documented, but no role set has been curated |
-| 16-module role pages and browser-only learning tools | PARTIAL | Five noindex role routes share a guide UI with search, filters, answer reveals, readiness, study, mock rehearsal, flashcards and local progress backup; several planned modules remain absent |
+| 16-module role pages and browser-only learning tools | PARTIAL | Five noindex role routes include search, filters, readiness, study sessions and 1/7/14/30-day plans, mock rehearsal, flashcards, scenario/design prompts, quick references, interview-stage outline, Core paths, print support and local progress backup. Spaced repetition, deeper authored modules and executed code examples remain absent |
 | Privacy and network capture for guide state | PARTIAL | Policy updated for the browser-only progress; automated network/storage capture has not been run |
 
 ## Verification statistics
 
-- Current items: 88 (76 Data Engineer and three for each other role).
-- Source records retrieved: 88; each includes publisher, version/context, and retrieval date.
-- Independent re-derivation: 88 agreements; no retained core-answer disagreements. The Data Engineer set includes item-specific limitations for SQL concurrency, CTE folding/materialization, streaming replay and slot retention, watermark state trade-offs, offset/tombstone behavior, orchestration, Parquet, and Iceberg.
-- Code examples: 0; executed 0; not applicable 88.
+- Current items: 92 (76 Data Engineer and four for each other role).
+- Source records retrieved: 92; each includes publisher, version/context, and retrieval date.
+- Independent re-derivation: 92 agreements; new items cover imbalanced-class evaluation, production ML monitoring, LLM evaluation design, and agent trace grading.
+- Code examples: 0; executed 0; not applicable 92.
 - Dropped items: 0.
 - Human expert reviews: 0.
 - Near-duplicate threshold: 0.82 Jaccard similarity over normalized question terms; the current set is still too small to establish future coverage.
@@ -116,10 +116,10 @@ Five draft role routes now share one guide interface. The following module statu
 | Role | Items | By level | By type | Core | Minimum | Coverage matrix |
 | --- | ---: | --- | --- | ---: | ---: | --- |
 | Data Engineer | 76 | L1 8, L2 53, L3 15 | Concept 18, scenario 20, debugging 27, trade-off 11 | 0 | 75 | Minimum met; topic coverage remains incomplete |
-| Data Scientist | 3 | L2 3 | Concept 1, trade-off 2 | 0 | 75 | 72 short; role scope incomplete |
-| AI/ML Engineer | 3 | L2 3 | Debugging 3 | 0 | 75 | 72 short; role scope incomplete |
-| Generative AI Engineer | 3 | L2 3 | Concept 1, scenario 2 | 0 | 75 | 72 short; role scope incomplete |
-| Agentic AI Engineer | 3 | L2 3 | Scenario 2, trade-off 1 | 0 | 75 | 72 short; role scope incomplete |
+| Data Scientist | 4 | L2 4 | Concept 1, trade-off 2, scenario 1 | 1 | 75 | 71 short; role scope incomplete |
+| AI/ML Engineer | 4 | L2 3, L3 1 | Debugging 4 | 1 | 75 | 71 short; role scope incomplete |
+| Generative AI Engineer | 4 | L2 4 | Concept 1, scenario 3 | 1 | 75 | 71 short; role scope incomplete |
+| Agentic AI Engineer | 4 | L2 4 | Scenario 2, trade-off 1, debugging 1 | 1 | 75 | 71 short; role scope incomplete |
 
 No Core items are selected. The criteria are documented in `docs/question-bank-style-guide.md`; breadth matrices and curated priority paths have not been completed.
 
@@ -135,7 +135,7 @@ No Core items are selected. The criteria are documented in `docs/question-bank-s
 | Print study pack and rapid-revision output | REVIEW REQUIRED | Not implemented |
 | Mobile Lighthouse >= 0.85, accessibility 1.0, axe A/AA, keyboard completion | REVIEW REQUIRED | No guide pages to measure |
 | Link and structured-data validation | REVIEW REQUIRED | Source link check passes point-in-time; no guide structured data |
-| Cross-bank near duplicates | PASS | Current 88-item set passes the existing validator |
+| Cross-bank near duplicates | PASS | Current 92-item set passes the existing validator |
 | Existing routes/tools/homepage visual style unchanged | PASS for this change | No routes, tools, styles, tokens, or navigation changed |
 | Privacy-policy match and network/storage capture | REVIEW REQUIRED | No guide answers or progress are stored or transmitted; no capture performed |
 
@@ -154,7 +154,7 @@ This feature-only audit is not yet performed against leading public resources. N
 
 ## Review queue and privacy
 
-`docs/needs-sme-review.md` is generated from the item records and lists all 88 items. It does not record approval; every listed item remains pending independent human review.
+`docs/needs-sme-review.md` is generated from the item records and lists all 92 items. It does not record approval; every listed item remains pending independent human review.
 
 The guide feature flag is disabled. No readiness answers, ratings, plans, flashcards, mock sessions, or other guide user inputs are currently stored or sent. The privacy policy was not changed; matching a future local-storage implementation requires review and network/storage capture before enabling the feature.
 
@@ -170,6 +170,6 @@ The guide feature flag is disabled. No readiness answers, ratings, plans, flashc
 
 - Added the shared structured question schema, five content files, five manifests, five topic maps, and the validation gate across prior and current work; the Data Engineer file contains 76 source-checked records.
 - Added this report and `content/questions/PROGRESS.md`; both distinguish content readiness from public-product implementation.
-- Added the Complete Interview Guide migration plan, writing/depth rubric, disabled feature configuration, and generated pending-review list. The report names all 16 missing guide modules and the gates not yet evidenced.
+- Added the Complete Interview Guide migration plan, writing/depth rubric, noindex draft routes, and generated pending-review list. The report tracks partial module coverage and the remaining gates.
 - No existing tool logic, homepage styles, design tokens, shared navigation/footer, privacy policy, route registry, sitemap, or deployment settings were changed.
 - Added an additive question metadata migration, disabled guide feature configuration, and editorial migration/style documentation. The existing generated mockup sandbox file was already modified and was not changed as part of this work.

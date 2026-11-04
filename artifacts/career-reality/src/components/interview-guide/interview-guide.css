@@ -297,3 +297,31 @@
 @media (prefers-reduced-motion: reduce) {
   .interview-guide *, .interview-guide *::before, .interview-guide *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+.ig-module-section { margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.ig-module-section > h3 { font-family: var(--font-display); font-size: clamp(1.35rem, 2vw, 2rem); }
+.ig-module-section > p { max-width: 60rem; color: var(--muted-foreground); }
+.ig-plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .8rem; margin-top: 1rem; }
+.ig-plan-day, .ig-module-prompts > li, .ig-quick-reference > div { border: 1px solid var(--border); border-radius: .8rem; background: var(--card); padding: 1rem; }
+.ig-plan-day h4 { font-weight: 700; }
+.ig-plan-day ul, .ig-module-prompts, .ig-stage-list { display: grid; gap: .75rem; }
+.ig-plan-day li { display: grid; gap: .35rem; margin-top: .8rem; font-size: .9rem; }
+.ig-plan-day li span, .ig-module-prompts p { color: var(--muted-foreground); }
+.ig-module-prompts { margin-top: 1rem; padding: 0; list-style: none; }
+.ig-module-prompts details { margin-top: .75rem; }
+.ig-stage-list { list-style: none; padding: 0; margin-top: 1rem; }
+.ig-stage-list li { display: flex; gap: .9rem; align-items: baseline; }
+.ig-stage-list li b { color: var(--primary); font-family: var(--font-mono); }
+.ig-quick-reference { display: grid; gap: .75rem; margin-top: 1rem; }
+.ig-quick-reference dt { font-weight: 700; }
+.ig-quick-reference dd { margin: .4rem 0 0; color: var(--muted-foreground); }
+.ig-tool-view pre { overflow-x: auto; padding: .8rem; background: var(--muted); }
+@media print {
+  .ig-topline, .ig-tabs, .ig-topic-rail, .ig-filters, .ig-question-actions,
+  .ig-footer, .ig-review-notice, button, input, select { display: none !important; }
+  .interview-guide { color: #111; background: white; }
+  .ig-header, .ig-overview, .ig-tab-panel { padding-inline: 0; }
+  .ig-module-section, .ig-question, .ig-plan-day { break-inside: avoid; }
+  .ig-module-section { margin-top: 1rem; }
+  a { color: #111; text-decoration: underline; }
+}

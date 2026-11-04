@@ -24,6 +24,19 @@
           "versions_checked": "PyTorch 2.15.0 tutorial"
         }
       ]
+    },
+    {
+      "topic": "Production ML testing and monitoring",
+      "subtopics": ["training-serving skew", "data drift", "delayed labels"],
+      "sources": [{
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Google Cloud Architecture Center guidance"
+      }]
     }
   ]
 }

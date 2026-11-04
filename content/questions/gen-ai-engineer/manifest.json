@@ -2,23 +2,24 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 3,
+  "itemCount": 4,
   "countsByTopic": {
-    "Retrieval-augmented generation": 3
+    "Retrieval-augmented generation": 3,
+    "Generative AI evaluation": 1
   },
   "countsByLevel": {
-    "L2": 3
+    "L2": 4
   },
   "countsByType": {
-    "scenario": 2,
+    "scenario": 3,
     "concept": 1
   },
   "status": {
-    "schemaValid": 3,
-    "sourcesVerified": 3,
-    "rederived": 3,
+    "schemaValid": 4,
+    "sourcesVerified": 4,
+    "rederived": 4,
     "codeExecuted": 0,
-    "expertReviewPending": 3
+    "expertReviewPending": 4
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -41,7 +42,14 @@
       "rederivation": "agree",
       "codeExecution": "n.a.",
       "expertReview": "pending"
+    },
+    "genai-eval-summary-objective-dataset-metrics": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
     }
   },
-  "coreItemCount": 0
+  "coreItemCount": 1
 }
