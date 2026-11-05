@@ -2,7 +2,7 @@
   "bank": "data-scientist",
   "target": 240,
   "minimum": 75,
-  "itemCount": 70,
+  "itemCount": 75,
   "countsByTopic": {
     "Machine learning evaluation": 4,
     "Evaluation metrics and experiments": 3,
@@ -14,7 +14,7 @@
     "Statistical test design": 1,
     "Statistical test interpretation": 2,
     "Time-series model evaluation": 2,
-    "Feature attribution and correlated inputs": 1,
+    "Feature attribution and correlated inputs": 2,
     "Causal inference and overlap": 3,
     "Statistical testing": 2,
     "Uncertainty estimation": 2,
@@ -22,10 +22,10 @@
     "Aggregated and stratified analysis": 1,
     "Survival analysis": 6,
     "Logistic regression interpretation": 1,
-    "Distribution shift": 1,
+    "Distribution shift": 2,
     "Negative controls for confounding": 1,
     "Regression discontinuity design": 1,
-    "Instrumental variable analysis": 1,
+    "Instrumental variable analysis": 2,
     "Cluster-randomized trial design": 3,
     "Effect measures and noncollapsibility": 1,
     "Count-data regression": 2,
@@ -37,33 +37,33 @@
     "Propensity score balance diagnostics": 1,
     "Synthetic control evaluation": 1,
     "Prediction intervals and confidence intervals": 1,
-    "Multiple imputation pooling": 1,
+    "Multiple imputation pooling": 2,
     "Complex survey sampling": 1,
     "Cross-validation uncertainty": 1,
     "Measurement error in predictors": 1,
     "Target trial emulation and time zero": 1,
     "Staggered difference-in-differences": 1,
-    "Bayesian posterior predictive checks": 1,
+    "Bayesian posterior predictive checks": 2,
     "Ratio metrics in online experiments": 1,
     "Binomial proportion confidence intervals": 1,
     "Ecological inference and levels of analysis": 1
   },
   "countsByLevel": {
-    "L2": 23,
-    "L3": 47
+    "L2": 24,
+    "L3": 51
   },
   "countsByType": {
     "trade-off": 7,
-    "concept": 20,
-    "scenario": 36,
-    "debugging": 7
+    "concept": 22,
+    "scenario": 38,
+    "debugging": 8
   },
   "status": {
-    "schemaValid": 70,
-    "sourcesVerified": 70,
-    "rederived": 70,
+    "schemaValid": 75,
+    "sourcesVerified": 75,
+    "rederived": 75,
     "codeExecuted": 0,
-    "expertReviewPending": 70
+    "expertReviewPending": 75
   },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
@@ -550,6 +550,41 @@
       "expertReview": "pending"
     },
     "ds-account-for-few-clusters-in-trial-inference": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-weak-instrument-robust-inference": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-joint-support-before-reading-partial-dependence": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-adjust-probabilities-under-label-shift": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-distinguish-imputation-uncertainty-from-monte-carlo-error": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-prior-predictive-check-before-fitting": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

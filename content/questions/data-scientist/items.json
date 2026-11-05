@@ -5009,33 +5009,65 @@
     "what_is_assessed": "Whether the candidate distinguishes instrument strength diagnostics from inference that remains reliable under weak identification.",
     "short_answer": "Do not rely on a conventional interval alone. Report the first-stage evidence and consider weak-instrument-robust inference, such as an Anderson–Rubin-based test or confidence set, while stating its assumptions and limitations. Such intervals may be wide or unbounded; they do not establish instrument validity or repair a violated exclusion restriction.",
     "deep_explanation": "The cited econometric paper develops inference procedures that include Anderson–Rubin-based tests for settings with many weak instruments and heteroskedasticity. The practical point is that weak identification changes the reliability of conventional inference. The analyst should use methods suited to the instrument design and separately justify relevance, exclusion, and exchangeability assumptions.",
-    "strong_answer_signals": ["Does not treat conventional 2SLS inference as automatically reliable under weak identification.", "Names weak-instrument-robust inference such as Anderson–Rubin methods.", "Separates instrument strength from instrument validity."],
-    "weak_answer_signals": ["Uses a first-stage cutoff as proof that the instrument is valid.", "Reports only the conventional 2SLS interval without discussing weak identification."],
-    "common_mistakes": ["Assuming a robust test fixes a violated exclusion restriction.", "Omitting that weak-instrument confidence sets can be wide or unbounded."],
+    "strong_answer_signals": [
+      "Does not treat conventional 2SLS inference as automatically reliable under weak identification.",
+      "Names weak-instrument-robust inference such as Anderson–Rubin methods.",
+      "Separates instrument strength from instrument validity."
+    ],
+    "weak_answer_signals": [
+      "Uses a first-stage cutoff as proof that the instrument is valid.",
+      "Reports only the conventional 2SLS interval without discussing weak identification."
+    ],
+    "common_mistakes": [
+      "Assuming a robust test fixes a violated exclusion restriction.",
+      "Omitting that weak-instrument confidence sets can be wide or unbounded."
+    ],
     "follow_ups": [
-      { "question": "Does a weak-instrument-robust interval prove exclusion?", "short_answer": "No. It addresses inference under weak identification, not instrument validity." },
-      { "question": "What should be reported alongside the estimate?", "short_answer": "Instrument-strength evidence, the robust inference method, and its assumptions." }
+      {
+        "question": "Does a weak-instrument-robust interval prove exclusion?",
+        "short_answer": "No. It addresses inference under weak identification, not instrument validity."
+      },
+      {
+        "question": "What should be reported alongside the estimate?",
+        "short_answer": "Instrument-strength evidence, the robust inference method, and its assumptions."
+      }
     ],
     "code": null,
-    "references": [{ "title": "A Conditional Linear Combination Test with Many Weak Instruments", "publisher": "arXiv", "url": "https://arxiv.org/html/2207.11137v3", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "A Conditional Linear Combination Test with Many Weak Instruments",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2207.11137v3",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Stable",
     "versions_checked": "arXiv:2207.11137v3 accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://arxiv.org/html/2207.11137v3"],
+      "sources_checked": [
+        "https://arxiv.org/html/2207.11137v3"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the paper's weak-identification inference procedures, including Anderson-Rubin-based methods; kept validity assumptions separate."],
+      "rederivation_notes": [
+        "Verified the paper's weak-identification inference procedures, including Anderson-Rubin-based methods; kept validity assumptions separate."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "medium"
     },
-    "related": ["ds-check-instrumental-variable-assumptions"],
+    "related": [
+      "ds-check-instrumental-variable-assumptions"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 3,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -5049,33 +5081,65 @@
     "what_is_assessed": "Whether the candidate recognizes unsupported feature combinations in marginal partial-dependence calculations.",
     "short_answer": "The plot may average predictions over unrealistic combinations outside the observed joint support, so its apparent effect can be misleading. Inspect the feature relationships and support, avoid interpreting extrapolated regions, and use an explanation method aligned with the conditional question when dependence is strong.",
     "deep_explanation": "Scikit-learn's partial-dependence documentation explains that PDP and ICE calculations vary a feature while marginalizing over complement features. With correlated inputs, this can create data points that are implausible in practice. The curve describes the model's response to those constructed inputs, not necessarily a relationship supported by observed data or a causal effect.",
-    "strong_answer_signals": ["Identifies the independence or marginalization issue.", "Checks whether the constructed combinations occur in the data.", "Avoids causal interpretation of a model explanation plot."],
-    "weak_answer_signals": ["Treats the PDP curve as an observed conditional relationship.", "Ignores regions with little or no joint feature support."],
-    "common_mistakes": ["Confusing a model-response summary with a causal effect.", "Reporting extrapolated regions without support diagnostics."],
+    "strong_answer_signals": [
+      "Identifies the independence or marginalization issue.",
+      "Checks whether the constructed combinations occur in the data.",
+      "Avoids causal interpretation of a model explanation plot."
+    ],
+    "weak_answer_signals": [
+      "Treats the PDP curve as an observed conditional relationship.",
+      "Ignores regions with little or no joint feature support."
+    ],
+    "common_mistakes": [
+      "Confusing a model-response summary with a causal effect.",
+      "Reporting extrapolated regions without support diagnostics."
+    ],
     "follow_ups": [
-      { "question": "Why can correlated features distort a PDP?", "short_answer": "Marginalizing can combine feature values that rarely or never occur together." },
-      { "question": "What should be checked before interpreting the curve?", "short_answer": "The joint support of the feature of interest and its correlated complements." }
+      {
+        "question": "Why can correlated features distort a PDP?",
+        "short_answer": "Marginalizing can combine feature values that rarely or never occur together."
+      },
+      {
+        "question": "What should be checked before interpreting the curve?",
+        "short_answer": "The joint support of the feature of interest and its correlated complements."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Partial Dependence and Individual Conditional Expectation plots", "publisher": "scikit-learn developers", "url": "https://scikit-learn.org/1.9/modules/partial_dependence.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Partial Dependence and Individual Conditional Expectation plots",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/1.9/modules/partial_dependence.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "scikit-learn 1.9.1 documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://scikit-learn.org/1.9/modules/partial_dependence.html"],
+      "sources_checked": [
+        "https://scikit-learn.org/1.9/modules/partial_dependence.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that marginalizing over complement features can create unrealistic points when features are correlated."],
+      "rederivation_notes": [
+        "Verified that marginalizing over complement features can create unrealistic points when features are correlated."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ds-permutation-importance-correlated-predictors"],
+    "related": [
+      "ds-permutation-importance-correlated-predictors"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -5089,33 +5153,65 @@
     "what_is_assessed": "Whether the candidate identifies prior-probability shift and states the class-conditional stability assumption needed for posterior adjustment.",
     "short_answer": "Posterior probabilities depend on class priors, so changed class prevalence can make the original probabilities miscalibrated even when class-conditional feature distributions are stable. Estimate or obtain the target class priors and adjust the posterior probabilities under that label-shift assumption, then validate when target labels become available. Do not apply this correction if the class-conditional feature distributions also changed.",
     "deep_explanation": "The cited paper describes adjusting classifier outputs when the a priori class probabilities in real-world data differ from those in the training sample, including an iterative procedure when target priors are not known in advance. This is a specific shift assumption: class-conditional feature behavior is treated as stable while class proportions change. The correction does not address arbitrary distribution shift, so monitor calibration and test the assumption with target data when possible.",
-    "strong_answer_signals": ["Identifies changed class priors as the source of probability miscalibration.", "States the class-conditional stability assumption.", "Distinguishes label shift from arbitrary distribution shift and validates after deployment."],
-    "weak_answer_signals": ["Assumes any prevalence change can be corrected by prior adjustment.", "Treats the training-set class fraction as the deployment prior."],
-    "common_mistakes": ["Confusing prior-probability shift with covariate shift.", "Failing to check calibration once target labels arrive."],
+    "strong_answer_signals": [
+      "Identifies changed class priors as the source of probability miscalibration.",
+      "States the class-conditional stability assumption.",
+      "Distinguishes label shift from arbitrary distribution shift and validates after deployment."
+    ],
+    "weak_answer_signals": [
+      "Assumes any prevalence change can be corrected by prior adjustment.",
+      "Treats the training-set class fraction as the deployment prior."
+    ],
+    "common_mistakes": [
+      "Confusing prior-probability shift with covariate shift.",
+      "Failing to check calibration once target labels arrive."
+    ],
     "follow_ups": [
-      { "question": "Which distribution must remain stable for this correction?", "short_answer": "The feature distribution conditional on each class." },
-      { "question": "Does prior adjustment repair arbitrary covariate shift?", "short_answer": "No. It relies on a label-shift assumption." }
+      {
+        "question": "Which distribution must remain stable for this correction?",
+        "short_answer": "The feature distribution conditional on each class."
+      },
+      {
+        "question": "Does prior adjustment repair arbitrary covariate shift?",
+        "short_answer": "No. It relies on a label-shift assumption."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure", "publisher": "Neural Computation via MIT Press", "url": "https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure",
+        "publisher": "Neural Computation via MIT Press",
+        "url": "https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Stable",
     "versions_checked": "Peer-reviewed article published 2002; abstract and method description accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext"],
+      "sources_checked": [
+        "https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the paper's adjustment of classifier posterior outputs to changed class priors and kept the claim conditional on label-shift assumptions."],
+      "rederivation_notes": [
+        "Verified the paper's adjustment of classifier posterior outputs to changed class priors and kept the claim conditional on label-shift assumptions."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ds-recalibrate-risk-from-case-control-sampling"],
+    "related": [
+      "ds-recalibrate-risk-from-case-control-sampling"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 3,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -5129,33 +5225,65 @@
     "what_is_assessed": "Whether the candidate distinguishes finite-imputation Monte Carlo error from between-imputation uncertainty.",
     "short_answer": "No. More imputations reduce Monte Carlo error from using a finite number of completed datasets, but between-imputation variability still represents uncertainty due to missing values. Under Rubin's rules, increasing the number of imputations reduces the finite-m term; it does not make the missing-data uncertainty vanish.",
     "deep_explanation": "The cited guidance describes total variance as combining within-imputation variance with between-imputation variance and a finite-imputation adjustment. It explains that increasing the number of imputations improves efficiency when the between-imputation component is substantial. This reduces simulation error in the pooled estimate rather than eliminating uncertainty from missing data or repairing an unsuitable imputation model.",
-    "strong_answer_signals": ["Separates Monte Carlo error from missing-data uncertainty.", "Identifies between-imputation variability as an enduring uncertainty component.", "Avoids treating a larger number of imputations as a cure for model misspecification."],
-    "weak_answer_signals": ["Claims enough imputations remove missing-data uncertainty.", "Confuses stable numerical estimates with valid imputation assumptions."],
-    "common_mistakes": ["Stopping at an arbitrary small number of imputations without checking stability.", "Increasing imputations instead of improving a misspecified imputation model."],
+    "strong_answer_signals": [
+      "Separates Monte Carlo error from missing-data uncertainty.",
+      "Identifies between-imputation variability as an enduring uncertainty component.",
+      "Avoids treating a larger number of imputations as a cure for model misspecification."
+    ],
+    "weak_answer_signals": [
+      "Claims enough imputations remove missing-data uncertainty.",
+      "Confuses stable numerical estimates with valid imputation assumptions."
+    ],
+    "common_mistakes": [
+      "Stopping at an arbitrary small number of imputations without checking stability.",
+      "Increasing imputations instead of improving a misspecified imputation model."
+    ],
     "follow_ups": [
-      { "question": "What does increasing the number of imputations reduce?", "short_answer": "Finite-imputation Monte Carlo error." },
-      { "question": "Which variance component remains relevant?", "short_answer": "Between-imputation variability due to missing values." }
+      {
+        "question": "What does increasing the number of imputations reduce?",
+        "short_answer": "Finite-imputation Monte Carlo error."
+      },
+      {
+        "question": "Which variance component remains relevant?",
+        "short_answer": "Between-imputation variability due to missing values."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines", "publisher": "PubMed Central", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Stable",
     "versions_checked": "Peer-reviewed methodological guidance accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/"],
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the finite-imputation adjustment and the role of between-imputation variability in pooled uncertainty."],
+      "rederivation_notes": [
+        "Verified the finite-imputation adjustment and the role of between-imputation variability in pooled uncertainty."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ds-pool-estimates-across-multiple-imputations"],
+    "related": [
+      "ds-pool-estimates-across-multiple-imputations"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -5169,33 +5297,65 @@
     "what_is_assessed": "Whether the candidate distinguishes prior predictive checks from posterior predictive checks and uses them to assess implied data plausibility.",
     "short_answer": "A prior predictive check shows what data the model and prior can generate before conditioning on observed data. It can reveal implausible scales, rates, or patterns and motivate revising the model or prior before fitting. It does not test fit to observed data; that is the role of posterior predictive checks.",
     "deep_explanation": "The Stan User's Guide distinguishes prior predictive checks, which evaluate the prior's implications for possible data, from posterior predictive checks, which simulate replicated data using fitted parameters and compare them with observed data. Prior predictive simulation can expose implausible model behavior early, but a plausible prior predictive distribution does not establish that the fitted model describes the observed data.",
-    "strong_answer_signals": ["Simulates from the prior and data-generating model before fitting.", "Checks whether the implied data are plausible for the application.", "Distinguishes this from posterior predictive assessment against observed data."],
-    "weak_answer_signals": ["Uses observed-data fit as the definition of a prior predictive check.", "Treats a plausible prior predictive simulation as proof of model adequacy."],
-    "common_mistakes": ["Skipping prior predictive checks when priors imply impossible values.", "Confusing prior checks with convergence diagnostics."],
+    "strong_answer_signals": [
+      "Simulates from the prior and data-generating model before fitting.",
+      "Checks whether the implied data are plausible for the application.",
+      "Distinguishes this from posterior predictive assessment against observed data."
+    ],
+    "weak_answer_signals": [
+      "Uses observed-data fit as the definition of a prior predictive check.",
+      "Treats a plausible prior predictive simulation as proof of model adequacy."
+    ],
+    "common_mistakes": [
+      "Skipping prior predictive checks when priors imply impossible values.",
+      "Confusing prior checks with convergence diagnostics."
+    ],
     "follow_ups": [
-      { "question": "What does a prior predictive check simulate from?", "short_answer": "The prior distribution and the model's likelihood before conditioning on observed data." },
-      { "question": "How does a posterior predictive check differ?", "short_answer": "It uses fitted posterior parameters and compares replicated data with observed data." }
+      {
+        "question": "What does a prior predictive check simulate from?",
+        "short_answer": "The prior distribution and the model's likelihood before conditioning on observed data."
+      },
+      {
+        "question": "How does a posterior predictive check differ?",
+        "short_answer": "It uses fitted posterior parameters and compares replicated data with observed data."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Posterior and Prior Predictive Checks", "publisher": "Stan User's Guide", "url": "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Posterior and Prior Predictive Checks",
+        "publisher": "Stan User's Guide",
+        "url": "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "Stan User's Guide, posterior and prior predictive checks accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"],
+      "sources_checked": [
+        "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that prior predictive checks simulate from prior implications before fitting, distinct from posterior checks against observed data."],
+      "rederivation_notes": [
+        "Verified that prior predictive checks simulate from prior implications before fitting, distinct from posterior checks against observed data."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ds-check-bayesian-model-with-posterior-predictions"],
+    "related": [
+      "ds-check-bayesian-model-with-posterior-predictions"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   }
 ]

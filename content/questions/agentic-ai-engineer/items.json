@@ -3858,33 +3858,65 @@
     "what_is_assessed": "Whether the candidate preserves and handles heterogeneous MCP content blocks according to their declared types.",
     "short_answer": "Process each block by its `type` instead of flattening the result into text or discarding non-text blocks. Preserve the image data and MIME type, route resource links through resource handling, and render text appropriately. Keep optional annotations such as audience or priority when relevant, and continue treating tool-provided text as untrusted input.",
     "deep_explanation": "The MCP Tools specification allows the `content` field to contain multiple items of different types, including text, image, audio, resource links, and embedded resources. These types carry different data and handling requirements; annotations can also supply audience and priority metadata. A client that flattens everything to text can lose content or misrepresent it. Type-aware rendering and policy checks are separate from validating any structuredContent or outputSchema.",
-    "strong_answer_signals": ["Dispatches each block by its declared type.", "Preserves non-text payloads and relevant annotations.", "Separates content rendering from trust and authorization decisions."],
-    "weak_answer_signals": ["Assumes every tool result is a single text string.", "Drops image or resource-link content before the user or model can use it."],
-    "common_mistakes": ["Treating an image's base64 data as ordinary text.", "Assuming typed content is trustworthy because the protocol parsed successfully."],
+    "strong_answer_signals": [
+      "Dispatches each block by its declared type.",
+      "Preserves non-text payloads and relevant annotations.",
+      "Separates content rendering from trust and authorization decisions."
+    ],
+    "weak_answer_signals": [
+      "Assumes every tool result is a single text string.",
+      "Drops image or resource-link content before the user or model can use it."
+    ],
+    "common_mistakes": [
+      "Treating an image's base64 data as ordinary text.",
+      "Assuming typed content is trustworthy because the protocol parsed successfully."
+    ],
     "follow_ups": [
-      { "question": "Which content types can MCP tool results include?", "short_answer": "Text, images, audio, resource links, and embedded resources, potentially mixed in one result." },
-      { "question": "Do annotations replace application policy checks?", "short_answer": "No. They provide metadata, not authorization or trust guarantees." }
+      {
+        "question": "Which content types can MCP tool results include?",
+        "short_answer": "Text, images, audio, resource links, and embedded resources, potentially mixed in one result."
+      },
+      {
+        "question": "Do annotations replace application policy checks?",
+        "short_answer": "No. They provide metadata, not authorization or trust guarantees."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Tools", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2025-06-18 accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2025-06-18/server/tools"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-06-18/server/tools"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that a tool result can contain mixed content types and that annotations include audience and priority metadata."],
+      "rederivation_notes": [
+        "Verified that a tool result can contain mixed content types and that annotations include audience and priority metadata."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-validate-mcp-structured-tool-results"],
+    "related": [
+      "agentic-validate-mcp-structured-tool-results"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -3893,38 +3925,70 @@
     "topic": "MCP Streamable HTTP session lifecycle",
     "subtopic": "Authorization independent of session identifiers",
     "level": "L3",
-    "type": "security",
+    "type": "debugging",
     "question": "A Streamable HTTP server accepts a valid `MCP-Session-Id` but does not verify the caller's authorization on requests. What security boundary is missing?",
     "what_is_assessed": "Whether the candidate distinguishes session continuity from authenticating and authorizing each caller.",
     "short_answer": "A session ID is not a substitute for authentication or authorization. Validate the caller's identity and permissions for each request, bind session state to the authenticated principal where appropriate, and protect session IDs from disclosure. Possession of an ID alone must not grant access to protected resources or actions.",
     "deep_explanation": "MCP security guidance describes session hijacking risk when a party obtains a session ID and the server treats it as sufficient proof of identity. The server should apply its authorization checks rather than treating session continuity as an access-control decision. This is a defensive boundary: the session ID identifies protocol state, while the authenticated principal and its permissions determine what the caller may do.",
-    "strong_answer_signals": ["Separates session state from authentication and authorization.", "Checks permissions for the authenticated caller on requests.", "Treats session identifiers as sensitive and not as bearer authorization."],
-    "weak_answer_signals": ["Allows access solely because a request includes a valid session ID.", "Assumes an unguessable identifier replaces authorization checks."],
-    "common_mistakes": ["Confusing protocol session continuity with the caller's identity.", "Failing to re-check access when a session is resumed or used for a protected operation."],
+    "strong_answer_signals": [
+      "Separates session state from authentication and authorization.",
+      "Checks permissions for the authenticated caller on requests.",
+      "Treats session identifiers as sensitive and not as bearer authorization."
+    ],
+    "weak_answer_signals": [
+      "Allows access solely because a request includes a valid session ID.",
+      "Assumes an unguessable identifier replaces authorization checks."
+    ],
+    "common_mistakes": [
+      "Confusing protocol session continuity with the caller's identity.",
+      "Failing to re-check access when a session is resumed or used for a protected operation."
+    ],
     "follow_ups": [
-      { "question": "What does the session ID establish?", "short_answer": "Which protocol session a request belongs to, not the caller's full authorization." },
-      { "question": "What should determine access to protected actions?", "short_answer": "The authenticated principal and its permissions." }
+      {
+        "question": "What does the session ID establish?",
+        "short_answer": "Which protocol session a request belongs to, not the caller's full authorization."
+      },
+      {
+        "question": "What should determine access to protected actions?",
+        "short_answer": "The authenticated principal and its permissions."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Security Best Practices", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Security Best Practices",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2025-06-18 security guidance accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the session-hijacking scenario and the need for authorization checks beyond session ID possession."],
+      "rederivation_notes": [
+        "Verified the session-hijacking scenario and the need for authorization checks beyond session ID possession."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-reinitialize-mcp-session-after-404"],
+    "related": [
+      "agentic-reinitialize-mcp-session-after-404"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -3933,38 +3997,70 @@
     "topic": "Trace privacy and data minimization",
     "subtopic": "Redacting generation and function span data",
     "level": "L3",
-    "type": "security",
+    "type": "scenario",
     "question": "Production agent traces may contain sensitive prompts, tool arguments, and tool results. What should you change before exporting them?",
     "what_is_assessed": "Whether the candidate preserves useful observability while controlling the capture and export of sensitive agent data.",
     "short_answer": "Disable sensitive span capture when full inputs and outputs are not needed, or redact sensitive fields before export. Keep non-sensitive metadata such as operation type, timing, status, and correlation IDs for debugging, and enforce access and retention controls on any retained traces. Test both generation and function spans because either can contain sensitive content.",
     "deep_explanation": "OpenAI's Agents SDK tracing guide states that generation spans may store model inputs and outputs and function spans may store tool inputs and outputs; either can contain sensitive data. It documents a configuration option to disable that capture. Observability should be designed to retain the minimum information needed for diagnosis while applying the application's privacy and retention requirements.",
-    "strong_answer_signals": ["Identifies both model and function spans as possible sensitive-data sources.", "Uses a documented capture control or redaction before export.", "Preserves safe operational metadata and applies access and retention controls."],
-    "weak_answer_signals": ["Exports all prompts and tool results by default without considering their contents.", "Disables every trace without considering safer, useful metadata."],
-    "common_mistakes": ["Redacting model prompts but forgetting tool arguments or outputs.", "Assuming a trace is safe because it is used only for debugging."],
+    "strong_answer_signals": [
+      "Identifies both model and function spans as possible sensitive-data sources.",
+      "Uses a documented capture control or redaction before export.",
+      "Preserves safe operational metadata and applies access and retention controls."
+    ],
+    "weak_answer_signals": [
+      "Exports all prompts and tool results by default without considering their contents.",
+      "Disables every trace without considering safer, useful metadata."
+    ],
+    "common_mistakes": [
+      "Redacting model prompts but forgetting tool arguments or outputs.",
+      "Assuming a trace is safe because it is used only for debugging."
+    ],
     "follow_ups": [
-      { "question": "Which span types may contain sensitive data?", "short_answer": "Generation spans and function or tool spans." },
-      { "question": "What operational data can remain useful after redaction?", "short_answer": "Timing, status, operation type, and non-sensitive correlation metadata." }
+      {
+        "question": "Which span types may contain sensitive data?",
+        "short_answer": "Generation spans and function or tool spans."
+      },
+      {
+        "question": "What operational data can remain useful after redaction?",
+        "short_answer": "Timing, status, operation type, and non-sensitive correlation metadata."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Tracing", "publisher": "OpenAI Agents SDK documentation", "url": "https://openai.github.io/openai-agents-js/guides/tracing", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Tracing",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-js/guides/tracing",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "OpenAI Agents SDK JavaScript tracing guide accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://openai.github.io/openai-agents-js/guides/tracing"],
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-js/guides/tracing"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that generation and function spans can capture sensitive data and that the SDK exposes a configuration to disable that capture."],
+      "rederivation_notes": [
+        "Verified that generation and function spans can capture sensitive data and that the SDK exposes a configuration to disable that capture."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-trace-grading-catches-wrong-tool-path"],
+    "related": [
+      "agentic-trace-grading-catches-wrong-tool-path"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -3978,33 +4074,65 @@
     "what_is_assessed": "Whether the candidate separates session-scoped execution state from cross-session memory by their intended retrieval scope.",
     "short_answer": "Use thread-scoped state or a checkpointer for the ongoing conversation and resumable run state. Store user-specific or application-level facts in a separate long-term memory store with an explicit namespace, so they can be recalled across threads without confusing them with the active transcript. Define how memories are updated and scoped.",
     "deep_explanation": "LangGraph's memory overview distinguishes short-term, thread-scoped memory that tracks a conversation and can be persisted for resumption from long-term memory stored in custom namespaces and shared across conversational threads. This separation makes retrieval scope explicit: execution state belongs to a thread, while durable user or application information belongs in a separately managed store.",
-    "strong_answer_signals": ["Uses thread-scoped state for the active conversation and resumable execution.", "Uses a separately scoped store for cross-thread user or application memory.", "Explains how namespace and update policy prevent unrelated state from being mixed."],
-    "weak_answer_signals": ["Uses one unscoped transcript as both run checkpoint and global memory.", "Assumes thread history automatically provides durable cross-conversation recall."],
-    "common_mistakes": ["Persisting all conversation turns as long-term memory without a retrieval-scope policy.", "Storing resumable tool progress in a user preference record."],
+    "strong_answer_signals": [
+      "Uses thread-scoped state for the active conversation and resumable execution.",
+      "Uses a separately scoped store for cross-thread user or application memory.",
+      "Explains how namespace and update policy prevent unrelated state from being mixed."
+    ],
+    "weak_answer_signals": [
+      "Uses one unscoped transcript as both run checkpoint and global memory.",
+      "Assumes thread history automatically provides durable cross-conversation recall."
+    ],
+    "common_mistakes": [
+      "Persisting all conversation turns as long-term memory without a retrieval-scope policy.",
+      "Storing resumable tool progress in a user preference record."
+    ],
     "follow_ups": [
-      { "question": "What belongs in thread-scoped state?", "short_answer": "The active conversation and state needed to resume that run." },
-      { "question": "What belongs in long-term memory?", "short_answer": "Explicitly scoped user-specific or application-level information needed across threads." }
+      {
+        "question": "What belongs in thread-scoped state?",
+        "short_answer": "The active conversation and state needed to resume that run."
+      },
+      {
+        "question": "What belongs in long-term memory?",
+        "short_answer": "Explicitly scoped user-specific or application-level information needed across threads."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Memory overview", "publisher": "LangChain documentation", "url": "https://docs.langchain.com/oss/python/langgraph/memory", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Memory overview",
+        "publisher": "LangChain documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LangGraph memory overview accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.langchain.com/oss/python/langgraph/memory"],
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/memory"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the source distinction between thread-scoped short-term state and namespaced long-term memory shared across threads."],
+      "rederivation_notes": [
+        "Verified the source distinction between thread-scoped short-term state and namespaced long-term memory shared across threads."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-recover-agent-run-after-restart"],
+    "related": [
+      "agentic-recover-agent-run-after-restart"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4013,38 +4141,70 @@
     "topic": "MCP OAuth client security",
     "subtopic": "PKCE for authorization-code protection",
     "level": "L3",
-    "type": "security",
+    "type": "scenario",
     "question": "An MCP client uses OAuth authorization code flow. What should it require before exchanging an authorization code?",
     "what_is_assessed": "Whether the candidate applies the MCP authorization-code protection requirements rather than relying on the code's short lifetime.",
     "short_answer": "Implement PKCE and verify the authorization server supports it before proceeding. Use the `S256` challenge method when technically capable. The verifier binds the token exchange to the client that initiated authorization, reducing the risk that an intercepted code can be redeemed by someone else.",
     "deep_explanation": "The MCP 2026-07-28 authorization security guidance requires MCP clients to implement PKCE and verify PKCE support before authorization. It also requires clients to use `S256` when technically capable. This is a defensive OAuth control for authorization-code interception; it does not replace secure token storage or other authorization checks.",
-    "strong_answer_signals": ["Requires PKCE before proceeding with the authorization flow.", "Verifies authorization-server support.", "Uses S256 when technically capable and recognizes the verifier's binding role."],
-    "weak_answer_signals": ["Relies only on a short-lived code or a client secret embedded in a public application.", "Proceeds without checking PKCE support."],
-    "common_mistakes": ["Treating PKCE as optional for MCP clients.", "Using a weaker challenge method when S256 is available."],
+    "strong_answer_signals": [
+      "Requires PKCE before proceeding with the authorization flow.",
+      "Verifies authorization-server support.",
+      "Uses S256 when technically capable and recognizes the verifier's binding role."
+    ],
+    "weak_answer_signals": [
+      "Relies only on a short-lived code or a client secret embedded in a public application.",
+      "Proceeds without checking PKCE support."
+    ],
+    "common_mistakes": [
+      "Treating PKCE as optional for MCP clients.",
+      "Using a weaker challenge method when S256 is available."
+    ],
     "follow_ups": [
-      { "question": "What does the PKCE verifier bind?", "short_answer": "The code exchange to the client that initiated the authorization request." },
-      { "question": "Which challenge method should be used when supported?", "short_answer": "S256." }
+      {
+        "question": "What does the PKCE verifier bind?",
+        "short_answer": "The code exchange to the client that initiated the authorization request."
+      },
+      {
+        "question": "Which challenge method should be used when supported?",
+        "short_answer": "S256."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Authorization Security Considerations", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Authorization Security Considerations",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2026-07-28 authorization security considerations accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the MUST requirements for PKCE and S256 when technically capable."],
+      "rederivation_notes": [
+        "Verified the MUST requirements for PKCE and S256 when technically capable."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-enforce-mcp-token-audience"],
+    "related": [
+      "agentic-enforce-mcp-token-audience"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4053,38 +4213,70 @@
     "topic": "MCP OAuth client security",
     "subtopic": "Refresh-token rotation for public clients",
     "level": "L3",
-    "type": "security",
+    "type": "scenario",
     "question": "An MCP authorization server issues refresh tokens to a public client. What token-handling requirement should the design implement?",
     "what_is_assessed": "Whether the candidate applies the MCP refresh-token rotation requirement and protects stored token material.",
     "short_answer": "Rotate refresh tokens for public clients as required by the MCP authorization security guidance, and securely replace the stored token after each successful refresh. Use short-lived access tokens where supported to reduce the impact of an access-token leak, and avoid logging or exposing either token.",
     "deep_explanation": "The MCP 2026-07-28 authorization security considerations require authorization servers to rotate refresh tokens for public clients in accordance with OAuth 2.1. The same guidance calls for secure token storage and notes that short-lived access tokens reduce the impact of token leakage. The client must therefore handle refresh as a state transition that safely stores the new token rather than continuing to use stale token material.",
-    "strong_answer_signals": ["States that public-client refresh tokens must be rotated.", "Safely replaces stored refresh-token material after refresh.", "Protects tokens in storage and logs."],
-    "weak_answer_signals": ["Reuses the same public-client refresh token indefinitely.", "Logs tokens or stores them in unprotected application state."],
-    "common_mistakes": ["Implementing rotation on the server but failing to update the client's stored token.", "Assuming refresh tokens are harmless because access tokens expire."],
+    "strong_answer_signals": [
+      "States that public-client refresh tokens must be rotated.",
+      "Safely replaces stored refresh-token material after refresh.",
+      "Protects tokens in storage and logs."
+    ],
+    "weak_answer_signals": [
+      "Reuses the same public-client refresh token indefinitely.",
+      "Logs tokens or stores them in unprotected application state."
+    ],
+    "common_mistakes": [
+      "Implementing rotation on the server but failing to update the client's stored token.",
+      "Assuming refresh tokens are harmless because access tokens expire."
+    ],
     "follow_ups": [
-      { "question": "Which client type is explicitly covered by this rotation requirement?", "short_answer": "Public clients." },
-      { "question": "What should the client do with the replacement token?", "short_answer": "Store it securely and use it for the next refresh." }
+      {
+        "question": "Which client type is explicitly covered by this rotation requirement?",
+        "short_answer": "Public clients."
+      },
+      {
+        "question": "What should the client do with the replacement token?",
+        "short_answer": "Store it securely and use it for the next refresh."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Authorization Security Considerations", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Authorization Security Considerations",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2026-07-28 authorization security considerations accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the public-client refresh-token rotation requirement and the secure-token-storage guidance."],
+      "rederivation_notes": [
+        "Verified the public-client refresh-token rotation requirement and the secure-token-storage guidance."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-protect-mcp-oauth-code-with-pkce"],
+    "related": [
+      "agentic-protect-mcp-oauth-code-with-pkce"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4098,33 +4290,65 @@
     "what_is_assessed": "Whether the candidate defines explicit merge semantics for concurrent agent outputs instead of relying on implicit last-write behavior.",
     "short_answer": "Define a reducer or merge policy for the shared key, such as appending results to a list, or write each agent's result to a separate namespaced field and merge them in a later step. Specify how conflicts are resolved; do not assume concurrent updates have a safe ordering.",
     "deep_explanation": "LangGraph's concurrent-update guidance explains that parallel nodes writing the same state property require a reducer to combine the updates. It demonstrates an append-style reducer and notes that the application must define the behavior for multiple updates. A reducer should match the data semantics; it should not silently discard or arbitrarily overwrite useful agent output.",
-    "strong_answer_signals": ["Recognizes multiple parallel writes to one key as the cause.", "Defines an explicit reducer or isolated per-agent fields.", "Makes conflict resolution deterministic and appropriate to the data."],
-    "weak_answer_signals": ["Relies on whichever agent finishes last.", "Merges structured outputs by overwriting without preserving or reporting conflicts."],
-    "common_mistakes": ["Using append semantics for values that require conflict resolution.", "Combining outputs without preserving which agent produced each result."],
+    "strong_answer_signals": [
+      "Recognizes multiple parallel writes to one key as the cause.",
+      "Defines an explicit reducer or isolated per-agent fields.",
+      "Makes conflict resolution deterministic and appropriate to the data."
+    ],
+    "weak_answer_signals": [
+      "Relies on whichever agent finishes last.",
+      "Merges structured outputs by overwriting without preserving or reporting conflicts."
+    ],
+    "common_mistakes": [
+      "Using append semantics for values that require conflict resolution.",
+      "Combining outputs without preserving which agent produced each result."
+    ],
     "follow_ups": [
-      { "question": "What does a reducer define?", "short_answer": "How multiple updates to a state key are combined." },
-      { "question": "When are separate fields preferable?", "short_answer": "When each agent's result should remain isolated until a later merge step." }
+      {
+        "question": "What does a reducer define?",
+        "short_answer": "How multiple updates to a state key are combined."
+      },
+      {
+        "question": "When are separate fields preferable?",
+        "short_answer": "When each agent's result should remain isolated until a later merge step."
+      }
     ],
     "code": null,
-    "references": [{ "title": "INVALID_CONCURRENT_GRAPH_UPDATE", "publisher": "LangChain documentation", "url": "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "INVALID_CONCURRENT_GRAPH_UPDATE",
+        "publisher": "LangChain documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LangGraph concurrent-update guidance accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE"],
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that parallel writes to a state key need a reducer and that the application defines how multiple values combine."],
+      "rederivation_notes": [
+        "Verified that parallel writes to a state key need a reducer and that the application defines how multiple values combine."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-separate-thread-state-from-long-term-memory"],
+    "related": [
+      "agentic-separate-thread-state-from-long-term-memory"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4133,38 +4357,70 @@
     "topic": "MCP OAuth client security",
     "subtopic": "HTTPS or localhost redirect URIs",
     "level": "L2",
-    "type": "security",
+    "type": "scenario",
     "question": "An MCP OAuth client proposes sending its authorization response to a non-localhost `http://` redirect URI. Should the flow proceed?",
     "what_is_assessed": "Whether the candidate applies the MCP redirect-URI transport requirement before authorizing a client flow.",
     "short_answer": "No. MCP authorization guidance requires redirect URIs to use HTTPS or `localhost`. Reject an insecure non-localhost HTTP redirect rather than sending an authorization response to it.",
     "deep_explanation": "The MCP 2026-07-28 authorization security considerations require authorization-server endpoints to use HTTPS and redirect URIs to be either `localhost` or HTTPS. This constrains where authorization responses may be sent and avoids sending them over an insecure remote HTTP connection.",
-    "strong_answer_signals": ["Rejects non-localhost HTTP redirect URIs.", "Allows HTTPS or localhost as specified.", "Applies the check before sending an authorization response."],
-    "weak_answer_signals": ["Allows any HTTP callback because it was supplied by the client.", "Confuses an authorization-server HTTPS endpoint with the redirect-URI requirement."],
-    "common_mistakes": ["Treating every loopback or remote HTTP callback as equivalent.", "Validating the redirect only after the authorization response is prepared."],
+    "strong_answer_signals": [
+      "Rejects non-localhost HTTP redirect URIs.",
+      "Allows HTTPS or localhost as specified.",
+      "Applies the check before sending an authorization response."
+    ],
+    "weak_answer_signals": [
+      "Allows any HTTP callback because it was supplied by the client.",
+      "Confuses an authorization-server HTTPS endpoint with the redirect-URI requirement."
+    ],
+    "common_mistakes": [
+      "Treating every loopback or remote HTTP callback as equivalent.",
+      "Validating the redirect only after the authorization response is prepared."
+    ],
     "follow_ups": [
-      { "question": "Which redirect URI schemes are allowed by this MCP guidance?", "short_answer": "HTTPS or `localhost`." },
-      { "question": "Does an HTTPS authorization endpoint make a remote HTTP callback safe?", "short_answer": "No. The redirect URI has its own HTTPS-or-localhost requirement." }
+      {
+        "question": "Which redirect URI schemes are allowed by this MCP guidance?",
+        "short_answer": "HTTPS or `localhost`."
+      },
+      {
+        "question": "Does an HTTPS authorization endpoint make a remote HTTP callback safe?",
+        "short_answer": "No. The redirect URI has its own HTTPS-or-localhost requirement."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Authorization Security Considerations", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Authorization Security Considerations",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2026-07-28 authorization security considerations accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the specification requirement that redirect URIs use HTTPS or localhost."],
+      "rederivation_notes": [
+        "Verified the specification requirement that redirect URIs use HTTPS or localhost."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-protect-mcp-oauth-code-with-pkce"],
+    "related": [
+      "agentic-protect-mcp-oauth-code-with-pkce"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4178,33 +4434,65 @@
     "what_is_assessed": "Whether the candidate understands that a server may decline the optional GET-based SSE stream while still supporting the Streamable HTTP transport.",
     "short_answer": "Not by itself. A client may use GET to open a server-initiated SSE stream, but the server can return 405 to indicate it does not offer one. Continue using supported POST requests and their negotiated response behavior; do not retry the unsupported GET indefinitely.",
     "deep_explanation": "The MCP Streamable HTTP specification makes the client GET request optional and says the server must either open an SSE stream or return HTTP 405 Method Not Allowed to indicate that no SSE stream is offered at that endpoint. This is a capability boundary for the GET stream, not proof that the endpoint cannot accept ordinary MCP POST requests.",
-    "strong_answer_signals": ["Treats GET-based SSE as optional.", "Interprets 405 as no GET stream at that endpoint.", "Uses supported POST request behavior rather than repeated GET retries."],
-    "weak_answer_signals": ["Treats every 405 as proof the entire MCP server is unavailable.", "Retries the same unsupported GET indefinitely."],
-    "common_mistakes": ["Confusing optional server-initiated streams with required POST transport support.", "Assuming the server must provide SSE for every client."],
+    "strong_answer_signals": [
+      "Treats GET-based SSE as optional.",
+      "Interprets 405 as no GET stream at that endpoint.",
+      "Uses supported POST request behavior rather than repeated GET retries."
+    ],
+    "weak_answer_signals": [
+      "Treats every 405 as proof the entire MCP server is unavailable.",
+      "Retries the same unsupported GET indefinitely."
+    ],
+    "common_mistakes": [
+      "Confusing optional server-initiated streams with required POST transport support.",
+      "Assuming the server must provide SSE for every client."
+    ],
     "follow_ups": [
-      { "question": "What does HTTP 405 communicate in this case?", "short_answer": "The server does not offer an SSE stream for that GET endpoint." },
-      { "question": "Does it automatically rule out POST requests?", "short_answer": "No. The client should use the supported POST transport behavior." }
+      {
+        "question": "What does HTTP 405 communicate in this case?",
+        "short_answer": "The server does not offer an SSE stream for that GET endpoint."
+      },
+      {
+        "question": "Does it automatically rule out POST requests?",
+        "short_answer": "No. The client should use the supported POST transport behavior."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Transports", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2025-11-25 Streamable HTTP transport accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified GET is optional and the server returns either an SSE stream or 405 when no stream is offered."],
+      "rederivation_notes": [
+        "Verified GET is optional and the server returns either an SSE stream or 405 when no stream is offered."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-resume-mcp-streamable-http-sse"],
+    "related": [
+      "agentic-resume-mcp-streamable-http-sse"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4218,33 +4506,65 @@
     "what_is_assessed": "Whether the candidate distinguishes server-initiated SSE messages from responses to client-initiated requests.",
     "short_answer": "No, not on an ordinary server-initiated GET stream. The MCP transport allows server requests and notifications on that stream but says a server must not send a JSON-RPC response there unless it is resuming a stream. Keep request-response correlation on the appropriate POST response stream.",
     "deep_explanation": "The MCP Streamable HTTP specification permits a GET request to open an SSE stream for server-to-client messages. It says the server may send JSON-RPC requests and notifications on that stream, but must not send a JSON-RPC response there unless resuming a stream. Clients should therefore keep the transport context and request IDs associated with the correct response path.",
-    "strong_answer_signals": ["Distinguishes requests/notifications from responses on the GET SSE stream.", "Recognizes the resumption exception.", "Correlates client POST responses with the appropriate request context."],
-    "weak_answer_signals": ["Accepts any response on any open stream based only on its JSON-RPC ID.", "Ignores the resumption exception."],
-    "common_mistakes": ["Treating the GET SSE stream as a generic response channel.", "Dropping stream context while correlating asynchronous messages."],
+    "strong_answer_signals": [
+      "Distinguishes requests/notifications from responses on the GET SSE stream.",
+      "Recognizes the resumption exception.",
+      "Correlates client POST responses with the appropriate request context."
+    ],
+    "weak_answer_signals": [
+      "Accepts any response on any open stream based only on its JSON-RPC ID.",
+      "Ignores the resumption exception."
+    ],
+    "common_mistakes": [
+      "Treating the GET SSE stream as a generic response channel.",
+      "Dropping stream context while correlating asynchronous messages."
+    ],
     "follow_ups": [
-      { "question": "Which server messages may appear on the GET SSE stream?", "short_answer": "Server-initiated JSON-RPC requests and notifications." },
-      { "question": "When may a JSON-RPC response appear there?", "short_answer": "When the server is resuming a stream, as specified by the transport." }
+      {
+        "question": "Which server messages may appear on the GET SSE stream?",
+        "short_answer": "Server-initiated JSON-RPC requests and notifications."
+      },
+      {
+        "question": "When may a JSON-RPC response appear there?",
+        "short_answer": "When the server is resuming a stream, as specified by the transport."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Transports", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2025-11-25 Streamable HTTP transport accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the allowed server-to-client requests and notifications on GET SSE streams and the restriction on responses outside stream resumption."],
+      "rederivation_notes": [
+        "Verified the allowed server-to-client requests and notifications on GET SSE streams and the restriction on responses outside stream resumption."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-do-not-assume-mcp-sse-stream-resumption"],
+    "related": [
+      "agentic-do-not-assume-mcp-sse-stream-resumption"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4253,38 +4573,70 @@
     "topic": "MCP sampling context capability",
     "subtopic": "Capability-gated context inclusion",
     "level": "L2",
-    "type": "protocol",
+    "type": "concept",
     "question": "An MCP server wants to set `includeContext: \"allServers\"`, but the client did not declare `sampling.context`. What should the server do?",
     "what_is_assessed": "Whether the candidate checks negotiated sampling capabilities before requesting client context.",
     "short_answer": "Do not use `allServers` without the client's `sampling.context` capability. The MCP specification soft-deprecates `thisServer` and `allServers`, recommends omitting `includeContext` because it defaults to `none`, and says servers should not use those values unless the client declares the capability.",
     "deep_explanation": "The MCP sampling specification defines `sampling.context` as a client capability. It says `thisServer` and `allServers` values for `includeContext` are soft-deprecated, recommends avoiding them (including by omitting the field so it defaults to `none`), and says servers should not use them unless the client declares `sampling.context`. A server should negotiate first and avoid assuming access to client context.",
-    "strong_answer_signals": ["Checks whether `sampling.context` was declared.", "Uses the default `none` when context inclusion is not negotiated.", "Recognizes the soft-deprecated status of `thisServer` and `allServers`."],
-    "weak_answer_signals": ["Assumes a server can request all client context by setting the field.", "Treats capability negotiation as optional."],
-    "common_mistakes": ["Using `allServers` without a declared capability.", "Assuming omission means the server receives context rather than the default `none`."],
+    "strong_answer_signals": [
+      "Checks whether `sampling.context` was declared.",
+      "Uses the default `none` when context inclusion is not negotiated.",
+      "Recognizes the soft-deprecated status of `thisServer` and `allServers`."
+    ],
+    "weak_answer_signals": [
+      "Assumes a server can request all client context by setting the field.",
+      "Treats capability negotiation as optional."
+    ],
+    "common_mistakes": [
+      "Using `allServers` without a declared capability.",
+      "Assuming omission means the server receives context rather than the default `none`."
+    ],
     "follow_ups": [
-      { "question": "What does omitted `includeContext` default to?", "short_answer": "`none`." },
-      { "question": "Which client capability is required for the deprecated context values?", "short_answer": "`sampling.context`." }
+      {
+        "question": "What does omitted `includeContext` default to?",
+        "short_answer": "`none`."
+      },
+      {
+        "question": "Which client capability is required for the deprecated context values?",
+        "short_answer": "`sampling.context`."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Sampling", "publisher": "Model Context Protocol specification", "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Sampling",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "MCP specification version 2025-11-25 sampling capability guidance accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://modelcontextprotocol.io/specification/2025-11-25/client/sampling"],
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified context inclusion defaults to none, the context values are soft-deprecated, and capability declaration is required before using them."],
+      "rederivation_notes": [
+        "Verified context inclusion defaults to none, the context values are soft-deprecated, and capability declaration is required before using them."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["agentic-mcp-sampling-keeps-model-access-client-controlled"],
+    "related": [
+      "agentic-mcp-sampling-keeps-model-access-client-controlled"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   }
 ]

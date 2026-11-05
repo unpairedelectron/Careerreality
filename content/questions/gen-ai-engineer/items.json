@@ -4026,33 +4026,65 @@
     "what_is_assessed": "Whether the candidate recognizes that table cells need their row and column context to retain meaning during retrieval.",
     "short_answer": "The value is ambiguous without its row label, column header, and often the table title or units. Use table-aware extraction or chunking that preserves those relationships, or normalize rows into explicit key-value records with the relevant headers and metadata attached. Evaluate with table-specific questions and verify that retrieved evidence retains the needed labels.",
     "deep_explanation": "The cited LangChain benchmark describes extraction and splitting approaches that preserve table elements inside text chunks before embedding them for semantic retrieval. A cell value alone is not self-describing: its meaning depends on row and column context. Preserving that structure improves the chance that retrieval returns evidence a generator can interpret, but it still needs evaluation on the target document formats and questions.",
-    "strong_answer_signals": ["Explains why a cell value requires row and column context.", "Keeps headers, labels, and units together with table data or encodes them explicitly.", "Tests retrieval using representative table questions and checks evidence quality."],
-    "weak_answer_signals": ["Treats arbitrary text chunking as sufficient for tables.", "Increases overlap without restoring missing labels or units."],
-    "common_mistakes": ["Embedding isolated numeric cells without schema context.", "Assuming a correct generated answer proves the retrieved table evidence was complete."],
+    "strong_answer_signals": [
+      "Explains why a cell value requires row and column context.",
+      "Keeps headers, labels, and units together with table data or encodes them explicitly.",
+      "Tests retrieval using representative table questions and checks evidence quality."
+    ],
+    "weak_answer_signals": [
+      "Treats arbitrary text chunking as sufficient for tables.",
+      "Increases overlap without restoring missing labels or units."
+    ],
+    "common_mistakes": [
+      "Embedding isolated numeric cells without schema context.",
+      "Assuming a correct generated answer proves the retrieved table evidence was complete."
+    ],
     "follow_ups": [
-      { "question": "What context makes a retrieved cell interpretable?", "short_answer": "Its row label, column header, table title, and relevant units." },
-      { "question": "What should the evaluation inspect?", "short_answer": "Whether retrieval returns the correct cell together with the context needed to interpret it." }
+      {
+        "question": "What context makes a retrieved cell interpretable?",
+        "short_answer": "Its row label, column header, table title, and relevant units."
+      },
+      {
+        "question": "What should the evaluation inspect?",
+        "short_answer": "Whether retrieval returns the correct cell together with the context needed to interpret it."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Benchmarking RAG on tables", "publisher": "LangChain", "url": "https://www.langchain.com/blog/benchmarking-rag-on-tables", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Benchmarking RAG on tables",
+        "publisher": "LangChain",
+        "url": "https://www.langchain.com/blog/benchmarking-rag-on-tables",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LangChain table-RAG benchmark article accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://www.langchain.com/blog/benchmarking-rag-on-tables"],
+      "sources_checked": [
+        "https://www.langchain.com/blog/benchmarking-rag-on-tables"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the recommendation to preserve table elements within text chunks or extract tables for semantic retrieval."],
+      "rederivation_notes": [
+        "Verified the recommendation to preserve table elements within text chunks or extract tables for semantic retrieval."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "medium"
     },
-    "related": ["genai-tune-vector-store-chunking-with-retrieval-tests"],
+    "related": [
+      "genai-tune-vector-store-chunking-with-retrieval-tests"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4066,33 +4098,65 @@
     "what_is_assessed": "Whether the candidate recognizes that some retrieval encoders use distinct query and passage input conventions.",
     "short_answer": "Check the embedding model's prescribed input types and use its query mode for queries and passage mode for documents. For asymmetric encoders, the same text can intentionally produce different vectors under the two modes; using the passage path for both can reduce retrieval relevance. Evaluate with representative queries rather than assuming identical strings should have identical embeddings.",
     "deep_explanation": "Pinecone's relevance guidance describes models such as E5 and Llama that use different input types for query and passage encoding. The encoder is shared, but the input mode affects the resulting vector by design. Follow the model-specific query/document instructions and validate retrieval quality on the target corpus; this is not a universal rule for every embedding model.",
-    "strong_answer_signals": ["Distinguishes query and passage input modes for asymmetric encoders.", "Follows the model-specific embedding instructions.", "Treats the behavior as model-specific and validates retrieval quality."],
-    "weak_answer_signals": ["Assumes every embedding model uses identical query and document encoding.", "Concludes that matching text must always yield matching vectors."],
-    "common_mistakes": ["Using a passage template for queries on a model that expects a query prefix or task type.", "Changing input mode without evaluating retrieval quality."],
+    "strong_answer_signals": [
+      "Distinguishes query and passage input modes for asymmetric encoders.",
+      "Follows the model-specific embedding instructions.",
+      "Treats the behavior as model-specific and validates retrieval quality."
+    ],
+    "weak_answer_signals": [
+      "Assumes every embedding model uses identical query and document encoding.",
+      "Concludes that matching text must always yield matching vectors."
+    ],
+    "common_mistakes": [
+      "Using a passage template for queries on a model that expects a query prefix or task type.",
+      "Changing input mode without evaluating retrieval quality."
+    ],
     "follow_ups": [
-      { "question": "Can one encoder intentionally produce different vectors for the same text?", "short_answer": "Yes, when the model uses distinct query and passage input types." },
-      { "question": "Does every embedding model require asymmetric modes?", "short_answer": "No. Follow the selected model's documentation." }
+      {
+        "question": "Can one encoder intentionally produce different vectors for the same text?",
+        "short_answer": "Yes, when the model uses distinct query and passage input types."
+      },
+      {
+        "question": "Does every embedding model require asymmetric modes?",
+        "short_answer": "No. Follow the selected model's documentation."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Increase search relevance", "publisher": "Pinecone documentation", "url": "https://docs.pinecone.io/guides/optimize/increase-relevance", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Increase search relevance",
+        "publisher": "Pinecone documentation",
+        "url": "https://docs.pinecone.io/guides/optimize/increase-relevance",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "Pinecone relevance guidance accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pinecone.io/guides/optimize/increase-relevance"],
+      "sources_checked": [
+        "https://docs.pinecone.io/guides/optimize/increase-relevance"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that E5- and Llama-style encoders may use distinct query and passage input types, intentionally yielding different vectors."],
+      "rederivation_notes": [
+        "Verified that E5- and Llama-style encoders may use distinct query and passage input types, intentionally yielding different vectors."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-tune-vector-store-chunking-with-retrieval-tests"],
+    "related": [
+      "genai-tune-vector-store-chunking-with-retrieval-tests"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4106,33 +4170,65 @@
     "what_is_assessed": "Whether the candidate uses rewriting to improve retrieval while preserving the original question's semantic intent.",
     "short_answer": "Rewrite the query to make its underlying intent and references explicit, then retrieve again. Keep the original question available, check that the rewrite preserves its constraints and entities, and evaluate whether the new results are more relevant before generating an answer. If retrieval still misses, abstain or ask for clarification rather than answering from irrelevant passages.",
     "deep_explanation": "LangGraph's agentic RAG guide describes rewriting the original user question when retrieved documents are irrelevant, followed by another retrieval attempt. Rewriting is a retrieval intervention, not evidence that the new passages are correct. Preserve intent, compare the returned evidence, and stop or clarify if a useful result is still unavailable.",
-    "strong_answer_signals": ["Uses rewriting after a retrieval failure rather than reflexively generating.", "Preserves the original question's intent, entities, and constraints.", "Evaluates the new evidence and has a stop or clarification path."],
-    "weak_answer_signals": ["Treats any rewrite as guaranteed to improve retrieval.", "Allows the rewrite to silently drop constraints or change the user's intent."],
-    "common_mistakes": ["Generating from irrelevant results without checking the second retrieval.", "Repeatedly rewriting without a retry budget or abstention path."],
+    "strong_answer_signals": [
+      "Uses rewriting after a retrieval failure rather than reflexively generating.",
+      "Preserves the original question's intent, entities, and constraints.",
+      "Evaluates the new evidence and has a stop or clarification path."
+    ],
+    "weak_answer_signals": [
+      "Treats any rewrite as guaranteed to improve retrieval.",
+      "Allows the rewrite to silently drop constraints or change the user's intent."
+    ],
+    "common_mistakes": [
+      "Generating from irrelevant results without checking the second retrieval.",
+      "Repeatedly rewriting without a retry budget or abstention path."
+    ],
     "follow_ups": [
-      { "question": "What should remain available after rewriting?", "short_answer": "The original user question and its constraints." },
-      { "question": "Does a rewritten query prove its retrieved passages are relevant?", "short_answer": "No. Inspect and evaluate the new evidence." }
+      {
+        "question": "What should remain available after rewriting?",
+        "short_answer": "The original user question and its constraints."
+      },
+      {
+        "question": "Does a rewritten query prove its retrieved passages are relevant?",
+        "short_answer": "No. Inspect and evaluate the new evidence."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Build a custom RAG agent with LangGraph", "publisher": "LangChain documentation", "url": "https://docs.langchain.com/oss/python/langgraph/agentic-rag", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Build a custom RAG agent with LangGraph",
+        "publisher": "LangChain documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/agentic-rag",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LangGraph agentic RAG documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.langchain.com/oss/python/langgraph/agentic-rag"],
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/agentic-rag"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the documented rewrite-and-retrieve-again path for irrelevant results; preserved the need to assess evidence after rewriting."],
+      "rederivation_notes": [
+        "Verified the documented rewrite-and-retrieve-again path for irrelevant results; preserved the need to assess evidence after rewriting."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-tune-vector-store-chunking-with-retrieval-tests"],
+    "related": [
+      "genai-tune-vector-store-chunking-with-retrieval-tests"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4146,33 +4242,65 @@
     "what_is_assessed": "Whether the candidate decomposes a multi-part question, retrieves evidence for each part, and preserves support when synthesizing.",
     "short_answer": "Decompose the request into focused sub-questions for each policy and its effective date, retrieve evidence for each independently, and synthesize only after checking that every part is supported. Keep the original question and constraints, cite evidence for each comparison claim, and say which part is missing if a sub-question cannot be answered.",
     "deep_explanation": "LlamaIndex's query-transform cookbook distinguishes rewriting a query from generating sub-questions that can be answered by different tools or sources. Decomposition is useful when a single query fails to surface evidence for all components of a multi-hop request. It does not guarantee complete or consistent evidence: the system must verify each retrieved result and preserve source-specific dates and citations during synthesis.",
-    "strong_answer_signals": ["Splits the request into answerable sub-questions.", "Retrieves and verifies evidence for each document and date.", "Synthesizes with claim-level citations and exposes missing evidence."],
-    "weak_answer_signals": ["Answers from the one retrieved document as if it covered the full comparison.", "Treats query decomposition as a guarantee that all sub-answers are correct."],
-    "common_mistakes": ["Dropping the original comparison constraints during decomposition.", "Combining evidence with different effective dates without stating the difference."],
+    "strong_answer_signals": [
+      "Splits the request into answerable sub-questions.",
+      "Retrieves and verifies evidence for each document and date.",
+      "Synthesizes with claim-level citations and exposes missing evidence."
+    ],
+    "weak_answer_signals": [
+      "Answers from the one retrieved document as if it covered the full comparison.",
+      "Treats query decomposition as a guarantee that all sub-answers are correct."
+    ],
+    "common_mistakes": [
+      "Dropping the original comparison constraints during decomposition.",
+      "Combining evidence with different effective dates without stating the difference."
+    ],
     "follow_ups": [
-      { "question": "When is decomposition different from rewriting?", "short_answer": "Decomposition splits a multi-part request; rewriting reformulates one request to improve retrieval." },
-      { "question": "What should happen if one sub-question has no evidence?", "short_answer": "Report the gap or ask for clarification instead of inventing that part." }
+      {
+        "question": "When is decomposition different from rewriting?",
+        "short_answer": "Decomposition splits a multi-part request; rewriting reformulates one request to improve retrieval."
+      },
+      {
+        "question": "What should happen if one sub-question has no evidence?",
+        "short_answer": "Report the gap or ask for clarification instead of inventing that part."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Query Transform Cookbook", "publisher": "LlamaIndex documentation", "url": "https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Query Transform Cookbook",
+        "publisher": "LlamaIndex documentation",
+        "url": "https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LlamaIndex query transformation cookbook accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/"],
+      "sources_checked": [
+        "https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that sub-question transformation decomposes a query into multiple questions that can be answered by different tools or sources."],
+      "rederivation_notes": [
+        "Verified that sub-question transformation decomposes a query into multiple questions that can be answered by different tools or sources."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-rewrite-query-when-retrieval-misses-intent"],
+    "related": [
+      "genai-rewrite-query-when-retrieval-misses-intent"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4186,33 +4314,65 @@
     "what_is_assessed": "Whether the candidate combines ranked lists without assuming raw scores are comparable or repeating the same evidence.",
     "short_answer": "Fuse the ranked lists with a rank-based method such as reciprocal-rank fusion, deduplicate repeated chunks by a stable chunk identity, and then rerank or select the final context. Preserve each passage's source metadata. Do not simply add incomparable raw similarity scores or remove distinct passages just because their text looks similar.",
     "deep_explanation": "LlamaIndex's query-fusion documentation describes combining results from multiple retrievers, deduplicating nodes that appear in more than one list, and reranking them with reciprocal-rank fusion. Rank fusion avoids treating retriever-specific raw score scales as directly interchangeable. Deduplication should use a stable identity for the same source chunk while retaining distinct evidence and provenance.",
-    "strong_answer_signals": ["Uses rank-based fusion or another justified score-normalization strategy.", "Deduplicates the same chunk by stable identity.", "Keeps provenance and does not discard distinct evidence with similar wording."],
-    "weak_answer_signals": ["Adds raw scores from incompatible retrievers without validation.", "Passes repeated copies of the same passage to the generator."],
-    "common_mistakes": ["Deduplicating solely by surface-text similarity and losing separate sources.", "Assuming reciprocal-rank fusion guarantees a better result for every query."],
+    "strong_answer_signals": [
+      "Uses rank-based fusion or another justified score-normalization strategy.",
+      "Deduplicates the same chunk by stable identity.",
+      "Keeps provenance and does not discard distinct evidence with similar wording."
+    ],
+    "weak_answer_signals": [
+      "Adds raw scores from incompatible retrievers without validation.",
+      "Passes repeated copies of the same passage to the generator."
+    ],
+    "common_mistakes": [
+      "Deduplicating solely by surface-text similarity and losing separate sources.",
+      "Assuming reciprocal-rank fusion guarantees a better result for every query."
+    ],
     "follow_ups": [
-      { "question": "Why not directly add raw vector and keyword scores?", "short_answer": "Their scales and meanings may differ across retrievers." },
-      { "question": "What should identify duplicate chunks?", "short_answer": "A stable identity tied to the same source chunk, while retaining provenance." }
+      {
+        "question": "Why not directly add raw vector and keyword scores?",
+        "short_answer": "Their scales and meanings may differ across retrievers."
+      },
+      {
+        "question": "What should identify duplicate chunks?",
+        "short_answer": "A stable identity tied to the same source chunk, while retaining provenance."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Query fusion", "publisher": "LlamaIndex documentation", "url": "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Query fusion",
+        "publisher": "LlamaIndex documentation",
+        "url": "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "LlamaIndex query-fusion documentation accessed through official search excerpt on 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/"],
+      "sources_checked": [
+        "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Official documentation describes deduplication of nodes retrieved by multiple branches and reciprocal-rank fusion; direct page extraction returned no body text."],
+      "rederivation_notes": [
+        "Official documentation describes deduplication of nodes retrieved by multiple branches and reciprocal-rank fusion; direct page extraction returned no body text."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "medium"
     },
-    "related": ["genai-measure-per-query-hybrid-retrieval-regressions"],
+    "related": [
+      "genai-measure-per-query-hybrid-retrieval-regressions"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4226,22 +4386,49 @@
     "what_is_assessed": "Whether the candidate understands image-conditioned video generation and specifies temporal action rather than treating the image as a complete video description.",
     "short_answer": "For the documented Sora workflow, the image acts as the video's first frame, helping establish its initial appearance. Describe the subject, action, setting, shot type, and lighting, including the motion or camera movement needed across the clip. Do not assume the reference image specifies every later frame.",
     "deep_explanation": "OpenAI's video-generation guide says an input image can guide generation as the first frame and recommends describing shot type, subject, action, setting, and lighting. The prompt should therefore provide temporal information that a still image cannot encode. Validate the generated clip against the intended motion and continuity rather than judging only the initial frame.",
-    "strong_answer_signals": ["Describes the image as the initial frame for this API workflow.", "Specifies subject action and temporal or camera motion.", "Checks the full clip for continuity, not just image resemblance."],
-    "weak_answer_signals": ["Treats the reference image as a complete description of all frames.", "Describes only static appearance when the desired result depends on motion."],
-    "common_mistakes": ["Assuming reference-image conditioning guarantees exact preservation throughout the clip.", "Leaving motion and shot progression unspecified."],
+    "strong_answer_signals": [
+      "Describes the image as the initial frame for this API workflow.",
+      "Specifies subject action and temporal or camera motion.",
+      "Checks the full clip for continuity, not just image resemblance."
+    ],
+    "weak_answer_signals": [
+      "Treats the reference image as a complete description of all frames.",
+      "Describes only static appearance when the desired result depends on motion."
+    ],
+    "common_mistakes": [
+      "Assuming reference-image conditioning guarantees exact preservation throughout the clip.",
+      "Leaving motion and shot progression unspecified."
+    ],
     "follow_ups": [
-      { "question": "What does the reference image establish in the cited workflow?", "short_answer": "The first frame of the video." },
-      { "question": "What information should be added beyond the still image?", "short_answer": "The subject's action and the desired shot or camera motion." }
+      {
+        "question": "What does the reference image establish in the cited workflow?",
+        "short_answer": "The first frame of the video."
+      },
+      {
+        "question": "What information should be added beyond the still image?",
+        "short_answer": "The subject's action and the desired shot or camera motion."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Video generation with Sora", "publisher": "OpenAI API documentation", "url": "https://platform.openai.com/docs/guides/video-generation", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Video generation with Sora",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/video-generation",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "OpenAI video-generation guide accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://platform.openai.com/docs/guides/video-generation"],
+      "sources_checked": [
+        "https://platform.openai.com/docs/guides/video-generation"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the input-reference first-frame behavior and the guide's prompting recommendations for shot, subject, action, setting, and lighting."],
+      "rederivation_notes": [
+        "Verified the input-reference first-frame behavior and the guide's prompting recommendations for shot, subject, action, setting, and lighting."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
@@ -4252,7 +4439,10 @@
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4266,33 +4456,65 @@
     "what_is_assessed": "Whether the candidate distinguishes request-rate limits from token-rate limits and controls both dimensions.",
     "short_answer": "Requests and tokens can have separate limits, and the first exhausted limit can reject traffic. Track token consumption per model as well as request count, estimate prompt and output budgets before admission, and queue or smooth work when either budget is near its limit. Backoff helps with transient excess; sustained overload needs lower concurrency or throughput, shorter requests, or additional approved capacity.",
     "deep_explanation": "OpenAI's rate-limit guide describes multiple dimensions, including requests per minute and tokens per minute, and notes that whichever limit is reached first can constrain requests. A workload with long prompts can therefore be token-bound even when its request count is modest. A token-aware admission controller and bounded queue make this distinction explicit instead of repeatedly retrying work that cannot fit the current budget.",
-    "strong_answer_signals": ["Names request and token limits as independent constraints.", "Tracks usage and reserves a realistic prompt/output budget.", "Uses queueing or concurrency controls for sustained load rather than retrying indefinitely."],
-    "weak_answer_signals": ["Assumes every 429 means only too many requests.", "Increases retries without reducing the load that exceeds the token budget."],
-    "common_mistakes": ["Monitoring request count but not token usage.", "Using one global token budget for models with separate limits."],
+    "strong_answer_signals": [
+      "Names request and token limits as independent constraints.",
+      "Tracks usage and reserves a realistic prompt/output budget.",
+      "Uses queueing or concurrency controls for sustained load rather than retrying indefinitely."
+    ],
+    "weak_answer_signals": [
+      "Assumes every 429 means only too many requests.",
+      "Increases retries without reducing the load that exceeds the token budget."
+    ],
+    "common_mistakes": [
+      "Monitoring request count but not token usage.",
+      "Using one global token budget for models with separate limits."
+    ],
     "follow_ups": [
-      { "question": "Which limit can reject a request first?", "short_answer": "Whichever applicable request or token limit is reached first." },
-      { "question": "What helps with sustained token overload?", "short_answer": "Token-aware admission, queuing, reduced throughput, or approved capacity." }
+      {
+        "question": "Which limit can reject a request first?",
+        "short_answer": "Whichever applicable request or token limit is reached first."
+      },
+      {
+        "question": "What helps with sustained token overload?",
+        "short_answer": "Token-aware admission, queuing, reduced throughput, or approved capacity."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Rate limits", "publisher": "OpenAI API documentation", "url": "https://platform.openai.com/docs/guides/rate-limits", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Rate limits",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/rate-limits",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "OpenAI API rate-limit guide accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://platform.openai.com/docs/guides/rate-limits"],
+      "sources_checked": [
+        "https://platform.openai.com/docs/guides/rate-limits"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that the guide lists separate request and token limits and that whichever limit is reached first can constrain traffic."],
+      "rederivation_notes": [
+        "Verified that the guide lists separate request and token limits and that whichever limit is reached first can constrain traffic."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-retry-temporary-rate-limits-with-bounded-backoff"],
+    "related": [
+      "genai-retry-temporary-rate-limits-with-bounded-backoff"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4306,33 +4528,65 @@
     "what_is_assessed": "Whether the candidate treats video generation as an asynchronous job and separates job completion from media retrieval.",
     "short_answer": "Persist the job ID and poll its status endpoint or use a configured completion webhook. Fetch the video content only after the job reaches `completed`; handle failure states separately and avoid treating the initial accepted response as a finished render.",
     "deep_explanation": "OpenAI's video-generation guide describes a render flow in which `POST /videos` returns a job ID and initial status. The application can poll `GET /videos/{video_id}` or use webhooks to learn when the job finishes, then retrieve the MP4 from the content endpoint after completion. This requires job-state handling and a separate media-download step.",
-    "strong_answer_signals": ["Stores and tracks the returned job identifier.", "Uses polling or webhooks to observe completion.", "Retrieves media only after a completed state and handles failures distinctly."],
-    "weak_answer_signals": ["Assumes the initial POST response contains the finished video.", "Polls the content endpoint without checking render status."],
-    "common_mistakes": ["Losing the job ID when the user navigates away.", "Treating a failed or still-running job as a completed artifact."],
+    "strong_answer_signals": [
+      "Stores and tracks the returned job identifier.",
+      "Uses polling or webhooks to observe completion.",
+      "Retrieves media only after a completed state and handles failures distinctly."
+    ],
+    "weak_answer_signals": [
+      "Assumes the initial POST response contains the finished video.",
+      "Polls the content endpoint without checking render status."
+    ],
+    "common_mistakes": [
+      "Losing the job ID when the user navigates away.",
+      "Treating a failed or still-running job as a completed artifact."
+    ],
     "follow_ups": [
-      { "question": "What does the initial response establish?", "short_answer": "That a render job was created, not that the video is ready." },
-      { "question": "When should the application retrieve the MP4?", "short_answer": "After the job status is completed." }
+      {
+        "question": "What does the initial response establish?",
+        "short_answer": "That a render job was created, not that the video is ready."
+      },
+      {
+        "question": "When should the application retrieve the MP4?",
+        "short_answer": "After the job status is completed."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Video generation with Sora", "publisher": "OpenAI API documentation", "url": "https://platform.openai.com/docs/guides/video-generation", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Video generation with Sora",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/video-generation",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "OpenAI video-generation guide accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://platform.openai.com/docs/guides/video-generation"],
+      "sources_checked": [
+        "https://platform.openai.com/docs/guides/video-generation"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the POST job response, polling or webhook completion options, and content retrieval after completion."],
+      "rederivation_notes": [
+        "Verified the POST job response, polling or webhook completion options, and content retrieval after completion."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-use-video-reference-image-as-first-frame"],
+    "related": [
+      "genai-use-video-reference-image-as-first-frame"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4346,33 +4600,65 @@
     "what_is_assessed": "Whether the candidate recognizes small-text limitations and improves image presentation or routes exact transcription through a suitable extraction path.",
     "short_answer": "Crop and enlarge the relevant region, use an appropriate high-detail image path, and preserve enough surrounding context to interpret the label. If exact character-level transcription matters, compare against OCR or a document parser and validate the extracted values instead of treating a visual answer as ground truth.",
     "deep_explanation": "OpenAI's images-and-vision guide lists small text as a known limitation and recommends enlarging the image when the model has difficulty. A focused crop can make relevant characters more legible without asking the model to inspect an entire page at once. For exact transcription, an independent OCR or document-extraction check provides a separate validation path; the appropriate route should be measured on the target documents.",
-    "strong_answer_signals": ["Identifies small text as a known vision limitation.", "Crops or enlarges the relevant region and selects sufficient detail.", "Validates exact transcription with an appropriate independent extraction method."],
-    "weak_answer_signals": ["Keeps the same full-page image and simply repeats the prompt.", "Treats one visual-model transcription as verified ground truth."],
-    "common_mistakes": ["Cropping so tightly that context or neighboring labels are lost.", "Using a low-detail path for tiny text without testing fidelity."],
+    "strong_answer_signals": [
+      "Identifies small text as a known vision limitation.",
+      "Crops or enlarges the relevant region and selects sufficient detail.",
+      "Validates exact transcription with an appropriate independent extraction method."
+    ],
+    "weak_answer_signals": [
+      "Keeps the same full-page image and simply repeats the prompt.",
+      "Treats one visual-model transcription as verified ground truth."
+    ],
+    "common_mistakes": [
+      "Cropping so tightly that context or neighboring labels are lost.",
+      "Using a low-detail path for tiny text without testing fidelity."
+    ],
     "follow_ups": [
-      { "question": "What image change can help with small text?", "short_answer": "Enlarge the image or provide a focused crop of the relevant region." },
-      { "question": "What if every character must be exact?", "short_answer": "Cross-check with OCR or document extraction and validate the result." }
+      {
+        "question": "What image change can help with small text?",
+        "short_answer": "Enlarge the image or provide a focused crop of the relevant region."
+      },
+      {
+        "question": "What if every character must be exact?",
+        "short_answer": "Cross-check with OCR or document extraction and validate the result."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Images and vision", "publisher": "OpenAI API documentation", "url": "https://platform.openai.com/docs/guides/images-vision", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Images and vision",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/images-vision",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "OpenAI Images and vision guide accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://platform.openai.com/docs/guides/images-vision"],
+      "sources_checked": [
+        "https://platform.openai.com/docs/guides/images-vision"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the guide's small-text limitation and enlarge-image recommendation; OCR cross-check is presented as an engineering validation option."],
+      "rederivation_notes": [
+        "Verified the guide's small-text limitation and enlarge-image recommendation; OCR cross-check is presented as an engineering validation option."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-measure-cost-before-assuming-low-image-detail-is-cheaper"],
+    "related": [
+      "genai-measure-cost-before-assuming-low-image-detail-is-cheaper"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4386,33 +4672,65 @@
     "what_is_assessed": "Whether the candidate distinguishes time to first token from the generation rate after the first token.",
     "short_answer": "Track time to first token (TTFT) separately from inter-token latency (ITL, often reported as time per output token). TTFT includes queuing, prompt processing, and first-token delivery; ITL describes the pace between subsequent tokens. Use the two signals to distinguish a slow start from slow decoding, then investigate prompt length, queueing, model, and serving configuration.",
     "deep_explanation": "NVIDIA's LLM inference metrics guide defines TTFT as the time from query submission to the first received output token and ITL as the average time between consecutive tokens. These metrics expose different user-visible latency patterns. Report them separately alongside end-to-end latency and workload details; measurement definitions can vary between tools, so keep the benchmark methodology consistent.",
-    "strong_answer_signals": ["Measures TTFT and ITL separately.", "Explains the user-visible difference between delayed start and slow streaming.", "Keeps benchmark definitions and workload consistent."],
-    "weak_answer_signals": ["Uses only average end-to-end latency for streaming behavior.", "Treats time-to-first-token as the speed of all generated tokens."],
-    "common_mistakes": ["Comparing TTFT or ITL across benchmarks with different inclusion rules.", "Ignoring queueing and prompt length when diagnosing TTFT."],
+    "strong_answer_signals": [
+      "Measures TTFT and ITL separately.",
+      "Explains the user-visible difference between delayed start and slow streaming.",
+      "Keeps benchmark definitions and workload consistent."
+    ],
+    "weak_answer_signals": [
+      "Uses only average end-to-end latency for streaming behavior.",
+      "Treats time-to-first-token as the speed of all generated tokens."
+    ],
+    "common_mistakes": [
+      "Comparing TTFT or ITL across benchmarks with different inclusion rules.",
+      "Ignoring queueing and prompt length when diagnosing TTFT."
+    ],
     "follow_ups": [
-      { "question": "What does TTFT measure?", "short_answer": "Time from request submission to the first output token." },
-      { "question": "What does ITL measure?", "short_answer": "Average time between consecutive output tokens." }
+      {
+        "question": "What does TTFT measure?",
+        "short_answer": "Time from request submission to the first output token."
+      },
+      {
+        "question": "What does ITL measure?",
+        "short_answer": "Average time between consecutive output tokens."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Metrics", "publisher": "NVIDIA NIM Benchmarking documentation", "url": "https://docs.nvidia.com/nim/benchmarking/llm/metrics", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Metrics",
+        "publisher": "NVIDIA NIM Benchmarking documentation",
+        "url": "https://docs.nvidia.com/nim/benchmarking/llm/metrics",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "NVIDIA NIM LLM benchmarking metrics documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.nvidia.com/nim/benchmarking/llm/metrics"],
+      "sources_checked": [
+        "https://docs.nvidia.com/nim/benchmarking/llm/metrics"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the source definitions of TTFT and inter-token latency and their distinct measurement windows."],
+      "rederivation_notes": [
+        "Verified the source definitions of TTFT and inter-token latency and their distinct measurement windows."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-reduce-latency-by-measuring-the-bottleneck"],
+    "related": [
+      "genai-reduce-latency-by-measuring-the-bottleneck"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4426,33 +4744,65 @@
     "what_is_assessed": "Whether the candidate understands the data-loss trade-off in automatic context truncation and handles overflow deliberately.",
     "short_answer": "`auto` drops items from the beginning of the conversation to fit the context window. With truncation disabled, the request fails with a 400 error instead of silently removing earlier items. Choose deliberately: manage or summarize context when earlier constraints matter, and handle the explicit error if automatic removal is unacceptable.",
     "deep_explanation": "The OpenAI Responses API reference documents `auto` as truncating input by dropping items from the beginning of the conversation when it exceeds the model's context window. The default `disabled` strategy returns a 400 error when the input is too large. Automatic truncation can remove information an application expected to remain in context, so applications should track their input budget and test which history is retained.",
-    "strong_answer_signals": ["States that auto drops items from the beginning.", "States that disabled is the default and returns an error on overflow.", "Connects the setting to explicit context-management and data-retention choices."],
-    "weak_answer_signals": ["Assumes auto truncation preserves every system or early conversation item.", "Treats disabled overflow as a successful partial response."],
-    "common_mistakes": ["Relying on silent removal for important instructions or evidence.", "Switching to auto without testing how conversation history is trimmed."],
+    "strong_answer_signals": [
+      "States that auto drops items from the beginning.",
+      "States that disabled is the default and returns an error on overflow.",
+      "Connects the setting to explicit context-management and data-retention choices."
+    ],
+    "weak_answer_signals": [
+      "Assumes auto truncation preserves every system or early conversation item.",
+      "Treats disabled overflow as a successful partial response."
+    ],
+    "common_mistakes": [
+      "Relying on silent removal for important instructions or evidence.",
+      "Switching to auto without testing how conversation history is trimmed."
+    ],
     "follow_ups": [
-      { "question": "Which items does auto truncation drop first?", "short_answer": "Items from the beginning of the conversation." },
-      { "question": "What happens when truncation is disabled and input is too large?", "short_answer": "The API returns a 400 error." }
+      {
+        "question": "Which items does auto truncation drop first?",
+        "short_answer": "Items from the beginning of the conversation."
+      },
+      {
+        "question": "What happens when truncation is disabled and input is too large?",
+        "short_answer": "The API returns a 400 error."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Responses API reference", "publisher": "OpenAI API documentation", "url": "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Responses API reference",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Fast-moving",
     "versions_checked": "OpenAI Responses API reference accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item"],
+      "sources_checked": [
+        "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified that auto truncation removes conversation items from the beginning and disabled mode fails on context overflow."],
+      "rederivation_notes": [
+        "Verified that auto truncation removes conversation items from the beginning and disabled mode fails on context overflow."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["genai-preserve-important-state-during-context-compaction"],
+    "related": [
+      "genai-preserve-important-state-during-context-compaction"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   }
 ]

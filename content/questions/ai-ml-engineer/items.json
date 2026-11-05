@@ -4278,33 +4278,65 @@
     "what_is_assessed": "Whether the candidate connects graph capture and replay to CPU launch overhead and recognizes the static-address requirement.",
     "short_answer": "Capture the GPU work into a CUDA graph and replay it to reduce repeated CPU launch overhead. Replays use the same kernels and arguments, including the same memory addresses for pointer arguments, so the implementation needs stable buffers and graph-compatible operations; new input data can be copied into the captured input buffers before replay. This helps most when launch overhead matters, not when runtime is dominated by long GPU kernels.",
     "deep_explanation": "PyTorch describes a CUDA graph as a record of work performed by a CUDA stream and its dependent streams. During capture, work is recorded rather than immediately run; replay launches the recorded sequence again with the same arguments. Pointer arguments therefore refer to the same memory addresses, which makes stable input and output buffers an important design constraint. Benchmark the full workload after warmup, because graph replay targets launch overhead and does not remove the cost of the underlying computation.",
-    "strong_answer_signals": ["Explains capture followed by replay of recorded GPU work.", "Connects replay to reduced CPU launch overhead.", "Mentions stable memory addresses or buffers and identifies when the optimization is useful."],
-    "weak_answer_signals": ["Assumes graph replay supports arbitrary changing pointers or dynamic work without constraints.", "Claims CUDA Graphs make GPU kernels themselves faster."],
-    "common_mistakes": ["Timing capture instead of replay.", "Ignoring warmup, buffer lifetime, or graph-compatible operation requirements."],
+    "strong_answer_signals": [
+      "Explains capture followed by replay of recorded GPU work.",
+      "Connects replay to reduced CPU launch overhead.",
+      "Mentions stable memory addresses or buffers and identifies when the optimization is useful."
+    ],
+    "weak_answer_signals": [
+      "Assumes graph replay supports arbitrary changing pointers or dynamic work without constraints.",
+      "Claims CUDA Graphs make GPU kernels themselves faster."
+    ],
+    "common_mistakes": [
+      "Timing capture instead of replay.",
+      "Ignoring warmup, buffer lifetime, or graph-compatible operation requirements."
+    ],
     "follow_ups": [
-      { "question": "Why must input buffers be stable across replays?", "short_answer": "Captured pointer arguments refer to the same memory addresses." },
-      { "question": "Which bottleneck do CUDA Graphs primarily reduce?", "short_answer": "Repeated CPU-side kernel launch overhead." }
+      {
+        "question": "Why must input buffers be stable across replays?",
+        "short_answer": "Captured pointer arguments refer to the same memory addresses."
+      },
+      {
+        "question": "Which bottleneck do CUDA Graphs primarily reduce?",
+        "short_answer": "Repeated CPU-side kernel launch overhead."
+      }
     ],
     "code": null,
-    "references": [{ "title": "CUDA semantics", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/notes/cuda.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "CUDA semantics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/cuda.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 CUDA semantics documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/notes/cuda.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/notes/cuda.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified capture/replay behavior, fixed arguments and pointer addresses, and the launch-overhead motivation."],
+      "rederivation_notes": [
+        "Verified capture/replay behavior, fixed arguments and pointer addresses, and the launch-overhead motivation."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-benchmark-cuda-work-with-events"],
+    "related": [
+      "ml-benchmark-cuda-work-with-events"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 3,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4318,33 +4350,65 @@
     "what_is_assessed": "Whether the candidate understands DDP gradient views, the associated memory reduction, and the restriction on in-place detachment.",
     "short_answer": "With `gradient_as_bucket_view=True`, parameter gradients can point into all-reduce communication buckets, reducing peak memory by roughly the gradient storage size and avoiding a copy. Because gradients become views, calling `detach_()` on them is invalid; use a compatible zero-gradient pattern and verify the optimizer and training loop.",
     "deep_explanation": "PyTorch documents that this option makes gradients views into offsets of the all-reduce buckets. It can reduce peak memory and avoid copying gradients into communication buffers, but view semantics restrict operations such as `detach_()`. The option should be benchmarked with the actual training loop, since compatibility depends on how gradients are cleared and manipulated.",
-    "strong_answer_signals": ["Explains that gradients alias communication buckets.", "Identifies potential peak-memory and copy reduction.", "Notes that `detach_()` cannot be called on these gradient views."],
-    "weak_answer_signals": ["Treats the option as changing the mathematical gradient.", "Ignores the view-related restriction on gradient operations."],
-    "common_mistakes": ["Enabling the flag without checking custom gradient hooks or clearing logic.", "Assuming the memory reduction is independent of model and optimizer behavior."],
+    "strong_answer_signals": [
+      "Explains that gradients alias communication buckets.",
+      "Identifies potential peak-memory and copy reduction.",
+      "Notes that `detach_()` cannot be called on these gradient views."
+    ],
+    "weak_answer_signals": [
+      "Treats the option as changing the mathematical gradient.",
+      "Ignores the view-related restriction on gradient operations."
+    ],
+    "common_mistakes": [
+      "Enabling the flag without checking custom gradient hooks or clearing logic.",
+      "Assuming the memory reduction is independent of model and optimizer behavior."
+    ],
     "follow_ups": [
-      { "question": "What memory can the option save?", "short_answer": "Potentially storage equal to the gradients, by avoiding separate gradient and all-reduce bucket copies." },
-      { "question": "Which operation is specifically incompatible with gradient views?", "short_answer": "`detach_()` on the gradients." }
+      {
+        "question": "What memory can the option save?",
+        "short_answer": "Potentially storage equal to the gradients, by avoiding separate gradient and all-reduce bucket copies."
+      },
+      {
+        "question": "Which operation is specifically incompatible with gradient views?",
+        "short_answer": "`detach_()` on the gradients."
+      }
     ],
     "code": null,
-    "references": [{ "title": "DistributedDataParallel", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified gradient bucket views, potential memory savings, and the detach_ restriction."],
+      "rederivation_notes": [
+        "Verified gradient bucket views, potential memory savings, and the detach_ restriction."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-use-cuda-graphs-for-repeated-static-work"],
+    "related": [
+      "ml-use-cuda-graphs-for-repeated-static-work"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4358,33 +4422,65 @@
     "what_is_assessed": "Whether the candidate understands DDP's static-graph invariant and its support for checkpointing and reentrant backward cases.",
     "short_answer": "It is appropriate only when the training graph and the set of used and unused parameters remain unchanged across the whole loop. PyTorch documents support for reentrant backward and repeated activation checkpointing in static-graph mode. Check DDP's logging guidance and validate the invariant; the flag does not mean parameters stop changing during optimization.",
     "deep_explanation": "The PyTorch DistributedDataParallel documentation defines a static graph as one whose structure and used/unused parameter set do not change during training. In that mode, DDP supports cases that previously had limitations, including reentrant backward and activation checkpointing multiple times, and may avoid repeated unused-parameter graph searches. Enabling the flag for dynamic control flow can be incorrect, so validate the logged `can_set_static_graph` signal and the actual training pattern.",
-    "strong_answer_signals": ["States that graph structure and the used/unused parameter set must remain fixed.", "Connects static-graph mode to reentrant backward or repeated activation checkpointing.", "Does not confuse static graph with frozen model weights."],
-    "weak_answer_signals": ["Enables the flag merely to silence a reducer error without checking iteration-to-iteration behavior.", "Claims the optimizer no longer updates parameters."],
-    "common_mistakes": ["Using static-graph mode when conditional paths change which parameters participate.", "Treating a successful short run as proof that all supported training paths are static."],
+    "strong_answer_signals": [
+      "States that graph structure and the used/unused parameter set must remain fixed.",
+      "Connects static-graph mode to reentrant backward or repeated activation checkpointing.",
+      "Does not confuse static graph with frozen model weights."
+    ],
+    "weak_answer_signals": [
+      "Enables the flag merely to silence a reducer error without checking iteration-to-iteration behavior.",
+      "Claims the optimizer no longer updates parameters."
+    ],
+    "common_mistakes": [
+      "Using static-graph mode when conditional paths change which parameters participate.",
+      "Treating a successful short run as proof that all supported training paths are static."
+    ],
     "follow_ups": [
-      { "question": "What must remain stable for static-graph mode?", "short_answer": "The graph structure and the set of used and unused parameters across iterations." },
-      { "question": "Does static graph freeze parameters?", "short_answer": "No. Optimizer steps still update parameters." }
+      {
+        "question": "What must remain stable for static-graph mode?",
+        "short_answer": "The graph structure and the set of used and unused parameters across iterations."
+      },
+      {
+        "question": "Does static graph freeze parameters?",
+        "short_answer": "No. Optimizer steps still update parameters."
+      }
     ],
     "code": null,
-    "references": [{ "title": "DistributedDataParallel", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the static-graph invariants and documented support for reentrant backward and repeated activation checkpointing."],
+      "rederivation_notes": [
+        "Verified the static-graph invariants and documented support for reentrant backward and repeated activation checkpointing."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-reduce-ddp-gradient-copy-with-bucket-views"],
+    "related": [
+      "ml-reduce-ddp-gradient-copy-with-bucket-views"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 3,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4398,33 +4494,65 @@
     "what_is_assessed": "Whether the candidate understands per-sample weighted draws with replacement and distinguishes draw count from unique-example coverage.",
     "short_answer": "With replacement, each draw is sampled independently according to its weight, so an index can appear multiple times and another may not appear at all. `num_samples` controls the number of draws, not the number of unique examples. Monitor class and example exposure, and evaluate on a representative unresampled validation set.",
     "deep_explanation": "PyTorch documents `WeightedRandomSampler` as drawing indices from the supplied per-sample weights, with `num_samples` setting how many draws are made and `replacement` controlling whether an index can recur. Therefore, an epoch-length number of draws does not guarantee one pass over every example when replacement is enabled. Sampling changes the training exposure distribution; validation should still reflect the deployment distribution.",
-    "strong_answer_signals": ["Distinguishes draw count from unique dataset coverage.", "Explains why replacement permits repeats and omissions.", "Checks class/example exposure and keeps evaluation representative."],
-    "weak_answer_signals": ["Assumes an epoch always visits every example exactly once.", "Interprets sampler weights as class labels rather than per-index sampling weights."],
-    "common_mistakes": ["Using replacement without monitoring minority-example repetition.", "Evaluating on the same reweighted sample distribution without explaining the target."],
+    "strong_answer_signals": [
+      "Distinguishes draw count from unique dataset coverage.",
+      "Explains why replacement permits repeats and omissions.",
+      "Checks class/example exposure and keeps evaluation representative."
+    ],
+    "weak_answer_signals": [
+      "Assumes an epoch always visits every example exactly once.",
+      "Interprets sampler weights as class labels rather than per-index sampling weights."
+    ],
+    "common_mistakes": [
+      "Using replacement without monitoring minority-example repetition.",
+      "Evaluating on the same reweighted sample distribution without explaining the target."
+    ],
     "follow_ups": [
-      { "question": "What does `num_samples` specify?", "short_answer": "The number of indices to draw, not the number of distinct indices." },
-      { "question": "What does replacement allow?", "short_answer": "An index may be drawn more than once." }
+      {
+        "question": "What does `num_samples` specify?",
+        "short_answer": "The number of indices to draw, not the number of distinct indices."
+      },
+      {
+        "question": "What does replacement allow?",
+        "short_answer": "An index may be drawn more than once."
+      }
     ],
     "code": null,
-    "references": [{ "title": "torch.utils.data", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/data.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 DataLoader and sampler documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/data.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified WeightedRandomSampler's per-sample weights, num_samples draw count, and replacement behavior."],
+      "rederivation_notes": [
+        "Verified WeightedRandomSampler's per-sample weights, num_samples draw count, and replacement behavior."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-shard-distributed-dataset-without-overlap"],
+    "related": [
+      "ml-shard-distributed-dataset-without-overlap"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4438,33 +4566,65 @@
     "what_is_assessed": "Whether the candidate distinguishes mirrored shadow evaluation from a canary that serves candidate responses.",
     "short_answer": "Keep the production variant serving all user responses and mirror a controlled share of requests to the shadow variant, whose responses are not returned to users. Compare candidate outputs and operational behavior offline, with appropriate privacy and logging controls. This reveals behavior on live inputs but does not measure the causal effect of showing those outputs to users; a canary or experiment is needed for that.",
     "deep_explanation": "Amazon SageMaker's shadow-testing documentation describes a production variant that handles and responds to all incoming requests and a shadow variant that receives replicated requests but returns no responses. This lets teams compare candidate behavior under live request distributions without exposing users to it. It does not establish user impact, and request replication, logging, latency, and privacy costs should be considered before increasing traffic.",
-    "strong_answer_signals": ["Keeps the incumbent serving production responses.", "Mirrors only a controlled portion of requests to the candidate.", "Separates output comparison from user-impact measurement and notes privacy or logging controls."],
-    "weak_answer_signals": ["Returns shadow outputs to users during the shadow phase.", "Claims a shadow test estimates the causal effect on user outcomes."],
-    "common_mistakes": ["Confusing shadow testing with a canary rollout.", "Ignoring the cost and governance of replicating production inputs."],
+    "strong_answer_signals": [
+      "Keeps the incumbent serving production responses.",
+      "Mirrors only a controlled portion of requests to the candidate.",
+      "Separates output comparison from user-impact measurement and notes privacy or logging controls."
+    ],
+    "weak_answer_signals": [
+      "Returns shadow outputs to users during the shadow phase.",
+      "Claims a shadow test estimates the causal effect on user outcomes."
+    ],
+    "common_mistakes": [
+      "Confusing shadow testing with a canary rollout.",
+      "Ignoring the cost and governance of replicating production inputs."
+    ],
     "follow_ups": [
-      { "question": "Which variant returns the user-facing response?", "short_answer": "The production variant." },
-      { "question": "Does a shadow test measure how users respond to candidate outputs?", "short_answer": "No. The shadow responses are not returned to users." }
+      {
+        "question": "Which variant returns the user-facing response?",
+        "short_answer": "The production variant."
+      },
+      {
+        "question": "Does a shadow test measure how users respond to candidate outputs?",
+        "short_answer": "No. The shadow responses are not returned to users."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Create a shadow test", "publisher": "Amazon SageMaker AI documentation", "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-create.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Create a shadow test",
+        "publisher": "Amazon SageMaker AI documentation",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-create.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "Amazon SageMaker AI shadow-testing documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-create.html"],
+      "sources_checked": [
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-create.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the production/shadow traffic roles and that the shadow variant does not return responses."],
+      "rederivation_notes": [
+        "Verified the production/shadow traffic roles and that the shadow variant does not return responses."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-advance-canary-only-after-production-analysis"],
+    "related": [
+      "ml-advance-canary-only-after-production-analysis"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4478,33 +4638,65 @@
     "what_is_assessed": "Whether the candidate understands class weights as loss weighting and evaluates the resulting model on the intended deployment distribution.",
     "short_answer": "Class weights increase the loss contribution of errors for selected classes; they do not add new examples or guarantee better calibration. Choose weights in light of the error costs, then compare against an unweighted baseline on representative held-out data using class-specific precision/recall and calibration. If weighted sampling is also used, check that the combination does not overemphasize the minority class.",
     "deep_explanation": "PyTorch's `CrossEntropyLoss` accepts a weight for each class and multiplies the loss contribution by the target class's weight. This changes the optimization objective, not the underlying sample count. The practical effect should be measured on data with the expected deployment prevalence; threshold selection, calibration, and operational error costs remain separate decisions.",
-    "strong_answer_signals": ["Explains that weights scale per-class loss contributions.", "Does not claim weighting creates additional minority examples.", "Evaluates class-specific errors and calibration on representative held-out data."],
-    "weak_answer_signals": ["Treats class weighting as a guarantee of better minority-class performance.", "Evaluates only on the reweighted training distribution."],
-    "common_mistakes": ["Combining aggressive oversampling and inverse-frequency loss weights without checking for overcorrection.", "Assuming the default probability threshold remains appropriate after changing the loss."],
+    "strong_answer_signals": [
+      "Explains that weights scale per-class loss contributions.",
+      "Does not claim weighting creates additional minority examples.",
+      "Evaluates class-specific errors and calibration on representative held-out data."
+    ],
+    "weak_answer_signals": [
+      "Treats class weighting as a guarantee of better minority-class performance.",
+      "Evaluates only on the reweighted training distribution."
+    ],
+    "common_mistakes": [
+      "Combining aggressive oversampling and inverse-frequency loss weights without checking for overcorrection.",
+      "Assuming the default probability threshold remains appropriate after changing the loss."
+    ],
     "follow_ups": [
-      { "question": "Does a class weight change how many examples are present?", "short_answer": "No. It changes their contribution to the loss." },
-      { "question": "What data should be used to compare the resulting model?", "short_answer": "Representative held-out data reflecting the intended deployment distribution." }
+      {
+        "question": "Does a class weight change how many examples are present?",
+        "short_answer": "No. It changes their contribution to the loss."
+      },
+      {
+        "question": "What data should be used to compare the resulting model?",
+        "short_answer": "Representative held-out data reflecting the intended deployment distribution."
+      }
     ],
     "code": null,
-    "references": [{ "title": "CrossEntropyLoss", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.CrossEntropyLoss.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "CrossEntropyLoss",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.CrossEntropyLoss.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 CrossEntropyLoss documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/generated/torch.nn.CrossEntropyLoss.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.CrossEntropyLoss.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified class-indexed loss weights and kept evaluation, calibration, and decision costs separate."],
+      "rederivation_notes": [
+        "Verified class-indexed loss weights and kept evaluation, calibration, and decision costs separate."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-explain-weighted-sampler-replacement-coverage"],
+    "related": [
+      "ml-explain-weighted-sampler-replacement-coverage"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4518,33 +4710,65 @@
     "what_is_assessed": "Whether the candidate recognizes future-feature leakage and reconstructs feature values as of each training event.",
     "short_answer": "The join can leak information that would not have been available at prediction time, making offline performance optimistic. Use a point-in-time join that retrieves the latest valid feature value at or before each event timestamp, with an appropriate time-to-live, so the training row reflects the state of the world at that event.",
     "deep_explanation": "Feast describes point-in-time joins as retrieving historical feature values that reproduce the state of the world at each entity-row timestamp. The join scans backward from the event time and applies the feature view's TTL. Joining against the latest current value instead can introduce future information and create training-serving mismatch.",
-    "strong_answer_signals": ["Identifies future-feature leakage.", "Joins using each prediction event's timestamp rather than the current snapshot.", "Applies a justified TTL and checks consistency with the serving feature definition."],
-    "weak_answer_signals": ["Uses the latest feature table value regardless of event time.", "Assumes a high offline score proves the feature was available at prediction time."],
-    "common_mistakes": ["Joining only by entity ID without an as-of timestamp.", "Ignoring staleness windows when reconstructing historical features."],
+    "strong_answer_signals": [
+      "Identifies future-feature leakage.",
+      "Joins using each prediction event's timestamp rather than the current snapshot.",
+      "Applies a justified TTL and checks consistency with the serving feature definition."
+    ],
+    "weak_answer_signals": [
+      "Uses the latest feature table value regardless of event time.",
+      "Assumes a high offline score proves the feature was available at prediction time."
+    ],
+    "common_mistakes": [
+      "Joining only by entity ID without an as-of timestamp.",
+      "Ignoring staleness windows when reconstructing historical features."
+    ],
     "follow_ups": [
-      { "question": "Which time should anchor the historical feature lookup?", "short_answer": "The timestamp of the prediction event represented by the training row." },
-      { "question": "Why can the latest snapshot be unsafe for training?", "short_answer": "It may include feature values recorded after the prediction event." }
+      {
+        "question": "Which time should anchor the historical feature lookup?",
+        "short_answer": "The timestamp of the prediction event represented by the training row."
+      },
+      {
+        "question": "Why can the latest snapshot be unsafe for training?",
+        "short_answer": "It may include feature values recorded after the prediction event."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Point-in-time joins", "publisher": "Feast documentation", "url": "https://docs.feast.dev/getting-started/concepts/point-in-time-joins", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Point-in-time joins",
+        "publisher": "Feast documentation",
+        "url": "https://docs.feast.dev/getting-started/concepts/point-in-time-joins",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "Feast point-in-time joins documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.feast.dev/getting-started/concepts/point-in-time-joins"],
+      "sources_checked": [
+        "https://docs.feast.dev/getting-started/concepts/point-in-time-joins"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified historical feature retrieval as of entity event timestamps and the use of a time-to-live."],
+      "rederivation_notes": [
+        "Verified historical feature retrieval as of entity event timestamps and the use of a time-to-live."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-monitor-training-serving-skew-and-drift"],
+    "related": [
+      "ml-monitor-training-serving-skew-and-drift"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4558,22 +4782,49 @@
     "what_is_assessed": "Whether the candidate distinguishes implicit observations from explicit negative labels and treats negative sampling as a modeling choice.",
     "short_answer": "Treat recorded interactions as positive evidence, but do not assume every unobserved item is an explicit dislike; it may never have been exposed. If the objective uses negative sampling, document how candidates are selected and evaluate with a time-aware split and a candidate set that reflects the intended use. Metrics based on sampled negatives depend on that sampling setup.",
     "deep_explanation": "RecBole's data documentation distinguishes explicit feedback, such as ratings, from implicit feedback such as clicks and purchases. For implicit feedback, it describes treating observed interactions as positive samples and selecting negative samples from unobserved interactions. That sampling choice supplies training examples; it does not turn every missing interaction into a known user preference. The evaluation protocol should preserve the deployment task and avoid using interactions from the future.",
-    "strong_answer_signals": ["Identifies observed interactions as positive evidence.", "Does not label all missing interactions as explicit dislikes.", "Explains that the negative sampler and candidate set affect training and evaluation."],
-    "weak_answer_signals": ["Treats every unobserved item as a confirmed negative preference.", "Compares models using different negative-sampling setups without accounting for the difference."],
-    "common_mistakes": ["Ignoring item exposure when interpreting missing interactions.", "Using a random split that lets future interactions inform training for a time-ordered recommendation task."],
+    "strong_answer_signals": [
+      "Identifies observed interactions as positive evidence.",
+      "Does not label all missing interactions as explicit dislikes.",
+      "Explains that the negative sampler and candidate set affect training and evaluation."
+    ],
+    "weak_answer_signals": [
+      "Treats every unobserved item as a confirmed negative preference.",
+      "Compares models using different negative-sampling setups without accounting for the difference."
+    ],
+    "common_mistakes": [
+      "Ignoring item exposure when interpreting missing interactions.",
+      "Using a random split that lets future interactions inform training for a time-ordered recommendation task."
+    ],
     "follow_ups": [
-      { "question": "Are unobserved items necessarily disliked?", "short_answer": "No. They may not have been seen or exposed." },
-      { "question": "Why record the negative-sampling policy?", "short_answer": "It defines the training examples and affects how evaluation results should be interpreted." }
+      {
+        "question": "Are unobserved items necessarily disliked?",
+        "short_answer": "No. They may not have been seen or exposed."
+      },
+      {
+        "question": "Why record the negative-sampling policy?",
+        "short_answer": "It defines the training examples and affects how evaluation results should be interpreted."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Label of data", "publisher": "RecBole documentation", "url": "https://recbole.io/docs/user_guide/data/label_of_data.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Label of data",
+        "publisher": "RecBole documentation",
+        "url": "https://recbole.io/docs/user_guide/data/label_of_data.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "RecBole 1.2.1 documentation accessed through official search excerpt on 2026-11-05; direct page extraction was unavailable.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://recbole.io/docs/user_guide/data/label_of_data.html"],
+      "sources_checked": [
+        "https://recbole.io/docs/user_guide/data/label_of_data.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Official RecBole documentation distinguishes implicit feedback and describes selecting negative samples from unobserved interactions; direct page extraction returned an error, so the official search excerpt was used."],
+      "rederivation_notes": [
+        "Official RecBole documentation distinguishes implicit feedback and describes selecting negative samples from unobserved interactions; direct page extraction returned an error, so the official search excerpt was used."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "medium"
@@ -4584,7 +4835,10 @@
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4598,33 +4852,65 @@
     "what_is_assessed": "Whether the candidate distinguishes mutually exclusive multiclass targets from independent multi-label targets.",
     "short_answer": "Softmax makes class probabilities compete and sum to one, which assumes a single mutually exclusive class. For labels that can coexist, use one logit per label with `BCEWithLogitsLoss`, then apply a sigmoid per label. Choose and validate per-label thresholds on representative held-out data; consider positive weighting only when the precision-recall trade-off is justified.",
     "deep_explanation": "PyTorch documents `BCEWithLogitsLoss` as combining sigmoid and binary cross entropy and explicitly gives its multi-label formulation. Each label is treated as a binary target rather than one choice among mutually exclusive classes. The output threshold is a separate decision from training the loss and should be selected against the deployment objective and validation data.",
-    "strong_answer_signals": ["Explains that multiple labels can be positive simultaneously.", "Uses independent per-label logits and a numerically stable sigmoid-plus-binary-cross-entropy loss.", "Separates threshold selection from the loss and evaluates label-specific trade-offs."],
-    "weak_answer_signals": ["Uses softmax even though multiple labels may be true at once.", "Assumes a 0.5 threshold is optimal for every label."],
-    "common_mistakes": ["Applying a softmax across labels that are not mutually exclusive.", "Treating positive-class weighting as a substitute for threshold evaluation."],
+    "strong_answer_signals": [
+      "Explains that multiple labels can be positive simultaneously.",
+      "Uses independent per-label logits and a numerically stable sigmoid-plus-binary-cross-entropy loss.",
+      "Separates threshold selection from the loss and evaluates label-specific trade-offs."
+    ],
+    "weak_answer_signals": [
+      "Uses softmax even though multiple labels may be true at once.",
+      "Assumes a 0.5 threshold is optimal for every label."
+    ],
+    "common_mistakes": [
+      "Applying a softmax across labels that are not mutually exclusive.",
+      "Treating positive-class weighting as a substitute for threshold evaluation."
+    ],
     "follow_ups": [
-      { "question": "What activation is used to interpret each label score?", "short_answer": "A sigmoid is applied independently to each label logit." },
-      { "question": "Does the loss choose the deployment threshold?", "short_answer": "No. Thresholds should be selected separately using validation data and the target trade-off." }
+      {
+        "question": "What activation is used to interpret each label score?",
+        "short_answer": "A sigmoid is applied independently to each label logit."
+      },
+      {
+        "question": "Does the loss choose the deployment threshold?",
+        "short_answer": "No. Thresholds should be selected separately using validation data and the target trade-off."
+      }
     ],
     "code": null,
-    "references": [{ "title": "BCEWithLogitsLoss", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BCEWithLogitsLoss.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "BCEWithLogitsLoss",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BCEWithLogitsLoss.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 BCEWithLogitsLoss documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/generated/torch.nn.BCEWithLogitsLoss.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BCEWithLogitsLoss.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the loss's sigmoid-plus-binary-cross-entropy formulation and explicit multi-label case."],
+      "rederivation_notes": [
+        "Verified the loss's sigmoid-plus-binary-cross-entropy formulation and explicit multi-label case."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-use-class-weighted-loss-with-targeted-evaluation"],
+    "related": [
+      "ml-use-class-weighted-loss-with-targeted-evaluation"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4638,33 +4924,65 @@
     "what_is_assessed": "Whether the candidate aligns the split unit with the intended generalization target and prevents group leakage.",
     "short_answer": "Split by customer so a group never appears in both training and validation, using a group-aware splitter such as `GroupKFold` or an appropriate held-out group split. If deployment also requires forecasting future periods, preserve time order as well. This measures generalization to new customers more honestly than a row-wise split.",
     "deep_explanation": "Scikit-learn documents `GroupKFold` as a cross-validation strategy that keeps the same group out of both training and testing folds. Its example describes repeated samples from subjects and warns that a flexible model can learn person-specific features without generalizing to new subjects. The group key should match the real deployment question; if both group novelty and future prediction matter, the validation design must respect both constraints.",
-    "strong_answer_signals": ["Uses the customer or entity as the split group.", "Explains why row-level splitting can leak identity-specific information.", "Adds a chronological constraint when future generalization is part of the target."],
-    "weak_answer_signals": ["Keeps random row-wise splitting despite repeated customers.", "Claims a group split measures future performance when time is also changing."],
-    "common_mistakes": ["Choosing groups that do not match the deployment unit.", "Using the final test set repeatedly while tuning the split or model."],
+    "strong_answer_signals": [
+      "Uses the customer or entity as the split group.",
+      "Explains why row-level splitting can leak identity-specific information.",
+      "Adds a chronological constraint when future generalization is part of the target."
+    ],
+    "weak_answer_signals": [
+      "Keeps random row-wise splitting despite repeated customers.",
+      "Claims a group split measures future performance when time is also changing."
+    ],
+    "common_mistakes": [
+      "Choosing groups that do not match the deployment unit.",
+      "Using the final test set repeatedly while tuning the split or model."
+    ],
     "follow_ups": [
-      { "question": "What does GroupKFold keep separate?", "short_answer": "The same group is not represented in both training and testing folds." },
-      { "question": "When is a group split alone insufficient?", "short_answer": "When deployment also requires prediction on future periods; preserve time order too." }
+      {
+        "question": "What does GroupKFold keep separate?",
+        "short_answer": "The same group is not represented in both training and testing folds."
+      },
+      {
+        "question": "When is a group split alone insufficient?",
+        "short_answer": "When deployment also requires prediction on future periods; preserve time order too."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Cross-validation: evaluating estimator performance", "publisher": "scikit-learn documentation", "url": "https://scikit-learn.org/stable/modules/cross_validation.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Cross-validation: evaluating estimator performance",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "scikit-learn cross-validation documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://scikit-learn.org/stable/modules/cross_validation.html"],
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified GroupKFold's non-overlapping group constraint and the repeated-subject generalization example."],
+      "rederivation_notes": [
+        "Verified GroupKFold's non-overlapping group constraint and the repeated-subject generalization example."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-block-candidate-model-with-slice-regression"],
+    "related": [
+      "ml-block-candidate-model-with-slice-regression"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4678,33 +4996,65 @@
     "what_is_assessed": "Whether the candidate matches the training objective to personalized ranking rather than treating sampled pairs as calibrated probabilities.",
     "short_answer": "If the product objective is to rank observed items above candidate alternatives, a pairwise objective can train that relative ordering directly: for a user, score an observed item above a sampled unobserved one. The result is a ranking signal, not necessarily a calibrated click probability. The negative-sampling policy and evaluation candidate set must match the intended recommendation task.",
     "deep_explanation": "The BPR paper studies personalized ranking from implicit feedback such as clicks and purchases, and frames the objective around ranking observed preferences above unobserved items. This differs from pointwise classification, which predicts a label for each sampled pair. Because unobserved items are sampled rather than confirmed dislikes, both the sampler and the evaluation protocol affect what the model learns and how offline ranking results should be interpreted.",
-    "strong_answer_signals": ["Connects pairwise training to relative item ranking.", "Distinguishes ranking scores from calibrated click probabilities.", "Calls out negative sampling and candidate-set alignment."],
-    "weak_answer_signals": ["Treats every sampled unobserved item as a confirmed dislike.", "Claims pairwise ranking scores are calibrated probabilities."],
-    "common_mistakes": ["Changing the negative-sampling distribution between experiments without accounting for it.", "Evaluating ranking models against candidates that do not resemble deployment."],
+    "strong_answer_signals": [
+      "Connects pairwise training to relative item ranking.",
+      "Distinguishes ranking scores from calibrated click probabilities.",
+      "Calls out negative sampling and candidate-set alignment."
+    ],
+    "weak_answer_signals": [
+      "Treats every sampled unobserved item as a confirmed dislike.",
+      "Claims pairwise ranking scores are calibrated probabilities."
+    ],
+    "common_mistakes": [
+      "Changing the negative-sampling distribution between experiments without accounting for it.",
+      "Evaluating ranking models against candidates that do not resemble deployment."
+    ],
     "follow_ups": [
-      { "question": "What does a pairwise ranking objective encourage?", "short_answer": "An observed item should score above a sampled alternative for the same user." },
-      { "question": "Are BPR scores automatically click probabilities?", "short_answer": "No. They are used for relative ranking unless separately calibrated." }
+      {
+        "question": "What does a pairwise ranking objective encourage?",
+        "short_answer": "An observed item should score above a sampled alternative for the same user."
+      },
+      {
+        "question": "Are BPR scores automatically click probabilities?",
+        "short_answer": "No. They are used for relative ranking unless separately calibrated."
+      }
     ],
     "code": null,
-    "references": [{ "title": "BPR: Bayesian Personalized Ranking from Implicit Feedback", "publisher": "arXiv", "url": "https://arxiv.org/abs/1205.2618", "retrieved_date": "2026-11-05" }],
-    "volatility": "Low",
+    "references": [
+      {
+        "title": "BPR: Bayesian Personalized Ranking from Implicit Feedback",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/1205.2618",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
     "versions_checked": "Original BPR paper, arXiv:1205.2618, accessed via arXiv record on 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://arxiv.org/abs/1205.2618"],
+      "sources_checked": [
+        "https://arxiv.org/abs/1205.2618"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the paper's implicit-feedback personalized-ranking objective; distinguished ranking from probability estimation."],
+      "rederivation_notes": [
+        "Verified the paper's implicit-feedback personalized-ranking objective; distinguished ranking from probability estimation."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-handle-unobserved-items-in-implicit-feedback"],
+    "related": [
+      "ml-handle-unobserved-items-in-implicit-feedback"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4718,33 +5068,65 @@
     "what_is_assessed": "Whether the candidate prevents data leakage and keeps the fitted preprocessing transformation consistent between training and inference.",
     "short_answer": "Split the data first, fit the scaler on training data only, and reuse that fitted transformer unchanged for validation, test, and production inputs. Persist preprocessing and the estimator together as one pipeline so evaluation does not leak information and serving uses the same learned transformation.",
     "deep_explanation": "Scikit-learn's common-pitfalls guidance recommends fitting transformations on training data and applying `transform` to test data. It explains that pipelines help avoid leakage by keeping transformations inside the estimator workflow. Refitting a scaler on validation or production changes the coordinate system seen by the model and can use information from data that should not influence training.",
-    "strong_answer_signals": ["Fits preprocessing only after the training split is established.", "Uses the same fitted transformer for validation and serving.", "Persists the preprocessing steps with the estimator."],
-    "weak_answer_signals": ["Refits preprocessing independently on each split or live batch.", "Assumes identical feature names guarantee identical transformed values."],
-    "common_mistakes": ["Calling `fit_transform` on validation or test data.", "Deploying the estimator without the fitted preprocessing state."],
+    "strong_answer_signals": [
+      "Fits preprocessing only after the training split is established.",
+      "Uses the same fitted transformer for validation and serving.",
+      "Persists the preprocessing steps with the estimator."
+    ],
+    "weak_answer_signals": [
+      "Refits preprocessing independently on each split or live batch.",
+      "Assumes identical feature names guarantee identical transformed values."
+    ],
+    "common_mistakes": [
+      "Calling `fit_transform` on validation or test data.",
+      "Deploying the estimator without the fitted preprocessing state."
+    ],
     "follow_ups": [
-      { "question": "Which split should fit a scaler?", "short_answer": "The training split only." },
-      { "question": "What happens to validation and production inputs?", "short_answer": "They use `transform` with the already-fitted training transformer." }
+      {
+        "question": "Which split should fit a scaler?",
+        "short_answer": "The training split only."
+      },
+      {
+        "question": "What happens to validation and production inputs?",
+        "short_answer": "They use `transform` with the already-fitted training transformer."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Common pitfalls and recommended practices", "publisher": "scikit-learn documentation", "url": "https://scikit-learn.org/stable/common_pitfalls", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Common pitfalls and recommended practices",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/common_pitfalls",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "scikit-learn common pitfalls documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://scikit-learn.org/stable/common_pitfalls"],
+      "sources_checked": [
+        "https://scikit-learn.org/stable/common_pitfalls"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified fit-on-training and transform-on-test guidance and the Pipeline recommendation for avoiding leakage."],
+      "rederivation_notes": [
+        "Verified fit-on-training and transform-on-test guidance and the Pipeline recommendation for avoiding leakage."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-build-training-rows-with-point-in-time-features"],
+    "related": [
+      "ml-build-training-rows-with-point-in-time-features"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4758,33 +5140,65 @@
     "what_is_assessed": "Whether the candidate recognizes target leakage from in-sample category statistics and uses cross-fitting for training encodings.",
     "short_answer": "The encoding can leak each row's target into its own feature value. Use out-of-fold or cross-fitted target encodings for training rows, then fit the encoder on the full training set for validation and inference transforms. Keep the encoder inside the pipeline and handle unseen categories and smoothing explicitly.",
     "deep_explanation": "Scikit-learn's `TargetEncoder` documentation states that `fit_transform` uses cross-fitting and therefore differs from `fit` followed by `transform` on the same training rows. It warns that the latter can introduce leakage and discourages it for training data. Cross-fitting reduces direct self-target leakage while keeping the transformation state fitted only from training data.",
-    "strong_answer_signals": ["Identifies each row's target leaking into its own encoding.", "Uses out-of-fold or cross-fitted encodings for training rows.", "Fits the final encoder on training data and applies it unchanged to validation and inference."],
-    "weak_answer_signals": ["Computes target means on all rows and reuses them on those same rows.", "Fits a new target encoder on validation or production data."],
-    "common_mistakes": ["Using `fit().transform()` on training rows when the encoder expects cross-fitting.", "Ignoring smoothing and unseen-category behavior."],
+    "strong_answer_signals": [
+      "Identifies each row's target leaking into its own encoding.",
+      "Uses out-of-fold or cross-fitted encodings for training rows.",
+      "Fits the final encoder on training data and applies it unchanged to validation and inference."
+    ],
+    "weak_answer_signals": [
+      "Computes target means on all rows and reuses them on those same rows.",
+      "Fits a new target encoder on validation or production data."
+    ],
+    "common_mistakes": [
+      "Using `fit().transform()` on training rows when the encoder expects cross-fitting.",
+      "Ignoring smoothing and unseen-category behavior."
+    ],
     "follow_ups": [
-      { "question": "Why can fit followed by transform leak?", "short_answer": "A training row's own target may contribute to its encoded feature." },
-      { "question": "What does cross-fitting provide?", "short_answer": "Each training row is encoded using statistics learned without its fold." }
+      {
+        "question": "Why can fit followed by transform leak?",
+        "short_answer": "A training row's own target may contribute to its encoded feature."
+      },
+      {
+        "question": "What does cross-fitting provide?",
+        "short_answer": "Each training row is encoded using statistics learned without its fold."
+      }
     ],
     "code": null,
-    "references": [{ "title": "TargetEncoder", "publisher": "scikit-learn documentation", "url": "https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.TargetEncoder.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "TargetEncoder",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.TargetEncoder.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "scikit-learn 1.8 TargetEncoder documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.TargetEncoder.html"],
+      "sources_checked": [
+        "https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.TargetEncoder.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified cross-fitting in fit_transform and the documentation warning against fit followed by transform on training data."],
+      "rederivation_notes": [
+        "Verified cross-fitting in fit_transform and the documentation warning against fit followed by transform on training data."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-fit-preprocessing-only-on-training-data"],
+    "related": [
+      "ml-fit-preprocessing-only-on-training-data"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4798,33 +5212,65 @@
     "what_is_assessed": "Whether the candidate tests functional parity rather than treating successful export or inference as proof of equivalence.",
     "short_answer": "Run both implementations on representative inputs and compare output shapes and values within task-appropriate tolerances. Include edge cases and supported dynamic shapes, confirm identical preprocessing and evaluation mode, and investigate unsupported or numerically different operators before deployment. A successful export alone is not a parity check.",
     "deep_explanation": "PyTorch's ONNX documentation describes an optional verification path for exported models and identifies ONNX Runtime as a deployment runtime. The serving artifact should be checked against the reference implementation on representative data, including output shape and numerical discrepancies. Tolerances must reflect the model and task; passing one sample does not establish parity for all input shapes or edge cases.",
-    "strong_answer_signals": ["Compares reference and exported outputs on a representative test set.", "Checks shape and numerical differences with justified tolerances.", "Includes preprocessing and edge or dynamic-shape cases in the release gate."],
-    "weak_answer_signals": ["Treats successful export or one successful inference as proof of equivalence.", "Uses a tolerance so loose that meaningful regressions are hidden."],
-    "common_mistakes": ["Comparing outputs from different preprocessing paths.", "Testing only the sample used during export."],
+    "strong_answer_signals": [
+      "Compares reference and exported outputs on a representative test set.",
+      "Checks shape and numerical differences with justified tolerances.",
+      "Includes preprocessing and edge or dynamic-shape cases in the release gate."
+    ],
+    "weak_answer_signals": [
+      "Treats successful export or one successful inference as proof of equivalence.",
+      "Uses a tolerance so loose that meaningful regressions are hidden."
+    ],
+    "common_mistakes": [
+      "Comparing outputs from different preprocessing paths.",
+      "Testing only the sample used during export."
+    ],
     "follow_ups": [
-      { "question": "What does successful export establish?", "short_answer": "That an artifact was produced, not that it is numerically equivalent for all target inputs." },
-      { "question": "Why include more than the export example?", "short_answer": "Other shapes and edge cases can expose conversion or runtime differences." }
+      {
+        "question": "What does successful export establish?",
+        "short_answer": "That an artifact was produced, not that it is numerically equivalent for all target inputs."
+      },
+      {
+        "question": "Why include more than the export example?",
+        "short_answer": "Other shapes and edge cases can expose conversion or runtime differences."
+      }
     ],
     "code": null,
-    "references": [{ "title": "torch.onnx", "publisher": "PyTorch documentation", "url": "https://docs.pytorch.org/docs/2.15/onnx.html", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "torch.onnx",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/onnx.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "PyTorch 2.15 ONNX documentation accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://docs.pytorch.org/docs/2.15/onnx.html"],
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/onnx.html"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Verified the export API's optional ONNX Runtime verification and the documentation's ONNX deployment-runtime references; framed broader representative testing as an engineering release gate."],
+      "rederivation_notes": [
+        "Verified the export API's optional ONNX Runtime verification and the documentation's ONNX deployment-runtime references; framed broader representative testing as an engineering release gate."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-declare-dynamic-shapes-in-onnx-export"],
+    "related": [
+      "ml-declare-dynamic-shapes-in-onnx-export"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 10,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   },
   {
@@ -4838,33 +5284,65 @@
     "what_is_assessed": "Whether the candidate preserves validation independence when multiple transformed examples come from the same source.",
     "short_answer": "Related versions of the same source image can land in both splits, so validation may measure recognition of near-duplicates rather than generalization to unseen examples. Split the original examples first, grouping related images where needed, then augment only the training split. Leave validation and test data representative and unaugmented except for deterministic preprocessing required by the model.",
     "deep_explanation": "Scikit-learn's data-leakage guidance recommends splitting data before preprocessing so information from the test subset does not influence model development. Applying stochastic augmentation before the split can also place related views of one source example in both subsets. The split should be made at the independent source unit, and augmentation should be restricted to training data.",
-    "strong_answer_signals": ["Identifies source-level overlap between augmented copies.", "Splits source examples before creating training augmentations.", "Keeps validation data independent and uses only consistent deterministic preprocessing there."],
-    "weak_answer_signals": ["Treats augmented copies as independent examples during splitting.", "Augments validation data and then interprets the result as performance on untouched examples."],
-    "common_mistakes": ["Splitting after augmentation.", "Failing to group multiple views or frames from the same original source."],
+    "strong_answer_signals": [
+      "Identifies source-level overlap between augmented copies.",
+      "Splits source examples before creating training augmentations.",
+      "Keeps validation data independent and uses only consistent deterministic preprocessing there."
+    ],
+    "weak_answer_signals": [
+      "Treats augmented copies as independent examples during splitting.",
+      "Augments validation data and then interprets the result as performance on untouched examples."
+    ],
+    "common_mistakes": [
+      "Splitting after augmentation.",
+      "Failing to group multiple views or frames from the same original source."
+    ],
     "follow_ups": [
-      { "question": "At what point should the split happen?", "short_answer": "Before augmentation, at the independent source-example level." },
-      { "question": "Which split should receive stochastic augmentation?", "short_answer": "The training split." }
+      {
+        "question": "At what point should the split happen?",
+        "short_answer": "Before augmentation, at the independent source-example level."
+      },
+      {
+        "question": "Which split should receive stochastic augmentation?",
+        "short_answer": "The training split."
+      }
     ],
     "code": null,
-    "references": [{ "title": "Common pitfalls and recommended practices", "publisher": "scikit-learn documentation", "url": "https://scikit-learn.org/stable/common_pitfalls", "retrieved_date": "2026-11-05" }],
+    "references": [
+      {
+        "title": "Common pitfalls and recommended practices",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/common_pitfalls",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
     "volatility": "Moderate",
     "versions_checked": "scikit-learn common-pitfalls guidance on splitting before preprocessing accessed 2026-11-05.",
     "last_verified": "2026-11-05",
     "verification": {
-      "sources_checked": ["https://scikit-learn.org/stable/common_pitfalls"],
+      "sources_checked": [
+        "https://scikit-learn.org/stable/common_pitfalls"
+      ],
       "rederivation_agreement": true,
-      "rederivation_notes": ["Applied the source's split-before-preprocessing rule to multiple augmented views of the same source example."],
+      "rederivation_notes": [
+        "Applied the source's split-before-preprocessing rule to multiple augmented views of the same source example."
+      ],
       "disagreements": [],
       "code_executed": "n.a.",
       "confidence": "high"
     },
-    "related": ["ml-split-repeated-entities-by-group"],
+    "related": [
+      "ml-split-repeated-entities-by-group"
+    ],
     "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
     "core": false,
     "priority": 2,
     "estimated_reading_minutes": 2,
     "estimated_practice_minutes": 8,
-    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
     "content_tier": "complete-guide"
   }
 ]

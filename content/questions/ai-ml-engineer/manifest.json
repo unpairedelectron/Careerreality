@@ -2,15 +2,15 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 60,
+  "itemCount": 75,
   "countsByTopic": {
     "Training and reproducibility": 3,
     "Production ML testing and monitoring": 5,
     "Training experiment tracking and lineage": 1,
     "Numerical stability and mixed precision": 2,
     "Model evaluation and autograd modes": 1,
-    "Model deployment and rollout": 1,
-    "Distributed training": 7,
+    "Model deployment and rollout": 2,
+    "Distributed training": 9,
     "Compilation and performance measurement": 4,
     "Model serving performance": 1,
     "Training performance and data pipelines": 2,
@@ -20,13 +20,13 @@
     "Activation checkpointing": 2,
     "Distributed checkpointing": 1,
     "Post-training quantization": 1,
-    "Data loading and throughput": 3,
+    "Data loading and throughput": 4,
     "Module state and checkpointing": 1,
     "Checkpoint security and loading": 1,
     "Optimizer behavior": 1,
     "Tensor layout and memory format": 1,
     "Tensor views and reshaping": 1,
-    "CUDA benchmarking": 1,
+    "CUDA benchmarking": 2,
     "Token-weighted gradient accumulation": 1,
     "Host-to-device data transfer": 1,
     "Distributed buffer synchronization": 1,
@@ -41,24 +41,34 @@
     "Model shadow testing": 1,
     "Quantization granularity": 1,
     "Normalization for small-batch training": 1,
-    "Training memory accounting": 1
+    "Training memory accounting": 1,
+    "Imbalanced classification training": 1,
+    "Training-serving skew and prediction drift": 1,
+    "Recommendation with implicit feedback": 2,
+    "Multi-label classification": 1,
+    "Group-aware model validation": 1,
+    "Preprocessing pipeline consistency": 1,
+    "Target encoding and leakage controls": 1,
+    "Exported-model parity validation": 1,
+    "Validation integrity for augmented data": 1
   },
   "countsByLevel": {
-    "L2": 23,
-    "L3": 37
+    "L2": 26,
+    "L3": 49
   },
   "countsByType": {
-    "debugging": 36,
-    "scenario": 11,
-    "trade-off": 8,
-    "concept": 5
+    "debugging": 44,
+    "scenario": 14,
+    "trade-off": 10,
+    "concept": 5,
+    "design": 2
   },
   "status": {
-    "schemaValid": 60,
-    "sourcesVerified": 60,
-    "rederived": 60,
+    "schemaValid": 75,
+    "sourcesVerified": 75,
+    "rederived": 75,
     "codeExecuted": 0,
-    "expertReviewPending": 60
+    "expertReviewPending": 75
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -482,6 +492,111 @@
       "expertReview": "pending"
     },
     "ml-budget-memory-for-mixed-precision-adam-training": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-cuda-graphs-for-repeated-static-work": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-reduce-ddp-gradient-copy-with-bucket-views": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-enable-ddp-static-graph-only-for-stable-use-pattern": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-explain-weighted-sampler-replacement-coverage": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-compare-candidate-model-with-shadow-traffic": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-class-weighted-loss-with-targeted-evaluation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-build-training-rows-with-point-in-time-features": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-handle-unobserved-items-in-implicit-feedback": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-select-loss-for-multilabel-targets": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-split-repeated-entities-by-group": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-pairwise-ranking-for-implicit-recommendation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-fit-preprocessing-only-on-training-data": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-cross-fit-target-encoding-on-training-data": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-compare-exported-onnx-output-with-reference": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-split-before-augmenting-training-examples": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

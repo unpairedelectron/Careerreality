@@ -2,21 +2,21 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 56,
+  "itemCount": 67,
   "countsByTopic": {
-    "Retrieval-augmented generation": 11,
+    "Retrieval-augmented generation": 15,
     "Generative AI evaluation": 3,
     "Generative AI safety and robustness": 1,
     "Model optimization and adaptation": 1,
     "Structured outputs and data contracts": 3,
-    "Latency and inference efficiency": 1,
+    "Latency and inference efficiency": 2,
     "Offline batch processing": 4,
     "Streaming response design": 3,
     "Prompt caching and repeated context": 2,
     "Asynchronous response execution": 1,
-    "Conversation context management": 1,
+    "Conversation context management": 2,
     "Embedding representations": 3,
-    "Rate limits and retries": 1,
+    "Rate limits and retries": 2,
     "Long-context reliability": 1,
     "Function calling and tool orchestration": 3,
     "Grounded generation and abstention": 1,
@@ -29,30 +29,32 @@
     "Token log probabilities": 1,
     "Responses API conversation state": 1,
     "API data retention controls": 1,
-    "Vision input fidelity and cost": 1,
+    "Vision input fidelity and cost": 2,
     "Realtime API turn control": 1,
     "Pairwise judge position consistency": 1,
     "Parameter-efficient fine-tuning with LoRA": 2,
     "Speculative decoding and inference speedups": 1,
-    "Multimodal retrieval-augmented generation": 1
+    "Multimodal retrieval-augmented generation": 1,
+    "Retrieval result fusion": 1,
+    "Video generation workflows": 2
   },
   "countsByLevel": {
-    "L2": 28,
-    "L3": 28
+    "L2": 30,
+    "L3": 37
   },
   "countsByType": {
-    "scenario": 18,
+    "scenario": 20,
     "concept": 8,
     "trade-off": 11,
-    "debugging": 18,
-    "design": 1
+    "debugging": 26,
+    "design": 2
   },
   "status": {
-    "schemaValid": 56,
-    "sourcesVerified": 56,
-    "rederived": 56,
+    "schemaValid": 67,
+    "sourcesVerified": 67,
+    "rederived": 67,
     "codeExecuted": 0,
-    "expertReviewPending": 56
+    "expertReviewPending": 67
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -441,6 +443,83 @@
       "expertReview": "pending"
     },
     "genai-preserve-visual-evidence-in-multimodal-rag": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-preserve-table-headers-in-rag-chunks": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-match-asymmetric-query-and-passage-embedding-modes": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-rewrite-query-when-retrieval-misses-intent": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-decompose-multihop-question-for-independent-retrieval": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-fuse-retriever-results-with-duplicate-chunks": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-use-video-reference-image-as-first-frame": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-budget-requests-and-tokens-separately": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-track-video-generation-job-to-completion": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-route-small-text-image-tasks-through-crops": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-separate-first-token-and-inter-token-latency": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-handle-responses-api-input-truncation-explicitly": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",
