@@ -211,6 +211,7 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ml-batchnorm-breaks-large-batch-accumulation-equivalence` — Memory-constrained training / BatchNorm statistics across microbatches: Gradient accumulation matches the loss scaling of a physical batch, but training still differs when the model uses BatchNorm. Why?
 - `ml-shadow-test-new-model-without-serving-its-output` — Model shadow testing / Mirrored production traffic without user-facing responses: A new model passed offline evaluation, but you want to measure its operational behavior on live inputs without changing user-visible predictions. What rollout pattern fits?
 - `ml-use-per-channel-scales-for-uneven-weight-ranges` — Quantization granularity / Per-channel versus per-tensor quantization: A tensor has channels with very different value ranges. Why might per-channel quantization preserve more detail than per-tensor quantization?
+- `ml-select-groupnorm-for-small-batches` — Normalization for small-batch training / Group statistics and channel divisibility: A vision model must train with tiny per-device batches, making batch statistics unstable. What does GroupNorm change, and what configuration constraint must you check?
 
 ## Generative AI Engineer
 

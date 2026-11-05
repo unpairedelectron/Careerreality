@@ -2,7 +2,7 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 58,
+  "itemCount": 59,
   "countsByTopic": {
     "Training and reproducibility": 3,
     "Production ML testing and monitoring": 5,
@@ -39,24 +39,25 @@
     "Scaled dot-product attention dropout behavior": 1,
     "ONNX export dynamic dimensions": 1,
     "Model shadow testing": 1,
-    "Quantization granularity": 1
+    "Quantization granularity": 1,
+    "Normalization for small-batch training": 1
   },
   "countsByLevel": {
-    "L2": 21,
+    "L2": 22,
     "L3": 37
   },
   "countsByType": {
     "debugging": 35,
-    "scenario": 10,
+    "scenario": 11,
     "trade-off": 8,
     "concept": 5
   },
   "status": {
-    "schemaValid": 58,
-    "sourcesVerified": 58,
-    "rederived": 58,
+    "schemaValid": 59,
+    "sourcesVerified": 59,
+    "rederived": 59,
     "codeExecuted": 0,
-    "expertReviewPending": 58
+    "expertReviewPending": 59
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -466,6 +467,13 @@
       "expertReview": "pending"
     },
     "ml-use-per-channel-scales-for-uneven-weight-ranges": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-select-groupnorm-for-small-batches": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

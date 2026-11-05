@@ -609,6 +609,19 @@
         "last_verified": "2026-11-05",
         "versions_checked": "PyTorch 2.0 quantization documentation accessed 2026-11-05"
       }]
+    },
+    {
+      "topic": "Normalization for small-batch training",
+      "subtopics": ["within-sample group statistics", "channel divisibility", "small-batch behavior"],
+      "sources": [{
+        "title": "GroupNorm",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.GroupNorm.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 stable documentation accessed 2026-11-05"
+      }]
     }
   ]
 }

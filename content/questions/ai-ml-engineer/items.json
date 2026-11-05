@@ -4124,5 +4124,75 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-select-groupnorm-for-small-batches",
+    "bank": "ai-ml-engineer",
+    "topic": "Normalization for small-batch training",
+    "subtopic": "Group statistics and channel divisibility",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A vision model must train with tiny per-device batches, making batch statistics unstable. What does GroupNorm change, and what configuration constraint must you check?",
+    "what_is_assessed": "Whether the candidate understands GroupNorm's per-sample channel grouping and its configuration requirements.",
+    "short_answer": "GroupNorm splits channels into groups and computes statistics within each sample rather than relying on statistics aggregated across the batch. Choose a group count that divides the number of channels, then validate its accuracy and throughput on the target model; it is not automatically superior for every workload.",
+    "deep_explanation": "PyTorch documents GroupNorm as partitioning input channels into groups and calculating the mean and standard deviation over each group's features. Because the computation is not based on a batch-wide estimate, it can be useful when per-device batches are small. The channel count must be divisible by the selected number of groups, and the normalization choice should still be evaluated empirically.",
+    "strong_answer_signals": [
+      "Distinguishes per-sample group statistics from batch-wide statistics.",
+      "Checks that channel count is divisible by the number of groups.",
+      "Treats quality and speed as workload-dependent."
+    ],
+    "weak_answer_signals": [
+      "Assumes GroupNorm aggregates statistics across the mini-batch like BatchNorm.",
+      "Chooses a group count that cannot partition the channels evenly."
+    ],
+    "common_mistakes": [
+      "Assuming GroupNorm is universally better for small batches.",
+      "Ignoring the divisibility constraint."
+    ],
+    "follow_ups": [
+      {
+        "question": "What dimension determines the number of groups?",
+        "short_answer": "The input channel count must be divisible by the configured group count."
+      },
+      {
+        "question": "Does GroupNorm require batch-wide running statistics?",
+        "short_answer": "No; it computes statistics over channel groups within each sample."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "GroupNorm",
+        "publisher": "PyTorch 2.15 documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.GroupNorm.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 stable documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.GroupNorm.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified per-sample channel grouping and the channel-count divisibility constraint in the PyTorch API documentation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]
