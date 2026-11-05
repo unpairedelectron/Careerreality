@@ -2,17 +2,17 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 67,
+  "itemCount": 75,
   "countsByTopic": {
     "Retrieval-augmented generation": 15,
-    "Generative AI evaluation": 3,
-    "Generative AI safety and robustness": 1,
+    "Generative AI evaluation": 4,
+    "Generative AI safety and robustness": 3,
     "Model optimization and adaptation": 1,
     "Structured outputs and data contracts": 3,
     "Latency and inference efficiency": 2,
-    "Offline batch processing": 4,
+    "Offline batch processing": 6,
     "Streaming response design": 3,
-    "Prompt caching and repeated context": 2,
+    "Prompt caching and repeated context": 5,
     "Asynchronous response execution": 1,
     "Conversation context management": 2,
     "Embedding representations": 3,
@@ -39,22 +39,22 @@
     "Video generation workflows": 2
   },
   "countsByLevel": {
-    "L2": 30,
-    "L3": 37
+    "L2": 31,
+    "L3": 44
   },
   "countsByType": {
-    "scenario": 20,
+    "scenario": 24,
     "concept": 8,
     "trade-off": 11,
-    "debugging": 26,
-    "design": 2
+    "debugging": 29,
+    "design": 3
   },
   "status": {
-    "schemaValid": 67,
-    "sourcesVerified": 67,
-    "rederived": 67,
+    "schemaValid": 75,
+    "sourcesVerified": 75,
+    "rederived": 75,
     "codeExecuted": 0,
-    "expertReviewPending": 67
+    "expertReviewPending": 75
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -520,6 +520,62 @@
       "expertReview": "pending"
     },
     "genai-handle-responses-api-input-truncation-explicitly": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-gemini-interactions-explicit-cache-support": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-gemini-verify-implicit-cache-hits": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-gemini-four-agent-cache-threshold": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-gemini-batch-create-not-idempotent": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-gemini-batch-line-level-status": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-evaluation-heldout-after-prompt-iteration": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-untrusted-output-before-downstream-sinks": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-bound-requests-to-prevent-unbounded-consumption": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

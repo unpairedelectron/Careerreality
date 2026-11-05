@@ -4804,5 +4804,565 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-gemini-interactions-explicit-cache-support",
+    "bank": "gen-ai-engineer",
+    "topic": "Prompt caching and repeated context",
+    "subtopic": "API-specific cache support",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A Gemini application moves to the Interactions API and still expects to create named cache objects. What should the team verify before changing its cache design?",
+    "what_is_assessed": "Ability to distinguish implicit caching from explicit cache-object support across documented APIs and models.",
+    "short_answer": "The current Gemini guide says the Interactions API supports implicit caching only; explicit cache-object management is not supported there. For supported Gemini 2.5 and 3 models, the guide directs teams to the generateContent API for explicit caching. Confirm current model/API support before relying on named caches, and do not generalize this behavior to every model or future release.",
+    "deep_explanation": "Google's context-caching page makes an explicit distinction between implicit caching and manually created cache objects. It states that Interactions supports implicit caching only and that explicit caching is unavailable in Interactions and Gemini 4 Argon onward; supported Gemini 2.5/3 models use generateContent for explicit caching. These are current API support boundaries, not a general claim about caching across providers.",
+    "strong_answer_signals": [
+      "Separates automatic cache hits from explicit cache-object lifecycle.",
+      "Checks the exact API/model combination and current vendor guide.",
+      "Avoids assuming that API migration preserves cache features."
+    ],
+    "weak_answer_signals": [
+      "Assumes every Gemini endpoint accepts named cache resources.",
+      "Treats implicit caching as equivalent to application-managed cache objects."
+    ],
+    "common_mistakes": [
+      "Migrating the endpoint without checking which cache semantics it supports.",
+      "Encoding a vendor-specific limitation as a general model rule."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the relevant fallback for supported Gemini 2.5/3 models?",
+        "short_answer": "Use the documented generateContent API when explicit caching is required."
+      },
+      {
+        "question": "Can you assume Gemini 4 Argon supports explicit caches?",
+        "short_answer": "No; the guide says explicit caching is not supported for Gemini 4 Argon and onward."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Context caching",
+        "publisher": "Google Gemini API documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/caching?api=generateContent",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Gemini API context caching documentation retrieved 2026-11-05; model/API support can change.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://ai.google.dev/gemini-api/docs/caching?api=generateContent"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-gemini-verify-implicit-cache-hits",
+    "bank": "gen-ai-engineer",
+    "topic": "Prompt caching and repeated context",
+    "subtopic": "Cache-hit observability",
+    "level": "L2",
+    "type": "debugging",
+    "question": "Repeated Gemini requests have unexpectedly high input cost. How would you determine whether implicit caching is working?",
+    "what_is_assessed": "Ability to validate actual cache use from response telemetry rather than infer it from latency or prompt similarity.",
+    "short_answer": "Inspect the response's reported cached-token count for repeated requests and compare it with the request's total input tokens. Check that the repeated prefix is large enough for the selected model and that requests arrive with sufficiently similar prefixes; the guide notes these conditions affect hit likelihood. Treat lower latency or an assumed repeated prompt as insufficient proof of a cache hit.",
+    "deep_explanation": "Gemini's context-caching documentation describes implicit caching as automatic for supported models, gives model-specific minimum input thresholds, recommends placing large common content early and sending similar prefixes close together, and says the response exposes the number of cache-hit tokens. The operational recommendation is to validate the usage signal for the actual traffic pattern rather than assume a hit.",
+    "strong_answer_signals": [
+      "Uses the response's cached-token telemetry to confirm a hit.",
+      "Checks model-specific thresholds and prefix similarity.",
+      "Separates observed cache use from latency-based inference."
+    ],
+    "weak_answer_signals": [
+      "Assumes caching because the prompt text looks similar.",
+      "Changes prompt layout without checking the provider's usage metadata."
+    ],
+    "common_mistakes": [
+      "Treating automatic cache availability as a guarantee of a hit.",
+      "Ignoring model-specific minimum input sizes."
+    ],
+    "follow_ups": [
+      {
+        "question": "What prompt adjustment may improve the chance of a hit?",
+        "short_answer": "Place large repeated content early and keep request prefixes similar."
+      },
+      {
+        "question": "Does a cache hit alone prove the request is cheaper overall?",
+        "short_answer": "No; compare reported token usage and total request cost for the workload."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Context caching",
+        "publisher": "Google Gemini API documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/caching?api=generateContent",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Gemini API context caching documentation retrieved 2026-11-05; model/API support can change.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://ai.google.dev/gemini-api/docs/caching?api=generateContent"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-gemini-four-agent-cache-threshold",
+    "bank": "gen-ai-engineer",
+    "topic": "Prompt caching and repeated context",
+    "subtopic": "Multi-turn cache behavior",
+    "level": "L3",
+    "type": "debugging",
+    "question": "On Gemini 4 Argon, an agent loop adds only a small tool result each turn and reprocesses prior context. What documented behavior could explain this?",
+    "what_is_assessed": "Ability to diagnose a model-specific multi-turn cache threshold without treating it as a universal caching rule.",
+    "short_answer": "The current guide says Gemini 4 Argon and newer cache the full previous request only when the new request adds at least 2,050 tokens; model output, thought, and function results count toward that addition. For smaller additions, the last 2,050 tokens are reprocessed at the standard input rate. Verify the reported cached-token count and evaluate the actual turn sizes before changing the agent loop.",
+    "deep_explanation": "Google documents special multi-turn and agent-loop behavior for Gemini 4 Argon and newer. It describes a 2,050-token minimum addition for caching the full previous request and identifies output, thought, and function results as part of the addition. This is a dated, model-family-specific API detail and should be rechecked when model versions change.",
+    "strong_answer_signals": [
+      "Recognizes the threshold is specific to Gemini 4 Argon and newer.",
+      "Counts model output, thought, and function results as additions per the guide.",
+      "Validates token telemetry before redesigning the loop."
+    ],
+    "weak_answer_signals": [
+      "Assumes every small turn reuses the full previous context.",
+      "Applies the Gemini 4 threshold to other providers or models."
+    ],
+    "common_mistakes": [
+      "Treating a cache miss as evidence that conversation state was lost.",
+      "Ignoring generated output and tool results when estimating token additions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the documented threshold?",
+        "short_answer": "At least 2,050 added tokens for the full previous request to be cached."
+      },
+      {
+        "question": "Should this threshold be hard-coded for all Gemini models?",
+        "short_answer": "No; it is documented for Gemini 4 Argon and newer and may change."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Context caching",
+        "publisher": "Google Gemini API documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/caching?api=generateContent",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Gemini API context caching documentation retrieved 2026-11-05; model/API support can change.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://ai.google.dev/gemini-api/docs/caching?api=generateContent"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-gemini-batch-create-not-idempotent",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Safe submission retries",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A Gemini batch-creation request times out before the client receives a job name. Is it safe to resend the same create request automatically?",
+    "what_is_assessed": "Ability to handle ambiguous submission outcomes when batch-job creation is not idempotent.",
+    "short_answer": "Not blindly. Google's Batch API guide says creating a batch job is not idempotent, so sending the same create request twice creates two jobs. Record a client-side submission identifier and request details before sending; if the response is ambiguous, reconcile through available job records or operational logs before deciding whether another create is needed. Do not assume the provider deduplicates retries.",
+    "deep_explanation": "The official Gemini Batch API guide explicitly warns that job creation is not idempotent and duplicate create requests create separate jobs. The ledger and reconciliation steps are reliability recommendations for handling an uncertain network outcome; they are not described as a provider-provided idempotency feature.",
+    "strong_answer_signals": [
+      "Treats a timeout as an ambiguous outcome, not proof that creation failed.",
+      "Knows duplicate create calls can produce duplicate jobs.",
+      "Separates client-side deduplication from provider guarantees."
+    ],
+    "weak_answer_signals": [
+      "Retries the create call automatically without checking for the first job.",
+      "Claims the API deduplicates identical create requests."
+    ],
+    "common_mistakes": [
+      "Losing the association between input batch and provider job name.",
+      "Confusing request transport failure with job-creation failure."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be persisted before submission?",
+        "short_answer": "A client-side submission ID, input identity, and request metadata."
+      },
+      {
+        "question": "What does the provider guarantee for duplicate creates?",
+        "short_answer": "The guide says they create separate jobs; it does not promise deduplication."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "Google Gemini API documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/batch-api",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Gemini API Batch API documentation retrieved 2026-11-05; service terms can change.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://ai.google.dev/gemini-api/docs/batch-api"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-gemini-batch-line-level-status",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Per-request result reconciliation",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A Gemini file-based batch job finishes, but some JSONL output lines contain status objects instead of generated responses. How should the consumer handle them?",
+    "what_is_assessed": "Ability to reconcile per-request batch outcomes instead of treating job completion as universal success.",
+    "short_answer": "Parse every output line as either a GenerateContentResponse or a status object, then map it back to the corresponding input record and handle failures individually. A successful overall job state does not make every row a successful generation. Preserve the per-request error details for retry or reporting, and retry only the affected requests under an explicit policy.",
+    "deep_explanation": "Google's Batch API documentation states that file-based output is JSONL and each line may be either a model response or a status object. This makes per-row outcome handling necessary. The retry policy is an application design choice; the source does not promise that every failed row is safely retryable or that retrying a whole job is harmless.",
+    "strong_answer_signals": [
+      "Branches on each line's response-versus-status shape.",
+      "Reconciles each result with its input record.",
+      "Retries only classified failures rather than resubmitting the whole batch."
+    ],
+    "weak_answer_signals": [
+      "Treats a completed job as proof that every request succeeded.",
+      "Drops status objects or silently counts them as empty output."
+    ],
+    "common_mistakes": [
+      "Assuming output line position is sufficient correlation without preserving keys.",
+      "Retrying the entire batch when only some rows failed."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be kept with each output row?",
+        "short_answer": "The input key or request identity and its response or status details."
+      },
+      {
+        "question": "Does a status object always mean retry is safe?",
+        "short_answer": "No; inspect the status and apply a bounded, error-specific retry policy."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "Google Gemini API documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/batch-api",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Gemini API Batch API documentation retrieved 2026-11-05; service terms can change.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://ai.google.dev/gemini-api/docs/batch-api"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-evaluation-heldout-after-prompt-iteration",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI evaluation",
+    "subtopic": "Held-out regression sets",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A prompt has been revised repeatedly against one labeled dataset, and the team now reports a score on that same dataset. What evidence is missing?",
+    "what_is_assessed": "Ability to identify evaluation-set overfitting and reserve unseen examples for a more credible comparison.",
+    "short_answer": "The reported set has become part of the optimization loop, so its score may overstate generalization. Keep a held-out set that is not used to tune the prompt, compare candidate changes on the same reserved cases, and rotate or expand coverage with new representative failures over time. Report the tuning and held-out results separately; a held-out score is evidence for that sample, not proof of universal quality.",
+    "deep_explanation": "OpenAI's evaluation best-practices guide describes evaluation on a held-out set and recommends continuous evaluation and growing the evaluation set as new cases appear. The guidance supports separating tuning from evaluation; the caution about repeated adaptation to the same cases is an experimental-design implication, not a guarantee that any fixed split is permanently representative.",
+    "strong_answer_signals": [
+      "Identifies contamination from repeated prompt iteration.",
+      "Reserves cases that were not used to tune the candidate.",
+      "Keeps the test set representative and grows it with newly observed failures."
+    ],
+    "weak_answer_signals": [
+      "Uses the same examples for tuning and final reported performance.",
+      "Treats one score as a universal quality guarantee."
+    ],
+    "common_mistakes": [
+      "Repeatedly inspecting the holdout until it effectively becomes another tuning set.",
+      "Reporting aggregate performance without the evaluation-set provenance."
+    ],
+    "follow_ups": [
+      {
+        "question": "What belongs in a continuing evaluation set?",
+        "short_answer": "Representative new cases and failures observed during use, subject to privacy controls."
+      },
+      {
+        "question": "What does a held-out score establish?",
+        "short_answer": "Performance on those reserved examples under the defined evaluation, not universal quality."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluation best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/evaluation-best-practices",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OpenAI evaluation best-practice guide retrieved 2026-11-05; no model-specific performance claim.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://platform.openai.com/docs/guides/evaluation-best-practices"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-untrusted-output-before-downstream-sinks",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI safety and robustness",
+    "subtopic": "Model output handling at application sinks",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A model returns HTML or SQL that the application passes directly to a browser or database. What boundary is missing?",
+    "what_is_assessed": "Ability to treat model-generated content as untrusted input before it reaches interpreters or privileged components.",
+    "short_answer": "Validate and safely handle the output at the downstream boundary rather than trusting the model or its prompt. Use context-appropriate output encoding or sanitization for browser rendering, parameterized queries and constrained operations for database access, and enforce authorization in application code. Structured output can help with shape but does not replace sink-specific security controls.",
+    "deep_explanation": "OWASP's 2025 Improper Output Handling risk covers insufficient validation, sanitization, and handling of LLM outputs before passing them to downstream systems. It notes that prompt-controlled output can indirectly expose functionality. The exact control depends on the sink; escaping HTML, parameterizing SQL, and checking authorization are established application-security practices applied here, not a claim that OWASP prescribes one universal sanitizer.",
+    "strong_answer_signals": [
+      "Treats generated text as untrusted at the point of use.",
+      "Chooses controls based on the downstream interpreter or sink.",
+      "Keeps authorization and business rules outside the model output."
+    ],
+    "weak_answer_signals": [
+      "Relies on a system prompt to prevent malicious output.",
+      "Assumes JSON or schema validation makes a value safe to execute."
+    ],
+    "common_mistakes": [
+      "Using one generic sanitizer for HTML, SQL, and shell contexts.",
+      "Giving generated content privileges that the end user should not have."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does schema-conforming SQL become safe to execute?",
+        "short_answer": "No; schema validity does not establish authorization or safe query semantics."
+      },
+      {
+        "question": "Where should authorization be enforced?",
+        "short_answer": "In trusted application or data-access code, independent of generated text."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "LLM05:2025 Improper Output Handling",
+        "publisher": "OWASP Gen AI Security Project",
+        "url": "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OWASP Top 10 for LLM Applications 2025 guidance retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-bound-requests-to-prevent-unbounded-consumption",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI safety and robustness",
+    "subtopic": "Resource and usage bounds",
+    "level": "L3",
+    "type": "design",
+    "question": "A public generation endpoint can receive oversized prompts and sustained request bursts. Which controls reduce unbounded-consumption risk?",
+    "what_is_assessed": "Ability to set layered input, rate, quota, and resource controls around model inference.",
+    "short_answer": "Set reasonable input-size limits, rate limits and per-user quotas, and monitor resource allocation. Add application-appropriate concurrency, time, and spending controls, then alert on unusual usage and test that limits fail safely. OWASP identifies input validation, rate limiting, and resource-allocation management as mitigations; the exact thresholds should be chosen from the service's capacity and user needs.",
+    "deep_explanation": "OWASP LLM10:2025 describes unbounded consumption as a risk that can disrupt service or deplete resources. Its mitigation guidance includes input validation with size limits, rate limits and user quotas, and resource-allocation management. Additional operational controls such as concurrency/time budgets should be calibrated to the service; they are recommendations, not universal OWASP values.",
+    "strong_answer_signals": [
+      "Bounds input size and request volume per identity.",
+      "Monitors and manages resource allocation rather than relying on prompt wording.",
+      "Chooses thresholds from capacity and abuse testing."
+    ],
+    "weak_answer_signals": [
+      "Uses only a system prompt asking users to be concise.",
+      "Sets global limits without considering abuse, legitimate traffic, or graceful failure."
+    ],
+    "common_mistakes": [
+      "Applying a rate limit but leaving oversized inputs and resource-heavy requests unbounded.",
+      "Failing to monitor costs and resource use after launch."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which concrete mitigations does OWASP name?",
+        "short_answer": "Input size validation, rate limits and user quotas, and resource-allocation management."
+      },
+      {
+        "question": "Does OWASP prescribe one universal token cap?",
+        "short_answer": "No; limits should be set for the application's context and capacity."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "LLM10:2025 Unbounded Consumption",
+        "publisher": "OWASP Gen AI Security Project",
+        "url": "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OWASP Top 10 for LLM Applications 2025 guidance retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

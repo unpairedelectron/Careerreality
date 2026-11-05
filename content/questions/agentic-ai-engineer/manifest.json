@@ -2,15 +2,15 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 75,
-  "itemCount": 65,
+  "itemCount": 75,
   "countsByTopic": {
     "Agent architecture": 5,
     "Agent evaluation and observability": 3,
-    "Agent errors and recovery": 1,
-    "Session state and turn control": 1,
-    "Tool execution and application boundaries": 6,
+    "Agent errors and recovery": 5,
+    "Session state and turn control": 2,
+    "Tool execution and application boundaries": 7,
     "Agent run limits and termination": 1,
-    "Multi-agent orchestration": 2,
+    "Multi-agent orchestration": 5,
     "External MCP data sharing and approval": 3,
     "Prompt injection and tool-output trust": 1,
     "Conversation and run state": 1,
@@ -44,28 +44,28 @@
     "Trace privacy and data minimization": 1,
     "Agent memory scope": 1,
     "MCP OAuth client security": 3,
-    "Parallel agent state management": 1,
+    "Parallel agent state management": 2,
     "MCP Streamable HTTP server-initiated streams": 1,
     "MCP SSE message routing": 1,
     "MCP sampling context capability": 1
   },
   "countsByLevel": {
-    "L2": 28,
-    "L3": 37
+    "L2": 29,
+    "L3": 46
   },
   "countsByType": {
     "trade-off": 7,
-    "scenario": 25,
-    "debugging": 24,
-    "concept": 8,
-    "design": 1
+    "scenario": 29,
+    "debugging": 27,
+    "concept": 9,
+    "design": 3
   },
   "status": {
-    "schemaValid": 65,
-    "sourcesVerified": 65,
-    "rederived": 65,
+    "schemaValid": 75,
+    "sourcesVerified": 75,
+    "rederived": 75,
     "codeExecuted": 0,
-    "expertReviewPending": 65
+    "expertReviewPending": 75
   },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
@@ -517,6 +517,76 @@
       "expertReview": "pending"
     },
     "agentic-negotiate-mcp-sampling-context-before-including": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-langgraph-replay-safe-task-side-effects": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-langgraph-capture-nondeterministic-task-results": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-langgraph-interrupt-side-effect-replay": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-langgraph-interrupt-persistence-contract": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-langgraph-pending-write-recovery": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-a2a-nonblocking-task-polling": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-a2a-input-required-is-interrupted": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-a2a-send-message-retry-dedup": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-a2a-task-id-vs-context-id": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-openai-approval-callback-does-not-enable-approval": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

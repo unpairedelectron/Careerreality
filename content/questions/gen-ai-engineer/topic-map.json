@@ -3,7 +3,23 @@
   "topics": [
     {
       "topic": "Retrieval-augmented generation",
-      "subtopics": ["retriever and generator roles", "retrieval evaluation", "grounded answers", "hit rate and mean reciprocal rank", "chunk size and overlap", "metadata filtering and access boundaries", "vector-store deletion consistency", "asynchronous vector-store ingestion", "semantic and keyword search", "hybrid ranking controls", "two-stage candidate retrieval and reranking", "table structure preservation", "asymmetric query and passage encoders", "query rewriting after retrieval failure", "multi-step query decomposition"],
+      "subtopics": [
+        "retriever and generator roles",
+        "retrieval evaluation",
+        "grounded answers",
+        "hit rate and mean reciprocal rank",
+        "chunk size and overlap",
+        "metadata filtering and access boundaries",
+        "vector-store deletion consistency",
+        "asynchronous vector-store ingestion",
+        "semantic and keyword search",
+        "hybrid ranking controls",
+        "two-stage candidate retrieval and reranking",
+        "table structure preservation",
+        "asymmetric query and passage encoders",
+        "query rewriting after retrieval failure",
+        "multi-step query decomposition"
+      ],
       "sources": [
         {
           "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
@@ -99,483 +115,755 @@
     },
     {
       "topic": "Generative AI evaluation",
-      "subtopics": ["evaluation objectives", "datasets and graders", "continuous evaluation", "choosing and calibrating evaluators", "model-grader agreement and bias"],
-      "sources": [{
-        "title": "Evaluation best practices",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "evaluation objectives",
+        "datasets and graders",
+        "continuous evaluation",
+        "choosing and calibrating evaluators",
+        "model-grader agreement and bias",
+        "Held-out regression sets"
+      ],
+      "sources": [
+        {
+          "title": "Evaluation best practices",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
+        },
+        {
+          "title": "Evaluation best practices",
+          "publisher": "OpenAI API documentation",
+          "url": "https://platform.openai.com/docs/guides/evaluation-best-practices",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI evaluation best-practice guide retrieved 2026-11-05; no model-specific performance claim."
+        }
+      ]
     },
     {
       "topic": "Generative AI safety and robustness",
-      "subtopics": ["adversarial evaluation", "untrusted content", "human review"],
-      "sources": [{
-        "title": "Safety best practices",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/safety-best-practices",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API safety guidance retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "adversarial evaluation",
+        "untrusted content",
+        "human review",
+        "Model output handling at application sinks",
+        "Resource and usage bounds"
+      ],
+      "sources": [
+        {
+          "title": "Safety best practices",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API safety guidance retrieved 2026-11-04"
+        },
+        {
+          "title": "LLM05:2025 Improper Output Handling",
+          "publisher": "OWASP Gen AI Security Project",
+          "url": "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OWASP Top 10 for LLM Applications 2025 guidance retrieved 2026-11-05."
+        },
+        {
+          "title": "LLM10:2025 Unbounded Consumption",
+          "publisher": "OWASP Gen AI Security Project",
+          "url": "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OWASP Top 10 for LLM Applications 2025 guidance retrieved 2026-11-05."
+        }
+      ]
     },
     {
       "topic": "Model optimization and adaptation",
-      "subtopics": ["prompt engineering", "retrieval-augmented generation", "fine-tuning"],
-      "sources": [{
-        "title": "Optimizing LLM Accuracy",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/optimizing-llm-accuracy",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API accuracy-optimization guidance retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "prompt engineering",
+        "retrieval-augmented generation",
+        "fine-tuning"
+      ],
+      "sources": [
+        {
+          "title": "Optimizing LLM Accuracy",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/optimizing-llm-accuracy",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API accuracy-optimization guidance retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Structured outputs and data contracts",
-      "subtopics": ["JSON schema adherence", "semantic validation", "refusal handling", "incomplete structured responses", "optional fields represented as nullable"],
-      "sources": [{
-        "title": "Structured model outputs",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Structured Outputs documentation retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "JSON schema adherence",
+        "semantic validation",
+        "refusal handling",
+        "incomplete structured responses",
+        "optional fields represented as nullable"
+      ],
+      "sources": [
+        {
+          "title": "Structured model outputs",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Structured Outputs documentation retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Latency and inference efficiency",
-      "subtopics": ["output length", "sequential requests", "model choice and quality", "time to first token versus inter-token latency"],
-      "sources": [{
-        "title": "Latency optimization",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API latency guidance retrieved 2026-11-04"
-      }, {
-        "title": "Metrics",
-        "publisher": "NVIDIA NIM Benchmarking documentation",
-        "url": "https://docs.nvidia.com/nim/benchmarking/llm/metrics",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-05",
-        "versions_checked": "NVIDIA NIM LLM benchmarking metrics documentation accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "output length",
+        "sequential requests",
+        "model choice and quality",
+        "time to first token versus inter-token latency"
+      ],
+      "sources": [
+        {
+          "title": "Latency optimization",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API latency guidance retrieved 2026-11-04"
+        },
+        {
+          "title": "Metrics",
+          "publisher": "NVIDIA NIM Benchmarking documentation",
+          "url": "https://docs.nvidia.com/nim/benchmarking/llm/metrics",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "NVIDIA NIM LLM benchmarking metrics documentation accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Offline batch processing",
-      "subtopics": ["asynchronous evaluation jobs", "job status and result retrieval", "request-to-result correlation", "expired batches and partial completion", "output-file retention and archival"],
-      "sources": [{
-        "title": "Batch API",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/batch",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Batch API documentation retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "asynchronous evaluation jobs",
+        "job status and result retrieval",
+        "request-to-result correlation",
+        "expired batches and partial completion",
+        "output-file retention and archival",
+        "Safe submission retries",
+        "Per-request result reconciliation"
+      ],
+      "sources": [
+        {
+          "title": "Batch API",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/batch",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Batch API documentation retrieved 2026-11-04"
+        },
+        {
+          "title": "Batch API",
+          "publisher": "Google Gemini API documentation",
+          "url": "https://ai.google.dev/gemini-api/docs/batch-api",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "Gemini API Batch API documentation retrieved 2026-11-05; service terms can change."
+        }
+      ]
     },
     {
       "topic": "Streaming response design",
-      "subtopics": ["incremental response events", "partial output state", "perceived latency", "completed versus incomplete terminal events", "complete function arguments before dispatch"],
-      "sources": [{
-        "title": "Streaming API responses",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/streaming-responses",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Responses API streaming guide retrieved 2026-11-04"
-      }, {
-        "title": "Responses streaming events",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/reference/resources/responses/streaming-events",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Responses API streaming event reference retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "incremental response events",
+        "partial output state",
+        "perceived latency",
+        "completed versus incomplete terminal events",
+        "complete function arguments before dispatch"
+      ],
+      "sources": [
+        {
+          "title": "Streaming API responses",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/streaming-responses",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Responses API streaming guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Responses streaming events",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/reference/resources/responses/streaming-events",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Responses API streaming event reference retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Prompt caching and repeated context",
-      "subtopics": ["exact prefix reuse", "cache eligibility", "cache-hit diagnostics", "static content before dynamic context"],
-      "sources": [{
-        "title": "Prompt caching",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI prompt-caching guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "exact prefix reuse",
+        "cache eligibility",
+        "cache-hit diagnostics",
+        "static content before dynamic context",
+        "API-specific cache support",
+        "Cache-hit observability",
+        "Multi-turn cache behavior"
+      ],
+      "sources": [
+        {
+          "title": "Prompt caching",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI prompt-caching guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Context caching",
+          "publisher": "Google Gemini API documentation",
+          "url": "https://ai.google.dev/gemini-api/docs/caching?api=generateContent",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "Gemini API context caching documentation retrieved 2026-11-05; model/API support can change."
+        }
+      ]
     },
     {
       "topic": "Asynchronous response execution",
-      "subtopics": ["background generation", "polling", "response retention"],
-      "sources": [{
-        "title": "Background mode",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/background",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Background mode guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "background generation",
+        "polling",
+        "response retention"
+      ],
+      "sources": [
+        {
+          "title": "Background mode",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/background",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Background mode guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Conversation context management",
-      "subtopics": ["context compaction", "preserved task state", "continuation contracts", "Responses API input truncation policy"],
-      "sources": [{
-        "title": "Compaction",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/compaction",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Compaction guide retrieved 2026-11-04"
-      }, {
-        "title": "Responses API reference",
-        "publisher": "OpenAI API documentation",
-        "url": "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI Responses API reference accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "context compaction",
+        "preserved task state",
+        "continuation contracts",
+        "Responses API input truncation policy"
+      ],
+      "sources": [
+        {
+          "title": "Compaction",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/compaction",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Compaction guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Responses API reference",
+          "publisher": "OpenAI API documentation",
+          "url": "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI Responses API reference accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Embedding representations",
-      "subtopics": ["embedding dimensions", "vector index compatibility", "retrieval quality trade-offs", "similarity metrics for normalized vectors", "token-to-sentence pooling"],
-      "sources": [{
-        "title": "Vector embeddings",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/embeddings",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI embedding guide retrieved 2026-11-04"
-      }, {
-        "title": "Sentence Transformer modules: Pooling",
-        "publisher": "Sentence Transformers documentation",
-        "url": "https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-04",
-        "versions_checked": "Sentence Transformers module documentation retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "embedding dimensions",
+        "vector index compatibility",
+        "retrieval quality trade-offs",
+        "similarity metrics for normalized vectors",
+        "token-to-sentence pooling"
+      ],
+      "sources": [
+        {
+          "title": "Vector embeddings",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/embeddings",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI embedding guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Sentence Transformer modules: Pooling",
+          "publisher": "Sentence Transformers documentation",
+          "url": "https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "Sentence Transformers module documentation retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Rate limits and retries",
-      "subtopics": ["Retry-After", "exponential backoff with jitter", "bounded retries", "quota and billing errors", "independent request and token budgets"],
-      "sources": [{
-        "title": "Rate limits",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/rate-limits",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API rate-limit guide retrieved 2026-11-04"
-      }, {
-        "title": "Rate limits",
-        "publisher": "OpenAI API documentation",
-        "url": "https://platform.openai.com/docs/guides/rate-limits",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI API rate-limit guide accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "Retry-After",
+        "exponential backoff with jitter",
+        "bounded retries",
+        "quota and billing errors",
+        "independent request and token budgets"
+      ],
+      "sources": [
+        {
+          "title": "Rate limits",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/rate-limits",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API rate-limit guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Rate limits",
+          "publisher": "OpenAI API documentation",
+          "url": "https://platform.openai.com/docs/guides/rate-limits",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI API rate-limit guide accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Long-context reliability",
-      "subtopics": ["position sensitivity of relevant evidence", "position-sweep evaluation", "context ordering"],
-      "sources": [{
-        "title": "Lost in the Middle: How Language Models Use Long Contexts",
-        "publisher": "Transactions of the Association for Computational Linguistics via arXiv",
-        "url": "https://arxiv.org/abs/2307.03172",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-04",
-        "versions_checked": "TACL paper, arXiv version 3 revised 2023-11-20"
-      }]
+      "subtopics": [
+        "position sensitivity of relevant evidence",
+        "position-sweep evaluation",
+        "context ordering"
+      ],
+      "sources": [
+        {
+          "title": "Lost in the Middle: How Language Models Use Long Contexts",
+          "publisher": "Transactions of the Association for Computational Linguistics via arXiv",
+          "url": "https://arxiv.org/abs/2307.03172",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-04",
+          "versions_checked": "TACL paper, arXiv version 3 revised 2023-11-20"
+        }
+      ]
     },
     {
       "topic": "Function calling and tool orchestration",
-      "subtopics": ["application-side execution", "argument validation", "authorization and side-effect controls", "correlating parallel tool results", "dependency-aware sequencing"],
-      "sources": [{
-        "title": "Function calling",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/function-calling",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "application-side execution",
+        "argument validation",
+        "authorization and side-effect controls",
+        "correlating parallel tool results",
+        "dependency-aware sequencing"
+      ],
+      "sources": [
+        {
+          "title": "Function calling",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/function-calling",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Grounded generation and abstention",
-      "subtopics": ["evidence sufficiency", "missing versus misleading context", "abstention evaluation"],
-      "sources": [{
-        "title": "Prompt-Based Abstention Fails Under Misleading Context: A Controlled Study of Small Frozen RAG Models",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/abs/2608.22228",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "arXiv version 1, published 2026-08-23"
-      }]
+      "subtopics": [
+        "evidence sufficiency",
+        "missing versus misleading context",
+        "abstention evaluation"
+      ],
+      "sources": [
+        {
+          "title": "Prompt-Based Abstention Fails Under Misleading Context: A Controlled Study of Small Frozen RAG Models",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2608.22228",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv version 1, published 2026-08-23"
+        }
+      ]
     },
     {
       "topic": "Hybrid retrieval evaluation",
-      "subtopics": ["per-query fusion trade-offs", "sparse and dense ranking comparison", "downstream answer support"],
-      "sources": [{
-        "title": "The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/abs/2610.30612",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "arXiv version 1, submitted 2026-10-22"
-      }]
+      "subtopics": [
+        "per-query fusion trade-offs",
+        "sparse and dense ranking comparison",
+        "downstream answer support"
+      ],
+      "sources": [
+        {
+          "title": "The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2610.30612",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv version 1, submitted 2026-10-22"
+        }
+      ]
     },
     {
       "topic": "Token budgeting and counting",
-      "subtopics": ["full request token counts", "format and tool overhead", "multimodal input sizing"],
-      "sources": [{
-        "title": "Counting tokens",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/token-counting",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API token-counting guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "full request token counts",
+        "format and tool overhead",
+        "multimodal input sizing"
+      ],
+      "sources": [
+        {
+          "title": "Counting tokens",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/token-counting",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API token-counting guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Code generation evaluation",
-      "subtopics": ["functional correctness", "unbiased pass@k estimation", "sample-budget reporting"],
-      "sources": [{
-        "title": "Evaluating Large Language Models Trained on Code",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/html/2107.03374",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Stable",
-        "last_verified": "2026-11-04",
-        "versions_checked": "arXiv version 2, published 2021-07-14"
-      }]
+      "subtopics": [
+        "functional correctness",
+        "unbiased pass@k estimation",
+        "sample-budget reporting"
+      ],
+      "sources": [
+        {
+          "title": "Evaluating Large Language Models Trained on Code",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2107.03374",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv version 2, published 2021-07-14"
+        }
+      ]
     },
     {
       "topic": "Confidence calibration from token probabilities",
-      "subtopics": ["token likelihood versus correctness", "empirical calibration", "task-specific validation"],
-      "sources": [{
-        "title": "From token probabilities to calibrated confidence: An empirical study of mathematical question answering",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/html/2608.07827",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "arXiv version 1, submitted 2026-08-08"
-      }]
+      "subtopics": [
+        "token likelihood versus correctness",
+        "empirical calibration",
+        "task-specific validation"
+      ],
+      "sources": [
+        {
+          "title": "From token probabilities to calibrated confidence: An empirical study of mathematical question answering",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2608.07827",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv version 1, submitted 2026-08-08"
+        }
+      ]
     },
     {
       "topic": "Reasoning token budget and completion state",
-      "subtopics": ["reasoning-token budget", "incomplete responses", "visible-output headroom"],
-      "sources": [{
-        "title": "Reasoning models",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/reasoning",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API reasoning-model guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "reasoning-token budget",
+        "incomplete responses",
+        "visible-output headroom"
+      ],
+      "sources": [
+        {
+          "title": "Reasoning models",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/reasoning",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API reasoning-model guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "RAG context compression and grounding",
-      "subtopics": ["citation fidelity", "answer correctness versus evidence support", "compression trade-offs"],
-      "sources": [{
-        "title": "Efficiency vs. Verifiability in Evidence-Aware RAG: Does Prompt Compression Preserve Citation Grounding?",
-        "publisher": "ACL Anthology",
-        "url": "https://aclanthology.org/2026.customnlp4u-1.19/",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "ACL Anthology paper published 2026-07-01"
-      }]
+      "subtopics": [
+        "citation fidelity",
+        "answer correctness versus evidence support",
+        "compression trade-offs"
+      ],
+      "sources": [
+        {
+          "title": "Efficiency vs. Verifiability in Evidence-Aware RAG: Does Prompt Compression Preserve Citation Grounding?",
+          "publisher": "ACL Anthology",
+          "url": "https://aclanthology.org/2026.customnlp4u-1.19/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "ACL Anthology paper published 2026-07-01"
+        }
+      ]
     },
     {
       "topic": "Token log probabilities",
-      "subtopics": ["conditional token likelihood", "sequence score aggregation", "correctness calibration"],
-      "sources": [{
-        "title": "Using logprobs for classification and Q&A evaluation",
-        "publisher": "OpenAI Cookbook",
-        "url": "https://developers.openai.com/cookbook/examples/using_logprobs",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Cookbook logprobs example retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "conditional token likelihood",
+        "sequence score aggregation",
+        "correctness calibration"
+      ],
+      "sources": [
+        {
+          "title": "Using logprobs for classification and Q&A evaluation",
+          "publisher": "OpenAI Cookbook",
+          "url": "https://developers.openai.com/cookbook/examples/using_logprobs",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Cookbook logprobs example retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Responses API conversation state",
-      "subtopics": ["previous_response_id chaining", "top-level instruction persistence", "request-state versioning"],
-      "sources": [{
-        "title": "Migrate to the Responses API",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Responses API migration guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "previous_response_id chaining",
+        "top-level instruction persistence",
+        "request-state versioning"
+      ],
+      "sources": [
+        {
+          "title": "Migrate to the Responses API",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Responses API migration guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "API data retention controls",
-      "subtopics": ["application state", "abuse-monitoring logs", "organization retention controls"],
-      "sources": [{
-        "title": "Data controls in the OpenAI platform",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/your-data",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI API data-controls guide retrieved 2026-11-04"
-      }]
+      "subtopics": [
+        "application state",
+        "abuse-monitoring logs",
+        "organization retention controls"
+      ],
+      "sources": [
+        {
+          "title": "Data controls in the OpenAI platform",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI API data-controls guide retrieved 2026-11-04"
+        }
+      ]
     },
     {
       "topic": "Vision input fidelity and cost",
-      "subtopics": ["image detail selection", "model-specific resizing", "visual quality versus token cost", "small-text fidelity and focused crops"],
-      "sources": [{
-        "title": "Images and vision",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/images-vision",
-        "retrieved_date": "2026-11-04",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-04",
-        "versions_checked": "OpenAI Images and vision guide retrieved 2026-11-04"
-      }, {
-        "title": "Images and vision",
-        "publisher": "OpenAI API documentation",
-        "url": "https://platform.openai.com/docs/guides/images-vision",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI Images and vision guide accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "image detail selection",
+        "model-specific resizing",
+        "visual quality versus token cost",
+        "small-text fidelity and focused crops"
+      ],
+      "sources": [
+        {
+          "title": "Images and vision",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/images-vision",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Images and vision guide retrieved 2026-11-04"
+        },
+        {
+          "title": "Images and vision",
+          "publisher": "OpenAI API documentation",
+          "url": "https://platform.openai.com/docs/guides/images-vision",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI Images and vision guide accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Realtime API turn control",
-      "subtopics": ["server VAD", "client-controlled response creation", "speech-to-speech turn handling"],
-      "sources": [{
-        "title": "Realtime conversations",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI Realtime conversations guide accessed 2026-11-05"
-      }, {
-        "title": "Voice activity detection (VAD)",
-        "publisher": "OpenAI API documentation",
-        "url": "https://developers.openai.com/api/docs/guides/realtime-vad",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI Realtime VAD guide accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "server VAD",
+        "client-controlled response creation",
+        "speech-to-speech turn handling"
+      ],
+      "sources": [
+        {
+          "title": "Realtime conversations",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI Realtime conversations guide accessed 2026-11-05"
+        },
+        {
+          "title": "Voice activity detection (VAD)",
+          "publisher": "OpenAI API documentation",
+          "url": "https://developers.openai.com/api/docs/guides/realtime-vad",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI Realtime VAD guide accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Pairwise judge position consistency",
-      "subtopics": ["answer-order swaps", "position consistency", "human-label validation"],
-      "sources": [{
-        "title": "Judging the Judges: A Systematic Investigation of Position Bias in Pairwise Comparative LLM-as-a-Judge",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/html/2406.07791v5",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-05",
-        "versions_checked": "arXiv:2406.07791v5 accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "answer-order swaps",
+        "position consistency",
+        "human-label validation"
+      ],
+      "sources": [
+        {
+          "title": "Judging the Judges: A Systematic Investigation of Position Bias in Pairwise Comparative LLM-as-a-Judge",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2406.07791v5",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "arXiv:2406.07791v5 accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Parameter-efficient fine-tuning with LoRA",
-      "subtopics": ["frozen pretrained weights", "low-rank trainable updates", "rank and quality trade-offs", "QLoRA 4-bit base weights and trainable adapters"],
-      "sources": [{
-        "title": "LoRA: Low-Rank Adaptation of Large Language Models",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/abs/2106.09685",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-05",
-        "versions_checked": "arXiv:2106.09685v2 accessed 2026-11-05"
-      }, {
-        "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/abs/2305.14314",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-05",
-        "versions_checked": "arXiv:2305.14314 accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "frozen pretrained weights",
+        "low-rank trainable updates",
+        "rank and quality trade-offs",
+        "QLoRA 4-bit base weights and trainable adapters"
+      ],
+      "sources": [
+        {
+          "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2106.09685",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "arXiv:2106.09685v2 accessed 2026-11-05"
+        },
+        {
+          "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/abs/2305.14314",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "arXiv:2305.14314 accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Speculative decoding and inference speedups",
-      "subtopics": ["draft-token proposals", "target-model verification", "acceptance-dependent latency"],
-      "sources": [{
-        "title": "Fast Inference from Transformers via Speculative Decoding",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/html/2211.17192v2",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Stable",
-        "last_verified": "2026-11-05",
-        "versions_checked": "arXiv:2211.17192v2 accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "draft-token proposals",
+        "target-model verification",
+        "acceptance-dependent latency"
+      ],
+      "sources": [
+        {
+          "title": "Fast Inference from Transformers via Speculative Decoding",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2211.17192v2",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Stable",
+          "last_verified": "2026-11-05",
+          "versions_checked": "arXiv:2211.17192v2 accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Multimodal retrieval-augmented generation",
-      "subtopics": ["text summaries versus native image retrieval", "visual evidence preservation", "page-level provenance"],
-      "sources": [{
-        "title": "Comparison of Text-Based and Image-Based Retrieval in Modern Multimodal Retrieval Augmented Generation Large Language Model Systems",
-        "publisher": "arXiv",
-        "url": "https://arxiv.org/html/2511.16654v2",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Stable",
-        "last_verified": "2026-11-05",
-        "versions_checked": "arXiv:2511.16654v2 accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "text summaries versus native image retrieval",
+        "visual evidence preservation",
+        "page-level provenance"
+      ],
+      "sources": [
+        {
+          "title": "Comparison of Text-Based and Image-Based Retrieval in Modern Multimodal Retrieval Augmented Generation Large Language Model Systems",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2511.16654v2",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Stable",
+          "last_verified": "2026-11-05",
+          "versions_checked": "arXiv:2511.16654v2 accessed 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Retrieval result fusion",
-      "subtopics": ["deduplication across retrievers", "reciprocal-rank fusion", "preserving source provenance"],
-      "sources": [{
-        "title": "Query fusion",
-        "publisher": "LlamaIndex documentation",
-        "url": "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Moderate",
-        "last_verified": "2026-11-05",
-        "versions_checked": "LlamaIndex query-fusion documentation verified via official search excerpt on 2026-11-05"
-      }]
+      "subtopics": [
+        "deduplication across retrievers",
+        "reciprocal-rank fusion",
+        "preserving source provenance"
+      ],
+      "sources": [
+        {
+          "title": "Query fusion",
+          "publisher": "LlamaIndex documentation",
+          "url": "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "LlamaIndex query-fusion documentation verified via official search excerpt on 2026-11-05"
+        }
+      ]
     },
     {
       "topic": "Video generation workflows",
-      "subtopics": ["reference image establishes the initial frame", "prompting motion and shot details", "asynchronous render job status and content retrieval"],
-      "sources": [{
-        "title": "Video generation with Sora",
-        "publisher": "OpenAI API documentation",
-        "url": "https://platform.openai.com/docs/guides/video-generation",
-        "retrieved_date": "2026-11-05",
-        "volatility": "Fast-moving",
-        "last_verified": "2026-11-05",
-        "versions_checked": "OpenAI video-generation guide accessed 2026-11-05"
-      }]
+      "subtopics": [
+        "reference image establishes the initial frame",
+        "prompting motion and shot details",
+        "asynchronous render job status and content retrieval"
+      ],
+      "sources": [
+        {
+          "title": "Video generation with Sora",
+          "publisher": "OpenAI API documentation",
+          "url": "https://platform.openai.com/docs/guides/video-generation",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-05",
+          "versions_checked": "OpenAI video-generation guide accessed 2026-11-05"
+        }
+      ]
     }
   ]
 }

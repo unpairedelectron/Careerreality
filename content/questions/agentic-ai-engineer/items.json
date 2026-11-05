@@ -4638,5 +4638,705 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-langgraph-replay-safe-task-side-effects",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent errors and recovery",
+    "subtopic": "Replay-safe external writes",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A LangGraph workflow resumes after a partial task failure, and an API write might run again. How should the write be designed?",
+    "what_is_assessed": "Understanding that an unfinished task can run again after resume and external writes need idempotent handling.",
+    "short_answer": "Place the API write in a task so completed task results can be restored, but still make the write safe to repeat: use an idempotency key or check whether the effect already exists. LangGraph documents that a task that started but did not finish may run again. A checkpoint is not an exactly-once guarantee for an external side effect.",
+    "deep_explanation": "The LangGraph Functional API guide says completed task outputs are restored on resume, while a task that started but did not finish may run again; it recommends idempotency keys or checking existing results before writing. This question applies that documented replay boundary to an external API and avoids claiming that checkpointing makes side effects exactly once.",
+    "strong_answer_signals": [
+      "Distinguishes completed-task restoration from an unfinished task retry.",
+      "Uses idempotency or deduplication at the external write boundary.",
+      "Does not assume checkpointing guarantees exactly-once effects."
+    ],
+    "weak_answer_signals": [
+      "Assumes the graph will never repeat an API call after a crash.",
+      "Retries a write without a stable operation identity."
+    ],
+    "common_mistakes": [
+      "Putting a non-idempotent write in a replayable task without deduplication.",
+      "Confusing workflow state persistence with transactional coordination across services."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can happen to a task that started but did not finish?",
+        "short_answer": "It may run again when execution resumes."
+      },
+      {
+        "question": "What protects the external system from duplicate effects?",
+        "short_answer": "An idempotency key or a check for an already-applied operation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Functional API overview",
+        "publisher": "LangChain LangGraph documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/functional-api",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "LangGraph Python Functional API documentation retrieved 2026-11-05; no package-version behavior beyond documented replay semantics.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/functional-api"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-langgraph-capture-nondeterministic-task-results",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent errors and recovery",
+    "subtopic": "Deterministic resume boundaries",
+    "level": "L3",
+    "type": "design",
+    "question": "A resumed LangGraph workflow produces a different deadline or random choice from its original attempt. How would you make replay predictable?",
+    "what_is_assessed": "Ability to capture nondeterministic values inside checkpointed tasks so resume can reuse their results.",
+    "short_answer": "Move wall-clock reads, random choices, and other values that can change between attempts into a LangGraph task, whose completed result can be restored on resume. Keep deterministic orchestration outside that boundary, and test both a completed-task resume and a task interrupted before completion. This preserves the captured value where available; an unfinished task may still execute again.",
+    "deep_explanation": "LangGraph's Functional API guidance explicitly recommends encapsulating nondeterministic operations such as random numbers and wall-clock reads inside tasks so replay lines up with checkpointed results. The task retry boundary remains important: the guide also warns that tasks that started but did not finish can run again, so external side effects still need idempotency.",
+    "strong_answer_signals": [
+      "Identifies wall-clock and random values as nondeterministic inputs.",
+      "Captures them within checkpointed task boundaries.",
+      "Retains retry-safe design for tasks that never completed."
+    ],
+    "weak_answer_signals": [
+      "Assumes checkpoint replay reproduces unrecorded randomness automatically.",
+      "Confuses deterministic values with idempotent side effects."
+    ],
+    "common_mistakes": [
+      "Reading the current time again during replay when the original timestamp matters.",
+      "Treating a task boundary as an exactly-once guarantee."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens to a completed task result on resume?",
+        "short_answer": "LangGraph restores its result instead of rerunning that completed task."
+      },
+      {
+        "question": "What if the task started but did not finish?",
+        "short_answer": "It may execute again, so writes still need idempotency protection."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Functional API overview",
+        "publisher": "LangChain LangGraph documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/functional-api",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "LangGraph Python Functional API documentation retrieved 2026-11-05; no package-version behavior beyond documented replay semantics.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/functional-api"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-langgraph-interrupt-side-effect-replay",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent errors and recovery",
+    "subtopic": "Side effects around human interrupts",
+    "level": "L3",
+    "type": "debugging",
+    "question": "After a LangGraph approval interrupt is resumed, a node repeats a database update that ran before the interrupt. Why, and how would you fix it?",
+    "what_is_assessed": "Understanding that resuming an interrupt reruns its node and can repeat earlier side effects.",
+    "short_answer": "LangGraph resumes by rerunning the node containing the interrupt, so code before the interrupt can execute again. Make any pre-interrupt side effect idempotent, move it after the interrupt when safe, or split it into a separate node with an explicit state boundary. Verify the chosen pattern with a pause/resume test; do not assume the node continues at the exact source line after the interrupt.",
+    "deep_explanation": "LangGraph's interrupts guide says the node containing an interrupt is rerun on resume and specifically warns that side effects before the interrupt may repeat. It recommends idempotent operations, placing effects after the interrupt when appropriate, or separating effects into nodes. The safe ordering depends on business semantics, so the answer does not treat moving every effect as universally correct.",
+    "strong_answer_signals": [
+      "Explains node replay rather than line-level continuation.",
+      "Offers idempotency or a deliberate effect boundary.",
+      "Tests the actual pause/resume path."
+    ],
+    "weak_answer_signals": [
+      "Assumes the pre-interrupt code executes only once.",
+      "Moves a consequential write without considering approval semantics."
+    ],
+    "common_mistakes": [
+      "Creating duplicate records on every approval resume.",
+      "Using interrupt as a transaction rollback mechanism."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can be done if the write must happen before approval?",
+        "short_answer": "Make it idempotent or record its completion so replay does not duplicate it."
+      },
+      {
+        "question": "Does interrupt roll back earlier writes?",
+        "short_answer": "No; the guide warns those effects can run again on resume."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Interrupts",
+        "publisher": "LangChain LangGraph documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "LangGraph Python interrupts documentation retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/interrupts"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-langgraph-interrupt-persistence-contract",
+    "bank": "agentic-ai-engineer",
+    "topic": "Session state and turn control",
+    "subtopic": "Resumable human interrupts",
+    "level": "L3",
+    "type": "design",
+    "question": "A LangGraph approval pause must survive a server restart. What must the application provide to resume it?",
+    "what_is_assessed": "Knowledge of the persistence, thread identity, and serialization requirements for resuming an interrupt.",
+    "short_answer": "Configure a durable checkpointer, invoke the workflow with a stable thread ID, and ensure the interrupt payload is JSON-serializable. On resume, use the same thread identity and supply the response through the documented resume mechanism. An in-memory checkpoint or missing thread ID is not a durable cross-process recovery design.",
+    "deep_explanation": "LangGraph's interrupt guide lists a checkpointer, a thread ID, and a JSON-serializable interrupt value as requirements; it recommends a persistent checkpointer in production. It describes resuming with a response that becomes the return value of the interrupt call. This is framework-specific behavior and should be checked against the installed version's docs.",
+    "strong_answer_signals": [
+      "Names a persistent checkpointer and stable thread ID.",
+      "Keeps the interrupt payload serializable.",
+      "Resumes the original persisted run rather than starting an unrelated run."
+    ],
+    "weak_answer_signals": [
+      "Relies on process memory for a pause that must outlive a restart.",
+      "Starts a new thread and expects it to recover the prior state."
+    ],
+    "common_mistakes": [
+      "Persisting the prompt but not the workflow checkpoint.",
+      "Passing non-serializable objects as interrupt payloads."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why is the thread ID necessary?",
+        "short_answer": "It identifies the saved state to resume."
+      },
+      {
+        "question": "What should production use for state persistence?",
+        "short_answer": "A persistent checkpointer rather than process-local memory."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Interrupts",
+        "publisher": "LangChain LangGraph documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "LangGraph Python interrupts documentation retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/interrupts"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-langgraph-pending-write-recovery",
+    "bank": "agentic-ai-engineer",
+    "topic": "Parallel agent state management",
+    "subtopic": "Recovery after parallel node failure",
+    "level": "L3",
+    "type": "scenario",
+    "question": "In a LangGraph super-step, one parallel node fails after its peers succeed. Must the successful nodes run again on resume?",
+    "what_is_assessed": "Understanding of checkpointed pending writes and fault recovery within a parallel super-step.",
+    "short_answer": "Not necessarily. LangGraph checkpointers store pending writes from nodes that completed successfully in the failed super-step; when execution resumes from that step, those successful nodes do not need to rerun. Confirm that the workflow is using the configured checkpointer and design each node's external effects safely in case its own execution did not complete.",
+    "deep_explanation": "The LangGraph checkpointer guide documents pending writes as per-task persistence that allows successful sibling nodes in a super-step to avoid rerunning when another node fails. This does not establish exactly-once behavior for an interrupted node or its external service calls, so retry-safe effects remain important.",
+    "strong_answer_signals": [
+      "Recognizes successful nodes' pending writes can be reused.",
+      "Distinguishes sibling recovery from the failed node's retry behavior.",
+      "Keeps external side effects idempotent where execution can repeat."
+    ],
+    "weak_answer_signals": [
+      "Assumes every node always reruns after any sibling failure.",
+      "Assumes all external effects are transactionally covered by the checkpointer."
+    ],
+    "common_mistakes": [
+      "Disabling checkpointing because the workflow already has parallelism.",
+      "Assuming pending writes protect calls that never completed."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the checkpointer preserve in this case?",
+        "short_answer": "Writes from nodes that completed successfully in that super-step."
+      },
+      {
+        "question": "Does it guarantee the failed node's external call ran exactly once?",
+        "short_answer": "No; unfinished work may be retried, so effects need their own safety controls."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Checkpointers",
+        "publisher": "LangChain LangGraph documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/checkpointers",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "LangGraph Python checkpointer documentation retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.langchain.com/oss/python/langgraph/checkpointers"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-a2a-nonblocking-task-polling",
+    "bank": "agentic-ai-engineer",
+    "topic": "Multi-agent orchestration",
+    "subtopic": "A2A non-blocking task lifecycle",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An A2A Send Message call returns quickly with a task in WORKING state. Can the client present that response as the completed agent result?",
+    "what_is_assessed": "Ability to distinguish immediate task creation from completion and continue observing an asynchronous agent task.",
+    "short_answer": "No. In A2A v1.0.1, non-blocking mode returns after creating the task even while work continues. The client should retain the task ID and poll Get Task, subscribe to task updates, or use the documented notification mechanism; it should present completion only after observing a terminal state and its artifacts.",
+    "deep_explanation": "The A2A v1.0.1 specification describes non-blocking Send Message as returning immediately after task creation and assigns the caller responsibility for polling, subscribing, or receiving push updates. The answer distinguishes task acceptance from completion and scopes the claim to that protocol version.",
+    "strong_answer_signals": [
+      "Treats WORKING as in progress, not success.",
+      "Stores the task identifier and uses a supported update mechanism.",
+      "Waits for a terminal state and final artifacts before declaring completion."
+    ],
+    "weak_answer_signals": [
+      "Treats any successful HTTP/JSON-RPC response as completed work.",
+      "Drops the task ID after returning an initial response."
+    ],
+    "common_mistakes": [
+      "Showing an empty or partial artifact as final output.",
+      "Polling indefinitely without timeout or user-visible progress policy."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can the client do after receiving a working task?",
+        "short_answer": "Poll Get Task, subscribe to updates, or use push notifications."
+      },
+      {
+        "question": "What does task acceptance establish?",
+        "short_answer": "That the task was created, not that its work completed."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "A2A Protocol Specification v1.0.1",
+        "publisher": "Agent2Agent Protocol",
+        "url": "https://a2a-protocol.org/v1.0.1/specification/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "A2A protocol specification version 1.0.1; retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://a2a-protocol.org/v1.0.1/specification/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-a2a-input-required-is-interrupted",
+    "bank": "agentic-ai-engineer",
+    "topic": "Multi-agent orchestration",
+    "subtopic": "A2A interrupted task states",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An A2A task returns INPUT_REQUIRED or AUTH_REQUIRED. Should the client mark it failed or completed?",
+    "what_is_assessed": "Understanding that A2A distinguishes interrupted states from terminal success and failure states.",
+    "short_answer": "Neither. A2A v1.0.1 treats INPUT_REQUIRED and AUTH_REQUIRED as interrupted states, distinct from terminal states such as COMPLETED, FAILED, CANCELED, or REJECTED. Surface the required next step to the user or authentication flow and continue according to the task's protocol interaction; do not report success or failure until the task reaches an appropriate terminal state.",
+    "deep_explanation": "The A2A specification's blocking-operation semantics list terminal states separately from INPUT_REQUIRED and AUTH_REQUIRED, which are interrupted states. The client should preserve the task and communicate the needed next action. Exact continuation behavior depends on the task interaction and protocol operation; this answer does not invent a generic resume endpoint.",
+    "strong_answer_signals": [
+      "Distinguishes interrupted from terminal task states.",
+      "Preserves task identity while obtaining required input or authorization.",
+      "Does not claim a generic continuation mechanism unsupported by the task flow."
+    ],
+    "weak_answer_signals": [
+      "Maps every non-COMPLETED state to failure.",
+      "Reports INPUT_REQUIRED as a successful final answer."
+    ],
+    "common_mistakes": [
+      "Discarding the task before collecting requested input.",
+      "Assuming authorization can be bypassed by restarting the request."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which states are listed as terminal in the specification?",
+        "short_answer": "COMPLETED, FAILED, CANCELED, and REJECTED."
+      },
+      {
+        "question": "Why isn't INPUT_REQUIRED a failure?",
+        "short_answer": "It indicates an interrupted task awaiting required input, not a terminal failure."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "A2A Protocol Specification v1.0.1",
+        "publisher": "Agent2Agent Protocol",
+        "url": "https://a2a-protocol.org/v1.0.1/specification/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "A2A protocol specification version 1.0.1; retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://a2a-protocol.org/v1.0.1/specification/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-a2a-send-message-retry-dedup",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent errors and recovery",
+    "subtopic": "A2A message retry semantics",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A client loses the response to an A2A Send Message request and wants to retry. What duplicate-work risk should it account for?",
+    "what_is_assessed": "Ability to avoid assuming that message submission retries are idempotent across A2A agents.",
+    "short_answer": "A2A v1.0.1 says Send Message operations may be idempotent, not that they must be; agents may use messageId to detect duplicates. The client should preserve the original message identity, check task state or available history before resending, and use application-level deduplication where supported. Do not assume a retry is harmless.",
+    "deep_explanation": "The A2A operation semantics explicitly distinguish naturally idempotent Get operations from Send Message operations that may be idempotent, with messageId as a possible duplicate-detection aid. The client should handle ambiguous network outcomes conservatively; the protocol wording does not guarantee that every agent deduplicates.",
+    "strong_answer_signals": [
+      "Knows Send Message idempotency is optional in the spec.",
+      "Uses message identity and available task state to reconcile an ambiguous result.",
+      "Avoids blind resubmission."
+    ],
+    "weak_answer_signals": [
+      "Claims all A2A message sends are idempotent.",
+      "Generates a new message ID for every retry without reconciliation."
+    ],
+    "common_mistakes": [
+      "Starting duplicate long-running tasks after a lost response.",
+      "Treating messageId as a guaranteed cross-agent idempotency key."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the spec say about messageId?",
+        "short_answer": "Agents may use it to detect duplicate messages."
+      },
+      {
+        "question": "What is a safer first step after a lost response?",
+        "short_answer": "Reconcile against the existing task or message state before resending."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "A2A Protocol Specification v1.0.1",
+        "publisher": "Agent2Agent Protocol",
+        "url": "https://a2a-protocol.org/v1.0.1/specification/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "A2A protocol specification version 1.0.1; retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://a2a-protocol.org/v1.0.1/specification/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-a2a-task-id-vs-context-id",
+    "bank": "agentic-ai-engineer",
+    "topic": "Multi-agent orchestration",
+    "subtopic": "A2A task and context identity",
+    "level": "L2",
+    "type": "concept",
+    "question": "In A2A, why should a client track both task ID and context ID instead of treating them as interchangeable?",
+    "what_is_assessed": "Knowledge of the distinct identity and grouping roles in the A2A task model.",
+    "short_answer": "A task ID identifies one stateful unit of work, while contextId groups related interactions for conversational or session context. A context can therefore be useful for correlation across interactions without replacing the task ID needed to retrieve a particular task's status and artifacts. Preserve both according to their documented roles.",
+    "deep_explanation": "The A2A v1.0.1 specification describes tasks as stateful units of work with unique IDs, and uses contextId to associate related messages or tasks with a conversation/session. The distinction is about scope: a context is a grouping identifier, while a task ID addresses a particular task. Keep the protocol's opaque identifiers opaque rather than deriving semantics beyond the spec.",
+    "strong_answer_signals": [
+      "Uses task ID for an individual task's lifecycle.",
+      "Uses context ID for related conversation/session interactions.",
+      "Does not substitute a broader context key for a task lookup."
+    ],
+    "weak_answer_signals": [
+      "Assumes contextId identifies one task only.",
+      "Uses task ID as a conversation-wide identity."
+    ],
+    "common_mistakes": [
+      "Overwriting task-level status when a context has multiple tasks.",
+      "Parsing opaque identifiers as if they encoded lifecycle state."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which identifier should be used to retrieve one task?",
+        "short_answer": "The task ID."
+      },
+      {
+        "question": "What does contextId help associate?",
+        "short_answer": "Related interactions within a conversation or session."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "A2A Protocol Specification v1.0.1",
+        "publisher": "Agent2Agent Protocol",
+        "url": "https://a2a-protocol.org/v1.0.1/specification/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "A2A protocol specification version 1.0.1; retrieved 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://a2a-protocol.org/v1.0.1/specification/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. The answer preserves the source's stated scope."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-openai-approval-callback-does-not-enable-approval",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Agents SDK approval configuration",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An OpenAI Agents SDK tool has an on_approval callback, but the run never pauses for approval. What configuration mistake should you check?",
+    "what_is_assessed": "Ability to distinguish the condition that requires approval from the callback that decides an approval request.",
+    "short_answer": "Check whether the tool's needs_approval setting is enabled or returns true for that call. The SDK guide says an on_approval callback alone does not enable approval; it runs only when approval is required and no decision already exists. Test both the pause path and the approved/rejected outcomes before relying on the callback.",
+    "deep_explanation": "The OpenAI Agents SDK tools guide states that approval-sensitive tools need needs_approval set to true or a per-call policy, and that on_approval is invoked only when approval is required and no existing decision is present. It explicitly warns that setting the callback alone does not enable approval. This is an SDK configuration detail, not a general claim about every agent framework.",
+    "strong_answer_signals": [
+      "Checks the needs_approval condition separately from the callback.",
+      "Understands the callback does not itself activate approval gating.",
+      "Tests required, approved, rejected, and already-decided paths."
+    ],
+    "weak_answer_signals": [
+      "Assumes a callback declaration automatically pauses every tool call.",
+      "Treats the callback as a substitute for a tool approval policy."
+    ],
+    "common_mistakes": [
+      "Deploying a high-impact tool without confirming it actually pauses.",
+      "Confusing programmatic approval with an always-required human interruption."
+    ],
+    "follow_ups": [
+      {
+        "question": "When does on_approval run according to the guide?",
+        "short_answer": "When approval is required and there is no existing approval decision."
+      },
+      {
+        "question": "How can approval be required?",
+        "short_answer": "Set needs_approval to true or provide a per-call approval policy."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/tools/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK Python tools guide retrieved 2026-11-05; no SDK version claim.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/tools/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "A separate source-to-answer pass confirmed the cited rule and checked that the answer does not extend it into an undocumented guarantee. Provider or framework behavior is explicitly scoped to the documentation retrieved on 2026-11-05."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]
