@@ -1,4 +1,4 @@
-- [OpenAPI and Zod generation](openapi-integer-generation.md) — avoid OpenAPI integer and email formats while shared validators remain on Zod 3.
+- [Dependency security compatibility](dependency-security-compatibility.md) — exercise parent APIs after transitive major overrides; lockfile fixtures are also scanned.
 - [Route registry import boundary](route-registry-import-boundary.md) — keep the JSON import attribute behind one TypeScript wrapper for consistent Vite builds and Node tests.
 - [Public API route ordering](public-api-route-ordering.md) — mount unauthenticated data routes before the workspace router, whose catch-all auth middleware otherwise returns 401.
 - [Live editorial source fetching](live-editorial-source-fetch.md) — large parallel public-article scrapes can 500; keep source links and brief labeling when extraction is unstable.

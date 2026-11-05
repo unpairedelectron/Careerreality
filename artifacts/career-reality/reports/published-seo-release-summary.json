@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T15:19:57.510Z",
-  "seoStatus": "fail",
+  "generatedAt": "2026-11-05T17:14:24.385Z",
+  "seoStatus": "pass",
   "configurationStatus": "ok",
   "effectiveSitemapAuditWarnMs": 5000,
   "configurationWarnings": [],
   "localFailureCount": 0,
-  "publishedFailureCount": 1
+  "publishedFailureCount": 0
 }

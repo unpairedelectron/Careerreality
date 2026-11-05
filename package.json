@@ -6,6 +6,7 @@
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
     "build": "pnpm run validate:dependency-lock && pnpm run test:report-rate-limit && pnpm run typecheck && pnpm -r --if-present run build",
     "validate:dependency-lock": "node scripts/test-validate-dependency-lock.mjs && pnpm install --lockfile-only --frozen-lockfile --ignore-scripts --reporter=append-only && node scripts/validate-dependency-lock.mjs",
+    "test:dependency-security": "node --test scripts/test-dependency-security.mjs",
     "test:report-rate-limit": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/report-rate-limiter.test.ts",
     "test:resume-intelligence": "DATABASE_URL=postgresql://resume-test:resume-test@127.0.0.1:5432/resume-test pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/resume-intelligence.test.ts",
     "test:resume-storage": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/tests/career-profile-storage.test.ts",

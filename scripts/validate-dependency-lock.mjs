@@ -94,7 +94,9 @@ for (const [name, actual] of lockOverrides) {
 const exactPinnedOverrides = [...workspaceOverrides].filter(([, value]) => /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(value));
 for (const [name, expected] of exactPinnedOverrides) {
   const packageKey = `${name}@${expected}`;
-  if (!packageKeys.has(packageKey) || !snapshotKeys.has(packageKey)) {
+  // pnpm decorates snapshots of peer-dependent packages with "(peer@version)".
+  // The package entry remains undecorated; compare snapshot versions instead.
+  if (!packageKeys.has(packageKey) || !versionsForPackage(snapshotKeys, name).includes(expected)) {
     errors.push(`package ${name}: expected resolved version ${expected} in both lockfile packages and snapshots`);
   }
 

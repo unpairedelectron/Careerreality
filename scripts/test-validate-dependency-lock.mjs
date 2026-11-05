@@ -34,15 +34,32 @@ try {
   }
 
   const staleLockfilePath = path.join(staleRoot, "pnpm-lock.yaml");
+  // A package with peers has no bare snapshot key, only peer-qualified keys.
+  const peerLockfile = fs.readFileSync(staleLockfilePath, "utf8").replace(
+    "snapshots:\n  brace-expansion@5.0.12: {}",
+    "snapshots:\n  brace-expansion@5.0.12(peer@1.0.0): {}",
+  );
+  fs.writeFileSync(staleLockfilePath, peerLockfile);
+  const peerResult = runValidator(staleRoot);
+  assert.equal(peerResult.status, 0, `Expected peer-qualified snapshots to pass:\n${peerResult.output}`);
+
   const staleLockfile = fs.readFileSync(staleLockfilePath, "utf8").replaceAll(
-    "  fast-uri@3.1.7: {}",
-    "  fast-uri@3.1.6: {}\n  fast-uri@3.1.7: {}",
+    "  fast-uri@3.1.9: {}",
+    "  fast-uri@3.1.8: {}\n  fast-uri@3.1.9: {}",
   );
   fs.writeFileSync(staleLockfilePath, staleLockfile);
 
   const staleResult = runValidator(staleRoot);
   assert.equal(staleResult.status, 1, `Expected the stale fixture to fail:\n${staleResult.output}`);
-  assert.match(staleResult.output, /package fast-uri: stale resolved version 3\.1\.6; expected 3\.1\.7/);
+  assert.match(staleResult.output, /package fast-uri: stale resolved version 3\.1\.8; expected 3\.1\.9/);
+
+  fs.writeFileSync(staleLockfilePath, peerLockfile.replace(
+    "brace-expansion@5.0.12(peer@1.0.0)",
+    "brace-expansion@5.0.11(peer@1.0.0)",
+  ));
+  const stalePeerResult = runValidator(staleRoot);
+  assert.equal(stalePeerResult.status, 1, `Expected stale peer-qualified snapshots to fail:\n${stalePeerResult.output}`);
+  assert.match(stalePeerResult.output, /package brace-expansion: stale resolved version 5\.0\.11; expected 5\.0\.12/);
 } finally {
   fs.rmSync(staleRoot, { recursive: true, force: true });
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T16:30:05.293Z",
+  "generatedAt": "2026-11-05T17:14:24.385Z",
   "origin": "https://careerreality.in",
   "alternateOrigins": [
     "https://www.careerreality.in",
@@ -22,7 +22,7 @@
       "/sitemap.xml": {
         "status": 200,
         "finalUrl": "https://careerreality.in/sitemap.xml",
-        "locationCount": 81,
+        "locationCount": 87,
         "locationOrigins": [
           "https://careerreality.in"
         ],
@@ -73,7 +73,7 @@
         "/sitemap.xml": {
           "status": 200,
           "finalUrl": "https://careerreality.in/sitemap.xml",
-          "locationCount": 81,
+          "locationCount": 87,
           "locationOrigins": [
             "https://careerreality.in"
           ],
@@ -123,7 +123,7 @@
         "/sitemap.xml": {
           "status": 200,
           "finalUrl": "https://indigo-bowed-megabyte.replit.app/sitemap.xml",
-          "locationCount": 81,
+          "locationCount": 87,
           "locationOrigins": [
             "https://careerreality.in"
           ],
@@ -586,6 +586,66 @@
         "indexable": true,
         "titleLength": 58,
         "canonical": "https://careerreality.in/home-loan-stress-test/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/",
+        "indexable": true,
+        "titleLength": 56,
+        "canonical": "https://careerreality.in/interview-guides/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/agentic-ai-engineer/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/agentic-ai-engineer/",
+        "indexable": true,
+        "titleLength": 55,
+        "canonical": "https://careerreality.in/interview-guides/agentic-ai-engineer/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/ai-ml-engineer/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/ai-ml-engineer/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/interview-guides/ai-ml-engineer/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/data-engineer/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/data-engineer/",
+        "indexable": true,
+        "titleLength": 59,
+        "canonical": "https://careerreality.in/interview-guides/data-engineer/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/data-scientist/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/data-scientist/",
+        "indexable": true,
+        "titleLength": 60,
+        "canonical": "https://careerreality.in/interview-guides/data-scientist/",
+        "passed": true,
+        "attempts": 1,
+        "retryOutcome": "not-needed"
+      },
+      "https://careerreality.in/interview-guides/gen-ai-engineer/": {
+        "status": 200,
+        "finalUrl": "https://careerreality.in/interview-guides/gen-ai-engineer/",
+        "indexable": true,
+        "titleLength": 58,
+        "canonical": "https://careerreality.in/interview-guides/gen-ai-engineer/",
         "passed": true,
         "attempts": 1,
         "retryOutcome": "not-needed"
@@ -1081,7 +1141,7 @@
       "label": "Local sitemap contains apex URLs only",
       "passed": true,
       "expected": "all <loc> entries use https://careerreality.in",
-      "observed": "81 apex URLs",
+      "observed": "87 apex URLs",
       "kind": "local",
       "status": "pass"
     },
@@ -1096,8 +1156,8 @@
     {
       "label": "Local sitemap matches registered indexable snapshots",
       "passed": true,
-      "expected": "81 registered routes; no article URLs",
-      "observed": "81 URLs; legacy article absent",
+      "expected": "87 registered routes; no article URLs",
+      "observed": "87 URLs; legacy article absent",
       "kind": "local",
       "status": "pass"
     },
@@ -2104,8 +2164,8 @@
     {
       "label": "Published sitemap matches local route set",
       "passed": true,
-      "expected": "81 canonical URLs matching the local build",
-      "observed": "81 live URLs; missing 0; unexpected 0",
+      "expected": "87 canonical URLs matching the local build",
+      "observed": "87 live URLs; missing 0; unexpected 0",
       "kind": "live",
       "status": "pass"
     },
@@ -2495,6 +2555,54 @@
     },
     {
       "label": "https://careerreality.in/home-loan-stress-test/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/agentic-ai-engineer/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/ai-ml-engineer/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/data-engineer/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/data-scientist/ indexability",
+      "passed": true,
+      "expected": "index, follow",
+      "observed": "index, follow",
+      "kind": "live",
+      "status": "pass"
+    },
+    {
+      "label": "https://careerreality.in/interview-guides/gen-ai-engineer/ indexability",
       "passed": true,
       "expected": "index, follow",
       "observed": "index, follow",

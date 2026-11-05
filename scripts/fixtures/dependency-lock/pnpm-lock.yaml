@@ -6,27 +6,27 @@ settings:
 
 overrides:
   esbuild: 0.28.1
-  fast-uri: 3.1.7
-  js-yaml: 4.3.1
-  brace-expansion: 5.0.9
+  fast-uri: 3.1.9
+  js-yaml: 4.3.2
+  brace-expansion: 5.0.12
   nanoid: 3.3.18
-  qs: 6.16.0
+  qs: 6.17.1
 
 importers:
   .: {}
 
 packages:
-  brace-expansion@5.0.9: {}
+  brace-expansion@5.0.12: {}
   esbuild@0.28.1: {}
-  fast-uri@3.1.7: {}
-  js-yaml@4.3.1: {}
+  fast-uri@3.1.9: {}
+  js-yaml@4.3.2: {}
   nanoid@3.3.18: {}
-  qs@6.16.0: {}
+  qs@6.17.1: {}
 
 snapshots:
-  brace-expansion@5.0.9: {}
+  brace-expansion@5.0.12: {}
   esbuild@0.28.1: {}
-  fast-uri@3.1.7: {}
-  js-yaml@4.3.1: {}
+  fast-uri@3.1.9: {}
+  js-yaml@4.3.2: {}
   nanoid@3.3.18: {}
-  qs@6.16.0: {}
+  qs@6.17.1: {}
