@@ -2,29 +2,30 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 8,
+  "itemCount": 9,
   "countsByTopic": {
     "Retrieval-augmented generation": 3,
     "Generative AI evaluation": 2,
     "Generative AI safety and robustness": 1,
     "Model optimization and adaptation": 1,
-    "Structured outputs and data contracts": 1
+    "Structured outputs and data contracts": 1,
+    "Latency and inference efficiency": 1
   },
   "countsByLevel": {
     "L2": 6,
-    "L3": 2
+    "L3": 3
   },
   "countsByType": {
     "scenario": 5,
     "concept": 1,
-    "trade-off": 2
+    "trade-off": 3
   },
   "status": {
-    "schemaValid": 8,
-    "sourcesVerified": 8,
-    "rederived": 8,
+    "schemaValid": 9,
+    "sourcesVerified": 9,
+    "rederived": 9,
     "codeExecuted": 0,
-    "expertReviewPending": 8
+    "expertReviewPending": 9
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -77,6 +78,13 @@
       "expertReview": "pending"
     },
     "genai-schema-valid-output-is-not-safe-business-action": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-reduce-latency-by-measuring-the-bottleneck": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

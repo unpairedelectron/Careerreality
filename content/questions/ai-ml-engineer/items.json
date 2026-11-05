@@ -578,5 +578,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-amp-overflow-and-skipped-steps",
+    "bank": "ai-ml-engineer",
+    "topic": "Numerical stability and mixed precision",
+    "subtopic": "Gradient scaling and overflow",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A mixed-precision training run occasionally skips optimizer updates and its gradient scale drops below one. Does that alone mean GradScaler is broken?",
+    "what_is_assessed": "Understanding of gradient scaling behavior, overflow handling, and numerical compatibility checks in mixed-precision training.",
+    "short_answer": "No. Gradient scaling can skip an optimizer step when gradients contain infinities or NaNs, and the scale can decrease as the scaler responds to overflow; PyTorch does not guarantee the scale stays above one. I would inspect loss and gradients, check model compatibility with the chosen precision range, and compare a controlled run with a suitable precision configuration. Repeated skips or non-finite values still need investigation rather than being dismissed as normal.",
+    "deep_explanation": "PyTorch's automatic mixed-precision documentation explains that gradient scaling is used to reduce float16 gradient underflow. The GradScaler checks gradients before an update and can skip `optimizer.step()` when they contain infinities or NaNs. The docs also note that some bf16-pretrained models may exceed float16's range, causing overflow, and that the scale can fall below one. These are documented behaviors, not proof that any particular training run is healthy.",
+    "strong_answer_signals": [
+      "Explains that non-finite gradients can cause an optimizer step to be skipped.",
+      "Does not assume the scale must remain above one.",
+      "Checks numerical compatibility and investigates persistent loss or gradient anomalies."
+    ],
+    "weak_answer_signals": [
+      "Treats every skipped step as evidence of a scaler bug.",
+      "Assumes a falling scale is always harmless and ignores non-finite training signals."
+    ],
+    "common_mistakes": [
+      "Confusing gradient underflow protection with overflow detection.",
+      "Changing precision settings without comparing training stability and model quality."
+    ],
+    "follow_ups": [
+      {
+        "question": "When may GradScaler skip an optimizer step?",
+        "short_answer": "When gradients contain infinities or NaNs."
+      },
+      {
+        "question": "Does PyTorch guarantee the scale is greater than one?",
+        "short_answer": "No; the documentation explicitly says it may fall below one."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Automatic Mixed Precision package",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/amp.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 stable AMP documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/amp.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's skip-on-inf-or-NaN behavior and explicit caveat that the scale may fall below one; kept the diagnostic recommendation conditional."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-resume-training-needs-optimizer-state"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

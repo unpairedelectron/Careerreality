@@ -590,5 +590,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-select-imputation-for-prediction-objective",
+    "bank": "data-scientist",
+    "topic": "Missing-data strategy",
+    "subtopic": "Imputation and missingness signals",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "For a prediction task with missing feature values, should you default to the most sophisticated imputation method?",
+    "what_is_assessed": "Whether the candidate chooses a missing-data strategy based on the prediction objective and validates it as part of the modeling pipeline.",
+    "short_answer": "Not by default. Compare a simple baseline, consider a missingness indicator when the fact that a value is absent may be informative, and evaluate candidate approaches using the same leakage-safe validation splits as the model. More elaborate imputation may be useful, but it adds complexity and is not guaranteed to improve prediction. If the goal is statistical inference or quantifying uncertainty due to missing values, distinguish that from the prediction-only objective and consider whether a single imputation is sufficient.",
+    "deep_explanation": "Scikit-learn's imputation guide distinguishes data reconstruction from prediction and discusses simple imputers, missingness indicators, and iterative methods. It notes that preserving whether a value was missing can be informative for prediction. The guide also says the usefulness of single versus multiple imputation for prediction or classification remains an open problem when the user is not interested in uncertainty due to missing values. The right comparison is therefore task-specific; the cited guidance does not make one imputer universally best.",
+    "strong_answer_signals": [
+      "Starts from the prediction or inference objective rather than selecting complexity by default.",
+      "Considers a missingness indicator and compares alternatives on appropriate validation data.",
+      "Acknowledges uncertainty around whether multiple imputation helps prediction."
+    ],
+    "weak_answer_signals": [
+      "Assumes a more complex imputer must improve predictive performance.",
+      "Treats prediction accuracy and uncertainty-aware statistical inference as the same objective."
+    ],
+    "common_mistakes": [
+      "Fitting imputation outside the training folds and leaking information into evaluation.",
+      "Dropping missingness indicators without checking whether absence itself carries signal."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why might a missingness indicator help?",
+        "short_answer": "The fact that a value was absent may itself contain predictive information."
+      },
+      {
+        "question": "When might multiple imputation matter more?",
+        "short_answer": "When the analysis needs to represent uncertainty caused by missing values, rather than only predict outcomes."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Imputation of missing values",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/impute.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable imputation documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/impute.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified missing-indicator guidance and the source's explicit statement that the prediction value of single versus multiple imputation remains an open problem in the stated setting."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-separate-selection-and-final-test"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

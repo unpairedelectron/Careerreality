@@ -50,6 +50,19 @@
         "last_verified": "2026-11-04",
         "versions_checked": "Google Cloud ML Metadata documentation retrieved 2026-11-04"
       }]
+    },
+    {
+      "topic": "Numerical stability and mixed precision",
+      "subtopics": ["gradient scaling", "overflow", "skipped optimizer steps"],
+      "sources": [{
+        "title": "Automatic Mixed Precision package",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/amp.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 stable AMP documentation"
+      }]
     }
   ]
 }

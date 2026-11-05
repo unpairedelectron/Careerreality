@@ -580,5 +580,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-model-tool-call-is-not-tool-execution",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Model requests versus application actions",
+    "level": "L2",
+    "type": "scenario",
+    "question": "An agent returns a tool call to issue a refund. Has the refund happened, and what should the application do next?",
+    "what_is_assessed": "Whether the candidate understands that a model tool call is a request in an orchestration flow and that application code owns execution and result handling.",
+    "short_answer": "Not necessarily. A tool call from the model is an instruction to the application, not proof the external action ran. The application should validate the requested tool and arguments, apply authorization and any approval rules, execute the action only if permitted, and return the result linked to that tool call. It should then handle the model's next response or tool request and avoid claiming success until the application has a confirmed result.",
+    "deep_explanation": "OpenAI's function-calling guide describes tool calling as a multi-step conversation: the application sends available tools, receives a tool call, executes code on the application side, returns the tool output, and receives a final response or more tool calls. The model proposes a call; application code performs it. Authorization, approval, and confirmation requirements remain application responsibilities and depend on the product's risk policy.",
+    "strong_answer_signals": [
+      "Distinguishes a requested tool call from a completed external action.",
+      "Validates arguments and permissions before application-side execution.",
+      "Returns the actual tool result and reports success only after confirmation."
+    ],
+    "weak_answer_signals": [
+      "Assumes the model directly executed the refund.",
+      "Executes any requested tool without checking authorization or application policy."
+    ],
+    "common_mistakes": [
+      "Showing a success message before receiving a confirmed tool result.",
+      "Failing to associate a tool result with the call that requested it."
+    ],
+    "follow_ups": [
+      {
+        "question": "Who executes a function tool in the documented flow?",
+        "short_answer": "The application executes code using the model's tool-call input."
+      },
+      {
+        "question": "What should the model receive after tool execution?",
+        "short_answer": "The tool output, associated with the corresponding tool call."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04; orchestration details vary by API and runtime.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented multi-step tool-calling flow and application-side execution; kept authorization and approval as application policy responsibilities."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-sensitive-tool-action-human-approval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

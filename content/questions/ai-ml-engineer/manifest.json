@@ -2,26 +2,27 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 8,
+  "itemCount": 9,
   "countsByTopic": {
     "Training and reproducibility": 3,
     "Production ML testing and monitoring": 4,
-    "Training experiment tracking and lineage": 1
+    "Training experiment tracking and lineage": 1,
+    "Numerical stability and mixed precision": 1
   },
   "countsByLevel": {
     "L2": 3,
-    "L3": 5
+    "L3": 6
   },
   "countsByType": {
-    "debugging": 6,
+    "debugging": 7,
     "scenario": 2
   },
   "status": {
-    "schemaValid": 8,
-    "sourcesVerified": 8,
-    "rederived": 8,
+    "schemaValid": 9,
+    "sourcesVerified": 9,
+    "rederived": 9,
     "codeExecuted": 0,
-    "expertReviewPending": 8
+    "expertReviewPending": 9
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -74,6 +75,13 @@
       "expertReview": "pending"
     },
     "ml-use-artifact-lineage-to-debug-retrained-model-change": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-diagnose-amp-overflow-and-skipped-steps": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

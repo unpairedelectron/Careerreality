@@ -63,6 +63,19 @@
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI Agents API session guidance retrieved 2026-11-04"
       }]
+    },
+    {
+      "topic": "Tool execution and application boundaries",
+      "subtopics": ["model tool requests", "application-side execution", "tool result handling"],
+      "sources": [{
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04"
+      }]
     }
   ]
 }

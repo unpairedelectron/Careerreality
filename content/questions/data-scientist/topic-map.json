@@ -71,6 +71,19 @@
         "last_verified": "2026-11-04",
         "versions_checked": "Statsig experiment-monitoring guidance retrieved 2026-11-04"
       }]
+    },
+    {
+      "topic": "Missing-data strategy",
+      "subtopics": ["imputation", "missingness indicators", "single versus multiple imputation"],
+      "sources": [{
+        "title": "Imputation of missing values",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/impute.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "scikit-learn 1.9.1 stable imputation documentation"
+      }]
     }
   ]
 }

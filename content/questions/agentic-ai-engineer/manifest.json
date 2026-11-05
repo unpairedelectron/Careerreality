@@ -2,28 +2,29 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 75,
-  "itemCount": 8,
+  "itemCount": 9,
   "countsByTopic": {
     "Agent architecture": 4,
     "Agent evaluation and observability": 2,
     "Agent errors and recovery": 1,
-    "Session state and turn control": 1
+    "Session state and turn control": 1,
+    "Tool execution and application boundaries": 1
   },
   "countsByLevel": {
-    "L2": 6,
+    "L2": 7,
     "L3": 2
   },
   "countsByType": {
     "trade-off": 1,
-    "scenario": 5,
+    "scenario": 6,
     "debugging": 2
   },
   "status": {
-    "schemaValid": 8,
-    "sourcesVerified": 8,
-    "rederived": 8,
+    "schemaValid": 9,
+    "sourcesVerified": 9,
+    "rederived": 9,
     "codeExecuted": 0,
-    "expertReviewPending": 8
+    "expertReviewPending": 9
   },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
@@ -76,6 +77,13 @@
       "expertReview": "pending"
     },
     "agentic-use-session-state-for-long-running-work": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-model-tool-call-is-not-tool-execution": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

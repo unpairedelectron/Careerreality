@@ -91,6 +91,7 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ds-compare-two-conversion-rates-with-uncertainty` — Experiment design and uncertainty / Confidence intervals for two proportions: An experiment reports conversion of 10.8% for a new design and 10.4% for the current design. What would you report before recommending a launch?
 - `ds-interpret-macro-and-weighted-multiclass-scores` — Evaluation metrics and experiments / Macro and support-weighted averaging: A multiclass classifier has a much lower macro F1 than weighted F1. What might that difference reveal?
 - `ds-investigate-sample-ratio-mismatch-before-reading-lift` — Experiment data quality / Sample ratio mismatch: A 50/50 experiment has a persistent 57/43 exposure split, and the treatment conversion rate looks higher. What should you do before interpreting the lift?
+- `ds-select-imputation-for-prediction-objective` — Missing-data strategy / Imputation and missingness signals: For a prediction task with missing feature values, should you default to the most sophisticated imputation method?
 
 ## AI/ML Engineer
 
@@ -102,6 +103,7 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ml-enforce-latency-as-a-deployment-gate` — Production ML testing and monitoring / Serving latency and release gates: A candidate model improves predictive quality but exceeds the serving latency budget in staging. How would you decide whether it is ready?
 - `ml-gate-continuous-training-on-data-validation` — Production ML testing and monitoring / Training-data schema validation: A continuous-training pipeline starts failing after a source system adds a field and changes a feature's type. What should the pipeline do before training?
 - `ml-use-artifact-lineage-to-debug-retrained-model-change` — Training experiment tracking and lineage / Reproducing and tracing model artifacts: A retrained model changes production predictions even though its validation score is similar. What run information would help you trace the difference?
+- `ml-diagnose-amp-overflow-and-skipped-steps` — Numerical stability and mixed precision / Gradient scaling and overflow: A mixed-precision training run occasionally skips optimizer updates and its gradient scale drops below one. Does that alone mean GradScaler is broken?
 
 ## Generative AI Engineer
 
@@ -113,6 +115,7 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `genai-red-team-rag-against-instruction-injection` — Generative AI safety and robustness / Adversarial evaluation of untrusted content: A document-answering system sometimes follows instructions embedded in retrieved documents instead of answering the user. How would you test and reduce this risk?
 - `genai-select-rag-or-fine-tuning-from-error-pattern` — Model optimization and adaptation / Choosing RAG versus fine-tuning: An assistant gives inconsistent answers about both frequently changing policy facts and a stable writing format. Would you use RAG or fine-tuning for both problems?
 - `genai-schema-valid-output-is-not-safe-business-action` — Structured outputs and data contracts / Schema compliance versus semantic validity: A model returns schema-valid JSON for a CRM update. Is that enough to apply the update automatically?
+- `genai-reduce-latency-by-measuring-the-bottleneck` — Latency and inference efficiency / Output length and request orchestration: An interactive assistant has high response latency, but its prompt is long and its final answers are also verbose. What would you investigate first?
 
 ## Agentic AI Engineer
 
@@ -124,4 +127,5 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `agentic-place-guardrails-at-input-tool-and-output` — Agent architecture / Guardrail placement across workflow boundaries: A multi-step agent accepts user requests, calls tools, and returns a final answer. Where would you place automatic guardrails and human approval?
 - `agentic-check-side-effects-before-retrying-timeout` — Agent errors and recovery / Safe recovery after an ambiguous timeout: An agent run times out while processing a request that can update an external account. What should the recovery logic do before retrying?
 - `agentic-use-session-state-for-long-running-work` — Session state and turn control / Continuing and steering long-running work: A long-running agent task needs to preserve its work while a user provides follow-up guidance. How should the application manage the session?
+- `agentic-model-tool-call-is-not-tool-execution` — Tool execution and application boundaries / Model requests versus application actions: An agent returns a tool call to issue a refund. Has the refund happened, and what should the application do next?
 

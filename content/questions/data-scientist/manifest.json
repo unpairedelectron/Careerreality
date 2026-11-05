@@ -2,27 +2,28 @@
   "bank": "data-scientist",
   "target": 240,
   "minimum": 75,
-  "itemCount": 8,
+  "itemCount": 9,
   "countsByTopic": {
     "Machine learning evaluation": 3,
     "Evaluation metrics and experiments": 3,
     "Experiment design and uncertainty": 1,
-    "Experiment data quality": 1
+    "Experiment data quality": 1,
+    "Missing-data strategy": 1
   },
   "countsByLevel": {
-    "L2": 8
+    "L2": 9
   },
   "countsByType": {
-    "trade-off": 3,
+    "trade-off": 4,
     "concept": 2,
     "scenario": 3
   },
   "status": {
-    "schemaValid": 8,
-    "sourcesVerified": 8,
-    "rederived": 8,
+    "schemaValid": 9,
+    "sourcesVerified": 9,
+    "rederived": 9,
     "codeExecuted": 0,
-    "expertReviewPending": 8
+    "expertReviewPending": 9
   },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
@@ -75,6 +76,13 @@
       "expertReview": "pending"
     },
     "ds-investigate-sample-ratio-mismatch-before-reading-lift": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-select-imputation-for-prediction-objective": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

@@ -582,5 +582,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-reduce-latency-by-measuring-the-bottleneck",
+    "bank": "gen-ai-engineer",
+    "topic": "Latency and inference efficiency",
+    "subtopic": "Output length and request orchestration",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "An interactive assistant has high response latency, but its prompt is long and its final answers are also verbose. What would you investigate first?",
+    "what_is_assessed": "Ability to profile end-to-end latency and prioritize output generation, request orchestration, and model choices without assuming quality can be sacrificed.",
+    "short_answer": "Measure where time is spent before changing the system. Check output token volume and the number of sequential model requests, then assess whether concise responses or combining and parallelizing independent work can reduce wait time. Prompt length may matter for very large contexts, but the provider guidance says output generation is often the larger factor. If evaluating a smaller or faster model, verify it still meets task-quality criteria rather than trading quality away blindly.",
+    "deep_explanation": "OpenAI's latency guide identifies generated tokens as a major latency contributor and recommends generating fewer tokens, making fewer requests, parallelizing independent work, and considering model size. It also cautions that reducing input tokens often has a smaller impact unless contexts are very large. These are optimization directions, not a guarantee of a specific percentage improvement in every application; profile the actual request path and rerun quality evaluations after changes.",
+    "strong_answer_signals": [
+      "Profiles the real latency path before choosing an optimization.",
+      "Considers output length and sequential round trips as well as model selection.",
+      "Validates response quality and product behavior after reducing latency."
+    ],
+    "weak_answer_signals": [
+      "Assumes prompt length is always the dominant latency source.",
+      "Switches to a smaller model without checking task quality."
+    ],
+    "common_mistakes": [
+      "Parallelizing dependent calls that require the previous result.",
+      "Reducing output so much that required information or safety checks disappear."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is reducing prompt tokens more likely to matter?",
+        "short_answer": "When requests contain very large contexts or other profiling shows input processing is a bottleneck."
+      },
+      {
+        "question": "What should happen after a faster model is selected?",
+        "short_answer": "Run representative quality evaluations before adopting it."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Latency optimization",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API latency guidance retrieved 2026-11-04; performance heuristics are not guarantees for every workload.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/latency-optimization"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified source recommendations around generated tokens, fewer requests, parallelism, model size, and the typically smaller effect of input-token reductions; preserved the source's heuristic framing."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-select-rag-or-fine-tuning-from-error-pattern"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]
