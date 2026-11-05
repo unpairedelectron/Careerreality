@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap");
+
+:root {
+  --background: 45 25% 94%;
+  --foreground: 201 32% 14%;
+  --border: 135 10% 85%;
+  --input: 148 11% 76%;
+  --ring: 175 65% 26%;
+  --card: 48 38% 97%;
+  --card-foreground: 201 32% 14%;
+  --primary: 175 65% 26%;
+  --primary-foreground: 90 27% 96%;
+  --secondary: 130 12% 90%;
+  --secondary-foreground: 201 32% 14%;
+  --muted: 77 13% 90%;
+  --muted-foreground: 190 9% 38%;
+  --accent: 10 36% 43%;
+  --accent-foreground: 24 100% 98%;
+  --destructive: 0 43% 49%;
+  --destructive-foreground: 24 100% 98%;
+  --app-font-sans: "Manrope", sans-serif;
+  --app-font-serif: "Newsreader", Georgia, serif;
+  --app-font-mono: "DM Mono", monospace;
+  --radius: .8rem;
+}
+
+.dark {
+  --background: 198 28% 9%;
+  --foreground: 90 21% 95%;
+  --border: 186 16% 25%;
+  --input: 175 13% 33%;
+  --ring: 164 50% 63%;
+  --card: 194 25% 14%;
+  --card-foreground: 90 21% 95%;
+  --primary: 164 50% 63%;
+  --primary-foreground: 178 51% 10%;
+  --secondary: 180 17% 19%;
+  --secondary-foreground: 90 21% 95%;
+  --muted: 192 23% 17%;
+  --muted-foreground: 166 9% 73%;
+  --accent: 18 65% 68%;
+  --accent-foreground: 11 33% 13%;
+  --destructive: 5 80% 69%;
+  --destructive-foreground: 11 33% 13%;
+}
+
+.ig-extracted {
+  min-height: 100vh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--app-font-sans);
+}
+
+.ig-extracted .font-display {
+  font-family: var(--app-font-serif);
+}

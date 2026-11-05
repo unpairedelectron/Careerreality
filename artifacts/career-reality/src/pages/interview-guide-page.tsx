@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { InterviewGuide } from "@/components/interview-guide/InterviewGuide";
+import { InterviewGuideChooser } from "@/components/interview-guide/InterviewGuideChooser";
 import type { InterviewGuideQuestion } from "@/components/interview-guide/types";
 import dataEngineerItems from "../../../../content/questions/data-engineer/items.json";
 import dataScientistItems from "../../../../content/questions/data-scientist/items.json";
@@ -76,17 +77,24 @@ export function InterviewGuidePage() {
   );
 
   if (!role) {
-    return (
-      <main className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="font-display text-4xl">Choose an interview guide</h1>
-        <p className="mt-3 text-muted-foreground">These draft guides are educational resources, not predictions about hiring outcomes. Independent expert review is pending.</p>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-          {Object.entries(roles).map(([id, entry]) => (
-            <li key={id}><a className="block rounded-xl border border-border bg-card p-5 font-semibold text-primary underline" href={`/interview-guides/${id}`}>{entry.title}</a></li>
-          ))}
-        </ul>
-      </main>
-    );
+    const topicNotes: Record<RoleSlug, string> = {
+      "data-engineer": "Pipelines, platforms & data quality",
+      "data-scientist": "Statistics, experimentation & impact",
+      "ai-ml-engineer": "Models, systems & production ML",
+      "gen-ai-engineer": "LLMs, retrieval & evaluation",
+      "agentic-ai-engineer": "Agents, tools & orchestration",
+    };
+    const chooserRoles = Object.entries(roles).map(([id, entry], index) => {
+      const roleSlug = id as RoleSlug;
+      return {
+        id: roleSlug,
+        title: entry.title,
+        count: entry.items.length,
+        index: String(index + 1).padStart(2, "0"),
+        note: topicNotes[roleSlug],
+      };
+    });
+    return <InterviewGuideChooser roles={chooserRoles} />;
   }
 
   return (

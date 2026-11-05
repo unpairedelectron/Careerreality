@@ -11,5 +11,7 @@ export const modules: ModuleMap = {
   "./components/mockups/career-plan-market/PlanStory.tsx": () => import("../components/mockups/career-plan-market/PlanStory.tsx"),
   "./components/mockups/career-reality/CareerRealityCompass.tsx": () => import("../components/mockups/career-reality/CareerRealityCompass.tsx"),
   "./components/mockups/career-reality/Current.tsx": () => import("../components/mockups/career-reality/Current.tsx"),
-  "./components/mockups/career-reality/Redesign.tsx": () => import("../components/mockups/career-reality/Redesign.tsx")
+  "./components/mockups/career-reality/Redesign.tsx": () => import("../components/mockups/career-reality/Redesign.tsx"),
+  "./components/mockups/interview-guide-chooser/Current.tsx": () => import("../components/mockups/interview-guide-chooser/Current.tsx"),
+  "./components/mockups/interview-guide-chooser/Redesign.tsx": () => import("../components/mockups/interview-guide-chooser/Redesign.tsx")
 };
