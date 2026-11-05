@@ -173,10 +173,10 @@ for (const bank of banks) {
 const guideConfig = JSON.parse(fs.readFileSync(path.join(contentRoot, "guide-config.json"), "utf8"));
 if (
   guideConfig.contentTier !== "complete-guide" ||
-  guideConfig.completeInterviewGuidesEnabled !== false ||
+  guideConfig.completeInterviewGuidesEnabled !== true ||
   guideConfig.progressStorage !== "local-only"
 ) {
-  addFailure("guide-config.json", "guide tier, disabled feature flag, and local-only storage boundary must be explicit");
+  addFailure("guide-config.json", "guide tier, enabled feature flag, and local-only storage boundary must be explicit");
 }
 
 // Documented near-duplicate gate: Jaccard similarity over normalized question tokens; reject > 0.82.

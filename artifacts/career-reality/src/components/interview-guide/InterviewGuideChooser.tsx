@@ -35,7 +35,7 @@ export function InterviewGuideChooser({ roles }: InterviewGuideChooserProps) {
           <aside className="ig-edition" aria-label="About these guides">
             <strong>Useful context, not certainty.</strong>
             These guides are educational resources—not predictions of hiring outcomes.{" "}
-            <span>Independent expert review is pending.</span>
+            <span>Owner-reviewed; independent SME review is not claimed.</span>
           </aside>
         </section>
 

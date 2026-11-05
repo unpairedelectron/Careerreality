@@ -19,6 +19,7 @@ export const siteMap: SiteMapSection[] = [
       { label: "Home", href: "/" },
       { label: "All tools", href: "/tools" },
       { label: "Editorial guides", href: "/guides" },
+      { label: "Interview guides", href: "/interview-guides" },
       { label: "Rules and data", href: "/rules" },
       { label: "Layoff hub", href: "/layoffs" },
       { label: "Public sitemap", href: "/sitemap" },
@@ -72,7 +73,7 @@ const sitemapRoutes = routeRegistry.routes.filter(
 export const sitemapSections = [
   { label: "Home and hubs", items: sitemapRoutes.filter((route) => route.kind === "home" || route.kind === "hub") },
   { label: "Tools", items: sitemapRoutes.filter((route) => route.kind === "tool") },
-  { label: "Guides", items: sitemapRoutes.filter((route) => route.kind === "guide") },
+  { label: "Guides", items: sitemapRoutes.filter((route) => route.kind === "guide" || route.kind === "interview-guide") },
   { label: "Rules and data", items: sitemapRoutes.filter((route) => route.kind === "library") },
   { label: "Trust information", items: sitemapRoutes.filter((route) => route.kind === "trust") },
 ].filter((section) => section.items.length > 0);

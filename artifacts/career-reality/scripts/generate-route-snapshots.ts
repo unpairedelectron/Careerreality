@@ -103,6 +103,25 @@ const rulesLibraryData = JSON.parse(
     related: Array<{ label: string; url: string }>;
   }>;
 };
+const interviewRoleData = [
+  { slug: "data-engineer", title: "Data Engineer" },
+  { slug: "data-scientist", title: "Data Scientist" },
+  { slug: "ai-ml-engineer", title: "AI/ML Engineer" },
+  { slug: "gen-ai-engineer", title: "Generative AI Engineer" },
+  { slug: "agentic-ai-engineer", title: "Agentic AI Engineer" },
+].map((role) => {
+  const bankRoot = path.resolve(root, "../../content/questions", role.slug);
+  return {
+    ...role,
+    items: JSON.parse(fs.readFileSync(path.join(bankRoot, "items.json"), "utf8")) as Array<{
+      id: string;
+      topic: string;
+      subtopic: string;
+      question: string;
+      what_is_assessed: string;
+    }>,
+  };
+});
 const siteUrl = getSiteUrl();
 const basePath = (process.env.BASE_PATH || "/").replace(/\/+$/, "");
 routeRegistry.routes.forEach(assertPublicRouteDescription);
@@ -150,6 +169,8 @@ const routeToMeta = (route: RegistryRoute): StaticRouteMeta => ({
       : undefined,
   eyebrow: route.path === "/"
     ? "Career intelligence for India"
+    : route.kind === "interview-guide"
+      ? "Interview study guide / source-cited practice"
     : route.kind === "tool"
       ? "Decision tool / evidence first"
       : route.kind === "guide"
@@ -598,6 +619,10 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
 }
 
 function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotContent {
+  if (route === "/interview-guides" || route.startsWith("/interview-guides/")) {
+    return renderInterviewGuideSnapshotContent(route, meta);
+  }
+
   const trustContent = getReleaseTrustSnapshotContent(route) ?? getTrustSnapshotContent(route);
   if (trustContent) return trustContent;
 
@@ -1030,6 +1055,58 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
   };
 }
 
+function renderInterviewGuideSnapshotContent(route: string, meta: StaticRouteMeta): SnapshotContent {
+  if (route === "/interview-guides") {
+    const roleRoutes = routeRegistry.routes.filter((entry) => entry.kind === "interview-guide" && entry.sitemap);
+    return {
+      lead: "Choose a role-specific study guide with source-cited questions, answer signals, and browser-only preparation tools. These materials support practice; they do not predict hiring outcomes.",
+      sections: [
+        {
+          heading: "Choose an interview guide",
+          html: `<ul>${roleRoutes.map((entry) => {
+            const slug = entry.path.split("/").at(-1);
+            const role = interviewRoleData.find((candidate) => candidate.slug === slug);
+            return `<li><a href="${escapeHtml(publicPath(entry.path))}">${escapeHtml(entry.title)}</a> — ${role?.items.length ?? 0} questions. ${escapeHtml(entry.description)}</li>`;
+          }).join("")}</ul>`,
+        },
+        { heading: "How to use the question banks", body: "Work through the concepts and scenarios, explain your reasoning in your own words, and use the answer signals to identify gaps. Questions include cited references; fast-moving product and protocol details should be checked against those sources." },
+        { heading: "Review status", body: "The site owner reviewed the complete interview question set. No independent SME endorsement is claimed; check cited sources for details that may change." },
+      ],
+      relatedLinks: [
+        { href: publicPath("/guides"), label: "Browse CareerReality editorial guides" },
+        { href: publicPath("/about"), label: "About CareerReality" },
+        { href: publicPath("/editorial"), label: "Editorial standards" },
+      ],
+    };
+  }
+
+  const slug = route.split("/").at(-1);
+  const role = interviewRoleData.find((candidate) => candidate.slug === slug);
+  if (!role) throw new Error(`Missing question-bank content for interview guide route ${route}`);
+  const reviewNote = `The ${role.title} questions were reviewed by the site owner. Independent SME endorsement is not claimed; verify fast-moving details against cited sources.`;
+
+  const grouped = new Map<string, typeof role.items>();
+  for (const item of role.items) grouped.set(item.topic, [...(grouped.get(item.topic) ?? []), item]);
+  const topicsHtml = [...grouped.entries()].map(([topic, items]) =>
+    `<section class="snapshot-question-topic"><h3>${escapeHtml(topic)} (${items.length})</h3><ol>${items.map((item) =>
+      `<li><article><h4>${escapeHtml(item.question)}</h4><p class="snapshot-question-meta">${escapeHtml(item.subtopic)}</p><p><strong>Assesses:</strong> ${escapeHtml(item.what_is_assessed)}</p></article></li>`,
+    ).join("")}</ol></section>`,
+  ).join("");
+
+  return {
+    lead: `${role.items.length} source-cited questions organize ${role.title} interview preparation across ${grouped.size} study topics. Each question includes an assessment focus and is available in the interactive guide with practice tools.`,
+    sections: [
+      { heading: "Review status and scope", body: `${reviewNote} This educational guide is not a hiring-outcome prediction.` },
+      { heading: `The ${role.title} question bank`, html: topicsHtml },
+    ],
+    relatedLinks: [
+      { href: publicPath("/interview-guides"), label: "Browse all role interview guides" },
+      { href: publicPath("/guides"), label: "Browse CareerReality editorial guides" },
+      { href: publicPath("/editorial"), label: "Editorial standards" },
+    ],
+  };
+}
+
 function renderStaticPage(
   route: string,
   meta: StaticRouteMeta,
@@ -1048,6 +1125,10 @@ function renderStaticPage(
     ? [{ href: publicPath("/"), label: "Home" }]
     : isGuide
       ? [{ href: publicPath("/"), label: "Home" }, { href: publicPath("/guides"), label: "Guides" }, { href: publicPath(route), label: meta.title }]
+      : route === "/interview-guides"
+        ? [{ href: publicPath("/"), label: "Home" }, { href: publicPath(route), label: "Interview guides" }]
+        : route.startsWith("/interview-guides/")
+          ? [{ href: publicPath("/"), label: "Home" }, { href: publicPath("/interview-guides"), label: "Interview guides" }, { href: publicPath(route), label: meta.title }]
       : route === "/companies"
         ? [{ href: publicPath("/"), label: "Home" }, { href: publicPath("/tools"), label: "Tools" }, { href: publicPath(route), label: "Employer check" }]
       : [{ href: publicPath("/"), label: "Home" }, { href: publicPath(route), label: meta.title }];
@@ -1109,6 +1190,7 @@ function renderStaticPage(
 function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: string): string {
   const organization = createSiteOrganization(siteUrl, basePath);
   const isGuide = routeRegistry.routes.find((entry) => entry.path === route)?.kind === "guide";
+  const isInterviewRolePage = route.startsWith("/interview-guides/");
   const breadcrumbs = route === "/"
     ? [{ "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` }]
     : isGuide
@@ -1117,6 +1199,17 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
           { "@type": "ListItem", position: 2, name: "Guides", item: `${siteUrl}${publicPath("/guides")}` },
           { "@type": "ListItem", position: 3, name: meta.title, item: canonical },
         ]
+      : route === "/interview-guides"
+        ? [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}${publicPath("/")}` },
+            { "@type": "ListItem", position: 2, name: "Interview guides", item: canonical },
+          ]
+        : isInterviewRolePage
+          ? [
+              { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}${publicPath("/")}` },
+              { "@type": "ListItem", position: 2, name: "Interview guides", item: `${siteUrl}${publicPath("/interview-guides")}` },
+              { "@type": "ListItem", position: 3, name: meta.title, item: canonical },
+            ]
       : route === "/companies"
         ? [
             { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}${publicPath("/")}` },
@@ -1162,6 +1255,33 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
           "@id": `${siteUrl}/team#shiv-mishra`,
           name: "Shiv Mishra",
           affiliation: { "@id": `${siteUrl}/#organization` },
+        }] : []),
+        ...(route === "/interview-guides" ? [{
+          "@type": "CollectionPage",
+          name: meta.title,
+          description: meta.description,
+          url: canonical,
+          inLanguage: "en-IN",
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: routeRegistry.routes
+              .filter((entry) => entry.kind === "interview-guide" && entry.sitemap)
+              .map((entry, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: entry.title,
+                url: `${siteUrl}${publicPath(entry.path)}`,
+              })),
+          },
+        }] : []),
+        ...(isInterviewRolePage ? [{
+          "@type": "LearningResource",
+          name: meta.title,
+          description: meta.description,
+          url: canonical,
+          learningResourceType: "Interview preparation guide",
+          inLanguage: "en-IN",
+          publisher: { "@id": `${siteUrl}/#organization` },
         }] : []),
       ],
     },

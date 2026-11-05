@@ -217,8 +217,8 @@ export function InterviewGuide({
         </div>
         <div className="ig-review-notice" role="note" data-testid="status-expert-review">
           <span className="ig-review-icon"><Sparkles size={16} aria-hidden="true" /></span>
-          <p><strong>Independent expert review is pending.</strong> Content is a work in progress; use the cited references to verify details that matter to your work.</p>
-          <span className="ig-review-status">IN REVIEW</span>
+          <p><strong>Owner review is complete.</strong> Independent SME review is not claimed; use cited references to verify fast-moving details.</p>
+          <span className="ig-review-status">OWNER REVIEWED</span>
         </div>
       </header>
 

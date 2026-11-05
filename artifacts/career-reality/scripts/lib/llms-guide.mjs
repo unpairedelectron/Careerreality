@@ -2,6 +2,7 @@ const sections = [
   ["Canonical hubs", new Set(["home", "hub"])],
   ["Career tools and calculators", new Set(["tool"])],
   ["Published pillar guides", new Set(["guide"])],
+  ["Interview preparation guides", new Set(["interview-guide"])],
   ["Rules library entries", new Set(["library"])],
   ["About, standards, sources, and policies", new Set(["trust"])],
 ];

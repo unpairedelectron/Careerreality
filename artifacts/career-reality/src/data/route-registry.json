@@ -5,247 +5,1641 @@
     "humanRouteIndexability": "noindex"
   },
   "routes": [
-    { "path": "/", "component": "home", "kind": "home", "title": "Career Decisions in Context", "description": "Career tools for India: compare written job offers, estimate take-home pay with stated tax assumptions, and use sourced guides to plan your next career move.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/tools", "component": "toolsHub", "kind": "hub", "title": "Career Tools for India", "description": "Explore career tools for India to compare offers, estimate take-home pay and salary tax, and check career costs with transparent inputs, examples and limits.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "primary" },
-    { "path": "/guides", "component": "guidesHub", "kind": "hub", "title": "Career Guides for India", "description": "Browse India career guides on offers, engineering, layoffs and workplace decisions, with source context, practical questions and clear limits on each claim.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "primary" },
-    { "path": "/layoffs", "component": "layoffHub", "kind": "hub", "title": "Layoff Support Hub for India", "description": "India layoff tracker, cash-runway planner, first-day checklist, dated rights questions, and a 90-day plan. Rumours are labelled and excluded from alerts.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "primary" },
-    { "path": "/layoffs/tcs-layoffs", "component": "layoffHub", "kind": "hub", "title": "Tata Consultancy Services Layoff Report", "description": "Dated, source-linked reporting on TCS’s announced FY2026 workforce reduction. This records an announcement, not completed exits or current job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/ola-electric-layoffs", "component": "layoffHub", "kind": "hub", "title": "Ola Electric Layoff Report", "description": "Dated Reuters report on Ola Electric workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/byjus-workforce-restructuring-2023", "component": "layoffHub", "kind": "hub", "title": "BYJU’S Workforce Reduction Report", "description": "Dated Reuters report on BYJU’S workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/swiggy-workforce-reduction-2023", "component": "layoffHub", "kind": "hub", "title": "Swiggy Workforce Reduction Report", "description": "Dated Reuters report on Swiggy workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/paytm-restructuring-2023", "component": "layoffHub", "kind": "hub", "title": "Paytm Workforce Reduction Report", "description": "Dated Reuters report on Paytm workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/opendoor-india-operations-closure-2026", "component": "layoffHub", "kind": "hub", "title": "Opendoor India Operations Closure Report", "description": "Reuters reported Opendoor’s India closure and 250 affected roles. This dated record links the source and does not describe current hiring or job security.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/paypal-india-workforce-reduction-2026", "component": "layoffHub", "kind": "hub", "title": "PayPal India Workforce Reduction Report", "description": "Reuters reported about 220 PayPal India cuts, citing a source. The estimate is attributed, not company-confirmed; read the dated report and its scope.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/adidas-india-technology-reduction-2026", "component": "layoffHub", "kind": "hub", "title": "Adidas India Technology Team Report", "description": "Reuters reported Adidas India technology role reductions; the company said fewer than 20% of the team was affected. The exact count was not disclosed.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/amazon-stores-workforce-reduction-2026", "component": "layoffHub", "kind": "hub", "title": "Amazon Stores Workforce Reduction Report", "description": "Reuters reported Amazon job cuts affecting employees in India, the US and UK; the global estimate is not an India-specific count. India roles remain unknown.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/amazon-devices-services-reduction-2026", "component": "layoffHub", "kind": "hub", "title": "Amazon Devices and Services Role Reductions", "description": "Reuters reported job cuts in Amazon's U.S. Devices and Services unit. The reported estimate is no more than 250 roles and does not establish an India impact.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/microsoft-voluntary-buyout-offer-2026", "component": "layoffHub", "kind": "hub", "title": "Microsoft Voluntary Buyout Offer Report", "description": "BBC News reported a Microsoft voluntary buyout offer across Canada, India, the UK and US. The reported 60,000 figure is an offer reach, not a job-loss count.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/hsbc-uk-wealth-restructuring-2026", "component": "layoffHub", "kind": "hub", "title": "HSBC UK Wealth Management Cuts Report", "description": "Reuters reported proposed HSBC cuts in UK wealth management. The percentages are attributed estimates, not a final headcount; India impact is not reported.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoffs/confirm", "component": "layoffHub", "kind": "hub", "title": "Confirm layoff alert email", "description": "Confirm your CareerReality email alert request.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/layoffs/unsubscribe", "component": "layoffHub", "kind": "hub", "title": "Unsubscribe from layoff alerts", "description": "Manage your CareerReality layoff alert email preferences.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/salary-calculator", "component": "ctcCalculator", "kind": "tool", "toolId": "ctc-calculator", "title": "CTC Calculator India: Estimate In-Hand Pay", "description": "Enter fixed pay, target variable, a PF basis and professional tax to estimate Tax Year 2026–27 default-regime in-hand cash; assumptions and limits are shown.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/offer-comparison", "component": "toolSuite", "kind": "tool", "toolId": "offer-comparison", "title": "Compare Job Offers: CTC and Take-Home", "description": "Compare two written CTC breakdowns with separate zero-variable and full-target take-home estimates, employer costs, and entered first-year transition costs.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/tax-regime-comparison", "component": "toolSuite", "kind": "tool", "toolId": "tax-regime-comparison", "title": "Compare Old vs New Tax for AY 2026–27", "description": "Compare Indian salary tax under old and new regimes for AY 2026–27, with deductions and rebate limits for residents under 60; verify against official sources.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/gratuity-estimator", "component": "toolSuite", "kind": "tool", "toolId": "gratuity-estimator", "title": "Gratuity Worksheet: Limited Formula Illustration", "description": "Test a limited gratuity formula against entered wage and service details, with dated Ministry sources and clear exclusions; it is not an eligibility decision.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/final-pay-estimator", "component": "toolSuite", "kind": "tool", "toolId": "final-pay-estimator", "title": "Notice Period and Leave Pay Calculator", "description": "Estimate Indian final-pay components from notice days, unused leave and written salary terms. Check the divisor, state leave rules and employer policy first.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/layoff-runway", "component": "toolSuite", "kind": "tool", "toolId": "layoff-runway", "title": "Job Loss Runway Calculator: Months of Cash", "description": "Estimate cash runway after a layoff in India using liquid savings, confirmed income, essential costs and debt payments; results do not predict job-search time.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/home-loan-stress-test", "component": "toolSuite", "kind": "tool", "toolId": "home-loan-stress-test", "title": "Home Loan EMI Stress Test with Your Budget", "description": "Stress-test an Indian home loan by comparing EMI at two rates and checking cash left after household costs; use your loan terms and verify the lender's offer.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/resign-or-stay", "component": "toolSuite", "kind": "tool", "toolId": "resign-or-stay", "title": "Should I Resign or Stay? Decision Worksheet", "description": "Resign or stay? Organize cash, health, role scope, location and learning trade-offs for your next India career decision; this worksheet does not choose for you.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/companies", "component": "companyDueDiligence", "kind": "tool", "toolId": "employer-due-diligence", "title": "Verify an Indian Employer and Job Offer | CareerReality", "description": "Check an Indian employer and job offer privately with official sources, role-specific questions, and evidence notes. No company score, rating, or verdict.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "primary" },
-    { "path": "/compass", "component": "compass", "kind": "tool", "toolId": "career-compass", "title": "Compare a Job Offer, Move, or Staying", "description": "Compare staying, changing roles or taking an offer in India by recording evidence, constraints and unanswered questions; no combined score or forecast is made.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/salary-drop", "component": "salaryDrop", "kind": "tool", "toolId": "salary-drop", "title": "Salary Change Calculator: Compare Two CTCs", "description": "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details are excluded.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/escape-plan", "component": "escapePlan", "kind": "tool", "toolId": "escape-plan", "title": "Career Change Plan: Build a Weekly Checklist", "description": "Build a session-only career action plan for India from your goal, available hours and time window; review practical tasks without predicting job-search success.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/career-reality-index", "component": "careerRealityIndex", "kind": "tool", "toolId": "career-reality-check", "title": "Career Reality Check: Questions Before a Move", "description": "Use four self-reported answers to identify career uncertainties, gather evidence, and open a relevant tool. No score or recommendation is produced here.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/job-posting-reality-check", "component": "jobPostingRealityCheck", "kind": "tool", "toolId": "job-posting-reality-check", "title": "Job Posting Reality Check", "description": "Match resume evidence to job requirements, get an apply-or-pause recommendation, and review why. Missing text alone is not proof you lack the experience.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/ai", "component": "aiPrompts", "kind": "tool", "toolId": "ai-work-prompts", "title": "AI at Work: Questions to Assess Task Changes", "description": "Explore AI at work in India by inspecting a task's inputs, output quality, review, privacy and accountability; this worksheet does not forecast job losses.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-
-    { "path": "/guides/read-the-offer-beyond-ctc", "component": "guide", "kind": "guide", "guideSlug": "read-the-offer-beyond-ctc", "title": "CTC vs Take-Home Pay: Read a Job Offer", "description": "Read an Indian job offer beyond CTC: separate fixed pay, variable targets, joining bonus and employer PF, then check payout conditions before estimating cash.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/runway-debt-and-big-decisions", "component": "guide", "kind": "guide", "guideSlug": "runway-debt-and-big-decisions", "title": "Career Change Savings: Runway, Debt and Costs", "description": "Plan a career move in India around liquid savings, monthly expenses, debt and employer equity; separate available cash from future promises before committing.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/independent-work-without-romanticising-it", "component": "guide", "kind": "guide", "guideSlug": "independent-work-without-romanticising-it", "title": "Freelancing in India: Test Income and Client Risk", "description": "Test freelancing or a side hustle in India with a paid project; check demand, scope, payment terms and available time before relying on independent income.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/career-switches-and-education", "component": "guide", "kind": "guide", "guideSlug": "career-switches-and-education", "title": "Career Switch or Further Study: Cost and Proof", "description": "Compare a career switch or course in India through target tasks, fees, time and skill evidence; test a work sample before committing to a longer programme.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/getting-hired-through-evidence-and-conversations", "component": "guide", "kind": "guide", "guideSlug": "getting-hired-through-evidence-and-conversations", "title": "Job Interview Preparation: Evidence and Questions", "description": "Prepare for hiring conversations in India with work examples, portfolio evidence and role questions; check the written offer rather than relying on a referral.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/performance-reviews-and-career-choices", "component": "guide", "kind": "guide", "guideSlug": "performance-reviews-and-career-choices", "title": "Performance Reviews: Promotion Questions to Ask", "description": "Prepare for a performance review in India by documenting impact, clarifying who decides promotions and agreeing on the evidence and timing for your next review.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/engineering-careers-without-the-title-trap", "component": "guide", "kind": "guide", "guideSlug": "engineering-careers-without-the-title-trap", "title": "Software Engineer Career Path: Scope Over Title", "description": "Compare engineering career paths in India through technical scope, decision authority, mentoring and operations; ask what changes beyond an IC or manager title.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/ai-at-work-questions-to-ask", "component": "guide", "kind": "guide", "guideSlug": "ai-at-work-questions-to-ask", "title": "AI at Work: Decide What to Upskill", "description": "Assess AI at work in India through a bounded task experiment; check output quality, privacy, review and accountability before choosing a new upskilling course.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/data-science-career-claims", "component": "guide", "kind": "guide", "guideSlug": "data-science-career-claims", "title": "Data Science Jobs in India: Tasks and Claims", "description": "Evaluate data-science career claims in India by checking actual tasks, required skills and dated hiring sources; ask for role evidence before choosing a course.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/cybersecurity-and-green-work", "component": "guide", "kind": "guide", "guideSlug": "cybersecurity-and-green-work", "title": "Cybersecurity and Green Jobs: Verify Requirements", "description": "Explore cybersecurity and green careers in India by comparing tasks, qualifications and source quality; test role requirements without assuming certain demand.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/layoff-recovery-and-employment-documents", "component": "guide", "kind": "guide", "guideSlug": "layoff-recovery-and-employment-documents", "title": "After a Layoff: Final Pay and Relieving Documents", "description": "Plan layoff recovery in India with written records for final pay, notice, severance and relieving letters; separate confirmed entitlements from untested claims.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/notice-period-and-return-to-office", "component": "guide", "kind": "guide", "guideSlug": "notice-period-and-return-to-office", "title": "Notice Period in India: Check Exit Terms", "description": "Check notice-period and return-to-office terms in India against your offer and HR policy; verify buyout, leave, location and relieving steps before resigning.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/cross-border-and-remote-pay", "component": "guide", "kind": "guide", "guideSlug": "cross-border-and-remote-pay", "title": "Remote Job Pay: Location, Currency and Tax", "description": "Compare cross-border and remote pay for an India career move: check employer identity, work location, currency and costs, then flag tax questions for an expert.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/senior-engineering-and-operations-work", "component": "guide", "kind": "guide", "guideSlug": "senior-engineering-and-operations-work", "title": "Senior Engineer Roles: Scope and Reliability Work", "description": "Compare senior engineering and operations roles in India through system ownership, incident response, technical depth and authority; check on-call expectations.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/skills-passion-and-career-constraints", "component": "guide", "kind": "guide", "guideSlug": "skills-passion-and-career-constraints", "title": "Career Change: Match Skills to Your Constraints", "description": "Choose a career or learning experiment in India that fits your time, finances, strengths and responsibilities; gather work evidence rather than passion slogans.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/culture-fit-and-product-management", "component": "guide", "kind": "guide", "guideSlug": "culture-fit-and-product-management", "title": "Product Manager Role: Culture, Work and Authority", "description": "Assess culture-fit and product-management claims in India by asking who sets priorities, owns outcomes and makes decisions; test the role beyond its job title.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/workplace-culture-and-boundaries", "component": "guide", "kind": "guide", "guideSlug": "workplace-culture-and-boundaries", "title": "Workplace Culture: Check Boundaries and Workload", "description": "Assess workplace culture in India through repeated evidence about workload, disagreement and boundaries; ask clear questions instead of judging one busy week.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/how-to-read-salary-and-hiring-claims", "component": "guide", "kind": "guide", "guideSlug": "how-to-read-salary-and-hiring-claims", "title": "Salary Claims: Check Source, Date and Role", "description": "Read India salary and hiring claims critically: check dates, job level, location, sample and base pay versus CTC before using a headline to plan your next move.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/notice-period-buyout-india", "component": "guide", "kind": "guide", "guideSlug": "notice-period-buyout-india", "title": "Notice Period Buyout in India: Terms to Check", "description": "Check an India notice buyout against your signed terms, employer policy, written waiver, payment basis, and exit documents before setting a new start date.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/gratuity-four-years-eight-months", "component": "guide", "kind": "guide", "guideSlug": "gratuity-four-years-eight-months", "title": "Gratuity at 4 Years 8 Months: The Six-Month Rule", "description": "Understand how the official gratuity calculation treats service beyond six months, why rounding does not itself confirm eligibility, and what to verify.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/first-24-hours-after-layoff", "component": "guide", "kind": "guide", "guideSlug": "first-24-hours-after-layoff", "title": "First 24 Hours After Layoff: Practical Checklist", "description": "A first-day layoff checklist in India: preserve personal records, confirm key dates and payments, protect account access, and choose one practical next step.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/severance-notice-leave-after-layoff", "component": "guide", "kind": "guide", "guideSlug": "severance-notice-leave-after-layoff", "title": "After a Layoff: Severance, Notice Pay and Leave", "description": "Separate severance, notice pay, and leave after an India layoff; confirm each amount, the written basis, unresolved questions, and where to get advice.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/pf-withdrawal-after-job-loss", "component": "guide", "kind": "guide", "guideSlug": "pf-withdrawal-after-job-loss", "title": "PF After Job Loss: EPFO Withdrawal Rules", "description": "Review EPFO guidance, account records, claim status, and tax facts before PF withdrawal after job loss; verify current eligibility, amounts, and timelines.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/old-vs-new-tax-regime-salaried-india", "component": "guide", "kind": "guide", "guideSlug": "old-vs-new-tax-regime-salaried-india", "title": "Old vs New Tax Regime: Compare for AY 2026–27", "description": "Compare the old and new Indian tax regimes for AY 2026–27 using official rules, eligible deductions, salary facts, and separate estimates before choosing.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/offer-letter-red-flags-india", "component": "guide", "kind": "guide", "guideSlug": "offer-letter-red-flags-india", "title": "India Offer Letter Red Flags: Terms to Check", "description": "Check an India offer letter for fixed-pay clarity, variable conditions, deductions, notice, buyout, location, benefits, and written terms before accepting.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/negotiate-salary-offer-with-numbers", "component": "guide", "kind": "guide", "guideSlug": "negotiate-salary-offer-with-numbers", "title": "Negotiate a Salary Offer with Numbers", "description": "Negotiate an India salary offer with fixed pay, variable targets, benefits, bonus conditions, and a clear ask; confirm figures in writing before accepting.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/labour-codes-and-layoffs-india", "component": "guide", "kind": "guide", "guideSlug": "labour-codes-and-layoffs-india", "title": "India Layoffs and Labour Codes: What to Check", "description": "Understand official Labour Code guidance on wages and layoffs, what transition rules leave open, and which contract, service, and state facts to verify.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/guides/90-day-post-layoff-job-search", "component": "guide", "kind": "guide", "guideSlug": "90-day-post-layoff-job-search", "title": "90-Day Job Search Plan After a Layoff", "description": "Use a flexible 90-day job-search plan after an India layoff, with weekly checks for cash runway, role fit, applications, conversations, and next steps.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-
-    { "path": "/rules/employee-pf", "component": "rulesLibrary", "kind": "library", "title": "EPF Statutory Wage Ceiling: 2026", "description": "EPFO's official FAQ records a ₹25,000 monthly wage ceiling from 17 September 2026, revised from ₹15,000; individual payroll application depends on the facts.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/gratuity-wages", "component": "rulesLibrary", "kind": "library", "title": "Gratuity Wage Rules for Fixed-Term Workers", "description": "Check Indian gratuity wage definitions, fixed-term eligibility and effective dates against official Ministry FAQs; CTC alone cannot establish your entitlement.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/leave-encashment", "component": "rulesLibrary", "kind": "library", "title": "Leave Carry-Forward and Encashment Rules", "description": "Review Indian leave carry-forward and encashment guidance from the Ministry's March 2026 answers; check worker coverage and state-law limits before estimating.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/income-tax-new-regime", "component": "rulesLibrary", "kind": "library", "title": "New Tax Regime Slabs and Rebate", "description": "Check India's AY 2026–27 new-regime income-tax slabs and rebate using dated official sources; review thresholds and limits before applying them to salary tax.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/income-tax-old-regime", "component": "rulesLibrary", "kind": "library", "title": "Old Tax Regime Slabs and Rebate", "description": "Review India's AY 2026–27 old-regime tax bands and rebate limits; keep age, deductions, surcharge and cess separate when checking salary-tax estimates or forms.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/salary-standard-deduction-cess", "component": "rulesLibrary", "kind": "library", "title": "Standard Deduction and Health Cess", "description": "Understand standard deduction and health and education cess in India's AY 2026–27 salary tax; follow the calculation order and check the official source links.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/professional-tax-states", "component": "rulesLibrary", "kind": "library", "title": "Professional Tax: State Payroll Checks", "description": "Find Indian state professional-tax portals and verify the schedule for your payroll; check salary bands, payment periods and exemptions before entering a total.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/hra-rent-exemption", "component": "rulesLibrary", "kind": "library", "title": "HRA and Rent Exemption Basics", "description": "Check India's HRA rent-exemption comparison using the required salary base, rent records and official guidance; check eligibility before relying on an estimate.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/ctc-components", "component": "rulesLibrary", "kind": "library", "title": "CTC Components Explained", "description": "Read Indian CTC components by separating fixed cash, variable pay, employer costs, reimbursements and benefits; compare written offers without double counting.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules/salary-benefits-tax", "component": "rulesLibrary", "kind": "library", "title": "Salary, Allowances, and Taxable Benefits", "description": "Classify Indian salary benefits, reimbursements and perquisites with official tax guidance; match each item to written records before estimating taxable income.", "render": "snapshot", "indexability": "indexable", "sitemap": true },
-    { "path": "/rules", "component": "rulesLibrary", "kind": "hub", "title": "Rules and Data Library", "description": "Browse India salary and employment rules with official EPFO, tax and Ministry sources; check dated assumptions and limits before using a career-tool estimate.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-
-    { "path": "/about", "component": "about", "kind": "trust", "title": "About CareerReality", "description": "Explore CareerReality's practical career decision tools and editorial guides, review their scope, and find a contact address.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/team", "component": "team", "kind": "trust", "title": "Team and Affiliation | CareerReality", "description": "Read about Shiv Mishra's affiliation with Doffysoft pvt. Limited. Contact CareerReality by email with editorial questions.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/editorial", "component": "editorial", "kind": "trust", "title": "Editorial Standards", "description": "See how CareerReality separates source-backed facts, editorial analysis, assumptions, and uncertainty when evidence is incomplete or disputed.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/corrections", "component": "corrections", "kind": "trust", "title": "Corrections and Updates", "description": "Email CareerReality to report an error, learn what information to include, and see how material corrections are described.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/methodology", "component": "methodology", "kind": "trust", "title": "Tools and Calculation Methods", "description": "Review each tool's inputs, formulas, worked examples, dated assumptions, and limits, including what its results cannot establish.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/sources", "component": "sources", "kind": "trust", "title": "Sources and Data", "description": "Browse official and primary materials used for CareerReality calculations and guides, with source dates and provenance limits stated where known.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/privacy-policy", "component": "privacy", "kind": "trust", "title": "Privacy Information: Data Use and Deletion", "description": "Learn what information CareerReality handles through public tools, contact messages, and sign-in, and how to make a privacy request.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/terms", "component": "terms", "kind": "trust", "title": "Terms of Use and Limits", "description": "Review the limits of CareerReality's educational tools, their assumptions, and what visitors should verify independently before relying on a result.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/contact", "component": "contact", "kind": "trust", "title": "Contact CareerReality", "description": "Contact CareerReality by email for general queries, corrections, privacy requests, security reports, press, or complaints.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/accessibility", "component": "accessibility", "kind": "trust", "title": "Accessibility Statement | CareerReality", "description": "Review accessibility checks on CareerReality's public pages and find an email address for reporting a barrier.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-    { "path": "/security", "component": "security", "kind": "trust", "title": "Security Reporting | CareerReality", "description": "Report a security concern to CareerReality by email, review safe reporting steps, and see current disclosure limits.", "render": "snapshot", "indexability": "indexable", "sitemap": true, "navigation": "footer" },
-
-    { "path": "/search", "component": "search", "kind": "utility", "title": "Search CareerReality", "description": "Search current tools and published guides.", "render": "snapshot", "indexability": "noindex", "sitemap": false },
-    { "path": "/sitemap", "component": "sitemap", "kind": "utility", "title": "CareerReality Sitemap", "description": "Browse published pages, tools, and guides.", "render": "snapshot", "indexability": "noindex", "sitemap": false },
-    { "path": "/mobile-app", "component": "mobileApp", "kind": "utility", "title": "CareerReality Mobile App", "description": "Mobile app availability and release information.", "render": "snapshot", "indexability": "noindex", "sitemap": false },
-    { "path": "/pro", "component": "pro", "kind": "utility", "title": "CareerReality Membership", "description": "Membership availability and service details.", "render": "snapshot", "indexability": "noindex", "sitemap": false },
-    { "path": "/payments/pricing", "component": "pro", "kind": "utility", "title": "CareerReality Membership", "description": "Membership availability and service details.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/workspace", "component": "workspace", "kind": "account", "title": "CareerReality Workspace", "description": "Private career workspace.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/workspace/catalog", "component": "workspaceCatalog", "kind": "account", "title": "Career Catalogue Review", "description": "Private career catalogue workspace.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/admin/application-readiness", "component": "applicationReadiness", "kind": "account", "title": "Application Readiness", "description": "Internal release assurance page.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/sign-in/*?", "component": "signIn", "kind": "account", "title": "Sign in", "description": "Sign in to CareerReality.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/sign-up/*?", "component": "signUp", "kind": "account", "title": "Create an account", "description": "Create a CareerReality account.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/interview-guides", "component": "interviewGuide", "kind": "utility", "title": "Interview Guides | CareerReality", "description": "Choose a draft, source-cited interview study guide by role. Independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false, "navigation": "primary" },
-    { "path": "/interview-guides/data-engineer", "component": "interviewGuide", "kind": "utility", "title": "Data Engineer Interview Guide", "description": "Draft Data Engineer interview study guide with cited practice questions; independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/interview-guides/data-scientist", "component": "interviewGuide", "kind": "utility", "title": "Data Scientist Interview Guide", "description": "Draft Data Scientist interview study guide with cited practice questions; independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/interview-guides/ai-ml-engineer", "component": "interviewGuide", "kind": "utility", "title": "AI/ML Engineer Interview Guide", "description": "Draft AI/ML Engineer interview study guide with cited practice questions; independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/interview-guides/gen-ai-engineer", "component": "interviewGuide", "kind": "utility", "title": "Generative AI Engineer Interview Guide", "description": "Draft Generative AI Engineer interview study guide with cited practice questions; independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/interview-guides/agentic-ai-engineer", "component": "interviewGuide", "kind": "utility", "title": "Agentic AI Engineer Interview Guide", "description": "Draft Agentic AI Engineer interview study guide with cited practice questions; independent expert review is pending.", "render": "app-shell", "indexability": "noindex", "sitemap": false },
-    { "path": "/article/*", "component": "articleDetail", "kind": "editorial-hold", "title": "Article not published", "description": "Archived articles remain withheld pending editorial review.", "render": "app-shell", "indexability": "noindex", "sitemap": false }
+    {
+      "path": "/",
+      "component": "home",
+      "kind": "home",
+      "title": "Career Decisions in Context",
+      "description": "Career tools for India: compare written job offers, estimate take-home pay with stated tax assumptions, and use sourced guides to plan your next career move.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/tools",
+      "component": "toolsHub",
+      "kind": "hub",
+      "title": "Career Tools for India",
+      "description": "Explore career tools for India to compare offers, estimate take-home pay and salary tax, and check career costs with transparent inputs, examples and limits.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "primary"
+    },
+    {
+      "path": "/guides",
+      "component": "guidesHub",
+      "kind": "hub",
+      "title": "Career Guides for India",
+      "description": "Browse India career guides on offers, engineering, layoffs and workplace decisions, with source context, practical questions and clear limits on each claim.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "primary"
+    },
+    {
+      "path": "/layoffs",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Layoff Support Hub for India",
+      "description": "India layoff tracker, cash-runway planner, first-day checklist, dated rights questions, and a 90-day plan. Rumours are labelled and excluded from alerts.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "primary"
+    },
+    {
+      "path": "/layoffs/tcs-layoffs",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Tata Consultancy Services Layoff Report",
+      "description": "Dated, source-linked reporting on TCS’s announced FY2026 workforce reduction. This records an announcement, not completed exits or current job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/ola-electric-layoffs",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Ola Electric Layoff Report",
+      "description": "Dated Reuters report on Ola Electric workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/byjus-workforce-restructuring-2023",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "BYJU’S Workforce Reduction Report",
+      "description": "Dated Reuters report on BYJU’S workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/swiggy-workforce-reduction-2023",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Swiggy Workforce Reduction Report",
+      "description": "Dated Reuters report on Swiggy workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/paytm-restructuring-2023",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Paytm Workforce Reduction Report",
+      "description": "Dated Reuters report on Paytm workforce cuts. Source, date and reported scale are shown; this historical item does not predict headcount or job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/opendoor-india-operations-closure-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Opendoor India Operations Closure Report",
+      "description": "Reuters reported Opendoor’s India closure and 250 affected roles. This dated record links the source and does not describe current hiring or job security.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/paypal-india-workforce-reduction-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "PayPal India Workforce Reduction Report",
+      "description": "Reuters reported about 220 PayPal India cuts, citing a source. The estimate is attributed, not company-confirmed; read the dated report and its scope.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/adidas-india-technology-reduction-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Adidas India Technology Team Report",
+      "description": "Reuters reported Adidas India technology role reductions; the company said fewer than 20% of the team was affected. The exact count was not disclosed.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/amazon-stores-workforce-reduction-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Amazon Stores Workforce Reduction Report",
+      "description": "Reuters reported Amazon job cuts affecting employees in India, the US and UK; the global estimate is not an India-specific count. India roles remain unknown.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/amazon-devices-services-reduction-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Amazon Devices and Services Role Reductions",
+      "description": "Reuters reported job cuts in Amazon's U.S. Devices and Services unit. The reported estimate is no more than 250 roles and does not establish an India impact.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/microsoft-voluntary-buyout-offer-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Microsoft Voluntary Buyout Offer Report",
+      "description": "BBC News reported a Microsoft voluntary buyout offer across Canada, India, the UK and US. The reported 60,000 figure is an offer reach, not a job-loss count.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/hsbc-uk-wealth-restructuring-2026",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "HSBC UK Wealth Management Cuts Report",
+      "description": "Reuters reported proposed HSBC cuts in UK wealth management. The percentages are attributed estimates, not a final headcount; India impact is not reported.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoffs/confirm",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Confirm layoff alert email",
+      "description": "Confirm your CareerReality email alert request.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/layoffs/unsubscribe",
+      "component": "layoffHub",
+      "kind": "hub",
+      "title": "Unsubscribe from layoff alerts",
+      "description": "Manage your CareerReality layoff alert email preferences.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/salary-calculator",
+      "component": "ctcCalculator",
+      "kind": "tool",
+      "toolId": "ctc-calculator",
+      "title": "CTC Calculator India: Estimate In-Hand Pay",
+      "description": "Enter fixed pay, target variable, a PF basis and professional tax to estimate Tax Year 2026–27 default-regime in-hand cash; assumptions and limits are shown.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/offer-comparison",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "offer-comparison",
+      "title": "Compare Job Offers: CTC and Take-Home",
+      "description": "Compare two written CTC breakdowns with separate zero-variable and full-target take-home estimates, employer costs, and entered first-year transition costs.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/tax-regime-comparison",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "tax-regime-comparison",
+      "title": "Compare Old vs New Tax for AY 2026–27",
+      "description": "Compare Indian salary tax under old and new regimes for AY 2026–27, with deductions and rebate limits for residents under 60; verify against official sources.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/gratuity-estimator",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "gratuity-estimator",
+      "title": "Gratuity Worksheet: Limited Formula Illustration",
+      "description": "Test a limited gratuity formula against entered wage and service details, with dated Ministry sources and clear exclusions; it is not an eligibility decision.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/final-pay-estimator",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "final-pay-estimator",
+      "title": "Notice Period and Leave Pay Calculator",
+      "description": "Estimate Indian final-pay components from notice days, unused leave and written salary terms. Check the divisor, state leave rules and employer policy first.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/layoff-runway",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "layoff-runway",
+      "title": "Job Loss Runway Calculator: Months of Cash",
+      "description": "Estimate cash runway after a layoff in India using liquid savings, confirmed income, essential costs and debt payments; results do not predict job-search time.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/home-loan-stress-test",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "home-loan-stress-test",
+      "title": "Home Loan EMI Stress Test with Your Budget",
+      "description": "Stress-test an Indian home loan by comparing EMI at two rates and checking cash left after household costs; use your loan terms and verify the lender's offer.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/resign-or-stay",
+      "component": "toolSuite",
+      "kind": "tool",
+      "toolId": "resign-or-stay",
+      "title": "Should I Resign or Stay? Decision Worksheet",
+      "description": "Resign or stay? Organize cash, health, role scope, location and learning trade-offs for your next India career decision; this worksheet does not choose for you.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/companies",
+      "component": "companyDueDiligence",
+      "kind": "tool",
+      "toolId": "employer-due-diligence",
+      "title": "Verify an Indian Employer and Job Offer | CareerReality",
+      "description": "Check an Indian employer and job offer privately with official sources, role-specific questions, and evidence notes. No company score, rating, or verdict.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "primary"
+    },
+    {
+      "path": "/compass",
+      "component": "compass",
+      "kind": "tool",
+      "toolId": "career-compass",
+      "title": "Compare a Job Offer, Move, or Staying",
+      "description": "Compare staying, changing roles or taking an offer in India by recording evidence, constraints and unanswered questions; no combined score or forecast is made.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/salary-drop",
+      "component": "salaryDrop",
+      "kind": "tool",
+      "toolId": "salary-drop",
+      "title": "Salary Change Calculator: Compare Two CTCs",
+      "description": "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details are excluded.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/escape-plan",
+      "component": "escapePlan",
+      "kind": "tool",
+      "toolId": "escape-plan",
+      "title": "Career Change Plan: Build a Weekly Checklist",
+      "description": "Build a session-only career action plan for India from your goal, available hours and time window; review practical tasks without predicting job-search success.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/career-reality-index",
+      "component": "careerRealityIndex",
+      "kind": "tool",
+      "toolId": "career-reality-check",
+      "title": "Career Reality Check: Questions Before a Move",
+      "description": "Use four self-reported answers to identify career uncertainties, gather evidence, and open a relevant tool. No score or recommendation is produced here.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/job-posting-reality-check",
+      "component": "jobPostingRealityCheck",
+      "kind": "tool",
+      "toolId": "job-posting-reality-check",
+      "title": "Job Posting Reality Check",
+      "description": "Match resume evidence to job requirements, get an apply-or-pause recommendation, and review why. Missing text alone is not proof you lack the experience.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/ai",
+      "component": "aiPrompts",
+      "kind": "tool",
+      "toolId": "ai-work-prompts",
+      "title": "AI at Work: Questions to Assess Task Changes",
+      "description": "Explore AI at work in India by inspecting a task's inputs, output quality, review, privacy and accountability; this worksheet does not forecast job losses.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/read-the-offer-beyond-ctc",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "read-the-offer-beyond-ctc",
+      "title": "CTC vs Take-Home Pay: Read a Job Offer",
+      "description": "Read an Indian job offer beyond CTC: separate fixed pay, variable targets, joining bonus and employer PF, then check payout conditions before estimating cash.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/runway-debt-and-big-decisions",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "runway-debt-and-big-decisions",
+      "title": "Career Change Savings: Runway, Debt and Costs",
+      "description": "Plan a career move in India around liquid savings, monthly expenses, debt and employer equity; separate available cash from future promises before committing.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/independent-work-without-romanticising-it",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "independent-work-without-romanticising-it",
+      "title": "Freelancing in India: Test Income and Client Risk",
+      "description": "Test freelancing or a side hustle in India with a paid project; check demand, scope, payment terms and available time before relying on independent income.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/career-switches-and-education",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "career-switches-and-education",
+      "title": "Career Switch or Further Study: Cost and Proof",
+      "description": "Compare a career switch or course in India through target tasks, fees, time and skill evidence; test a work sample before committing to a longer programme.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/getting-hired-through-evidence-and-conversations",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "getting-hired-through-evidence-and-conversations",
+      "title": "Job Interview Preparation: Evidence and Questions",
+      "description": "Prepare for hiring conversations in India with work examples, portfolio evidence and role questions; check the written offer rather than relying on a referral.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/performance-reviews-and-career-choices",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "performance-reviews-and-career-choices",
+      "title": "Performance Reviews: Promotion Questions to Ask",
+      "description": "Prepare for a performance review in India by documenting impact, clarifying who decides promotions and agreeing on the evidence and timing for your next review.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/engineering-careers-without-the-title-trap",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "engineering-careers-without-the-title-trap",
+      "title": "Software Engineer Career Path: Scope Over Title",
+      "description": "Compare engineering career paths in India through technical scope, decision authority, mentoring and operations; ask what changes beyond an IC or manager title.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/ai-at-work-questions-to-ask",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "ai-at-work-questions-to-ask",
+      "title": "AI at Work: Decide What to Upskill",
+      "description": "Assess AI at work in India through a bounded task experiment; check output quality, privacy, review and accountability before choosing a new upskilling course.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/data-science-career-claims",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "data-science-career-claims",
+      "title": "Data Science Jobs in India: Tasks and Claims",
+      "description": "Evaluate data-science career claims in India by checking actual tasks, required skills and dated hiring sources; ask for role evidence before choosing a course.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/cybersecurity-and-green-work",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "cybersecurity-and-green-work",
+      "title": "Cybersecurity and Green Jobs: Verify Requirements",
+      "description": "Explore cybersecurity and green careers in India by comparing tasks, qualifications and source quality; test role requirements without assuming certain demand.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/layoff-recovery-and-employment-documents",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "layoff-recovery-and-employment-documents",
+      "title": "After a Layoff: Final Pay and Relieving Documents",
+      "description": "Plan layoff recovery in India with written records for final pay, notice, severance and relieving letters; separate confirmed entitlements from untested claims.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/notice-period-and-return-to-office",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "notice-period-and-return-to-office",
+      "title": "Notice Period in India: Check Exit Terms",
+      "description": "Check notice-period and return-to-office terms in India against your offer and HR policy; verify buyout, leave, location and relieving steps before resigning.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/cross-border-and-remote-pay",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "cross-border-and-remote-pay",
+      "title": "Remote Job Pay: Location, Currency and Tax",
+      "description": "Compare cross-border and remote pay for an India career move: check employer identity, work location, currency and costs, then flag tax questions for an expert.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/senior-engineering-and-operations-work",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "senior-engineering-and-operations-work",
+      "title": "Senior Engineer Roles: Scope and Reliability Work",
+      "description": "Compare senior engineering and operations roles in India through system ownership, incident response, technical depth and authority; check on-call expectations.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/skills-passion-and-career-constraints",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "skills-passion-and-career-constraints",
+      "title": "Career Change: Match Skills to Your Constraints",
+      "description": "Choose a career or learning experiment in India that fits your time, finances, strengths and responsibilities; gather work evidence rather than passion slogans.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/culture-fit-and-product-management",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "culture-fit-and-product-management",
+      "title": "Product Manager Role: Culture, Work and Authority",
+      "description": "Assess culture-fit and product-management claims in India by asking who sets priorities, owns outcomes and makes decisions; test the role beyond its job title.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/workplace-culture-and-boundaries",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "workplace-culture-and-boundaries",
+      "title": "Workplace Culture: Check Boundaries and Workload",
+      "description": "Assess workplace culture in India through repeated evidence about workload, disagreement and boundaries; ask clear questions instead of judging one busy week.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/how-to-read-salary-and-hiring-claims",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "how-to-read-salary-and-hiring-claims",
+      "title": "Salary Claims: Check Source, Date and Role",
+      "description": "Read India salary and hiring claims critically: check dates, job level, location, sample and base pay versus CTC before using a headline to plan your next move.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/notice-period-buyout-india",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "notice-period-buyout-india",
+      "title": "Notice Period Buyout in India: Terms to Check",
+      "description": "Check an India notice buyout against your signed terms, employer policy, written waiver, payment basis, and exit documents before setting a new start date.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/gratuity-four-years-eight-months",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "gratuity-four-years-eight-months",
+      "title": "Gratuity at 4 Years 8 Months: The Six-Month Rule",
+      "description": "Understand how the official gratuity calculation treats service beyond six months, why rounding does not itself confirm eligibility, and what to verify.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/first-24-hours-after-layoff",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "first-24-hours-after-layoff",
+      "title": "First 24 Hours After Layoff: Practical Checklist",
+      "description": "A first-day layoff checklist in India: preserve personal records, confirm key dates and payments, protect account access, and choose one practical next step.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/severance-notice-leave-after-layoff",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "severance-notice-leave-after-layoff",
+      "title": "After a Layoff: Severance, Notice Pay and Leave",
+      "description": "Separate severance, notice pay, and leave after an India layoff; confirm each amount, the written basis, unresolved questions, and where to get advice.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/pf-withdrawal-after-job-loss",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "pf-withdrawal-after-job-loss",
+      "title": "PF After Job Loss: EPFO Withdrawal Rules",
+      "description": "Review EPFO guidance, account records, claim status, and tax facts before PF withdrawal after job loss; verify current eligibility, amounts, and timelines.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/old-vs-new-tax-regime-salaried-india",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "old-vs-new-tax-regime-salaried-india",
+      "title": "Old vs New Tax Regime: Compare for AY 2026–27",
+      "description": "Compare the old and new Indian tax regimes for AY 2026–27 using official rules, eligible deductions, salary facts, and separate estimates before choosing.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/offer-letter-red-flags-india",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "offer-letter-red-flags-india",
+      "title": "India Offer Letter Red Flags: Terms to Check",
+      "description": "Check an India offer letter for fixed-pay clarity, variable conditions, deductions, notice, buyout, location, benefits, and written terms before accepting.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/negotiate-salary-offer-with-numbers",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "negotiate-salary-offer-with-numbers",
+      "title": "Negotiate a Salary Offer with Numbers",
+      "description": "Negotiate an India salary offer with fixed pay, variable targets, benefits, bonus conditions, and a clear ask; confirm figures in writing before accepting.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/labour-codes-and-layoffs-india",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "labour-codes-and-layoffs-india",
+      "title": "India Layoffs and Labour Codes: What to Check",
+      "description": "Understand official Labour Code guidance on wages and layoffs, what transition rules leave open, and which contract, service, and state facts to verify.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/guides/90-day-post-layoff-job-search",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "90-day-post-layoff-job-search",
+      "title": "90-Day Job Search Plan After a Layoff",
+      "description": "Use a flexible 90-day job-search plan after an India layoff, with weekly checks for cash runway, role fit, applications, conversations, and next steps.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/employee-pf",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "EPF Statutory Wage Ceiling: 2026",
+      "description": "EPFO's official FAQ records a ₹25,000 monthly wage ceiling from 17 September 2026, revised from ₹15,000; individual payroll application depends on the facts.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/gratuity-wages",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Gratuity Wage Rules for Fixed-Term Workers",
+      "description": "Check Indian gratuity wage definitions, fixed-term eligibility and effective dates against official Ministry FAQs; CTC alone cannot establish your entitlement.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/leave-encashment",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Leave Carry-Forward and Encashment Rules",
+      "description": "Review Indian leave carry-forward and encashment guidance from the Ministry's March 2026 answers; check worker coverage and state-law limits before estimating.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/income-tax-new-regime",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "New Tax Regime Slabs and Rebate",
+      "description": "Check India's AY 2026–27 new-regime income-tax slabs and rebate using dated official sources; review thresholds and limits before applying them to salary tax.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/income-tax-old-regime",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Old Tax Regime Slabs and Rebate",
+      "description": "Review India's AY 2026–27 old-regime tax bands and rebate limits; keep age, deductions, surcharge and cess separate when checking salary-tax estimates or forms.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/salary-standard-deduction-cess",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Standard Deduction and Health Cess",
+      "description": "Understand standard deduction and health and education cess in India's AY 2026–27 salary tax; follow the calculation order and check the official source links.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/professional-tax-states",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Professional Tax: State Payroll Checks",
+      "description": "Find Indian state professional-tax portals and verify the schedule for your payroll; check salary bands, payment periods and exemptions before entering a total.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/hra-rent-exemption",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "HRA and Rent Exemption Basics",
+      "description": "Check India's HRA rent-exemption comparison using the required salary base, rent records and official guidance; check eligibility before relying on an estimate.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/ctc-components",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "CTC Components Explained",
+      "description": "Read Indian CTC components by separating fixed cash, variable pay, employer costs, reimbursements and benefits; compare written offers without double counting.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules/salary-benefits-tax",
+      "component": "rulesLibrary",
+      "kind": "library",
+      "title": "Salary, Allowances, and Taxable Benefits",
+      "description": "Classify Indian salary benefits, reimbursements and perquisites with official tax guidance; match each item to written records before estimating taxable income.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/rules",
+      "component": "rulesLibrary",
+      "kind": "hub",
+      "title": "Rules and Data Library",
+      "description": "Browse India salary and employment rules with official EPFO, tax and Ministry sources; check dated assumptions and limits before using a career-tool estimate.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/about",
+      "component": "about",
+      "kind": "trust",
+      "title": "About CareerReality",
+      "description": "Explore CareerReality's practical career decision tools and editorial guides, review their scope, and find a contact address.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/team",
+      "component": "team",
+      "kind": "trust",
+      "title": "Team and Affiliation | CareerReality",
+      "description": "Read about Shiv Mishra's affiliation with Doffysoft pvt. Limited. Contact CareerReality by email with editorial questions.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/editorial",
+      "component": "editorial",
+      "kind": "trust",
+      "title": "Editorial Standards",
+      "description": "See how CareerReality separates source-backed facts, editorial analysis, assumptions, and uncertainty when evidence is incomplete or disputed.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/corrections",
+      "component": "corrections",
+      "kind": "trust",
+      "title": "Corrections and Updates",
+      "description": "Email CareerReality to report an error, learn what information to include, and see how material corrections are described.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/methodology",
+      "component": "methodology",
+      "kind": "trust",
+      "title": "Tools and Calculation Methods",
+      "description": "Review each tool's inputs, formulas, worked examples, dated assumptions, and limits, including what its results cannot establish.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/sources",
+      "component": "sources",
+      "kind": "trust",
+      "title": "Sources and Data",
+      "description": "Browse official and primary materials used for CareerReality calculations and guides, with source dates and provenance limits stated where known.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/privacy-policy",
+      "component": "privacy",
+      "kind": "trust",
+      "title": "Privacy Information: Data Use and Deletion",
+      "description": "Learn what information CareerReality handles through public tools, contact messages, and sign-in, and how to make a privacy request.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/terms",
+      "component": "terms",
+      "kind": "trust",
+      "title": "Terms of Use and Limits",
+      "description": "Review the limits of CareerReality's educational tools, their assumptions, and what visitors should verify independently before relying on a result.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/contact",
+      "component": "contact",
+      "kind": "trust",
+      "title": "Contact CareerReality",
+      "description": "Contact CareerReality by email for general queries, corrections, privacy requests, security reports, press, or complaints.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/accessibility",
+      "component": "accessibility",
+      "kind": "trust",
+      "title": "Accessibility Statement | CareerReality",
+      "description": "Review accessibility checks on CareerReality's public pages and find an email address for reporting a barrier.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/security",
+      "component": "security",
+      "kind": "trust",
+      "title": "Security Reporting | CareerReality",
+      "description": "Report a security concern to CareerReality by email, review safe reporting steps, and see current disclosure limits.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "footer"
+    },
+    {
+      "path": "/search",
+      "component": "search",
+      "kind": "utility",
+      "title": "Search CareerReality",
+      "description": "Search current tools and published guides.",
+      "render": "snapshot",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/sitemap",
+      "component": "sitemap",
+      "kind": "utility",
+      "title": "CareerReality Sitemap",
+      "description": "Browse published pages, tools, and guides.",
+      "render": "snapshot",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/mobile-app",
+      "component": "mobileApp",
+      "kind": "utility",
+      "title": "CareerReality Mobile App",
+      "description": "Mobile app availability and release information.",
+      "render": "snapshot",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/pro",
+      "component": "pro",
+      "kind": "utility",
+      "title": "CareerReality Membership",
+      "description": "Membership availability and service details.",
+      "render": "snapshot",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/payments/pricing",
+      "component": "pro",
+      "kind": "utility",
+      "title": "CareerReality Membership",
+      "description": "Membership availability and service details.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/workspace",
+      "component": "workspace",
+      "kind": "account",
+      "title": "CareerReality Workspace",
+      "description": "Private career workspace.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/workspace/catalog",
+      "component": "workspaceCatalog",
+      "kind": "account",
+      "title": "Career Catalogue Review",
+      "description": "Private career catalogue workspace.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/admin/application-readiness",
+      "component": "applicationReadiness",
+      "kind": "account",
+      "title": "Application Readiness",
+      "description": "Internal release assurance page.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/sign-in/*?",
+      "component": "signIn",
+      "kind": "account",
+      "title": "Sign in",
+      "description": "Sign in to CareerReality.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/sign-up/*?",
+      "component": "signUp",
+      "kind": "account",
+      "title": "Create an account",
+      "description": "Create a CareerReality account.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    },
+    {
+      "path": "/interview-guides",
+      "component": "interviewGuide",
+      "kind": "hub",
+      "title": "Career Interview Guides by Role in India",
+      "description": "Explore five source-cited interview guides with 75+ role questions, practical answer signals and browser-only study tools. Reviewed by the site owner.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true,
+      "navigation": "primary"
+    },
+    {
+      "path": "/interview-guides/data-engineer",
+      "component": "interviewGuide",
+      "kind": "interview-guide",
+      "title": "Data Engineer Interview Questions and Guide",
+      "description": "Prepare for Data Engineer interviews with source-cited questions on pipelines, data quality, governance, orchestration, reliability and platform design.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/interview-guides/data-scientist",
+      "component": "interviewGuide",
+      "kind": "interview-guide",
+      "title": "Data Scientist Interview Questions and Guide",
+      "description": "Prepare for Data Scientist interviews with source-cited questions on statistics, experimentation, measurement, modeling and clear communication for practice.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/interview-guides/ai-ml-engineer",
+      "component": "interviewGuide",
+      "kind": "interview-guide",
+      "title": "AI/ML Engineer Interview Questions and Guide",
+      "description": "Prepare for AI/ML Engineer interviews with source-cited questions on model development, evaluation, deployment, monitoring, responsible AI and answer guidance.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/interview-guides/gen-ai-engineer",
+      "component": "interviewGuide",
+      "kind": "interview-guide",
+      "title": "Generative AI Engineer Interview Questions",
+      "description": "Prepare for Generative AI Engineer interviews with source-cited questions on retrieval, evaluation, model safety, caching, tool use and production reliability.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/interview-guides/agentic-ai-engineer",
+      "component": "interviewGuide",
+      "kind": "interview-guide",
+      "title": "Agentic AI Engineer Interview Questions",
+      "description": "Prepare for Agentic AI Engineer interviews with source-cited questions on orchestration, tool safety, state, protocols, evaluation and production reliability.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
+      "path": "/article/*",
+      "component": "articleDetail",
+      "kind": "editorial-hold",
+      "title": "Article not published",
+      "description": "Archived articles remain withheld pending editorial review.",
+      "render": "app-shell",
+      "indexability": "noindex",
+      "sitemap": false
+    }
   ],
   "redirects": [
-    { "from": "/articles", "to": "/guides/", "status": 301 },
-    { "from": "/career-compass", "to": "/compass/", "status": 301 },
-    { "from": "/salary-reality", "to": "/offer-comparison/", "status": 301 },
-    { "from": "/salary-reality-check", "to": "/offer-comparison/", "status": 301 },
-    { "from": "/companies/groww", "to": "/companies/", "status": 301 },
-    { "from": "/companies/amazon-india", "to": "/companies/", "status": 301 },
-    { "from": "/companies/ather-energy", "to": "/companies/", "status": 301 },
-    { "from": "/companies/cred", "to": "/companies/", "status": 301 },
-    { "from": "/companies/flipkart", "to": "/companies/", "status": 301 },
-    { "from": "/companies/freshworks", "to": "/companies/", "status": 301 },
-    { "from": "/companies/google-india", "to": "/companies/", "status": 301 },
-    { "from": "/companies/hcltech", "to": "/companies/", "status": 301 },
-    { "from": "/companies/infosys", "to": "/companies/", "status": 301 },
-    { "from": "/companies/ltimindtree", "to": "/companies/", "status": 301 },
-    { "from": "/companies/meesho", "to": "/companies/", "status": 301 },
-    { "from": "/companies/microsoft-india", "to": "/companies/", "status": 301 },
-    { "from": "/companies/mphasis", "to": "/companies/", "status": 301 },
-    { "from": "/companies/ola-electric", "to": "/companies/", "status": 301 },
-    { "from": "/companies/paytm", "to": "/companies/", "status": 301 },
-    { "from": "/companies/persistent-systems", "to": "/companies/", "status": 301 },
-    { "from": "/companies/phonepe", "to": "/companies/", "status": 301 },
-    { "from": "/companies/policybazaar", "to": "/companies/", "status": 301 },
-    { "from": "/companies/postman", "to": "/companies/", "status": 301 },
-    { "from": "/companies/razorpay", "to": "/companies/", "status": 301 },
-    { "from": "/companies/reliance-jio", "to": "/companies/", "status": 301 },
-    { "from": "/companies/swiggy", "to": "/companies/", "status": 301 },
-    { "from": "/companies/tata-consultancy-services", "to": "/companies/", "status": 301 },
-    { "from": "/companies/tech-mahindra", "to": "/companies/", "status": 301 },
-    { "from": "/companies/wipro", "to": "/companies/", "status": 301 },
-    { "from": "/companies/zoho", "to": "/companies/", "status": 301 },
-    { "from": "/companies/zomato", "to": "/companies/", "status": 301 },
-    { "from": "/tools/ctc", "to": "/salary-calculator/", "status": 301 },
-    { "from": "/resignation-risk", "to": "/resign-or-stay/", "status": 301 },
-    { "from": "/tools/risk", "to": "/resign-or-stay/", "status": 301 },
-    { "from": "/layoff-radar", "to": "/layoff-runway/", "status": 301 },
-    { "from": "/tools/layoffs", "to": "/layoff-runway/", "status": 301 },
-    { "from": "/career-reality-check", "to": "/career-reality-index/", "status": 301 },
-    { "from": "/salary-comparison", "to": "/offer-comparison/", "status": 301 },
-    { "from": "/topic-clusters", "to": "/guides/", "status": 301 },
-    { "from": "/category/career-growth", "to": "/guides/", "status": 301 },
-    { "from": "/category/career-advice", "to": "/guides/", "status": 301 },
-    { "from": "/category/compensation", "to": "/guides/read-the-offer-beyond-ctc/", "status": 301 },
-    { "from": "/category/technology", "to": "/guides/ai-at-work-questions-to-ask/", "status": 301 },
-    { "from": "/category/workplace", "to": "/guides/workplace-culture-and-boundaries/", "status": 301 },
-    { "from": "/category/layoffs", "to": "/guides/layoff-recovery-and-employment-documents/", "status": 301 },
-    { "from": "/category/indian-it", "to": "/guides/layoff-recovery-and-employment-documents/", "status": 301 },
-    { "from": "/category/ai", "to": "/guides/ai-at-work-questions-to-ask/", "status": 301 },
-    { "from": "/category/salary", "to": "/guides/read-the-offer-beyond-ctc/", "status": 301 },
-    { "from": "/category/career-switch", "to": "/guides/career-switches-and-education/", "status": 301 },
-    { "from": "/category/engineering", "to": "/guides/engineering-careers-without-the-title-trap/", "status": 301 },
-    { "from": "/category/career-reality-checks", "to": "/guides/workplace-culture-and-boundaries/", "status": 301 },
-    { "from": "/category/career-strategy", "to": "/guides/performance-reviews-and-career-choices/", "status": 301 },
-    { "from": "/category/money-reality", "to": "/guides/runway-debt-and-big-decisions/", "status": 301 },
-    { "from": "/category/software-engineering", "to": "/guides/engineering-careers-without-the-title-trap/", "status": 301 }
+    {
+      "from": "/articles",
+      "to": "/guides/",
+      "status": 301
+    },
+    {
+      "from": "/career-compass",
+      "to": "/compass/",
+      "status": 301
+    },
+    {
+      "from": "/salary-reality",
+      "to": "/offer-comparison/",
+      "status": 301
+    },
+    {
+      "from": "/salary-reality-check",
+      "to": "/offer-comparison/",
+      "status": 301
+    },
+    {
+      "from": "/companies/groww",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/amazon-india",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/ather-energy",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/cred",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/flipkart",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/freshworks",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/google-india",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/hcltech",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/infosys",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/ltimindtree",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/meesho",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/microsoft-india",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/mphasis",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/ola-electric",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/paytm",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/persistent-systems",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/phonepe",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/policybazaar",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/postman",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/razorpay",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/reliance-jio",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/swiggy",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/tata-consultancy-services",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/tech-mahindra",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/wipro",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/zoho",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/companies/zomato",
+      "to": "/companies/",
+      "status": 301
+    },
+    {
+      "from": "/tools/ctc",
+      "to": "/salary-calculator/",
+      "status": 301
+    },
+    {
+      "from": "/resignation-risk",
+      "to": "/resign-or-stay/",
+      "status": 301
+    },
+    {
+      "from": "/tools/risk",
+      "to": "/resign-or-stay/",
+      "status": 301
+    },
+    {
+      "from": "/layoff-radar",
+      "to": "/layoff-runway/",
+      "status": 301
+    },
+    {
+      "from": "/tools/layoffs",
+      "to": "/layoff-runway/",
+      "status": 301
+    },
+    {
+      "from": "/career-reality-check",
+      "to": "/career-reality-index/",
+      "status": 301
+    },
+    {
+      "from": "/salary-comparison",
+      "to": "/offer-comparison/",
+      "status": 301
+    },
+    {
+      "from": "/topic-clusters",
+      "to": "/guides/",
+      "status": 301
+    },
+    {
+      "from": "/category/career-growth",
+      "to": "/guides/",
+      "status": 301
+    },
+    {
+      "from": "/category/career-advice",
+      "to": "/guides/",
+      "status": 301
+    },
+    {
+      "from": "/category/compensation",
+      "to": "/guides/read-the-offer-beyond-ctc/",
+      "status": 301
+    },
+    {
+      "from": "/category/technology",
+      "to": "/guides/ai-at-work-questions-to-ask/",
+      "status": 301
+    },
+    {
+      "from": "/category/workplace",
+      "to": "/guides/workplace-culture-and-boundaries/",
+      "status": 301
+    },
+    {
+      "from": "/category/layoffs",
+      "to": "/guides/layoff-recovery-and-employment-documents/",
+      "status": 301
+    },
+    {
+      "from": "/category/indian-it",
+      "to": "/guides/layoff-recovery-and-employment-documents/",
+      "status": 301
+    },
+    {
+      "from": "/category/ai",
+      "to": "/guides/ai-at-work-questions-to-ask/",
+      "status": 301
+    },
+    {
+      "from": "/category/salary",
+      "to": "/guides/read-the-offer-beyond-ctc/",
+      "status": 301
+    },
+    {
+      "from": "/category/career-switch",
+      "to": "/guides/career-switches-and-education/",
+      "status": 301
+    },
+    {
+      "from": "/category/engineering",
+      "to": "/guides/engineering-careers-without-the-title-trap/",
+      "status": 301
+    },
+    {
+      "from": "/category/career-reality-checks",
+      "to": "/guides/workplace-culture-and-boundaries/",
+      "status": 301
+    },
+    {
+      "from": "/category/career-strategy",
+      "to": "/guides/performance-reviews-and-career-choices/",
+      "status": 301
+    },
+    {
+      "from": "/category/money-reality",
+      "to": "/guides/runway-debt-and-big-decisions/",
+      "status": 301
+    },
+    {
+      "from": "/category/software-engineering",
+      "to": "/guides/engineering-careers-without-the-title-trap/",
+      "status": 301
+    }
   ],
   "drafts": {
     "articles": [
-      { "slug": "10x-developer-myth-productivity-killing-careers", "archiveFile": "archive/articles/10x-developer-myth-productivity-killing-careers.json" },
-      { "slug": "ai-job-market-2026-india-show-your-working", "archiveFile": "archive/articles/ai-job-market-2026-india-show-your-working.json" },
-      { "slug": "ai-upskilling-trap-india-api-wrapper-reality", "archiveFile": "archive/articles/ai-upskilling-trap-india-api-wrapper-reality.json" },
-      { "slug": "american-dream-indian-engineers", "archiveFile": "archive/articles/american-dream-indian-engineers.json" },
-      { "slug": "broke-at-30-money-mistakes-nobody-warned", "archiveFile": "archive/articles/broke-at-30-money-mistakes-nobody-warned.json" },
-      { "slug": "career-switch-illusion-changing-jobs-not-career", "archiveFile": "archive/articles/career-switch-illusion-changing-jobs-not-career.json" },
-      { "slug": "culture-fit-trap-hiring-reality", "archiveFile": "archive/articles/culture-fit-trap-hiring-reality.json" },
-      { "slug": "cybersecurity-privacy-careers-beyond-tech-india-2026", "archiveFile": "archive/articles/cybersecurity-privacy-careers-beyond-tech-india-2026.json" },
-      { "slug": "data-science-bubble-excel-work-reality", "archiveFile": "archive/articles/data-science-bubble-excel-work-reality.json" },
-      { "slug": "devops-sre-reality-india-oncall", "archiveFile": "archive/articles/devops-sre-reality-india-oncall.json" },
-      { "slug": "engineering-career-ceiling-peak-at-35", "archiveFile": "archive/articles/engineering-career-ceiling-peak-at-35.json" },
-      { "slug": "freelancing-reality-india-freedom-myth", "archiveFile": "archive/articles/freelancing-reality-india-freedom-myth.json" },
-      { "slug": "gcc-gold-rush-india-captive-center-reality", "archiveFile": "archive/articles/gcc-gold-rush-india-captive-center-reality.json" },
-      { "slug": "gcc-return-to-office-hybrid-reality-india-2026", "archiveFile": "archive/articles/gcc-return-to-office-hybrid-reality-india-2026.json" },
-      { "slug": "green-careers-esg-renewable-sustainability-india-2026", "archiveFile": "archive/articles/green-careers-esg-renewable-sustainability-india-2026.json" },
-      { "slug": "home-loan-trap-dream-house-financial-prison", "archiveFile": "archive/articles/home-loan-trap-dream-house-financial-prison.json" },
-      { "slug": "hr-conversations-what-matters-india", "archiveFile": "archive/articles/hr-conversations-what-matters-india.json" },
-      { "slug": "humour-in-workplace-culture-2026-joke-is-on-promotion", "archiveFile": "archive/articles/humour-in-workplace-culture-2026-joke-is-on-promotion.json" },
-      { "slug": "indian-education-trap-degree-career-mistake", "archiveFile": "archive/articles/indian-education-trap-degree-career-mistake.json" },
-      { "slug": "indian-it-layoff-cycle-2026", "archiveFile": "archive/articles/indian-it-layoff-cycle-2026.json" },
-      { "slug": "job-hopping-stops-working-after-35", "archiveFile": "archive/articles/job-hopping-stops-working-after-35.json" },
-      { "slug": "joining-bonus-clawback-offer-letter-traps-2026", "archiveFile": "archive/articles/joining-bonus-clawback-offer-letter-traps-2026.json" },
-      { "slug": "junior-data-scientist-reality-india", "archiveFile": "archive/articles/junior-data-scientist-reality-india.json" },
-      { "slug": "layoff-recovery-timeline-india", "archiveFile": "archive/articles/layoff-recovery-timeline-india.json" },
-      { "slug": "manager-vs-ic-career-path-india", "archiveFile": "archive/articles/manager-vs-ic-career-path-india.json" },
-      { "slug": "mba-reality-india-worth-it-2026", "archiveFile": "archive/articles/mba-reality-india-worth-it-2026.json" },
-      { "slug": "networking-reality-india-introverts", "archiveFile": "archive/articles/networking-reality-india-introverts.json" },
-      { "slug": "passion-luxury-not-strategy-india", "archiveFile": "archive/articles/passion-luxury-not-strategy-india.json" },
-      { "slug": "performance-review-reality-ratings-india", "archiveFile": "archive/articles/performance-review-reality-ratings-india.json" },
-      { "slug": "pm-prestige-trap-escape-from-engineering", "archiveFile": "archive/articles/pm-prestige-trap-escape-from-engineering.json" },
-      { "slug": "portfolio-first-hiring-gig-economy-careers-india-2026", "archiveFile": "archive/articles/portfolio-first-hiring-gig-economy-careers-india-2026.json" },
-      { "slug": "relieving-letter-hostage-notice-period-india-2026", "archiveFile": "archive/articles/relieving-letter-hostage-notice-period-india-2026.json" },
-      { "slug": "remote-work-salary-trap-india", "archiveFile": "archive/articles/remote-work-salary-trap-india.json" },
-      { "slug": "salary-transparency-india-2026-number-in-room", "archiveFile": "archive/articles/salary-transparency-india-2026-number-in-room.json" },
-      { "slug": "self-learning-trap-online-courses-expensive-entertainment", "archiveFile": "archive/articles/self-learning-trap-online-courses-expensive-entertainment.json" },
-      { "slug": "senior-developer-salary-ceiling-india", "archiveFile": "archive/articles/senior-developer-salary-ceiling-india.json" },
-      { "slug": "side-hustle-myth-india-reality", "archiveFile": "archive/articles/side-hustle-myth-india-reality.json" },
-      { "slug": "staff-engineer-promotion-freeze-india-2026", "archiveFile": "archive/articles/staff-engineer-promotion-freeze-india-2026.json" },
-      { "slug": "startup-equity-esop-reality-india", "archiveFile": "archive/articles/startup-equity-esop-reality-india.json" },
-      { "slug": "tech-lead-trap-responsibility-authority", "archiveFile": "archive/articles/tech-lead-trap-responsibility-authority.json" },
-      { "slug": "ux-salary-myth-design-careers-plateau", "archiveFile": "archive/articles/ux-salary-myth-design-careers-plateau.json" },
-      { "slug": "what-20-lpa-actually-feels-like-india-purchasing-power", "archiveFile": "archive/articles/what-20-lpa-actually-feels-like-india-purchasing-power.json" },
-      { "slug": "why-upskilling-stops-working-career-trap", "archiveFile": "archive/articles/why-upskilling-stops-working-career-trap.json" },
-      { "slug": "work-life-balance-myth-high-performers", "archiveFile": "archive/articles/work-life-balance-myth-high-performers.json" }
+      {
+        "slug": "10x-developer-myth-productivity-killing-careers",
+        "archiveFile": "archive/articles/10x-developer-myth-productivity-killing-careers.json"
+      },
+      {
+        "slug": "ai-job-market-2026-india-show-your-working",
+        "archiveFile": "archive/articles/ai-job-market-2026-india-show-your-working.json"
+      },
+      {
+        "slug": "ai-upskilling-trap-india-api-wrapper-reality",
+        "archiveFile": "archive/articles/ai-upskilling-trap-india-api-wrapper-reality.json"
+      },
+      {
+        "slug": "american-dream-indian-engineers",
+        "archiveFile": "archive/articles/american-dream-indian-engineers.json"
+      },
+      {
+        "slug": "broke-at-30-money-mistakes-nobody-warned",
+        "archiveFile": "archive/articles/broke-at-30-money-mistakes-nobody-warned.json"
+      },
+      {
+        "slug": "career-switch-illusion-changing-jobs-not-career",
+        "archiveFile": "archive/articles/career-switch-illusion-changing-jobs-not-career.json"
+      },
+      {
+        "slug": "culture-fit-trap-hiring-reality",
+        "archiveFile": "archive/articles/culture-fit-trap-hiring-reality.json"
+      },
+      {
+        "slug": "cybersecurity-privacy-careers-beyond-tech-india-2026",
+        "archiveFile": "archive/articles/cybersecurity-privacy-careers-beyond-tech-india-2026.json"
+      },
+      {
+        "slug": "data-science-bubble-excel-work-reality",
+        "archiveFile": "archive/articles/data-science-bubble-excel-work-reality.json"
+      },
+      {
+        "slug": "devops-sre-reality-india-oncall",
+        "archiveFile": "archive/articles/devops-sre-reality-india-oncall.json"
+      },
+      {
+        "slug": "engineering-career-ceiling-peak-at-35",
+        "archiveFile": "archive/articles/engineering-career-ceiling-peak-at-35.json"
+      },
+      {
+        "slug": "freelancing-reality-india-freedom-myth",
+        "archiveFile": "archive/articles/freelancing-reality-india-freedom-myth.json"
+      },
+      {
+        "slug": "gcc-gold-rush-india-captive-center-reality",
+        "archiveFile": "archive/articles/gcc-gold-rush-india-captive-center-reality.json"
+      },
+      {
+        "slug": "gcc-return-to-office-hybrid-reality-india-2026",
+        "archiveFile": "archive/articles/gcc-return-to-office-hybrid-reality-india-2026.json"
+      },
+      {
+        "slug": "green-careers-esg-renewable-sustainability-india-2026",
+        "archiveFile": "archive/articles/green-careers-esg-renewable-sustainability-india-2026.json"
+      },
+      {
+        "slug": "home-loan-trap-dream-house-financial-prison",
+        "archiveFile": "archive/articles/home-loan-trap-dream-house-financial-prison.json"
+      },
+      {
+        "slug": "hr-conversations-what-matters-india",
+        "archiveFile": "archive/articles/hr-conversations-what-matters-india.json"
+      },
+      {
+        "slug": "humour-in-workplace-culture-2026-joke-is-on-promotion",
+        "archiveFile": "archive/articles/humour-in-workplace-culture-2026-joke-is-on-promotion.json"
+      },
+      {
+        "slug": "indian-education-trap-degree-career-mistake",
+        "archiveFile": "archive/articles/indian-education-trap-degree-career-mistake.json"
+      },
+      {
+        "slug": "indian-it-layoff-cycle-2026",
+        "archiveFile": "archive/articles/indian-it-layoff-cycle-2026.json"
+      },
+      {
+        "slug": "job-hopping-stops-working-after-35",
+        "archiveFile": "archive/articles/job-hopping-stops-working-after-35.json"
+      },
+      {
+        "slug": "joining-bonus-clawback-offer-letter-traps-2026",
+        "archiveFile": "archive/articles/joining-bonus-clawback-offer-letter-traps-2026.json"
+      },
+      {
+        "slug": "junior-data-scientist-reality-india",
+        "archiveFile": "archive/articles/junior-data-scientist-reality-india.json"
+      },
+      {
+        "slug": "layoff-recovery-timeline-india",
+        "archiveFile": "archive/articles/layoff-recovery-timeline-india.json"
+      },
+      {
+        "slug": "manager-vs-ic-career-path-india",
+        "archiveFile": "archive/articles/manager-vs-ic-career-path-india.json"
+      },
+      {
+        "slug": "mba-reality-india-worth-it-2026",
+        "archiveFile": "archive/articles/mba-reality-india-worth-it-2026.json"
+      },
+      {
+        "slug": "networking-reality-india-introverts",
+        "archiveFile": "archive/articles/networking-reality-india-introverts.json"
+      },
+      {
+        "slug": "passion-luxury-not-strategy-india",
+        "archiveFile": "archive/articles/passion-luxury-not-strategy-india.json"
+      },
+      {
+        "slug": "performance-review-reality-ratings-india",
+        "archiveFile": "archive/articles/performance-review-reality-ratings-india.json"
+      },
+      {
+        "slug": "pm-prestige-trap-escape-from-engineering",
+        "archiveFile": "archive/articles/pm-prestige-trap-escape-from-engineering.json"
+      },
+      {
+        "slug": "portfolio-first-hiring-gig-economy-careers-india-2026",
+        "archiveFile": "archive/articles/portfolio-first-hiring-gig-economy-careers-india-2026.json"
+      },
+      {
+        "slug": "relieving-letter-hostage-notice-period-india-2026",
+        "archiveFile": "archive/articles/relieving-letter-hostage-notice-period-india-2026.json"
+      },
+      {
+        "slug": "remote-work-salary-trap-india",
+        "archiveFile": "archive/articles/remote-work-salary-trap-india.json"
+      },
+      {
+        "slug": "salary-transparency-india-2026-number-in-room",
+        "archiveFile": "archive/articles/salary-transparency-india-2026-number-in-room.json"
+      },
+      {
+        "slug": "self-learning-trap-online-courses-expensive-entertainment",
+        "archiveFile": "archive/articles/self-learning-trap-online-courses-expensive-entertainment.json"
+      },
+      {
+        "slug": "senior-developer-salary-ceiling-india",
+        "archiveFile": "archive/articles/senior-developer-salary-ceiling-india.json"
+      },
+      {
+        "slug": "side-hustle-myth-india-reality",
+        "archiveFile": "archive/articles/side-hustle-myth-india-reality.json"
+      },
+      {
+        "slug": "staff-engineer-promotion-freeze-india-2026",
+        "archiveFile": "archive/articles/staff-engineer-promotion-freeze-india-2026.json"
+      },
+      {
+        "slug": "startup-equity-esop-reality-india",
+        "archiveFile": "archive/articles/startup-equity-esop-reality-india.json"
+      },
+      {
+        "slug": "tech-lead-trap-responsibility-authority",
+        "archiveFile": "archive/articles/tech-lead-trap-responsibility-authority.json"
+      },
+      {
+        "slug": "ux-salary-myth-design-careers-plateau",
+        "archiveFile": "archive/articles/ux-salary-myth-design-careers-plateau.json"
+      },
+      {
+        "slug": "what-20-lpa-actually-feels-like-india-purchasing-power",
+        "archiveFile": "archive/articles/what-20-lpa-actually-feels-like-india-purchasing-power.json"
+      },
+      {
+        "slug": "why-upskilling-stops-working-career-trap",
+        "archiveFile": "archive/articles/why-upskilling-stops-working-career-trap.json"
+      },
+      {
+        "slug": "work-life-balance-myth-high-performers",
+        "archiveFile": "archive/articles/work-life-balance-myth-high-performers.json"
+      }
     ],
     "companyPages": [
-      { "path": "/companies/amazon-india/", "status": "draft" },
-      { "path": "/companies/ather-energy/", "status": "draft" },
-      { "path": "/companies/cred/", "status": "draft" },
-      { "path": "/companies/flipkart/", "status": "draft" },
-      { "path": "/companies/freshworks/", "status": "draft" },
-      { "path": "/companies/google-india/", "status": "draft" },
-      { "path": "/companies/groww/", "status": "draft" },
-      { "path": "/companies/hcltech/", "status": "draft" },
-      { "path": "/companies/infosys/", "status": "draft" },
-      { "path": "/companies/ltimindtree/", "status": "draft" },
-      { "path": "/companies/meesho/", "status": "draft" },
-      { "path": "/companies/microsoft-india/", "status": "draft" },
-      { "path": "/companies/mphasis/", "status": "draft" },
-      { "path": "/companies/ola-electric/", "status": "draft" },
-      { "path": "/companies/paytm/", "status": "draft" },
-      { "path": "/companies/persistent-systems/", "status": "draft" },
-      { "path": "/companies/phonepe/", "status": "draft" },
-      { "path": "/companies/policybazaar/", "status": "draft" },
-      { "path": "/companies/postman/", "status": "draft" },
-      { "path": "/companies/razorpay/", "status": "draft" },
-      { "path": "/companies/reliance-jio/", "status": "draft" },
-      { "path": "/companies/swiggy/", "status": "draft" },
-      { "path": "/companies/tata-consultancy-services/", "status": "draft" },
-      { "path": "/companies/tech-mahindra/", "status": "draft" },
-      { "path": "/companies/wipro/", "status": "draft" },
-      { "path": "/companies/zoho/", "status": "draft" },
-      { "path": "/companies/zomato/", "status": "draft" }
+      {
+        "path": "/companies/amazon-india/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/ather-energy/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/cred/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/flipkart/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/freshworks/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/google-india/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/groww/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/hcltech/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/infosys/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/ltimindtree/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/meesho/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/microsoft-india/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/mphasis/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/ola-electric/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/paytm/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/persistent-systems/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/phonepe/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/policybazaar/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/postman/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/razorpay/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/reliance-jio/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/swiggy/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/tata-consultancy-services/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/tech-mahindra/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/wipro/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/zoho/",
+        "status": "draft"
+      },
+      {
+        "path": "/companies/zomato/",
+        "status": "draft"
+      }
     ],
     "retiredTools": [
-      { "path": "/tools/ctc/", "status": "redirect" },
-      { "path": "/tools/risk/", "status": "redirect" },
-      { "path": "/tools/layoffs/", "status": "redirect" }
+      {
+        "path": "/tools/ctc/",
+        "status": "redirect"
+      },
+      {
+        "path": "/tools/risk/",
+        "status": "redirect"
+      },
+      {
+        "path": "/tools/layoffs/",
+        "status": "redirect"
+      }
     ]
   }
 }

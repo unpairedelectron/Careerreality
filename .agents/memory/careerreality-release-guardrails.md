@@ -32,3 +32,7 @@ description: User-specified scope, verification, and publication constraints for
 **Why:** the user chose to leave the two previously indexed AI-news pages retired; no replacement content was approved.
 
 **How to apply:** keep the URLs out of the route registry, sitemap, and internal links, and retain their real 404 responses unless the user later approves a closely matching replacement.
+
+**Why:** the static SEO build validates route-kind coverage in crawler guidance and rejects repeated long paragraphs across public snapshots.
+
+**How to apply:** for a new indexable content family, update crawler-guidance categories and write route-specific snapshot copy before running one complete build.

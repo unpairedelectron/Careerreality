@@ -1,5 +1,5 @@
 {
   "contentTier": "complete-guide",
-  "completeInterviewGuidesEnabled": false,
+  "completeInterviewGuidesEnabled": true,
   "progressStorage": "local-only"
 }

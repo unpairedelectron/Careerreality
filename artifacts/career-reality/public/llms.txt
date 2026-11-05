@@ -33,6 +33,7 @@ Cite the specific page and its original sources where provided. Preserve source 
 - [Microsoft Voluntary Buyout Offer Report](https://careerreality.in/layoffs/microsoft-voluntary-buyout-offer-2026/): BBC News reported a Microsoft voluntary buyout offer across Canada, India, the UK and US. The reported 60,000 figure is an offer reach, not a job-loss count.
 - [HSBC UK Wealth Management Cuts Report](https://careerreality.in/layoffs/hsbc-uk-wealth-restructuring-2026/): Reuters reported proposed HSBC cuts in UK wealth management. The percentages are attributed estimates, not a final headcount; India impact is not reported.
 - [Rules and Data Library](https://careerreality.in/rules/): Browse India salary and employment rules with official EPFO, tax and Ministry sources; check dated assumptions and limits before using a career-tool estimate.
+- [Career Interview Guides by Role in India](https://careerreality.in/interview-guides/): Explore five source-cited interview guides with 75+ role questions, practical answer signals and browser-only study tools. Reviewed by the site owner.
 
 ## Career tools and calculators
 
@@ -82,6 +83,14 @@ Cite the specific page and its original sources where provided. Preserve source 
 - [Negotiate a Salary Offer with Numbers](https://careerreality.in/guides/negotiate-salary-offer-with-numbers/): Negotiate an India salary offer with fixed pay, variable targets, benefits, bonus conditions, and a clear ask; confirm figures in writing before accepting.
 - [India Layoffs and Labour Codes: What to Check](https://careerreality.in/guides/labour-codes-and-layoffs-india/): Understand official Labour Code guidance on wages and layoffs, what transition rules leave open, and which contract, service, and state facts to verify.
 - [90-Day Job Search Plan After a Layoff](https://careerreality.in/guides/90-day-post-layoff-job-search/): Use a flexible 90-day job-search plan after an India layoff, with weekly checks for cash runway, role fit, applications, conversations, and next steps.
+
+## Interview preparation guides
+
+- [Data Engineer Interview Questions and Guide](https://careerreality.in/interview-guides/data-engineer/): Prepare for Data Engineer interviews with source-cited questions on pipelines, data quality, governance, orchestration, reliability and platform design.
+- [Data Scientist Interview Questions and Guide](https://careerreality.in/interview-guides/data-scientist/): Prepare for Data Scientist interviews with source-cited questions on statistics, experimentation, measurement, modeling and clear communication for practice.
+- [AI/ML Engineer Interview Questions and Guide](https://careerreality.in/interview-guides/ai-ml-engineer/): Prepare for AI/ML Engineer interviews with source-cited questions on model development, evaluation, deployment, monitoring, responsible AI and answer guidance.
+- [Generative AI Engineer Interview Questions](https://careerreality.in/interview-guides/gen-ai-engineer/): Prepare for Generative AI Engineer interviews with source-cited questions on retrieval, evaluation, model safety, caching, tool use and production reliability.
+- [Agentic AI Engineer Interview Questions](https://careerreality.in/interview-guides/agentic-ai-engineer/): Prepare for Agentic AI Engineer interviews with source-cited questions on orchestration, tool safety, state, protocols, evaluation and production reliability.
 
 ## Rules library entries
 
