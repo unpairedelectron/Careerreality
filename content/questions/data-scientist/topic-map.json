@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "Machine learning evaluation",
-      "subtopics": ["cross-validation", "leakage", "metrics", "calibration"],
+      "subtopics": ["cross-validation", "leakage", "metrics", "calibration", "cross-validation uncertainty"],
       "sources": [
         {
           "title": "Cross-validation: evaluating estimator performance",
@@ -22,6 +22,15 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-04",
           "versions_checked": "scikit-learn 1.9.1 stable documentation"
+        },
+        {
+          "title": "Cross-validation: what does it estimate and how well does it do it?",
+          "publisher": "arXiv",
+          "url": "https://arxiv.org/html/2104.00673",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Stable",
+          "last_verified": "2026-11-04",
+          "versions_checked": "arXiv version 1, published 2021-04-02"
         }
       ]
     },
@@ -48,7 +57,7 @@
     },
     {
       "topic": "Experiment design and uncertainty",
-      "subtopics": ["confidence intervals for two proportions", "effect size", "decision thresholds"],
+      "subtopics": ["confidence intervals for two proportions", "effect size", "decision thresholds", "paired bootstrap resampling", "sequential testing and planned monitoring", "CUPED variance reduction", "randomization-unit consistency", "intention-to-treat under nonadherence", "interference and spillover effects"],
       "sources": [{
         "title": "Confidence intervals for comparing two independent proportions",
         "publisher": "statsmodels documentation",
@@ -57,6 +66,54 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "statsmodels 0.15.0 stable API documentation; method API marked experimental"
+      }, {
+        "title": "bootstrap",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "SciPy 1.18.0 stable documentation"
+      }, {
+        "title": "Frequentist Sequential Testing",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/advanced-setup/sequential-testing",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Statsig experiment documentation retrieved 2026-11-04"
+      }, {
+        "title": "CUPED",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/statistical-methods/methodologies/cuped",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Statsig CUPED documentation retrieved 2026-11-04"
+      }, {
+        "title": "Experiments Overview",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/overview",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Statsig Experiments Overview retrieved 2026-11-04"
+      }, {
+        "title": "Intent-to-Treat (ITT) vs Completer or Per-Protocol Analysis in Randomized Controlled Trials",
+        "publisher": "Indian Journal of Psychological Medicine via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9301744/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2022"
+      }, {
+        "title": "Network experiment designs for inferring causal effects under interference",
+        "publisher": "Frontiers in Data Science via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10150447/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2023"
       }]
     },
     {
@@ -74,7 +131,7 @@
     },
     {
       "topic": "Missing-data strategy",
-      "subtopics": ["imputation", "missingness indicators", "single versus multiple imputation"],
+      "subtopics": ["imputation", "missingness indicators", "single versus multiple imputation", "missing-at-random assumptions", "MNAR sensitivity analysis"],
       "sources": [{
         "title": "Imputation of missing values",
         "publisher": "scikit-learn developers",
@@ -83,6 +140,481 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "scikit-learn 1.9.1 stable imputation documentation"
+      }, {
+        "title": "Missing data: A statistical framework for practice",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7615108/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed statistical framework published 2021"
+      }]
+    },
+    {
+      "topic": "Statistical power and sample size",
+      "subtopics": ["effect size", "Type I and Type II errors", "prospective sample-size planning"],
+      "sources": [{
+        "title": "TTestIndPower.solve_power",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestIndPower.solve_power.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "statsmodels 0.15.0 stable documentation; independent two-sample t-test"
+      }]
+    },
+    {
+      "topic": "Multiple testing and false discovery",
+      "subtopics": ["false discovery rate", "hypothesis families", "exploratory segment analysis"],
+      "sources": [{
+        "title": "fdrcorrection",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.multitest.fdrcorrection.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "statsmodels 0.15.0 stable documentation"
+      }]
+    },
+    {
+      "topic": "Statistical test design",
+      "subtopics": ["paired samples", "repeated observations", "independent versus related data"],
+      "sources": [{
+        "title": "ttest_rel",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "SciPy 1.18.0 stable documentation"
+      }]
+    },
+    {
+      "topic": "Statistical test interpretation",
+      "subtopics": ["p-value meaning", "effect size", "transparent reporting", "noninferiority margins and confidence intervals"],
+      "sources": [{
+        "title": "Statement on Statistical Significance and P-Values",
+        "publisher": "American Statistical Association",
+        "url": "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "ASA statement published 2016"
+      }, {
+        "title": "Non-Inferiority Clinical Trials to Establish Effectiveness",
+        "publisher": "U.S. Food and Drug Administration",
+        "url": "https://www.fda.gov/media/78504/download",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "FDA Guidance for Industry, November 2016"
+      }]
+    },
+    {
+      "topic": "Time-series model evaluation",
+      "subtopics": ["expanding validation windows", "equal-duration test folds", "gap between train and test windows"],
+      "sources": [{
+        "title": "TimeSeriesSplit",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "scikit-learn 1.9.1 stable API documentation"
+      }]
+    },
+    {
+      "topic": "Feature attribution and correlated inputs",
+      "subtopics": ["permutation importance", "multicollinearity", "redundant predictors"],
+      "sources": [{
+        "title": "Permutation Importance with Multicollinear or Correlated Features",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "scikit-learn 1.9.1 stable example"
+      }]
+    },
+    {
+      "topic": "Causal inference and overlap",
+      "subtopics": ["propensity weighting", "common support", "extreme weights", "difference-in-differences parallel trends", "collider bias"],
+      "sources": [{
+        "title": "Weighting, Overlap, and Common Support",
+        "publisher": "Causal inference tutorial",
+        "url": "https://p-shekhar.github.io/notebooks/tutorials/dowhy/05_weighting_overlap_and_common_support.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Causal inference tutorial retrieved 2026-11-04"
+      }, {
+        "title": "The often (unspoken) assumptions behind the difference-in-difference estimator in practice",
+        "publisher": "World Bank Development Impact",
+        "url": "https://blogs.worldbank.org/en/impactevaluations/often-unspoken-assumptions-behind-difference-difference-estimator-practice",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "World Bank Development Impact blog retrieved 2026-11-04"
+      }, {
+        "title": "Endogenous Selection Bias: The Problem of Conditioning on a Collider Variable",
+        "publisher": "Annual Review of Sociology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6089543/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2014"
+      }]
+    },
+    {
+      "topic": "Statistical testing",
+      "subtopics": ["Mann-Whitney U interpretation", "distributional null hypotheses", "sparse contingency tables"],
+      "sources": [{
+        "title": "mannwhitneyu",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "SciPy 1.18.0 reference documentation"
+      }, {
+        "title": "chi2_contingency",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "SciPy 1.18.0 reference documentation"
+      }]
+    },
+    {
+      "topic": "Uncertainty estimation",
+      "subtopics": ["clustered bootstrap resampling", "preserving sampling structure", "degenerate BCa bootstrap intervals"],
+      "sources": [{
+        "title": "Using Cluster Bootstrapping to Analyze Nested Data With a Few Clusters",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5965657/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed cluster-bootstrap article accessed 2026-11-04"
+      }, {
+        "title": "TRIPOD-Cluster: explanation and elaboration",
+        "publisher": "BMJ via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9903176/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "TRIPOD-Cluster guidance published 2023"
+      }, {
+        "title": "bootstrap",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "SciPy 1.18.0 bootstrap reference documentation"
+      }]
+    },
+    {
+      "topic": "Subgroup analysis and effect heterogeneity",
+      "subtopics": ["interaction tests", "prespecification", "subgroup uncertainty"],
+      "sources": [{
+        "title": "Detecting Moderator Effects Using Subgroup Analyses",
+        "publisher": "Clinical Trials via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3193873/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2011"
+      }]
+    },
+    {
+      "topic": "Aggregated and stratified analysis",
+      "subtopics": ["Simpson's paradox", "stratum composition", "target estimands"],
+      "sources": [{
+        "title": "Simpson's Paradox and Experimental Research",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2880329/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Survival analysis",
+      "subtopics": ["right censoring", "observed event versus censor time", "follow-up windows", "competing events and cumulative incidence", "proportional hazards diagnostics", "cause-specific hazard and cumulative incidence"],
+      "sources": [{
+        "title": "Introduction to survival analysis",
+        "publisher": "lifelines documentation",
+        "url": "https://lifelines.readthedocs.io/en/stable/Survival%20Analysis%20intro.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "lifelines 0.30.3 survival analysis introduction"
+      }, {
+        "title": "Weighing risks and benefits in the presence of competing risks",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11521377/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2024"
+      }]
+    },
+    {
+      "topic": "Logistic regression interpretation",
+      "subtopics": ["log-odds coefficients", "odds ratios", "probability-scale effects"],
+      "sources": [{
+        "title": "Explaining Odds Ratios",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2938757/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2010"
+      }]
+    },
+    {
+      "topic": "Distribution shift",
+      "subtopics": ["covariate shift", "target-to-training density ratios", "support overlap"],
+      "sources": [{
+        "title": "Improving importance estimation in covariate shift for providing accurate prediction error",
+        "publisher": "Expert Systems with Applications via arXiv",
+        "url": "https://arxiv.org/html/2402.01450v1",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article accepted for publication; arXiv version 1"
+      }]
+    },
+    {
+      "topic": "Negative controls for confounding",
+      "subtopics": ["negative-control outcomes", "shared confounding structure", "bias-diagnostic assumptions"],
+      "sources": [{
+        "title": "Observational studies and the difficult quest for causality: lessons from vaccine effectiveness and impact studies",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5841615/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2018"
+      }]
+    },
+    {
+      "topic": "Regression discontinuity design",
+      "subtopics": ["cutoff manipulation", "covariate continuity", "placebo thresholds and bandwidth sensitivity"],
+      "sources": [{
+        "title": "Strategies for evaluating the assumptions of the regression discontinuity design",
+        "publisher": "International Journal of Epidemiology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5837477/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2017"
+      }]
+    },
+    {
+      "topic": "Instrumental variable analysis",
+      "subtopics": ["instrument relevance", "exclusion restriction", "exchangeability and weak instruments"],
+      "sources": [{
+        "title": "Understanding the Assumptions Underlying Instrumental Variable Analyses",
+        "publisher": "Epidemiology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6096851/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2018"
+      }]
+    },
+    {
+      "topic": "Cluster-randomized trial design",
+      "subtopics": ["intracluster correlation", "effective sample size", "cluster-level power planning", "cluster-aware uncertainty and unit of analysis"],
+      "sources": [{
+        "title": "Key considerations for designing, conducting and analysing a cluster randomized trial",
+        "publisher": "Trials via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10555937/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed review published 2023"
+      }, {
+        "title": "Cluster-randomized controlled trials: A tutorial",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11795929/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed tutorial published 2023"
+      }]
+    },
+    {
+      "topic": "Effect measures and noncollapsibility",
+      "subtopics": ["marginal versus conditional odds ratios", "noncollapsibility versus confounding"],
+      "sources": [{
+        "title": "Making apples from oranges: Comparing noncollapsible effect estimators and their standard errors after adjustment for different covariate sets",
+        "publisher": "Statistics in Medicine via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7986756/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2021"
+      }]
+    },
+    {
+      "topic": "Count-data regression",
+      "subtopics": ["Poisson mean-variance assumption", "overdispersion diagnostics", "negative-binomial and zero-inflated alternatives"],
+      "sources": [{
+        "title": "An empirical approach to determine a threshold for assessing overdispersion in Poisson and negative binomial models for count data",
+        "publisher": "Communications in Statistics via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6290908/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2018"
+      }]
+    },
+    {
+      "topic": "Hierarchical modeling",
+      "subtopics": ["partial pooling", "shrinkage", "small-group estimate stability"],
+      "sources": [{
+        "title": "Multilevel Regression and Poststratification Using Margins of Poststratifiers",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12967158/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed multilevel modeling application published 2026"
+      }]
+    },
+    {
+      "topic": "Regression to the mean",
+      "subtopics": ["extreme-baseline selection", "pre-post change", "comparison-group interpretation"],
+      "sources": [{
+        "title": "Regression to the Mean in Pre–Post Testing: Using Simulations and Permutations to Develop Null Expectations",
+        "publisher": "CBE—Life Sciences Education via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6755224/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2019"
+      }]
+    },
+    {
+      "topic": "Mediation analysis",
+      "subtopics": ["mediator-outcome confounding", "direct and indirect effects", "causal assumptions"],
+      "sources": [{
+        "title": "Assumptions Not Often Assessed or Satisfied in Published Mediation Analyses in Psychology and Psychiatry",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8900288/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2022"
+      }]
+    },
+    {
+      "topic": "Baseline adjustment in randomized trials",
+      "subtopics": ["ANCOVA", "change-score analysis", "baseline-follow-up association"],
+      "sources": [{
+        "title": "Statistical analysis of two arm randomized pre-post designs with one post-treatment measurement",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8305561/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2021"
+      }]
+    },
+    {
+      "topic": "Case-control risk prediction",
+      "subtopics": ["outcome-dependent sampling", "intercept correction", "population absolute risk"],
+      "sources": [{
+        "title": "Assessing risk prediction models in case-control studies using semiparametric and nonparametric methods",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3045657/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2011"
+      }]
+    },
+    {
+      "topic": "Propensity score balance diagnostics",
+      "subtopics": ["standardized mean differences", "distributional balance", "limitations of p-value tests"],
+      "sources": [{
+        "title": "Balance diagnostics after propensity score matching",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351359/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2018"
+      }]
+    },
+    {
+      "topic": "Synthetic control evaluation",
+      "subtopics": ["pre-intervention fit", "donor-pool suitability", "placebo comparisons"],
+      "sources": [{
+        "title": "Synthetic Control Methods for the Evaluation of Single-Unit Interventions in Epidemiology: A Tutorial",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8634614/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed tutorial published 2021"
+      }]
+    },
+    {
+      "topic": "Prediction intervals and confidence intervals",
+      "subtopics": ["mean response versus individual outcome", "residual variance", "interval interpretation"],
+      "sources": [{
+        "title": "PredictionResults.conf_int",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.PredictionResults.conf_int.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "statsmodels 0.15.0 stable API documentation"
+      }]
+    },
+    {
+      "topic": "Multiple imputation pooling",
+      "subtopics": ["within-imputation variance", "between-imputation variability", "Rubin's rules"],
+      "sources": [{
+        "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed article published 2009"
+      }]
+    },
+    {
+      "topic": "Complex survey sampling",
+      "subtopics": ["sampling weights", "strata and primary sampling units", "design-aware variance estimation"],
+      "sources": [{
+        "title": "NHANES Sample Design Module",
+        "publisher": "U.S. Centers for Disease Control and Prevention",
+        "url": "https://wwwn.cdc.gov/nchs/nhanes/tutorials/sampledesign.aspx",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "CDC NHANES sample-design tutorial retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Measurement error in predictors",
+      "subtopics": ["classical measurement error", "attenuation in simple regression", "non-classical error patterns"],
+      "sources": [{
+        "title": "STRATOS guidance document on measurement error and misclassification of variables in observational epidemiology: Part 1 – basic theory and simple methods of adjustment",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7450672/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Peer-reviewed STRATOS guidance published 2020"
       }]
     }
   ]

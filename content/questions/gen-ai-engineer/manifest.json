@@ -2,30 +2,52 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 9,
+  "itemCount": 49,
   "countsByTopic": {
-    "Retrieval-augmented generation": 3,
-    "Generative AI evaluation": 2,
+    "Retrieval-augmented generation": 11,
+    "Generative AI evaluation": 3,
     "Generative AI safety and robustness": 1,
     "Model optimization and adaptation": 1,
-    "Structured outputs and data contracts": 1,
-    "Latency and inference efficiency": 1
+    "Structured outputs and data contracts": 3,
+    "Latency and inference efficiency": 1,
+    "Offline batch processing": 4,
+    "Streaming response design": 3,
+    "Prompt caching and repeated context": 2,
+    "Asynchronous response execution": 1,
+    "Conversation context management": 1,
+    "Embedding representations": 3,
+    "Rate limits and retries": 1,
+    "Long-context reliability": 1,
+    "Function calling and tool orchestration": 2,
+    "Grounded generation and abstention": 1,
+    "Hybrid retrieval evaluation": 1,
+    "Token budgeting and counting": 1,
+    "Code generation evaluation": 1,
+    "Confidence calibration from token probabilities": 1,
+    "Reasoning token budget and completion state": 1,
+    "RAG context compression and grounding": 1,
+    "Token log probabilities": 1,
+    "Responses API conversation state": 1,
+    "API data retention controls": 1,
+    "Vision input fidelity and cost": 1
   },
   "countsByLevel": {
-    "L2": 6,
-    "L3": 3
+    "L2": 25,
+    "L3": 24
   },
   "countsByType": {
-    "scenario": 5,
-    "concept": 1,
-    "trade-off": 3
+    "scenario": 15,
+    "concept": 5,
+    "trade-off": 11,
+    "debugging": 17,
+    "design": 1
   },
   "status": {
-    "schemaValid": 9,
-    "sourcesVerified": 9,
-    "rederived": 9,
+    "schemaValid": 49,
+    "sourcesVerified": 49,
+    "rederived": 49,
     "codeExecuted": 0,
-    "expertReviewPending": 9
+    "expertReviewPending": 49
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -85,6 +107,286 @@
       "expertReview": "pending"
     },
     "genai-reduce-latency-by-measuring-the-bottleneck": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-use-batch-processing-for-offline-evaluations": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-stream-to-improve-perceived-response-time": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-debug-prompt-cache-misses-with-prefix-stability": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-calibrate-model-grader-against-human-judgments": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-handle-refusals-outside-structured-output-schema": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-run-long-response-as-background-work": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-preserve-required-context-during-compaction": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-measure-retriever-rank-with-hit-rate-and-mrr": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-tune-vector-store-chunking-with-retrieval-tests": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-filter-retrieval-by-authorized-metadata": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-block-retrieval-after-vector-store-file-removal": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-wait-for-vector-store-ingestion-before-search": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-evaluate-semantic-and-keyword-search-for-exact-terms": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-map-batch-results-by-custom-id": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-keep-query-and-corpus-embedding-dimensions-aligned": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-choose-similarity-metric-for-normalized-embeddings": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-tune-semantic-and-keyword-ranking-weights": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-retry-temporary-rate-limits-with-bounded-backoff": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-commit-streamed-response-only-after-completion": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-test-retrieved-evidence-position-in-long-context": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-rerank-limited-candidates-with-cross-encoder": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-authorize-before-executing-model-function-call": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-buffer-streamed-tool-arguments-before-execution": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-match-tool-results-by-call-id": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-test-rag-abstention-on-misleading-context": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-measure-per-query-hybrid-retrieval-regressions": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-count-full-request-tokens-before-dispatch": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-estimate-pass-at-k-from-sampled-programs": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-calibrate-token-probability-confidence": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-account-for-reasoning-tokens-in-output-budget": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-evaluate-citation-grounding-after-compression": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-preserve-trained-pooling-for-embeddings": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-represent-optional-structured-fields-as-nullable": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-order-static-prompt-content-before-dynamic-input": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-reconcile-partial-results-from-expired-batch": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-do-not-treat-token-logprobs-as-answer-confidence": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-archive-batch-output-before-retention-expiry": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-resend-instructions-when-chaining-responses": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-distinguish-store-setting-from-zero-retention": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-measure-cost-before-assuming-low-image-detail-is-cheaper": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

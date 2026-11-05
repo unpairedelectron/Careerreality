@@ -2,28 +2,62 @@
   "bank": "data-scientist",
   "target": 240,
   "minimum": 75,
-  "itemCount": 9,
+  "itemCount": 58,
   "countsByTopic": {
     "Machine learning evaluation": 3,
     "Evaluation metrics and experiments": 3,
-    "Experiment design and uncertainty": 1,
+    "Experiment design and uncertainty": 7,
     "Experiment data quality": 1,
-    "Missing-data strategy": 1
+    "Missing-data strategy": 2,
+    "Statistical power and sample size": 1,
+    "Multiple testing and false discovery": 1,
+    "Statistical test design": 1,
+    "Statistical test interpretation": 2,
+    "Time-series model evaluation": 2,
+    "Feature attribution and correlated inputs": 1,
+    "Causal inference and overlap": 3,
+    "Statistical testing": 2,
+    "Uncertainty estimation": 2,
+    "Subgroup analysis and effect heterogeneity": 1,
+    "Aggregated and stratified analysis": 1,
+    "Survival analysis": 4,
+    "Logistic regression interpretation": 1,
+    "Distribution shift": 1,
+    "Negative controls for confounding": 1,
+    "Regression discontinuity design": 1,
+    "Instrumental variable analysis": 1,
+    "Cluster-randomized trial design": 2,
+    "Effect measures and noncollapsibility": 1,
+    "Count-data regression": 1,
+    "Hierarchical modeling": 1,
+    "Regression to the mean": 1,
+    "Mediation analysis": 1,
+    "Baseline adjustment in randomized trials": 1,
+    "Case-control risk prediction": 1,
+    "Propensity score balance diagnostics": 1,
+    "Synthetic control evaluation": 1,
+    "Prediction intervals and confidence intervals": 1,
+    "Multiple imputation pooling": 1,
+    "Complex survey sampling": 1,
+    "Cross-validation uncertainty": 1,
+    "Measurement error in predictors": 1
   },
   "countsByLevel": {
-    "L2": 9
+    "L2": 19,
+    "L3": 39
   },
   "countsByType": {
-    "trade-off": 4,
-    "concept": 2,
-    "scenario": 3
+    "trade-off": 7,
+    "concept": 19,
+    "scenario": 27,
+    "debugging": 5
   },
   "status": {
-    "schemaValid": 9,
-    "sourcesVerified": 9,
-    "rederived": 9,
+    "schemaValid": 58,
+    "sourcesVerified": 58,
+    "rederived": 58,
     "codeExecuted": 0,
-    "expertReviewPending": 9
+    "expertReviewPending": 58
   },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
@@ -83,6 +117,349 @@
       "expertReview": "pending"
     },
     "ds-select-imputation-for-prediction-objective": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-plan-experiment-power-before-data-collection": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-control-false-discoveries-across-many-segments": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-paired-test-for-repeated-observations": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-interpret-pvalue-as-model-incompatibility-not-truth": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-preserve-pairs-in-bootstrap-uncertainty": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-plan-sequential-testing-before-repeated-peeking": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-interpret-expanding-time-series-validation-folds": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-explain-low-permutation-importance-with-correlated-features": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-pre-exposure-covariates-for-cuped": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-set-time-series-gap-for-overlapping-label-windows": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-common-support-before-causal-weighting": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-interpret-mann-whitney-beyond-median-differences": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-expected-counts-before-chi-square-approximation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-bootstrap-at-the-cluster-level-for-grouped-data": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-investigate-degenerate-bca-bootstrap-intervals": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-align-experiment-randomization-unit-with-assignment": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-preserve-randomization-with-intention-to-treat": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-parallel-trends-before-difference-in-differences": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-avoid-conditioning-on-a-collider": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-test-treatment-effect-heterogeneity-with-interaction": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-investigate-reversals-between-strata-and-aggregate": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-include-right-censored-observations-in-survival-analysis": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-interpret-logit-coefficients-on-the-odds-scale": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-address-missing-not-at-random-data": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-importance-weight-under-covariate-shift": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-distinguish-nonsignificance-from-noninferiority": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-estimate-event-risk-with-competing-risks": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-negative-control-outcome-to-probe-confounding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-account-for-treatment-spillovers-in-ab-tests": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-regression-discontinuity-design-validity": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-instrumental-variable-assumptions": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-account-for-clustering-in-trial-power": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-distinguish-odds-ratio-noncollapsibility-from-confounding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-investigate-poisson-overdispersion-before-model-change": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-partial-pooling-for-small-groups": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-account-for-clustering-in-cluster-rct-inference": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-proportional-hazards-in-cox-model": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-control-regression-to-mean-in-pre-post-analysis": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-mediator-outcome-confounding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-select-ancova-or-change-score-in-rct": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-distinguish-cause-specific-hazard-from-absolute-risk": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-recalibrate-risk-from-case-control-sampling": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-smd-not-p-values-for-matching-balance": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-assess-synthetic-control-pre-fit-and-placebos": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-choose-prediction-interval-for-new-observation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-pool-estimates-across-multiple-imputations": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-account-for-complex-survey-design": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-avoid-naive-fold-se-for-cross-validation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-state-assumptions-before-correcting-measurement-error": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

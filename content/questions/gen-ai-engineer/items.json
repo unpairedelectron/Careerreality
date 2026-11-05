@@ -654,5 +654,2859 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-use-batch-processing-for-offline-evaluations",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Choosing asynchronous evaluation jobs",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A team needs to evaluate 50,000 prompts overnight, but does not need each result immediately. What request pattern should it consider?",
+    "what_is_assessed": "Whether the candidate separates offline workloads from interactive response requirements and understands asynchronous batch trade-offs.",
+    "short_answer": "Consider an asynchronous batch-processing interface for the offline evaluation workload, provided its completion window and supported endpoints fit the job. It can offer distinct rate limits and cost characteristics compared with synchronous requests, but results arrive later and the application must track job state and retrieve per-request outcomes. Use synchronous requests for interactions that need an immediate response, and compare total cost, turnaround, and operational recovery needs.",
+    "deep_explanation": "OpenAI's Batch API documentation positions asynchronous groups of requests for workloads that do not need immediate responses, including evaluations, large-scale classification, and embedding jobs. It documents a separate rate-limit pool, cost discounts, and a 24-hour completion window. These are provider-specific service terms that may change; the design principle is to match asynchronous processing to offline work rather than adding its latency to an interactive flow.",
+    "strong_answer_signals": [
+      "Recognizes the job is offline because individual results are not needed immediately.",
+      "Checks turnaround, endpoint support, and per-request result handling.",
+      "Distinguishes provider-specific cost and rate-limit terms from general design guidance."
+    ],
+    "weak_answer_signals": [
+      "Uses asynchronous batching for a user interaction that needs an immediate response.",
+      "Assumes the batch completes instantly or has no partial-failure handling."
+    ],
+    "common_mistakes": [
+      "Failing to track job status and map returned results back to requests.",
+      "Treating a current discount or service deadline as a permanent platform guarantee."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which workload does the guide identify as a batch use case?",
+        "short_answer": "Running evaluations, classifying large datasets, or embedding content repositories."
+      },
+      {
+        "question": "What trade-off should be checked first?",
+        "short_answer": "Whether delayed completion fits the workload's response-time needs."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/batch",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Batch API documentation retrieved 2026-11-04; pricing, limits, and turnaround terms can change.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/batch"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's offline use cases, separate rate-limit pool, and stated 24-hour completion window; marked commercial terms and timelines as changeable."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-eval-summary-objective-dataset-metrics"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-stream-to-improve-perceived-response-time",
+    "bank": "gen-ai-engineer",
+    "topic": "Streaming response design",
+    "subtopic": "Perceived latency and partial output",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A generated answer takes several seconds to finish, but useful text is available much earlier. What can streaming improve, and what must the application still handle?",
+    "what_is_assessed": "Understanding that streaming can expose early output without reducing total generation time or removing completion and safety handling.",
+    "short_answer": "Streaming can let the interface display or process the beginning of a response while generation continues, improving perceived responsiveness. It does not by itself guarantee that the full response arrives sooner. The client must handle incremental events, completion and error states, and avoid treating partial text as a finished result. For actions with side effects, wait for the appropriate completed and validated state before committing.",
+    "deep_explanation": "OpenAI's streaming guide describes receiving response events incrementally so an application can begin printing or processing output while the full response is still being generated. It documents HTTP streaming over server-sent events for the Responses API. Whether streaming improves user experience depends on the interaction; incremental output should be treated as partial until the response completes, and downstream logic must handle interruption or failure.",
+    "strong_answer_signals": [
+      "Separates perceived responsiveness from total completion latency.",
+      "Accounts for partial events, completion, and error states.",
+      "Avoids committing consequential actions from an incomplete stream."
+    ],
+    "weak_answer_signals": [
+      "Claims streaming makes generation itself finish sooner.",
+      "Treats the first text chunk as the final validated answer."
+    ],
+    "common_mistakes": [
+      "Leaving partial output displayed as if it were a completed answer after a stream error.",
+      "Triggering a side effect before required final checks have completed."
+    ],
+    "follow_ups": [
+      {
+        "question": "What user-facing benefit can streaming provide?",
+        "short_answer": "The user can see early output while the rest is still generating."
+      },
+      {
+        "question": "What should the application do with partial output?",
+        "short_answer": "Track it as incomplete until the response reaches a valid completion state."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Streaming API responses",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/streaming-responses",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Responses API streaming guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/streaming-responses"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source describes incremental delivery while generation continues; kept the distinction between perceived response time and total completion explicit."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-reduce-latency-by-measuring-the-bottleneck"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-debug-prompt-cache-misses-with-prefix-stability",
+    "bank": "gen-ai-engineer",
+    "topic": "Prompt caching and repeated context",
+    "subtopic": "Exact prefix reuse",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A service repeatedly sends a long system prompt but rarely gets prompt-cache hits. What should you inspect?",
+    "what_is_assessed": "Whether the candidate understands exact prefix reuse, eligible cache breakpoints, and the difference between input processing and output-generation latency.",
+    "short_answer": "Check whether the entire rendered prefix is identical before an eligible cache breakpoint, including relevant settings such as model and tools. Put stable shared instructions and definitions before request-specific context, and verify the prefix meets the model's current minimum cacheable length. Inspect cache-token reporting rather than assuming reuse. Caching can reduce repeated input processing and input-token cost; it does not eliminate generation time or guarantee a hit.",
+    "deep_explanation": "OpenAI's prompt-caching guide says reuse requires an exact rendered-prefix match and compatible request settings; changes before a breakpoint prevent that prefix from matching. It also documents model-dependent minimum cacheable lengths and cache diagnostics. The precise length, breakpoint behavior, retention, and pricing vary by model and API and can change, so application monitoring should use current documentation rather than hard-coded assumptions.",
+    "strong_answer_signals": [
+      "Checks byte-for-byte or token-for-token prefix stability and relevant request settings.",
+      "Separates stable instructions from variable request content where practical.",
+      "Verifies actual cached-token signals and does not claim caching speeds output generation."
+    ],
+    "weak_answer_signals": [
+      "Assumes similar prompts share a cache entry even when their prefixes differ.",
+      "Expects prompt caching to fix slow token generation."
+    ],
+    "common_mistakes": [
+      "Changing tool definitions or early context on each request and expecting the later prefix to match.",
+      "Hard-coding one minimum cache length for every model."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must match for cache reuse?",
+        "short_answer": "The eligible rendered prefix and compatible request settings."
+      },
+      {
+        "question": "What should be monitored to confirm a hit?",
+        "short_answer": "The provider's cached-token or cache-diagnostic signals for the request."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Prompt caching",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI prompt-caching guide retrieved 2026-11-04; eligibility and limits vary by model and request settings.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified exact-prefix and compatible-setting requirements, model-dependent minimum cache lengths, and the input-processing scope; avoided claiming output-generation acceleration."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-reduce-latency-by-measuring-the-bottleneck"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-calibrate-model-grader-against-human-judgments",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI evaluation",
+    "subtopic": "Model-grader calibration and bias",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An LLM grader assigns higher scores to longer answers and usually agrees with the product team. What should you test before relying on it at scale?",
+    "what_is_assessed": "Whether the candidate validates a model grader against human judgments and checks for systematic biases.",
+    "short_answer": "Build a representative set with trusted human labels and compare grader outcomes against them, including disagreements and edge cases. Test known failure modes such as verbosity and response-order bias, and inspect results by task slice rather than relying on aggregate agreement. Revise the rubric or grading method and recheck it before optimizing for cost or latency. A grader's agreement on one sample does not establish that it is unbiased or valid for every use.",
+    "deep_explanation": "OpenAI's evaluation guidance recommends validating model-grader agreement against human labels and calls out position and verbosity bias as challenges. It suggests pairwise comparisons or pass/fail formats for more reliable grading in relevant cases. The source does not define a universal acceptable agreement threshold; teams must set one based on the evaluation's stakes and use human review where automated grading is insufficient.",
+    "strong_answer_signals": [
+      "Uses trusted human judgments to evaluate grader agreement.",
+      "Tests the observed verbosity bias and other systematic failure modes.",
+      "Reviews disagreement by task slice and sets a use-appropriate acceptance threshold."
+    ],
+    "weak_answer_signals": [
+      "Treats team intuition or a single aggregate agreement number as validation.",
+      "Assumes a model grader is objective because it is automated."
+    ],
+    "common_mistakes": [
+      "Optimizing grader cost before establishing quality against human labels.",
+      "Using a grader on tasks or populations outside its validated scope."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which grader biases does the guide identify?",
+        "short_answer": "Position bias and verbosity bias."
+      },
+      {
+        "question": "What is a practical initial validation set?",
+        "short_answer": "Representative examples with trusted human judgments, including edge cases."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluation best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI evaluation best-practices guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's instruction to compare model-grader agreement with human labels and its position/verbosity bias cautions; avoided inventing a universal pass threshold."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-choose-evaluator-for-open-ended-support-answers"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-handle-refusals-outside-structured-output-schema",
+    "bank": "gen-ai-engineer",
+    "topic": "Structured outputs and data contracts",
+    "subtopic": "Refusal and incomplete response handling",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A structured-output request expects a JSON object, but the model refuses the request. Why might the response not match the requested schema, and what should the application do?",
+    "what_is_assessed": "Whether the candidate handles refusal and incomplete-response states separately from successful schema-conforming output.",
+    "short_answer": "A refusal is a distinct response state and may not conform to the requested schema. Inspect the response's refusal or status indicators before parsing it as the business object, and route it through an explicit refusal path. Also handle incomplete responses separately, such as when an output-token limit is reached. Schema constraints apply to successful structured output; they do not remove refusal or transport/error handling.",
+    "deep_explanation": "OpenAI's Structured Outputs guide explicitly calls out refusals as a case where the model may not produce a response matching the supplied schema, and documents a refusal indicator. It also discusses incomplete output as an edge case. The application should branch on the response state and avoid silently coercing a refusal or truncated result into a valid domain record.",
+    "strong_answer_signals": [
+      "Recognizes refusal as an explicit response state outside the requested schema.",
+      "Checks refusal and completion state before deserializing the business payload.",
+      "Keeps refusal, incomplete output, and successful structured output as distinct paths."
+    ],
+    "weak_answer_signals": [
+      "Retries or parses every nonconforming response as if it were malformed JSON.",
+      "Assumes strict schema guarantees that every request produces a successful object."
+    ],
+    "common_mistakes": [
+      "Applying downstream actions to a refusal or truncated response.",
+      "Treating structured formatting as a substitute for error-state handling."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does the requested schema guarantee an object after a refusal?",
+        "short_answer": "No. Refusals may use a distinct response shape and state."
+      },
+      {
+        "question": "What should happen before parsing the business object?",
+        "short_answer": "Check response status, refusal indicators, and completion state."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Structured model outputs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Structured Outputs guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/structured-outputs"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's edge-case discussion that refusals and incomplete responses can fail to match the requested schema; described separate response-state handling rather than treating them as normal JSON."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-schema-valid-json-is-not-enough-for-crm-update"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-run-long-response-as-background-work",
+    "bank": "gen-ai-engineer",
+    "topic": "Asynchronous response execution",
+    "subtopic": "Background generation and polling",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A long generation request often outlasts the web server's request timeout. How can the application avoid holding the original connection open?",
+    "what_is_assessed": "Whether the candidate designs a non-blocking long-running response flow and handles its lifecycle explicitly.",
+    "short_answer": "Use an asynchronous background-response flow when the API and task support it: start the response, retain its identifier, and poll or receive a completion event while the client can show a pending state. Handle failed, incomplete, and completed states separately, and verify the provider's current response-retention behavior before depending on later retrieval. This is different from streaming partial text to an interactive user.",
+    "deep_explanation": "OpenAI's background-mode guide describes starting generation asynchronously and polling response objects for status, which can avoid relying on one long-lived connection. It also documents response storage and retention behavior that varies with request settings and policy. The application must design its own pending-state UX, persistence, and recovery around the provider's current API contract.",
+    "strong_answer_signals": [
+      "Separates the initial request from later status/result retrieval.",
+      "Explains pending, completed, failed, and incomplete states.",
+      "Checks retention and storage settings before promising later retrieval."
+    ],
+    "weak_answer_signals": [
+      "Retries the entire generation whenever the HTTP connection times out.",
+      "Treats a pending response as completed or assumes results are retained indefinitely."
+    ],
+    "common_mistakes": [
+      "Confusing background execution with streaming.",
+      "Failing to persist the response identifier needed for later polling."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should the client show while generation continues?",
+        "short_answer": "A pending state tied to the background response identifier."
+      },
+      {
+        "question": "What must be checked before later retrieval?",
+        "short_answer": "The provider's current storage and retention behavior for the request."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Background mode",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/background",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Background mode guide retrieved 2026-11-04; retention behavior is request- and policy-dependent.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/background"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that background mode runs asynchronously and supports polling; kept retention details explicitly subject to current request settings and policy."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-use-batch-processing-for-offline-evaluations"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-preserve-required-context-during-compaction",
+    "bank": "gen-ai-engineer",
+    "topic": "Conversation context management",
+    "subtopic": "Compacting long-running conversations",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A long-running assistant conversation is approaching the model's context limit. How can you reduce context size without blindly dropping the whole history?",
+    "what_is_assessed": "Whether the candidate uses a documented compaction flow and preserves the context item required for continuation.",
+    "short_answer": "Use an appropriate compaction flow to reduce context while carrying forward state needed for later turns. Preserve and pass the returned compaction item as specified by the API; do not manually trim the canonical output of the standalone compact endpoint. If using response chaining, follow that mode's input rules. Test whether important user constraints and tool state survive compaction, because a smaller context is useful only if the task can still continue correctly.",
+    "deep_explanation": "OpenAI's compaction guide describes reducing long conversation context while preserving state for subsequent turns. It says the returned compaction item carries forward prior state and is opaque; for standalone compaction, the returned compacted window should be passed to the next response as-is. The guide distinguishes chaining modes, so clients must follow the contract for the mode they use rather than applying one pruning rule everywhere.",
+    "strong_answer_signals": [
+      "Uses a supported compaction flow rather than deleting arbitrary history.",
+      "Preserves the returned compaction item and follows the selected chaining mode.",
+      "Tests continuity of task constraints, tool results, and user intent."
+    ],
+    "weak_answer_signals": [
+      "Drops old turns based only on age or token count.",
+      "Prunes the canonical compacted output without understanding the API contract."
+    ],
+    "common_mistakes": [
+      "Confusing compaction with a summary written by the application.",
+      "Assuming an opaque compaction item can be safely edited."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the compaction item carry forward?",
+        "short_answer": "Key prior state and reasoning needed for the next context window."
+      },
+      {
+        "question": "Should standalone compact output be manually pruned?",
+        "short_answer": "No. Pass the returned compacted window as the documented canonical next context."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Compaction",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/compaction",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Compaction guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/compaction"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's state-preserving compaction behavior, opaque compaction item, and standalone output handling; retained the distinction between response chaining modes."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-run-long-response-as-background-work"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-measure-retriever-rank-with-hit-rate-and-mrr",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Retriever ranking metrics",
+    "level": "L2",
+    "type": "concept",
+    "question": "A RAG system's final answers are sometimes wrong. How could you tell whether the retriever is failing to surface relevant documents?",
+    "what_is_assessed": "Whether the candidate evaluates retrieval independently from answer generation and selects ranking metrics suited to retrieved context.",
+    "short_answer": "Build a query set with known relevant documents and evaluate the retriever separately. Hit rate measures how often at least one relevant document appears within the top k; mean reciprocal rank rewards placing the first relevant result higher. Then evaluate answer quality separately using the retrieved context. High retrieval metrics do not prove the generator uses the context correctly, and weak answer scores alone do not identify which stage failed.",
+    "deep_explanation": "The OpenAI Cookbook RAG example distinguishes retrieval evaluation from response evaluation and demonstrates hit rate and mean reciprocal rank for the retriever. Hit rate checks whether a relevant document appears in the top-k results, while MRR measures the rank of the highest-ranked relevant document. These metrics require a suitable query/relevance dataset and do not replace human-validated evaluation of the generated answer.",
+    "strong_answer_signals": [
+      "Measures retrieval separately from response quality.",
+      "Explains the difference between hit rate and MRR.",
+      "Uses known relevant documents and does not treat retriever scores as proof of grounded answers."
+    ],
+    "weak_answer_signals": [
+      "Uses only a final-answer score to diagnose the retriever.",
+      "Assumes a relevant passage in the top-k guarantees a correct answer."
+    ],
+    "common_mistakes": [
+      "Evaluating retrieval without a labeled or otherwise validated relevance set.",
+      "Confusing document ranking quality with answer faithfulness."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does hit rate measure?",
+        "short_answer": "The fraction of queries with a relevant document in the top-k results."
+      },
+      {
+        "question": "What does MRR reward?",
+        "short_answer": "A higher rank for the first relevant retrieved document."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluate RAG with LlamaIndex",
+        "publisher": "OpenAI Cookbook",
+        "url": "https://developers.openai.com/cookbook/examples/evaluation/evaluate_rag_with_llamaindex",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Cookbook example retrieved 2026-11-04; metric implementation depends on the evaluation dataset and retrieval stack.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/cookbook/examples/evaluation/evaluate_rag_with_llamaindex"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's distinction between retrieval and response evaluation and its definitions of hit rate and MRR; stated the need for known relevant documents."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-separate-retrieval-from-generation-failures"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-tune-vector-store-chunking-with-retrieval-tests",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Chunking strategy",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A vector-search pipeline misses facts that span paragraph boundaries and also returns overly broad passages. How would you tune document chunking?",
+    "what_is_assessed": "Whether the candidate treats chunk size and overlap as retrieval parameters to test against the source structure and representative queries.",
+    "short_answer": "Use a representative retrieval set with known relevant passages and compare chunk sizes and overlap. Smaller chunks can improve precision but may split context; larger chunks preserve context but can retrieve broad or noisy text. Overlap can preserve boundary information, but excess overlap increases duplication. Measure retrieval quality separately from answer quality, inspect failure cases, and choose a configuration suited to the documents rather than assuming a universal optimum.",
+    "deep_explanation": "OpenAI's Retrieval guide documents automatic and static file chunking strategies and configurable maximum chunk size and overlap. The API's default values are implementation defaults, not a guarantee of best retrieval for every corpus. The engineering choice should be evaluated using representative questions and relevant-document judgments, with attention to both retrieval metrics and the context passed to generation.",
+    "strong_answer_signals": [
+      "Treats chunking as a corpus- and query-dependent retrieval decision.",
+      "Explains the context-versus-specificity trade-off and the cost of excessive overlap.",
+      "Evaluates configurations on a representative retrieval set and inspects errors."
+    ],
+    "weak_answer_signals": [
+      "Copies a default chunk size and assumes it is optimal.",
+      "Changes chunking based only on generated-answer quality without inspecting retrieval."
+    ],
+    "common_mistakes": [
+      "Using overlap so large that the index contains redundant passages.",
+      "Optimizing a few hand-picked prompts that do not represent production queries."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can smaller chunks improve?",
+        "short_answer": "Passage specificity, though too-small chunks can lose needed context."
+      },
+      {
+        "question": "What evidence should guide a chunking change?",
+        "short_answer": "Retrieval results on representative queries with known relevant passages, plus failure inspection."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Retrieval",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Retrieval guide retrieved 2026-11-04; defaults can change and are not presented as universal best settings.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/retrieval"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that the API supports automatic and configurable static chunk sizes and overlaps; framed optimal settings as workload-specific and did not claim the defaults are universally best."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-measure-retriever-rank-with-hit-rate-and-mrr"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-filter-retrieval-by-authorized-metadata",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Metadata filtering and access boundaries",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A shared RAG index contains files for multiple teams. How should a query restrict results to the requesting user's authorized corpus?",
+    "what_is_assessed": "Whether the candidate uses metadata filters as part of retrieval while keeping authorization enforced by trusted application logic.",
+    "short_answer": "Attach reliable metadata to indexed files and apply a server-side filter derived from the authenticated user's permissions before retrieval. Validate that metadata is correct and test both allowed and denied cases. Treat filtering as one retrieval control, not a substitute for authorization: the application must determine the user's access and should not let a prompt or model-selected filter expand it. Audit the retrieved file identities where the system handles sensitive data.",
+    "deep_explanation": "OpenAI's File Search guide documents metadata filtering of vector-store search results, while the Retrieval guide describes file attributes and filter construction. These API features can narrow search results, but authorization policy and trusted identity mapping belong to the application. Incorrect or user-controlled metadata can still produce an unsafe result set, so permission derivation and filter validation must occur outside model discretion.",
+    "strong_answer_signals": [
+      "Derives the filter from authenticated permissions in trusted application code.",
+      "Checks metadata integrity and tests both permitted and forbidden retrieval.",
+      "Does not treat a model-generated filter as an access-control decision."
+    ],
+    "weak_answer_signals": [
+      "Lets the user or model choose arbitrary team filters.",
+      "Assumes metadata filtering alone guarantees access isolation."
+    ],
+    "common_mistakes": [
+      "Failing to update or validate metadata when document ownership changes.",
+      "Testing only successful retrieval and not cross-tenant denial cases."
+    ],
+    "follow_ups": [
+      {
+        "question": "Who should decide which metadata filter applies?",
+        "short_answer": "Trusted application logic using the authenticated user's permissions."
+      },
+      {
+        "question": "Does a filter replace authorization checks?",
+        "short_answer": "No. It narrows retrieval but does not replace application-enforced access control."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "File search",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-file-search",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI File Search guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/tools-file-search"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's metadata filtering capability and kept authorization derivation in trusted application logic; the security requirement is an application design constraint, not a claim that filtering itself enforces permissions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-tune-vector-store-chunking-with-retrieval-tests"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-block-retrieval-after-vector-store-file-removal",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Vector-store deletion consistency",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A document was removed from a vector store after access was revoked. Can the application assume it will disappear from search immediately?",
+    "what_is_assessed": "Whether the candidate accounts for eventual consistency and prevents revoked content from being served during removal.",
+    "short_answer": "No. OpenAI's Retrieval guide says vector-store file removal is eventually consistent and search results may still include the removed content briefly. Enforce access revocation in trusted application logic immediately, suppress results for the revoked file, and verify the removal has completed before relying on index state alone. If the underlying uploaded file also needs deletion, check that separately; removing a file from a vector store is not the same operation as deleting the file object.",
+    "deep_explanation": "The OpenAI Retrieval guide documents eventual consistency for vector-store removal and warns that search may continue returning content for a short period. Its API reference distinguishes removing a file from a vector store from deleting the underlying file. For sensitive or tenant-scoped data, retrieval-index cleanup should not be the only authorization boundary: application access policy must prevent serving revoked content while asynchronous removal settles.",
+    "strong_answer_signals": [
+      "Does not promise immediate removal from search results.",
+      "Blocks access through trusted authorization while index cleanup completes.",
+      "Distinguishes vector-store removal from deletion of the underlying file object."
+    ],
+    "weak_answer_signals": [
+      "Treats a successful delete request as proof that no later search can return the content.",
+      "Relies only on prompt instructions to avoid showing revoked documents."
+    ],
+    "common_mistakes": [
+      "Failing to re-check permissions on each retrieved result.",
+      "Assuming the vector-store link and uploaded file have identical deletion lifecycles."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should block access during eventual consistency?",
+        "short_answer": "Trusted application authorization and result filtering for the revoked file."
+      },
+      {
+        "question": "Does removing a file from a vector store delete the original file?",
+        "short_answer": "Not necessarily; the API distinguishes vector-store removal from deleting the file object."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Retrieval",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Retrieval guide and vector-store file lifecycle guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/retrieval"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified eventual consistency and possible residual search results after vector-store removal; retained the distinction between removing a vector-store file and deleting its underlying file object."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-filter-retrieval-by-authorized-metadata"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-wait-for-vector-store-ingestion-before-search",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Asynchronous vector-store ingestion",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A newly uploaded document is not appearing in retrieval results. What should you check before changing embeddings or prompts?",
+    "what_is_assessed": "Whether the candidate accounts for asynchronous file processing and checks ingestion status and errors before diagnosing retrieval quality.",
+    "short_answer": "Check whether vector-store ingestion has completed and whether the file reports an error. File creation and indexing can be asynchronous; use the documented upload-and-poll helper or retrieve status until processing is complete before evaluating search. If processing failed, fix that first. Once the file is ready, test retrieval with a query known to match its content and inspect the returned chunks.",
+    "deep_explanation": "OpenAI's Retrieval guide describes vector-store file creation as asynchronous and recommends helper functions such as `create_and_poll`, or checking status directly. A document that has not finished processing cannot be diagnosed as a prompt or embedding-quality problem yet. The API response's status and last-error fields help distinguish ongoing ingestion from a failed upload.",
+    "strong_answer_signals": [
+      "Checks file processing status and errors before tuning retrieval.",
+      "Waits for completion through polling or a documented helper.",
+      "Separates ingestion failures from search relevance failures."
+    ],
+    "weak_answer_signals": [
+      "Immediately changes chunking or prompts without checking whether indexing completed.",
+      "Assumes successful upload means the file is already searchable."
+    ],
+    "common_mistakes": [
+      "Ignoring ingestion errors or an in-progress status.",
+      "Testing retrieval with a query that does not match the document's content."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can an uploaded file be temporarily absent from search?",
+        "short_answer": "Vector-store processing is asynchronous and may not have completed."
+      },
+      {
+        "question": "What should be checked if processing does not complete?",
+        "short_answer": "The file's status and any reported last error."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Retrieval",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Retrieval guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/retrieval"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified vector-store file operations may be asynchronous and the guide recommends polling or checking status; separated ingestion readiness from retrieval relevance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-block-retrieval-after-vector-store-file-removal"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-evaluate-semantic-and-keyword-search-for-exact-terms",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Semantic and keyword search",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Users ask both paraphrased questions and exact product-code lookups. What should you evaluate in the retrieval layer?",
+    "what_is_assessed": "Whether the candidate tests semantic relevance and exact lexical matching rather than assuming one retrieval signal fits both query types.",
+    "short_answer": "Build separate test cases for paraphrases and exact identifiers, then inspect whether retrieval returns the expected passages for each. Semantic search can find related meaning even when query and document share few words, while keyword search can help surface exact terms. OpenAI File Search documents both semantic and keyword search; evaluate the hosted behavior on your own corpus and queries rather than assuming either signal is sufficient by itself.",
+    "deep_explanation": "The OpenAI Retrieval guide explains that semantic search can find relevant results with few or no shared keywords, while File Search describes its retrieval as using semantic and keyword search. These capabilities serve different query patterns. The engineer should test paraphrase, synonym, and exact identifier cases independently, inspect retrieved passages, and measure task-specific retrieval quality before changing the generation prompt.",
+    "strong_answer_signals": [
+      "Includes both semantic paraphrase queries and exact lexical queries in the evaluation set.",
+      "Understands that semantic similarity and keyword overlap can behave differently.",
+      "Inspects retrieved results before attributing errors to answer generation."
+    ],
+    "weak_answer_signals": [
+      "Assumes embedding similarity always retrieves exact codes or names reliably.",
+      "Tunes generation prompts without checking whether the expected document was retrieved."
+    ],
+    "common_mistakes": [
+      "Evaluating only natural-language paraphrases while users also search identifiers.",
+      "Treating keyword overlap as proof that a passage is contextually relevant."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can semantic search find when keyword overlap is low?",
+        "short_answer": "Semantically related passages that use different wording."
+      },
+      {
+        "question": "Why test exact identifiers separately?",
+        "short_answer": "They may depend more on lexical matching than paraphrased natural-language queries."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "File search",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-file-search",
+        "retrieved_date": "2026-11-04"
+      },
+      {
+        "title": "Retrieval",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI File Search and Retrieval guides retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/tools-file-search",
+        "https://developers.openai.com/api/docs/guides/retrieval"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified File Search describes semantic and keyword search and Retrieval explains semantic relevance with little keyword overlap; did not assume a user-configurable hybrid-weight control."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-measure-retriever-rank-with-hit-rate-and-mrr"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-map-batch-results-by-custom-id",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Request-to-result correlation",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A completed batch returns results in a different order from the input file. How should you match each response to its original request?",
+    "what_is_assessed": "Whether the candidate uses stable request identifiers rather than relying on line order and handles failed requests separately.",
+    "short_answer": "Give every input line a unique `custom_id` and join output records back to the source requests by that identifier. The Batch API warns output order may differ from input order; successful responses appear in the output file, while failed requests are recorded in the error file. Reconcile both files by ID and detect missing, duplicate, or unexpected IDs before publishing evaluation results.",
+    "deep_explanation": "OpenAI's Batch API guide requires a unique `custom_id` for each request and says it can be used to reference results after completion. It explicitly warns that output-line order may not match input order. The guide also separates successful outputs from failed-request details in the error file, so reliable downstream processing must correlate both outcomes by identifier.",
+    "strong_answer_signals": [
+      "Uses unique custom IDs and joins by ID rather than row position.",
+      "Reads both output and error files.",
+      "Checks for missing or duplicate identifiers before interpreting results."
+    ],
+    "weak_answer_signals": [
+      "Assumes response line order matches input line order.",
+      "Drops failed requests without accounting for them in metrics."
+    ],
+    "common_mistakes": [
+      "Reusing a custom ID within one batch.",
+      "Calculating evaluation metrics only on successful responses without reporting failures."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can output order be used as the request mapping?",
+        "short_answer": "No. The API says output order may differ from input order."
+      },
+      {
+        "question": "Where are failed requests reported?",
+        "short_answer": "In the batch error file referenced by its error file ID."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/batch",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Batch API guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/batch"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified unique custom_id, unordered output warning, and separate error file for failed requests."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-use-batch-processing-for-offline-evaluations"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-keep-query-and-corpus-embedding-dimensions-aligned",
+    "bank": "gen-ai-engineer",
+    "topic": "Embedding representations",
+    "subtopic": "Embedding dimensions and index compatibility",
+    "level": "L3",
+    "type": "design",
+    "question": "A team wants smaller embedding vectors to reduce storage costs. What compatibility and quality checks should it plan before changing dimensions?",
+    "what_is_assessed": "Whether the candidate treats embedding dimensions as part of the index contract and evaluates the cost-quality trade-off.",
+    "short_answer": "Choose a supported dimension and use the same embedding model and dimensionality for corpus and query vectors. Existing vectors and index mappings may need to be regenerated or rebuilt to match the new size; do not mix incompatible dimensions. Measure retrieval quality on representative queries alongside storage, latency, and compute savings before migrating production traffic.",
+    "deep_explanation": "OpenAI's embedding guide documents a `dimensions` parameter for supported third-generation embedding models and explains that smaller embeddings can trade representation size against performance and resource use. A vector index expects compatible vector shapes, so a dimension change is an index migration: regenerate document vectors, update index configuration, and ensure query vectors use the same model and dimensions. The retrieval evaluation, not size alone, determines whether the change is acceptable.",
+    "strong_answer_signals": [
+      "Keeps corpus and query vector dimensions compatible.",
+      "Plans for re-embedding and index migration.",
+      "Measures retrieval quality as well as resource savings."
+    ],
+    "weak_answer_signals": [
+      "Changes query-vector dimensions while leaving corpus vectors unchanged.",
+      "Assumes fewer dimensions preserve retrieval quality for every use case."
+    ],
+    "common_mistakes": [
+      "Treating vector dimensions as an API-only setting with no index consequences.",
+      "Comparing cost without checking retrieval regressions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must match between query and indexed vectors?",
+        "short_answer": "The embedding space and vector dimensionality."
+      },
+      {
+        "question": "What should be measured after reducing dimensions?",
+        "short_answer": "Retrieval quality and the intended cost, storage, or latency savings."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Vector embeddings",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/embeddings",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI embedding guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/embeddings"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified supported dimensionality reduction and resource/performance trade-offs; treated vector-index compatibility and re-embedding as engineering consequences of changing vector shape."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-choose-similarity-metric-for-normalized-embeddings",
+    "bank": "gen-ai-engineer",
+    "topic": "Embedding representations",
+    "subtopic": "Similarity metrics for normalized vectors",
+    "level": "L2",
+    "type": "concept",
+    "question": "The embedding provider normalizes every vector to length one. Will cosine similarity and Euclidean distance rank the results differently?",
+    "what_is_assessed": "Whether the candidate connects vector normalization to equivalent ranking behavior for common distance measures.",
+    "short_answer": "For unit-normalized vectors, cosine similarity and Euclidean distance produce identical rankings: cosine can be computed as a dot product, while Euclidean distance is a monotonic transformation of the same cosine relationship. Use the metric supported efficiently by the vector store, but verify the provider's normalization behavior rather than assuming this equivalence for arbitrary embeddings.",
+    "deep_explanation": "OpenAI's embeddings guide states that its embeddings are normalized to length one and that cosine similarity and Euclidean distance therefore give identical rankings. The conclusion depends on unit normalization; for unnormalized vectors, distance and cosine can rank candidates differently. Retrieval performance should still be evaluated on representative queries.",
+    "strong_answer_signals": [
+      "Explains the ranking equivalence for unit-normalized vectors.",
+      "Scopes the claim to normalized embeddings.",
+      "Still validates retrieval quality in the target application."
+    ],
+    "weak_answer_signals": [
+      "Claims the metrics are equivalent for any embedding vectors.",
+      "Treats metric choice as a substitute for evaluating retrieval."
+    ],
+    "common_mistakes": [
+      "Ignoring vector normalization assumptions.",
+      "Confusing score magnitude with ranking order."
+    ],
+    "follow_ups": [
+      {
+        "question": "What enables dot-product cosine scoring?",
+        "short_answer": "Unit-normalized vectors."
+      },
+      {
+        "question": "Does the same ranking claim hold for arbitrary vectors?",
+        "short_answer": "Not necessarily; it depends on normalization."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Vector embeddings",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/embeddings",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI embedding guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/embeddings"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the provider's unit-normalization statement and equivalent ranking claim for cosine similarity and Euclidean distance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-keep-query-and-corpus-embedding-dimensions-aligned"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-tune-semantic-and-keyword-ranking-weights",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Hybrid ranking controls",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A retrieval evaluation shows exact product codes are missed, while paraphrased questions work well. What ranking control could you test?",
+    "what_is_assessed": "Whether the candidate tunes semantic and lexical signals against retrieval evidence instead of changing generation prompts first.",
+    "short_answer": "Use a labeled retrieval set containing both exact-code and paraphrase queries, then inspect results and adjust the retrieval API's hybrid-search embedding and text weights if applicable. Increasing text weight emphasizes keyword overlap; increasing embedding weight emphasizes semantic similarity. A score threshold can also trade fewer weak matches for potentially excluded useful chunks. Compare recall and relevance after each change rather than assuming a universal weight.",
+    "deep_explanation": "OpenAI's Retrieval guide documents `ranking_options`, including hybrid-search weights for reciprocal-rank fusion between semantic embedding and sparse keyword matches, plus a score threshold that can exclude potentially useful chunks. The correct setting depends on the query mix and corpus; tune against representative labeled queries and review retrieved content before attributing failures to the generated answer.",
+    "strong_answer_signals": [
+      "Separates exact lexical queries from paraphrase tests.",
+      "Adjusts text versus embedding weight based on observed retrieval failures.",
+      "Measures relevance and recall while accounting for threshold trade-offs."
+    ],
+    "weak_answer_signals": [
+      "Raises the score threshold without checking what relevant results disappear.",
+      "Changes prompts when the target passage is absent from retrieved results."
+    ],
+    "common_mistakes": [
+      "Optimizing for only one query family.",
+      "Treating ranking weights as universal defaults."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which weight emphasizes textual overlap?",
+        "short_answer": "The hybrid-search text weight."
+      },
+      {
+        "question": "What can a higher score threshold do?",
+        "short_answer": "Exclude weaker results, but also remove some useful chunks."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Retrieval",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Retrieval guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/retrieval"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified hybrid embedding/text weights and score-threshold trade-off; made tuning conditional on evaluated query sets."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-evaluate-retrieval-separately-from-generation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-retry-temporary-rate-limits-with-bounded-backoff",
+    "bank": "gen-ai-engineer",
+    "topic": "Rate limits and retries",
+    "subtopic": "Retry-After and exponential backoff",
+    "level": "L2",
+    "type": "debugging",
+    "question": "An API request receives a temporary rate-limit response. What retry policy avoids amplifying the outage?",
+    "what_is_assessed": "Whether the candidate respects provider guidance while bounding retry amplification and excluding errors that require operator action.",
+    "short_answer": "Honor a valid `Retry-After` header. If it is absent or invalid, use exponential backoff with jitter, and cap both the number of attempts and total retry time. Avoid nested application and SDK retry loops that multiply requests. Do not retry quota, billing, or other errors that require a configuration or account change.",
+    "deep_explanation": "OpenAI's rate-limit guide recommends following `Retry-After` when valid and otherwise falling back to exponential backoff with jitter. It also advises limiting attempts and total retry duration, accounting for SDK retries, and not retrying quota or billing errors. Retries should be applied only to temporary failures and should respect the operation's idempotency.",
+    "strong_answer_signals": [
+      "Uses Retry-After when valid.",
+      "Adds jitter and bounded attempts/time.",
+      "Avoids retrying permanent quota or billing failures and nested retry amplification."
+    ],
+    "weak_answer_signals": [
+      "Retries immediately in a tight loop.",
+      "Retries every 429 or account error indefinitely."
+    ],
+    "common_mistakes": [
+      "Ignoring Retry-After.",
+      "Combining SDK and application retries without a shared budget."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the fallback when Retry-After is unavailable?",
+        "short_answer": "Exponential backoff with jitter."
+      },
+      {
+        "question": "Which errors should not be retried automatically?",
+        "short_answer": "Quota, billing, and other errors that need corrective action."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Rate limits",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/rate-limits",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API rate-limit guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/rate-limits"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified Retry-After, exponential backoff with jitter, retry budgets, nested SDK retry warning, and non-retryable quota/billing conditions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-commit-streamed-response-only-after-completion",
+    "bank": "gen-ai-engineer",
+    "topic": "Streaming response design",
+    "subtopic": "Completed, incomplete, and failed response events",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A streaming client has rendered several text deltas when the server emits `response.incomplete`. Can it treat the buffered text as a completed answer?",
+    "what_is_assessed": "Whether the candidate distinguishes progressive display from a successfully completed response and handles terminal stream states.",
+    "short_answer": "No. Text deltas are provisional output. Treat `response.completed` as successful completion; if the stream ends with `response.incomplete` or `response.failed`, surface the terminal state and its available reason, and do not commit the partial text as a completed answer or trigger downstream actions from it. The UI may keep a clearly marked partial draft, but it should distinguish that from a final result.",
+    "deep_explanation": "The Responses API documents separate `response.completed`, `response.incomplete`, and `response.failed` events. A client can display text as it arrives, but must still process the terminal event to determine whether the response completed successfully. Any application side effect based on generated output should wait for a validated successful completion and any required schema or safety checks.",
+    "strong_answer_signals": [
+      "Waits for a successful terminal event before finalizing output.",
+      "Handles incomplete and failed states separately.",
+      "Keeps partial display distinct from committed downstream actions."
+    ],
+    "weak_answer_signals": [
+      "Treats the last received text delta as proof of successful completion.",
+      "Runs a tool or stores a final answer from an incomplete stream."
+    ],
+    "common_mistakes": [
+      "Ignoring terminal events after rendering deltas.",
+      "Retrying without preserving the incomplete reason or request context."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which event confirms successful completion?",
+        "short_answer": "`response.completed`."
+      },
+      {
+        "question": "May a UI show partial text before completion?",
+        "short_answer": "Yes, if it is clearly marked as provisional and not treated as a final result."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Responses streaming events",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/reference/resources/responses/streaming-events",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Responses API streaming event reference retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/reference/resources/responses/streaming-events"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified distinct completed, incomplete, and failed events; treated side-effect gating as application safety practice."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-test-retrieved-evidence-position-in-long-context",
+    "bank": "gen-ai-engineer",
+    "topic": "Long-context reliability",
+    "subtopic": "Position sensitivity of relevant evidence",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A model answers correctly when a retrieved passage is at the start or end of a long prompt, but often misses it when the same passage is in the middle. What would you investigate?",
+    "what_is_assessed": "Whether the candidate tests context-position sensitivity instead of assuming the model reliably uses every token in a long context.",
+    "short_answer": "Run a controlled position-sweep evaluation: keep the question and evidence fixed while moving the relevant passage across early, middle, and late positions, and measure answer quality and grounding. Long-context models can use evidence unevenly depending on where it appears. If the failure is material, reduce irrelevant context, improve evidence ordering or retrieval, and test those changes on the same position-aware set.",
+    "deep_explanation": "The cited study evaluates multi-document question answering and key-value retrieval and reports that performance can degrade when relevant information moves to the middle of a long input. Context-window capacity therefore does not guarantee uniform use of all positions. The specific behavior varies by model and task, so test the deployed model and prompt rather than assuming a universal positional pattern.",
+    "strong_answer_signals": [
+      "Proposes a controlled position-sweep evaluation.",
+      "Separates context capacity from reliable evidence use.",
+      "Tests retrieval or context-ordering changes on representative tasks."
+    ],
+    "weak_answer_signals": [
+      "Assumes a longer context window guarantees the model will use every passage.",
+      "Moves passages and changes the prompt or question at the same time."
+    ],
+    "common_mistakes": [
+      "Treating one benchmark position as representative of all placements.",
+      "Adding more context without measuring whether relevant evidence remains accessible."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should remain fixed in a position-sweep test?",
+        "short_answer": "The question and evidence content; only the evidence position should vary."
+      },
+      {
+        "question": "Does every model show the same position effect?",
+        "short_answer": "No. Measure the behavior for the deployed model and task."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Lost in the Middle: How Language Models Use Long Contexts",
+        "publisher": "Transactions of the Association for Computational Linguistics via arXiv",
+        "url": "https://arxiv.org/abs/2307.03172",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "TACL paper, arXiv version 3 revised 2023-11-20.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2307.03172"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the study's finding that answer quality can vary with evidence position; framed it as a behavior to test, not a universal model guarantee."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-rerank-limited-candidates-with-cross-encoder",
+    "bank": "gen-ai-engineer",
+    "topic": "Retrieval-augmented generation",
+    "subtopic": "Two-stage candidate retrieval and reranking",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "Vector retrieval finds relevant documents but ranks them inconsistently for nuanced queries. When would a cross-encoder reranker help?",
+    "what_is_assessed": "Whether the candidate uses a two-stage retrieval pipeline to improve query-document relevance while bounding reranking cost.",
+    "short_answer": "Use an efficient bi-encoder or hybrid retriever to produce a limited candidate set, then score each query-candidate pair jointly with a cross-encoder to rerank that set. The cross-encoder can model query-document interactions more directly, but evaluating many pairs costs more latency and compute. Tune candidate depth against retrieval recall and reranking quality, and check that the reranker matches the corpus domain.",
+    "deep_explanation": "Sentence Transformers documents the common retrieve-and-rerank design: a bi-encoder efficiently retrieves candidates, then a cross-encoder scores the query with each candidate and reranks them. Cross-encoders do not scale as well to large corpora because each pair requires scoring, so they are applied to a bounded candidate pool. Measure end-to-end retrieval quality and latency rather than assuming the additional stage always improves production results.",
+    "strong_answer_signals": [
+      "Separates broad candidate retrieval from pairwise reranking.",
+      "Explains the cross-encoder's relevance benefit and per-candidate compute cost.",
+      "Tunes candidate depth with both quality and latency measurements."
+    ],
+    "weak_answer_signals": [
+      "Runs a cross-encoder across the entire corpus for every query.",
+      "Assumes reranking always improves results regardless of domain or candidate recall."
+    ],
+    "common_mistakes": [
+      "Reranking cannot recover relevant documents absent from the candidate pool.",
+      "Selecting a reranker only by benchmark score without production latency checks."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can reranking recover a document not retrieved into the candidate pool?",
+        "short_answer": "No. Candidate retrieval must include it first."
+      },
+      {
+        "question": "Why limit the number of candidates?",
+        "short_answer": "Each query-candidate pair adds cross-encoder computation and latency."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Cross-Encoders",
+        "publisher": "Sentence Transformers documentation",
+        "url": "https://www.sbert.net/examples/cross_encoder/applications/README.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Sentence Transformers documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.sbert.net/examples/cross_encoder/applications/README.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the retrieve-with-bi-encoder then rerank-with-cross-encoder pattern and the scalability trade-off; noted that reranking cannot recover absent candidates."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-tune-semantic-and-keyword-ranking-weights"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-authorize-before-executing-model-function-call",
+    "bank": "gen-ai-engineer",
+    "topic": "Function calling and tool orchestration",
+    "subtopic": "Application-side authorization and validation",
+    "level": "L3",
+    "type": "scenario",
+    "question": "The model returns a syntactically valid function call to issue a refund. Is valid JSON enough reason to execute it?",
+    "what_is_assessed": "Whether the candidate treats a generated function call as an application-side request that still requires validation, authorization, and policy checks.",
+    "short_answer": "No. The model emits a proposed call; the application executes it. Validate the function name and arguments, authenticate the requester, check authorization and refund limits, and require approval where the business policy calls for it. Only then execute the operation and return its result associated with that tool call. Schema validity verifies structure, not permission or intent.",
+    "deep_explanation": "OpenAI's function-calling guide describes a multi-step flow in which the application receives a model tool call, executes the function on the application side, and sends the result back. The application therefore owns authorization, business rules, and side-effect controls; a schema-valid argument object does not establish that the requester may perform the action.",
+    "strong_answer_signals": [
+      "Separates schema validation from authentication and authorization.",
+      "Keeps execution and side-effect checks in application code.",
+      "Applies limits or human approval before consequential actions."
+    ],
+    "weak_answer_signals": [
+      "Executes any schema-valid call without checking the user or business policy.",
+      "Treats model output as proof of user consent."
+    ],
+    "common_mistakes": [
+      "Allowing a tool schema to become the only security boundary.",
+      "Failing to record the result against the matching tool-call identifier."
+    ],
+    "follow_ups": [
+      {
+        "question": "Who executes a function call returned by the model?",
+        "short_answer": "The application, after its own validation and authorization checks."
+      },
+      {
+        "question": "What does a strict schema prove?",
+        "short_answer": "That arguments match a structure, not that the action is authorized."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that the application executes returned function calls; separated that protocol flow from application-owned authorization and policy controls."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-buffer-streamed-tool-arguments-before-execution",
+    "bank": "gen-ai-engineer",
+    "topic": "Streaming response design",
+    "subtopic": "Complete function arguments before dispatch",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A streamed function call has emitted only `{\"account_id\":` so far. Should the application dispatch the tool with the partial arguments?",
+    "what_is_assessed": "Whether the candidate buffers streamed function-call deltas, waits for complete arguments, and validates the final call before execution.",
+    "short_answer": "No. Accumulate argument deltas for the correct output item and wait for the function-call arguments completion event before parsing and validating the full object. Then apply authorization and side-effect checks before dispatch. If the overall response fails or is incomplete, do not execute a partially received call.",
+    "deep_explanation": "The Responses API emits incremental function-call argument events and a distinct completion event. Deltas are fragments, not standalone JSON arguments. Applications should associate fragments with the appropriate output item, assemble the complete arguments, parse and validate them, and only execute after the relevant response state is complete.",
+    "strong_answer_signals": [
+      "Buffers deltas by output item or call identity.",
+      "Waits for complete arguments and validates the object.",
+      "Does not dispatch from an incomplete or failed response."
+    ],
+    "weak_answer_signals": [
+      "Executes as soon as the first argument fragment arrives.",
+      "Concatenates deltas from multiple calls into one argument string."
+    ],
+    "common_mistakes": [
+      "Ignoring output item identifiers when several calls stream concurrently.",
+      "Treating valid partial JSON text as authorization to execute."
+    ],
+    "follow_ups": [
+      {
+        "question": "What event indicates arguments are complete?",
+        "short_answer": "`response.function_call_arguments.done`."
+      },
+      {
+        "question": "What should happen if the response is incomplete?",
+        "short_answer": "Do not dispatch the partial tool call; handle the terminal state."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Responses streaming events",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/reference/resources/responses/streaming-events",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Responses API streaming event reference retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/reference/resources/responses/streaming-events"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified delta and completion events for function-call arguments; emphasized that only complete, validated arguments should be dispatched."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-commit-streamed-response-only-after-completion"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-match-tool-results-by-call-id",
+    "bank": "gen-ai-engineer",
+    "topic": "Function calling and tool orchestration",
+    "subtopic": "Correlating parallel tool results",
+    "level": "L2",
+    "type": "debugging",
+    "question": "Two function calls finish in a different order from the order they were requested. How should the application return their results?",
+    "what_is_assessed": "Whether the candidate associates each function result with the specific model call rather than relying on array or completion order.",
+    "short_answer": "Return each result as a function-call output with the `call_id` of the specific request it answers. Do not match by completion order, since calls can run in parallel and finish out of order. Keep each call's name, arguments, result, and identifier together through dispatch and error handling.",
+    "deep_explanation": "OpenAI's function-calling guide shows that a tool output references a specific model tool call using its `call_id`. When multiple calls are present, each result must preserve that association so the model receives the correct output for each request, regardless of when the underlying work completes.",
+    "strong_answer_signals": [
+      "Uses each function call's call_id when constructing its output.",
+      "Does not assume request order and completion order are identical.",
+      "Keeps call metadata attached through concurrent dispatch."
+    ],
+    "weak_answer_signals": [
+      "Pairs results with requests by array position after asynchronous completion.",
+      "Combines outputs from distinct calls into one unreferenced response."
+    ],
+    "common_mistakes": [
+      "Losing identifiers while putting calls into a work queue.",
+      "Returning a successful result under another call's ID."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which field associates output with its request?",
+        "short_answer": "`call_id`."
+      },
+      {
+        "question": "Can completion order be used as the correlation key?",
+        "short_answer": "No. Use the call identifier."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified function_call_output uses the call_id associated with the specific tool call; emphasized that concurrency makes completion order unsafe for matching."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-authorize-before-executing-model-function-call"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-test-rag-abstention-on-misleading-context",
+    "bank": "gen-ai-engineer",
+    "topic": "Grounded generation and abstention",
+    "subtopic": "Missing versus misleading evidence",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A RAG assistant abstains when retrieval returns nothing but confidently repeats a false claim from a misleading passage. What evaluation gap does this reveal?",
+    "what_is_assessed": "Whether the candidate tests evidence sufficiency and conflicting or misleading context separately, rather than treating empty retrieval as the only abstention case.",
+    "short_answer": "The evaluation covers missing evidence but not misleading evidence. Build separate cases for supportive, degraded, missing, and contradictory or misleading context; measure unsupported claims and appropriate abstention in each. A retrieved passage is not automatically trustworthy or sufficient. For source-grounded responses, the system should explain the conflict or abstain under a defined policy instead of copying a plausible but unsupported claim.",
+    "deep_explanation": "The GRAB-RAG study distinguishes missing from misleading evidence and reports that prompt-based abstention can behave differently in the two conditions. The finding is scoped to the models and benchmark studied, but it supports testing these cases separately. Retrieval presence alone is not a grounding guarantee; evaluation should check whether the answer is supported by the actual evidence and whether conflicts trigger the intended response policy.",
+    "strong_answer_signals": [
+      "Separates absent evidence from misleading or contradictory evidence.",
+      "Measures support and abstention by context condition.",
+      "Avoids treating retrieval presence as proof that a claim is grounded."
+    ],
+    "weak_answer_signals": [
+      "Tests only empty retrieval and declares abstention solved.",
+      "Assumes any retrieved passage can be repeated as a factual answer."
+    ],
+    "common_mistakes": [
+      "Collapsing retrieval quality and generator faithfulness into one aggregate metric.",
+      "Generalizing a benchmark result to every model without testing the deployed system."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why test misleading evidence separately from missing evidence?",
+        "short_answer": "A model may abstain with no context yet still follow a false or conflicting passage."
+      },
+      {
+        "question": "Does retrieved context guarantee support?",
+        "short_answer": "No. Evaluate whether each answer claim is actually supported by the retrieved evidence."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Prompt-Based Abstention Fails Under Misleading Context: A Controlled Study of Small Frozen RAG Models",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2608.22228",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "arXiv version 1, published 2026-08-23.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2608.22228"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the paper distinguishes missing and misleading evidence and scoped its empirical finding to tested small frozen models."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-diagnose-retrieval-vs-generation-failure"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-measure-per-query-hybrid-retrieval-regressions",
+    "bank": "gen-ai-engineer",
+    "topic": "Hybrid retrieval evaluation",
+    "subtopic": "Per-query fusion trade-offs",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A sparse-plus-dense retriever improves aggregate relevance, but some queries now retrieve worse evidence than the better individual retriever. What should you investigate?",
+    "what_is_assessed": "Whether the candidate evaluates retrieval fusion at both aggregate and per-query levels instead of assuming hybrid retrieval always helps.",
+    "short_answer": "Measure per-query regressions as well as aggregate recall or ranking metrics. Compare sparse, dense, and fused rankings on the target corpus, inspect queries where fusion pushes useful results down, and tune or route fusion based on validated evidence. Then evaluate downstream answer support, since a better aggregate retrieval score does not guarantee improved RAG responses for every query.",
+    "deep_explanation": "The cited 2026 study reports that a hybrid retrieval method can improve aggregate results while ranking relevant documents below the stronger component for a meaningful subset of queries. Its findings are specific to its tested systems and datasets, but they motivate per-query and risk-sensitive evaluation rather than a blanket assumption that fusion is beneficial.",
+    "strong_answer_signals": [
+      "Checks per-query regressions in addition to aggregate metrics.",
+      "Compares sparse, dense, and fused retrieval on the target corpus.",
+      "Connects retrieval evaluation to downstream answer grounding."
+    ],
+    "weak_answer_signals": [
+      "Keeps fusion solely because the average score increased.",
+      "Assumes reciprocal-rank fusion cannot hurt a query."
+    ],
+    "common_mistakes": [
+      "Tuning fusion weights on the final evaluation set.",
+      "Measuring recall only while ignoring ranking changes in the prompt's top-k context."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why inspect results per query?",
+        "short_answer": "An aggregate gain can hide queries where fusion ranks relevant evidence lower."
+      },
+      {
+        "question": "Does retrieval gain guarantee better generated answers?",
+        "short_answer": "No. Evaluate downstream answer support and quality separately."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2610.30612",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "arXiv version 1, submitted 2026-10-22.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2610.30612"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the paper's aggregate-versus-per-query fusion findings and kept their scope limited to tested retrievers, corpora, and metrics."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-rerank-limited-candidates-with-cross-encoder"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-count-full-request-tokens-before-dispatch",
+    "bank": "gen-ai-engineer",
+    "topic": "Token budgeting and counting",
+    "subtopic": "Exact request token counts",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A prompt fits when you count its plain text locally, but the API request exceeds the model's input budget after adding tools and images. What should change?",
+    "what_is_assessed": "Whether the candidate understands that message structure, tool schemas, images, and files affect input token counts beyond plain-text tokenization.",
+    "short_answer": "Estimate or count the full request, not just the text. Local tokenizers may omit message-format overhead and do not count images, files, tools, or schemas the same way the API does. Use the provider's input token-count endpoint with the same payload you plan to send, then reserve headroom for output and model-specific behavior.",
+    "deep_explanation": "OpenAI's token-counting guide says the API endpoint accepts the same input format as Responses and returns the count the model will receive, including formatting tokens, images, files, tools, and conversations. Local tokenizers are useful for plain text but do not capture all of these request components. The exact count can depend on model-specific behavior.",
+    "strong_answer_signals": [
+      "Counts the full request rather than only prompt text.",
+      "Identifies tools, schemas, images, files, and formatting overhead.",
+      "Uses the same request payload for preflight counting and generation."
+    ],
+    "weak_answer_signals": [
+      "Uses characters divided by a fixed constant as an exact count.",
+      "Ignores tool definitions and multimodal input."
+    ],
+    "common_mistakes": [
+      "Counting only user and system message text.",
+      "Filling the entire context window without reserving space for output."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the token-count endpoint accept?",
+        "short_answer": "The same input format as the Responses API, including tools and multimodal inputs."
+      },
+      {
+        "question": "Why can local tokenizers undercount?",
+        "short_answer": "They may miss formatting, tools, images, files, and model-specific behavior."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Counting tokens",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/token-counting",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API token-counting guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/token-counting"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the endpoint counts the full Responses input and includes formatting and multimodal/tool content omitted by plain-text token estimates."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-estimate-pass-at-k-from-sampled-programs",
+    "bank": "gen-ai-engineer",
+    "topic": "Code generation evaluation",
+    "subtopic": "Unbiased pass@k estimation",
+    "level": "L3",
+    "type": "concept",
+    "question": "You generated n programs for a task and c pass the tests. How should you estimate pass@k without relying on the naive pass@1 rate?",
+    "what_is_assessed": "Whether the candidate can explain the finite-sample estimator for pass@k and why it differs from transforming empirical pass@1.",
+    "short_answer": "Use the unbiased estimator `1 - C(n-c, k) / C(n, k)` for `k <= n`, then average it across tasks. It estimates the chance that at least one of k samples passes when drawn from the n generated candidates. The shortcut `1 - (1 - c/n)^k` can be biased for finite samples, so report n, k, the test harness, and sampling setup.",
+    "deep_explanation": "The HumanEval paper defines pass@k by generating n samples for each problem, counting c correct samples, and applying the unbiased estimator 1 - C(n-c,k)/C(n,k). The paper notes that transforming the empirical pass@1 rate as if it were a known independent success probability is biased. Results depend on the test suite, sampling configuration, and execution environment, so the benchmark protocol should be reported.",
+    "strong_answer_signals": [
+      "States the finite-sample combination estimator.",
+      "Distinguishes it from raising the empirical failure rate to the kth power.",
+      "Reports the number of samples, k, tests, and decoding setup."
+    ],
+    "weak_answer_signals": [
+      "Uses the naive empirical pass@1 transform without noting its bias.",
+      "Compares pass@k across different sample budgets without disclosure."
+    ],
+    "common_mistakes": [
+      "Choosing k greater than the number of sampled programs.",
+      "Treating passing unit tests as proof of general correctness or safety."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does pass@k measure?",
+        "short_answer": "The estimated chance that at least one of k generated candidates passes the task tests."
+      },
+      {
+        "question": "Why report n as well as k?",
+        "short_answer": "The estimate is computed from n observed candidates and its sampling precision depends on that budget."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluating Large Language Models Trained on Code",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2107.03374",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "arXiv version 2, published 2021-07-14.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2107.03374"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the unbiased combinatorial pass@k estimator and the paper's warning that transforming empirical pass@1 is biased."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-calibrate-token-probability-confidence",
+    "bank": "gen-ai-engineer",
+    "topic": "Confidence calibration from token probabilities",
+    "subtopic": "Token likelihood versus answer correctness",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A system maps a generated answer's average token likelihood to a 92% confidence score. Is that enough to tell users the answer is correct with 92% probability?",
+    "what_is_assessed": "Whether the candidate distinguishes model token likelihood from empirically calibrated answer-correctness probability.",
+    "short_answer": "No. Token probabilities are signals about the model's next-token distribution, not automatically calibrated probabilities that a whole answer is factually correct. Evaluate a confidence estimator against labeled answers from the target task, inspect calibration as well as ranking, and recalibrate or abstain when it is unreliable. The cited study is specific to mathematical question answering and should not be generalized without testing.",
+    "deep_explanation": "The cited 2026 study distinguishes confidence estimation from calibration and reports that individual token probabilities can be saturated, while sequence-level aggregates may carry some correctness signal. It also finds that multi-pass methods can produce calibrated estimates in its mathematical-QA setting. This supports treating token probabilities as candidate features to validate, not directly presenting an untested score as a correctness probability.",
+    "strong_answer_signals": [
+      "Separates token likelihood from answer correctness.",
+      "Requires held-out labeled data and calibration evaluation.",
+      "Scopes findings to the evaluated task and estimator."
+    ],
+    "weak_answer_signals": [
+      "Interprets 0.92 token likelihood as 92% factual accuracy.",
+      "Assumes calibration transfers automatically across models, domains, or prompts."
+    ],
+    "common_mistakes": [
+      "Evaluating calibration on the same examples used to fit the mapping.",
+      "Using ranking performance alone to claim calibrated probabilities."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does calibration require?",
+        "short_answer": "Predictions at a stated confidence level should be correct at a similar empirical rate on representative data."
+      },
+      {
+        "question": "Can token probabilities still be useful?",
+        "short_answer": "Yes, as signals for a confidence estimator that is validated and calibrated on the target task."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "From token probabilities to calibrated confidence: An empirical study of mathematical question answering",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2608.07827",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "arXiv version 1, submitted 2026-08-08.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2608.07827"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Kept the source's conclusions scoped to math QA and treated token probabilities as signals rather than calibrated correctness estimates by default."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-account-for-reasoning-tokens-in-output-budget",
+    "bank": "gen-ai-engineer",
+    "topic": "Reasoning token budget and completion state",
+    "subtopic": "Incomplete responses before visible output",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A reasoning-model request has `max_output_tokens` set, but the API returns no visible answer before exhausting the budget. What may have happened?",
+    "what_is_assessed": "Whether the candidate understands that reasoning and other non-visible generated tokens consume the output budget and can produce an incomplete response.",
+    "short_answer": "The output limit includes reasoning tokens, visible output, and formatting tokens, so internal reasoning may consume the budget before a user-visible answer appears. For the Responses API, inspect `status` and `incomplete_details.reason`; if it is `max_output_tokens`, treat the result as incomplete rather than as an empty successful answer. Adjust the budget or prompt and reserve enough room for the visible response.",
+    "deep_explanation": "OpenAI's reasoning-model guide states that generated tokens counted against `max_output_tokens` include reasoning and non-visible formatting tokens as well as visible output. If the context or output limit is reached, the Responses API can return `status: incomplete` with `incomplete_details.reason: max_output_tokens`, potentially before visible output tokens are produced. This behavior is provider- and model-specific.",
+    "strong_answer_signals": [
+      "Recognizes hidden reasoning tokens consume output budget.",
+      "Checks the incomplete status and reason.",
+      "Handles incomplete output explicitly and budgets for visible content."
+    ],
+    "weak_answer_signals": [
+      "Treats the response as successful empty content.",
+      "Assumes max_output_tokens caps only visible answer text."
+    ],
+    "common_mistakes": [
+      "Retrying blindly without changing the budget or request.",
+      "Presenting partial or absent output as a complete answer."
+    ],
+    "follow_ups": [
+      {
+        "question": "What status indicates the response did not complete?",
+        "short_answer": "`incomplete`."
+      },
+      {
+        "question": "Which detail identifies an output-token limit?",
+        "short_answer": "`incomplete_details.reason` set to `max_output_tokens`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Reasoning models",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/reasoning",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API reasoning-model guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/reasoning"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified reasoning and non-visible formatting tokens count toward max_output_tokens and can result in incomplete status before visible text."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-evaluate-citation-grounding-after-compression",
+    "bank": "gen-ai-engineer",
+    "topic": "RAG context compression and grounding",
+    "subtopic": "Citation fidelity versus answer correctness",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Compressed RAG prompts preserve answer accuracy but citations no longer support the claims as often. What should change in evaluation?",
+    "what_is_assessed": "Whether the candidate evaluates evidence grounding separately from answer correctness when compressing retrieved context.",
+    "short_answer": "Measure answer correctness and citation/evidence grounding separately. Compression can preserve a plausible answer while removing the spans that support it, so compare grounding, citation entailment, and answer quality across compression levels. Treat published effect sizes as specific to their tested models and dataset; validate the compressor on the target corpus and verification needs.",
+    "deep_explanation": "The cited 2026 study evaluates both answer correctness and citation grounding for compressed RAG on ASQA with specific compression methods. It reports that answer correctness changed less than grounding under increasing compression, showing why answer-only evaluation can miss evidence loss. Its numerical findings are study-specific, but the separate-metric lesson is relevant to evidence-aware applications.",
+    "strong_answer_signals": [
+      "Separates correctness from grounding metrics.",
+      "Inspects whether cited evidence still supports each claim.",
+      "Validates compression on the target data and avoids generalizing one paper's exact effect sizes."
+    ],
+    "weak_answer_signals": [
+      "Keeps compression based only on answer accuracy.",
+      "Assumes preserved wording or answer correctness guarantees faithful citations."
+    ],
+    "common_mistakes": [
+      "Using answer-only evaluation for a citation-grounded product.",
+      "Treating one benchmark's compression results as universal."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can degrade even when answer accuracy stays similar?",
+        "short_answer": "Citation grounding or evidence support."
+      },
+      {
+        "question": "Should the paper's effect sizes transfer to every corpus?",
+        "short_answer": "No. They are scoped to the tested setup and require target-domain validation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Efficiency vs. Verifiability in Evidence-Aware RAG: Does Prompt Compression Preserve Citation Grounding?",
+        "publisher": "ACL Anthology",
+        "url": "https://aclanthology.org/2026.customnlp4u-1.19/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "ACL Anthology paper published 2026-07-01.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://aclanthology.org/2026.customnlp4u-1.19/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the study reports separate answer-correctness and citation-grounding outcomes for a limited tested setup; kept the results scoped to that setup."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-preserve-trained-pooling-for-embeddings",
+    "bank": "gen-ai-engineer",
+    "topic": "Embedding representations",
+    "subtopic": "Token-to-sentence pooling",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A retrieval team replaces a model's mean pooling with CLS pooling but keeps the same encoder weights. Why should it re-evaluate the index?",
+    "what_is_assessed": "Whether the candidate understands pooling is part of the embedding representation and that different pooling modes are not automatically interchangeable.",
+    "short_answer": "Pooling converts variable-length token embeddings into a fixed-size sentence vector, so changing mean to CLS changes the representation used for indexing and query matching. Use the pooling configuration expected by the selected embedding model or re-embed and evaluate the full retrieval pipeline. Compare retrieval quality on representative queries rather than assuming one pooling strategy is universally best.",
+    "deep_explanation": "Sentence Transformers documents pooling as the module that produces fixed-size sentence embeddings from token embeddings and supports modes such as CLS, mean, max, and last-token pooling. These modes aggregate token representations differently. The documentation establishes the implementation options; selecting the right one for a model and retrieval task requires validation against that model's training configuration and task data.",
+    "strong_answer_signals": [
+      "Explains that pooling changes the fixed-size representation.",
+      "Keeps the model's expected pooling configuration or re-embeds consistently.",
+      "Evaluates retrieval quality rather than assuming a universal pooling winner."
+    ],
+    "weak_answer_signals": [
+      "Changes pooling while retaining old indexed vectors and assumes compatibility.",
+      "Claims CLS or mean pooling is always superior."
+    ],
+    "common_mistakes": [
+      "Mixing query and document embeddings produced with different pooling modes.",
+      "Comparing pooling strategies without rebuilding the index or controlling other factors."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does pooling produce?",
+        "short_answer": "A fixed-size sentence embedding from variable-length token embeddings."
+      },
+      {
+        "question": "Can pooling modes be combined?",
+        "short_answer": "The library supports combining pooling modes, but the resulting representation should be evaluated for the task."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Sentence Transformer modules: Pooling",
+        "publisher": "Sentence Transformers documentation",
+        "url": "https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Sentence Transformers module documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.sbert.net/docs/package_reference/sentence_transformer/modules.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified pooling produces fixed-size embeddings from token embeddings and supports distinct aggregation modes; model-specific performance is left to evaluation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-represent-optional-structured-fields-as-nullable",
+    "bank": "gen-ai-engineer",
+    "topic": "Structured outputs and data contracts",
+    "subtopic": "Optional fields in strict schemas",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A strict structured-output schema has an application-optional `category` field. How should the schema represent it?",
+    "what_is_assessed": "Whether the candidate distinguishes an optional application value from a property omitted from a strict Structured Outputs schema.",
+    "short_answer": "Include `category` in the object's `required` list and make its type nullable, for example `string | null`. In strict Structured Outputs, all declared object fields must be required; the value `null` represents an unavailable or inapplicable field. Keep `additionalProperties: false` and normalize null explicitly in downstream code.",
+    "deep_explanation": "OpenAI's Structured Outputs guide requires all fields to be listed as required in strict schemas and demonstrates nullable types for values that may be absent. This keeps the response shape predictable while representing missing values explicitly. The application still needs to define the meaning of null and validate business rules beyond schema conformance.",
+    "strong_answer_signals": [
+      "Keeps the property required in the JSON Schema.",
+      "Uses a nullable type to represent absence.",
+      "Explains null handling and downstream semantic validation."
+    ],
+    "weak_answer_signals": [
+      "Removes the property from `required` and assumes strict mode accepts omission.",
+      "Treats schema validity as proof the value is semantically correct."
+    ],
+    "common_mistakes": [
+      "Confusing nullable with optional in the schema.",
+      "Failing to handle null in application code."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does nullable make the property optional to omit?",
+        "short_answer": "No. In strict mode, the property remains required; its value may be null."
+      },
+      {
+        "question": "What prevents extra keys in a strict object?",
+        "short_answer": "`additionalProperties: false`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Structured model outputs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API Structured Outputs guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/structured-outputs"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified strict schemas require all fields and support nullable types for application-optional values; semantic validation remains separate."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-order-static-prompt-content-before-dynamic-input",
+    "bank": "gen-ai-engineer",
+    "topic": "Prompt caching and repeated context",
+    "subtopic": "Static-prefix layout and cache-hit diagnosis",
+    "level": "L2",
+    "type": "scenario",
+    "question": "Prompt-cache hits drop after user-specific context is inserted before stable instructions and tool schemas. How would you investigate and restructure the request?",
+    "what_is_assessed": "Whether the candidate understands exact-prefix reuse and can place stable content before request-specific content while measuring cache hits.",
+    "short_answer": "Prompt caching relies on reusable prompt prefixes, so changing early tokens can prevent a match. Put stable instructions, tool definitions, and schemas first, then append volatile user or session context. Confirm the result using the response's cached-token usage rather than assuming reordering helped; preserve prompt semantics while doing so.",
+    "deep_explanation": "OpenAI's prompt-caching guidance recommends keeping the early prompt portion stable and placing dynamic content later because cache matching depends on prefix reuse. It also recommends checking cached-token usage to measure hits. Reordering should not change which instructions take precedence or alter the meaning of the request, so validate behavior as well as cache metrics.",
+    "strong_answer_signals": [
+      "Explains why changes near the prefix reduce reuse.",
+      "Places stable instructions, tools, and schemas before dynamic context.",
+      "Measures cached tokens and checks behavior after reordering."
+    ],
+    "weak_answer_signals": [
+      "Moves content without checking whether the prompt's meaning or instruction precedence changed.",
+      "Assumes identical total token count implies a cache hit."
+    ],
+    "common_mistakes": [
+      "Interleaving user-specific values into the stable prefix.",
+      "Judging cache performance from latency alone without usage diagnostics."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where should volatile session values usually go?",
+        "short_answer": "After the stable prefix, near the end of the prompt."
+      },
+      {
+        "question": "Which response metric can confirm cached input tokens?",
+        "short_answer": "The cached-token count in usage details."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Prompt caching",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI prompt-caching guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Confirmed stable-prefix ordering and cached-token diagnostics; added a prompt-semantics check as an implementation safeguard."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-reconcile-partial-results-from-expired-batch",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Expired batches and partial completion",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A Batch API job reaches `expired` after some requests finish. How do you recover without discarding completed work or rerunning everything?",
+    "what_is_assessed": "Whether the candidate reconciles partial outputs and expired-request errors by custom_id before selectively resubmitting unfinished work.",
+    "short_answer": "Read the output file for completed responses and the error file for requests marked `batch_expired`. Join both to the input using each unique `custom_id`, preserve completed results, and resubmit only unfinished requests if still needed. Account for charges on completed requests and validate that every expected ID has exactly one outcome.",
+    "deep_explanation": "OpenAI's Batch API guide states that requests not completed within the window are cancelled when a batch expires, while responses to completed requests are made available in the output file. Expired requests appear in the error file with a `batch_expired` error and their `custom_id`. This permits selective recovery instead of treating the entire batch as either complete or lost.",
+    "strong_answer_signals": [
+      "Uses output and error files together.",
+      "Correlates completed and expired requests by unique custom_id.",
+      "Retries only unfinished work and accounts for completed work and charges."
+    ],
+    "weak_answer_signals": [
+      "Treats the expired batch as if no requests completed.",
+      "Resubmits every input without reconciling prior results."
+    ],
+    "common_mistakes": [
+      "Relying on output order instead of custom_id.",
+      "Dropping the error-file records when reporting evaluation coverage."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where are completed responses from an expired batch available?",
+        "short_answer": "In the batch output file."
+      },
+      {
+        "question": "How do you identify requests that did not finish?",
+        "short_answer": "The error file marks them with `batch_expired` and includes their custom_id."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/batch",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Batch API guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/batch"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified completed results remain in the output file and unfinished requests are marked batch_expired in the error file with custom_id; recovery is scoped to unfinished work."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-map-batch-results-by-custom-id"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-do-not-treat-token-logprobs-as-answer-confidence",
+    "bank": "gen-ai-engineer",
+    "topic": "Token log probabilities",
+    "subtopic": "Conditional token likelihood versus answer correctness",
+    "level": "L3",
+    "type": "concept",
+    "question": "A team averages generated-token log probabilities and calls the result the probability that an answer is correct. What is missing from that interpretation?",
+    "what_is_assessed": "Whether the candidate distinguishes conditional token likelihoods from calibrated semantic correctness probabilities.",
+    "short_answer": "A token log probability measures the model's likelihood for that token given the preceding context and generated sequence; it is not directly a calibrated probability that the whole answer is true or correct. Treat sequence scores as model signals, then calibrate and validate them against task-specific labeled outcomes before using them as confidence thresholds.",
+    "deep_explanation": "The OpenAI logprobs example describes per-token probabilities conditioned on prior context and shows their use as signals for classification and Q&A evaluation. Aggregating token scores creates a sequence-level score, but correctness calibration is a separate empirical property: evaluate against representative human-labeled examples, inspect error slices, and choose thresholds for the intended task. A high-likelihood answer can still be factually wrong.",
+    "strong_answer_signals": [
+      "Defines logprob as a conditional token likelihood.",
+      "Rejects interpreting it directly as answer correctness probability.",
+      "Validates and calibrates any confidence use against labeled task outcomes."
+    ],
+    "weak_answer_signals": [
+      "Equates high token likelihood with factual truth.",
+      "Uses a universal threshold without labeled evaluation."
+    ],
+    "common_mistakes": [
+      "Calling a raw sequence score a calibrated confidence.",
+      "Evaluating the score only on examples used to tune its threshold."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does a token logprob describe?",
+        "short_answer": "The log likelihood of that token given the preceding context."
+      },
+      {
+        "question": "How can it be used as a correctness signal?",
+        "short_answer": "Calibrate and validate it against representative labeled correctness outcomes."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Using logprobs for classification and Q&A evaluation",
+        "publisher": "OpenAI Cookbook",
+        "url": "https://developers.openai.com/cookbook/examples/using_logprobs",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Cookbook logprobs example retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/cookbook/examples/using_logprobs"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified logprobs are conditional probabilities for generated tokens; correctness calibration is framed as an empirical task-specific validation requirement, not a provider guarantee."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-archive-batch-output-before-retention-expiry",
+    "bank": "gen-ai-engineer",
+    "topic": "Offline batch processing",
+    "subtopic": "Output-file retention and archival",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A team plans to retrieve completed Batch API outputs several months later. What should it change in its workflow?",
+    "what_is_assessed": "Whether the candidate plans around the provider's documented output-file retention window and archives results needed beyond it.",
+    "short_answer": "Download and archive the output file soon after completion if the team needs it beyond the documented retention period. The current guide says the output file is automatically deleted 30 days after the batch completes. Store the results in an approved durable location with access controls and an explicit retention policy; verify current provider terms rather than treating 30 days as permanent.",
+    "deep_explanation": "The Batch API guide states that an output file is automatically deleted 30 days after the batch is complete. A workflow that needs long-term evaluation evidence should retrieve the output promptly, preserve the custom IDs and provenance needed to map results, and manage its own storage and deletion policy. Provider retention details may change, so verify them before designing a new archival workflow.",
+    "strong_answer_signals": [
+      "Identifies the current 30-day output-file deletion window.",
+      "Archives needed results before that window ends.",
+      "Maintains access controls, provenance, and its own retention policy."
+    ],
+    "weak_answer_signals": [
+      "Assumes completed output files remain available indefinitely.",
+      "Stores sensitive outputs without considering access or retention."
+    ],
+    "common_mistakes": [
+      "Confusing batch job status retention with output-file retention.",
+      "Archiving without request identifiers or source dataset version."
+    ],
+    "follow_ups": [
+      {
+        "question": "When does the documented output-file deletion period begin?",
+        "short_answer": "30 days after the batch is complete."
+      },
+      {
+        "question": "What should the archive preserve for evaluation traceability?",
+        "short_answer": "Request identifiers, results, and the input or dataset version they correspond to."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batch API",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/batch",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Batch API guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/batch"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's 30-day output-file deletion statement and distinguished it from broader batch metadata retention."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-map-batch-results-by-custom-id",
+      "genai-reconcile-partial-results-from-expired-batch"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-resend-instructions-when-chaining-responses",
+    "bank": "gen-ai-engineer",
+    "topic": "Responses API conversation state",
+    "subtopic": "Instruction persistence across previous_response_id",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A chained Responses API turn uses `previous_response_id`, but the assistant no longer follows the prior top-level instructions. What should the client change?",
+    "what_is_assessed": "Whether the candidate understands which conversation context is chained and which request-level instructions must be resent.",
+    "short_answer": "Resend the stable top-level `instructions` on every request. The Responses API guide says `previous_response_id` carries prior response context but does not carry over the previous response's top-level instructions. Keep the instruction source explicit in the client rather than relying on the response chain to preserve it.",
+    "deep_explanation": "OpenAI's Responses API migration guide distinguishes chaining response context from top-level instruction persistence: when using `previous_response_id`, stable `instructions` must be resent on each request. This is an API behavior, not a general rule for all conversation-state mechanisms; verify the chosen provider's current contract and ensure instruction changes are deliberate.",
+    "strong_answer_signals": [
+      "Resends the top-level instructions on each chained request.",
+      "Distinguishes response context from instruction persistence.",
+      "Keeps instruction versioning explicit in the application."
+    ],
+    "weak_answer_signals": [
+      "Assumes previous_response_id automatically preserves all request fields.",
+      "Changes the prompt without tracking which instructions were sent."
+    ],
+    "common_mistakes": [
+      "Confusing conversation history with request-level configuration.",
+      "Assuming the same persistence behavior for the Conversations API and response chaining."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does previous_response_id carry over top-level instructions?",
+        "short_answer": "No. Resend them on each request."
+      },
+      {
+        "question": "What does previous_response_id help chain?",
+        "short_answer": "Prior response context, not every top-level request setting."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Migrate to the Responses API",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Responses API migration guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/migrate-to-responses"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide explicitly requires resending top-level instructions when chaining with previous_response_id."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-distinguish-store-setting-from-zero-retention",
+    "bank": "gen-ai-engineer",
+    "topic": "API data retention controls",
+    "subtopic": "Application state versus abuse monitoring",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A team sets `store: false` on Responses API requests and claims that no prompt data can be retained. What caveat should you explain?",
+    "what_is_assessed": "Whether the candidate distinguishes endpoint application-state storage from organization-level abuse-monitoring retention controls.",
+    "short_answer": "`store: false` is not the same as organization-level Zero Data Retention. OpenAI's data-controls guide says abuse-monitoring logs may still include prompts and responses and are retained for up to 30 days by default, subject to stated exceptions. Check the current endpoint-specific application-state rules and any approved Modified Abuse Monitoring or Zero Data Retention controls before making a retention claim.",
+    "deep_explanation": "The OpenAI data-controls guide separates application state from abuse-monitoring logs. It describes default Responses API application-state retention and notes that abuse-monitoring logs may contain customer content and are retained up to 30 days by default, unless an approved control applies or an exception is required. The guide also documents endpoint-specific behavior, so the team should avoid treating one request parameter as a blanket data-retention guarantee.",
+    "strong_answer_signals": [
+      "Separates application state from abuse-monitoring logs.",
+      "Does not treat `store: false` as Zero Data Retention.",
+      "Verifies current endpoint behavior and approved organization controls before promising retention terms."
+    ],
+    "weak_answer_signals": [
+      "Claims one parameter guarantees no platform retention.",
+      "Confuses model-training policy with data-retention controls."
+    ],
+    "common_mistakes": [
+      "Ignoring endpoint-specific state such as background processing.",
+      "Making a broad privacy promise from a single API field."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the guide say about default abuse-monitoring retention?",
+        "short_answer": "Logs may contain prompts and responses and are retained for up to 30 days by default, subject to exceptions."
+      },
+      {
+        "question": "Is store false identical to Zero Data Retention?",
+        "short_answer": "No. They are distinct controls with different scope and eligibility."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Data controls in the OpenAI platform",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/your-data",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API data-controls guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/your-data"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the separation between application state and abuse-monitoring logs, including default up-to-30-day log retention and approved control exceptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-measure-cost-before-assuming-low-image-detail-is-cheaper",
+    "bank": "gen-ai-engineer",
+    "topic": "Vision input fidelity and cost",
+    "subtopic": "Image detail selection",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A team sets image `detail: low` everywhere because it assumes low detail always uses fewer input tokens. Is that a safe cost rule?",
+    "what_is_assessed": "Whether the candidate checks model-specific image processing and token costs instead of assuming a universal token ordering from the detail label.",
+    "short_answer": "No. The OpenAI image guide notes that resizing and token use depend on the model, and `low` does not always use fewer tokens than `high`. Select detail based on the visual task's fidelity needs, estimate tokens with the current model-specific guidance or calculator, and validate cost and accuracy on representative images.",
+    "deep_explanation": "OpenAI's vision guide explains that image resizing and token use depend on the model and explicitly warns that low detail does not always use fewer tokens than high detail. A label alone is not a reliable cost estimate. Teams should account for model-specific patch or tile rules and compare quality on the visual details their task requires.",
+    "strong_answer_signals": [
+      "Rejects a universal low-is-cheaper assumption.",
+      "Checks model-specific image sizing and token rules.",
+      "Balances fidelity and cost using representative task data."
+    ],
+    "weak_answer_signals": [
+      "Uses one detail setting for every image without validating quality or cost.",
+      "Assumes the detail name directly predicts token count."
+    ],
+    "common_mistakes": [
+      "Choosing detail only from image dimensions or only from the label.",
+      "Reducing detail without testing whether small visual features remain detectable."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can affect image token use?",
+        "short_answer": "The model's resizing and patch or tile rules, as well as the input image."
+      },
+      {
+        "question": "How should a team select detail for production?",
+        "short_answer": "Measure token cost and task quality on representative images with the target model."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Images and vision",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/images-vision",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Images and vision guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/images-vision"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's model-specific token use caveat and explicit note that low detail does not always use fewer tokens than high detail."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

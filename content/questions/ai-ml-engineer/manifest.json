@@ -2,27 +2,56 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 9,
+  "itemCount": 52,
   "countsByTopic": {
     "Training and reproducibility": 3,
-    "Production ML testing and monitoring": 4,
+    "Production ML testing and monitoring": 5,
     "Training experiment tracking and lineage": 1,
-    "Numerical stability and mixed precision": 1
+    "Numerical stability and mixed precision": 2,
+    "Model evaluation and autograd modes": 1,
+    "Model deployment and rollout": 1,
+    "Distributed training": 7,
+    "Compilation and performance measurement": 4,
+    "Model serving performance": 1,
+    "Training performance and data pipelines": 2,
+    "Mixed-precision training": 1,
+    "Memory-constrained training": 2,
+    "Optimization and regularization": 1,
+    "Activation checkpointing": 2,
+    "Distributed checkpointing": 1,
+    "Post-training quantization": 1,
+    "Data loading and throughput": 3,
+    "Module state and checkpointing": 1,
+    "Checkpoint security and loading": 1,
+    "Optimizer behavior": 1,
+    "Tensor layout and memory format": 1,
+    "Tensor views and reshaping": 1,
+    "CUDA benchmarking": 1,
+    "Token-weighted gradient accumulation": 1,
+    "Host-to-device data transfer": 1,
+    "Distributed buffer synchronization": 1,
+    "Sparse embedding gradients": 1,
+    "Embedding max-norm autograd behavior": 1,
+    "Embedding padding indices": 1,
+    "Tensor detach and storage aliasing": 1,
+    "CUDA allocator and empty_cache": 1
   },
   "countsByLevel": {
-    "L2": 3,
-    "L3": 6
+    "L2": 17,
+    "L3": 35
   },
   "countsByType": {
-    "debugging": 7,
-    "scenario": 2
+    "debugging": 33,
+    "scenario": 7,
+    "trade-off": 8,
+    "concept": 4
   },
   "status": {
-    "schemaValid": 9,
-    "sourcesVerified": 9,
-    "rederived": 9,
+    "schemaValid": 52,
+    "sourcesVerified": 52,
+    "rederived": 52,
     "codeExecuted": 0,
-    "expertReviewPending": 9
+    "expertReviewPending": 52
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -82,6 +111,314 @@
       "expertReview": "pending"
     },
     "ml-diagnose-amp-overflow-and-skipped-steps": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-separate-eval-mode-from-gradient-disabling": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-unscale-gradients-before-amp-clipping": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-advance-canary-only-after-production-analysis": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-interpret-feature-drift-without-outcome-labels": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-debug-ddp-multi-gpu-process-and-data-sharding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-benchmark-torch-compile-after-warmup": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-investigate-recompiles-after-dynamic-input-shapes": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-tune-dynamic-batching-against-latency-budget": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-diagnose-gpu-idle-during-data-loading": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-stabilize-float16-training-with-gradient-scaling": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-gradient-accumulation-for-memory-limited-batches": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-separate-evaluation-mode-from-gradient-disabling": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-explain-adamw-decoupled-weight-decay": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-diagnose-torch-compile-graph-breaks": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-step-scheduler-with-optimizer-under-gradient-accumulation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-handle-conditionally-unused-ddp-parameters": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-ddp-join-for-uneven-input-lengths": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-suppress-ddp-allreduce-during-accumulation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-trade-activation-checkpointing-for-memory": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-tune-dataloader-prefetch-under-memory-limits": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-resume-fsdp-training-across-cluster-topologies": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-validate-post-training-quantization-calibration": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-diagnose-nccl-collective-hangs": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-diagnose-torch-compile-cache-limit-fallback": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-set-distributed-sampler-epoch-before-iteration": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-handle-distributed-sampler-tail-padding": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-persistent-dataloader-workers-deliberately": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-shard-iterable-dataset-across-workers": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-register-nontrainable-module-state-as-buffer": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-load-external-checkpoints-with-limited-trust": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-understand-none-vs-zero-gradient-reset": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-evaluate-dataloader-out-of-order-batches": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-profile-channels-last-memory-format": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-keep-checkpoint-recomputation-function-consistent": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-debug-view-on-noncontiguous-tensor": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-time-gpu-benchmarks-with-synchronization": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-normalize-gradient-accumulation-by-valid-tokens": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-benchmark-pinned-memory-and-nonblocking-transfer": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-understand-ddp-buffer-broadcast-semantics": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-match-sparse-embedding-gradients-to-optimizer": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-clone-embedding-weight-before-max-norm-forward": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-keep-padding-index-out-of-embedding-updates": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-detach-shares-storage-unless-cloned": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-understand-what-empty-cache-releases": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "Agent architecture",
-      "subtopics": ["workflow versus agent", "autonomy boundaries", "control flow", "guardrail placement across workflow boundaries"],
+      "subtopics": ["workflow versus agent", "autonomy boundaries", "control flow", "guardrail placement across workflow boundaries", "blocking input guardrails"],
       "sources": [
         {
           "title": "Building Effective AI Agents",
@@ -22,12 +22,21 @@
           "volatility": "Fast-moving",
           "last_verified": "2026-11-04",
           "versions_checked": "Current OpenAI Agents SDK guide; no SDK version claim"
+        },
+        {
+          "title": "Guardrails",
+          "publisher": "OpenAI Agents SDK documentation",
+          "url": "https://openai.github.io/openai-agents-python/guardrails/",
+          "retrieved_date": "2026-11-04",
+          "volatility": "Fast-moving",
+          "last_verified": "2026-11-04",
+          "versions_checked": "OpenAI Agents SDK guardrails guide retrieved 2026-11-04"
         }
       ]
     },
     {
       "topic": "Agent evaluation and observability",
-      "subtopics": ["trace grading", "tool choice", "handoff evaluation", "repeatable dataset evaluations"],
+      "subtopics": ["trace grading", "tool choice", "handoff evaluation", "repeatable dataset evaluations", "sensitive-data handling in traces"],
       "sources": [{
         "title": "Evaluate agent workflows",
         "publisher": "OpenAI API documentation",
@@ -36,6 +45,14 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
+      }, {
+        "title": "Tracing",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/tracing",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents SDK tracing guide retrieved 2026-11-04"
       }]
     },
     {
@@ -66,7 +83,7 @@
     },
     {
       "topic": "Tool execution and application boundaries",
-      "subtopics": ["model tool requests", "application-side execution", "tool result handling"],
+      "subtopics": ["model tool requests", "application-side execution", "tool result handling", "argument validation and authorization", "parallel versus sequential tool calls", "tool descriptions and selection", "deferred tool discovery", "tool choice and allowed-tool subsets"],
       "sources": [{
         "title": "Function calling",
         "publisher": "OpenAI API documentation",
@@ -75,6 +92,360 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API function-calling guide retrieved 2026-11-04"
+      }, {
+        "title": "Tool search",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-tool-search",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Tool search guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Agent run limits and termination",
+      "subtopics": ["maximum turn budgets", "limit exhaustion", "safe recovery"],
+      "sources": [{
+        "title": "Run config",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/ref/run_config/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents SDK RunOptions reference retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Multi-agent orchestration",
+      "subtopics": ["handoff", "agent-as-tool", "response ownership", "handoff input filtering"],
+      "sources": [{
+        "title": "Orchestration and handoffs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents SDK orchestration guide retrieved 2026-11-04"
+      }, {
+        "title": "Handoffs",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/handoffs/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents SDK handoff guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "External MCP data sharing and approval",
+      "subtopics": ["remote server trust", "tool argument review", "data-sharing approval", "per-call approval scope"],
+      "sources": [{
+        "title": "MCP servers",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI MCP server guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Prompt injection and tool-output trust",
+      "subtopics": ["untrusted retrieved content", "downstream tool actions", "private data leakage"],
+      "sources": [{
+        "title": "Safety in building agents",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agent-builder-safety",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI agent safety guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Conversation and run state",
+      "subtopics": ["local replay", "sessions", "server-managed continuation"],
+      "sources": [{
+        "title": "Running agents",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents/running-agents",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Running agents guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Agent evaluation and safety controls",
+      "subtopics": ["delegated workflow boundaries", "per-tool guardrails", "pre- and post-execution checks"],
+      "sources": [{
+        "title": "Guardrails",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/guardrails/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents SDK Python guardrails guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "MCP tool annotations and trust",
+      "subtopics": ["annotation trust", "read-only hints", "client-side enforcement"],
+      "sources": [{
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP tool error handling",
+      "subtopics": ["tool execution errors", "protocol errors", "safe retry feedback"],
+      "sources": [{
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP tool discovery updates",
+      "subtopics": ["listChanged capability", "tools/list refresh", "catalog validation and authorization"],
+      "sources": [{
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP pagination",
+      "subtopics": ["opaque cursors", "nextCursor continuation", "server-determined page size"],
+      "sources": [{
+        "title": "Pagination",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP elicitation",
+      "subtopics": ["user consent", "form review and cancellation", "safe URL-mode elicitation"],
+      "sources": [{
+        "title": "Elicitation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP resource subscriptions",
+      "subtopics": ["resource update notifications", "resources/read refresh", "subscription lifecycle"],
+      "sources": [{
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP progress notifications",
+      "subtopics": ["progress-token correlation", "monotonic progress", "active request lifecycle"],
+      "sources": [{
+        "title": "Progress",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/progress",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP cancellation",
+      "subtopics": ["active request cancellation", "task cancellation", "side-effect reconciliation"],
+      "sources": [{
+        "title": "Cancellation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP sampling",
+      "subtopics": ["client-mediated model access", "sampling capability", "human review and denial", "tool-enabled sampling capability"],
+      "sources": [{
+        "title": "Sampling",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP roots and scope",
+      "subtopics": ["root-list updates", "path containment", "workspace scope"],
+      "sources": [{
+        "title": "Roots",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/roots",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP initialization and compatibility",
+      "subtopics": ["protocol version compatibility", "capability exchange", "optional-feature fallback"],
+      "sources": [{
+        "title": "Lifecycle",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP tasks",
+      "subtopics": ["task polling", "poll interval", "terminal and input-required states", "task lifetime and deferred result retrieval"],
+      "sources": [{
+        "title": "Tasks",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25; Tasks are experimental in this revision"
+      }]
+    },
+    {
+      "topic": "MCP resource templates",
+      "subtopics": ["parameterized resource URIs", "template discovery", "validated resource reads"],
+      "sources": [{
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP completion",
+      "subtopics": ["prompt argument suggestions", "resource-template suggestions", "validation after completion"],
+      "sources": [{
+        "title": "Completion",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/completion",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP resource catalog changes",
+      "subtopics": ["resource-list invalidation", "list_changed notification", "catalog versus content refresh"],
+      "sources": [{
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP prompt catalog changes",
+      "subtopics": ["prompt-list invalidation", "prompts/list pagination", "refreshing selected prompt content"],
+      "sources": [{
+        "title": "Prompts",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP logging",
+      "subtopics": ["minimum severity configuration", "structured log notifications", "diagnostics versus audit"],
+      "sources": [{
+        "title": "Logging",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/logging",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP structured tool results",
+      "subtopics": ["structuredContent", "outputSchema validation", "schema versus semantic checks"],
+      "sources": [{
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP Streamable HTTP session lifecycle",
+      "subtopics": ["session ID handling", "404 recovery", "secure session management"],
+      "sources": [{
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
+      }]
+    },
+    {
+      "topic": "MCP JSON-RPC request IDs",
+      "subtopics": ["per-session uniqueness", "non-null request IDs", "request-response correlation"],
+      "sources": [{
+        "title": "Messages",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "MCP specification version 2025-11-25"
       }]
     }
   ]

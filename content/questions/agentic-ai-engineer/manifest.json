@@ -2,29 +2,55 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 75,
-  "itemCount": 9,
+  "itemCount": 46,
   "countsByTopic": {
-    "Agent architecture": 4,
-    "Agent evaluation and observability": 2,
+    "Agent architecture": 5,
+    "Agent evaluation and observability": 3,
     "Agent errors and recovery": 1,
     "Session state and turn control": 1,
-    "Tool execution and application boundaries": 1
+    "Tool execution and application boundaries": 6,
+    "Agent run limits and termination": 1,
+    "Multi-agent orchestration": 2,
+    "External MCP data sharing and approval": 3,
+    "Prompt injection and tool-output trust": 1,
+    "Conversation and run state": 1,
+    "Agent evaluation and safety controls": 1,
+    "MCP tool error handling": 1,
+    "MCP tool discovery updates": 1,
+    "MCP pagination": 1,
+    "MCP elicitation": 1,
+    "MCP resource subscriptions": 1,
+    "MCP progress notifications": 1,
+    "MCP cancellation": 1,
+    "MCP sampling": 2,
+    "MCP roots and scope": 1,
+    "MCP initialization and compatibility": 1,
+    "MCP tasks": 2,
+    "MCP resource templates": 1,
+    "MCP completion": 1,
+    "MCP resource catalog changes": 1,
+    "MCP prompt catalog changes": 1,
+    "MCP logging": 1,
+    "MCP structured tool results": 1,
+    "MCP Streamable HTTP session lifecycle": 1,
+    "MCP JSON-RPC request IDs": 1
   },
   "countsByLevel": {
-    "L2": 7,
-    "L3": 2
+    "L2": 20,
+    "L3": 26
   },
   "countsByType": {
-    "trade-off": 1,
-    "scenario": 6,
-    "debugging": 2
+    "trade-off": 7,
+    "scenario": 20,
+    "debugging": 13,
+    "concept": 6
   },
   "status": {
-    "schemaValid": 9,
-    "sourcesVerified": 9,
-    "rederived": 9,
+    "schemaValid": 46,
+    "sourcesVerified": 46,
+    "rederived": 46,
     "codeExecuted": 0,
-    "expertReviewPending": 9
+    "expertReviewPending": 46
   },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
@@ -84,6 +110,265 @@
       "expertReview": "pending"
     },
     "agentic-model-tool-call-is-not-tool-execution": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-bound-run-length-and-handle-limit-reached": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-choose-handoff-or-bounded-specialist-tool": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-authorize-and-validate-tools-before-execution": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-review-data-before-sharing-with-remote-mcp": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-isolate-untrusted-tool-content-from-actions": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-sequence-dependent-tools-instead-of-parallel-calls": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-treat-mcp-approval-as-per-tool-call": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-improve-tool-selection-with-clear-contracts": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-choose-one-conversation-state-strategy": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-place-per-tool-checks-at-tool-boundaries": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-defer-large-tool-catalogs-with-tool-search": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-restrict-available-tools-per-workflow-stage": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-disable-sensitive-data-in-traces": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-filter-handoff-history-for-specialist": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-block-input-guardrail-before-running-tools": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-treat-mcp-tool-annotations-as-untrusted-hints": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-distinguish-mcp-tool-errors-from-protocol-errors": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-refresh-mcp-tool-catalog-after-change-notification": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-follow-mcp-pagination-cursors-for-tool-lists": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-handle-mcp-elicitation-with-user-control": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-refetch-mcp-resource-after-update-notification": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-correlate-mcp-progress-with-active-request": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-handle-cancellation-without-assuming-rollback": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-mcp-sampling-keeps-model-access-client-controlled": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-refresh-and-enforce-mcp-roots": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-check-negotiated-mcp-version-and-capabilities": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-poll-mcp-task-at-advised-interval": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-discover-mcp-resource-templates": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-negotiate-mcp-sampling-tool-use-capability": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-use-mcp-completion-as-suggestion": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-refresh-mcp-resource-catalog-on-list-change": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-refresh-mcp-prompt-catalog-on-change": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-configure-mcp-logging-minimum-level": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-respect-mcp-task-lifetime-and-poll-interval": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-validate-mcp-structured-tool-results": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-reinitialize-mcp-session-after-404": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-use-unique-non-null-mcp-request-ids": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

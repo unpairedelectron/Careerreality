@@ -652,5 +652,2637 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-bound-run-length-and-handle-limit-reached",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent run limits and termination",
+    "subtopic": "Maximum turns and explicit stop behavior",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An agent keeps calling tools without reaching a useful final answer. What runtime control and recovery behavior should you consider?",
+    "what_is_assessed": "Whether the candidate bounds agent execution and handles a limit as a recoverable state rather than allowing an unbounded loop.",
+    "short_answer": "Set a maximum turn count or equivalent run budget supported by the runtime, and define what the application does when that limit is reached. Capture the trace and tool outcomes, return a clear incomplete state or request human review, and only resume after diagnosing the loop or narrowing the task. A turn limit bounds work; it does not replace tool authorization, task-specific success criteria, or investigation of repeated tool choices.",
+    "deep_explanation": "The OpenAI Agents SDK run configuration documents `max_turns` as the maximum number of turns for a run, with `None` disabling the limit. The running-agent guide describes a loop that continues through tool calls and handoffs until a stopping point such as a final answer. The run limit is an SDK-specific control; the engineering recommendation is to make limit exhaustion visible and define safe recovery rather than silently treating it as success.",
+    "strong_answer_signals": [
+      "Uses a finite turn or work budget for a potentially looping run.",
+      "Distinguishes limit exhaustion from a successful final answer.",
+      "Inspects traces and tool outcomes before deciding whether to resume or escalate."
+    ],
+    "weak_answer_signals": [
+      "Disables the limit without another termination or cost control.",
+      "Returns an incomplete run as if the task succeeded."
+    ],
+    "common_mistakes": [
+      "Automatically restarting the same loop without changing its cause.",
+      "Treating a turn limit as an authorization or safety control."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `max_turns` limit in the cited SDK?",
+        "short_answer": "The maximum number of turns the agent runner executes for a run."
+      },
+      {
+        "question": "What should happen when the limit is reached?",
+        "short_answer": "Expose the incomplete state and use traces to decide whether to stop, clarify, or safely resume."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Run config",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/ref/run_config/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK RunOptions reference retrieved 2026-11-04; `max_turns` is SDK-specific.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/ref/run_config/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the reference describes `max_turns` as the maximum turns and notes that None disables the limit; clearly separated the API control from recommended recovery behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-use-session-state-for-long-running-work"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-choose-handoff-or-bounded-specialist-tool",
+    "bank": "agentic-ai-engineer",
+    "topic": "Multi-agent orchestration",
+    "subtopic": "Handoff versus agent-as-tool",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A manager agent needs a specialist to handle some requests. When should control transfer to the specialist, and when should the manager call it as a bounded tool?",
+    "what_is_assessed": "Whether the candidate selects an orchestration pattern based on who should own the next user-facing response.",
+    "short_answer": "Use a handoff when the specialist should take over the conversation and own the next response. Use the specialist as a tool when the manager should remain in control, request bounded specialist work, and compose the final answer. Keep each specialist's role narrow and split only when the branch needs distinct instructions, tools, or policy. The choice should reflect response ownership, not merely the number of agents.",
+    "deep_explanation": "OpenAI's orchestration guide contrasts handoffs, where control moves to a specialist, with agents as tools, where the manager stays in control and owns the reply. It recommends clear, narrow specialist responsibilities. These are the guide's SDK patterns; other orchestrators may use different names, but the design question—who owns the final user-facing response—remains useful.",
+    "strong_answer_signals": [
+      "Identifies response ownership as the key distinction.",
+      "Explains the manager-controlled behavior of a bounded specialist call.",
+      "Keeps specialist responsibilities narrow and justified by different needs."
+    ],
+    "weak_answer_signals": [
+      "Adds agents without specifying who is responsible for the final answer.",
+      "Uses a handoff for every tool-like operation regardless of control needs."
+    ],
+    "common_mistakes": [
+      "Treating handoffs and agent calls as equivalent when they change control ownership.",
+      "Creating overlapping specialists with unclear instructions."
+    ],
+    "follow_ups": [
+      {
+        "question": "Who owns the reply after a handoff?",
+        "short_answer": "The specialist that receives control."
+      },
+      {
+        "question": "Who owns the reply when a specialist is used as a tool?",
+        "short_answer": "The manager remains responsible for composing the final reply."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Orchestration and handoffs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK orchestration guide retrieved 2026-11-04; exact APIs vary by language and runtime.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents/orchestration"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's control-ownership distinction between handoffs and agents-as-tools and preserved its recommendation for narrow specialist roles."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-route-specialized-prompts-for-clear-categories"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-authorize-and-validate-tools-before-execution",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Argument validation and authorization",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A tool call contains schema-valid JSON requesting a refund for a customer. What checks should happen before the application executes it?",
+    "what_is_assessed": "Whether the candidate distinguishes structured argument validity from semantic validation and user authorization.",
+    "short_answer": "Treat the model-generated call as a request, not permission. Parse and validate the arguments, verify the authenticated caller may act on that specific account and amount, enforce business limits and required approvals, and only then execute through a constrained server-side tool. Log the decision and return a result that contains no unnecessary sensitive data. A schema constrains structure; it does not establish identity, authorization, or business correctness.",
+    "deep_explanation": "OpenAI's function-calling guide describes a multi-step flow in which the model returns a tool call and the application executes code on the application side. The schema can constrain argument shape, but access control and business rules belong to the application that owns the data and action. For consequential actions, the system should evaluate identity, object-level authorization, limits, and any required human approval before execution.",
+    "strong_answer_signals": [
+      "Treats the tool call as untrusted input rather than an authorization decision.",
+      "Checks caller identity and permission for the specific account and operation.",
+      "Validates business constraints and required approvals before server-side execution."
+    ],
+    "weak_answer_signals": [
+      "Executes any syntactically valid tool arguments returned by the model.",
+      "Relies on prompt instructions instead of application-side authorization."
+    ],
+    "common_mistakes": [
+      "Confusing JSON-schema validity with permission to mutate a record.",
+      "Checking a general role but not whether the caller may act on the requested object."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does a tool schema prove?",
+        "short_answer": "That arguments match a defined structure, not that the caller is authorized."
+      },
+      {
+        "question": "Where should the consequential action execute?",
+        "short_answer": "In constrained application-side code after authorization and business-rule checks."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI function-calling guide retrieved 2026-11-04; authorization recommendations are application responsibilities.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source assigns tool execution to application-side code; separated documented tool flow from application security controls and made schema validity explicitly insufficient for authorization."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-tool-call-request-does-not-execute-itself"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-review-data-before-sharing-with-remote-mcp",
+    "bank": "agentic-ai-engineer",
+    "topic": "External MCP data sharing and approval",
+    "subtopic": "Reviewing remote tool requests",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An agent asks to send conversation context and a tool request to a remote MCP server. What should the reviewer inspect before approving?",
+    "what_is_assessed": "Whether the candidate treats remote tool execution as data sharing and reviews the specific server, tool, arguments, and information sent.",
+    "short_answer": "Inspect which server will receive the request, which tool will run, its arguments, and what user or conversation data will be shared. Keep approval required when the data or action is consequential, and log the approval decision where appropriate. The MCP server's trustworthiness and the minimum data needed should be assessed; a user approval prompt is not a substitute for access controls or data minimization.",
+    "deep_explanation": "OpenAI's MCP guide says approval is requested by default before data is shared with a connector or remote MCP server and recommends carefully reviewing, and optionally logging, the data being shared. It instructs reviewers to inspect the requested tool and arguments. These controls concern the documented API flow; teams should also apply their own privacy, access-control, and vendor review requirements.",
+    "strong_answer_signals": [
+      "Reviews the destination, tool, arguments, and data payload before approval.",
+      "Keeps approvals enabled for consequential data sharing or actions.",
+      "Treats approval as one control alongside data minimization and access controls."
+    ],
+    "weak_answer_signals": [
+      "Approves every remote tool call because the model selected it.",
+      "Sends full conversation history when the tool needs only a narrow input."
+    ],
+    "common_mistakes": [
+      "Reviewing only the tool name while ignoring arguments and shared data.",
+      "Treating a trusted provider as permission to share all user context."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the guide recommend reviewing?",
+        "short_answer": "The requested tool, its arguments, and the data being shared with the remote server."
+      },
+      {
+        "question": "Does approval replace data minimization?",
+        "short_answer": "No. Share only what the tool needs and retain appropriate access controls."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "MCP servers",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI MCP server guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/tools-connectors-mcp"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the default approval behavior, review of tool arguments, and recommendation to review/log shared data; kept privacy controls beyond the API flow clearly as application responsibility."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-authorize-and-validate-tools-before-execution"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-isolate-untrusted-tool-content-from-actions",
+    "bank": "agentic-ai-engineer",
+    "topic": "Prompt injection and tool-output trust",
+    "subtopic": "Untrusted retrieved instructions",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A browser tool returns a page telling the agent to ignore its instructions and send customer records to another service. What should the system do?",
+    "what_is_assessed": "Whether the candidate treats tool-returned text as untrusted data and prevents it from authorizing sensitive downstream actions.",
+    "short_answer": "Treat the page content as untrusted input, not as a change to the agent's instructions or permissions. Keep tool access constrained, require application-side authorization for any sensitive data request, and block or review downstream sharing that was not part of the user's authorized task. Test adversarial tool results and log attempted data flows. Prompt wording alone is not a security boundary.",
+    "deep_explanation": "OpenAI's agent-safety guide describes prompt injection as malicious instructions in untrusted text or data that can alter behavior or trigger downstream tool calls, including exfiltration of private data. It also notes that private-data leakage can occur unintentionally. The recommended approach is defense in depth: restrict tool capabilities and data access, validate actions in application code, and keep human review for consequential cases rather than trusting retrieved text.",
+    "strong_answer_signals": [
+      "Distinguishes tool content from trusted system or developer instructions.",
+      "Prevents untrusted content from expanding permissions or authorizing data sharing.",
+      "Uses least-privilege tools, application checks, and adversarial tests."
+    ],
+    "weak_answer_signals": [
+      "Follows instructions because they appear in a retrieved page.",
+      "Relies only on a prompt telling the model to ignore malicious text."
+    ],
+    "common_mistakes": [
+      "Allowing retrieved content to select a privileged destination or record set.",
+      "Assuming a trusted browser or search provider makes every returned page trustworthy."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can retrieved content grant permission to send private data?",
+        "short_answer": "No. Authorization must come from trusted application policy and the user's allowed task."
+      },
+      {
+        "question": "Why is prompt wording alone insufficient?",
+        "short_answer": "Untrusted content can still influence model behavior; enforce permissions and action checks outside the prompt."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Safety in building agents",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agent-builder-safety",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI agent safety guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agent-builder-safety"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's prompt-injection and private-data leakage descriptions; framed authorization and tool constraints as application controls, not as guaranteed model behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-review-data-before-sharing-with-remote-mcp"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-sequence-dependent-tools-instead-of-parallel-calls",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Parallel versus sequential tool calls",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "An agent requests two tools in the same turn, but the second needs the first tool's result. Should the application run both calls in parallel?",
+    "what_is_assessed": "Whether the candidate recognizes dependency constraints before parallelizing tool execution.",
+    "short_answer": "No. Run calls concurrently only when they are independent; if one needs the other's result, execute in sequence and return the first result before continuing. Where supported, configure the model/runtime to limit parallel tool calls when concurrency would be unsafe or ambiguous. The application still owns execution order and side effects; model-proposed parallel calls do not prove the operations are independent.",
+    "deep_explanation": "OpenAI's function-calling guide notes that a model may request multiple function calls in one turn and documents `parallel_tool_calls: false` to limit a turn to zero or one tool call. The engineering decision depends on data and action dependencies: independent read operations may be parallelizable, while dependent operations need sequential control. The API setting is provider-specific; the dependency analysis is a general application responsibility.",
+    "strong_answer_signals": [
+      "Checks whether calls depend on one another before running them concurrently.",
+      "Preserves sequential execution where later arguments require earlier results.",
+      "Uses concurrency controls and idempotent application logic where appropriate."
+    ],
+    "weak_answer_signals": [
+      "Runs all requested calls concurrently because they appear in one model response.",
+      "Assumes disabling parallel calls removes the need for application-side dependency checks."
+    ],
+    "common_mistakes": [
+      "Racing dependent reads and writes.",
+      "Ignoring ordering requirements when multiple tools mutate shared state."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is parallel execution appropriate?",
+        "short_answer": "When tool calls are independent and their side effects and data dependencies allow concurrency."
+      },
+      {
+        "question": "Who determines and enforces execution order?",
+        "short_answer": "The application orchestrating the tools."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI function-calling guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide documents multiple tool calls per turn and the parallel_tool_calls control; derived the sequential-vs-parallel choice from explicit dependency requirements rather than the provider setting alone."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-authorize-and-validate-tools-before-execution"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-treat-mcp-approval-as-per-tool-call",
+    "bank": "agentic-ai-engineer",
+    "topic": "External MCP data sharing and approval",
+    "subtopic": "Per-call approval scope",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A user approved one remote MCP tool call, and the agent now requests a different call. Does the first approval cover the rest of the run?",
+    "what_is_assessed": "Whether the candidate understands that approvals are scoped to individual calls and must be evaluated again when subsequent requests arrive.",
+    "short_answer": "No. In the cited OpenAI flow, each approval applies to one tool call; review every subsequent request, including its tool, arguments, destination, and shared data. Do not treat one approval as a session-wide grant. Keep application authorization and data-minimization checks in place even when a call is approved.",
+    "deep_explanation": "OpenAI's MCP guide says each approval applies to one tool call and subsequent approval requests should be handled the same way. This is a provider-specific approval flow, while the broader principle is to scope consent and authorization to the action and information being requested.",
+    "strong_answer_signals": [
+      "Recognizes approval is per-call rather than a blanket session permission.",
+      "Reviews each later tool and its arguments before approving.",
+      "Continues to enforce access controls and data minimization."
+    ],
+    "weak_answer_signals": [
+      "Treats one approved call as permission for all later tools.",
+      "Approves subsequent requests without inspecting their arguments or data."
+    ],
+    "common_mistakes": [
+      "Conflating user approval with authorization to access any account or record.",
+      "Failing to ask for a new approval after the requested action changes."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the scope of each approval in the cited flow?",
+        "short_answer": "One specific tool call."
+      },
+      {
+        "question": "What should be reviewed for a later call?",
+        "short_answer": "Its tool, arguments, destination, and the data it would share."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "MCP servers",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI MCP server guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/tools-connectors-mcp"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide explicitly scopes each approval to one tool call and requires handling subsequent approval requests separately."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-review-data-before-sharing-with-remote-mcp"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-improve-tool-selection-with-clear-contracts",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Tool descriptions and selection",
+    "level": "L2",
+    "type": "debugging",
+    "question": "An agent often chooses the wrong one of two similar tools. What changes to the tool interface and instructions should you test?",
+    "what_is_assessed": "Whether the candidate treats tool definitions as an interface contract that guides model selection and invocation.",
+    "short_answer": "Make names and descriptions clearly distinguish each tool's purpose, when to use it, required arguments, and expected output. State selection rules in the developer instructions, include edge cases for recurring failures, and keep the tools predictable. Then evaluate tool-choice accuracy on representative scenarios. Avoid overlapping tools with unclear responsibilities; descriptions can improve selection but do not replace application-side validation.",
+    "deep_explanation": "OpenAI's function-calling guide recommends clear function names, parameter descriptions, and instructions that explain what each tool does, when to use it, and what outputs mean. It also recommends examples and edge cases for recurring failures, while noting that examples can have trade-offs for some reasoning models. Tool documentation is therefore part of the orchestration interface, but the application must still enforce safety and correctness.",
+    "strong_answer_signals": [
+      "Clarifies purpose, parameters, output meaning, and selection conditions.",
+      "Uses representative cases to check whether tool choice improves.",
+      "Keeps application validation in place instead of trusting better descriptions alone."
+    ],
+    "weak_answer_signals": [
+      "Adds more overlapping tools without differentiating their roles.",
+      "Assumes prompt wording guarantees correct tool calls."
+    ],
+    "common_mistakes": [
+      "Leaving ambiguous parameter descriptions or undocumented side effects.",
+      "Evaluating only final answers while ignoring incorrect tool selection."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should a tool description explain?",
+        "short_answer": "Its purpose, parameters, outputs, and when it should or should not be used."
+      },
+      {
+        "question": "What should follow an interface change?",
+        "short_answer": "A repeatable evaluation of tool selection across representative cases."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI function-calling guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's recommendations for clear function names, parameter descriptions, usage instructions, examples, and edge cases; preserved the distinction between model guidance and application enforcement."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-evaluate-wrong-tool-and-missed-handoff"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-choose-one-conversation-state-strategy",
+    "bank": "agentic-ai-engineer",
+    "topic": "Conversation and run state",
+    "subtopic": "Single state strategy per conversation",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A multi-turn agent currently replays local history and also passes a server-managed conversation identifier. What state risk should you investigate?",
+    "what_is_assessed": "Whether the candidate chooses a clear state owner and avoids accidental duplication when mixing conversation-continuation strategies.",
+    "short_answer": "Check whether the same turns are being included through both mechanisms, which can duplicate context or produce inconsistent continuation. Choose one strategy per conversation unless the application deliberately reconciles the two layers. Use application history for maximum control, a session for persistent resumable state, a conversation ID for shared server-managed state, or a previous-response ID for a light continuation path; pass only the documented new-turn input for server-managed strategies.",
+    "deep_explanation": "OpenAI's Running agents guide lists application-managed history, sessions, Conversations API IDs, and Responses API previous-response IDs as distinct state strategies. It recommends choosing one strategy per conversation in most applications because mixing local replay with server-managed state can duplicate context unless the layers are intentionally reconciled. The appropriate strategy depends on persistence, control, and whether state must be shared across workers.",
+    "strong_answer_signals": [
+      "Identifies duplicated context as a risk of mixing replay and server-managed state.",
+      "Chooses a strategy based on persistence, control, and cross-worker requirements.",
+      "Passes only the new turn when using a server-managed continuation strategy."
+    ],
+    "weak_answer_signals": [
+      "Combines full local history with a conversation ID without checking what the server already retains.",
+      "Assumes all state strategies can be mixed interchangeably."
+    ],
+    "common_mistakes": [
+      "Replaying previous turns while also continuing the same server-side conversation.",
+      "Choosing ephemeral in-memory state when runs must resume after process restarts."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can happen when local replay and server state are mixed?",
+        "short_answer": "Turns can be duplicated unless the application intentionally reconciles both layers."
+      },
+      {
+        "question": "Which strategy can share server-managed state across workers?",
+        "short_answer": "A Conversations API conversation ID, when that API is used."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Running agents",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents/running-agents",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Running agents guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents/running-agents"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's four continuation strategies and warning that mixing local replay with server-managed state can duplicate context; kept strategy selection conditional on product needs."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-place-per-tool-checks-at-tool-boundaries",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent evaluation and safety controls",
+    "subtopic": "Guardrails across delegated workflows",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A workflow delegates to multiple agents, and every function-tool call must be checked before and after execution. Are agent-level input and output guardrails sufficient?",
+    "what_is_assessed": "Whether the candidate places controls at the execution boundary they are intended to protect.",
+    "short_answer": "Not by themselves. In the cited Agents SDK, input guardrails run only for the first agent in the chain and output guardrails only for the final agent. Tool guardrails run around each guarded function-tool invocation. If each tool call needs pre- and post-execution checks, configure tool guardrails for those calls and verify that every relevant tool is covered; agent-level checks do not automatically inspect every intermediate action.",
+    "deep_explanation": "The OpenAI Agents SDK guardrails guide distinguishes checks by workflow boundary: input guardrails apply at the start of the chain, output guardrails at the final response, and tool guardrails around each guarded function-tool invocation. This matters in delegated workflows because a check on the initial request or final answer does not necessarily validate intermediate tool arguments and results. Exact coverage depends on the SDK configuration and tool types, so test each path.",
+    "strong_answer_signals": [
+      "Explains the first-agent and final-agent scope of agent-level guardrails.",
+      "Places per-call checks around each relevant tool invocation.",
+      "Tests coverage across handoffs, delegated agents, and tool types."
+    ],
+    "weak_answer_signals": [
+      "Assumes input guardrails run again for every delegated agent.",
+      "Assumes checking the final answer protects every intermediate tool action."
+    ],
+    "common_mistakes": [
+      "Leaving a custom or remote tool outside the guarded invocation path.",
+      "Treating output validation as a replacement for checking tool arguments before side effects."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where do input guardrails run in the documented chain?",
+        "short_answer": "On the first agent in the chain."
+      },
+      {
+        "question": "What guardrail type checks each guarded function-tool call?",
+        "short_answer": "Tool guardrails, before and after execution."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guardrails",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/guardrails/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK Python guardrails guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/guardrails/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's first-agent input and final-agent output scope and per-invocation tool guardrails; marked configuration coverage as something to test rather than assuming every tool is included."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-defer-large-tool-catalogs-with-tool-search",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Deferred tool discovery",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "An agent has hundreds of rarely used functions, making requests expensive and tool choice confusing. How can you reduce the initial tool context?",
+    "what_is_assessed": "Whether the candidate uses deferred tool discovery appropriately while keeping tool descriptions, availability, and authorization clear.",
+    "short_answer": "For supported APIs and models, defer rarely used functions and expose a tool-search mechanism that loads relevant definitions when needed. Organize tools into clear namespaces or MCP servers, and keep searchable descriptions informative. Verify the selected tools are actually available before invocation and retain application-side authorization and validation; deferring schemas reduces initial context but does not make tools safer or guarantee correct discovery.",
+    "deep_explanation": "OpenAI's tool-search guide describes deferring function or MCP tool definitions and loading them when needed, with namespaces or MCP servers recommended where useful. For the Responses API, the guide states that tool search is supported by gpt-5.4 and later and requires adding `tool_search` and marking deferred tools. This is provider- and model-specific behavior; teams should check current compatibility and test discovery accuracy, token savings, and tool authorization.",
+    "strong_answer_signals": [
+      "Uses deferred loading to reduce initial context for rarely used tools.",
+      "Provides clear descriptions and namespaces to make discovery effective.",
+      "Keeps authorization and argument validation in the application."
+    ],
+    "weak_answer_signals": [
+      "Assumes every model supports deferred tool search.",
+      "Treats successful discovery as proof that a tool call is authorized."
+    ],
+    "common_mistakes": [
+      "Deferring tools without making their purpose searchable.",
+      "Failing to test whether the model discovers the right function for representative requests."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is one benefit of deferred tool loading?",
+        "short_answer": "It can reduce the initial context used by large or rarely needed tool definitions."
+      },
+      {
+        "question": "Does tool search replace authorization?",
+        "short_answer": "No. The application must still authorize and validate every invocation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tool search",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/tools-tool-search",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Tool search guide retrieved 2026-11-04; model support can change.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/tools-tool-search"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified deferred function/MCP loading and current Responses API requirements; framed model compatibility as time-sensitive and kept authorization separate from discovery."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-improve-tool-selection-with-clear-contracts"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-restrict-available-tools-per-workflow-stage",
+    "bank": "agentic-ai-engineer",
+    "topic": "Tool execution and application boundaries",
+    "subtopic": "Tool choice and allowed-tool subsets",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A workflow should allow either a documentation lookup or a policy lookup on this turn, but not the rest of the application's tools. How can you constrain model tool choice?",
+    "what_is_assessed": "Whether the candidate limits callable tools to the workflow's current needs without mistaking the model-facing constraint for authorization.",
+    "short_answer": "Use the API's allowed-tools option to constrain the model's callable subset for that request, or force one function when exactly one must be called. Choose `auto` when the model may answer without a tool; use `required` only when a tool call is necessary. Keep authorization and business checks in application code: limiting the model's choices is not a security boundary and does not validate the chosen action.",
+    "deep_explanation": "OpenAI's function-calling guide documents `tool_choice` modes including auto, required, a specific forced function, and an allowed-tools subset. It describes allowed tools as a way to restrict calls to a subset while leaving the full tool list in the request. This supports workflow-specific control and can preserve prompt-caching benefits, but execution still belongs to the application and must follow its permission checks.",
+    "strong_answer_signals": [
+      "Selects auto, required, forced function, or allowed subset according to workflow intent.",
+      "Uses the smallest relevant tool set for the current stage.",
+      "Retains application-side authorization and validation after model selection."
+    ],
+    "weak_answer_signals": [
+      "Forces a tool even when the model should be able to answer without one.",
+      "Treats allowed-tools configuration as a replacement for caller authorization."
+    ],
+    "common_mistakes": [
+      "Confusing a model-facing constraint with an access-control check.",
+      "Leaving unrelated tools available in a high-risk workflow stage."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is `required` appropriate?",
+        "short_answer": "When the workflow requires at least one tool call to proceed."
+      },
+      {
+        "question": "What does an allowed-tools subset not establish?",
+        "short_answer": "That the caller is authorized to perform the selected action."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI function-calling guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified documented tool_choice modes and allowed-tools subset behavior; distinguished model-facing tool constraints from application authorization."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-defer-large-tool-catalogs-with-tool-search"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-disable-sensitive-data-in-traces",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent evaluation and observability",
+    "subtopic": "Sensitive-data handling in traces",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Agent traces are useful for debugging, but tool arguments can contain personal data. What should you change before production tracing?",
+    "what_is_assessed": "Whether the candidate recognizes sensitive trace payloads and configures capture or export controls before collecting production data.",
+    "short_answer": "Review what each span records and disable sensitive input/output capture with the SDK's `trace_include_sensitive_data` setting when those values are not needed. If traces must be exported, apply redaction in an application-owned exporter and ensure failures do not fall through to an unredacted default exporter. Test the resulting traces and preserve non-sensitive operational signals needed for debugging; also apply the product's retention and access policies.",
+    "deep_explanation": "The OpenAI Agents SDK tracing guide says generation spans can store LLM inputs and outputs, and function spans can store function-call inputs and outputs. It documents `RunConfig.trace_include_sensitive_data` for disabling that capture. The guide also warns that a separate redaction processor can fail while another exporter still receives the original trace; when successful redaction is required, keep redaction and delivery in the same application-owned exporter and discard data if redaction fails.",
+    "strong_answer_signals": [
+      "Identifies that prompts and tool arguments may be present in spans.",
+      "Disables sensitive-data capture when unnecessary.",
+      "Ensures redaction failure cannot send raw data through another exporter."
+    ],
+    "weak_answer_signals": [
+      "Assumes traces contain only timing metadata.",
+      "Adds redaction but leaves a parallel unredacted exporter active."
+    ],
+    "common_mistakes": [
+      "Testing only successful redaction paths.",
+      "Removing all observability instead of limiting sensitive payload capture."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which spans can contain user data?",
+        "short_answer": "Generation spans and function spans may store inputs and outputs."
+      },
+      {
+        "question": "What should happen if required redaction fails?",
+        "short_answer": "Discard the batch rather than export an unredacted trace."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tracing",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/tracing",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK tracing guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/tracing"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified sensitive span payloads, the trace_include_sensitive_data setting, and the documented redaction/export failure boundary."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-filter-handoff-history-for-specialist",
+    "bank": "agentic-ai-engineer",
+    "topic": "Multi-agent orchestration",
+    "subtopic": "Handoff input filtering",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A specialist agent needs the current task but should not receive every earlier tool result. How can a handoff limit its model input?",
+    "what_is_assessed": "Whether the candidate understands default history forwarding and uses a handoff input filter without confusing model input with session history.",
+    "short_answer": "The Agents SDK forwards the conversation history to the receiving agent by default. Configure an `input_filter` to construct the history the specialist should receive, removing irrelevant or sensitive prior items while keeping the records needed for session continuity. Test that the handoff call and its result remain represented as required; filtering model input should be an explicit context and privacy decision.",
+    "deep_explanation": "The SDK handoff guide says the new agent sees the previous conversation history by default and documents `input_filter` for changing the input. Its handoff data distinguishes prior history, items created before handoff, and current-turn items; filtered `input_items` can change what the next model receives while retaining session history items. Choose filtering behavior based on the specialist's task and data-minimization needs.",
+    "strong_answer_signals": [
+      "Knows that the default handoff forwards prior conversation history.",
+      "Uses input_filter to limit or reshape the receiving agent's input.",
+      "Preserves only context needed for the specialist and session record."
+    ],
+    "weak_answer_signals": [
+      "Assumes a handoff automatically starts with a clean context.",
+      "Deletes session history when only the next model input needs filtering."
+    ],
+    "common_mistakes": [
+      "Forwarding every prior tool result to every specialist.",
+      "Filtering out the handoff context required to complete the task."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the default history behavior?",
+        "short_answer": "The receiving agent sees the previous conversation history."
+      },
+      {
+        "question": "Can model input be filtered while retaining session history?",
+        "short_answer": "Yes; handoff input filtering can change forwarded model input separately from session history."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Handoffs",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/handoffs/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK handoff guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/handoffs/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified default full-history handoff behavior and input_filter controls; distinguished forwarded model input from retained session items."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-block-input-guardrail-before-running-tools",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent architecture",
+    "subtopic": "Blocking input guardrails",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A high-risk workflow should not call tools if its initial request fails a guardrail. Which input-guardrail execution mode should you choose?",
+    "what_is_assessed": "Whether the candidate understands the timing and side-effect trade-off between parallel and blocking input guardrails.",
+    "short_answer": "Use blocking execution with `run_in_parallel=False` when the guardrail must finish before the agent begins. If its tripwire fires, the agent does not start and cannot consume tokens or execute tools. Parallel execution can reduce latency, but the agent may already have started or called tools before the guardrail completes. Input guardrails run only for the first agent; use tool guardrails for checks required before each tool invocation.",
+    "deep_explanation": "The OpenAI Agents SDK guide documents parallel input guardrails as starting alongside the agent for lower latency, with the risk that work or tool calls may occur before a tripwire cancels the run. Blocking mode waits for the guardrail before starting the agent. The same guide distinguishes initial input guardrails from tool guardrails, which run around guarded tool calls.",
+    "strong_answer_signals": [
+      "Chooses blocking mode for a strict precondition.",
+      "Names the latency versus premature execution trade-off.",
+      "Uses tool guardrails when checks must run at each tool boundary."
+    ],
+    "weak_answer_signals": [
+      "Assumes a parallel tripwire always prevents tool side effects.",
+      "Uses an initial input guardrail as the only check for every delegated tool call."
+    ],
+    "common_mistakes": [
+      "Confusing input guardrails with per-tool guardrails.",
+      "Choosing parallel execution without considering side effects that can start before cancellation."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens if a blocking input guardrail trips?",
+        "short_answer": "The agent does not start."
+      },
+      {
+        "question": "Which guardrail runs before each guarded function tool?",
+        "short_answer": "A tool input guardrail."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guardrails",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-python/guardrails/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents SDK guardrails guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://openai.github.io/openai-agents-python/guardrails/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified blocking versus parallel input-guardrail timing and that input guardrails apply to the first agent while tool guardrails apply at guarded tool calls."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-sensitive-tool-action-human-approval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-treat-mcp-tool-annotations-as-untrusted-hints",
+    "bank": "agentic-ai-engineer",
+    "topic": "External MCP data sharing and approval",
+    "subtopic": "Trusting tool annotations",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A remote MCP tool advertises a `readOnlyHint`. Can the client skip authorization and side-effect checks based on that annotation?",
+    "what_is_assessed": "Whether the candidate treats server-provided annotations as hints rather than security controls.",
+    "short_answer": "No. The MCP specification says clients must consider tool annotations untrusted unless they come from trusted servers. Verify the server's identity and enforce authorization and policy in the client or application; a `readOnlyHint` or `destructiveHint` should not decide permission by itself. Review the actual tool behavior and arguments before exposing it for sensitive workflows.",
+    "deep_explanation": "The MCP tools specification describes annotations such as read-only or destructive hints but requires clients to treat annotations as untrusted unless the server is trusted. These metadata fields can inform user experience, but they do not prove what the implementation will do. Apply the product's own authorization, confirmation, and data-sharing controls to the actual operation.",
+    "strong_answer_signals": [
+      "Treats annotations as untrusted metadata unless the server is trusted.",
+      "Does not use a hint as an authorization decision.",
+      "Checks actual tool behavior and applies application-side controls."
+    ],
+    "weak_answer_signals": [
+      "Assumes a read-only hint guarantees no side effects.",
+      "Allows a destructive tool because its annotation says it is safe."
+    ],
+    "common_mistakes": [
+      "Confusing descriptive metadata with enforced capability restrictions.",
+      "Trusting a server's annotation without verifying the server."
+    ],
+    "follow_ups": [
+      {
+        "question": "When can a client trust tool annotations?",
+        "short_answer": "Only when they come from a server the client trusts."
+      },
+      {
+        "question": "What should authorize a sensitive tool action?",
+        "short_answer": "Application-side permissions and policy checks, not the annotation alone."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the specification's requirement to treat annotations as untrusted unless the server is trusted; distinguished descriptive hints from enforcement."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-review-data-before-sharing-with-remote-mcp"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-distinguish-mcp-tool-errors-from-protocol-errors",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP tool error handling",
+    "subtopic": "Tool execution versus protocol errors",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An MCP call returns an input-validation failure. Should the client report it as a JSON-RPC protocol error or a tool result error?",
+    "what_is_assessed": "Whether the candidate distinguishes malformed protocol requests from execution failures and preserves actionable recovery feedback.",
+    "short_answer": "Return it as a tool execution error in the result with `isError: true`; validation, API, and business-logic failures occur after a valid tool call and can provide actionable feedback for correction. Reserve JSON-RPC protocol errors for issues such as unknown tools or malformed requests. The client should present tool execution errors to the model when safe, but retry only after checking whether the operation had side effects.",
+    "deep_explanation": "The MCP specification separates protocol errors, which indicate request-structure issues, from tool execution errors, which include API failures, input validation, and business-logic errors. It says tool execution errors are reported in results with `isError: true` and recommends that clients provide them to language models to enable self-correction. That feedback does not make retries automatically safe for non-idempotent operations.",
+    "strong_answer_signals": [
+      "Uses isError for failures during valid tool execution.",
+      "Uses JSON-RPC errors for malformed or unknown requests.",
+      "Checks side effects before model-directed retries."
+    ],
+    "weak_answer_signals": [
+      "Treats every tool failure as a protocol error.",
+      "Retries a failed mutation automatically without checking completion state."
+    ],
+    "common_mistakes": [
+      "Swallowing actionable tool errors and returning an empty success.",
+      "Exposing sensitive details in error text sent back to the model."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where does an input-validation failure belong?",
+        "short_answer": "In a tool result marked `isError: true`."
+      },
+      {
+        "question": "What does a protocol error usually indicate?",
+        "short_answer": "A malformed request, unknown tool, or other request-structure failure."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the protocol-versus-tool-execution error distinction and isError field; included idempotency caution as application behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-check-side-effects-before-retrying-timeout"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-refresh-mcp-tool-catalog-after-change-notification",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP tool discovery updates",
+    "subtopic": "tools/list_changed notifications",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An MCP server sends `notifications/tools/list_changed` while your client has a cached tool catalog. What should the client do?",
+    "what_is_assessed": "Whether the candidate refreshes dynamic tool discovery while preserving validation and authorization for changed tools.",
+    "short_answer": "Treat the notification as a signal that the available tool list may have changed, then issue `tools/list` to retrieve the current catalog and update the cache. Revalidate schemas and the application's allowlist before exposing newly added or modified tools. The notification itself does not contain the replacement catalog and does not grant permission to call new tools.",
+    "deep_explanation": "The MCP tools specification defines a `listChanged` capability and the `notifications/tools/list_changed` notification for servers that change their available tools. Clients discover the current definitions with `tools/list`, which supports pagination. Application-level trust and authorization checks still apply after refreshing the catalog.",
+    "strong_answer_signals": [
+      "Refreshes the catalog with tools/list after a change notification.",
+      "Accounts for pagination and updates stale cached definitions.",
+      "Revalidates tool schema, trust, and permissions before use."
+    ],
+    "weak_answer_signals": [
+      "Assumes the notification includes the full updated list.",
+      "Automatically exposes newly listed tools without application review."
+    ],
+    "common_mistakes": [
+      "Keeping a stale tool cache after a notification.",
+      "Treating discovery as authorization."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the notification contain?",
+        "short_answer": "A signal that the available tool list changed, not the replacement catalog."
+      },
+      {
+        "question": "Which request retrieves the current tool definitions?",
+        "short_answer": "`tools/list`, including pagination if needed."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the listChanged capability, notification method, and tools/list discovery operation; treated catalog refresh and authorization as separate responsibilities."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-defer-large-tool-catalogs-with-tool-search"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-follow-mcp-pagination-cursors-for-tool-lists",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP pagination",
+    "subtopic": "Cursor-based tool-list retrieval",
+    "level": "L2",
+    "type": "concept",
+    "question": "An MCP `tools/list` response contains a `nextCursor`. How should a client retrieve the complete tool list?",
+    "what_is_assessed": "Whether the candidate follows opaque cursors until pagination ends and avoids assumptions about page size.",
+    "short_answer": "Use the returned cursor in the next `tools/list` request, append that page's tools, and continue until no `nextCursor` is returned. Treat the cursor as opaque and do not assume a fixed page size; the server controls page boundaries. Validate and authorize the combined catalog before exposing tools to the agent.",
+    "deep_explanation": "The MCP pagination specification defines opaque cursor-based pagination. A response may include `nextCursor`; clients continue by sending that cursor in the next request, and must not assume a fixed page size. Tool discovery should therefore accumulate all pages before treating the catalog as complete.",
+    "strong_answer_signals": [
+      "Passes each nextCursor back unchanged.",
+      "Continues until the response has no nextCursor.",
+      "Does not assume fixed page size and validates the resulting catalog."
+    ],
+    "weak_answer_signals": [
+      "Stops after the first page.",
+      "Tries to decode or construct the opaque cursor."
+    ],
+    "common_mistakes": [
+      "Assuming one response contains every available tool.",
+      "Using a fixed number of pages instead of checking for the next cursor."
+    ],
+    "follow_ups": [
+      {
+        "question": "How long should the client continue?",
+        "short_answer": "Until the server response no longer includes `nextCursor`."
+      },
+      {
+        "question": "Can the client assume a fixed page size?",
+        "short_answer": "No. The server determines page size."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Pagination",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified opaque cursor handling, nextCursor continuation, and server-determined page size in the MCP pagination specification."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-refresh-mcp-tool-catalog-after-change-notification"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-handle-mcp-elicitation-with-user-control",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP elicitation",
+    "subtopic": "User consent and review for elicited input",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An MCP server asks the client to collect additional information from the user before continuing. What should the client do?",
+    "what_is_assessed": "Whether the candidate keeps elicitation under explicit user control and handles declined, cancelled, or URL-based requests safely.",
+    "short_answer": "Show which server is requesting information, explain what it is asking for and why, and let the user review or edit form responses before sending. Provide clear decline and cancel options. For URL-mode elicitation, disclose the destination host and obtain consent before navigation; do not treat the server request as authorization to collect or disclose unrelated data. Handle declines and failures without assuming the input was supplied.",
+    "deep_explanation": "The MCP elicitation specification keeps interaction under client control. It recommends identifying the requesting server, presenting the requested information and purpose, enabling approval and decline/cancel, and allowing review of form responses. URL-mode elicitation requires clear target disclosure and consent before navigation. Servers are expected to handle declined, cancelled, or unprocessed requests.",
+    "strong_answer_signals": [
+      "Identifies the server and purpose to the user.",
+      "Provides review, edit, decline, and cancel controls.",
+      "Obtains explicit consent before opening a URL and handles non-acceptance safely."
+    ],
+    "weak_answer_signals": [
+      "Automatically submits user data because a server requested it.",
+      "Opens an elicitation URL without showing the target or getting consent."
+    ],
+    "common_mistakes": [
+      "Assuming elicitation always succeeds.",
+      "Treating client-side user input as trusted authorization for other tools."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must the user see before URL-mode navigation?",
+        "short_answer": "The target host and a clear consent request."
+      },
+      {
+        "question": "What if the user declines or cancels?",
+        "short_answer": "Handle the request as declined or cancelled; do not assume input was provided."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Elicitation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified server identification, user controls, form review, URL disclosure/consent, and handling of declined or cancelled requests."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-refetch-mcp-resource-after-update-notification",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP resource subscriptions",
+    "subtopic": "Refreshing subscribed resource content",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An MCP server sends `notifications/resources/updated` for a URI your client subscribes to. Does the notification contain the new resource contents?",
+    "what_is_assessed": "Whether the candidate treats resource notifications as invalidation signals and re-reads the resource instead of using stale content.",
+    "short_answer": "No. The notification identifies the updated URI; it does not carry the replacement resource content. Call `resources/read` for that URI, validate the returned content and its access boundary, then update the context or cache. Subscribe only when useful and remove subscriptions when they are no longer needed.",
+    "deep_explanation": "The MCP resources specification describes a `resources/subscribe` request and a `notifications/resources/updated` notification containing the resource URI. Its message flow shows the client reading updated contents after receiving the notification. Resource subscriptions are capability-dependent, and notifications should be treated as a signal to refresh rather than as the content itself.",
+    "strong_answer_signals": [
+      "Recognizes the notification contains a URI rather than the updated contents.",
+      "Re-reads the resource and refreshes the cache or context.",
+      "Applies authorization and validation to the newly read content."
+    ],
+    "weak_answer_signals": [
+      "Assumes notification payload is the new resource content.",
+      "Continues using stale cached data after the update event."
+    ],
+    "common_mistakes": [
+      "Failing to verify that resource subscription support was negotiated.",
+      "Keeping subscriptions active without a lifecycle or cleanup policy."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which operation retrieves the changed resource content?",
+        "short_answer": "`resources/read` for the notified URI."
+      },
+      {
+        "question": "What does the update notification carry?",
+        "short_answer": "The URI of the resource that changed."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/resources"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the subscription and update notification flow; the client re-reads the resource after the notification."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-correlate-mcp-progress-with-active-request",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP progress notifications",
+    "subtopic": "Progress-token correlation and lifecycle",
+    "level": "L2",
+    "type": "concept",
+    "question": "A client sends two long-running MCP requests and receives interleaved progress notifications. How should it route the updates?",
+    "what_is_assessed": "Whether the candidate uses unique active progress tokens to associate notifications with requests and treats progress separately from completion.",
+    "short_answer": "Include a distinct `progressToken` in each request's metadata and route each `notifications/progress` message by its token. Tokens must be unique across active requests, and notifications should only refer to active in-progress operations. Progress values must increase; an optional total and message can improve the UI. A progress update is not a completion result.",
+    "deep_explanation": "The MCP progress specification associates notifications with the `progressToken` provided in request metadata and requires tokens to be unique across active requests. Progress values must increase, while total and human-readable message fields are optional. Clients should stop associating progress when the request is no longer active and still wait for the request's terminal response.",
+    "strong_answer_signals": [
+      "Uses unique tokens for concurrent active requests.",
+      "Routes notifications by token and rejects stale or unknown tokens.",
+      "Distinguishes progress updates from terminal success or failure."
+    ],
+    "weak_answer_signals": [
+      "Associates progress with arrival order rather than request token.",
+      "Treats progress 100 as proof that the request succeeded."
+    ],
+    "common_mistakes": [
+      "Reusing one token for multiple active requests.",
+      "Failing to close progress state after a terminal response."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must be unique across active requests?",
+        "short_answer": "Each progress token."
+      },
+      {
+        "question": "Does a progress notification finish the operation?",
+        "short_answer": "No. The client must still process the request's terminal response."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Progress",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/progress",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/progress"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified active-request token uniqueness, progress notification correlation, monotonic progress, and optional totals/messages."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-handle-cancellation-without-assuming-rollback",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP cancellation",
+    "subtopic": "Cancel active requests and reconcile side effects",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A user cancels an MCP tool request that may already have sent an external update. Can the client assume cancellation rolled it back?",
+    "what_is_assessed": "Whether the candidate cancels only active requests and distinguishes stopping work from reversing side effects.",
+    "short_answer": "No. Send `notifications/cancelled` for the active request ID and reason, and the receiver should stop processing and release resources. Cancellation is not a rollback guarantee: reconcile the external system's state before retrying or reporting that nothing changed. For task-augmented requests, use the task cancellation mechanism instead.",
+    "deep_explanation": "The MCP cancellation specification applies to previously issued requests believed to still be in progress and says receivers should stop processing and free associated resources. It also specifies a dedicated cancellation request for task-augmented operations. A cancellation signal cannot undo a side effect that has already committed, so application-level state reconciliation is required.",
+    "strong_answer_signals": [
+      "Targets the active request ID with cancellation.",
+      "Uses the task-specific cancellation path for task-augmented requests.",
+      "Checks external state before retrying or claiming rollback."
+    ],
+    "weak_answer_signals": [
+      "Assumes cancellation reverses a committed external action.",
+      "Sends cancellation for a request that is already complete."
+    ],
+    "common_mistakes": [
+      "Blindly retrying a non-idempotent tool after cancellation.",
+      "Confusing stopping computation with transactional rollback."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does a cancellation notification guarantee?",
+        "short_answer": "It requests termination of an in-progress request; it does not roll back committed side effects."
+      },
+      {
+        "question": "How are task-augmented requests cancelled?",
+        "short_answer": "Use the dedicated tasks/cancel request."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Cancellation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified cancellation applies to active requests, receivers should stop processing, and task-augmented requests use tasks/cancel; separated cancellation from rollback."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-mcp-sampling-keeps-model-access-client-controlled",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP sampling",
+    "subtopic": "Client control and user review",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An MCP server wants an LLM completion but has no model credentials. How can sampling work, and who should control the request?",
+    "what_is_assessed": "Whether the candidate understands that MCP sampling routes server-initiated generation through the client, which retains model access and permission controls.",
+    "short_answer": "The server can issue an MCP sampling request through the client, which performs the model interaction using its own configured access. The client must advertise sampling support and retains control over model selection, permissions, and prompt context. The specification recommends a human in the loop who can deny requests and review or edit prompts and generated responses.",
+    "deep_explanation": "MCP sampling allows servers to request model generations through clients, so servers can use model capabilities without holding model API credentials. The client maintains control over access, model choice, and permissions; sampling support is declared as a client capability. The specification also recommends human review and the ability to deny sampling requests for trust and safety.",
+    "strong_answer_signals": [
+      "Describes client-mediated sampling instead of server-held model credentials.",
+      "Checks the client's declared sampling capability.",
+      "Preserves user review and the ability to deny requests."
+    ],
+    "weak_answer_signals": [
+      "Assumes any server can invoke sampling without negotiated client support.",
+      "Moves model credentials into the MCP server to bypass client control."
+    ],
+    "common_mistakes": [
+      "Forwarding sensitive prompt context without review.",
+      "Treating a sampling request from a server as automatically approved."
+    ],
+    "follow_ups": [
+      {
+        "question": "Who controls model access in MCP sampling?",
+        "short_answer": "The client."
+      },
+      {
+        "question": "What review capability does the spec recommend?",
+        "short_answer": "A human should be able to review and deny sampling requests."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Sampling",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified client-mediated model access, capability declaration, and human review recommendations in the MCP sampling specification."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-refresh-and-enforce-mcp-roots",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP roots and scope",
+    "subtopic": "Root-list updates and path validation",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A client sends `notifications/roots/list_changed` while an MCP server is processing a workspace task. What should the server do?",
+    "what_is_assessed": "Whether the candidate refreshes the declared roots and continues enforcing path boundaries rather than treating a stale list as permanent authorization.",
+    "short_answer": "If roots support was negotiated, request the current list again and update the operation's allowed scope. Validate each resolved path against the current roots, respect the boundaries, and handle roots that disappear. Roots communicate the client's workspace scope; they do not remove the need for safe path validation and application access controls.",
+    "deep_explanation": "The MCP roots specification says clients supporting `listChanged` notify servers when roots change, after which the server can request the updated list. It requires clients to expose appropriately permissioned roots and validate root URIs, and says servers should respect root boundaries and validate paths against them. A server should not continue using a stale scope after notification.",
+    "strong_answer_signals": [
+      "Re-fetches roots after a list-changed notification.",
+      "Checks path containment against the current list.",
+      "Handles removed roots and retains application-level access controls."
+    ],
+    "weak_answer_signals": [
+      "Assumes the old roots remain valid after a change.",
+      "Concatenates untrusted paths without checking traversal or containment."
+    ],
+    "common_mistakes": [
+      "Treating a root URI as permission to escape its directory.",
+      "Ignoring unavailable or removed roots during an in-flight operation."
+    ],
+    "follow_ups": [
+      {
+        "question": "What notification indicates roots changed?",
+        "short_answer": "`notifications/roots/list_changed`."
+      },
+      {
+        "question": "What should a server do with a new path?",
+        "short_answer": "Validate it against the current roots and respect the declared boundaries."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Roots",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/roots",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/client/roots"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified listChanged notification flow, client-side root validation, and server-side boundary/path validation guidance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-check-negotiated-mcp-version-and-capabilities",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP initialization and compatibility",
+    "subtopic": "Protocol version and capability negotiation",
+    "level": "L2",
+    "type": "debugging",
+    "question": "An MCP client wants to call `sampling/createMessage`, but the connected server session did not advertise that capability. Should the client send it anyway?",
+    "what_is_assessed": "Whether the candidate uses the initialization exchange to establish protocol compatibility and only relies on negotiated capabilities.",
+    "short_answer": "No. The client and server establish protocol-version compatibility and exchange capabilities during initialization. Use only methods supported by the negotiated version and capabilities; otherwise choose a fallback or report that the feature is unavailable. Do not infer support merely because a method exists in a newer specification.",
+    "deep_explanation": "The MCP lifecycle specification makes initialization the first interaction and uses it to establish protocol-version compatibility and exchange capabilities. The client declares its supported version and capabilities, and the resulting session determines which features can be used. This prevents clients from assuming that every implementation supports every optional capability or newer method.",
+    "strong_answer_signals": [
+      "Checks protocol compatibility during initialization.",
+      "Uses only negotiated capabilities.",
+      "Provides a clear fallback for unsupported optional features."
+    ],
+    "weak_answer_signals": [
+      "Calls a capability-dependent method without negotiation.",
+      "Assumes a newer protocol feature is available on every server."
+    ],
+    "common_mistakes": [
+      "Confusing protocol version support with support for every optional capability.",
+      "Failing to handle a server that lacks an optional feature."
+    ],
+    "follow_ups": [
+      {
+        "question": "When are MCP capabilities exchanged?",
+        "short_answer": "During the initialization phase."
+      },
+      {
+        "question": "What should happen if an optional capability is absent?",
+        "short_answer": "Use a supported fallback or report the feature as unavailable."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Lifecycle",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified initialization establishes protocol compatibility and exchanges client/server capabilities before normal operations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-poll-mcp-task-at-advised-interval",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP tasks",
+    "subtopic": "Polling cadence and terminal states",
+    "level": "L2",
+    "type": "concept",
+    "question": "An MCP operation returns a task handle with a polling interval. How should the requestor monitor it?",
+    "what_is_assessed": "Whether the candidate uses tasks/get at the advised cadence, handles intermediate input requirements, and stops at a terminal state.",
+    "short_answer": "Poll with `tasks/get` and respect the task's `pollInterval` rather than repeatedly querying as fast as possible. Continue until the task is completed, failed, cancelled, or reaches `input_required`, then handle that state and retrieve the result with `tasks/result` when appropriate. Do not treat a still-working response as the operation's final result.",
+    "deep_explanation": "The MCP Tasks specification describes tasks as requestor-driven durable operations. Requestors poll through `tasks/get`, should respect the returned poll interval, and continue until a terminal status or `input_required`. Result retrieval is separate from status polling, so clients should model both state and the final result rather than relying on a single immediate response.",
+    "strong_answer_signals": [
+      "Uses tasks/get and respects pollInterval.",
+      "Handles completed, failed, cancelled, and input_required states.",
+      "Separates task status from result retrieval."
+    ],
+    "weak_answer_signals": [
+      "Busy-polls without respecting the suggested interval.",
+      "Treats `working` as a completed result."
+    ],
+    "common_mistakes": [
+      "Ignoring input_required and polling indefinitely.",
+      "Stopping status monitoring after a result request when it has not completed."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which method polls task state?",
+        "short_answer": "`tasks/get`."
+      },
+      {
+        "question": "Which state may require user input?",
+        "short_answer": "`input_required`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tasks",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25; Tasks are experimental in this revision.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified requestor polling, advised poll interval, terminal states, input_required, and separate result retrieval."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-discover-mcp-resource-templates",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP resource templates",
+    "subtopic": "Parameterized resources and reads",
+    "level": "L2",
+    "type": "concept",
+    "question": "An MCP server exposes a resource URI template such as `file:///{path}`. Is that a concrete resource the client can read as-is?",
+    "what_is_assessed": "Whether the candidate distinguishes parameterized resource templates from concrete resource URIs and knows the discovery/read flow.",
+    "short_answer": "No. A resource template describes a parameterized pattern for constructing concrete resource URIs. Discover templates with `resources/templates/list`, fill parameters using the application's validated values, then read a concrete URI with `resources/read`. Validate the resolved URI and path against the client's current roots and access policy.",
+    "deep_explanation": "The MCP resources specification distinguishes concrete resources, which are listed and read by URI, from resource templates, which expose parameterized resources through URI templates. Clients can discover templates with `resources/templates/list`; a template is not itself the returned resource content. The client still needs to validate inputs and respect root boundaries when resolving a URI.",
+    "strong_answer_signals": [
+      "Distinguishes a URI template from a concrete resource URI.",
+      "Uses resources/templates/list for template discovery and resources/read for concrete content.",
+      "Validates resolved paths against current scope."
+    ],
+    "weak_answer_signals": [
+      "Attempts to read the unexpanded template URI as a concrete resource.",
+      "Treats template parameters as trusted filesystem paths."
+    ],
+    "common_mistakes": [
+      "Confusing `resources/list` with `resources/templates/list`.",
+      "Skipping path validation after template expansion."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which method lists resource templates?",
+        "short_answer": "`resources/templates/list`."
+      },
+      {
+        "question": "What method reads a concrete resource?",
+        "short_answer": "`resources/read` with a resolved URI."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/resources"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that resource templates are parameterized URI patterns and are discovered separately from concrete resources."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-refresh-and-enforce-mcp-roots"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-negotiate-mcp-sampling-tool-use-capability",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP sampling",
+    "subtopic": "Tool-enabled sampling capability",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A server sends a sampling request containing a tools array, but the client advertised only basic `sampling` support. Should the server expect tool use?",
+    "what_is_assessed": "Whether the candidate distinguishes basic sampling support from the separately negotiated sampling.tools capability.",
+    "short_answer": "No. A client must declare the `sampling.tools` capability to receive tool-enabled sampling requests, and servers must not send those requests to clients that have not declared it. Use basic sampling without tools or negotiate support before relying on the tool-use flow.",
+    "deep_explanation": "The MCP sampling specification defines basic sampling capability separately from tool use. Clients that support tools in sampling declare `sampling.tools`; servers must not send tool-enabled requests without that declaration. Capability negotiation prevents a server from assuming that every sampling-capable client can execute tools in the nested generation flow.",
+    "strong_answer_signals": [
+      "Distinguishes `sampling` from `sampling.tools`.",
+      "Checks the negotiated capability before sending or accepting tool-enabled sampling.",
+      "Provides a fallback to basic sampling when tool use is unsupported."
+    ],
+    "weak_answer_signals": [
+      "Assumes basic sampling support includes tool execution.",
+      "Sends tool-enabled requests without checking client capabilities."
+    ],
+    "common_mistakes": [
+      "Treating toolChoice or a tools array as a substitute for capability negotiation.",
+      "Failing to handle clients that support sampling but not nested tool use."
+    ],
+    "follow_ups": [
+      {
+        "question": "What capability enables tools in sampling?",
+        "short_answer": "`sampling.tools`."
+      },
+      {
+        "question": "Can a server send tool-enabled sampling without it?",
+        "short_answer": "No. The specification prohibits that."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Sampling",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that tool-enabled sampling requires clients to declare sampling.tools and that servers must not send such requests otherwise."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-mcp-sampling-keeps-model-access-client-controlled"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-use-mcp-completion-as-suggestion",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP completion",
+    "subtopic": "Prompt and resource-template suggestions",
+    "level": "L2",
+    "type": "concept",
+    "question": "An MCP completion request returns several suggested resource-template arguments. Are these values guaranteed to exist or authorized?",
+    "what_is_assessed": "Whether the candidate treats completions as interactive suggestions and validates the chosen value through normal application and resource checks.",
+    "short_answer": "No. MCP completion provides contextual suggestions for prompt or resource-template arguments, like IDE autocomplete. A suggestion is not proof that a resource exists or that the user may access it. Validate the selected value, resolve the concrete URI safely, and perform the normal authorization and resource-read checks.",
+    "deep_explanation": "The MCP completion API supports interactive suggestions for arguments to prompts and resource templates. It is a user-interface aid, not a substitute for validating the final argument, checking current scope, or reading the resolved resource. The application should treat selected values as input and apply its normal validation and access controls.",
+    "strong_answer_signals": [
+      "Recognizes completions as suggestions rather than guarantees.",
+      "Validates the final argument and resolved URI.",
+      "Keeps authorization and resource access checks in the normal execution path."
+    ],
+    "weak_answer_signals": [
+      "Treats an autocomplete result as proof a resource exists.",
+      "Uses a completion value to bypass access checks."
+    ],
+    "common_mistakes": [
+      "Trusting a stale suggestion after the resource list changes.",
+      "Failing to validate path or URI parameters supplied by the user."
+    ],
+    "follow_ups": [
+      {
+        "question": "What are MCP completions designed to provide?",
+        "short_answer": "Contextual suggestions for prompt or resource-template arguments."
+      },
+      {
+        "question": "Do suggested values grant access?",
+        "short_answer": "No. Apply normal validation and authorization."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Completion",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/completion",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/completion"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified completion provides interactive suggestions for prompt and resource-template arguments; final validation and access checks remain application responsibilities."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-discover-mcp-resource-templates"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-refresh-mcp-resource-catalog-on-list-change",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP resource catalog changes",
+    "subtopic": "List-change versus resource-update notifications",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An MCP client receives `notifications/resources/list_changed`. Should it reread the URI of its last subscribed resource?",
+    "what_is_assessed": "Whether the candidate distinguishes a resource-catalog change from a subscribed resource's content update.",
+    "short_answer": "Not based on that notification alone. It signals that the available-resource list changed, so invalidate the cached catalog and refresh it with `resources/list` (including pagination). A subscribed resource's content update uses `notifications/resources/updated` and includes its URI; reread that specific resource with `resources/read` when appropriate.",
+    "deep_explanation": "The MCP resources specification distinguishes `notifications/resources/list_changed`, which signals a change to the available resource catalog, from `notifications/resources/updated`, which reports an update to a specific subscribed URI. Clients should refresh the catalog for the former and refresh the named resource for the latter rather than conflating discovery and content updates.",
+    "strong_answer_signals": [
+      "Refreshes the catalog with resources/list after list_changed.",
+      "Distinguishes catalog changes from per-resource update notifications.",
+      "Uses pagination when refreshing a large catalog."
+    ],
+    "weak_answer_signals": [
+      "Treats list_changed as an update to the last-read resource.",
+      "Ignores the notification and continues using a stale resource catalog."
+    ],
+    "common_mistakes": [
+      "Refreshing only subscribed content when the resource set changed.",
+      "Assuming list_changed includes the changed resource URI."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which notification names a changed subscribed resource?",
+        "short_answer": "`notifications/resources/updated`, with its URI."
+      },
+      {
+        "question": "How does a client refresh the resource catalog?",
+        "short_answer": "Call `resources/list` and follow pagination cursors."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Resources",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/resources"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified catalog list-change and per-resource updated notifications are separate protocol events with different refresh behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-discover-mcp-resource-templates"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-refresh-mcp-prompt-catalog-on-change",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP prompt catalog changes",
+    "subtopic": "Prompt-list invalidation and pagination",
+    "level": "L2",
+    "type": "debugging",
+    "question": "An MCP client receives `notifications/prompts/list_changed` but continues showing an old prompt menu. What should it do?",
+    "what_is_assessed": "Whether the candidate invalidates cached prompt definitions and refreshes the paginated prompt catalog.",
+    "short_answer": "Invalidate the cached prompt list and call `prompts/list` again, following pagination cursors to retrieve the full current catalog. The notification does not identify one changed prompt. When a user selects an entry, fetch its current content with `prompts/get` rather than relying on a stale cached definition.",
+    "deep_explanation": "The MCP prompts specification says servers that declare the `listChanged` capability should send `notifications/prompts/list_changed` when the available prompt list changes. Clients discover prompts with the paginated `prompts/list` method and retrieve a selected prompt with `prompts/get`. The notification is a catalog invalidation signal, not a replacement prompt definition.",
+    "strong_answer_signals": [
+      "Invalidates the stale prompt catalog.",
+      "Refreshes with prompts/list and follows pagination.",
+      "Retrieves current selected prompt content with prompts/get."
+    ],
+    "weak_answer_signals": [
+      "Treats the notification as containing the updated prompt.",
+      "Continues to use cached prompt definitions after the catalog changes."
+    ],
+    "common_mistakes": [
+      "Refreshing only the currently selected prompt while leaving the menu stale.",
+      "Ignoring pagination when rebuilding the catalog."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does list_changed include the changed prompt definition?",
+        "short_answer": "No. Refresh the catalog with prompts/list."
+      },
+      {
+        "question": "Which method returns a selected prompt's content?",
+        "short_answer": "`prompts/get`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Prompts",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified prompts/list_changed signals catalog changes; prompts/list is paginated and prompts/get retrieves selected prompt content."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-refresh-mcp-resource-catalog-on-list-change"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-configure-mcp-logging-minimum-level",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP logging",
+    "subtopic": "Minimum severity and notification handling",
+    "level": "L2",
+    "type": "concept",
+    "question": "An MCP client sends `logging/setLevel` with `info`. How should it interpret subsequent `notifications/message` events?",
+    "what_is_assessed": "Whether the candidate understands minimum log-level configuration and treats protocol log notifications as structured observability data.",
+    "short_answer": "The request configures the minimum severity the client wants the server to emit; an `info` threshold includes messages at that level and more severe levels. Log events arrive through `notifications/message` and may include a logger name and JSON data. Do not treat these optional diagnostic messages as a complete audit trail, and avoid exposing sensitive values in logs.",
+    "deep_explanation": "The MCP logging specification allows clients to request a minimum log level with `logging/setLevel`. Servers with the logging capability send structured `notifications/message` events containing a severity and optional logger and data. The protocol's logging mechanism is for diagnostics; applications should still maintain any required audit records through their own explicit, privacy-conscious system.",
+    "strong_answer_signals": [
+      "Interprets the requested level as a minimum severity.",
+      "Recognizes structured notifications/message events.",
+      "Separates diagnostics from an application audit system and avoids sensitive log data."
+    ],
+    "weak_answer_signals": [
+      "Assumes `info` means only info-level events and suppresses more severe events.",
+      "Treats MCP notifications as a durable, complete audit record."
+    ],
+    "common_mistakes": [
+      "Ignoring the server's logging capability negotiation.",
+      "Logging credentials or personal data in arbitrary JSON fields."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which notification carries a log message?",
+        "short_answer": "`notifications/message`."
+      },
+      {
+        "question": "Does MCP logging replace an application's audit trail?",
+        "short_answer": "No. Use a separate system for required audit records."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Logging",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/logging",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/logging"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified logging/setLevel configures a minimum log level and notifications/message carry structured log events; audit guidance is stated as application design advice."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-respect-mcp-task-lifetime-and-poll-interval",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP tasks",
+    "subtopic": "Task lifetime and deferred result retrieval",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A client creates an MCP task and plans to reconnect hours later for the result. What task metadata should it use to plan retrieval?",
+    "what_is_assessed": "Whether the candidate accounts for the task lifetime and server-provided polling guidance instead of assuming task results remain available indefinitely.",
+    "short_answer": "Persist the returned task ID and inspect the task's `ttl` and `pollInterval`. Poll no more frequently than the server's suggested interval, then retrieve the result with `tasks/result` after a completed state. A request may specify a desired TTL, but use the accepted task metadata and handle an unavailable or expired result rather than assuming indefinite retention.",
+    "deep_explanation": "The MCP Tasks specification allows a requestor to provide a desired task lifetime in `ttl`; the accepted task response includes task metadata such as `ttl` and `pollInterval`. The initial task-creation response does not contain the operation result, which is retrieved with `tasks/result` after completion. Clients should use the returned metadata to schedule polling and retrieval.",
+    "strong_answer_signals": [
+      "Stores the returned task ID across reconnects.",
+      "Uses the returned TTL and poll interval.",
+      "Retrieves the result only after completion and handles unavailable results."
+    ],
+    "weak_answer_signals": [
+      "Assumes a task result is retained forever.",
+      "Polls aggressively without respecting the suggested interval."
+    ],
+    "common_mistakes": [
+      "Treating task creation as the final operation result.",
+      "Confusing a requested TTL with an unconditional guarantee of retention."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where is the operation result retrieved?",
+        "short_answer": "With `tasks/result` after the task completes."
+      },
+      {
+        "question": "What does the response's pollInterval guide?",
+        "short_answer": "How long the client should wait before its next status poll."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tasks",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25; Tasks are experimental in this revision.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified requested task TTL, returned TTL and pollInterval, and deferred tasks/result retrieval after completion; avoided implying indefinite retention."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-poll-mcp-task-at-advised-interval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-validate-mcp-structured-tool-results",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP structured tool results",
+    "subtopic": "Output-schema validation and structuredContent",
+    "level": "L2",
+    "type": "scenario",
+    "question": "An MCP tool declares an `outputSchema` and returns `structuredContent` plus a text block. Which result should your client validate and consume?",
+    "what_is_assessed": "Whether the candidate uses structured tool output according to the declared schema while keeping semantic and application-policy checks separate.",
+    "short_answer": "Use `structuredContent` as the structured result and validate it against the tool's declared `outputSchema`; MCP says clients should perform that validation. A server returning structured content should also include serialized JSON in a text block for backward compatibility, but clients should not rely on scraping that text when the structured field is available. Schema conformance does not replace semantic validation or authorization.",
+    "deep_explanation": "The MCP Tools specification describes `structuredContent` as the structured result value and allows a tool to declare an `outputSchema`. Servers must return structured results that conform when they provide the schema, and clients should validate them. For backward compatibility, servers returning structured content should also include serialized JSON in a text content block. Clients still need to check the result's meaning and apply their own policy.",
+    "strong_answer_signals": [
+      "Consumes `structuredContent` rather than parsing text when it is available.",
+      "Validates against the declared output schema.",
+      "Separates schema validation from semantic checks and authorization."
+    ],
+    "weak_answer_signals": [
+      "Trusts any structured result without validating it.",
+      "Treats schema validity as permission to execute a follow-up action."
+    ],
+    "common_mistakes": [
+      "Assuming the text block is the only canonical representation.",
+      "Confusing MCP tool output schemas with model-side structured generation."
+    ],
+    "follow_ups": [
+      {
+        "question": "Is schema validation mandatory for the client?",
+        "short_answer": "The specification says clients should validate structured results against the declared schema."
+      },
+      {
+        "question": "Does a valid schema establish the result is safe to act on?",
+        "short_answer": "No. Apply semantic validation and application authorization separately."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified structuredContent, outputSchema validation guidance, and backward-compatibility text content; kept semantic and policy checks separate."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-reinitialize-mcp-session-after-404",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP Streamable HTTP session lifecycle",
+    "subtopic": "Session ID handling and 404 recovery",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A Streamable HTTP MCP request with an `MCP-Session-Id` receives HTTP 404. What should the client do next?",
+    "what_is_assessed": "Whether the candidate follows the negotiated session lifecycle rather than retrying requests with an expired session ID.",
+    "short_answer": "Start a new session by sending a fresh `InitializeRequest` without a session ID. If the server returns a new `MCP-Session-Id`, include it in subsequent requests for that session and handle session identifiers securely. Do not keep retrying the old session ID after the server has returned 404.",
+    "deep_explanation": "The MCP Streamable HTTP specification says that when a client receives HTTP 404 for a request carrying an `MCP-Session-Id`, it must start a new session with an `InitializeRequest` that has no session ID. Once initialization returns an ID, the client must include it on subsequent HTTP requests for that session. Session IDs are session-scoped and should be handled securely.",
+    "strong_answer_signals": [
+      "Reinitializes without the old session ID.",
+      "Uses the newly returned session ID on later requests.",
+      "Treats the ID as a session identifier and handles it securely."
+    ],
+    "weak_answer_signals": [
+      "Retries the same request indefinitely with the expired ID.",
+      "Reuses a session ID across unrelated sessions without reinitialization."
+    ],
+    "common_mistakes": [
+      "Treating HTTP 404 as an ordinary transient failure for the same session.",
+      "Sending the old session ID on the new InitializeRequest."
+    ],
+    "follow_ups": [
+      {
+        "question": "Should the new InitializeRequest include the old session ID?",
+        "short_answer": "No. Send it without a session ID."
+      },
+      {
+        "question": "When is the returned session ID sent?",
+        "short_answer": "On subsequent HTTP requests within that established session."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the required 404 recovery flow: initialize a new session without the old ID, then use the newly returned ID on subsequent requests."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-use-unique-non-null-mcp-request-ids",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP JSON-RPC request IDs",
+    "subtopic": "Request ID type and session uniqueness",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A client sends `id: null` for an MCP request and later reuses an earlier request ID in the same session. Which protocol constraints does this violate?",
+    "what_is_assessed": "Whether the candidate applies MCP's request-ID requirements for valid types and request-response correlation within a session.",
+    "short_answer": "MCP requests must use a string or integer ID, must not use null, and the requestor must not reuse an ID previously used in the same session. Allocate a unique ID for each request and use the response ID to correlate the result. Notifications are different: they have no ID because they do not expect a response.",
+    "deep_explanation": "The MCP Messages specification requires request IDs to be strings or integers, disallows null, and forbids reuse by the same requestor within a session. These constraints keep response correlation unambiguous. A notification is a one-way message without an ID, so it should not be used when the client needs a response.",
+    "strong_answer_signals": [
+      "Names the permitted string or integer types.",
+      "Rejects null and requestor-side reuse within the same session.",
+      "Distinguishes request IDs from notifications."
+    ],
+    "weak_answer_signals": [
+      "Treats null as a valid request ID.",
+      "Reuses IDs and assumes message arrival order is enough for correlation."
+    ],
+    "common_mistakes": [
+      "Confusing a notification with a request that has no ID.",
+      "Checking ID uniqueness globally across unrelated sessions rather than applying the session scope."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can a request ID be null?",
+        "short_answer": "No. MCP request IDs must be strings or integers and must not be null."
+      },
+      {
+        "question": "Does a notification include an ID?",
+        "short_answer": "No. Notifications do not expect a response and have no ID."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Messages",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2025-11-25.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2025-11-25/basic"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified permitted request ID types, null prohibition, requestor-side non-reuse within a session, and the no-ID notification distinction."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

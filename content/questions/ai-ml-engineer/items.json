@@ -650,5 +650,3052 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-separate-eval-mode-from-gradient-disabling",
+    "bank": "ai-ml-engineer",
+    "topic": "Model evaluation and autograd modes",
+    "subtopic": "Evaluation behavior versus gradient tracking",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A validation loop still builds autograd graphs after calling model.eval(). What concept has been confused?",
+    "what_is_assessed": "Whether the candidate distinguishes module evaluation behavior from mechanisms that disable gradient recording.",
+    "short_answer": "Module evaluation mode and gradient disabling are separate. `model.eval()` changes behavior only for modules that define different train/eval behavior, such as dropout or batch normalization; it does not disable autograd. Use an appropriate no-grad or inference-mode context when gradients are not needed, and consider inference mode's additional restrictions if tensors will later enter autograd-tracked computation.",
+    "deep_explanation": "PyTorch's autograd guide states that `nn.Module.eval()` is orthogonal to no-grad and inference mode. Evaluation mode affects module-specific training behavior, while no-grad and inference mode control whether operations are recorded for backward computation. Inference mode can remove additional overhead but is more restrictive for tensors used later in autograd. A correct validation loop chooses both module behavior and gradient mode intentionally.",
+    "strong_answer_signals": [
+      "Explains that eval mode does not disable autograd.",
+      "Distinguishes module-specific behavior from gradient-recording behavior.",
+      "Notes inference mode's restrictions and chooses based on downstream tensor use."
+    ],
+    "weak_answer_signals": [
+      "Assumes `model.eval()` is equivalent to `torch.no_grad()`.",
+      "Uses inference mode without considering later autograd interactions."
+    ],
+    "common_mistakes": [
+      "Validating in training mode and allowing dropout or running-stat behavior to differ.",
+      "Disabling gradients but forgetting to set module evaluation behavior."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `model.eval()` change?",
+        "short_answer": "Training-specific behavior in modules that implement it; it does not itself stop gradient recording."
+      },
+      {
+        "question": "When is inference mode more restrictive than no-grad?",
+        "short_answer": "Tensors created there cannot be used in computations recorded by autograd."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Autograd mechanics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/notes/autograd.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 stable autograd documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/notes/autograd.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source explicitly distinguishes eval mode from no-grad and inference mode; preserved the documented inference-mode restriction."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-diagnose-training-serving-skew-and-model-drift"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-unscale-gradients-before-amp-clipping",
+    "bank": "ai-ml-engineer",
+    "topic": "Numerical stability and mixed precision",
+    "subtopic": "Unscaling before gradient clipping",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A mixed-precision run uses gradient clipping, but clipping seems ineffective after loss scaling. What ordering should you check?",
+    "what_is_assessed": "Whether the candidate understands that scaled gradients must be unscaled before applying a threshold intended for ordinary gradient magnitudes.",
+    "short_answer": "Unscale the optimizer's gradients before clipping them. Loss scaling changes the gradient magnitudes, so clipping the scaled values applies the threshold in the wrong scale. In the documented PyTorch flow, call the scaler's unscale operation for the optimizer, clip the now-unscaled gradients, then use the scaler step and update sequence. Keep the ordering aligned with the framework version and optimizer setup.",
+    "deep_explanation": "PyTorch's AMP examples explain that gradients produced by scaled loss are themselves scaled; inspecting or modifying them before unscaling makes a clipping threshold invalid. The documented pattern calls `unscale_` before clipping and then steps the optimizer through the GradScaler. This question concerns the specific documented flow; mixed-precision APIs can evolve, so engineers should verify exact calls for their installed version.",
+    "strong_answer_signals": [
+      "Places gradient unscaling before clipping.",
+      "Explains why clipping scaled gradients changes the effective threshold.",
+      "Checks framework and optimizer details rather than assuming all AMP APIs behave identically."
+    ],
+    "weak_answer_signals": [
+      "Clips gradients while they are still loss-scaled.",
+      "Changes the clipping threshold without checking the scale relationship."
+    ],
+    "common_mistakes": [
+      "Unscaling after clipping and assuming the intended norm bound was applied.",
+      "Calling unscale more than once for the same optimizer step."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why is the clipping threshold wrong before unscaling?",
+        "short_answer": "The gradient norm still includes the loss scale, so it is not the intended unscaled magnitude."
+      },
+      {
+        "question": "What operation follows clipping in the documented example?",
+        "short_answer": "The GradScaler performs the optimizer step and then updates its scale."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Automatic Mixed Precision examples",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/notes/amp_examples.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 stable AMP examples.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/notes/amp_examples.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's required unscale-before-clipping order and explained the threshold error caused by clipping scaled gradients."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-diagnose-amp-overflow-and-skipped-steps"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-advance-canary-only-after-production-analysis",
+    "bank": "ai-ml-engineer",
+    "topic": "Model deployment and rollout",
+    "subtopic": "Canary traffic and rollout decisions",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A new model revision is serving a small share of production traffic. What evidence should guide advancing the canary or stopping the rollout?",
+    "what_is_assessed": "Whether the candidate treats a canary as a staged release with monitored production signals and a defined decision to advance or halt.",
+    "short_answer": "Compare the candidate and current revision on prespecified service and model-quality signals while the new revision receives limited traffic. Advance only when the relevant checks are healthy; stop or roll back when guardrails regress, and investigate before exposing more users. Define thresholds and ownership before deployment. Google Cloud documents progressive traffic percentages and monitoring for its Cloud Run canary flow; the exact rollout mechanics and metrics are platform-specific.",
+    "deep_explanation": "Google Cloud's Cloud Run canary guide describes gradually increasing traffic to a new revision while monitoring application performance to catch issues and limit impact. Cloud Deploy also supports analysis during canary phases to inform whether a rollout advances. These sources establish the staged rollout pattern, not universal model-quality thresholds; teams must choose signals tied to their own service and model risks.",
+    "strong_answer_signals": [
+      "Uses staged traffic exposure and monitors the new revision against the current one.",
+      "Defines advance, stop, and rollback criteria before rollout.",
+      "Includes model-quality and service-health signals relevant to the use case."
+    ],
+    "weak_answer_signals": [
+      "Advances based only on successful deployment or aggregate offline metrics.",
+      "Sends all traffic to the candidate before checking live guardrails."
+    ],
+    "common_mistakes": [
+      "Monitoring only infrastructure health while ignoring prediction quality.",
+      "Failing to specify who can halt or roll back the rollout."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does a canary change gradually?",
+        "short_answer": "The share of production traffic sent to the new revision."
+      },
+      {
+        "question": "Are the cloud guide's rollout percentages universal model gates?",
+        "short_answer": "No. They describe platform deployment mechanics; model-specific thresholds must be defined for the system."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Canary Deployments to Cloud Run",
+        "publisher": "Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/deploy/docs/deployment-strategies/canary/cloud-run",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud canary deployment documentation retrieved 2026-11-04; rollout mechanics are platform-specific.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/deploy/docs/deployment-strategies/canary/cloud-run"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified progressive traffic allocation and monitoring in the source; described model-quality thresholds as application-defined rather than source-prescribed."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-enforce-latency-as-a-deployment-gate"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-interpret-feature-drift-without-outcome-labels",
+    "bank": "ai-ml-engineer",
+    "topic": "Production ML testing and monitoring",
+    "subtopic": "Unlabeled input drift signals",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A production feature-distribution alert fires, but outcome labels arrive weeks later. What can the on-call team conclude now?",
+    "what_is_assessed": "Whether the candidate distinguishes an input-distribution signal from direct evidence of current predictive performance.",
+    "short_answer": "Treat the alert as evidence that serving inputs differ from the monitored baseline, not as a direct measurement of model quality or proof of failure. Check for logging, schema, and upstream changes; compare the affected features and populations; and monitor service behavior while awaiting outcome labels. Once labels mature, measure performance and decide whether to mitigate, retrain, or roll back. Keep drift thresholds and response actions tied to the model's risk.",
+    "deep_explanation": "Google Cloud's ML guidance describes training-serving skew as inconsistency between expected and serving features, and data drift as changes in serving-data statistics that can make learned patterns stale. It recommends profiling stored serving request-response data regularly and monitoring effectiveness. An input-only alert is therefore a diagnostic signal; without outcomes or a validated proxy, it does not quantify the effect on predictive quality.",
+    "strong_answer_signals": [
+      "Separates feature-distribution change from measured outcome performance.",
+      "Investigates schema, pipeline, and population changes before choosing a mitigation.",
+      "Plans a later labeled evaluation and avoids treating drift as automatic failure."
+    ],
+    "weak_answer_signals": [
+      "Immediately retrains solely because a feature distribution moved.",
+      "Ignores the alert until labels arrive without checking for serving bugs."
+    ],
+    "common_mistakes": [
+      "Confusing training-serving skew with model concept drift without evidence.",
+      "Using unlabeled input statistics as a substitute for outcome-based monitoring."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does an input drift alert directly show?",
+        "short_answer": "A change in monitored input statistics relative to a reference, not current model accuracy."
+      },
+      {
+        "question": "What should happen when labels mature?",
+        "short_answer": "Evaluate the model on labeled serving data and compare performance with the relevant baseline."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud Architecture Center guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source distinguishes feature skew and input drift and recommends regular serving statistics and effectiveness monitoring; clarified that unlabeled drift is not an outcome metric."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-diagnose-training-serving-skew-and-model-drift"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-debug-ddp-multi-gpu-process-and-data-sharding",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "PyTorch DistributedDataParallel setup",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A single-GPU training script was moved to two GPUs, but both devices appear to process duplicate work and throughput barely improves. What DDP setup should you check?",
+    "what_is_assessed": "Whether the candidate understands DDP's multi-process execution model and the need to initialize distributed state and partition work correctly.",
+    "short_answer": "Check that the job launches the intended worker processes, initializes the process group, assigns each process to its device, and wraps a model copy with DistributedDataParallel. Ensure each process receives the intended shard of training examples rather than repeating the same full dataset, and measure communication and input-pipeline costs. DDP synchronizes gradients across model replicas; adding devices alone does not guarantee linear speedup.",
+    "deep_explanation": "The PyTorch DDP tutorial describes spawning multiple processes, setting up process groups, and creating one DDP instance per process; the replicas synchronize gradients through distributed communication. The data pipeline must also partition work appropriately. Performance depends on the workload and communication overhead, so compare end-to-end throughput and avoid assuming that two devices produce exactly twice the speed.",
+    "strong_answer_signals": [
+      "Identifies process-group setup and one worker/model replica per process.",
+      "Checks that training examples are partitioned rather than duplicated.",
+      "Measures communication and input throughput instead of promising linear scaling."
+    ],
+    "weak_answer_signals": [
+      "Wraps the model without launching or initializing distributed workers.",
+      "Assumes the framework automatically prevents every form of duplicated data."
+    ],
+    "common_mistakes": [
+      "Assigning multiple workers to the same device unintentionally.",
+      "Ignoring communication and data-loading bottlenecks when evaluating scaling."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does DDP synchronize across model replicas?",
+        "short_answer": "Gradients through distributed collective communication."
+      },
+      {
+        "question": "Does adding a GPU guarantee a proportional speedup?",
+        "short_answer": "No. Communication and input-pipeline overhead can limit scaling."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Getting Started with Distributed Data Parallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/ddp_tutorial.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/intermediate/ddp_tutorial.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the tutorial's multi-process model, process-group setup, per-process DDP wrapper, and gradient synchronization; framed sharding and throughput checks as application setup rather than an automatic DDP guarantee."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-resume-training-from-a-complete-checkpoint"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-benchmark-torch-compile-after-warmup",
+    "bank": "ai-ml-engineer",
+    "topic": "Compilation and performance measurement",
+    "subtopic": "Compile overhead versus steady-state speed",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A PyTorch model appears slower in its first few compiled inference runs than in eager mode. What should you measure before rejecting compilation?",
+    "what_is_assessed": "Whether the candidate separates one-time compilation cost from steady-state execution performance.",
+    "short_answer": "Measure compilation and warm-up separately from steady-state latency. The first compiled iterations can be slower because compilation occurs during those runs; benchmark repeated representative inputs after warm-up and report both startup cost and steady-state behavior. Compare under the actual model, batch sizes, shapes, device, and concurrency, since compile speedups vary by workload.",
+    "deep_explanation": "The PyTorch `torch.compile` end-to-end tutorial states that the first few iterations are expected to be slower due to compilation overhead, while subsequent iterations can speed up relative to eager mode. It cautions that demonstrated speedups are not universal. For a serving system, startup and steady-state latency may both matter, so evaluate the trade-off under the deployment's actual request pattern.",
+    "strong_answer_signals": [
+      "Separates compilation/warm-up time from steady-state execution.",
+      "Benchmarks representative shapes, batch sizes, devices, and concurrency.",
+      "Reports startup overhead as well as steady-state benefit."
+    ],
+    "weak_answer_signals": [
+      "Rejects compilation based only on the first request.",
+      "Assumes a tutorial's speedup applies to every architecture and workload."
+    ],
+    "common_mistakes": [
+      "Including compile time in one mode but not the other.",
+      "Ignoring compilation overhead when the service frequently restarts or receives only a few requests."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can initial compiled iterations be slow?",
+        "short_answer": "The model is being compiled during the initial runs."
+      },
+      {
+        "question": "What should a serving benchmark include?",
+        "short_answer": "Both startup/compilation cost and warmed steady-state performance."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.compile End-to-End Tutorial",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_full_example.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/intermediate/torch_compile_full_example.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the tutorial's initial compilation overhead and expected later speedup; avoided treating its example speedup as general."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-enforce-latency-as-a-deployment-gate"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-investigate-recompiles-after-dynamic-input-shapes",
+    "bank": "ai-ml-engineer",
+    "topic": "Compilation and performance measurement",
+    "subtopic": "Dynamic shapes and recompilation",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A compiled inference service has latency spikes when request sequence lengths vary. What would you inspect before disabling compilation?",
+    "what_is_assessed": "Whether the candidate connects runtime guards and changing shapes to recompilation, then diagnoses the actual trigger.",
+    "short_answer": "Check compiler logs for guard failures and recompilations triggered by changing input shapes or values. Profile which requests cause new graphs, then evaluate dynamic-shape support or input bucketing if they fit the workload. Measure compile count and latency under representative traffic, because dynamic shapes, graph breaks, and compile behavior have trade-offs. Avoid compiling arbitrary request shapes without a bounded strategy in a latency-critical service.",
+    "deep_explanation": "PyTorch's compiler FAQ explains that Dynamo uses runtime guards and may recompile when those assumptions fail. It discusses dynamic shapes as a way to handle some shape variation and notes production cases where unexpected compilation is undesirable. The exact behavior depends on version, model, backend, and input variation, so use the installed version's diagnostics and benchmark the proposed strategy.",
+    "strong_answer_signals": [
+      "Looks for guard failures and recompilation evidence instead of guessing.",
+      "Considers dynamic shapes or bounded shape buckets for variable requests.",
+      "Measures latency and compilation behavior under realistic input distributions."
+    ],
+    "weak_answer_signals": [
+      "Assumes every latency spike is model inference rather than compilation.",
+      "Enables dynamic shapes globally without checking the workload or compiler version."
+    ],
+    "common_mistakes": [
+      "Ignoring repeated compilation in a latency-critical path.",
+      "Benchmarking only one static input shape when production inputs vary."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can trigger a guarded graph to recompile?",
+        "short_answer": "A runtime value or shape that violates a compiler guard."
+      },
+      {
+        "question": "What should be measured after changing shape handling?",
+        "short_answer": "Compilation frequency and steady-state latency across representative inputs."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Frequently Asked Questions",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/torch.compiler_faq.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 compiler FAQ.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/torch.compiler_faq.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified runtime guard failures can trigger recompilation and that dynamic shapes can mitigate some shape variation; did not claim this eliminates all recompilation or guarantees lower latency."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-benchmark-torch-compile-after-warmup"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-tune-dynamic-batching-against-latency-budget",
+    "bank": "ai-ml-engineer",
+    "topic": "Model serving performance",
+    "subtopic": "Dynamic batching trade-offs",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "Inference throughput is too low for a stateless model, but users have a strict response-time limit. How would you evaluate dynamic batching?",
+    "what_is_assessed": "Whether the candidate understands that batching can raise throughput while scheduler delay increases latency.",
+    "short_answer": "Benchmark the default batcher under representative traffic, then increase maximum batch size or introduce a small queue delay only while the latency budget remains satisfied. Measure both throughput and tail latency, along with queue behavior and error rate. Dynamic batching is appropriate for stateless workloads; it is not a free speedup, and preferred batch sizes should be configured only when they show a meaningful advantage.",
+    "deep_explanation": "NVIDIA Triton's batching guide describes combining inference requests to increase throughput, with configurable preferred batch sizes and maximum scheduler delay. It recommends measuring latency and throughput, then exploring higher batch sizes or delay only within the latency budget. The exact settings depend on the model and traffic pattern; results from one deployment should not be assumed to transfer to another.",
+    "strong_answer_signals": [
+      "Measures throughput and latency together under representative load.",
+      "Uses queue delay as an explicit throughput-versus-latency trade-off.",
+      "Checks that the model is stateless and that the chosen batch sizes improve performance."
+    ],
+    "weak_answer_signals": [
+      "Maximizes batch size without considering response-time limits.",
+      "Assumes a throughput increase means end-user latency improved."
+    ],
+    "common_mistakes": [
+      "Tuning on average latency while ignoring tail latency and queueing.",
+      "Using preferred batch sizes without evidence of a performance benefit."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the main benefit of dynamic batching?",
+        "short_answer": "Combining requests can increase throughput for supported stateless models."
+      },
+      {
+        "question": "What cost can a nonzero batch delay introduce?",
+        "short_answer": "Higher request latency while the scheduler waits for more requests."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Batchers",
+        "publisher": "NVIDIA Triton Inference Server documentation",
+        "url": "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "NVIDIA Triton Inference Server user guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified Triton's description of batching throughput gains and the configurable queue-delay/latency trade-off; preserved its stateless-model constraint and measurement-first recommendation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-enforce-latency-as-a-deployment-gate"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-gpu-idle-during-data-loading",
+    "bank": "ai-ml-engineer",
+    "topic": "Training performance and data pipelines",
+    "subtopic": "Asynchronous data loading",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A GPU is frequently idle between training steps while batches are being prepared. What data-loader settings would you investigate?",
+    "what_is_assessed": "Whether the candidate recognizes synchronous input loading as a possible bottleneck and tunes asynchronous loading empirically.",
+    "short_answer": "Profile whether the training process waits for input, then test `num_workers > 0` to load data asynchronously and overlap loading with training. For GPU transfers, test `pin_memory=True` where appropriate. Tune worker count and memory settings against the actual CPU, storage, and workload; more workers are not guaranteed to help and may add contention or memory overhead. Confirm the change with throughput and accelerator-utilization measurements.",
+    "deep_explanation": "PyTorch's performance tuning guide states that `num_workers=0` performs loading synchronously in the main process, while positive worker counts enable asynchronous loading and overlap. It also describes pinned memory as a way to enable faster, asynchronous host-to-GPU copies. These options should be profiled and tuned for the workload, hardware, and data location rather than treated as universal defaults.",
+    "strong_answer_signals": [
+      "Measures whether input loading is actually stalling the accelerator.",
+      "Tests asynchronous workers and pinned memory as workload-appropriate options.",
+      "Benchmarks throughput and resource use after tuning."
+    ],
+    "weak_answer_signals": [
+      "Assumes the GPU is the bottleneck without profiling.",
+      "Sets a very high worker count without checking CPU, storage, or memory contention."
+    ],
+    "common_mistakes": [
+      "Changing multiple data-pipeline settings without measuring which change helped.",
+      "Treating pinned memory as a guarantee of improvement for every workload."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `num_workers=0` mean in the guide?",
+        "short_answer": "Data loading runs synchronously in the main process."
+      },
+      {
+        "question": "Why test pinned memory with a GPU?",
+        "short_answer": "It can enable faster and asynchronous host-to-GPU memory copies."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Performance Tuning Guide",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 performance tuning guide.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's synchronous default, asynchronous worker behavior, and pinned-memory transfer guidance; framed settings as workload-dependent tuning rather than guaranteed speedups."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-stabilize-float16-training-with-gradient-scaling",
+    "bank": "ai-ml-engineer",
+    "topic": "Mixed-precision training",
+    "subtopic": "Autocast and gradient scaling",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A CUDA training run gains speed with float16 autocasting but sometimes stops converging. What AMP mechanism should you inspect?",
+    "what_is_assessed": "Whether the candidate understands the distinct roles of autocasting and gradient scaling in mixed-precision training.",
+    "short_answer": "Check that the training loop uses gradient scaling appropriately alongside autocast. PyTorch describes autocast as selecting precision by operation, while `GradScaler` helps prevent small float16 gradients from underflowing to zero. Verify scaler updates and inspect loss and gradient behavior; compare convergence and validation quality against the baseline. Mixed precision can improve performance, but its benefit and numerical behavior depend on the model and hardware.",
+    "deep_explanation": "PyTorch's AMP recipe describes using autocast and GradScaler together for typical automatic mixed-precision training. Autocast chooses operation precision; gradient scaling addresses underflow risk for small gradients in float16 training. These mechanisms are modular, and the recipe's performance results are hardware-dependent, so engineers should validate convergence, accuracy, memory, and runtime on their target workload.",
+    "strong_answer_signals": [
+      "Distinguishes autocast's operation-level precision selection from gradient scaling.",
+      "Connects scaling to float16 gradient underflow.",
+      "Checks convergence and validation quality as well as speed."
+    ],
+    "weak_answer_signals": [
+      "Treats autocast alone as a guarantee of stable float16 training.",
+      "Claims gradient scaling improves every mixed-precision format or workload."
+    ],
+    "common_mistakes": [
+      "Using a scaler incorrectly or changing its lifecycle without checking the framework guidance.",
+      "Reporting throughput gains without verifying numerical quality."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does autocast do?",
+        "short_answer": "Selects operation precision within a chosen region."
+      },
+      {
+        "question": "What problem does gradient scaling address?",
+        "short_answer": "Underflow of small gradients during float16 training."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Automatic Mixed Precision",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 Automatic Mixed Precision recipe.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the recipe's autocast and GradScaler roles and underflow description; limited the scaling claim to float16 gradients and emphasized workload-specific validation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-use-gradient-accumulation-for-memory-limited-batches",
+    "bank": "ai-ml-engineer",
+    "topic": "Memory-constrained training",
+    "subtopic": "Gradient accumulation",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "The target training batch does not fit in GPU memory. What can gradient accumulation change, and what should you measure?",
+    "what_is_assessed": "Whether the candidate understands gradient accumulation as a memory technique rather than an automatic speed improvement.",
+    "short_answer": "Split the target batch into smaller micro-batches, accumulate their gradients, and update the optimizer after the intended number of micro-batches. This can reduce peak memory while approximating the gradient from a larger batch when loss scaling and model behavior permit. It does not inherently increase throughput and can add computation overhead. Compare runtime, memory, convergence, and validation quality against the physical batch sizes that fit.",
+    "deep_explanation": "The cited Hugging Face guide describes gradient accumulation as computing gradients in smaller increments and lists it as a memory optimization when the desired batch exceeds GPU capacity. It also distinguishes memory optimization from speed improvement and cautions that if the preferred batch already fits, memory techniques may slow training. Exact equivalence to a physical batch can depend on loss normalization, batch-dependent layers, and other training details.",
+    "strong_answer_signals": [
+      "Accumulates gradients across micro-batches before the optimizer update.",
+      "Frames the benefit as lower memory use, not guaranteed speedup.",
+      "Checks effective batch behavior, runtime, and model quality."
+    ],
+    "weak_answer_signals": [
+      "Calls optimizer.step() after each micro-batch while claiming the same accumulated batch.",
+      "Assumes accumulation exactly matches a physical batch for every model."
+    ],
+    "common_mistakes": [
+      "Failing to scale the loss consistently across accumulation steps.",
+      "Ignoring batch-dependent layers or scheduler timing when comparing to a physical batch."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the main benefit of gradient accumulation?",
+        "short_answer": "It can reduce peak memory by computing gradients in smaller batches."
+      },
+      {
+        "question": "Does it guarantee faster training?",
+        "short_answer": "No. It is primarily a memory technique and can add overhead."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Methods and tools for efficient training on a single GPU",
+        "publisher": "Hugging Face Transformers documentation",
+        "url": "https://huggingface.co/docs/transformers/v4.49.0/perf_train_gpu_one",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Hugging Face Transformers v4.49 documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://huggingface.co/docs/transformers/v4.49.0/perf_train_gpu_one"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's description of accumulation as smaller gradient increments and a memory technique, not a speed optimization; added implementation caveats about normalization and batch-dependent operations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [
+      "ml-stabilize-float16-training-with-gradient-scaling"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-explain-adamw-decoupled-weight-decay",
+    "bank": "ai-ml-engineer",
+    "topic": "Optimization and regularization",
+    "subtopic": "AdamW versus L2 regularization",
+    "level": "L3",
+    "type": "concept",
+    "question": "A team switches from Adam with an L2 penalty to AdamW but keeps the same regularization setting. What optimizer behavior should it understand?",
+    "what_is_assessed": "Whether the candidate understands that AdamW decouples weight decay from Adam's adaptive gradient update.",
+    "short_answer": "AdamW applies weight decay separately rather than letting it accumulate in Adam's momentum and variance estimates. L2 regularization added to the loss and decoupled weight decay are not generally equivalent for adaptive optimizers such as Adam. Review how the existing penalty was implemented, avoid unintentionally applying both mechanisms, and retune the coefficient with validation because its effective behavior can change.",
+    "deep_explanation": "PyTorch documents AdamW as an Adam variant in which weight decay does not accumulate in the momentum or variance. The cited decoupled-weight-decay paper explains that L2 regularization and weight decay are equivalent for standard SGD under a learning-rate rescaling but not for adaptive gradient methods such as Adam. Changing optimizer implementations therefore changes the regularization mechanism; empirical validation is still needed.",
+    "strong_answer_signals": [
+      "Explains that AdamW decouples decay from adaptive moment estimates.",
+      "Distinguishes L2 penalty in the loss from decoupled weight decay for Adam.",
+      "Checks for double application and retunes against held-out performance."
+    ],
+    "weak_answer_signals": [
+      "Assumes Adam and AdamW use identical regularization behavior.",
+      "Keeps both an explicit L2 penalty and AdamW decay without checking."
+    ],
+    "common_mistakes": [
+      "Treating the same numeric coefficient as equivalent across optimizer implementations.",
+      "Assuming the paper's empirical findings guarantee improvement for every model."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where does AdamW apply weight decay?",
+        "short_answer": "Separately from Adam's momentum and variance updates."
+      },
+      {
+        "question": "Are L2 regularization and weight decay equivalent for Adam?",
+        "short_answer": "Not generally; the cited work distinguishes them for adaptive optimizers."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "AdamW",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.optim.AdamW.html",
+        "retrieved_date": "2026-11-04"
+      },
+      {
+        "title": "Decoupled Weight Decay Regularization",
+        "publisher": "Loshchilov and Hutter, arXiv",
+        "url": "https://arxiv.org/abs/1711.05101",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 AdamW documentation and the 2017 decoupled-weight-decay paper.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.optim.AdamW.html",
+        "https://arxiv.org/abs/1711.05101"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified PyTorch's AdamW description and the paper's distinction between L2 regularization and decoupled decay for adaptive optimizers; framed coefficient tuning as empirical."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-torch-compile-graph-breaks",
+    "bank": "ai-ml-engineer",
+    "topic": "Compilation and performance measurement",
+    "subtopic": "Graph-break diagnosis",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A compiled model runs, but profiling shows fragmented graphs and limited speedup. How would you investigate graph breaks?",
+    "what_is_assessed": "Whether the candidate uses compiler diagnostics to locate unsupported code and weighs graph capture against maintainability.",
+    "short_answer": "Inspect compiler logs and use `torch.compile(fullgraph=True)` in a diagnostic run to turn graph breaks into actionable errors. Locate the unsupported operation or Python control flow, then decide whether to refactor that region, leave it eager, or accept the break. Benchmark representative inputs after changes; full-graph capture is a debugging and validation tool, not a guarantee that every model should be rewritten to one graph.",
+    "deep_explanation": "PyTorch documents that the default `fullgraph=False` can graph-break, compile the portions it can capture, run unsupported code, and resume tracing. This preserves broad compatibility but can lose optimization opportunities. `fullgraph=True` requires one FX graph or raises an error, making it useful for identifying breaks. The appropriate remedy depends on the unsupported construct and performance evidence.",
+    "strong_answer_signals": [
+      "Uses compiler logs or fullgraph mode to localize breaks.",
+      "Understands breaks fragment the captured computation and can limit optimization.",
+      "Benchmarks before and after instead of assuming a refactor is faster."
+    ],
+    "weak_answer_signals": [
+      "Disables compilation without checking where breaks occur.",
+      "Assumes fullgraph mode is always the best production setting."
+    ],
+    "common_mistakes": [
+      "Confusing graph breaks with shape-triggered recompilations.",
+      "Rewriting model code before identifying the unsupported operation."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `fullgraph=True` do when a break occurs?",
+        "short_answer": "It raises an error instead of silently compiling multiple graph segments."
+      },
+      {
+        "question": "Does eliminating every break guarantee a faster model?",
+        "short_answer": "No. Measure representative workload performance and compilation costs."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Use fullgraph=True to Identify and Eliminate Graph Breaks",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/compile/programming_model.fullgraph_true.md",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch stable compiler guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/compile/programming_model.fullgraph_true.md"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified default graph-break behavior and fullgraph=True's single-graph-or-error behavior; kept recommendations conditional on measured performance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-step-scheduler-with-optimizer-under-gradient-accumulation",
+    "bank": "ai-ml-engineer",
+    "topic": "Memory-constrained training",
+    "subtopic": "Scheduler timing with gradient accumulation",
+    "level": "L3",
+    "type": "debugging",
+    "question": "Training accumulates gradients over several microbatches before updating weights. How should you align the learning-rate scheduler?",
+    "what_is_assessed": "Whether the candidate distinguishes microbatches from optimizer updates when defining schedule progress.",
+    "short_answer": "For a schedule intended to advance once per weight update, call `scheduler.step()` alongside the optimizer step after the accumulation window, not after every microbatch. Otherwise the schedule advances faster than the optimizer updates. Recalculate planned scheduler steps and warmup when changing accumulation, and follow a different cadence only if the schedule is deliberately defined per microbatch.",
+    "deep_explanation": "Hugging Face's gradient-accumulation guide shows `optimizer.step()` and `scheduler.step()` together after the configured accumulation steps. This makes the scheduler cadence correspond to actual parameter updates in that training loop. Schedules can be defined differently, so document the unit of progress and adjust total-step calculations when accumulation changes.",
+    "strong_answer_signals": [
+      "Distinguishes microbatches from optimizer updates.",
+      "Aligns scheduler progress with the intended update cadence.",
+      "Recomputes warmup and total steps when accumulation changes."
+    ],
+    "weak_answer_signals": [
+      "Advances an update-based schedule on every microbatch.",
+      "Changes accumulation without checking schedule length."
+    ],
+    "common_mistakes": [
+      "Assuming one dataloader batch always equals one parameter update.",
+      "Treating every scheduler as necessarily update-based."
+    ],
+    "follow_ups": [
+      {
+        "question": "When does the example scheduler advance?",
+        "short_answer": "After the optimizer update at the end of the accumulation window."
+      },
+      {
+        "question": "What should be revisited when accumulation changes?",
+        "short_answer": "The scheduler's total steps, warmup, and intended update cadence."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Performing gradient accumulation with Accelerate",
+        "publisher": "Hugging Face documentation",
+        "url": "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Hugging Face Accelerate gradient accumulation guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide steps the scheduler with the optimizer after accumulation; stated update-based scheduling as a chosen cadence, not a universal requirement."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-gradient-accumulation-effective-batch-size"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-handle-conditionally-unused-ddp-parameters",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "Unused parameters in conditional models",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A model has conditional branches, and some parameters receive no gradient on a given iteration under DistributedDataParallel. What should you investigate?",
+    "what_is_assessed": "Whether the candidate diagnoses unused parameters from the forward graph and configures DDP based on the model's actual execution.",
+    "short_answer": "Confirm whether parameters are genuinely unused in the loss graph on some iterations or ranks. If so, evaluate `find_unused_parameters=True`, which traverses the autograd graph and marks parameters without gradients ready for reduction. It adds graph-traversal work, so do not enable it by default when every parameter is used. Also verify that ranks follow compatible control flow and test the change across representative batches.",
+    "deep_explanation": "PyTorch documents `find_unused_parameters` as traversing the autograd graph from the wrapped module's outputs and marking parameters that do not receive gradients as ready for reduction. Conditional branches can make parameter usage vary. The option has runtime cost, so first inspect the model and distributed traces; this setting does not repair arbitrary rank-divergent control flow.",
+    "strong_answer_signals": [
+      "Checks which parameters participate in the loss graph on each iteration.",
+      "Uses unused-parameter detection only when model behavior requires it.",
+      "Considers rank-consistent control flow and the extra traversal cost."
+    ],
+    "weak_answer_signals": [
+      "Enables the option blindly for every DDP job.",
+      "Assumes it makes different rank control flow safe."
+    ],
+    "common_mistakes": [
+      "Debugging only the single-GPU forward path.",
+      "Ignoring parameters used in forward but disconnected from the loss."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `find_unused_parameters` traverse?",
+        "short_answer": "The autograd graph reachable from the wrapped forward outputs."
+      },
+      {
+        "question": "Why not enable it unconditionally?",
+        "short_answer": "The graph traversal adds overhead when it is not needed."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch DistributedDataParallel documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/main/generated/torch.nn.parallel.DistributedDataParallel.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented autograd traversal and ready-for-reduction behavior; distinguished unused parameters from arbitrary rank-divergent control flow."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-use-ddp-join-for-uneven-input-lengths",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "Uneven inputs and Join",
+    "level": "L3",
+    "type": "debugging",
+    "question": "One distributed rank exhausts its training data before the others, which then hang in synchronization. What PyTorch facility can help?",
+    "what_is_assessed": "Whether the candidate recognizes uneven per-rank inputs and understands the purpose and limits of DDP Join.",
+    "short_answer": "Consider wrapping the per-rank loop in PyTorch's `Join` context manager with the relevant Joinable components. Ranks that finish early can shadow the collectives expected by still-active ranks rather than leaving them blocked. Check whether the model or optimizer has additional collectives that need handling, and configure early termination if those collectives cannot safely be shadowed. The Join tutorial notes this API's behavior and version status; validate against the installed PyTorch release.",
+    "deep_explanation": "PyTorch's distributed tutorial describes Join for uneven inputs and shows it with DistributedDataParallel. The mechanism lets early-exhausted ranks participate in shadow operations while other ranks continue. Additional Joinables and collectives affect correctness, so the context manager is not a substitute for understanding the loop's distributed communication.",
+    "strong_answer_signals": [
+      "Diagnoses different input exhaustion across ranks.",
+      "Uses Join around the per-rank loop and accounts for Joinable components.",
+      "Checks for non-DDP collectives and release-specific behavior."
+    ],
+    "weak_answer_signals": [
+      "Adds a barrier after the loop while ranks are blocked inside earlier collectives.",
+      "Assumes Join handles every custom communication operation automatically."
+    ],
+    "common_mistakes": [
+      "Ignoring unequal shard lengths in the input pipeline.",
+      "Not testing early-termination behavior with the actual optimizer and collectives."
+    ],
+    "follow_ups": [
+      {
+        "question": "What problem does Join address?",
+        "short_answer": "Ranks that exhaust their inputs at different times during distributed training."
+      },
+      {
+        "question": "What should be checked beyond DDP?",
+        "short_answer": "Other collectives or Joinable components that may need matching shadow behavior."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Distributed Training with Uneven Inputs Using the Join Context Manager",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/advanced/generic_join.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 distributed tutorial; tutorial notes Join originated as a prototype feature.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/advanced/generic_join.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified Join is intended for uneven inputs and scoped the recommendation to Joinable communication and version caveats."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-suppress-ddp-allreduce-during-accumulation",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "DDP gradient synchronization during accumulation",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A DDP job accumulates gradients over several microbatches but synchronizes across ranks after every backward pass. How can you reduce that communication?",
+    "what_is_assessed": "Whether the candidate uses DDP no_sync correctly while preserving synchronization on the final accumulation pass.",
+    "short_answer": "Wrap the forward and backward passes for the non-final microbatches in `ddp.no_sync()`. Gradients accumulate locally, then synchronize on the first forward-backward pass after leaving the context, typically the final microbatch. Include the forward pass inside the context; otherwise synchronization still occurs. Measure communication and step time to confirm the change helps.",
+    "deep_explanation": "PyTorch documents `no_sync()` as disabling gradient synchronization across DDP processes while gradients accumulate, then synchronizing on the first forward-backward pass outside the context. Its API specifically warns that the forward pass must be inside `no_sync()`. This is distinct from merely accumulating gradients, which can still communicate on each microbatch if DDP synchronization remains enabled.",
+    "strong_answer_signals": [
+      "Uses no_sync for non-final accumulation passes.",
+      "Includes forward and backward in the context.",
+      "Synchronizes on the final pass and measures communication impact."
+    ],
+    "weak_answer_signals": [
+      "Wraps only backward while leaving forward outside.",
+      "Leaves every pass unsynchronized and never performs a collective update."
+    ],
+    "common_mistakes": [
+      "Confusing effective batch size with communication reduction.",
+      "Failing to verify the final microbatch synchronizes gradients."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens when leaving no_sync?",
+        "short_answer": "The first subsequent forward-backward pass synchronizes accumulated gradients."
+      },
+      {
+        "question": "Must the forward pass be inside no_sync?",
+        "short_answer": "Yes, PyTorch warns otherwise gradients will still synchronize."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified no_sync disables synchronization during accumulation and that the forward pass must be inside the context."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-step-scheduler-with-optimizer-under-gradient-accumulation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-trade-activation-checkpointing-for-memory",
+    "bank": "ai-ml-engineer",
+    "topic": "Activation checkpointing",
+    "subtopic": "Compute-memory trade-off",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A training model runs out of memory because many intermediate activations are retained for backpropagation. What does activation checkpointing trade?",
+    "what_is_assessed": "Whether the candidate understands activation recomputation as a way to reduce memory at additional compute cost.",
+    "short_answer": "Checkpoint selected regions so their intermediate activations are not all retained from the forward pass. During backward, the checkpointed function is rerun as needed to reconstruct them, reducing activation memory while adding compute and potentially changing runtime. Apply it to measured memory bottlenecks and verify the recomputed function behaves consistently between forward and backward.",
+    "deep_explanation": "PyTorch documents activation checkpointing as trading compute for memory: tensors produced inside a checkpointed function are recomputed during backward rather than kept alive. The documentation warns that if the function behaves differently during recomputation—for example because of mutable global state—the gradients may be incorrect or an error may occur. PyTorch recommends explicitly selecting the non-reentrant implementation in the current API.",
+    "strong_answer_signals": [
+      "Explains that activations are recomputed during backward.",
+      "Names extra compute as the cost of reduced memory.",
+      "Checks deterministic and equivalent behavior of the checkpointed function."
+    ],
+    "weak_answer_signals": [
+      "Assumes checkpointing reduces both memory and compute.",
+      "Ignores differences between forward execution and recomputation."
+    ],
+    "common_mistakes": [
+      "Checkpointing without profiling activation memory.",
+      "Using mutable state or side effects inside a recomputed function."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is recomputed during backward?",
+        "short_answer": "Intermediate tensors from the checkpointed forward function."
+      },
+      {
+        "question": "What should remain consistent across recomputation?",
+        "short_answer": "The function's behavior and relevant state used to calculate gradients."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.checkpoint",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/checkpoint.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 checkpoint documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/checkpoint.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the compute-memory trade-off, backward recomputation, and warning about inconsistent function behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-tune-dataloader-prefetch-under-memory-limits",
+    "bank": "ai-ml-engineer",
+    "topic": "Training performance and data pipelines",
+    "subtopic": "Prefetch depth and host memory",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "The GPU is intermittently waiting for batches, and increasing DataLoader prefetching improves throughput but raises host-memory use. How would you tune it?",
+    "what_is_assessed": "Whether the candidate understands per-worker prefetching as a throughput-memory trade-off and measures the pipeline.",
+    "short_answer": "Treat `prefetch_factor` as the number of batches loaded in advance by each worker. Increase it gradually while measuring GPU idle time, batch wait time, host memory, and end-to-end step throughput; higher worker counts can multiply the number of queued batches. Keep only enough prefetching to hide data latency within the memory budget, and check whether the bottleneck is actually data loading.",
+    "deep_explanation": "PyTorch documents `prefetch_factor` as the number of batches loaded in advance by each worker and exposes it as a DataLoader setting. A deeper queue can overlap data preparation with model execution, but consumes more host memory and may not help when the GPU is compute-bound. Tune with the actual dataset, worker count, and workload.",
+    "strong_answer_signals": [
+      "Connects prefetch depth to batches queued per worker.",
+      "Measures both input wait and host-memory usage.",
+      "Tunes based on the observed bottleneck rather than maximizing the setting."
+    ],
+    "weak_answer_signals": [
+      "Increases prefetch indefinitely without monitoring host memory.",
+      "Assumes an idle GPU is always caused by DataLoader configuration."
+    ],
+    "common_mistakes": [
+      "Ignoring the interaction between worker count and total queued batches.",
+      "Using a synthetic benchmark that does not reproduce data transforms."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does `prefetch_factor` count?",
+        "short_answer": "Batches loaded in advance per worker."
+      },
+      {
+        "question": "What should be monitored while increasing it?",
+        "short_answer": "Input wait, GPU utilization, step throughput, and host memory."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DataLoader documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified prefetch_factor counts batches loaded in advance per worker; framed tuning as a workload-dependent memory-throughput trade-off."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-resume-fsdp-training-across-cluster-topologies",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed checkpointing",
+    "subtopic": "Sharded checkpoint resharding",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A large FSDP model must be checkpointed across many ranks and later resumed with a different world size. What checkpoint capability matters?",
+    "what_is_assessed": "Whether the candidate chooses a distributed checkpoint path that avoids treating one rank as the sole checkpointing bottleneck and supports resharding.",
+    "short_answer": "Use a distributed checkpoint workflow that lets ranks save and load their state in parallel and supports load-time resharding. PyTorch Distributed Checkpoint documents this capability, so the saved state can be restored into a different cluster topology. Test save and resume with the target topology and validate model and optimizer state, rather than assuming an ordinary single-file save will scale or resume identically.",
+    "deep_explanation": "PyTorch Distributed Checkpoint supports parallel save and load across ranks and handles load-time resharding, which enables saving with one cluster topology and loading with another. Its FSDP documentation includes sharded model and optimizer-state examples and recommends the sharded checkpoint path for FSDP. Production validation should include a round-trip resume and state consistency checks.",
+    "strong_answer_signals": [
+      "Identifies parallel distributed checkpointing.",
+      "Names load-time resharding across topologies.",
+      "Tests model and optimizer restoration in the target setup."
+    ],
+    "weak_answer_signals": [
+      "Assumes checkpoint shards can be loaded only with the original world size.",
+      "Validates file creation but not resumed training state."
+    ],
+    "common_mistakes": [
+      "Saving model weights but omitting optimizer state when training must resume.",
+      "Treating checkpoint serialization as independent of distributed layout."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does load-time resharding enable?",
+        "short_answer": "Loading a distributed checkpoint into a different cluster topology."
+      },
+      {
+        "question": "What should a resume test verify beyond successful loading?",
+        "short_answer": "Model and optimizer state consistency and continued training behavior."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Distributed Checkpoint",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/distributed.checkpoint.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Distributed Checkpoint documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/distributed.checkpoint.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified parallel multi-rank save/load and load-time resharding across cluster topologies; kept resume-state testing as an engineering recommendation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-validate-post-training-quantization-calibration",
+    "bank": "ai-ml-engineer",
+    "topic": "Post-training quantization",
+    "subtopic": "Representative calibration data and accuracy checks",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A post-training quantized model loses accuracy mainly on a few input categories. What should you check before changing the quantization recipe?",
+    "what_is_assessed": "Whether the candidate diagnoses calibration representativeness and separates quantization error from implementation or outlier effects.",
+    "short_answer": "Check whether the calibration data represents the deployed input distribution, including the affected categories and important outliers. Compare quantized and reference-model errors by category, then investigate whether the issue is data-sensitive, intrinsic quantization error, or a kernel mismatch. Use held-out deployment-like evaluation; increase precision selectively for problematic operations only after identifying the source rather than assuming one global fix.",
+    "deep_explanation": "PyTorch's quantization accuracy guidance recommends representative post-training calibration data and multiple examples across categories. It distinguishes data-insensitive error, data-sensitive error, and implementation mismatches, and suggests increasing precision for problematic operations as an accuracy-performance trade-off. Its numeric sample guideline is not a guarantee; the calibration set should reflect the actual task and deployment distribution.",
+    "strong_answer_signals": [
+      "Checks category and distribution coverage in calibration data.",
+      "Compares error by input slice and distinguishes model from kernel issues.",
+      "Evaluates accuracy and performance on representative held-out data."
+    ],
+    "weak_answer_signals": [
+      "Treats a single aggregate accuracy score as enough diagnosis.",
+      "Adds calibration examples without checking which inputs are underrepresented."
+    ],
+    "common_mistakes": [
+      "Calibrating only on easy or majority-class examples.",
+      "Assuming more quantization precision is free of latency or hardware trade-offs."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should calibration data represent?",
+        "short_answer": "The range and composition of inputs expected during deployment."
+      },
+      {
+        "question": "What if only a few operations cause large error?",
+        "short_answer": "Test selective higher precision for those operations and measure the accuracy-performance trade-off."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Quantization Accuracy Debugging",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.3/quantization-accuracy-debugging.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.3 quantization accuracy debugging documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.3/quantization-accuracy-debugging.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified representative calibration, class coverage guidance, and distinct data-sensitive, data-insensitive, and implementation error categories."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-nccl-collective-hangs",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "Diagnosing NCCL collective hangs",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A multi-GPU training job hangs during gradient synchronization. Which first diagnostics can help distinguish a collective mismatch from a general NCCL startup problem?",
+    "what_is_assessed": "Whether the candidate uses focused distributed communication diagnostics and investigates rank-level collective consistency.",
+    "short_answer": "Enable `NCCL_DEBUG=INFO` for basic NCCL initialization details and, when collective behavior is suspect, `NCCL_DEBUG_SUBSYS=COLL` to log collective calls. Compare ranks for mismatched collective order, operation type, or message size, and verify all ranks reach the same synchronization path. Capture the logs for a minimal failing run, then remove verbose diagnostics after resolving the issue.",
+    "deep_explanation": "PyTorch's distributed communication documentation says `NCCL_DEBUG=INFO` provides initialization information and that `NCCL_DEBUG_SUBSYS=COLL` logs collective calls, which can help diagnose hangs caused by collective type or message-size mismatches. These settings gather evidence; they do not repair inconsistent rank behavior. Check the distributed control flow and compare logs across ranks.",
+    "strong_answer_signals": [
+      "Selects NCCL debug output appropriate to initialization or collective traces.",
+      "Checks that ranks issue matching collectives in compatible order and shape.",
+      "Treats logs as diagnostic evidence and removes verbosity after troubleshooting."
+    ],
+    "weak_answer_signals": [
+      "Changes network settings before collecting evidence about collective mismatch.",
+      "Assumes a hang is always a hardware or connectivity failure."
+    ],
+    "common_mistakes": [
+      "Inspecting only rank zero's logs.",
+      "Leaving high-volume debug logging enabled in normal training."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which subsystem can log collective calls?",
+        "short_answer": "`NCCL_DEBUG_SUBSYS=COLL`."
+      },
+      {
+        "question": "What mismatch can this help reveal?",
+        "short_answer": "Different collective types or message sizes across ranks."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Distributed communication package",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/distributed.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 distributed communication documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/distributed.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified NCCL_DEBUG=INFO and NCCL_DEBUG_SUBSYS=COLL guidance and the documented collective-type/message-size hang causes."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-diagnose-torch-compile-cache-limit-fallback",
+    "bank": "ai-ml-engineer",
+    "topic": "Compilation and performance measurement",
+    "subtopic": "Recompilation limits and eager fallback",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A compiled function logs that it hit a recompilation limit and is now running eagerly. Should you immediately raise the limit?",
+    "what_is_assessed": "Whether the candidate diagnoses repeated specialization before changing compiler limits and weighs compilation overhead against eager execution.",
+    "short_answer": "Not immediately. Inspect the warning and guard failure to identify the function and changing input properties. If a small, bounded set of valid specializations is expected and compilation improves steady-state performance, consider an appropriate limit or dynamic-shape strategy. If inputs create open-ended recompilation or compilation costs more than it saves, reduce recompilation or lower the limit instead. Measure steady-state and cold-start latency.",
+    "deep_explanation": "PyTorch documents per-function and accumulated recompilation limits. Once exceeded, the compiler stops attempting further compilation for the function and executes it eagerly, with a warning that identifies the limit and affected function. The troubleshooting guide says raising the limit may be appropriate when the number of recompilations has a reasonable constant upper bound; lowering it may be appropriate when recompilation cost outweighs the benefit.",
+    "strong_answer_signals": [
+      "Reads the warning and recompilation reason before tuning limits.",
+      "Distinguishes bounded specialization from unbounded input variation.",
+      "Measures compile cost and steady-state benefit before choosing a limit."
+    ],
+    "weak_answer_signals": [
+      "Raises limits automatically for every warning.",
+      "Treats eager fallback as necessarily slower without benchmarking."
+    ],
+    "common_mistakes": [
+      "Ignoring why guards fail and compiling more variants.",
+      "Comparing only warmed-up compiled latency while omitting compilation cost."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens when the limit is exceeded?",
+        "short_answer": "PyTorch stops attempting further compilation for that function and runs it eagerly."
+      },
+      {
+        "question": "When might raising a limit be reasonable?",
+        "short_answer": "When recompilations have a known, bounded count and compilation is beneficial."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.compile Troubleshooting",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/user_guide/torch_compiler/torch.compiler_troubleshooting.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "PyTorch main compiler troubleshooting documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/main/user_guide/torch_compiler/torch.compiler_troubleshooting.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified recompilation-limit eager fallback and the documented trade-off between raising and lowering limits based on bounded recompiles and compilation cost."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-investigate-recompiles-after-dynamic-input-shapes"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-set-distributed-sampler-epoch-before-iteration",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "Epoch-aware distributed shuffling",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A distributed training job uses `DistributedSampler(shuffle=True)`, but the data appears in the same order every epoch. What is likely missing?",
+    "what_is_assessed": "Whether the candidate advances DistributedSampler's epoch seed before creating each DataLoader iterator.",
+    "short_answer": "Call `sampler.set_epoch(epoch)` at the start of every epoch, before creating the DataLoader iterator. Without it, PyTorch documents that the same ordering is used across epochs. Ensure all ranks use the same epoch value so they derive a consistent distributed shuffle.",
+    "deep_explanation": "PyTorch's DistributedSampler documentation warns that `set_epoch()` must be called at the beginning of each epoch before the DataLoader iterator is created; otherwise, the same ordering is reused each epoch. This keeps shuffling behavior aligned across distributed replicas while changing the order between epochs.",
+    "strong_answer_signals": [
+      "Calls set_epoch for each epoch.",
+      "Places it before iterator creation.",
+      "Uses a consistent epoch across ranks."
+    ],
+    "weak_answer_signals": [
+      "Sets DataLoader shuffle=True while also relying on DistributedSampler to manage shuffling.",
+      "Calls set_epoch after the iterator has already been created."
+    ],
+    "common_mistakes": [
+      "Calling the method only once before training.",
+      "Using different epoch values across ranks."
+    ],
+    "follow_ups": [
+      {
+        "question": "When must set_epoch run?",
+        "short_answer": "At the start of each epoch, before creating the DataLoader iterator."
+      },
+      {
+        "question": "What happens if it is omitted?",
+        "short_answer": "The same sample ordering is reused across epochs."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DataLoader and DistributedSampler documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified set_epoch must be called before creating each epoch's iterator to change the sampler ordering across epochs."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-handle-distributed-sampler-tail-padding",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed training",
+    "subtopic": "DistributedSampler padding versus dropping",
+    "level": "L2",
+    "type": "debugging",
+    "question": "The dataset size is not divisible by the number of training ranks. What does `DistributedSampler(drop_last=...)` change?",
+    "what_is_assessed": "Whether the candidate understands that the sampler either drops the tail or adds indices so each rank receives an evenly sized shard.",
+    "short_answer": "With sampler `drop_last=True`, the sampler drops the tail to make the dataset evenly divisible across replicas. With `False`, it adds extra indices so each rank gets the same number of samples, which can repeat examples. Account for that behavior when interpreting exact epoch coverage or aggregating evaluation metrics, and distinguish sampler `drop_last` from the DataLoader's separate batch-level option.",
+    "deep_explanation": "PyTorch documents that DistributedSampler drops the tail when its `drop_last` flag is true, and otherwise adds extra indices to make the data evenly divisible across replicas. Equal shard sizes simplify synchronized training, but padding can repeat samples and dropping omits a tail. The sampler's option is separate from DataLoader `drop_last`, which concerns incomplete batches.",
+    "strong_answer_signals": [
+      "States the exact behavior for both sampler settings.",
+      "Recognizes padded indices can duplicate examples.",
+      "Distinguishes sampler-level and DataLoader-level drop_last."
+    ],
+    "weak_answer_signals": [
+      "Assumes `drop_last=False` means every sample appears exactly once across ranks.",
+      "Confuses sampler padding with incomplete-batch handling."
+    ],
+    "common_mistakes": [
+      "Ignoring duplicate padding in evaluation metrics.",
+      "Setting different sampler options across ranks."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens with sampler drop_last=False?",
+        "short_answer": "Extra indices are added so shards have equal size."
+      },
+      {
+        "question": "Is DataLoader drop_last the same setting?",
+        "short_answer": "No. It controls incomplete batches, not sampler divisibility across replicas."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DataLoader and DistributedSampler documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified DistributedSampler drop_last behavior and distinguished it from DataLoader batch-level drop_last."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-set-distributed-sampler-epoch-before-iteration"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-use-persistent-dataloader-workers-deliberately",
+    "bank": "ai-ml-engineer",
+    "topic": "Data loading and throughput",
+    "subtopic": "Persistent DataLoader worker lifecycle",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A training loop repeatedly pays worker startup costs at each epoch. What can `persistent_workers=True` change, and what should you check?",
+    "what_is_assessed": "Whether the candidate understands that persistent workers keep worker processes and dataset instances alive between dataset iterations, with resource and state implications.",
+    "short_answer": "With `num_workers > 0`, `persistent_workers=True` keeps worker processes and their Dataset instances alive after a dataset has been consumed, avoiding repeated worker shutdown and startup. It can reduce epoch-boundary overhead, but uses persistent worker resources and can preserve worker-local state. Check memory use, dataset mutation/refresh behavior, and reproducibility; it is not valid with `num_workers=0`.",
+    "deep_explanation": "PyTorch documents that persistent workers are not shut down after a dataset has been consumed once, allowing worker Dataset instances to remain alive. The option requires at least one worker. This can help when startup is material, but means worker processes and their state persist, so the trade-off should be measured with the actual input pipeline and dataset lifecycle.",
+    "strong_answer_signals": [
+      "Explains worker and Dataset-instance persistence.",
+      "Checks the `num_workers > 0` requirement.",
+      "Considers memory and state-refresh implications rather than enabling it by default."
+    ],
+    "weak_answer_signals": [
+      "Claims the flag makes data loading faster in every workload.",
+      "Assumes changes to the main-process Dataset automatically refresh worker-local copies."
+    ],
+    "common_mistakes": [
+      "Enabling persistent workers with zero workers.",
+      "Ignoring worker memory or stale state between epochs."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must be true for persistent_workers to work?",
+        "short_answer": "`num_workers` must be greater than zero."
+      },
+      {
+        "question": "What state remains alive?",
+        "short_answer": "The worker processes and their Dataset instances."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DataLoader documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified DataLoader worker and Dataset-instance persistence and the requirement that num_workers be positive."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-shard-iterable-dataset-across-workers",
+    "bank": "ai-ml-engineer",
+    "topic": "Data loading and throughput",
+    "subtopic": "IterableDataset worker sharding",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A multi-worker DataLoader emits the same stream of examples several times per epoch. What should you inspect in an `IterableDataset`?",
+    "what_is_assessed": "Whether the candidate knows each worker receives a dataset replica and must be assigned a distinct shard.",
+    "short_answer": "Each worker gets its own replica of an `IterableDataset`; if every replica iterates the full source, examples are duplicated. Use `torch.utils.data.get_worker_info()` or `worker_init_fn` to partition the stream among workers. In distributed training, include the rank and world size in the partitioning so workers across processes also receive disjoint shards.",
+    "deep_explanation": "PyTorch warns that multi-process loading of an iterable-style dataset can duplicate data because each worker has a replica of the dataset object. The documentation recommends configuring replicas differently, for example with `get_worker_info()` or `worker_init_fn`. Distributed jobs need a partitioning scheme that accounts for both process rank and local worker identity.",
+    "strong_answer_signals": [
+      "Identifies per-worker dataset replicas as the cause.",
+      "Partitions data using worker identity.",
+      "Extends sharding across distributed ranks when applicable."
+    ],
+    "weak_answer_signals": [
+      "Assumes DataLoader automatically shards every iterable source.",
+      "Uses the same worker seed but leaves all workers iterating the full stream."
+    ],
+    "common_mistakes": [
+      "Sharding only across local workers while duplicating data across ranks.",
+      "Partitioning by unstable batch order rather than a deterministic worker/rank assignment."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does each DataLoader worker receive?",
+        "short_answer": "A separate replica of the IterableDataset object."
+      },
+      {
+        "question": "Which API exposes worker identity?",
+        "short_answer": "`torch.utils.data.get_worker_info()`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 data-loading documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified iterable dataset replicas can duplicate data across workers and that get_worker_info or worker_init_fn can configure distinct shards."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-register-nontrainable-module-state-as-buffer",
+    "bank": "ai-ml-engineer",
+    "topic": "Module state and checkpointing",
+    "subtopic": "Registered buffers versus parameters",
+    "level": "L2",
+    "type": "concept",
+    "question": "A module stores a fixed tensor that should move with the model and be saved in checkpoints, but should not be optimized. Should it be a Parameter?",
+    "what_is_assessed": "Whether the candidate uses a registered buffer for non-trainable module state and understands persistence.",
+    "short_answer": "Usually use `register_buffer`, not a trainable `Parameter`. A buffer is module state that follows module device and dtype operations but is not optimized as a parameter. Persistent buffers are included in `state_dict`; set `persistent=False` if the value should not be checkpointed. Use a Parameter when the tensor should be learned.",
+    "deep_explanation": "PyTorch documents buffers as tensors that are not model parameters but are part of module state, with BatchNorm running statistics as an example. `register_buffer` makes the tensor participate in module buffer handling; by default it is persistent and included in `state_dict`, while `persistent=False` excludes it from the state dictionary. A plain tensor attribute does not receive the same registration behavior.",
+    "strong_answer_signals": [
+      "Distinguishes learned parameters from non-trainable state.",
+      "Explains persistent versus non-persistent buffers.",
+      "Recognizes that module registration affects device/state handling."
+    ],
+    "weak_answer_signals": [
+      "Uses a Parameter for a fixed constant and unintentionally optimizes it.",
+      "Stores important state as an unregistered tensor and assumes it will move or save automatically."
+    ],
+    "common_mistakes": [
+      "Assuming every buffer is excluded from checkpoints.",
+      "Setting `requires_grad=False` on a Parameter when a buffer better expresses the intended state."
+    ],
+    "follow_ups": [
+      {
+        "question": "Are persistent buffers saved in state_dict?",
+        "short_answer": "Yes, by default."
+      },
+      {
+        "question": "When should a tensor be a Parameter?",
+        "short_answer": "When it represents learnable state that should be optimized."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.nn.Module",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Module.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Module documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Module.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that buffers are non-parameter module state and that persistent buffers are included in state_dict by default."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-load-external-checkpoints-with-limited-trust",
+    "bank": "ai-ml-engineer",
+    "topic": "Checkpoint security and loading",
+    "subtopic": "weights_only loading limitations",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A partner sends a PyTorch checkpoint, and your service loads it with `weights_only=True`. Is that enough to treat the file as fully safe?",
+    "what_is_assessed": "Whether the candidate understands the reduced unpickling risk and remaining resource or downstream risks of loading untrusted checkpoint data.",
+    "short_answer": "No. `weights_only=True` restricts what the unpickler can construct and narrows remote-code-execution exposure, but PyTorch documents that it does not prevent denial of service and that memory-corruption risks may remain. Prefer a trusted state-dict workflow, verify provenance and integrity, and apply resource limits and downstream validation. Do not switch to unrestricted loading just to bypass an error without reviewing the source.",
+    "deep_explanation": "PyTorch's serialization documentation describes the restricted `weights_only` unpickler and its security limitations. It reduces the set of executable unpickling behavior but is not a guarantee that every file is harmless or that downstream use of loaded tensors is safe. Loading policy should account for provenance, integrity, resource limits, compatibility, and the code that consumes the checkpoint.",
+    "strong_answer_signals": [
+      "Identifies `weights_only=True` as risk reduction, not a complete safety guarantee.",
+      "Mentions denial-of-service and remaining memory or downstream risks.",
+      "Keeps provenance and resource limits in the loading decision."
+    ],
+    "weak_answer_signals": [
+      "Claims `weights_only=True` makes any file safe.",
+      "Disables the restriction on an untrusted file without checking its provenance."
+    ],
+    "common_mistakes": [
+      "Treating a successful load as proof of integrity or semantic correctness.",
+      "Ignoring resource exhaustion and downstream tensor handling."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does weights_only reduce?",
+        "short_answer": "The unpickling surface for arbitrary code execution."
+      },
+      {
+        "question": "What risk does the docs say remains?",
+        "short_answer": "Denial of service and possible memory-corruption issues."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Serialization semantics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/serialization.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 serialization documentation; weights_only default changed in PyTorch 2.6.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/notes/serialization.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified weights_only narrows arbitrary unpickling behavior but does not guard against denial of service and does not eliminate all memory or downstream risks."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-understand-none-vs-zero-gradient-reset",
+    "bank": "ai-ml-engineer",
+    "topic": "Optimizer behavior",
+    "subtopic": "None versus zero gradients",
+    "level": "L2",
+    "type": "concept",
+    "question": "What behavior can change when calling `optimizer.zero_grad(set_to_none=True)` instead of filling existing gradients with zeros?",
+    "what_is_assessed": "Whether the candidate understands optimizer semantics for parameters with no gradient and the memory/performance trade-off.",
+    "short_answer": "`set_to_none=True` can reduce memory use and may improve performance, but a parameter with `grad is None` is not always treated like one with a zero-valued gradient. Optimizers may skip a parameter whose gradient is `None`, while a zero gradient can still participate in momentum or weight-decay updates. Check code that inspects gradients or relies on these update semantics.",
+    "deep_explanation": "PyTorch documents that setting gradients to `None` differs from zeroing them. After backward, parameters that did not receive a gradient remain `None`; optimizers can behave differently for `None` and zero gradients. The option can reduce memory footprint, but should be selected with awareness of the model's conditional paths and optimizer behavior.",
+    "strong_answer_signals": [
+      "Distinguishes missing gradients from zero-valued gradients.",
+      "Notes optimizer behavior can differ for `None`.",
+      "Mentions the potential memory benefit without claiming universal speedup."
+    ],
+    "weak_answer_signals": [
+      "Treats `None` and zero as interchangeable.",
+      "Assumes a parameter with no gradient is always updated identically."
+    ],
+    "common_mistakes": [
+      "Using a manual gradient operation that assumes every `.grad` is a tensor.",
+      "Ignoring conditional branches that leave some parameters without gradients."
+    ],
+    "follow_ups": [
+      {
+        "question": "What may an optimizer do when grad is None?",
+        "short_answer": "It may skip that parameter's update."
+      },
+      {
+        "question": "What is one potential benefit of set_to_none?",
+        "short_answer": "Lower memory use and sometimes modestly improved performance."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.optim.Optimizer.zero_grad",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.optim.Optimizer.zero_grad.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 optimizer documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.optim.Optimizer.zero_grad.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified None-versus-zero optimizer behavior and memory trade-off in the PyTorch API documentation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-evaluate-dataloader-out-of-order-batches",
+    "bank": "ai-ml-engineer",
+    "topic": "Data loading and throughput",
+    "subtopic": "Out-of-order DataLoader delivery",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A multi-worker DataLoader is faster with `in_order=False`. What risks should you evaluate before keeping it?",
+    "what_is_assessed": "Whether the candidate understands that disabling FIFO batch delivery can affect reproducibility and the distribution seen by training.",
+    "short_answer": "`in_order=False` allows batches to be returned as workers finish rather than in first-in, first-out order; it applies when `num_workers > 0`. Profile whether the throughput gain matters, and check reproducibility and whether imbalanced or variable-latency data causes a skewed sequence of examples. Keep ordered delivery when ordering is important or the gain does not justify the changed behavior.",
+    "deep_explanation": "PyTorch's DataLoader documentation states that `in_order=False` disables FIFO batch delivery when worker processes are used and warns that it can harm reproducibility or skew the data distribution in imbalanced settings. The option should therefore be evaluated with the actual sample-latency and class distribution rather than treated as an unconditional performance optimization.",
+    "strong_answer_signals": [
+      "Explains the change from FIFO delivery.",
+      "Checks data-order reproducibility and distribution under variable latency.",
+      "Measures throughput on the real workload."
+    ],
+    "weak_answer_signals": [
+      "Assumes out-of-order batches are always harmless.",
+      "Assumes faster batch arrival necessarily improves training throughput or model quality."
+    ],
+    "common_mistakes": [
+      "Ignoring class imbalance combined with variable sample-processing time.",
+      "Applying the option when `num_workers=0`."
+    ],
+    "follow_ups": [
+      {
+        "question": "When does in_order apply?",
+        "short_answer": "When DataLoader uses one or more worker processes."
+      },
+      {
+        "question": "What risk does PyTorch call out for imbalanced data?",
+        "short_answer": "The trainer may receive a skewed data distribution."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/data.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "PyTorch main DataLoader documentation retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/main/data.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified in_order=False disables FIFO delivery for multi-worker loading and may affect reproducibility or distribution in imbalanced settings."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-profile-channels-last-memory-format",
+    "bank": "ai-ml-engineer",
+    "topic": "Tensor layout and memory format",
+    "subtopic": "Channels-last convolution performance",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A convolutional model is GPU-bound. When might `channels_last` memory format help, and what should you measure?",
+    "what_is_assessed": "Whether the candidate understands channels-last as a memory layout optimization that may benefit convolution workloads but must be profiled end to end.",
+    "short_answer": "It may improve convolution performance on supported hardware and backends, especially when compatible operations preserve the layout through much of the model. Convert inputs and suitable model weights consistently, then measure full-step throughput and check for hidden layout conversions or unsupported operators. It is not a universal speedup, and the tutorial focuses on 4D NCHW tensors.",
+    "deep_explanation": "PyTorch's memory-format tutorial describes channels-last as an alternative stride layout for 4D tensors and notes performance benefits for convolution workloads on supported configurations. Operations that do not preserve the layout can introduce permutations, so isolated convolution timing may not predict whole-model speed. Benchmark the actual model, precision, device, and input pipeline.",
+    "strong_answer_signals": [
+      "Connects the format to supported convolution kernels.",
+      "Considers layout propagation and conversion overhead.",
+      "Benchmarks complete training or inference steps on target hardware."
+    ],
+    "weak_answer_signals": [
+      "Claims channels_last always makes models faster.",
+      "Changes only weights or inputs without checking layout consistency."
+    ],
+    "common_mistakes": [
+      "Ignoring implicit layout conversions between operators.",
+      "Generalizing a result from one convolution to an entire model."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which tensor shape does the tutorial discuss?",
+        "short_answer": "4D NCHW tensors."
+      },
+      {
+        "question": "What should be benchmarked?",
+        "short_answer": "The full model on target hardware, including layout conversion overhead."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Channels Last Memory Format in PyTorch",
+        "publisher": "PyTorch tutorials",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/memory_format_tutorial.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/intermediate/memory_format_tutorial.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the channels-last layout and convolution use case; kept performance claims conditional on compatible operators and end-to-end profiling."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-keep-checkpoint-recomputation-function-consistent",
+    "bank": "ai-ml-engineer",
+    "topic": "Activation checkpointing",
+    "subtopic": "Consistent recomputation and mutable state",
+    "level": "L3",
+    "type": "debugging",
+    "question": "Gradients become incorrect only after enabling activation checkpointing. What should you inspect inside the checkpointed function?",
+    "what_is_assessed": "Whether the candidate checks that the recomputed forward function behaves consistently and avoids mutable state or side effects.",
+    "short_answer": "Checkpointing reruns the function during backward, so inspect whether the second invocation differs from the original forward—for example because it reads a changing global variable, mutates state, or uses randomness differently. Keep the computation functionally consistent, understand RNG preservation, and explicitly choose the recommended non-reentrant implementation where appropriate. Validate gradients against an uncheckpointed run.",
+    "deep_explanation": "PyTorch warns that if the checkpointed function invocation differs between forward and backward, such as because of a global variable, it may error or silently produce incorrect gradients. RNG state is preserved by default for recomputation, but mutable external state and side effects can still break equivalence. The API recommends explicitly selecting the non-reentrant variant.",
+    "strong_answer_signals": [
+      "Recognizes that checkpointing recomputes the function during backward.",
+      "Looks for mutable globals, side effects, or different random behavior.",
+      "Compares gradients with a non-checkpointed reference and uses explicit checkpoint options."
+    ],
+    "weak_answer_signals": [
+      "Assumes checkpointing only changes memory and cannot affect computation.",
+      "Ignores state mutation because the initial forward pass appeared correct."
+    ],
+    "common_mistakes": [
+      "Updating a counter or cache inside the checkpointed function.",
+      "Assuming preserved RNG state makes every stateful function safe to recompute."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is the checkpointed function run again?",
+        "short_answer": "During backward to recompute activations needed for gradients."
+      },
+      {
+        "question": "What can a changing global variable cause?",
+        "short_answer": "An error or silently incorrect gradients."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.utils.checkpoint",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/checkpoint.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 checkpointing documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/checkpoint.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified recomputation equivalence warning and the risk of mutable global state producing errors or incorrect gradients."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-debug-view-on-noncontiguous-tensor",
+    "bank": "ai-ml-engineer",
+    "topic": "Tensor views and reshaping",
+    "subtopic": "Stride compatibility and copies",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A call to `tensor.view(-1)` fails after a transpose, but `tensor.reshape(-1)` works. Why?",
+    "what_is_assessed": "Whether the candidate understands that view requires stride-compatible layout while reshape may copy.",
+    "short_answer": "A transpose often produces a non-contiguous tensor whose strides cannot be reinterpreted by `view` without changing storage. `reshape` returns a view when the strides permit it, but otherwise may create a copy. If avoiding copies matters, inspect strides and contiguity or explicitly make the tensor contiguous before viewing it; measure the memory and runtime impact.",
+    "deep_explanation": "PyTorch documents that `view` can combine dimensions only when a stride compatibility condition holds; otherwise the tensor must be copied, for example with `contiguous()`. `reshape` is the safer shape-changing API when it is unclear whether a view is possible, but callers should not assume it always avoids a copy.",
+    "strong_answer_signals": [
+      "Connects transpose to changed strides or non-contiguity.",
+      "Distinguishes view-only behavior from reshape's possible copy.",
+      "Checks copy cost when memory or performance matters."
+    ],
+    "weak_answer_signals": [
+      "Assumes `reshape` always returns a view.",
+      "Treats `view` failure as a tensor data corruption issue."
+    ],
+    "common_mistakes": [
+      "Adding `.contiguous()` everywhere without measuring copy cost.",
+      "Relying on storage aliasing after `reshape`."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can reshape copy data?",
+        "short_answer": "Yes, when the requested shape cannot be represented by the existing strides."
+      },
+      {
+        "question": "What should you inspect after a transpose?",
+        "short_answer": "The tensor's strides and contiguity."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.Tensor.view",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.view.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Tensor.view documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.view.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that view requires stride compatibility and reshape may return a copy when a view is not possible."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-time-gpu-benchmarks-with-synchronization",
+    "bank": "ai-ml-engineer",
+    "topic": "CUDA benchmarking",
+    "subtopic": "Asynchronous execution and timing",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A GPU kernel appears to take only a few microseconds when timed with a CPU clock, but end-to-end throughput is much slower. What may be wrong with the benchmark?",
+    "what_is_assessed": "Whether the candidate accounts for asynchronous GPU execution when measuring device work.",
+    "short_answer": "CUDA operations are queued asynchronously, so a CPU timer may stop before the GPU finishes. Synchronize before reading elapsed wall time, or use CUDA events and synchronize after the recorded work. Warm up the workload, separate transfer and execution costs where useful, and benchmark representative end-to-end steps rather than an unsynchronized launch.",
+    "deep_explanation": "PyTorch documents that GPU operations are asynchronous by default and that measurements without synchronization are inaccurate. It recommends `torch.cuda.synchronize()` before timing or using `torch.cuda.Event` to record device-side elapsed time, then synchronizing before reading the result.",
+    "strong_answer_signals": [
+      "Recognizes asynchronous kernel launch behavior.",
+      "Uses synchronization or CUDA events correctly.",
+      "Measures the workload relevant to deployment or training throughput."
+    ],
+    "weak_answer_signals": [
+      "Trusts an unsynchronized CPU wall-clock measurement.",
+      "Times only a launch and assumes it represents completed GPU work."
+    ],
+    "common_mistakes": [
+      "Forgetting warm-up and compilation effects.",
+      "Including or excluding host-to-device transfer inconsistently across comparisons."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can a CPU timer under-report GPU time?",
+        "short_answer": "The GPU work may still be queued when the CPU timer stops."
+      },
+      {
+        "question": "What are two timing approaches PyTorch documents?",
+        "short_answer": "Synchronize the device or use CUDA events."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "CUDA semantics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/cuda.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 CUDA semantics documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/notes/cuda.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified GPU operations are asynchronous by default and unsynchronized timing is inaccurate; checked synchronize and CUDA Event recommendations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-normalize-gradient-accumulation-by-valid-tokens",
+    "bank": "ai-ml-engineer",
+    "topic": "Token-weighted gradient accumulation",
+    "subtopic": "Variable-length language-model microbatches",
+    "level": "L3",
+    "type": "debugging",
+    "question": "During gradient accumulation for causal-LM training, microbatches contain different numbers of non-padding tokens. Why can averaging each microbatch's mean loss give the wrong gradient?",
+    "what_is_assessed": "Whether the candidate weights token-level losses by the total valid-token count rather than giving each unequal microbatch equal influence.",
+    "short_answer": "Averaging microbatch means gives each microbatch equal weight even when they contain different numbers of valid tokens. For a token-level objective, sum the losses across the accumulation window and divide by the total number of non-padding tokens, applying the appropriate distributed scaling if training across ranks. This matches the token-weighted objective more closely than averaging per-batch means.",
+    "deep_explanation": "The Hugging Face Accelerate guide explicitly notes that for token-level tasks such as causal language modeling, the correct accumulation loss is the total loss across all batches in the accumulation step divided by the total number of non-padding tokens—not the average of the per-batch loss values. Unequal sequence lengths otherwise make short and long microbatches contribute equally despite representing different numbers of target tokens.",
+    "strong_answer_signals": [
+      "Identifies unequal valid-token counts as the source of misweighting.",
+      "Normalizes by total non-padding tokens across the accumulation window.",
+      "Accounts for distributed gradient scaling when applicable."
+    ],
+    "weak_answer_signals": [
+      "Divides every microbatch mean by the number of accumulation steps regardless of token count.",
+      "Includes padding tokens in the denominator."
+    ],
+    "common_mistakes": [
+      "Averaging microbatch averages when token counts vary.",
+      "Forgetting to exclude padding positions from the loss denominator."
+    ],
+    "follow_ups": [
+      {
+        "question": "What denominator should a token-level loss use?",
+        "short_answer": "The total number of non-padding target tokens in the accumulation window."
+      },
+      {
+        "question": "Why is a mean of microbatch means different?",
+        "short_answer": "It weights microbatches equally, not individual valid tokens equally."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Performing gradient accumulation with Accelerate",
+        "publisher": "Hugging Face documentation",
+        "url": "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Hugging Face Accelerate gradient accumulation guide retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the token-level accumulation denominator is the total non-padding token count, not the average of microbatch means."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-evaluate-gradient-accumulation-trade-offs"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-benchmark-pinned-memory-and-nonblocking-transfer",
+    "bank": "ai-ml-engineer",
+    "topic": "Host-to-device data transfer",
+    "subtopic": "Pinned memory and asynchronous copies",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A training benchmark adds `tensor.pin_memory().to('cuda', non_blocking=True)` and gets slower. What should you investigate?",
+    "what_is_assessed": "Whether the candidate distinguishes the potential benefit of asynchronous transfers from the overhead of pinning and host-memory constraints.",
+    "short_answer": "Manual `pin_memory()` can block and add overhead, so pinning each tensor immediately before transfer may be slower than a direct copy. Test DataLoader-managed `pin_memory=True` with `to(device, non_blocking=True)` on the real pipeline, and measure transfer plus end-to-end throughput. Pinned memory is limited page-locked host memory; keep the source tensor unchanged until an asynchronous transfer has safely completed.",
+    "deep_explanation": "The PyTorch tutorial reports that CPU-to-GPU pinning and non-blocking transfers can improve throughput in suitable pipelines, but also shows that manually pinning a tensor immediately before transfer can be slower than a direct transfer. It notes that asynchronous copies require care with source-tensor mutation. The best approach depends on the workload and hardware, so benchmark the complete pipeline.",
+    "strong_answer_signals": [
+      "Recognizes manual pinning overhead.",
+      "Considers DataLoader-managed pinning and non-blocking copies.",
+      "Measures the end-to-end pipeline and respects asynchronous source-memory behavior."
+    ],
+    "weak_answer_signals": [
+      "Assumes pinned memory always speeds up every transfer.",
+      "Mutates or reuses source storage before an asynchronous copy is complete."
+    ],
+    "common_mistakes": [
+      "Timing only the copy call without synchronizing.",
+      "Ignoring pinned host-memory pressure or input-loader bottlenecks."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can manual pinning plus non-blocking transfer be slower?",
+        "short_answer": "Yes. Pinning overhead can outweigh the transfer benefit."
+      },
+      {
+        "question": "What should be measured?",
+        "short_answer": "The actual input pipeline and end-to-end training throughput."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "A guide on good usage of non_blocking and pin_memory() in PyTorch",
+        "publisher": "PyTorch tutorials",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15.0 tutorial documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified manual pinning can be slower than direct transfer and source mutation can be unsafe during an asynchronous host-to-device copy."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-understand-ddp-buffer-broadcast-semantics",
+    "bank": "ai-ml-engineer",
+    "topic": "Distributed buffer synchronization",
+    "subtopic": "DDP buffer broadcast versus gradient reduction",
+    "level": "L3",
+    "type": "debugging",
+    "question": "Two DDP replicas have different BatchNorm running statistics after a forward pass. What should you check about `broadcast_buffers`?",
+    "what_is_assessed": "Whether the candidate distinguishes DDP's buffer broadcast behavior from gradient all-reduction and understands its timing.",
+    "short_answer": "DDP's `broadcast_buffers` option (enabled by default) broadcasts module buffers such as BatchNorm statistics from rank 0 to other replicas at the beginning of forward; it does not all-reduce those buffers like parameter gradients. Local forward updates can therefore differ until the next synchronization. If the model requires synchronized batch statistics, evaluate `SyncBatchNorm` or another explicit aggregation strategy.",
+    "deep_explanation": "PyTorch's DistributedDataParallel documentation states that gradients are all-reduced, while buffers such as BatchNorm statistics are broadcast from rank 0 to other replicas each iteration. The `broadcast_buffers` setting controls this synchronization at the beginning of forward. It should not be mistaken for global averaging of per-rank running statistics.",
+    "strong_answer_signals": [
+      "Distinguishes gradient all-reduce from buffer broadcast.",
+      "Names the default forward-start timing and rank-0 source.",
+      "Uses SyncBatchNorm or explicit aggregation when global batch statistics are required."
+    ],
+    "weak_answer_signals": [
+      "Assumes DDP automatically averages BatchNorm running statistics.",
+      "Disables buffer broadcasts without checking model-state consistency."
+    ],
+    "common_mistakes": [
+      "Confusing parameter gradients with module buffers.",
+      "Assuming a buffer broadcast synchronizes the batch statistics computed independently on every rank."
+    ],
+    "follow_ups": [
+      {
+        "question": "Are BatchNorm buffers all-reduced by DDP?",
+        "short_answer": "No. DDP broadcasts buffers from rank 0; gradients are all-reduced."
+      },
+      {
+        "question": "What can synchronize batch statistics across workers?",
+        "short_answer": "SyncBatchNorm or another explicit aggregation mechanism."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified DDP all-reduces gradients but broadcasts buffers from rank 0 at forward start; distinguished this from global BatchNorm statistic aggregation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-match-sparse-embedding-gradients-to-optimizer",
+    "bank": "ai-ml-engineer",
+    "topic": "Sparse embedding gradients",
+    "subtopic": "Optimizer and device support",
+    "level": "L2",
+    "type": "debugging",
+    "question": "You enable `sparse=True` on a large `nn.Embedding` and the training step fails with an unsupported sparse-gradient operation. What should you verify?",
+    "what_is_assessed": "Whether the candidate checks the documented sparse-gradient optimizer and device support instead of assuming every optimizer supports sparse embedding updates.",
+    "short_answer": "Check whether the chosen optimizer and device support sparse gradients. PyTorch's `nn.Embedding` documentation lists only a limited set: SGD and SparseAdam on CPU or CUDA, and Adagrad on CPU. If your optimizer is unsupported, choose a compatible optimizer or keep dense gradients and measure the memory and performance trade-off; do not assume converting the gradient is free.",
+    "deep_explanation": "The PyTorch Embedding reference explicitly limits sparse-gradient optimizer support. This list is versioned and can change, so verify the documentation for the deployed PyTorch version and target device. Sparse gradients can reduce work when only a small subset of embedding rows is touched, but they constrain optimizer choices and do not automatically make the whole training pipeline faster.",
+    "strong_answer_signals": [
+      "Checks both optimizer and device support.",
+      "Names the documented supported optimizers accurately.",
+      "Treats sparse gradients as a workload-dependent trade-off."
+    ],
+    "weak_answer_signals": [
+      "Assumes AdamW supports sparse gradients because it works with dense tensors.",
+      "Enables sparse gradients without checking the target device or optimizer."
+    ],
+    "common_mistakes": [
+      "Treating sparse=True as a universal optimizer optimization.",
+      "Densifying gradients without accounting for memory cost."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which listed optimizer supports sparse gradients on CUDA?",
+        "short_answer": "SGD and SparseAdam; Adagrad is listed for CPU only."
+      },
+      {
+        "question": "Does sparse=True guarantee faster training?",
+        "short_answer": "No. It depends on access patterns, optimizer support, device, and pipeline costs."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Embedding API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented supported sparse-gradient optimizer/device combinations for PyTorch 2.15 and avoided claiming sparse gradients always improve performance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-clone-embedding-weight-before-max-norm-forward",
+    "bank": "ai-ml-engineer",
+    "topic": "Embedding max-norm autograd behavior",
+    "subtopic": "In-place renormalization and differentiable weight use",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A differentiable operation uses `embedding.weight` before a forward pass, and the embedding has `max_norm` set. Why might autograd fail?",
+    "what_is_assessed": "Whether the candidate knows that Embedding with max_norm can modify its weight in place during forward and how to preserve the earlier computation's autograd history.",
+    "short_answer": "When `max_norm` is set, `nn.Embedding` renormalizes its weight tensor in place during forward. If a differentiable operation already used that weight, the in-place change can invalidate autograd's saved version. Clone the weight for the earlier operation, or restructure the computation so the mutation does not conflict.",
+    "deep_explanation": "PyTorch's Embedding documentation explicitly warns that `max_norm` modifies the weight tensor in place. If a differentiable operation on `Embedding.weight` occurs before the Embedding forward, clone the weight for that earlier operation so autograd retains the needed version. This is a conditional interaction; the warning does not mean every Embedding with `max_norm` fails.",
+    "strong_answer_signals": [
+      "Identifies the in-place renormalization during forward.",
+      "Connects it to autograd's saved tensor version.",
+      "Applies cloning or restructures operations only when the weight was used differentiably beforehand."
+    ],
+    "weak_answer_signals": [
+      "Assumes max_norm is only a read-only constraint.",
+      "Removes max_norm without checking the intended norm behavior."
+    ],
+    "common_mistakes": [
+      "Cloning after the in-place mutation has already happened.",
+      "Treating all Embedding uses as affected regardless of operation order."
+    ],
+    "follow_ups": [
+      {
+        "question": "When does Embedding perform the in-place weight change?",
+        "short_answer": "During forward when `max_norm` is not None."
+      },
+      {
+        "question": "Why clone before the forward in this case?",
+        "short_answer": "To preserve the weight version used by the earlier differentiable operation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Embedding API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the conditional in-place max_norm behavior and the documented clone recommendation when a differentiable operation uses the weight before forward."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-keep-padding-index-out-of-embedding-updates",
+    "bank": "ai-ml-engineer",
+    "topic": "Embedding padding indices",
+    "subtopic": "Fixed padding vectors and gradient behavior",
+    "level": "L2",
+    "type": "concept",
+    "question": "A team sets `padding_idx` on `nn.Embedding` and assumes that row is trainable because it starts at zero. Is that assumption correct?",
+    "what_is_assessed": "Whether the candidate understands that padding_idx excludes the row from gradient updates and that zero initialization is a default, not an immutable rule.",
+    "short_answer": "No. The row at `padding_idx` does not contribute to the gradient and is not updated by training, so it acts as a fixed padding vector. A newly created embedding initializes that row to zeros by default, but the row can be assigned another value when a nonzero padding representation is needed.",
+    "deep_explanation": "PyTorch's `nn.Embedding` reference states that entries at `padding_idx` do not contribute to the gradient and remain fixed during training. For a newly constructed module, the row defaults to all zeros, but it can be set to another value. Do not assume `padding_idx` is a trainable special token or that zero initialization is guaranteed after custom initialization or checkpoint loading.",
+    "strong_answer_signals": [
+      "States the padding row is excluded from gradient updates.",
+      "Distinguishes default zero initialization from a fixed zero requirement.",
+      "Checks custom initialization or loaded checkpoints when the padding representation matters."
+    ],
+    "weak_answer_signals": [
+      "Assumes the padding row is updated normally.",
+      "Assumes `padding_idx` always forces the row to remain zero."
+    ],
+    "common_mistakes": [
+      "Using padding_idx for a token that should be learned.",
+      "Relying on zero initialization after overwriting or loading the embedding weights."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does a new Embedding initialize the padding row to zero?",
+        "short_answer": "Yes, by default; it can be assigned another value."
+      },
+      {
+        "question": "Will gradient descent update that row?",
+        "short_answer": "No. Entries at padding_idx do not contribute to the gradient."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Embedding API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified padding_idx excludes the row from gradient updates and that zero initialization is the default for a newly constructed module, not an immutable constraint."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-match-sparse-embedding-gradients-to-optimizer"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-detach-shares-storage-unless-cloned",
+    "bank": "ai-ml-engineer",
+    "topic": "Tensor detach and storage aliasing",
+    "subtopic": "Autograd history versus storage ownership",
+    "level": "L2",
+    "type": "debugging",
+    "question": "You call `x.detach()` before an in-place normalization, but the original `x` changes too. Why?",
+    "what_is_assessed": "Whether the candidate distinguishes detaching from autograd history from making an independent copy of tensor storage.",
+    "short_answer": "`detach()` removes the tensor from the autograd graph but shares storage with the original tensor. In-place changes to either view can therefore be visible through the other. Use `x.detach().clone()` when you need both no autograd history and independent storage; use `clone()` only if the new copy should still participate in autograd.",
+    "deep_explanation": "PyTorch documents that the result of `detach()` never requires gradients and shares storage with the original tensor. In-place modifications are visible through both, and may trigger correctness-check errors. `clone()` creates separate storage while preserving gradient relationships by default, so `detach().clone()` is appropriate when both graph detachment and storage independence are intended.",
+    "strong_answer_signals": [
+      "Explains that detach changes autograd history, not storage ownership.",
+      "Uses detach().clone() for an independent non-differentiable copy.",
+      "Recognizes clone alone preserves differentiability."
+    ],
+    "weak_answer_signals": [
+      "Assumes detach always copies tensor data.",
+      "Uses an in-place mutation without considering aliases."
+    ],
+    "common_mistakes": [
+      "Confusing detach with clone.",
+      "Using detach().clone() when gradients through the copy are still required."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does detach make a copy?",
+        "short_answer": "No. It shares storage with the original tensor."
+      },
+      {
+        "question": "How do you create a detached copy with separate storage?",
+        "short_answer": "Use `x.detach().clone()`."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.Tensor.detach",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.detach.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 Tensor.detach API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.detach.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified detach removes autograd history while sharing storage, and clone creates separate storage while preserving gradients by default."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-understand-what-empty-cache-releases",
+    "bank": "ai-ml-engineer",
+    "topic": "CUDA allocator and empty_cache",
+    "subtopic": "Allocated versus cached GPU memory",
+    "level": "L2",
+    "type": "debugging",
+    "question": "After deleting temporary tensors, `nvidia-smi` still shows GPU memory held by PyTorch. What does `torch.cuda.empty_cache()` actually do?",
+    "what_is_assessed": "Whether the candidate distinguishes live tensor allocations from unoccupied memory held by PyTorch's caching allocator.",
+    "short_answer": "`empty_cache()` releases unoccupied cached blocks from PyTorch's caching allocator so other GPU applications can use them and they become visible as free in `nvidia-smi`. It does not free memory owned by live tensors or increase the total memory available for new PyTorch allocations. It may help fragmentation in some cases, but first identify live references and measure allocator behavior.",
+    "deep_explanation": "PyTorch documents that `torch.cuda.empty_cache()` releases unoccupied cached memory to other applications and can make it visible in `nvidia-smi`. It does not increase the amount of GPU memory available to PyTorch, although it may reduce fragmentation in certain cases. A persistent memory footprint can therefore reflect caching rather than a leak; live tensors remain allocated until their references are released.",
+    "strong_answer_signals": [
+      "Distinguishes allocated live tensors from unoccupied cached blocks.",
+      "Explains that empty_cache returns unused cache to other applications.",
+      "Does not present it as a way to free live tensors or increase PyTorch capacity."
+    ],
+    "weak_answer_signals": [
+      "Calls empty_cache after every batch as a guaranteed memory fix.",
+      "Assumes it deletes tensors that still have references."
+    ],
+    "common_mistakes": [
+      "Confusing allocator-reserved memory with active tensor allocations.",
+      "Using empty_cache as a substitute for finding retained tensors or measuring fragmentation."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does empty_cache free live tensor storage?",
+        "short_answer": "No. It releases only unoccupied cached blocks."
+      },
+      {
+        "question": "Can it ever help?",
+        "short_answer": "It can help other GPU applications or reduce fragmentation in some cases."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.cuda.empty_cache",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.0/generated/torch.cuda.empty_cache.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 CUDA API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.0/generated/torch.cuda.empty_cache.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the allocator only releases unoccupied cached memory, does not increase memory available to PyTorch, and may help fragmentation in certain cases."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

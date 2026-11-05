@@ -58,28 +58,28 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Every included item matches schema | PASS | `pnpm --filter @workspace/career-reality run validate:question-banks` |
-| Every included item has a cited source and retrieval date | PASS | 112 item records across five role maps |
-| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 112 |
+| Every included item has a cited source and retrieval date | PASS | 128 item records across five role maps |
+| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 128 |
 | Every executable code sample executed or visibly marked | PASS | No current item contains code; `code: null` and `code_executed: n.a.` |
-| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 112-item current set |
-| Source URL reachability | PASS (point-in-time) | All 65 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
+| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 128-item current set |
+| Source URL reachability | PASS (point-in-time) | All 78 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
 | Structured data valid | REVIEW REQUIRED | Interview guide routes are noindex app shells; dedicated structured data is intentionally not added |
 | axe, keyboard, zoom, Lighthouse gates | PARTIAL | Keyboard tab sequence and 640px/320px overflow checks pass; full screen-reader, actual browser-zoom, axe, and Lighthouse checks remain open |
 | Privacy policy matches local-only progress storage | PARTIAL | Browser localStorage, export/import, and confirmed clear are implemented; browser test observes no non-GET request from progress interactions |
-| All banks meet minimum counts | FAIL | 112 items total; each of four short banks needs 66 more |
-| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 112 draft items; no human reviewer recorded |
+| All banks meet minimum counts | FAIL | 128 items total; short banks need 61, 62, 62, and 63 more respectively |
+| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 128 draft items; no human reviewer recorded |
 | No invented publication or expert-review facts | PASS | Status text explicitly leaves expert review pending |
-| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 112 records |
+| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 128 records |
 | Core breadth/priority curation | PARTIAL | One authored anchor per short bank is manually marked Core; full topic breadth and path sequencing remain unfinished |
 | 16-module role pages and browser-only learning tools | PARTIAL | Five noindex role routes include search, filters, readiness, study sessions and 1/7/14/30-day plans, mock rehearsal, flashcards, scenario/design prompts, quick references, interview-stage outline, Core paths, print support and local progress backup. Spaced repetition, deeper authored modules and executed code examples remain absent |
 | Privacy and network capture for guide state | PARTIAL | Policy updated for the browser-only progress; automated network/storage capture has not been run |
 
 ## Verification statistics
 
-- Current items: 112 (76 Data Engineer and nine for each other role).
-- Source records retrieved: 112; each includes publisher, version/context, and retrieval date.
-- Independent re-derivation: 112 agreements; recent additions cover missing-data strategy, mixed-precision debugging, latency optimization, and application-side tool execution.
-- Code examples: 0; executed 0; not applicable 112.
+- Current items: 128 (76 Data Engineer, 14 Data Scientist, 13 AI/ML Engineer, 13 Generative AI Engineer, and 12 Agentic AI Engineer).
+- Source records retrieved: 128; each includes publisher, version/context, and retrieval date.
+- Independent re-derivation: 128 agreements; recent additions cover power and multiplicity, paired tests/bootstrap, p-value interpretation, evaluation modes and AMP, canary rollout and drift, batch/streaming/caching, grader calibration, and bounded agent controls.
+- Code examples: 0; executed 0; not applicable 128.
 - Dropped items: 0.
 - Human expert reviews: 0.
 - Near-duplicate threshold: 0.82 Jaccard similarity over normalized question terms; the current set is still too small to establish future coverage.
@@ -116,10 +116,10 @@ Five draft role routes now share one guide interface. The following module statu
 | Role | Items | By level | By type | Core | Minimum | Coverage matrix |
 | --- | ---: | --- | --- | ---: | ---: | --- |
 | Data Engineer | 76 | L1 8, L2 53, L3 15 | Concept 18, scenario 20, debugging 27, trade-off 11 | 0 | 75 | Minimum met; topic coverage remains incomplete |
-| Data Scientist | 9 | L2 9 | Concept 2, trade-off 4, scenario 3 | 1 | 75 | 66 short; role scope incomplete |
-| AI/ML Engineer | 9 | L2 3, L3 6 | Debugging 7, scenario 2 | 1 | 75 | 66 short; role scope incomplete |
-| Generative AI Engineer | 9 | L2 6, L3 3 | Concept 1, scenario 5, trade-off 3 | 1 | 75 | 66 short; role scope incomplete |
-| Agentic AI Engineer | 9 | L2 7, L3 2 | Scenario 6, trade-off 1, debugging 2 | 1 | 75 | 66 short; role scope incomplete |
+| Data Scientist | 14 | L2 12, L3 2 | Concept 3, trade-off 4, scenario 6, debugging 1 | 1 | 75 | 61 short; role scope incomplete |
+| AI/ML Engineer | 13 | L2 4, L3 9 | Debugging 9, scenario 4 | 1 | 75 | 62 short; role scope incomplete |
+| Generative AI Engineer | 13 | L2 8, L3 5 | Concept 1, scenario 5, trade-off 5, debugging 2 | 1 | 75 | 62 short; role scope incomplete |
+| Agentic AI Engineer | 12 | L2 7, L3 5 | Scenario 7, trade-off 2, debugging 3 | 1 | 75 | 63 short; role scope incomplete |
 
 One anchor question is manually selected as Core in each short bank; the full criteria-led path is not complete. The criteria are documented in `docs/question-bank-style-guide.md`.
 
@@ -154,7 +154,7 @@ This feature-only audit is not yet performed against leading public resources. N
 
 ## Review queue and privacy
 
-`docs/needs-sme-review.md` is generated from the item records and lists all 112 items. It does not record approval; every listed item remains pending independent human review.
+`docs/needs-sme-review.md` is generated from the item records and lists all 128 items. It does not record approval; every listed item remains pending independent human review.
 
 Draft guide routes remain noindex and outside the sitemap. Readiness, Core, and revised-question selections are stored in browser localStorage; export/import is manual. The automated browser test observes no non-GET request from progress interactions, but a broader packet and storage audit remains open.
 

@@ -662,5 +662,3478 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-plan-experiment-power-before-data-collection",
+    "bank": "data-scientist",
+    "topic": "Statistical power and sample size",
+    "subtopic": "Prospective power analysis",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A product experiment often ends with an uncertain result. What should the team specify before choosing its sample size?",
+    "what_is_assessed": "Whether the candidate frames sample-size planning around a prespecified effect, error rate, power, and allocation rather than interpreting an inconclusive test after the fact.",
+    "short_answer": "Define the smallest effect worth detecting, the test and significance level, desired power, and the group allocation ratio, using assumptions appropriate to the outcome. A power analysis can solve for the needed sample size given the other inputs. Power is the probability of rejecting the null when the alternative is true, so inadequate sample size raises the chance of a Type II error. Planning does not guarantee a significant result or make an underpowered negative result proof of no effect.",
+    "deep_explanation": "Statsmodels' independent-samples power tools parameterize effect size, sample size, significance level, power, and group ratio, solving for one when the others are specified. The documentation defines power as one minus the Type II error probability. In practice, the team should select assumptions and a practically meaningful effect before seeing outcomes and use a method aligned to the study design; the cited function is for a two-sample t-test and is not a universal design calculator.",
+    "strong_answer_signals": [
+      "Chooses a meaningful target effect and desired power before data collection.",
+      "Names the significance level and allocation ratio as part of the calculation.",
+      "Explains that low power makes false negatives more likely and does not prove no effect."
+    ],
+    "weak_answer_signals": [
+      "Chooses sample size solely from a calendar deadline.",
+      "Treats a nonsignificant result as evidence of no effect regardless of uncertainty."
+    ],
+    "common_mistakes": [
+      "Using an optimistic effect size without grounding it in a practical decision threshold.",
+      "Changing the target effect or test assumptions after seeing the result."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does power represent?",
+        "short_answer": "The probability the test rejects the null when the alternative hypothesis is true."
+      },
+      {
+        "question": "What does a power calculation solve for?",
+        "short_answer": "One design parameter such as sample size, given the other assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "TTestIndPower.solve_power",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestIndPower.solve_power.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "statsmodels 0.15.0 stable documentation; the referenced calculator is for a two-sample t-test.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.statsmodels.org/stable/generated/statsmodels.stats.power.TTestIndPower.solve_power.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's power definition and supported inputs; restricted the example to the documented independent two-sample t-test rather than implying a universal experiment calculator."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-control-false-discoveries-across-many-segments",
+    "bank": "data-scientist",
+    "topic": "Multiple testing and false discovery",
+    "subtopic": "Correction across segment hypotheses",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An analyst tests treatment effects in 30 customer segments and highlights the smallest p-value. What should they consider before calling it a discovery?",
+    "what_is_assessed": "Whether the candidate accounts for multiplicity and distinguishes exploratory segment findings from confirmatory evidence.",
+    "short_answer": "Recognize that testing many hypotheses increases the chance of false discoveries. Define the family of comparisons and the error rate that matters, then choose a suitable correction—for example, a family-wise error procedure when limiting any false positive is key, or a false-discovery-rate procedure for a broader set of exploratory findings. Report the adjustment and treat the result as exploratory unless it was prespecified or confirmed independently. The correction does not remove bias from poor measurement or post-hoc segment selection.",
+    "deep_explanation": "Statsmodels provides multiple-testing corrections and separate false-discovery-rate procedures, including Benjamini-Hochberg for independent or positively correlated tests and Benjamini-Yekutieli for more general dependence. The appropriate procedure depends on the hypothesis family, dependence assumptions, and decision costs. A correction does not turn a post-hoc pattern into a prespecified causal result; transparent reporting and follow-up confirmation remain important.",
+    "strong_answer_signals": [
+      "Identifies the increased false-positive risk from many simultaneous tests.",
+      "Chooses the error criterion based on whether the goal is confirmatory control or exploration.",
+      "Labels post-hoc subgroup results and seeks independent confirmation."
+    ],
+    "weak_answer_signals": [
+      "Reports only the smallest unadjusted p-value.",
+      "Applies a correction without stating the hypothesis family or assumptions."
+    ],
+    "common_mistakes": [
+      "Treating every segment as an independent confirmatory test after inspecting results.",
+      "Claiming multiplicity correction repairs outcome or exposure measurement problems."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does false-discovery-rate control target?",
+        "short_answer": "The expected proportion of false discoveries among rejected hypotheses under the procedure's assumptions."
+      },
+      {
+        "question": "What should be reported for a segment analysis?",
+        "short_answer": "The hypothesis family, correction method, assumptions, and whether the analysis was prespecified."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "fdrcorrection",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.multitest.fdrcorrection.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "statsmodels 0.15.0 stable documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.statsmodels.org/stable/generated/statsmodels.stats.multitest.fdrcorrection.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's FDR methods and dependence descriptions; framed method selection as dependent on the testing objective and assumptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-investigate-sample-ratio-mismatch-before-reading-lift"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-paired-test-for-repeated-observations",
+    "bank": "data-scientist",
+    "topic": "Statistical test design",
+    "subtopic": "Paired versus independent samples",
+    "level": "L2",
+    "type": "scenario",
+    "question": "The same customers are measured before and after a product change. Which sampling relationship should guide the test choice?",
+    "what_is_assessed": "Whether the candidate accounts for dependence created by repeated measurements on the same units.",
+    "short_answer": "The observations are paired, not independent. Compare within-customer differences with a method designed for related samples, and preserve the pairing when handling missing values. An independent-samples test would ignore that structure. The exact test still depends on the outcome and design assumptions; the SciPy paired t-test, for example, expects two same-shaped related samples and tests whether their average values are equal.",
+    "deep_explanation": "SciPy defines `ttest_rel` for two related or repeated samples and requires the input arrays to have the same shape. That supports the design distinction in this scenario, but does not mean the paired t-test is the right method for every outcome or data distribution. Choose an analysis that matches the experimental unit and outcome, and document how incomplete pairs are handled.",
+    "strong_answer_signals": [
+      "Recognizes repeated observations on the same customer are paired.",
+      "Preserves within-unit pairing in the analysis.",
+      "Does not generalize the paired t-test to every outcome or design."
+    ],
+    "weak_answer_signals": [
+      "Treats before and after measurements as independent observations.",
+      "Chooses a test solely by comparing sample sizes."
+    ],
+    "common_mistakes": [
+      "Breaking the pairing when filtering missing observations.",
+      "Claiming paired analysis automatically removes all confounding."
+    ],
+    "follow_ups": [
+      {
+        "question": "What null does the cited paired t-test evaluate?",
+        "short_answer": "That the two related samples have identical average values."
+      },
+      {
+        "question": "When would an independent-samples test be more appropriate?",
+        "short_answer": "When the groups contain independent units rather than repeated or matched observations."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "ttest_rel",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "SciPy 1.18.0 stable documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the method is defined for two related or repeated samples with matching shapes; limited the conclusion to the sampling relationship and retained outcome-specific assumptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-pvalue-as-model-incompatibility-not-truth",
+    "bank": "data-scientist",
+    "topic": "Statistical test interpretation",
+    "subtopic": "P-value meaning and limits",
+    "level": "L2",
+    "type": "concept",
+    "question": "A result has p = 0.03. What can you conclude, and what does that number not tell you?",
+    "what_is_assessed": "Whether the candidate interprets a p-value conditionally and avoids equating significance with effect size or hypothesis probability.",
+    "short_answer": "Under the specified model and its assumptions, the p-value describes how incompatible the observed data are with that model. It is not the probability that the null hypothesis is true, does not measure the effect's size or importance, and should not alone determine a decision. Report the study design, effect estimate and uncertainty, assumptions, and complete results in context rather than treating a threshold as a verdict.",
+    "deep_explanation": "The American Statistical Association's statement lists principles that p-values can indicate incompatibility between data and a specified model, but do not measure the probability that a hypothesis is true or the size and importance of an effect. It also cautions against basing scientific, business, or policy conclusions only on whether a p-value passes a threshold and emphasizes transparency and context. These principles do not select a particular alternative analysis; they bound what can be claimed from the p-value alone.",
+    "strong_answer_signals": [
+      "States the conditional relation to a specified statistical model.",
+      "Rejects interpreting p as the probability the null is true.",
+      "Separates statistical evidence from effect size, practical value, and decision-making."
+    ],
+    "weak_answer_signals": [
+      "Says there is a 3% chance the null hypothesis is true.",
+      "Treats p < 0.05 as proof of an important or reproducible effect."
+    ],
+    "common_mistakes": [
+      "Reporting only whether a p-value crosses an arbitrary threshold.",
+      "Interpreting statistical significance as effect magnitude."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does a p-value measure effect size?",
+        "short_answer": "No. It does not measure the size or importance of an effect."
+      },
+      {
+        "question": "What should accompany a p-value?",
+        "short_answer": "The design, assumptions, effect estimate and uncertainty, and transparent reporting in context."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Statement on Statistical Significance and P-Values",
+        "publisher": "American Statistical Association",
+        "url": "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "ASA statement published 2016; foundational guidance.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Cross-checked the source's principles on conditional model incompatibility, hypothesis probability, effect size, thresholds, and reporting."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-plan-experiment-power-before-data-collection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-preserve-pairs-in-bootstrap-uncertainty",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Paired bootstrap resampling",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A team bootstraps the difference between before-and-after outcomes but resamples each group independently. What could be wrong?",
+    "what_is_assessed": "Whether the candidate preserves matched units when resampling a paired statistic.",
+    "short_answer": "If each before-and-after value belongs to the same unit, independent resampling breaks the pair and changes the statistic's sampling structure. Resample paired indices together so both values for each selected unit remain matched, then compute the statistic on each resample. Also identify the actual independent sampling unit—such as customer or cluster—before bootstrapping. SciPy's paired option uses the same sampled indices for all arrays.",
+    "deep_explanation": "SciPy's bootstrap documentation specifies that `paired=True` resamples one index array and applies it to all input arrays, while the default independently resamples each array. This preserves the correspondence for a paired statistic. The function documentation does not establish that every dataset is iid at the row level; clustered or time-dependent designs require a resampling strategy consistent with their sampling unit and dependence structure.",
+    "strong_answer_signals": [
+      "Recognizes that independent resampling destroys the matching.",
+      "Resamples shared indices for the paired arrays.",
+      "Checks the independent sampling unit and any clustering or temporal dependence."
+    ],
+    "weak_answer_signals": [
+      "Resamples before and after outcomes independently despite matched units.",
+      "Assumes bootstrap resampling fixes dependence or sampling bias automatically."
+    ],
+    "common_mistakes": [
+      "Treating rows as independent when customers or sites are the sampled units.",
+      "Reporting an interval without stating the resampling unit."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does paired resampling preserve?",
+        "short_answer": "The correspondence between values measured on the same sampled unit."
+      },
+      {
+        "question": "Does paired=True handle cluster sampling automatically?",
+        "short_answer": "No. The resampling design must still match the actual independent sampling unit."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "bootstrap",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "SciPy 1.18.0 stable documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified paired=True applies shared resampled indices across arrays; limited the recommendation to preserving documented pairing and noted that cluster or temporal dependence needs a matching design."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-use-paired-test-for-repeated-observations"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-plan-sequential-testing-before-repeated-peeking",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Sequential testing and planned monitoring",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A team checks its A/B test every day and stops as soon as p < 0.05. What is the statistical risk, and what should it decide before launch?",
+    "what_is_assessed": "Whether the candidate recognizes false-positive inflation from repeated fixed-horizon testing and chooses a valid monitoring design in advance.",
+    "short_answer": "Repeatedly checking a conventional fixed-horizon test and stopping at the first significant result can raise the false-positive rate above the chosen level. Before launch, specify a fixed sample size and analysis time, or choose a sequential-testing procedure designed for valid interim decisions. Do not switch to a sequential method only after inspecting results. Define how the team will handle stopping for efficacy, harm, or futility under the selected procedure.",
+    "deep_explanation": "Statsig's frequentist sequential-testing guide explains that fixed-horizon tests are designed around a planned sample size and analysis, while repeated peeking can inflate false positives. It describes sequential methods that support interim reads with adjusted inference. The exact method and stopping boundaries should be chosen for the experiment and implementation; this source does not make every platform procedure interchangeable.",
+    "strong_answer_signals": [
+      "Explains why repeated unadjusted testing changes the error rate.",
+      "Plans either a fixed-horizon analysis or a sequential procedure before launch.",
+      "Does not use a sequential method retroactively after seeing results."
+    ],
+    "weak_answer_signals": [
+      "Claims daily p-value checks preserve the original significance level.",
+      "Stops when a result crosses a threshold without a valid interim-testing plan."
+    ],
+    "common_mistakes": [
+      "Confusing a fixed-horizon method with a sequential method.",
+      "Assuming sequential testing means the team can ignore stopping rules."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the core risk of unadjusted peeking?",
+        "short_answer": "The false-positive rate can exceed the chosen significance level."
+      },
+      {
+        "question": "When should the interim analysis method be selected?",
+        "short_answer": "Before the experiment begins, as part of the analysis plan."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Frequentist Sequential Testing",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/advanced-setup/sequential-testing",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Statsig experiment documentation retrieved 2026-11-04; procedure-specific assumptions apply.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.statsig.com/experiments/advanced-setup/sequential-testing"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's distinction between fixed-horizon testing and sequential testing and its warning that continuous peeking inflates false positives; stated that procedure choice must be made in advance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-plan-experiment-power-before-data-collection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-expanding-time-series-validation-folds",
+    "bank": "data-scientist",
+    "topic": "Time-series model evaluation",
+    "subtopic": "Expanding windows and comparable folds",
+    "level": "L2",
+    "type": "concept",
+    "question": "In a time-series cross-validation report, later folds have more training data than earlier folds. Is that necessarily a bug?",
+    "what_is_assessed": "Understanding of expanding-window validation and the assumptions needed for comparable time-based test folds.",
+    "short_answer": "Not necessarily. Scikit-learn's TimeSeriesSplit uses earlier folds to train later splits, so successive training sets grow. To compare test metrics across folds as equal-duration periods, the samples should be equally spaced; otherwise the same number of rows may represent different time spans. Confirm that the split reflects deployment and that no future information enters training.",
+    "deep_explanation": "The TimeSeriesSplit documentation describes time-ordered splits, with each successive training set accumulating earlier data and each test fold using the next segment. It notes that equally spaced samples are needed for test sets to cover comparable durations. Expanding training windows are therefore expected in this splitter; they are not evidence of leakage by themselves. The analyst must still choose a split and feature-window policy that match the forecasting task.",
+    "strong_answer_signals": [
+      "Recognizes expanding training sets as expected for the documented splitter.",
+      "Checks sample spacing when comparing fold durations.",
+      "Verifies the split matches the intended forecast horizon and deployment timeline."
+    ],
+    "weak_answer_signals": [
+      "Assumes every cross-validation fold must have the same training size.",
+      "Treats chronological ordering alone as proof that feature construction cannot leak."
+    ],
+    "common_mistakes": [
+      "Comparing metrics from unequal time spans as if each fold covered the same duration.",
+      "Using random shuffling for a task that predicts future observations."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why do later training sets grow in TimeSeriesSplit?",
+        "short_answer": "Each split includes earlier folds in training."
+      },
+      {
+        "question": "What supports equal-duration test folds?",
+        "short_answer": "Equally spaced samples and a consistent test size."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "TimeSeriesSplit",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the expanding training-set behavior and equal-spacing caveat; kept the question distinct from generic chronological splitting by focusing on fold comparability."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-separate-selection-and-final-test"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-explain-low-permutation-importance-with-correlated-features",
+    "bank": "data-scientist",
+    "topic": "Feature attribution and correlated inputs",
+    "subtopic": "Permutation importance under multicollinearity",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A high-performing model shows near-zero permutation importance for every feature. The features are strongly correlated. How could both observations be true?",
+    "what_is_assessed": "Whether the candidate understands that correlated predictors can substitute for one another during individual feature permutation.",
+    "short_answer": "When features carry redundant information, permuting one may have little effect because correlated alternatives still support the prediction. Individual permutation scores can therefore understate the joint contribution of a correlated group even when held-out predictive performance is high. Inspect feature correlation and validate the interpretation with grouped or representative-feature analyses; do not conclude that the model uses no information.",
+    "deep_explanation": "Scikit-learn demonstrates that multicollinear features can produce low individual permutation importance despite strong test accuracy, because correlated features substitute for one another. The documentation example clusters features by rank correlation and selects a representative from each cluster as one possible analysis. That treatment changes the interpretation of individual scores; it does not establish causal importance or a universal way to resolve correlated features.",
+    "strong_answer_signals": [
+      "Explains redundancy among correlated features as the reason individual scores can be low.",
+      "Checks held-out model performance and feature relationships before interpreting the scores.",
+      "Considers grouped or representative-feature analysis without claiming causal importance."
+    ],
+    "weak_answer_signals": [
+      "Concludes that all features are useless despite strong predictive performance.",
+      "Treats permutation importance as a causal effect."
+    ],
+    "common_mistakes": [
+      "Interpreting individual importance independently when correlated substitutes remain.",
+      "Using training-only scores as proof of generalizable feature importance."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can individual permutation scores be low for correlated features?",
+        "short_answer": "Other correlated features can preserve similar predictive information."
+      },
+      {
+        "question": "Does permutation importance establish causality?",
+        "short_answer": "No. It measures score sensitivity to feature shuffling, not a causal effect."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Permutation Importance with Multicollinear or Correlated Features",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable example.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented multicollinearity example and kept the inference limited to predictive redundancy and score sensitivity, not causal importance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-interpret-macro-and-weighted-multiclass-scores"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-pre-exposure-covariates-for-cuped",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "CUPED variance reduction",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "An experiment metric is strongly correlated with the same users' pre-experiment behavior. How could that information improve sensitivity without changing treatment assignment?",
+    "what_is_assessed": "Whether the candidate understands pre-exposure covariate adjustment as a variance-reduction technique and avoids using post-treatment information.",
+    "short_answer": "Consider CUPED, which adjusts user-level metric values using a relevant pre-exposure measurement to reduce variance when the metric is correlated over time. Use only information measured before exposure, preserve randomized assignment, and verify that the adjustment matches the metric and population. CUPED can increase precision; it does not repair a broken randomization or justify conditioning on post-treatment outcomes.",
+    "deep_explanation": "Statsig's CUPED guide describes reducing a metric's variance by adjusting each user's metric using pre-exposure data, and recommends it when the metric is autocorrelated over time. It also notes product-specific windows and handling for users without pre-exposure data. The statistical principle is broader than those implementation defaults; do not assume the provider's window applies universally.",
+    "strong_answer_signals": [
+      "Uses a pre-exposure measure related to the experiment metric.",
+      "Describes the benefit as variance reduction and increased precision.",
+      "Avoids post-treatment covariates and does not claim to fix assignment bias."
+    ],
+    "weak_answer_signals": [
+      "Uses a post-treatment variable to adjust the treatment effect.",
+      "Claims CUPED makes randomization or experiment-quality checks unnecessary."
+    ],
+    "common_mistakes": [
+      "Using an unrelated covariate without checking its association with the outcome.",
+      "Treating a platform's default lookback window as a universal statistical rule."
+    ],
+    "follow_ups": [
+      {
+        "question": "What information should CUPED use?",
+        "short_answer": "A relevant measurement recorded before the user's treatment exposure."
+      },
+      {
+        "question": "What is its main intended benefit?",
+        "short_answer": "Reducing metric variance to improve experiment sensitivity."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "CUPED",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/statistical-methods/methodologies/cuped",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Statsig CUPED documentation retrieved 2026-11-04; platform windows are implementation-specific.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.statsig.com/experiments/statistical-methods/methodologies/cuped"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's use of per-user pre-exposure values and variance reduction for autocorrelated metrics; separated the statistical principle from platform-specific windows and exclusions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-plan-experiment-power-before-data-collection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-set-time-series-gap-for-overlapping-label-windows",
+    "bank": "data-scientist",
+    "topic": "Time-series model evaluation",
+    "subtopic": "Gap between train and test windows",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A forecasting target uses the next 14 days, so adjacent training and test windows overlap in time. What split setting should you consider?",
+    "what_is_assessed": "Whether the candidate recognizes overlap leakage at a time boundary and sizes a temporal gap to the prediction setup.",
+    "short_answer": "Consider excluding a gap between the end of each training set and the test set, sized to prevent training labels or features from overlapping the evaluation period. In scikit-learn's TimeSeriesSplit, `gap` excludes a number of samples from the end of each training set before the test set. Choose the number from the data cadence, feature lookback, and target horizon; 14 rows is appropriate only if the cadence and overlap structure make that equivalence true.",
+    "deep_explanation": "The TimeSeriesSplit API defines `gap` as the number of samples excluded from the end of each training set before the test set. In a forecasting design with overlapping label windows, the split gap should prevent information from training examples whose outcomes extend into the test period from contaminating evaluation. The API parameter is measured in samples; converting a 14-day horizon into a sample count requires knowing the sampling cadence and window construction.",
+    "strong_answer_signals": [
+      "Identifies overlapping label or feature windows as a leakage risk.",
+      "Uses the documented gap to exclude samples immediately before the test fold.",
+      "Derives the gap from cadence and window construction rather than blindly setting it to 14."
+    ],
+    "weak_answer_signals": [
+      "Assumes chronological ordering alone prevents overlapping-window leakage.",
+      "Sets `gap=14` without checking whether one sample equals one day."
+    ],
+    "common_mistakes": [
+      "Confusing a sample-count gap with a calendar-day duration.",
+      "Ignoring lookback or label horizons when building temporal folds."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does TimeSeriesSplit's `gap` count?",
+        "short_answer": "Samples excluded from the end of the training set before the test set."
+      },
+      {
+        "question": "How should its value be selected?",
+        "short_answer": "From data cadence and the feature/label overlap that the split must prevent."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "TimeSeriesSplit",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified `gap` excludes a number of samples at the end of each training set before the test fold; explicitly distinguished sample count from calendar days."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-interpret-expanding-time-series-validation-folds"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-common-support-before-causal-weighting",
+    "bank": "data-scientist",
+    "topic": "Causal inference and overlap",
+    "subtopic": "Common support for treated and control units",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An observational study uses propensity weights, but many treated users have no similar controls. What should the analyst check before reporting an overall effect?",
+    "what_is_assessed": "Whether the candidate recognizes limited overlap as a threat to supported causal comparisons and extreme-weight stability.",
+    "short_answer": "Check whether treated and control units share common support across the covariates used for adjustment. Where one group is absent or propensities are extreme, the data do not support a direct comparison without extrapolation, and inverse-propensity weights can become unstable. Report the affected population, assess balance and weight concentration, and consider a narrower target population or another design rather than presenting a full-population effect as well supported.",
+    "deep_explanation": "The cited causal-inference tutorial describes overlap/common support as the presence of comparable treated and untreated units across covariate or propensity-score values. It explains that lack of overlap weakens support for estimates outside the shared region and that extreme weights can inflate variance. Trimming or changing the target population changes the estimand and must be reported; overlap diagnostics do not by themselves establish exchangeability or eliminate unmeasured confounding.",
+    "strong_answer_signals": [
+      "Checks common support and covariate balance before interpreting weighted effects.",
+      "Explains how extreme weights can make estimates unstable.",
+      "Makes any change in target population explicit and acknowledges remaining assumptions."
+    ],
+    "weak_answer_signals": [
+      "Reports the full-sample estimate without diagnosing overlap.",
+      "Treats propensity weighting as proof that all confounding has been removed."
+    ],
+    "common_mistakes": [
+      "Trimming unsupported observations without stating that the estimand changed.",
+      "Confusing large sample size with adequate treated-control comparability."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does common support mean?",
+        "short_answer": "Both treatment groups have comparable units across the covariate region being analyzed."
+      },
+      {
+        "question": "What can extreme propensity weights indicate?",
+        "short_answer": "Weak overlap, where a small number of units can dominate the estimate."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Weighting, Overlap, and Common Support",
+        "publisher": "Causal inference tutorial",
+        "url": "https://p-shekhar.github.io/notebooks/tutorials/dowhy/05_weighting_overlap_and_common_support.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Causal inference tutorial retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://p-shekhar.github.io/notebooks/tutorials/dowhy/05_weighting_overlap_and_common_support.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's common-support definition, lack-of-overlap extrapolation risk, and extreme-weight instability; noted that overlap does not establish all causal assumptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [
+      "ds-plan-experiment-power-before-data-collection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-mann-whitney-beyond-median-differences",
+    "bank": "data-scientist",
+    "topic": "Statistical testing",
+    "subtopic": "Mann-Whitney U interpretation",
+    "level": "L3",
+    "type": "concept",
+    "question": "A team selects the Mann-Whitney U test for two independent groups. Can it always describe a significant result as a difference in medians?",
+    "what_is_assessed": "Whether the candidate distinguishes a test of distributions from a narrowly interpreted test of medians.",
+    "short_answer": "No. SciPy defines the test's null as equality of the underlying distributions and says it is often used as a test of location difference. A significant result does not automatically isolate a median difference, especially if distribution shapes or spreads differ. State the scientific estimand, inspect the distributions, and choose an analysis whose assumptions and interpretation match the question.",
+    "deep_explanation": "The Mann-Whitney U test ranks two independent samples and tests a distributional null. It is often presented as a nonparametric alternative to a two-sample t-test, but describing it as a universal median test overstates what it establishes. A location-shift interpretation requires additional distributional conditions. Report the test's assumptions and complement it with descriptive summaries or an effect measure aligned with the scientific question.",
+    "strong_answer_signals": [
+      "Identifies equality of distributions as the documented null hypothesis.",
+      "Avoids interpreting every significant result as a median shift.",
+      "Checks distribution shape and aligns the estimand with the chosen method."
+    ],
+    "weak_answer_signals": [
+      "Calls Mann-Whitney a test of medians without qualification.",
+      "Treats nonparametric as assumption-free."
+    ],
+    "common_mistakes": [
+      "Ignoring independence of the two samples.",
+      "Choosing a rank test solely because the outcome is skewed without clarifying the target quantity."
+    ],
+    "follow_ups": [
+      {
+        "question": "What null does SciPy document for this test?",
+        "short_answer": "The underlying distributions of the two independent samples are the same."
+      },
+      {
+        "question": "What else is needed for a location-shift interpretation?",
+        "short_answer": "Additional assumptions about the distributions, such as comparable shapes."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "mannwhitneyu",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "SciPy 1.18.0 reference documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mannwhitneyu.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified SciPy's distribution-equality null and location-test description; explicitly avoided equating significance with a median difference absent additional distributional assumptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-expected-counts-before-chi-square-approximation",
+    "bank": "data-scientist",
+    "topic": "Statistical testing",
+    "subtopic": "Sparse contingency tables",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A 2×2 table has very small expected counts in some cells. What should you check before relying on a chi-square approximation?",
+    "what_is_assessed": "Whether the candidate inspects expected frequencies and chooses an inference method appropriate to a sparse table.",
+    "short_answer": "Compute and inspect the expected frequencies under independence rather than looking only at the observed cell counts. SciPy's chi-square documentation gives at least five in each cell as a commonly quoted guideline, not a universal guarantee. If the approximation is questionable, consider a suitable exact or resampling method for the table and state the test's assumptions. Do not choose a method solely because the table is 2×2.",
+    "deep_explanation": "SciPy's `chi2_contingency` computes expected frequencies from the table margins under the independence hypothesis and cites a common guideline that observed and expected cell frequencies should be at least five. For sparse tables, analysts should assess whether the asymptotic approximation is credible and select an exact or other appropriate procedure. The threshold is a rule of thumb; table structure, design, and the available method matter.",
+    "strong_answer_signals": [
+      "Examines expected frequencies under the null, not only observed counts.",
+      "Treats the five-count guideline as a heuristic rather than a guarantee.",
+      "Chooses an exact or alternative method based on the design and table."
+    ],
+    "weak_answer_signals": [
+      "Uses chi-square automatically without checking expected counts.",
+      "Claims Fisher's exact test is required for every 2×2 table."
+    ],
+    "common_mistakes": [
+      "Checking only whether observed cell counts exceed a threshold.",
+      "Ignoring the sampling design and interpreting the test as causal evidence."
+    ],
+    "follow_ups": [
+      {
+        "question": "How are expected frequencies obtained?",
+        "short_answer": "From the table's marginal sums under the independence assumption."
+      },
+      {
+        "question": "Is five an absolute cutoff?",
+        "short_answer": "No. It is a commonly quoted guideline, not a universal guarantee."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "chi2_contingency",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "SciPy 1.18.0 reference documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified expected frequencies are calculated from marginal sums under independence and that the documentation presents five as a commonly quoted guideline; avoided turning it into an absolute rule."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-interpret-mann-whitney-beyond-median-differences"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-bootstrap-at-the-cluster-level-for-grouped-data",
+    "bank": "data-scientist",
+    "topic": "Uncertainty estimation",
+    "subtopic": "Clustered bootstrap resampling",
+    "level": "L3",
+    "type": "scenario",
+    "question": "You are estimating model optimism from patient records nested within hospitals. What should guide the bootstrap resampling unit?",
+    "what_is_assessed": "Whether the candidate preserves the sampling structure when estimating uncertainty or optimism from clustered observations.",
+    "short_answer": "Match the resampling scheme to the data's sampling and dependence structure. If hospitals are the independent clusters and patients within each hospital are correlated, resampling individual patient rows as if independent can break that structure. Consider resampling hospitals, or another design-appropriate scheme, and state the population to which the estimate applies. The best scheme depends on the number and structure of clusters, so compare methods and assumptions rather than applying one rule to every clustered dataset.",
+    "deep_explanation": "The TRIPOD-Cluster guidance describes bootstrap and cross-validation as common approaches to internal validation for prediction models. The cluster-bootstrap article explains resampling independent clusters with replacement and including all observations from each selected cluster. These sources support matching the resampling unit to the sampling and dependence structure, while leaving the exact scheme dependent on the number and structure of clusters and the target estimand.",
+    "strong_answer_signals": [
+      "Identifies the cluster as a potential independent sampling unit.",
+      "Avoids treating correlated rows as independent resampling units without justification.",
+      "Considers cluster count, intraclass correlation, target population, and uncertainty in the chosen scheme."
+    ],
+    "weak_answer_signals": [
+      "Resamples individual rows automatically despite within-hospital dependence.",
+      "Claims cluster bootstrap is always correct regardless of design or estimand."
+    ],
+    "common_mistakes": [
+      "Ignoring cluster structure when estimating model optimism or uncertainty.",
+      "Treating one paper's simulation result as a universal resampling rule."
+    ],
+    "follow_ups": [
+      {
+        "question": "What problem can row-level resampling create?",
+        "short_answer": "It can break the within-cluster dependence structure and misrepresent the sampling process."
+      },
+      {
+        "question": "Does cluster resampling always fit every clustered analysis?",
+        "short_answer": "No. Choose a scheme based on the design, clusters, estimand, and assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Using Cluster Bootstrapping to Analyze Nested Data With a Few Clusters",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5965657/",
+        "retrieved_date": "2026-11-04"
+      },
+      {
+        "title": "TRIPOD-Cluster: explanation and elaboration",
+        "publisher": "BMJ via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9903176/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed study published 2013; population and simulation findings are scoped to the paper.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5965657/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9903176/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified TRIPOD-Cluster's description of bootstrap methods for internal validation and the cluster-bootstrap article's procedure of resampling clusters with all observations from each selected cluster."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-investigate-degenerate-bca-bootstrap-intervals",
+    "bank": "data-scientist",
+    "topic": "Uncertainty estimation",
+    "subtopic": "Degenerate BCa bootstrap intervals",
+    "level": "L3",
+    "type": "debugging",
+    "question": "SciPy returns NaN endpoints for a BCa bootstrap interval. What should you investigate before reporting it?",
+    "what_is_assessed": "Whether the candidate recognizes a degenerate bootstrap distribution and checks the statistic and data before switching methods.",
+    "short_answer": "Inspect the bootstrap distribution and original data for degeneracy, such as a statistic that is identical across resamples or observations that are all the same. SciPy documents that BCa endpoints may be NaN for a degenerate bootstrap distribution. Consider another interval method only if it is justified for the statistic and design, and report the limitation rather than silently treating NaNs as a valid interval.",
+    "deep_explanation": "SciPy's `bootstrap` documentation warns that `method='BCa'` can produce NaN confidence-interval elements when the bootstrap distribution is degenerate, and recommends considering another method or inspecting the data for cases such as identical observations. Changing methods should not be an automatic workaround: analysts should understand why the resamples contain no useful variation and whether the observed sample supports uncertainty estimation.",
+    "strong_answer_signals": [
+      "Identifies degeneracy in the bootstrap distribution as a documented cause.",
+      "Inspects the statistic and data before selecting an alternative interval.",
+      "Reports the issue rather than hiding invalid interval endpoints."
+    ],
+    "weak_answer_signals": [
+      "Replaces NaNs with arbitrary values or drops the warning.",
+      "Switches interval methods without checking the statistic or data."
+    ],
+    "common_mistakes": [
+      "Treating a degenerate sample as if the bootstrap captured uncertainty.",
+      "Assuming every alternative interval is valid for every statistic."
+    ],
+    "follow_ups": [
+      {
+        "question": "When can SciPy BCa endpoints be NaN?",
+        "short_answer": "When the bootstrap distribution is degenerate, such as when all resampled statistics are identical."
+      },
+      {
+        "question": "What should be checked before changing methods?",
+        "short_answer": "The original data, the statistic, and whether another interval method is appropriate."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "bootstrap",
+        "publisher": "SciPy documentation",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "SciPy 1.18.0 bootstrap reference documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented BCa degeneracy warning and possible NaN interval endpoints; preserved the recommendation to inspect data or consider another justified method."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-bootstrap-at-the-cluster-level-for-grouped-data"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-align-experiment-randomization-unit-with-assignment",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Randomization-unit consistency",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A returning customer can see one experiment variant on a laptop and another on a phone because assignment is session-based. What should you review?",
+    "what_is_assessed": "Whether the candidate selects a randomization unit that preserves a consistent experience and supports the intended measurement.",
+    "short_answer": "Review the randomization unit against the point where treatment is assigned and the entity whose behavior the metric measures. If the same customer can receive different variants across sessions or devices, the assignment may create crossovers and contaminate the comparison. A persistent user ID may be appropriate after sign-in; an anonymous device ID may fit pre-login flows. State what population and behavior each choice includes, because no unit is best for every product surface.",
+    "deep_explanation": "Statsig's experimentation guide defines the randomization unit as the entity assigned to a variant and used as the basis of measurement. It recommends choosing a unit that matches where users are in the product when assignment occurs; a mismatch can cause crossovers and skew results. The guide notes trade-offs among user, device, and session units, such as availability before sign-in and persistence across devices.",
+    "strong_answer_signals": [
+      "Connects assignment consistency to the unit receiving treatment.",
+      "Recognizes crossovers as a threat to the comparison.",
+      "Chooses between user, device, or session based on product stage and measurement population."
+    ],
+    "weak_answer_signals": [
+      "Chooses the unit only because it produces more rows.",
+      "Ignores that one person may experience both variants under session-level assignment."
+    ],
+    "common_mistakes": [
+      "Using a persistent user ID for a flow that occurs before sign-in without accounting for missing users.",
+      "Changing assignment unit after launch without considering analysis and exposure consistency."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can a mismatched unit cause?",
+        "short_answer": "Unintentional crossovers between variants that can skew experiment results."
+      },
+      {
+        "question": "Which unit can reach anonymous first-time visitors?",
+        "short_answer": "A device or stable identifier may, depending on the product's identity setup."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Experiments Overview",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/overview",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Statsig Experiments Overview retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.statsig.com/experiments/overview"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's definition and trade-offs for randomization units and its warning that mismatches can cause crossovers; examples are scoped to identity availability and product flow."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-preserve-randomization-with-intention-to-treat",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Intention-to-treat under nonadherence",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Some participants cross over to the other treatment after random assignment. Which analysis best preserves the original randomized comparison?",
+    "what_is_assessed": "Whether the candidate distinguishes the effect of assignment from the effect of treatment received when post-randomization adherence changes.",
+    "short_answer": "Use an intention-to-treat analysis as the primary randomized comparison: analyze participants according to their assigned group, regardless of crossover or adherence. This preserves the assignment-based comparison, but it estimates the effect of assignment or offer, not necessarily the effect of actually receiving treatment. Per-protocol and as-treated analyses answer different questions and can reintroduce selection bias, so any such analyses need explicit assumptions and should not replace the randomized comparison without justification.",
+    "deep_explanation": "The cited review describes ITT as including all randomized participants and preserving the integrity of randomization, while completer and per-protocol analyses restrict the sample based on post-randomization behavior. In product experiments, the analogous issue is users assigned to a variant who do not receive or engage with it, or who cross over. Define the estimand in advance, report exposure and missing-outcome handling, and avoid interpreting an as-treated comparison as randomized without additional assumptions.",
+    "strong_answer_signals": [
+      "Analyzes by assigned group for the primary randomized estimate.",
+      "Distinguishes effect of assignment from effect of treatment received.",
+      "Treats per-protocol or as-treated results as different estimands with additional bias risks."
+    ],
+    "weak_answer_signals": [
+      "Drops crossovers after randomization and assumes randomization is preserved.",
+      "Calls an as-treated comparison the causal effect of the treatment without qualification."
+    ],
+    "common_mistakes": [
+      "Failing to define the analysis population before looking at outcomes.",
+      "Ignoring missing outcomes when describing an ITT analysis."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does an ITT estimate primarily reflect?",
+        "short_answer": "The effect of assignment to or offer of a treatment, under the study's outcome and missing-data handling."
+      },
+      {
+        "question": "Why can per-protocol analysis be biased?",
+        "short_answer": "Adherence is post-randomization and may select participants with different outcome risks."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Intent-to-Treat (ITT) vs Completer or Per-Protocol Analysis in Randomized Controlled Trials",
+        "publisher": "Indian Journal of Psychological Medicine via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9301744/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2022; examples are clinical trials, with the assignment principle generalized to randomized experiments.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9301744/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the article's definition of ITT as including randomized participants and its discussion of preserving randomization; clearly distinguished assignment effects from treatment-received estimands when applying the principle to product experiments."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-align-experiment-randomization-unit-with-assignment"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-parallel-trends-before-difference-in-differences",
+    "bank": "data-scientist",
+    "topic": "Causal inference and overlap",
+    "subtopic": "Difference-in-differences parallel trends",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A treated region and a comparison region have different outcome trends before a program starts. Can a basic difference-in-differences estimate be trusted?",
+    "what_is_assessed": "Whether the candidate identifies the parallel-trends assumption and treats pre-trend checks as evidence rather than proof.",
+    "short_answer": "Not without addressing the divergence. Difference-in-differences relies on the assumption that, absent treatment, the groups would have followed parallel outcome trends. Plot and compare multiple pre-treatment periods and run appropriate placebo checks, but do not treat a nonsignificant pre-trend test as proof of the assumption. Investigate differences in composition, concurrent shocks, and model specification; consider a different comparison group or a method suited to the design, and report the limitations.",
+    "deep_explanation": "The World Bank DIME guide describes the equal-trends assumption as central to difference-in-differences and notes it cannot be proved from observed data. Repeated pre-period comparisons and placebo tests can support or challenge the design, but they do not guarantee that post-treatment counterfactual trends would have remained parallel. The estimate is not automatically causal merely because a regression includes group and time effects.",
+    "strong_answer_signals": [
+      "Names the parallel-trends assumption.",
+      "Uses pre-period trends and placebo checks as diagnostics, not proof.",
+      "Considers confounding changes and alternative comparison groups."
+    ],
+    "weak_answer_signals": [
+      "Treats a nonsignificant pre-trend test as proof.",
+      "Reports the difference-in-differences coefficient as causal despite visibly divergent pre-trends."
+    ],
+    "common_mistakes": [
+      "Checking only one pre-treatment period.",
+      "Ignoring composition changes or shocks that affect groups differently."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can observed pre-trends prove the assumption?",
+        "short_answer": "No. They can support or challenge it, but the counterfactual post-period trend is unobserved."
+      },
+      {
+        "question": "What does a placebo test help assess?",
+        "short_answer": "Whether the design appears to detect an effect where none should occur."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "The often (unspoken) assumptions behind the difference-in-difference estimator in practice",
+        "publisher": "World Bank Development Impact",
+        "url": "https://blogs.worldbank.org/en/impactevaluations/often-unspoken-assumptions-behind-difference-difference-estimator-practice",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "World Bank DIME Wiki retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://blogs.worldbank.org/en/impactevaluations/often-unspoken-assumptions-behind-difference-difference-estimator-practice"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the parallel-paths counterfactual assumption and that observed pre-trends cannot directly test the identifying assumption; framed diagnostics as evidence, not proof."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-avoid-conditioning-on-a-collider",
+    "bank": "data-scientist",
+    "topic": "Causal inference and overlap",
+    "subtopic": "Collider bias",
+    "level": "L3",
+    "type": "concept",
+    "question": "Two variables are independent before analysis, but both affect whether a record is included in your dataset. Why can analyzing only included records create an association?",
+    "what_is_assessed": "Whether the candidate recognizes selection on a common effect as collider bias.",
+    "short_answer": "Dataset inclusion is a collider if both variables cause inclusion. Conditioning on that collider—by restricting to included records or controlling for inclusion—can open a noncausal path between the variables and create a spurious association. Draw the causal graph before adjusting; do not automatically control for every variable related to selection.",
+    "deep_explanation": "In a directed acyclic graph, a collider is a common effect, such as A → S ← B. The path between A and B is blocked when S is not conditioned on, but conditioning on S can induce an association. Elwert and Winship review collider conditioning as a source of endogenous selection bias and distinguish it from confounding adjustment.",
+    "strong_answer_signals": [
+      "Identifies inclusion as a common effect of both variables.",
+      "Explains that conditioning opens a noncausal path.",
+      "Uses a causal graph to choose adjustment variables."
+    ],
+    "weak_answer_signals": [
+      "Assumes selecting a more complete or cleaner sample cannot bias an association.",
+      "Adjusts for every available predictor without considering its causal role."
+    ],
+    "common_mistakes": [
+      "Calling every selection variable a confounder.",
+      "Ignoring how the dataset's inclusion rule was generated."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is a collider in a causal graph?",
+        "short_answer": "A common effect of two or more variables."
+      },
+      {
+        "question": "What can conditioning on a collider do?",
+        "short_answer": "Open a noncausal path and induce an association between its causes."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Endogenous Selection Bias: The Problem of Conditioning on a Collider Variable",
+        "publisher": "Annual Review of Sociology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6089543/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2014.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6089543/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the review's account of conditioning on a collider as endogenous selection bias; used the standard common-effect DAG pattern."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-test-treatment-effect-heterogeneity-with-interaction",
+    "bank": "data-scientist",
+    "topic": "Subgroup analysis and effect heterogeneity",
+    "subtopic": "Interaction tests and prespecification",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An experiment shows a significant effect in one customer subgroup but not another. Does that establish different treatment effects?",
+    "what_is_assessed": "Whether the candidate tests the difference between subgroup effects rather than comparing subgroup-specific significance.",
+    "short_answer": "No. A significant result in one subgroup and a nonsignificant result in another does not itself show the effects differ. Test the treatment-by-subgroup interaction on the chosen effect scale, prespecify the subgroup where possible, and account for how many subgroup analyses were examined. Report subgroup estimates and uncertainty, because interaction tests can be underpowered and the effect may depend on the metric scale.",
+    "deep_explanation": "The cited review describes subgroup analysis as beginning with a test for interaction to assess whether relative treatment effects vary across subgroups. Comparing p-values or point estimates informally is problematic because random variation is expected. Exploratory subgroup searches also increase false-discovery risk, so distinguish prespecified hypotheses from post hoc findings and validate patterns where possible.",
+    "strong_answer_signals": [
+      "Calls for an interaction test rather than comparing subgroup p-values.",
+      "Reports effect estimates and uncertainty for each subgroup.",
+      "Accounts for prespecification, multiplicity, power, and effect scale."
+    ],
+    "weak_answer_signals": [
+      "Concludes that effects differ because one p-value is below 0.05 and another is not.",
+      "Selects a subgroup after searching many and reports it as confirmatory."
+    ],
+    "common_mistakes": [
+      "Ignoring low power for interaction tests.",
+      "Treating a subgroup difference on one effect scale as scale-independent."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be tested to compare subgroup effects?",
+        "short_answer": "A treatment-by-subgroup interaction."
+      },
+      {
+        "question": "Does a nonsignificant interaction prove homogeneous effects?",
+        "short_answer": "No. The test may have limited power; report estimates and uncertainty."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Detecting Moderator Effects Using Subgroup Analyses",
+        "publisher": "Clinical Trials via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3193873/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2011.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3193873/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the review's recommendation to test interactions rather than compare subgroup p-values informally; included prespecification, power, and scale caveats."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-investigate-reversals-between-strata-and-aggregate",
+    "bank": "data-scientist",
+    "topic": "Aggregated and stratified analysis",
+    "subtopic": "Simpson's paradox",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A treatment performs better within every clinic but worse in the pooled data. What should you investigate before choosing a conclusion?",
+    "what_is_assessed": "Whether the candidate recognizes a reversal from differing group composition and distinguishes pooled from within-group estimands.",
+    "short_answer": "Inspect treatment allocation and outcome rates by clinic, especially whether the groups have different clinic mixes or baseline risks. Aggregation can reverse a within-clinic pattern when group sizes differ across strata. Define the target population and estimand, then report both the appropriately stratified or adjusted comparison and the crude aggregate with its assumptions; do not select whichever result supports a preferred decision.",
+    "deep_explanation": "Simpson's paradox describes an association that reverses after data are stratified by a third variable. The cited review explains that overlooked confounding and disproportionate allocation across strata can produce such reversals. The analyst should investigate the data-generating and allocation process and define which population-level question is relevant; stratification is not automatically causal if the grouping variable is inappropriate.",
+    "strong_answer_signals": [
+      "Checks treatment and outcome patterns within relevant strata.",
+      "Investigates unequal group composition and baseline risk.",
+      "States the target estimand instead of privileging the pooled or stratified result automatically."
+    ],
+    "weak_answer_signals": [
+      "Reports only the aggregate or only the favorable strata.",
+      "Assumes stratification always removes bias."
+    ],
+    "common_mistakes": [
+      "Treating the reversal as a data error without checking composition.",
+      "Conditioning on a post-treatment variable without considering collider or mediator bias."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can cause an aggregate reversal?",
+        "short_answer": "Different group proportions across strata combined with different baseline outcome rates."
+      },
+      {
+        "question": "Does stratification always identify the causal effect?",
+        "short_answer": "No. The strata and estimand must be justified by the causal design."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Simpson's Paradox and Experimental Research",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2880329/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2880329/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that stratum-specific and aggregate associations can reverse with confounding and disproportionate allocation; avoided claiming stratification is always causal."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-include-right-censored-observations-in-survival-analysis",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Right censoring",
+    "level": "L2",
+    "type": "concept",
+    "question": "At the end of a study, some users have not churned yet. Should you drop them or count the study end as their churn time?",
+    "what_is_assessed": "Whether the candidate handles right-censored durations without treating them as observed events or discarding their follow-up.",
+    "short_answer": "Neither. Mark those users as right-censored at their last observed time. They contribute information that they remained event-free up to that point, but their eventual churn time is unknown. Survival estimators such as Kaplan–Meier account for censoring; dropping these users or treating study end as the event can bias duration estimates. State the censoring assumptions and follow-up window.",
+    "deep_explanation": "The lifelines introduction defines right-censored observations as durations observed only up to a point before the event occurs and warns that ignoring them can distort population estimates. Survival analysis uses the observed at-risk time without asserting that the event occurred at censoring. The validity of common estimators also depends on assumptions about how censoring relates to event risk.",
+    "strong_answer_signals": [
+      "Distinguishes censoring from an observed event.",
+      "Retains known follow-up time in the analysis.",
+      "Names assumptions and evaluation horizon."
+    ],
+    "weak_answer_signals": [
+      "Drops every user who has not churned.",
+      "Treats the study-end date as the actual churn date."
+    ],
+    "common_mistakes": [
+      "Calling censored observations missing with no usable information.",
+      "Ignoring informative censoring assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does a right-censored user tell you?",
+        "short_answer": "The user remained event-free through the last observed time; later event time is unknown."
+      },
+      {
+        "question": "Why not count study end as churn?",
+        "short_answer": "The event was not observed, so doing so invents an event time."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Introduction to survival analysis",
+        "publisher": "lifelines documentation",
+        "url": "https://lifelines.readthedocs.io/en/stable/Survival%20Analysis%20intro.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "lifelines 0.30.3 survival analysis introduction.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://lifelines.readthedocs.io/en/stable/Survival%20Analysis%20intro.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the definition of right censoring and why censored observations should not be ignored or treated as events; added the usual censoring-assumption caveat."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-logit-coefficients-on-the-odds-scale",
+    "bank": "data-scientist",
+    "topic": "Logistic regression interpretation",
+    "subtopic": "Log-odds coefficients and odds ratios",
+    "level": "L2",
+    "type": "concept",
+    "question": "A logistic regression coefficient is 0.4. Is that a 40-percentage-point increase in outcome probability?",
+    "what_is_assessed": "Whether the candidate interprets logistic coefficients on the log-odds scale and distinguishes odds ratios from probability changes.",
+    "short_answer": "No. The coefficient is a change in log odds for a one-unit predictor increase, holding the model's other terms fixed. Exponentiating 0.4 gives the corresponding odds ratio, but that is not a probability ratio or percentage-point change. The probability change depends on the starting probability and covariates; report predicted probabilities or marginal effects when the audience needs an absolute change.",
+    "deep_explanation": "The cited review explains that a logistic regression coefficient represents the increase in log odds per unit exposure and that its exponent is the odds ratio. Odds and probability are different quantities, and a fixed change in log odds maps to different probability changes at different baseline probabilities. Avoid interpreting the exponentiated coefficient as a risk ratio or an absolute probability change without additional calculation and assumptions.",
+    "strong_answer_signals": [
+      "Identifies the log-odds scale.",
+      "Exponentiates the coefficient for the odds ratio.",
+      "Explains why probability changes depend on baseline risk."
+    ],
+    "weak_answer_signals": [
+      "Calls 0.4 a 40-point probability increase.",
+      "Treats the odds ratio as a risk ratio in every setting."
+    ],
+    "common_mistakes": [
+      "Ignoring predictor units and model specification.",
+      "Reporting only an odds ratio when decisions require absolute probabilities."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does exponentiating a logit coefficient give?",
+        "short_answer": "The odds ratio for a one-unit increase in the predictor, conditional on the model."
+      },
+      {
+        "question": "What additional quantity helps explain practical impact?",
+        "short_answer": "Predicted probabilities or marginal effects at relevant covariate values."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Explaining Odds Ratios",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2938757/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2010.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2938757/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the coefficient's log-odds meaning and exponentiated odds-ratio interpretation; distinguished both from absolute probability changes."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-address-missing-not-at-random-data",
+    "bank": "data-scientist",
+    "topic": "Missing-data strategy",
+    "subtopic": "MNAR sensitivity analysis",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Participants with worsening symptoms are more likely to stop reporting them, and severity is not observed after dropout. Is standard multiple imputation enough?",
+    "what_is_assessed": "Whether the candidate distinguishes missing-at-random assumptions from missing-not-at-random mechanisms and plans sensitivity analysis.",
+    "short_answer": "Not by itself. If missingness depends on the unobserved severity after dropout, the data may be missing not at random, so imputations based only on observed variables rely on an unverified assumption. Define a plausible missingness model, run sensitivity analyses under alternative assumptions, and report how conclusions change. Improve follow-up data collection where possible; do not claim the observed data alone identify the missing values.",
+    "deep_explanation": "The cited statistical framework distinguishes MAR, where missingness can depend on observed data but not the missing value after conditioning, from MNAR, where the missing value itself can affect missingness. It discusses multiple imputation and sensitivity analysis as related tools. MNAR assumptions generally cannot be tested from observed data alone, so conclusions should be shown across defensible assumptions.",
+    "strong_answer_signals": [
+      "Identifies possible dependence on the unobserved value.",
+      "States that standard MAR imputation does not resolve MNAR automatically.",
+      "Uses sensitivity analysis and reports assumption-dependent conclusions."
+    ],
+    "weak_answer_signals": [
+      "Claims multiple imputation removes bias regardless of the missingness mechanism.",
+      "Treats a complete-case analysis as automatically unbiased."
+    ],
+    "common_mistakes": [
+      "Calling missingness MAR because observed predictors were added to the imputation model.",
+      "Reporting one imputed estimate without discussing assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What makes this scenario potentially MNAR?",
+        "short_answer": "The missing value itself may influence whether it is observed."
+      },
+      {
+        "question": "What does sensitivity analysis show?",
+        "short_answer": "How conclusions change under plausible alternative missingness assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Missing data: A statistical framework for practice",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7615108/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed statistical framework published 2021.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7615108/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the MAR/MNAR distinction and the role of sensitivity analyses; avoided claiming the mechanism can be inferred from observed data alone."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-importance-weight-under-covariate-shift",
+    "bank": "data-scientist",
+    "topic": "Distribution shift",
+    "subtopic": "Importance weighting under covariate shift",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "Your production feature distribution differs from training, but the relationship between features and outcomes appears stable. When might importance weighting help?",
+    "what_is_assessed": "Whether the candidate recognizes the covariate-shift assumption, density-ratio weighting, and support limitations.",
+    "short_answer": "If the conditional outcome relationship is stable and the target feature distribution is represented in training, weight training examples by the target-to-training feature-density ratio. This emphasizes examples that resemble the production population. Check overlap and inspect weight variance: where training density is near zero, ratios become unstable or undefined, and weighting cannot create information absent from the training support. Validate the shift and evaluate on representative target data when available.",
+    "deep_explanation": "The cited covariate-shift work defines importance weights as the ratio of target/test to training covariate densities and applies them to prediction errors. The method relies on the covariate-shift setup rather than arbitrary label or concept drift. In practice, density-ratio estimation and weak support overlap can make weights high variance, so report diagnostics and consider weight stabilization or collecting target-domain labels.",
+    "strong_answer_signals": [
+      "States that the conditional outcome relationship must remain stable.",
+      "Uses the target-to-training covariate density ratio.",
+      "Checks support overlap and weight stability before trusting estimates."
+    ],
+    "weak_answer_signals": [
+      "Applies covariate weighting to any distribution change.",
+      "Assumes weighting fixes missing target support or changed label relationships."
+    ],
+    "common_mistakes": [
+      "Ignoring extreme weights and their variance.",
+      "Confusing covariate shift with label or concept shift."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the direction of the density ratio?",
+        "short_answer": "Target covariate density divided by training covariate density."
+      },
+      {
+        "question": "What happens where training support is absent?",
+        "short_answer": "The ratio is unstable or undefined; weighting cannot supply missing examples."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Improving importance estimation in covariate shift for providing accurate prediction error",
+        "publisher": "Expert Systems with Applications via arXiv",
+        "url": "https://arxiv.org/html/2402.01450v1",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Peer-reviewed article accepted for publication; arXiv version 1 retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2402.01450v1"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the target-to-training covariate-density ratio; included the covariate-shift and overlap assumptions as necessary scope conditions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-distinguish-nonsignificance-from-noninferiority",
+    "bank": "data-scientist",
+    "topic": "Statistical test interpretation",
+    "subtopic": "Noninferiority margins and confidence intervals",
+    "level": "L2",
+    "type": "concept",
+    "question": "A new treatment is not significantly worse than the control in a superiority test. Can you conclude it is noninferior?",
+    "what_is_assessed": "Whether the candidate distinguishes failure to show superiority from a prespecified noninferiority claim.",
+    "short_answer": "No. A nonsignificant superiority result does not establish noninferiority or equivalence. Those require a design with a clinically or operationally justified margin specified in advance and an analysis whose confidence interval is compared with that margin. State the estimand and decision rule before looking at results; do not choose a margin after observing the data.",
+    "deep_explanation": "The FDA guidance for noninferiority trials describes comparing a confidence bound for the treatment-control difference with a prespecified noninferiority margin. The margin must reflect the effect worth preserving and the study context. A failure to reject a superiority null can simply reflect imprecision, so it cannot by itself establish that a treatment is acceptably close to control.",
+    "strong_answer_signals": [
+      "Rejects the inference from nonsignificance to noninferiority.",
+      "Requires a justified, prespecified margin.",
+      "Connects the confidence interval and decision direction to the chosen estimand."
+    ],
+    "weak_answer_signals": [
+      "Treats p greater than 0.05 as evidence of equivalence.",
+      "Chooses the acceptable margin after seeing results."
+    ],
+    "common_mistakes": [
+      "Confusing absence of detected difference with evidence that differences are sufficiently small.",
+      "Ignoring the direction of the confidence bound and margin."
+    ],
+    "follow_ups": [
+      {
+        "question": "What must be set before the study?",
+        "short_answer": "A justified noninferiority or equivalence margin and corresponding analysis rule."
+      },
+      {
+        "question": "Why is a nonsignificant superiority test insufficient?",
+        "short_answer": "It may reflect low precision and does not test whether the difference is within an acceptable margin."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Non-Inferiority Clinical Trials to Establish Effectiveness",
+        "publisher": "U.S. Food and Drug Administration",
+        "url": "https://www.fda.gov/media/78504/download",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "FDA Guidance for Industry, November 2016.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.fda.gov/media/78504/download"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the prespecified-margin and confidence-interval basis for noninferiority; scoped the source to clinical trials and kept the statistical distinction general."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-estimate-event-risk-with-competing-risks",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Competing events and cumulative incidence",
+    "level": "L3",
+    "type": "scenario",
+    "question": "You are estimating time to customer churn, but account closure for fraud permanently prevents ordinary churn from occurring. Should fraud closure be treated like ordinary right censoring?",
+    "what_is_assessed": "Whether the candidate distinguishes a competing event from censoring and selects an estimand appropriate to the question.",
+    "short_answer": "Not automatically. Fraud closure precludes the event of interest, so it is a competing event. If the goal is the real-world probability of ordinary churn by a given time, estimate cumulative incidence while accounting for competing events. Treating the competing event as censoring instead targets a conditional, hypothetical risk under assumptions that the competing event could be prevented. State the estimand before choosing the method.",
+    "deep_explanation": "The cited review explains that competing events preclude the event of interest and contrasts conditional risk, which censors competing-event person-time, with unconditional risk or cumulative incidence, which accounts for competing events. These answer different questions; the cumulative incidence function is commonly estimated with the Aalen–Johansen estimator. The selected approach should match the practical estimand rather than treating every non-target event as generic censoring.",
+    "strong_answer_signals": [
+      "Recognizes that the competing event makes the target event impossible afterward.",
+      "Uses cumulative incidence for real-world event probability.",
+      "Explains how censoring competing events changes the estimand."
+    ],
+    "weak_answer_signals": [
+      "Treats every competing event as non-informative censoring without stating assumptions.",
+      "Interprets a cause-specific or conditional quantity as the unconditional real-world risk."
+    ],
+    "common_mistakes": [
+      "Choosing a method before defining the target risk.",
+      "Assuming competing-risk handling is identical to ordinary right censoring."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does cumulative incidence estimate?",
+        "short_answer": "The unconditional probability of the event of interest by time, accounting for competing events."
+      },
+      {
+        "question": "What assumption is implied by censoring competing events for a conditional risk?",
+        "short_answer": "That the competing event could be prevented, targeting a hypothetical risk."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Weighing risks and benefits in the presence of competing risks",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11521377/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2024.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11521377/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that competing events preclude the event of interest and that censoring versus cumulative incidence target different estimands."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-include-right-censored-observations-in-survival-analysis"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-negative-control-outcome-to-probe-confounding",
+    "bank": "data-scientist",
+    "topic": "Negative controls for confounding",
+    "subtopic": "Interpreting negative-control outcomes",
+    "level": "L3",
+    "type": "concept",
+    "question": "An exposure is associated with an outcome that it cannot plausibly cause, but that shares the same confounders. What does this negative-control result suggest?",
+    "what_is_assessed": "Whether the candidate uses negative controls as a diagnostic for residual bias without treating them as proof that bias is absent or present.",
+    "short_answer": "The association is a warning that residual confounding or another bias may remain, assuming the negative-control outcome truly has no causal path from the exposure and shares relevant confounding structure. It does not quantify or prove the bias by itself. A null negative-control result also does not prove the main estimate is unbiased; evaluate the assumptions, measurement, and statistical power.",
+    "deep_explanation": "The cited review describes negative-control outcomes as outcomes with no causal connection to the exposure of interest but a shared confounding relationship. A non-null association can reveal bias under those assumptions. Valid interpretation depends on the negative control's causal structure and measurement; a negative result is not a universal test that eliminates all confounding.",
+    "strong_answer_signals": [
+      "States the no-causal-effect and shared-confounding assumptions.",
+      "Treats an association as a bias signal rather than a definitive correction.",
+      "Avoids treating a null result as proof of no residual confounding."
+    ],
+    "weak_answer_signals": [
+      "Uses a negative control that could be affected by the exposure.",
+      "Claims a null negative control proves the primary estimate is unbiased."
+    ],
+    "common_mistakes": [
+      "Ignoring indirect causal paths to the control outcome.",
+      "Interpreting the control result without considering measurement and power."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be true of the negative-control outcome?",
+        "short_answer": "The exposure should not causally affect it, while relevant confounding structure is shared."
+      },
+      {
+        "question": "Does a null control association prove no bias?",
+        "short_answer": "No. The assumptions and sensitivity of the diagnostic may fail."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Observational studies and the difficult quest for causality: lessons from vaccine effectiveness and impact studies",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5841615/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2018.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5841615/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the negative-control outcome assumptions and framed observed association as a diagnostic warning, not automatic proof or correction."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-account-for-treatment-spillovers-in-ab-tests",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Interference and spillover effects",
+    "level": "L3",
+    "type": "scenario",
+    "question": "In a social product experiment, treated users invite control users who then see more activity. What assumption may fail, and how would you adapt the design?",
+    "what_is_assessed": "Whether the candidate recognizes interference between experimental units and considers a design and estimand that account for spillovers.",
+    "short_answer": "The no-interference assumption may fail because one user's treatment changes another user's outcome. Individual randomization can then contaminate control outcomes and bias the effect estimate. Consider cluster or graph-based randomization to reduce cross-arm exposure, measure treatment exposure, and define whether the target is a direct effect or a total effect that includes spillovers. Analyze at a level consistent with the assignment design.",
+    "deep_explanation": "The cited review of network experiments explains that treatment effects can spill over through network connections and that standard causal assumptions may fail under interference. Cluster-based or two-stage designs can estimate different effects while reducing or modeling cross-group interference. The right design depends on the network structure and whether the goal is a direct effect on treated users or a total effect including indirect consequences.",
+    "strong_answer_signals": [
+      "Identifies interference across randomized units.",
+      "Distinguishes direct from total effects.",
+      "Proposes cluster or network-aware randomization and analysis aligned with the assignment unit."
+    ],
+    "weak_answer_signals": [
+      "Assumes independent user outcomes despite treatment-induced sharing.",
+      "Treats all spillovers as random noise without measuring exposure."
+    ],
+    "common_mistakes": [
+      "Changing the analysis unit without changing or accounting for the randomization unit.",
+      "Claiming cluster randomization eliminates every cross-cluster spillover."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is a direct treatment effect?",
+        "short_answer": "The effect of a user's own treatment, distinguished from effects transmitted through other units."
+      },
+      {
+        "question": "What design can reduce cross-arm contamination?",
+        "short_answer": "Cluster or network-aware randomization, chosen for the network and target estimand."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Network experiment designs for inferring causal effects under interference",
+        "publisher": "Frontiers in Data Science via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10150447/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2023.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10150447/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified treatment spillovers can violate no-interference assumptions and that cluster/network designs target distinct causal effects."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-regression-discontinuity-design-validity",
+    "bank": "data-scientist",
+    "topic": "Regression discontinuity design",
+    "subtopic": "Cutoff manipulation and continuity checks",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A program assigns treatment above an income cutoff. What checks would you make before interpreting an outcome jump at the cutoff causally?",
+    "what_is_assessed": "Whether the candidate assesses manipulation and continuity assumptions in a regression discontinuity design rather than relying on the estimated jump alone.",
+    "short_answer": "Check whether units could precisely manipulate the running variable and inspect its density around the cutoff; bunching can be a warning, though a density test alone is not definitive. Examine whether predetermined covariates remain continuous near the threshold, test placebo cutoffs, and assess sensitivity to reasonable bandwidth and model choices. Report the assignment rule and distinguish a sharp from a fuzzy design.",
+    "deep_explanation": "The cited practical review describes key regression-discontinuity assumptions and empirical checks, including manipulation of the forcing variable, covariate continuity, and placebo tests. A density discontinuity can suggest sorting near the cutoff but is not by itself a complete test of validity. The estimate is local to units near the threshold and depends on the stated design and modeling choices.",
+    "strong_answer_signals": [
+      "Checks potential sorting or manipulation of the running variable.",
+      "Examines continuity in predetermined covariates and placebo cutoffs.",
+      "Reports bandwidth sensitivity and the local nature of the effect."
+    ],
+    "weak_answer_signals": [
+      "Treats a significant discontinuity as causal without checking design assumptions.",
+      "Calls a density test conclusive proof of manipulation or its absence."
+    ],
+    "common_mistakes": [
+      "Ignoring changes in covariates at the cutoff.",
+      "Choosing bandwidth only because it maximizes the desired result."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can bunching near the cutoff indicate?",
+        "short_answer": "Possible sorting or manipulation of the running variable; it is a warning to investigate."
+      },
+      {
+        "question": "What population does the estimate usually describe?",
+        "short_answer": "Units near the assignment threshold."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Strategies for evaluating the assumptions of the regression discontinuity design",
+        "publisher": "International Journal of Epidemiology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5837477/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2017.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5837477/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the review's manipulation, covariate-continuity, and falsification checks; retained the caveat that density discontinuity is suggestive rather than definitive."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-instrumental-variable-assumptions",
+    "bank": "data-scientist",
+    "topic": "Instrumental variable analysis",
+    "subtopic": "Relevance, exclusion, and exchangeability",
+    "level": "L3",
+    "type": "concept",
+    "question": "A proposed instrument strongly predicts treatment. Is that alone enough to make an instrumental-variable estimate credible?",
+    "what_is_assessed": "Whether the candidate checks the instrument's causal assumptions rather than equating predictive strength with validity.",
+    "short_answer": "No. Relevance is only one condition. The instrument must affect the outcome only through treatment (the exclusion restriction), and its assignment must be sufficiently unconfounded under the analysis assumptions. A weak relationship with treatment can also produce unstable or biased estimates. Explain the scientific rationale for each assumption and use falsification or sensitivity analyses where possible; statistical strength alone cannot prove the exclusion restriction.",
+    "deep_explanation": "The cited review describes relevance, exclusion, and exchangeability as core instrumental-variable conditions and notes that weak associations can worsen finite-sample bias or amplify violations of other assumptions. These assumptions are partly substantive and generally cannot all be established by a strong first-stage association. The instrument and estimand must be justified in the study context.",
+    "strong_answer_signals": [
+      "Names assumptions beyond relevance.",
+      "Distinguishes instrument strength from validity.",
+      "Recognizes that exclusion restrictions require substantive justification and sensitivity checks."
+    ],
+    "weak_answer_signals": [
+      "Claims a high first-stage statistic proves the instrument is valid.",
+      "Ignores how the instrument could directly affect the outcome."
+    ],
+    "common_mistakes": [
+      "Treating a weak-instrument diagnostic as a test of the exclusion restriction.",
+      "Reporting an IV estimate without explaining its target population or assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does relevance mean?",
+        "short_answer": "The instrument is associated with the exposure or treatment."
+      },
+      {
+        "question": "Can observed instrument strength prove exclusion?",
+        "short_answer": "No. Exclusion is a causal assumption requiring substantive justification."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Understanding the Assumptions Underlying Instrumental Variable Analyses",
+        "publisher": "Epidemiology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6096851/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2018.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6096851/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified relevance, exclusion, exchangeability, and weak-instrument concerns; did not present strength diagnostics as proof of validity."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-account-for-clustering-in-trial-power",
+    "bank": "data-scientist",
+    "topic": "Cluster-randomized trial design",
+    "subtopic": "Intracluster correlation and sample size",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A clinic-level randomized trial has the same number of patients as an individually randomized trial, but fewer clinics. Why may it have less power?",
+    "what_is_assessed": "Whether the candidate accounts for within-cluster outcome correlation and the effective number of independent units in sample-size planning.",
+    "short_answer": "Patients within a clinic tend to be more alike, so their outcomes are correlated and do not contribute as much independent information as the same number of individually randomized patients. Plan and analyze at the cluster-assignment level, using realistic estimates of the intracluster correlation, cluster sizes, and number of clinics. Adding patients within a small number of clinics may not replace having enough independent clusters.",
+    "deep_explanation": "The cited review notes that when assignment is at the cluster level and outcomes are measured on individuals, within-cluster correlation reduces effective sample size and cluster trials require larger samples than individually randomized trials. Power planning should reflect the hierarchical design, realistic ICC and cluster-size assumptions, and the number of clusters, rather than applying an individually randomized calculation unchanged.",
+    "strong_answer_signals": [
+      "Identifies within-cluster correlation as loss of independent information.",
+      "Plans around the number and size of clusters and a defensible ICC.",
+      "Aligns analysis with the unit of randomization."
+    ],
+    "weak_answer_signals": [
+      "Counts every patient as independent despite clinic-level assignment.",
+      "Assumes adding many patients to only a few clinics always restores power."
+    ],
+    "common_mistakes": [
+      "Using an individual-randomization sample-size calculation without a clustering adjustment.",
+      "Ignoring unequal cluster sizes or the limited number of independent clusters."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the ICC describe?",
+        "short_answer": "Similarity or correlation of outcomes within the same cluster."
+      },
+      {
+        "question": "Why can more clinics help more than more patients per clinic?",
+        "short_answer": "Additional clusters add independent randomized units; additional patients in one cluster remain correlated."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Key considerations for designing, conducting and analysing a cluster randomized trial",
+        "publisher": "Trials via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10555937/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed review published 2023.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10555937/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that within-cluster correlation lowers effective sample size and that cluster trials need a design-aware sample-size calculation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-distinguish-odds-ratio-noncollapsibility-from-confounding",
+    "bank": "data-scientist",
+    "topic": "Effect measures and noncollapsibility",
+    "subtopic": "Marginal versus conditional odds ratios",
+    "level": "L3",
+    "type": "concept",
+    "question": "In a randomized trial, an adjusted odds ratio differs from the unadjusted odds ratio. Does that difference prove confounding?",
+    "what_is_assessed": "Whether the candidate recognizes odds-ratio noncollapsibility and distinguishes a change in estimand from confounding.",
+    "short_answer": "No. Odds ratios are noncollapsible, so conditional and marginal odds ratios can differ even without confounding. The adjusted result may describe a conditional association while the unadjusted result is marginal; neither difference alone proves bias. State the target estimand and, when useful, report marginal standardized risks or risk differences alongside the odds ratio.",
+    "deep_explanation": "The cited review explains that conditional and marginal odds ratios may differ because of noncollapsibility, including in randomized trials without confounding. This is a property of the measure and model, not automatically an indication that adjustment removed bias or introduced it. Analysts should identify whether the target is conditional or marginal and avoid interpreting unlike effect measures as interchangeable.",
+    "strong_answer_signals": [
+      "Names odds-ratio noncollapsibility.",
+      "Separates conditional and marginal estimands.",
+      "Does not infer confounding from the difference alone."
+    ],
+    "weak_answer_signals": [
+      "Claims randomization requires adjusted and unadjusted odds ratios to match.",
+      "Treats the adjusted estimate as automatically less biased."
+    ],
+    "common_mistakes": [
+      "Calling every covariate-adjusted odds-ratio change confounding control.",
+      "Comparing conditional odds ratios with marginal risk differences as if they estimate the same quantity."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can noncollapsibility occur without confounding?",
+        "short_answer": "Yes. It is a property of the odds ratio and can occur in randomized trials."
+      },
+      {
+        "question": "What should be stated when reporting adjusted odds ratios?",
+        "short_answer": "Whether the estimate is conditional or marginal and which estimand is targeted."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Making apples from oranges: Comparing noncollapsible effect estimators and their standard errors after adjustment for different covariate sets",
+        "publisher": "Statistics in Medicine via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7986756/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2021.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7986756/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified conditional and marginal odds ratios can differ in randomized trials because of noncollapsibility, not necessarily confounding."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-investigate-poisson-overdispersion-before-model-change",
+    "bank": "data-scientist",
+    "topic": "Count-data regression",
+    "subtopic": "Overdispersion diagnosis and model choice",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A Poisson model's count outcomes have variance far above the fitted mean. What would you investigate before changing models?",
+    "what_is_assessed": "Whether the candidate diagnoses conditional overdispersion and considers plausible data structure before selecting a count model.",
+    "short_answer": "The Poisson model assumes conditional mean and variance are equal, so inspect residual and dispersion diagnostics and look for omitted structure such as clustering, heterogeneity, or excess zeros. Depending on the data-generating process, compare a negative-binomial or quasi-Poisson approach, and consider a zero-inflated model only when a separate zero-generating process is defensible. Recheck uncertainty and fit rather than selecting by one dispersion ratio alone.",
+    "deep_explanation": "The cited count-data study describes the Poisson equal conditional mean-variance assumption and discusses diagnostics and alternative models for overdispersed counts. Overdispersion can have different causes, including excess zeros or aggregation, so a single replacement model is not universally appropriate. Model choice should reflect the observed structure and be assessed with diagnostics and a clearly defined estimand.",
+    "strong_answer_signals": [
+      "Recognizes the Poisson conditional mean-variance assumption.",
+      "Investigates clustering, heterogeneity, or excess-zero mechanisms.",
+      "Chooses and validates an alternative based on the data-generating process."
+    ],
+    "weak_answer_signals": [
+      "Treats any variance above the mean as sufficient reason to use zero inflation.",
+      "Keeps Poisson standard errors without checking dispersion."
+    ],
+    "common_mistakes": [
+      "Choosing a model solely by a heuristic dispersion cutoff.",
+      "Ignoring clustering or dependence in the count observations."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the basic Poisson variance assumption?",
+        "short_answer": "The conditional variance equals the conditional mean."
+      },
+      {
+        "question": "Does overdispersion alone prove zero inflation?",
+        "short_answer": "No. Investigate its cause; zero inflation is only one possible mechanism."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "An empirical approach to determine a threshold for assessing overdispersion in Poisson and negative binomial models for count data",
+        "publisher": "Communications in Statistics via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6290908/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2018.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6290908/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the Poisson equal conditional mean-variance assumption and the need to consider the overdispersion mechanism before choosing an alternative."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-partial-pooling-for-small-groups",
+    "bank": "data-scientist",
+    "topic": "Hierarchical modeling",
+    "subtopic": "Partial pooling and small-group stability",
+    "level": "L3",
+    "type": "concept",
+    "question": "You need subgroup estimates, but several groups have very little data. What can partial pooling offer over separate group models?",
+    "what_is_assessed": "Whether the candidate understands how hierarchical models borrow information across groups while preserving group-level variation.",
+    "short_answer": "Partial pooling shares information across groups, often shrinking noisy small-group estimates toward the overall or related-group pattern. It can stabilize estimates and reduce overfitting compared with fitting each group independently, while still allowing meaningful group differences. It is not the same as forcing all groups to be identical; check the model structure, assumptions, and subgroup fit.",
+    "deep_explanation": "The cited multilevel-regression study describes partial pooling as stabilizing estimates for small groups by borrowing information from larger groups, while preserving variation across categories. The degree of pooling depends on the hierarchical model and data. It can improve precision when groups share structure, but it should not be presented as a guarantee that every subgroup estimate is unbiased or appropriate.",
+    "strong_answer_signals": [
+      "Explains information sharing and shrinkage of noisy estimates.",
+      "Distinguishes partial pooling from complete pooling and no pooling.",
+      "Checks whether the shared structure is defensible for the groups."
+    ],
+    "weak_answer_signals": [
+      "Treats small-group estimates as equally reliable as large-group estimates.",
+      "Assumes partial pooling forces every group to have the same effect."
+    ],
+    "common_mistakes": [
+      "Ignoring group heterogeneity when selecting a pooling model.",
+      "Reporting shrunk subgroup estimates without explaining the model assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "How does partial pooling differ from complete pooling?",
+        "short_answer": "It allows group variation while sharing information across groups."
+      },
+      {
+        "question": "Why can it help small groups?",
+        "short_answer": "Noisy estimates borrow information from better-supported groups and can become more stable."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Multilevel Regression and Poststratification Using Margins of Poststratifiers",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12967158/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed multilevel modeling application published 2026.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12967158/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified partial pooling stabilizes small-group estimates by borrowing information while retaining group variation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-account-for-clustering-in-cluster-rct-inference",
+    "bank": "data-scientist",
+    "topic": "Cluster-randomized trial design",
+    "subtopic": "Cluster-aware uncertainty and unit of analysis",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Clinics were randomized, but your analysis treats every patient as independent. What can go wrong, and how would you correct it?",
+    "what_is_assessed": "Whether the candidate accounts for within-clinic dependence when estimating uncertainty in a cluster-randomized trial.",
+    "short_answer": "Patients within a clinic may have correlated outcomes. Treating them as independent can underestimate uncertainty, producing confidence intervals that are too narrow and p-values that are too small. Use an analysis that accounts for clustering, such as cluster-level analysis or an appropriate multilevel or cluster-robust method, with small-sample corrections when needed. The individual remains a possible outcome-analysis unit, but the dependence and number of randomized clusters must be respected.",
+    "deep_explanation": "The cited tutorial describes a unit-of-analysis error when cluster-randomized data are analyzed as if individuals were independently randomized, and notes that ignoring dependence can make intervals artificially narrow. It also clarifies that analyzing individual outcomes is not inherently wrong if the analysis accounts for clustering. The design, estimator, uncertainty method, and number of clusters should be described together.",
+    "strong_answer_signals": [
+      "Identifies within-cluster dependence.",
+      "Explains the direction of uncertainty error when clustering is ignored.",
+      "Names a cluster-aware inference approach and avoids the false rule that analysis must always aggregate to clusters."
+    ],
+    "weak_answer_signals": [
+      "Uses an ordinary independent-sample standard error without adjustment.",
+      "Claims individual-level analysis is always invalid."
+    ],
+    "common_mistakes": [
+      "Confusing the outcome-analysis unit with the unit needed for variance estimation.",
+      "Ignoring the small number of randomized clusters when choosing inference methods."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can happen to p-values if clustering is ignored?",
+        "short_answer": "They can be too small because standard errors are underestimated."
+      },
+      {
+        "question": "Must all outcomes be aggregated to a cluster mean?",
+        "short_answer": "No. Individual-level models can be used if they account for clustering appropriately."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Cluster-randomized controlled trials: A tutorial",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11795929/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed tutorial published 2023.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11795929/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified cluster dependence can make ordinary individual-independent confidence intervals too narrow; retained the nuance that individual-level modeling may be valid when clustering is accounted for."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-account-for-clustering-in-trial-power"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-proportional-hazards-in-cox-model",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Proportional hazards diagnostics",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A Cox model's estimated treatment effect appears to change over follow-up time. What assumption should you check?",
+    "what_is_assessed": "Whether the candidate recognizes and diagnoses violations of the proportional hazards assumption.",
+    "short_answer": "Check the proportional hazards assumption: the Cox model assumes covariate hazard ratios are constant over time. Examine appropriate residual and graphical diagnostics, such as Schoenfeld-residual trends or log-minus-log plots, and inspect which covariates may violate the assumption. Depending on the goal, consider time-varying effects, stratification, or another model, and report how the violation changes interpretation.",
+    "deep_explanation": "The Cox proportional hazards model assumes a covariate's relative hazard remains constant over time, even though the baseline hazard can vary. The lifelines guide provides checks for this assumption. A detected violation does not automatically imply one universal fix; model choice should reflect the covariate, estimand, and study design.",
+    "strong_answer_signals": [
+      "States the constant hazard-ratio assumption.",
+      "Uses diagnostic plots or residual-based checks.",
+      "Considers a targeted alternative such as a time-varying effect or stratification."
+    ],
+    "weak_answer_signals": [
+      "Assumes a changing baseline hazard itself violates proportional hazards.",
+      "Reports a single Cox hazard ratio without checking the assumption."
+    ],
+    "common_mistakes": [
+      "Treating a diagnostic p-value as the only evidence.",
+      "Switching models without explaining how the target effect changes."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can the baseline hazard change over time under Cox PH?",
+        "short_answer": "Yes. The assumption concerns covariate hazard ratios, not a constant baseline hazard."
+      },
+      {
+        "question": "Name one possible response to a violation.",
+        "short_answer": "Model a time-varying effect or stratify on the offending covariate when appropriate."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Survival regression",
+        "publisher": "lifelines documentation",
+        "url": "https://lifelines.readthedocs.io/en/stable/Survival%20Regression.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "lifelines 0.30.3 survival regression documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://lifelines.readthedocs.io/en/stable/Survival%20Regression.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the Cox proportional-hazards assumption and documented diagnostic guidance; distinguished it from a changing baseline hazard."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-control-regression-to-mean-in-pre-post-analysis",
+    "bank": "data-scientist",
+    "topic": "Regression to the mean",
+    "subtopic": "Extreme-baseline selection and pre-post change",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A support program enrolls people because their baseline outcome was unusually poor, then reports improvement at follow-up. What alternative explanation should you consider?",
+    "what_is_assessed": "Whether the candidate recognizes regression to the mean and distinguishes natural movement after an extreme measurement from a treatment effect.",
+    "short_answer": "Regression to the mean: when selection is based on an extreme noisy measurement, a later measurement tends to be less extreme even without an intervention. A simple before-after improvement therefore does not identify the program's effect. Use an appropriate comparison group or randomized design, and consider repeated baseline measurements to understand natural variation.",
+    "deep_explanation": "The cited pre-post testing review explains that extreme measurements in one occasion tend to be closer to the middle on a subsequent occasion when measurements are not perfectly correlated. Selecting participants because of unusually poor baseline outcomes can therefore create apparent improvement by chance. A comparison design is needed to separate that pattern from a causal intervention effect.",
+    "strong_answer_signals": [
+      "Names regression to the mean.",
+      "Explains why selection on an extreme baseline induces apparent change.",
+      "Recommends a comparison design rather than attributing all pre-post change to treatment."
+    ],
+    "weak_answer_signals": [
+      "Attributes the entire improvement to the intervention.",
+      "Assumes regression to the mean is a data-entry error."
+    ],
+    "common_mistakes": [
+      "Selecting only extreme baseline cases and interpreting follow-up change without a control.",
+      "Treating repeated measures as independent evidence of intervention benefit."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is regression to the mean especially relevant?",
+        "short_answer": "When subjects are selected because of an unusually high or low noisy measurement."
+      },
+      {
+        "question": "Does a pre-post comparison alone establish causality?",
+        "short_answer": "No. A comparison group or stronger design is needed to separate alternative explanations."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Regression to the Mean in Pre–Post Testing: Using Simulations and Permutations to Develop Null Expectations",
+        "publisher": "CBE—Life Sciences Education via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6755224/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2019.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6755224/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified extreme measurements tend to be less extreme on repeat measurement and that pre-post change alone does not isolate an intervention effect."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-mediator-outcome-confounding",
+    "bank": "data-scientist",
+    "topic": "Mediation analysis",
+    "subtopic": "Mediator-outcome confounding",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Treatment was randomized, but you want to claim that a measured mediator caused the outcome change. What additional concern remains?",
+    "what_is_assessed": "Whether the candidate recognizes that randomizing treatment does not randomize the mediator or remove mediator-outcome confounding.",
+    "short_answer": "Randomizing treatment helps address treatment-outcome and treatment-mediator confounding, but it does not randomize the mediator. Unmeasured mediator-outcome confounding can still bias direct and indirect effect estimates. State the mediation estimand and assumptions, examine plausible confounders and sensitivity, and avoid treating a significant mediator association as proof of a causal mechanism.",
+    "deep_explanation": "The cited review notes that mediation involves exposure-outcome, exposure-mediator, and mediator-outcome relationships. Randomizing the exposure addresses the first two types of confounding, but not mediator-outcome confounding because the mediator is generally not randomized. Causal mediation claims therefore require additional assumptions and careful interpretation.",
+    "strong_answer_signals": [
+      "Separates randomization of exposure from randomization of mediator.",
+      "Names mediator-outcome confounding as an unresolved threat.",
+      "States assumptions and sensitivity needs before causal mechanism claims."
+    ],
+    "weak_answer_signals": [
+      "Claims randomized treatment makes the mediator-outcome relationship unconfounded.",
+      "Equates a mediator association with proof of mediation."
+    ],
+    "common_mistakes": [
+      "Treating a regression product or significant indirect effect as causal without assumptions.",
+      "Ignoring post-treatment confounders of the mediator-outcome relationship."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does randomizing treatment randomize the mediator?",
+        "short_answer": "No."
+      },
+      {
+        "question": "Which confounding can remain?",
+        "short_answer": "Unmeasured confounding between the mediator and outcome."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Assumptions Not Often Assessed or Satisfied in Published Mediation Analyses in Psychology and Psychiatry",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8900288/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2022.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8900288/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified randomization addresses exposure-related confounding but does not generally resolve mediator-outcome confounding."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-select-ancova-or-change-score-in-rct",
+    "bank": "data-scientist",
+    "topic": "Baseline adjustment in randomized trials",
+    "subtopic": "ANCOVA versus change-score analysis",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "A two-arm randomized trial measures an outcome at baseline and once after treatment. How would you choose between baseline-adjusted ANCOVA and analyzing change scores?",
+    "what_is_assessed": "Whether the candidate understands baseline adjustment and avoids treating one analysis as universally superior regardless of assumptions and precision.",
+    "short_answer": "Prespecify the estimand and analysis. ANCOVA models the post-treatment outcome while adjusting for baseline and often improves precision when baseline predicts follow-up. A change-score analysis models follow-up minus baseline and answers a related but not always identical modeling question. Compare assumptions, baseline-follow-up association, and any treatment-by-baseline interaction; report the planned primary analysis rather than selecting whichever result looks better.",
+    "deep_explanation": "The cited study compares several analysis methods for two-arm randomized pre-post designs, including post-treatment ANCOVA, ANCOVA with a baseline interaction, and change-score analysis. Their performance depends on the design and model assumptions, so an analyst should choose and justify a primary method in advance. Baseline adjustment can improve precision when baseline predicts follow-up, but the question should not be reduced to a universal rule that change scores are always invalid.",
+    "strong_answer_signals": [
+      "Defines the target contrast and prespecifies the analysis.",
+      "Explains that ANCOVA adjusts the follow-up outcome for baseline.",
+      "Considers precision, model assumptions, and possible baseline-by-treatment interaction."
+    ],
+    "weak_answer_signals": [
+      "Selects the analysis after comparing p-values.",
+      "Claims change scores are always wrong or ANCOVA is guaranteed to be superior."
+    ],
+    "common_mistakes": [
+      "Ignoring baseline-follow-up correlation when considering precision.",
+      "Changing the primary analysis after seeing the outcomes."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does ANCOVA adjust for?",
+        "short_answer": "The baseline outcome when modeling the post-treatment outcome."
+      },
+      {
+        "question": "Should the analysis be selected after inspecting results?",
+        "short_answer": "No. Prespecify the primary method and explain its assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Statistical analysis of two arm randomized pre-post designs with one post-treatment measurement",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8305561/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2021.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8305561/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that ANCOVA and change-score methods are distinct approaches for randomized pre-post designs and avoided a universal superiority claim."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-distinguish-cause-specific-hazard-from-absolute-risk",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Cause-specific hazard and cumulative incidence",
+    "level": "L3",
+    "type": "concept",
+    "question": "A cause-specific hazard ratio is below 1 in a competing-risks study. Does that directly quantify the reduction in the event's cumulative incidence?",
+    "what_is_assessed": "Whether the candidate distinguishes a cause-specific event rate from the real-world cumulative probability of an event under competing risks.",
+    "short_answer": "No. In competing risks, the cause-specific hazard ratio describes the instantaneous event rate among people still event-free, not a direct ratio of cumulative incidence. The cumulative incidence also depends on the hazards of competing events, so estimate and report the absolute event probability over the relevant time horizon when that is the decision target.",
+    "deep_explanation": "The cited epidemiology review explains that competing risks break the one-to-one relationship between a cause-specific hazard and its cumulative incidence. A cause-specific hazard is a rate conditional on remaining event-free, while cumulative incidence is an absolute probability that incorporates competing causes. Interpret the estimand explicitly and avoid translating a hazard ratio directly into an absolute risk reduction.",
+    "strong_answer_signals": [
+      "Defines the cause-specific hazard conditionally among event-free subjects.",
+      "Explains that competing-event hazards also affect cumulative incidence.",
+      "Reports cumulative incidence for absolute-risk questions."
+    ],
+    "weak_answer_signals": [
+      "Calls the cause-specific hazard ratio a risk ratio.",
+      "Treats competing events as irrelevant to real-world cumulative probability."
+    ],
+    "common_mistakes": [
+      "Converting a hazard ratio directly into an absolute risk reduction without baseline hazards.",
+      "Using one hazard estimand to answer a different cumulative-probability question."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does the cause-specific hazard condition on?",
+        "short_answer": "Remaining free of any event up to that time."
+      },
+      {
+        "question": "What quantity answers a real-world absolute-risk question?",
+        "short_answer": "The cumulative incidence for the event of interest, accounting for competing events."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Competing risks in epidemiology: possibilities and pitfalls",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3396320/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2012.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3396320/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that cause-specific hazards and cumulative incidence are not in one-to-one correspondence when competing risks are present."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-recalibrate-risk-from-case-control-sampling",
+    "bank": "data-scientist",
+    "topic": "Case-control risk prediction",
+    "subtopic": "Sampling effects on intercept and absolute risk",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A logistic model trained on a case-control sample predicts 30% disease risk for a patient. Can you report that as the patient's population risk without adjustment?",
+    "what_is_assessed": "Whether the candidate distinguishes estimable odds-ratio associations from absolute-risk predictions distorted by outcome-dependent sampling.",
+    "short_answer": "Not without accounting for the sampling design. Case and control proportions are set by study design, so the logistic intercept and predicted absolute risks generally do not represent population risk directly, even when odds-ratio coefficients remain estimable. Use population prevalence or known sampling fractions to correct the intercept, then validate calibration in the target population.",
+    "deep_explanation": "The cited case-control risk-prediction study states that the intercept is not estimable from the sampled case-control proportions, while odds ratios remain estimable. To estimate population risk, the intercept must be adjusted using information about sampling and the source population. Predictions should therefore not be interpreted as calibrated population probabilities until this correction and target-population validation are addressed.",
+    "strong_answer_signals": [
+      "Identifies outcome-dependent sampling.",
+      "Separates odds-ratio estimation from absolute-risk estimation.",
+      "Uses source-population prevalence or sampling fractions for intercept correction."
+    ],
+    "weak_answer_signals": [
+      "Treats the case fraction in the sample as population prevalence.",
+      "Assumes valid odds ratios automatically imply calibrated risks."
+    ],
+    "common_mistakes": [
+      "Reporting model probabilities without correcting the intercept.",
+      "Applying a correction without knowing the source-population prevalence or sampling design."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can remain estimable in a case-control design?",
+        "short_answer": "Odds-ratio coefficients under the logistic model."
+      },
+      {
+        "question": "What information can support population-risk correction?",
+        "short_answer": "Source-population prevalence or the relevant case and control sampling fractions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Assessing risk prediction models in case-control studies using semiparametric and nonparametric methods",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3045657/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2011.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3045657/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified case-control sampling prevents direct intercept estimation while odds-ratio coefficients remain estimable; population risk requires sampling information."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-smd-not-p-values-for-matching-balance",
+    "bank": "data-scientist",
+    "topic": "Propensity score balance diagnostics",
+    "subtopic": "Standardized mean differences after matching",
+    "level": "L2",
+    "type": "concept",
+    "question": "After propensity-score matching, why is a nonsignificant p-value not enough to conclude that covariates are balanced?",
+    "what_is_assessed": "Whether the candidate uses descriptive balance diagnostics rather than significance tests whose result depends strongly on sample size.",
+    "short_answer": "A p-value tests evidence against an exact equality null and is affected by the matched sample size; a nonsignificant result can reflect low power rather than good balance. Compare standardized mean differences across covariates, inspect their distributions and variances, and report diagnostics such as a balance plot. Reassess model specification if important imbalance remains.",
+    "deep_explanation": "The cited propensity-score matching review identifies standardized mean difference as a commonly used statistic for comparing covariate balance and explains why significance testing can be misleading after matching: sample-size reduction can make imbalances nonsignificant, while multiple tests can also produce spurious significance. SMD is unitless and supports comparisons across covariates; variance and distributional balance should also be checked.",
+    "strong_answer_signals": [
+      "Explains why p-values depend on sample size and do not measure balance magnitude.",
+      "Uses standardized mean differences and distributional diagnostics.",
+      "Revisits propensity-score model specification when imbalance remains."
+    ],
+    "weak_answer_signals": [
+      "Treats p > 0.05 as proof of balance.",
+      "Uses one pooled balance statistic without checking individual covariates."
+    ],
+    "common_mistakes": [
+      "Ignoring variance imbalance after matching.",
+      "Using significance tests as a pass/fail rule for covariate balance."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why is SMD useful across different covariates?",
+        "short_answer": "It is standardized and independent of the covariate's measurement unit."
+      },
+      {
+        "question": "What else should be checked besides mean differences?",
+        "short_answer": "Variance and distributional balance."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Balance diagnostics after propensity score matching",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351359/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2018.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351359/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified SMD as a common unitless balance statistic and the sample-size and multiple-testing limitations of p-value balance tests."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-assess-synthetic-control-pre-fit-and-placebos",
+    "bank": "data-scientist",
+    "topic": "Synthetic control evaluation",
+    "subtopic": "Pre-intervention fit and placebo comparisons",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A synthetic-control estimate shows a large post-intervention gap. What checks help assess whether that gap is credible?",
+    "what_is_assessed": "Whether the candidate evaluates pre-intervention fit, donor-pool suitability, and placebo comparisons without treating any single check as proof.",
+    "short_answer": "Check whether the weighted donor closely reproduces the treated unit's pre-intervention outcome path and relevant covariates, and verify donors were not exposed to the intervention or similar spillovers. Use held-out pre-periods or placebo assignments to assess how unusual the post-period gap is relative to comparable fit, while explaining that these checks strengthen or challenge credibility rather than prove causality.",
+    "deep_explanation": "The cited tutorial describes pre-intervention outcome and covariate fit as central to assessing a synthetic control. It also discusses in-space placebo effects and cautions that placebo comparisons should account for differences in pre-intervention fit. Cross-validation on a held-out pre-period can provide an additional check. None of these diagnostics repairs a poor donor pool or establishes the causal assumptions by itself.",
+    "strong_answer_signals": [
+      "Inspects treated-versus-synthetic fit before treatment.",
+      "Checks donor eligibility and exposure.",
+      "Interprets placebo gaps relative to pre-period fit and avoids claiming proof."
+    ],
+    "weak_answer_signals": [
+      "Focuses only on the post-treatment estimate.",
+      "Treats any placebo comparison as a formal causal guarantee."
+    ],
+    "common_mistakes": [
+      "Using donors exposed to the intervention or related spillovers.",
+      "Comparing placebo gaps without considering their pre-intervention fit."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why does pre-intervention fit matter?",
+        "short_answer": "Poor fit weakens the synthetic control's value as a counterfactual for the treated unit."
+      },
+      {
+        "question": "Do placebo tests prove the treatment caused the gap?",
+        "short_answer": "No. They are diagnostics that support or challenge the design's credibility."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Synthetic Control Methods for the Evaluation of Single-Unit Interventions in Epidemiology: A Tutorial",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8634614/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed tutorial published 2021.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8634614/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the tutorial's emphasis on pre-intervention fit, donor suitability, cross-validation, and placebo comparisons relative to fit."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-choose-prediction-interval-for-new-observation",
+    "bank": "data-scientist",
+    "topic": "Prediction intervals and confidence intervals",
+    "subtopic": "Mean response versus individual outcome",
+    "level": "L2",
+    "type": "concept",
+    "question": "A stakeholder asks for a range likely to contain one new individual's outcome, not the mean outcome. Which interval should you report?",
+    "what_is_assessed": "Whether the candidate distinguishes uncertainty about the estimated mean from variability in a new individual observation.",
+    "short_answer": "Use a prediction interval for a new observation. A confidence interval for the mean response reflects uncertainty in the estimated conditional mean, while a prediction interval also includes residual variability among individual outcomes and is therefore generally wider.",
+    "deep_explanation": "The statsmodels prediction API distinguishes a confidence interval for the mean prediction, based on the standard error of the mean, from a prediction interval for a new observation, based on the observation-level standard error that also includes residual variance. The interval must match the quantity the stakeholder needs.",
+    "strong_answer_signals": [
+      "Identifies the new individual as the prediction target.",
+      "Explains that prediction intervals include residual variation.",
+      "Does not present a confidence interval for the mean as an individual range."
+    ],
+    "weak_answer_signals": [
+      "Uses a confidence interval for the mean to claim likely coverage of a new observation.",
+      "Assumes both intervals represent the same uncertainty."
+    ],
+    "common_mistakes": [
+      "Failing to name whether the interval targets a mean or an individual.",
+      "Ignoring model assumptions and distributional limits when interpreting interval coverage."
+    ],
+    "follow_ups": [
+      {
+        "question": "What extra variation does a prediction interval include?",
+        "short_answer": "Residual variability of a new observation around the mean response."
+      },
+      {
+        "question": "Which interval is usually wider?",
+        "short_answer": "The prediction interval for a new observation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "PredictionResults.conf_int",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.PredictionResults.conf_int.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "statsmodels 0.15.0 stable API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.PredictionResults.conf_int.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented distinction between mean-response confidence intervals and prediction intervals for new observations, which include residual variance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-pool-estimates-across-multiple-imputations",
+    "bank": "data-scientist",
+    "topic": "Multiple imputation pooling",
+    "subtopic": "Within- and between-imputation variance",
+    "level": "L3",
+    "type": "concept",
+    "question": "You fit the same model in several multiply imputed datasets. Is averaging the coefficients alone enough to report uncertainty?",
+    "what_is_assessed": "Whether the candidate combines both within-imputation and between-imputation uncertainty instead of reporting only an average estimate.",
+    "short_answer": "No. Pool the point estimates and their uncertainty using an appropriate multiple-imputation rule, such as Rubin's rules, which combines within-imputation variance with between-imputation variability. Do not average p-values or treat imputations as independent new samples; report the number of imputations and check that the pooled inference is appropriate for the parameter and model.",
+    "deep_explanation": "The cited guidance describes analyzing each imputed dataset with the same method and combining the estimates and variance so that both within- and between-imputation variability are represented. Rubin's rules are based on asymptotic theory, and the normality assumptions may not suit every target, especially some prediction or performance measures. The pooling method should match the estimand and inferential setting.",
+    "strong_answer_signals": [
+      "Includes within- and between-imputation variance.",
+      "Combines estimates rather than pooling p-values.",
+      "Checks whether the pooling assumptions fit the parameter being reported."
+    ],
+    "weak_answer_signals": [
+      "Reports only the mean coefficient across imputations.",
+      "Treats the imputed datasets as independent studies."
+    ],
+    "common_mistakes": [
+      "Ignoring uncertainty between imputed datasets.",
+      "Applying normal-theory pooling uncritically to a non-normal performance measure."
+    ],
+    "follow_ups": [
+      {
+        "question": "What two variance components are combined?",
+        "short_answer": "Within-imputation variance and between-imputation variability."
+      },
+      {
+        "question": "Should p-values simply be averaged?",
+        "short_answer": "No. Pool the estimates and uncertainty with a method appropriate to the analysis."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2009.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that pooled estimates and variance incorporate within- and between-imputation variability and noted normality limitations for some parameters."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-account-for-complex-survey-design",
+    "bank": "data-scientist",
+    "topic": "Complex survey sampling",
+    "subtopic": "Weights, strata, and clustered sampling",
+    "level": "L3",
+    "type": "scenario",
+    "question": "An NHANES analysis uses ordinary unweighted regression even though some groups were oversampled. What could go wrong?",
+    "what_is_assessed": "Whether the candidate accounts for unequal selection probabilities and complex design in population estimates and uncertainty.",
+    "short_answer": "The sample may not represent the target population, and observations are not a simple random sample. Use the appropriate survey weights and design variables such as strata and primary sampling units in a survey-aware analysis. Ignoring them can bias estimates and understate uncertainty or overstate significance; the correct weights and variance design depend on the dataset and estimand.",
+    "deep_explanation": "CDC guidance describes NHANES as a complex, multistage probability sample with oversampling and recommends using sampling weights and sample-design variables in analyses. Weights address unequal selection and related adjustments, while design-aware variance estimation accounts for clustering and stratification. The guidance is specific to NHANES and should not be transferred as a fixed recipe to other surveys.",
+    "strong_answer_signals": [
+      "Recognizes unequal selection probabilities and oversampling.",
+      "Uses weights plus design variables for variance estimation.",
+      "Scopes the analysis to the survey's population and official guidance."
+    ],
+    "weak_answer_signals": [
+      "Assumes a large sample automatically makes unweighted results representative.",
+      "Uses weights but ignores the sample design when estimating uncertainty."
+    ],
+    "common_mistakes": [
+      "Treating complex survey observations as independent simple-random-sample data.",
+      "Using the wrong survey weight for the analytic population or period."
+    ],
+    "follow_ups": [
+      {
+        "question": "What do survey weights help account for?",
+        "short_answer": "Unequal selection probabilities and specified nonresponse or population adjustments."
+      },
+      {
+        "question": "Why include strata and primary sampling units?",
+        "short_answer": "They represent the complex design needed for appropriate variance estimation."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "NHANES Sample Design Module",
+        "publisher": "U.S. Centers for Disease Control and Prevention",
+        "url": "https://wwwn.cdc.gov/nchs/nhanes/tutorials/sampledesign.aspx",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "CDC NHANES sample-design tutorial retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://wwwn.cdc.gov/nchs/nhanes/tutorials/sampledesign.aspx"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified NHANES uses complex multistage sampling and recommends weights and sample design variables; kept its recommendations survey-specific."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-avoid-naive-fold-se-for-cross-validation",
+    "bank": "data-scientist",
+    "topic": "Cross-validation uncertainty",
+    "subtopic": "Dependence between fold estimates",
+    "level": "L3",
+    "type": "concept",
+    "question": "A report gives the standard deviation of k-fold scores divided by √k as a confidence-interval standard error. What assumption should you question?",
+    "what_is_assessed": "Whether the candidate recognizes that cross-validation fold estimates are dependent because their training sets overlap.",
+    "short_answer": "The calculation treats fold scores as independent replicates, but cross-validation folds share heavily overlapping training data, so their errors are correlated. The naive standard error can be too small and its interval too narrow. Use an uncertainty method designed for the cross-validation procedure and state its assumptions; do not interpret the fold standard deviation alone as a general confidence interval.",
+    "deep_explanation": "The cited study explains that fold-level errors are correlated because observations are reused across training and testing splits. It reports that naive cross-validation intervals can be too narrow and notes that no unbiased standard-error estimator exists for a single instance of ordinary CV without additional assumptions or procedure changes. The question concerns uncertainty about the CV estimate, not the estimate's usefulness for model selection.",
+    "strong_answer_signals": [
+      "Identifies dependence from overlapping training sets.",
+      "Explains why dividing by √k can understate uncertainty.",
+      "Chooses an inference procedure suited to cross-validation and states assumptions."
+    ],
+    "weak_answer_signals": [
+      "Treats folds as independent experiments.",
+      "Reports a narrow interval without qualifying the variance estimate."
+    ],
+    "common_mistakes": [
+      "Confusing variability across folds with uncertainty of the CV point estimate.",
+      "Assuming repeated CV automatically creates independent estimates."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why are fold errors correlated?",
+        "short_answer": "Their training sets overlap, so fitted models and predictions are dependent."
+      },
+      {
+        "question": "Does a small fold standard deviation guarantee a precise CV estimate?",
+        "short_answer": "No. It does not account for the dependence between folds."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Cross-validation: what does it estimate and how well does it do it?",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2104.00673",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "arXiv version 1, published 2021-04-02.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2104.00673"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified fold dependence from overlapping training sets and the paper's warning that naive cross-validation intervals can be too narrow."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-state-assumptions-before-correcting-measurement-error",
+    "bank": "data-scientist",
+    "topic": "Measurement error in predictors",
+    "subtopic": "Classical error and attenuation",
+    "level": "L3",
+    "type": "concept",
+    "question": "A continuous predictor is measured with additive classical error. Can you assume ordinary regression's coefficient is unbiased?",
+    "what_is_assessed": "Whether the candidate recognizes attenuation under a specific classical measurement-error model and avoids generalizing it to every error structure.",
+    "short_answer": "No. In simple linear regression, independent mean-zero classical error in the predictor generally attenuates the estimated slope toward zero. That is not a universal correction rule: with multiple predictors, differential error, or other error structures, bias can be more complex and may not point toward zero. State the measurement model and use validation data, an explicit correction method, or sensitivity analysis when the effect matters.",
+    "deep_explanation": "The cited STRATOS guidance describes attenuation under classical measurement error and discusses how other settings, including Berkson error and error correlated with covariates, can produce different bias patterns. The simple toward-zero result depends on assumptions such as the classical additive error model and a simple regression setting. Analysts should not apply a blanket correction without identifying the measurement process and estimand.",
+    "strong_answer_signals": [
+      "Names the assumptions behind the simple attenuation result.",
+      "Distinguishes simple regression from more complex or differential error structures.",
+      "Proposes validation data, a correction model, or sensitivity analysis."
+    ],
+    "weak_answer_signals": [
+      "Claims all measurement error biases every coefficient toward zero.",
+      "Assumes a noisy proxy is unbiased because the error is nondifferential."
+    ],
+    "common_mistakes": [
+      "Applying the attenuation formula without checking the error model.",
+      "Treating a measurement-error correction as possible without validation or identifying assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is the usual simple-regression effect of classical predictor error?",
+        "short_answer": "Attenuation of the slope toward zero under the stated assumptions."
+      },
+      {
+        "question": "Does that direction necessarily hold in multivariable models?",
+        "short_answer": "No. Correlated or differential errors can produce more complex bias."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "STRATOS guidance document on measurement error and misclassification of variables in observational epidemiology: Part 1 – basic theory and simple methods of adjustment",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7450672/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed STRATOS guidance published 2020.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7450672/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Cross-checked the classical attenuation result and the source's discussion of non-classical error patterns; constrained the statement to the simple-regression assumptions."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

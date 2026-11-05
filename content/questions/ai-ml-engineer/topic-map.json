@@ -27,7 +27,7 @@
     },
     {
       "topic": "Production ML testing and monitoring",
-      "subtopics": ["training-serving skew", "data drift", "delayed labels", "candidate validation across data slices", "serving latency and release gates", "training-data schema validation"],
+      "subtopics": ["training-serving skew", "data drift", "delayed labels", "candidate validation across data slices", "serving latency and release gates", "training-data schema validation", "canary traffic rollout", "unlabeled input drift signals"],
       "sources": [{
         "title": "Guidelines for developing high-quality, predictive ML solutions",
         "publisher": "Google Cloud Architecture Center",
@@ -36,6 +36,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "Google Cloud Architecture Center guidance"
+      }, {
+        "title": "Canary Deployments to Cloud Run",
+        "publisher": "Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/deploy/docs/deployment-strategies/canary/cloud-run",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Google Cloud canary deployment documentation retrieved 2026-11-04"
       }]
     },
     {
@@ -62,6 +70,471 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "PyTorch 2.15 stable AMP documentation"
+      }, {
+        "title": "Automatic Mixed Precision examples",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/notes/amp_examples.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 stable AMP examples"
+      }]
+    },
+    {
+      "topic": "Model evaluation and autograd modes",
+      "subtopics": ["module evaluation behavior", "no-grad mode", "inference mode"],
+      "sources": [{
+        "title": "Autograd mechanics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/notes/autograd.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 stable autograd documentation"
+      }]
+    },
+    {
+      "topic": "Distributed training",
+      "subtopics": ["process groups", "multi-process training", "gradient synchronization", "unused parameters in conditional models", "NCCL collective hang diagnostics", "epoch-aware distributed shuffling", "DistributedSampler padding versus dropping"],
+      "sources": [{
+        "title": "Getting Started with Distributed Data Parallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/ddp_tutorial.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 tutorial documentation"
+      }, {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch DistributedDataParallel documentation retrieved 2026-11-04"
+      }, {
+        "title": "Distributed communication package",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/distributed.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 distributed communication documentation"
+      }, {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 DataLoader and DistributedSampler documentation"
+      }]
+    },
+    {
+      "topic": "Compilation and performance measurement",
+      "subtopics": ["compile overhead", "warm-up", "steady-state benchmarking", "dynamic shapes and recompilation", "graph-break diagnosis"],
+      "sources": [{
+        "title": "torch.compile End-to-End Tutorial",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/torch_compile_full_example.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 tutorial documentation"
+      }, {
+        "title": "Frequently Asked Questions",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/torch.compiler_faq.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 compiler FAQ"
+      }, {
+        "title": "Use fullgraph=True to Identify and Eliminate Graph Breaks",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/user_guide/torch_compiler/compile/programming_model.fullgraph_true.md",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch stable compiler guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Model serving performance",
+      "subtopics": ["dynamic batching", "latency budgets", "throughput"],
+      "sources": [{
+        "title": "Batchers",
+        "publisher": "NVIDIA Triton Inference Server documentation",
+        "url": "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "NVIDIA Triton Inference Server user guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Training performance and data pipelines",
+      "subtopics": ["asynchronous data loading", "pinned memory", "GPU utilization", "prefetch depth and host memory"],
+      "sources": [{
+        "title": "Performance Tuning Guide",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 performance tuning guide"
+      }, {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 DataLoader documentation"
+      }]
+    },
+    {
+      "topic": "Mixed-precision training",
+      "subtopics": ["autocast", "gradient scaling", "float16 underflow", "gradient clipping with GradScaler"],
+      "sources": [{
+        "title": "Automatic Mixed Precision",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 Automatic Mixed Precision recipe"
+      }, {
+        "title": "Automatic Mixed Precision examples",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/notes/amp_examples.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 stable Automatic Mixed Precision examples"
+      }]
+    },
+    {
+      "topic": "Memory-constrained training",
+      "subtopics": ["gradient accumulation", "effective batch size", "peak GPU memory", "scheduler timing with gradient accumulation"],
+      "sources": [{
+        "title": "Methods and tools for efficient training on a single GPU",
+        "publisher": "Hugging Face Transformers documentation",
+        "url": "https://huggingface.co/docs/transformers/v4.49.0/perf_train_gpu_one",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Hugging Face Transformers v4.49 documentation"
+      }, {
+        "title": "Performing gradient accumulation with Accelerate",
+        "publisher": "Hugging Face documentation",
+        "url": "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Hugging Face Accelerate gradient accumulation guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Optimization and regularization",
+      "subtopics": ["AdamW", "decoupled weight decay", "adaptive optimizers"],
+      "sources": [{
+        "title": "AdamW",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.optim.AdamW.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 AdamW documentation"
+      }, {
+        "title": "Decoupled Weight Decay Regularization",
+        "publisher": "Loshchilov and Hutter, arXiv",
+        "url": "https://arxiv.org/abs/1711.05101",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "2017 paper"
+      }]
+    },
+    {
+      "topic": "Uneven distributed input handling",
+      "subtopics": ["rank exhaustion", "Join context manager", "shadow collectives"],
+      "sources": [{
+        "title": "Distributed Training with Uneven Inputs Using the Join Context Manager",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/tutorials/advanced/generic_join.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 distributed tutorial"
+      }]
+    },
+    {
+      "topic": "Distributed gradient synchronization",
+      "subtopics": ["no_sync", "gradient accumulation", "all-reduce communication"],
+      "sources": [{
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation"
+      }]
+    },
+    {
+      "topic": "Activation checkpointing",
+      "subtopics": ["activation recomputation", "memory reduction", "compute trade-offs", "consistent recomputation and mutable state"],
+      "sources": [{
+        "title": "torch.utils.checkpoint",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/checkpoint.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 checkpoint documentation"
+      }]
+    },
+    {
+      "topic": "Distributed checkpointing",
+      "subtopics": ["parallel rank save and load", "load-time resharding", "cross-topology resume"],
+      "sources": [{
+        "title": "Distributed Checkpoint",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/distributed.checkpoint.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Distributed Checkpoint documentation"
+      }]
+    },
+    {
+      "topic": "Post-training quantization",
+      "subtopics": ["representative calibration data", "per-category accuracy checks", "precision-performance trade-offs"],
+      "sources": [{
+        "title": "Quantization Accuracy Debugging",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.3/quantization-accuracy-debugging.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.3 quantization accuracy debugging documentation"
+      }]
+    },
+    {
+      "topic": "Compiler recompilation limits",
+      "subtopics": ["recompile limits", "eager fallback", "bounded specialization"],
+      "sources": [{
+        "title": "torch.compile Troubleshooting",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/user_guide/torch_compiler/torch.compiler_troubleshooting.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch main compiler troubleshooting documentation retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Data loading and throughput",
+      "subtopics": ["persistent DataLoader worker lifecycle", "worker memory and dataset state", "IterableDataset worker sharding", "out-of-order DataLoader delivery"],
+      "sources": [{
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/data.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 DataLoader documentation"
+      }, {
+        "title": "torch.utils.data",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/main/data.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch main DataLoader documentation retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Module state and checkpointing",
+      "subtopics": ["registered buffers versus parameters", "persistent and non-persistent state"],
+      "sources": [{
+        "title": "torch.nn.Module",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Module.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Module documentation"
+      }]
+    },
+    {
+      "topic": "Checkpoint security and loading",
+      "subtopics": ["weights_only loading", "checkpoint provenance", "serialization resource limits"],
+      "sources": [{
+        "title": "Serialization semantics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/serialization.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 serialization documentation"
+      }]
+    },
+    {
+      "topic": "Optimizer behavior",
+      "subtopics": ["None versus zero gradients", "conditional parameter updates"],
+      "sources": [{
+        "title": "torch.optim.Optimizer.zero_grad",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.optim.Optimizer.zero_grad.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 optimizer documentation"
+      }]
+    },
+    {
+      "topic": "Tensor layout and memory format",
+      "subtopics": ["channels-last layout", "convolution performance", "layout conversion costs"],
+      "sources": [{
+        "title": "Channels Last Memory Format in PyTorch",
+        "publisher": "PyTorch tutorials",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/memory_format_tutorial.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 tutorial documentation"
+      }]
+    },
+    {
+      "topic": "Tensor views and reshaping",
+      "subtopics": ["stride compatibility", "non-contiguous tensor views", "reshape copy behavior"],
+      "sources": [{
+        "title": "torch.Tensor.view",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.view.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Tensor.view documentation"
+      }]
+    },
+    {
+      "topic": "CUDA benchmarking",
+      "subtopics": ["asynchronous execution and timing", "CUDA events", "device synchronization"],
+      "sources": [{
+        "title": "CUDA semantics",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/notes/cuda.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 CUDA semantics documentation"
+      }]
+    },
+    {
+      "topic": "Token-weighted gradient accumulation",
+      "subtopics": ["variable-length microbatches", "non-padding token normalization", "distributed scaling"],
+      "sources": [{
+        "title": "Performing gradient accumulation with Accelerate",
+        "publisher": "Hugging Face documentation",
+        "url": "https://huggingface.co/docs/accelerate/en/usage_guides/gradient_accumulation",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Hugging Face Accelerate guide retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Host-to-device data transfer",
+      "subtopics": ["pinned memory", "asynchronous copies", "source-buffer safety"],
+      "sources": [{
+        "title": "A guide on good usage of non_blocking and pin_memory() in PyTorch",
+        "publisher": "PyTorch tutorials",
+        "url": "https://docs.pytorch.org/tutorials/intermediate/pinmem_nonblock.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15.0 tutorial documentation"
+      }]
+    },
+    {
+      "topic": "Distributed buffer synchronization",
+      "subtopics": ["DDP buffer broadcast", "gradient all-reduce distinction", "BatchNorm synchronization"],
+      "sources": [{
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation"
+      }]
+    },
+    {
+      "topic": "Sparse embedding gradients",
+      "subtopics": ["optimizer support", "device compatibility", "sparse versus dense trade-offs"],
+      "sources": [{
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Embedding API documentation"
+      }]
+    },
+    {
+      "topic": "Embedding max-norm autograd behavior",
+      "subtopics": ["in-place renormalization", "autograd tensor versions", "conditional weight cloning"],
+      "sources": [{
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Embedding API documentation"
+      }]
+    },
+    {
+      "topic": "Embedding padding indices",
+      "subtopics": ["padding vector initialization", "gradient exclusion", "custom pad representations"],
+      "sources": [{
+        "title": "Embedding",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Embedding API documentation"
+      }]
+    },
+    {
+      "topic": "Tensor detach and storage aliasing",
+      "subtopics": ["autograd history", "shared storage", "detached copies"],
+      "sources": [{
+        "title": "torch.Tensor.detach",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.Tensor.detach.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 Tensor.detach API documentation"
+      }]
+    },
+    {
+      "topic": "CUDA allocator and empty_cache",
+      "subtopics": ["live tensor allocations", "unoccupied cached blocks", "fragmentation diagnostics"],
+      "sources": [{
+        "title": "torch.cuda.empty_cache",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.0/generated/torch.cuda.empty_cache.html",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "PyTorch 2.15 CUDA API documentation"
       }]
     }
   ]
