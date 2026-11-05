@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { InterviewGuide } from "@/components/interview-guide/InterviewGuide";
 import { InterviewGuideChooser } from "@/components/interview-guide/InterviewGuideChooser";
+import { AppNav } from "@/components/shared/app-nav";
 import { PublicFooter } from "@/components/shared/public-footer";
 import type { InterviewGuideQuestion } from "@/components/interview-guide/types";
 import dataEngineerItems from "../../../../content/questions/data-engineer/items.json";
@@ -96,49 +97,51 @@ export function InterviewGuidePage() {
       };
     });
     return (
-      <>
+      <div className="grain min-h-[100dvh] flex flex-col">
+        <AppNav />
         <InterviewGuideChooser roles={chooserRoles} />
         <PublicFooter />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-    <details className="mx-auto max-w-6xl px-5 pt-3 text-sm">
-      <summary className="w-fit cursor-pointer text-muted-foreground underline decoration-border underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
-        Browser-only progress controls
-      </summary>
-      <div className="flex flex-wrap items-center gap-3 py-3">
-        <span className="mr-auto text-muted-foreground">Your study progress stays in this browser.</span>
-        <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={exportProgress} data-testid="button-export-guide-progress">Export backup</button>
-        <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={() => importRef.current?.click()} data-testid="button-import-guide-progress">Import backup</button>
-        <input ref={importRef} className="sr-only" type="file" accept="application/json,.json" aria-label="Choose study progress backup" onChange={(event) => {
-          setImportError("");
-          void importProgress(event.currentTarget.files?.[0]).catch((error: unknown) => setImportError(error instanceof Error ? error.message : "Could not import this backup."));
-          event.currentTarget.value = "";
-        }} />
-        <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={() => {
-          if (window.confirm("Clear this browser’s interview-guide progress? This cannot be undone unless you saved a backup.")) {
-            save({ completed: [], readiness: [], core: [] });
-          }
-        }} data-testid="button-clear-guide-progress">Clear progress</button>
-        {importError && <p role="alert" className="w-full text-destructive">{importError}</p>}
-      </div>
-    </details>
-    <InterviewGuide
-      roleTitle={role.title}
-      roleSlug={slug}
-      topics={role.map.topics.map((topic) => ({ name: topic.topic, question_count: questions.filter((question) => question.topic === topic.topic).length }))}
-      questions={questions}
-      coreQuestionIds={progress.core}
-      completedQuestionIds={progress.completed}
-      readinessChecks={progress.readiness}
-      onCoreQuestionIdsChange={(core) => save({ ...progress, core })}
-      onCompletedQuestionIdsChange={(completed) => save({ ...progress, completed })}
-      onReadinessChecksChange={(readiness) => save({ ...progress, readiness })}
-    />
-     <PublicFooter />
-    </>
+    <div className="grain min-h-[100dvh] flex flex-col">
+      <AppNav />
+      <details className="mx-auto max-w-6xl px-5 pt-3 text-sm">
+        <summary className="w-fit cursor-pointer text-muted-foreground underline decoration-border underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+          Browser-only progress controls
+        </summary>
+        <div className="flex flex-wrap items-center gap-3 py-3">
+          <span className="mr-auto text-muted-foreground">Your study progress stays in this browser.</span>
+          <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={exportProgress} data-testid="button-export-guide-progress">Export backup</button>
+          <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={() => importRef.current?.click()} data-testid="button-import-guide-progress">Import backup</button>
+          <input ref={importRef} className="sr-only" type="file" accept="application/json,.json" aria-label="Choose study progress backup" onChange={(event) => {
+            setImportError("");
+            void importProgress(event.currentTarget.files?.[0]).catch((error: unknown) => setImportError(error instanceof Error ? error.message : "Could not import this backup."));
+            event.currentTarget.value = "";
+          }} />
+          <button type="button" className="rounded-lg border border-border px-3 py-2 font-semibold" onClick={() => {
+            if (window.confirm("Clear this browser’s interview-guide progress? This cannot be undone unless you saved a backup.")) {
+              save({ completed: [], readiness: [], core: [] });
+            }
+          }} data-testid="button-clear-guide-progress">Clear progress</button>
+          {importError && <p role="alert" className="w-full text-destructive">{importError}</p>}
+        </div>
+      </details>
+      <InterviewGuide
+        roleTitle={role.title}
+        roleSlug={slug}
+        topics={role.map.topics.map((topic) => ({ name: topic.topic, question_count: questions.filter((question) => question.topic === topic.topic).length }))}
+        questions={questions}
+        coreQuestionIds={progress.core}
+        completedQuestionIds={progress.completed}
+        readinessChecks={progress.readiness}
+        onCoreQuestionIdsChange={(core) => save({ ...progress, core })}
+        onCompletedQuestionIdsChange={(completed) => save({ ...progress, completed })}
+        onReadinessChecksChange={(readiness) => save({ ...progress, readiness })}
+      />
+      <PublicFooter />
+    </div>
   );
 }

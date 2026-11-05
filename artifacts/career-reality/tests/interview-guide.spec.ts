@@ -4,13 +4,16 @@ const route = "/interview-guides/data-scientist";
 const questionId = "ds-separate-selection-and-final-test";
 const key = "careerreality-guide-v1:data-scientist";
 
-test("shows the public site footer on the guide directory and role page", async ({ page }) => {
+test("shows primary navigation and the public footer on directory and role pages", async ({ page }) => {
+  const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
   const footerNavigation = page.getByRole("navigation", { name: "Public CareerReality navigation" });
   await page.goto("/interview-guides");
+  await expect(primaryNavigation).toBeVisible();
   await expect(footerNavigation).toBeVisible();
   await expect(page.getByText("A career desk for India")).toBeVisible();
 
   await page.goto(route);
+  await expect(primaryNavigation).toBeVisible();
   await expect(footerNavigation).toBeVisible();
   await expect(page.getByText("A career desk for India")).toBeVisible();
 });

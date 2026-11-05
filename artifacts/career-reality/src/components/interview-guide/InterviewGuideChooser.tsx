@@ -15,14 +15,6 @@ type InterviewGuideChooserProps = {
 export function InterviewGuideChooser({ roles }: InterviewGuideChooserProps) {
   return (
     <div className="ig-extracted ig-redesign">
-      <header className="ig-shell ig-topbar">
-        <a className="ig-brand" href="/" aria-label="CareerReality home" data-testid="link-careerreality-home">
-          <span className="ig-brand-mark" aria-hidden="true">CR</span>
-          <span className="ig-brand-name">CareerReality</span>
-        </a>
-        <span className="ig-top-note">Interview guide library&nbsp; / &nbsp;India</span>
-      </header>
-
       <main className="ig-shell ig-main">
         <section className="ig-intro" aria-labelledby="ig-heading">
           <div>
