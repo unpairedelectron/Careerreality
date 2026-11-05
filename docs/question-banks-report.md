@@ -58,28 +58,28 @@ The Complete Interview Guide request is in progress. The schema migration plan i
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Every included item matches schema | PASS | `pnpm --filter @workspace/career-reality run validate:question-banks` |
-| Every included item has a cited source and retrieval date | PASS | 92 item records across five role maps |
-| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 92 |
+| Every included item has a cited source and retrieval date | PASS | 108 item records across five role maps |
+| Independent re-derivation recorded for each included item | PASS | `verification.rederivation_agreement` on all 108 |
 | Every executable code sample executed or visibly marked | PASS | No current item contains code; `code: null` and `code_executed: n.a.` |
-| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 92-item current set |
-| Source URL reachability | PASS (point-in-time) | All 52 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
+| No pair exceeds documented similarity threshold | PASS | Validator checks normalized question text at Jaccard threshold 0.82; 108-item current set |
+| Source URL reachability | PASS (point-in-time) | All 61 unique item and topic-map URLs returned 2xx/3xx on 2026-11-04; the check does not verify claim support |
 | Structured data valid | REVIEW REQUIRED | Interview guide routes are noindex app shells; dedicated structured data is intentionally not added |
-| axe, keyboard, zoom, Lighthouse gates | REVIEW REQUIRED | Shared guide UI is implemented but has not received these checks |
-| Privacy policy matches local-only progress storage | PARTIAL | Browser-only Core/revision/readiness state, export/import and clear controls are implemented; network/storage capture is pending |
-| All banks meet minimum counts | FAIL | 92 items total; each of four short banks needs 71 more |
-| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 92 draft items; no human reviewer recorded |
+| axe, keyboard, zoom, Lighthouse gates | PARTIAL | Keyboard tab sequence and 640px/320px overflow checks pass; full screen-reader, actual browser-zoom, axe, and Lighthouse checks remain open |
+| Privacy policy matches local-only progress storage | PARTIAL | Browser localStorage, export/import, and confirmed clear are implemented; browser test observes no non-GET request from progress interactions |
+| All banks meet minimum counts | FAIL | 108 items total; each of four short banks needs 67 more |
+| Expert review | REVIEW REQUIRED | `docs/needs-sme-review.md` lists all 108 draft items; no human reviewer recorded |
 | No invented publication or expert-review facts | PASS | Status text explicitly leaves expert review pending |
-| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 92 records |
-| Core breadth/priority curation | REVIEW REQUIRED | All existing items default non-Core; public criteria are documented, but no role set has been curated |
+| Additive guide metadata migration | PASS | `pnpm --filter @workspace/career-reality run migrate:question-bank-guide-fields`; validator covers all 108 records |
+| Core breadth/priority curation | PARTIAL | One authored anchor per short bank is manually marked Core; full topic breadth and path sequencing remain unfinished |
 | 16-module role pages and browser-only learning tools | PARTIAL | Five noindex role routes include search, filters, readiness, study sessions and 1/7/14/30-day plans, mock rehearsal, flashcards, scenario/design prompts, quick references, interview-stage outline, Core paths, print support and local progress backup. Spaced repetition, deeper authored modules and executed code examples remain absent |
 | Privacy and network capture for guide state | PARTIAL | Policy updated for the browser-only progress; automated network/storage capture has not been run |
 
 ## Verification statistics
 
-- Current items: 92 (76 Data Engineer and four for each other role).
-- Source records retrieved: 92; each includes publisher, version/context, and retrieval date.
-- Independent re-derivation: 92 agreements; new items cover imbalanced-class evaluation, production ML monitoring, LLM evaluation design, and agent trace grading.
-- Code examples: 0; executed 0; not applicable 92.
+- Current items: 108 (76 Data Engineer and eight for each other role).
+- Source records retrieved: 108; each includes publisher, version/context, and retrieval date.
+- Independent re-derivation: 108 agreements; recent additions cover experiment data quality, ML artifact lineage, structured outputs, and persistent agent sessions.
+- Code examples: 0; executed 0; not applicable 108.
 - Dropped items: 0.
 - Human expert reviews: 0.
 - Near-duplicate threshold: 0.82 Jaccard similarity over normalized question terms; the current set is still too small to establish future coverage.
@@ -116,28 +116,28 @@ Five draft role routes now share one guide interface. The following module statu
 | Role | Items | By level | By type | Core | Minimum | Coverage matrix |
 | --- | ---: | --- | --- | ---: | ---: | --- |
 | Data Engineer | 76 | L1 8, L2 53, L3 15 | Concept 18, scenario 20, debugging 27, trade-off 11 | 0 | 75 | Minimum met; topic coverage remains incomplete |
-| Data Scientist | 4 | L2 4 | Concept 1, trade-off 2, scenario 1 | 1 | 75 | 71 short; role scope incomplete |
-| AI/ML Engineer | 4 | L2 3, L3 1 | Debugging 4 | 1 | 75 | 71 short; role scope incomplete |
-| Generative AI Engineer | 4 | L2 4 | Concept 1, scenario 3 | 1 | 75 | 71 short; role scope incomplete |
-| Agentic AI Engineer | 4 | L2 4 | Scenario 2, trade-off 1, debugging 1 | 1 | 75 | 71 short; role scope incomplete |
+| Data Scientist | 8 | L2 8 | Concept 2, trade-off 3, scenario 3 | 1 | 75 | 67 short; role scope incomplete |
+| AI/ML Engineer | 8 | L2 3, L3 5 | Debugging 6, scenario 2 | 1 | 75 | 67 short; role scope incomplete |
+| Generative AI Engineer | 8 | L2 6, L3 2 | Concept 1, scenario 5, trade-off 2 | 1 | 75 | 67 short; role scope incomplete |
+| Agentic AI Engineer | 8 | L2 6, L3 2 | Scenario 5, trade-off 1, debugging 2 | 1 | 75 | 67 short; role scope incomplete |
 
-No Core items are selected. The criteria are documented in `docs/question-bank-style-guide.md`; breadth matrices and curated priority paths have not been completed.
+One anchor question is manually selected as Core in each short bank; the full criteria-led path is not complete. The criteria are documented in `docs/question-bank-style-guide.md`.
 
 ## Complete Interview Guide gates
 
 | Gate | Result | Evidence/status |
 | --- | --- | --- |
 | Role pages have all modules or documented shortfalls | REVIEW REQUIRED | Missing modules and reasons listed above for each role |
-| Readiness, plan generation, flashcards, and Core progress unit/E2E coverage | REVIEW REQUIRED | Features and tests do not exist |
-| Core criteria and topic-map breadth | REVIEW REQUIRED | Criteria documented; no items curated |
+| Readiness, plan generation, flashcards, and Core progress unit/E2E coverage | PARTIAL | Browser-only interactions are covered by two Playwright tests; broader unit and accessibility coverage remains open |
+| Core criteria and topic-map breadth | PARTIAL | One anchor per short bank is selected; role breadth and a sequenced path remain incomplete |
 | Unsupported claims scan and claims register | REVIEW REQUIRED | No guide copy published; no claims register or automated scan added |
-| Counts derived from data | PASS for existing bank manifests; REVIEW REQUIRED for guide UI | Validator checks item/manifests; no guide UI exists |
-| Print study pack and rapid-revision output | REVIEW REQUIRED | Not implemented |
-| Mobile Lighthouse >= 0.85, accessibility 1.0, axe A/AA, keyboard completion | REVIEW REQUIRED | No guide pages to measure |
+| Counts derived from data | PASS | Validator checks item/manifests; guide renders counts from its loaded bank |
+| Print study pack and rapid-revision output | PARTIAL | Browser print view exists; curated rapid-revision pack remains absent |
+| Mobile Lighthouse >= 0.85, accessibility 1.0, axe A/AA, keyboard completion | PARTIAL | Keyboard and narrow-width smoke tests pass; scores and full assistive-technology checks remain open |
 | Link and structured-data validation | REVIEW REQUIRED | Source link check passes point-in-time; no guide structured data |
-| Cross-bank near duplicates | PASS | Current 92-item set passes the existing validator |
-| Existing routes/tools/homepage visual style unchanged | PASS for this change | No routes, tools, styles, tokens, or navigation changed |
-| Privacy-policy match and network/storage capture | REVIEW REQUIRED | No guide answers or progress are stored or transmitted; no capture performed |
+| Cross-bank near duplicates | PASS | Current 96-item set passes the existing validator |
+| Existing routes/tools/homepage visual style unchanged | PASS for this change | Existing public routes were not changed |
+| Privacy-policy match and network/storage capture | PARTIAL | Progress remains browser-only; Playwright confirms no non-GET request from progress interactions |
 
 ## Competitive feature-gap audit
 
@@ -154,9 +154,9 @@ This feature-only audit is not yet performed against leading public resources. N
 
 ## Review queue and privacy
 
-`docs/needs-sme-review.md` is generated from the item records and lists all 92 items. It does not record approval; every listed item remains pending independent human review.
+`docs/needs-sme-review.md` is generated from the item records and lists all 108 items. It does not record approval; every listed item remains pending independent human review.
 
-The guide feature flag is disabled. No readiness answers, ratings, plans, flashcards, mock sessions, or other guide user inputs are currently stored or sent. The privacy policy was not changed; matching a future local-storage implementation requires review and network/storage capture before enabling the feature.
+Draft guide routes remain noindex and outside the sitemap. Readiness, Core, and revised-question selections are stored in browser localStorage; export/import is manual. The automated browser test observes no non-GET request from progress interactions, but a broader packet and storage audit remains open.
 
 ## Assumptions
 

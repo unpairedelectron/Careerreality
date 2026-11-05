@@ -290,5 +290,293 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-block-candidate-model-with-slice-regression",
+    "bank": "ai-ml-engineer",
+    "topic": "Production ML testing and monitoring",
+    "subtopic": "Candidate validation across data slices",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A challenger model beats the current model on the aggregate test score but performs worse for one important region. What should the deployment gate consider?",
+    "what_is_assessed": "Whether the candidate validates a model against predefined quality thresholds, representative test data, and important slices rather than relying on one aggregate.",
+    "short_answer": "Do not let the aggregate score hide the regional regression. Confirm that the held-out test set is representative, compare the challenger with the champion on the agreed metrics, and inspect relevant slices and fairness indicators. Apply predefined thresholds and investigate whether the slice result is reliable and operationally important before deployment. The gate should make the trade-off explicit rather than silently averaging it away.",
+    "deep_explanation": "Google Cloud's model-validation guidance recommends using a separate test split not used for training or tuning, checking that it represents the data, evaluating important slices, comparing the candidate with the current champion, and verifying predefined quality thresholds. It also recommends fairness indicators to surface potential issues before deployment. These checks do not prescribe one universal threshold or guarantee that all slice regressions should block every release; the responsible team must set task- and deployment-specific criteria and document its decision.",
+    "strong_answer_signals": [
+      "Uses the held-out test split only after model choices are fixed.",
+      "Compares the candidate and champion on aggregate and important slices.",
+      "Applies predefined, deployment-specific gates and investigates fairness signals."
+    ],
+    "weak_answer_signals": [
+      "Deploys solely because the aggregate metric improved.",
+      "Treats one observed slice regression as conclusive without checking sample support or context."
+    ],
+    "common_mistakes": [
+      "Tuning repeatedly on the final test split and then presenting it as untouched.",
+      "Choosing slice thresholds after seeing the challenger results."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why compare the challenger with the champion on the same test split?",
+        "short_answer": "It gives a direct comparison under the same evaluation data, while still requiring the test split to remain held out."
+      },
+      {
+        "question": "What if a region has very few examples?",
+        "short_answer": "Report uncertainty and sample support, then gather more representative evidence before treating the estimate as decisive."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud Architecture Center guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source guidance on separate test data, predefined thresholds, representative splits, model slices, champion/challenger comparison, and fairness indicators; avoided claiming universal thresholds."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-diagnose-training-serving-skew-and-model-drift"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-enforce-latency-as-a-deployment-gate",
+    "bank": "ai-ml-engineer",
+    "topic": "Production ML testing and monitoring",
+    "subtopic": "Serving latency and release gates",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A candidate model improves predictive quality but exceeds the serving latency budget in staging. How would you decide whether it is ready?",
+    "what_is_assessed": "Whether the candidate treats operational constraints as explicit model-quality gates and validates them in a representative serving environment.",
+    "short_answer": "If latency is a required service constraint, the candidate has not passed the release gate just because its predictive score improved. Confirm the latency measurement in a representative staging environment, review the agreed threshold and workload, and consider optimization or a model variant that meets the target. If it passes, proceed through a controlled canary or online experiment with monitoring and rollback criteria rather than assuming offline quality guarantees production readiness.",
+    "deep_explanation": "Google Cloud's ML quality guidance describes operational or 'satisficing' metrics such as prediction latency and recommends validating them in a staging environment. It also discusses canary testing and online experimentation for deployed models. The source does not give a universal acceptable latency: teams must define a threshold for the product's workload and serving environment. Predictive quality and serving efficiency are separate dimensions, and both need explicit acceptance criteria.",
+    "strong_answer_signals": [
+      "Treats the service latency target as a separate release constraint from predictive quality.",
+      "Measures the candidate in staging using a representative serving environment and workload.",
+      "Uses controlled rollout, monitoring, and rollback criteria after the gate is met."
+    ],
+    "weak_answer_signals": [
+      "Ships based only on an offline score improvement.",
+      "Assumes a latency result from a different hardware or workload setup applies unchanged."
+    ],
+    "common_mistakes": [
+      "Defining the latency threshold only after seeing the candidate's result.",
+      "Confusing a canary or online experiment with a substitute for pre-deployment validation."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be held representative during staging latency tests?",
+        "short_answer": "The serving environment and workload characteristics that determine the product's operational target."
+      },
+      {
+        "question": "What does a canary add after staging passes?",
+        "short_answer": "A limited live rollout can reveal production behavior while preserving monitoring and rollback options."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud Architecture Center guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Cross-checked the source's guidance on operational satisficing metrics, staging validation, canaries, and online experiments; no universal latency budget is asserted."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-block-candidate-model-with-slice-regression"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-gate-continuous-training-on-data-validation",
+    "bank": "ai-ml-engineer",
+    "topic": "Production ML testing and monitoring",
+    "subtopic": "Training-data schema validation",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A continuous-training pipeline starts failing after a source system adds a field and changes a feature's type. What should the pipeline do before training?",
+    "what_is_assessed": "Ability to use explicit data-validation gates to detect schema or distribution anomalies before retraining.",
+    "short_answer": "Validate incoming data against an expected schema and relevant statistical constraints before training. Treat unexpected or invalid inputs as a pipeline decision point: surface the anomaly, stop or quarantine the run according to policy, and investigate compatibility rather than silently training on changed semantics. Then validate the produced model separately before deployment. Data validation and model validation protect different stages.",
+    "deep_explanation": "Google Cloud's ML quality guidance recommends schema and feature-statistic checks to identify anomalous or invalid data during experimentation and training. Its continuous-training guidance places data validation before training and model validation on the resulting model as separate quality-control steps. A schema change is not automatically harmful, but it must be reviewed and handled under an explicit compatibility policy; blindly accepting it can change feature meaning or break later stages.",
+    "strong_answer_signals": [
+      "Places data validation before model training and treats schema changes as explicit anomalies to investigate.",
+      "Separates validation of pipeline inputs from validation of the resulting model.",
+      "Avoids silently accepting a type or meaning change without compatibility checks."
+    ],
+    "weak_answer_signals": [
+      "Automatically retrains on any new data without validating schema or quality.",
+      "Treats a successful training job as proof that its inputs were valid."
+    ],
+    "common_mistakes": [
+      "Silently coercing a feature type and assuming the transformed values retain the same meaning.",
+      "Using one pass/fail signal for both data integrity and model quality."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why is model validation still needed after data validation passes?",
+        "short_answer": "Valid inputs do not guarantee that the trained model meets quality or deployment requirements."
+      },
+      {
+        "question": "Should every schema change block training permanently?",
+        "short_answer": "No. The pipeline should surface it for compatibility handling under a defined policy, not silently accept or reject every change."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guidelines for developing high-quality, predictive ML solutions",
+        "publisher": "Google Cloud Architecture Center",
+        "url": "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud Architecture Center guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/architecture/guidelines-for-developing-high-quality-ml-solutions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's placement of data validation before training and model validation after training; stated schema-change handling as a policy decision rather than an automatic universal block."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-block-candidate-model-with-slice-regression"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-use-artifact-lineage-to-debug-retrained-model-change",
+    "bank": "ai-ml-engineer",
+    "topic": "Training experiment tracking and lineage",
+    "subtopic": "Reproducing and tracing model artifacts",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A retrained model changes production predictions even though its validation score is similar. What run information would help you trace the difference?",
+    "what_is_assessed": "Ability to use experiment metadata and artifact lineage to reproduce training and identify changes that affected a deployed model.",
+    "short_answer": "Record and compare the training inputs and dataset versions, model and code artifacts, parameters, and evaluation metrics for both runs. Trace which artifacts produced each model and how the deployed model was selected. This lets the team reproduce a run, inspect changed inputs or settings, and determine whether the difference comes from data, training configuration, model artifacts, or deployment selection rather than relying on a summary score alone.",
+    "deep_explanation": "Google Cloud's ML Metadata documentation recommends tracking experiment parameters, artifacts, and metrics. It identifies analysis of production prediction changes, comparison of hyperparameters, lineage among datasets and models, and rerunning a workflow with the same artifacts and parameters as uses for that metadata. The question applies those capabilities to diagnosis; recording metadata does not itself prove which factor caused a behavior change.",
+    "strong_answer_signals": [
+      "Compares dataset, model, and code artifacts along with parameters and metrics.",
+      "Uses lineage to trace how the deployed model was produced and selected.",
+      "Treats metadata as evidence for investigation, not an automatic causal explanation."
+    ],
+    "weak_answer_signals": [
+      "Compares only aggregate validation scores.",
+      "Assumes the model artifact is reproducible without recording its inputs and parameters."
+    ],
+    "common_mistakes": [
+      "Failing to link a deployed model version to its training run and source artifacts.",
+      "Confusing a reproducible run record with proof that production data or serving behavior is unchanged."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which metadata helps compare two training runs?",
+        "short_answer": "Their input artifacts, parameters, outputs, and evaluation metrics."
+      },
+      {
+        "question": "What does lineage help you inspect?",
+        "short_answer": "Which artifacts contributed to a model and which downstream artifacts used it."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Introduction to Vertex ML Metadata",
+        "publisher": "Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/ml-metadata/introduction",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Google Cloud ML Metadata documentation retrieved 2026-11-04; no platform implementation is required by the answer.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.cloud.google.com/vertex-ai/docs/ml-metadata/introduction"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's stated uses of parameter, artifact, metric, and lineage tracking; avoided claiming metadata alone proves causality."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-gate-continuous-training-on-data-validation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

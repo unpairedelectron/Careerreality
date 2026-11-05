@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "Agent architecture",
-      "subtopics": ["workflow versus agent", "autonomy boundaries", "control flow"],
+      "subtopics": ["workflow versus agent", "autonomy boundaries", "control flow", "guardrail placement across workflow boundaries"],
       "sources": [
         {
           "title": "Building Effective AI Agents",
@@ -27,7 +27,7 @@
     },
     {
       "topic": "Agent evaluation and observability",
-      "subtopics": ["trace grading", "tool choice", "handoff evaluation"],
+      "subtopics": ["trace grading", "tool choice", "handoff evaluation", "repeatable dataset evaluations"],
       "sources": [{
         "title": "Evaluate agent workflows",
         "publisher": "OpenAI API documentation",
@@ -36,6 +36,32 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Agent errors and recovery",
+      "subtopics": ["transient failures", "ambiguous completion", "bounded retries"],
+      "sources": [{
+        "title": "Errors and recovery",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents-api/errors",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents API error and recovery guidance retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Session state and turn control",
+      "subtopics": ["persistent session context", "asynchronous turns", "steering active work"],
+      "sources": [{
+        "title": "Run and continue sessions",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents-api/sessions",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Agents API session guidance retrieved 2026-11-04"
       }]
     }
   ]

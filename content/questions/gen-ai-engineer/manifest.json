@@ -2,24 +2,29 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 4,
+  "itemCount": 8,
   "countsByTopic": {
     "Retrieval-augmented generation": 3,
-    "Generative AI evaluation": 1
+    "Generative AI evaluation": 2,
+    "Generative AI safety and robustness": 1,
+    "Model optimization and adaptation": 1,
+    "Structured outputs and data contracts": 1
   },
   "countsByLevel": {
-    "L2": 4
+    "L2": 6,
+    "L3": 2
   },
   "countsByType": {
-    "scenario": 3,
-    "concept": 1
+    "scenario": 5,
+    "concept": 1,
+    "trade-off": 2
   },
   "status": {
-    "schemaValid": 4,
-    "sourcesVerified": 4,
-    "rederived": 4,
+    "schemaValid": 8,
+    "sourcesVerified": 8,
+    "rederived": 8,
     "codeExecuted": 0,
-    "expertReviewPending": 4
+    "expertReviewPending": 8
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -44,6 +49,34 @@
       "expertReview": "pending"
     },
     "genai-eval-summary-objective-dataset-metrics": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-choose-evaluator-for-open-ended-outputs": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-red-team-rag-against-instruction-injection": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-select-rag-or-fine-tuning-from-error-pattern": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-schema-valid-output-is-not-safe-business-action": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

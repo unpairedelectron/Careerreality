@@ -1,28 +1,28 @@
 # Interview question banks — progress
 
-As of 2026-11-04, the structured content framework and 92 cited items across five role banks are in place. Five role guides now include a study toolkit with plans, scenario/design prompts, interview stages, quick references, Core paths, tested-code filtering, and print support. The question banks remain below the current 75-question-per-role minimum and independent expert review is pending.
+As of 2026-11-04, the structured content framework and 108 cited items across five role banks are in place. Five role guides now include a study toolkit with plans, scenario/design prompts, interview stages, quick references, Core paths, tested-code filtering, and print support. The question banks remain below the current 75-question-per-role minimum and independent expert review is pending.
 
 The first production build and type check passed with the question-bank validator included in the normal prebuild sequence. The build completed the existing site's route snapshot checks; existing Vite source-map and large-chunk warnings were emitted.
 
-The additive guide-field migration and current schema/duplicate validator pass on all 92 items. One newly researched anchor per short bank is marked Core; the remainder are not auto-selected. Audience-specific fresher/senior answers remain unset until authored. Reading and practice times are estimates. Draft guide routes are noindex and absent from the sitemap; expert review is pending.
+The additive guide-field migration and current schema/duplicate validator pass on all 108 items. One researched anchor per short bank is manually marked Core; other questions are not auto-selected. Audience-specific fresher/senior answers remain unset until authored. Reading and practice times are estimates. Draft guide routes are noindex and absent from the sitemap; expert review is pending.
 
 The report includes the 16-module checklist, per-role counts, gate statuses, and privacy gaps. `docs/needs-sme-review.md` is generated from source records; none is marked approved.
 
 ## Resume point
 
-The Data Engineer bank contains 76 items and meets the current 75-item minimum. Each other role bank contains 4 items, leaving 71 items per bank. Preserve source verification, independent re-derivation, and validation; do not use repetitive filler to reach the counts.
+The Data Engineer bank contains 76 items and meets the current 75-item minimum. Each other role bank contains 8 items, leaving 67 items per bank. Preserve source verification, independent re-derivation, and validation; do not use repetitive filler to reach the counts.
 
 ## Current counts and shortfalls
 
 | Bank | Current | Minimum | Target | Status |
 | --- | ---: | ---: | ---: | --- |
 | Data Engineer | 76 | 75 | 240 | Minimum met; topic coverage and stretch target remain incomplete |
-| Data Scientist | 4 | 75 | 240 | 71 short; evaluation coverage remains incomplete |
-| AI/ML Engineer | 4 | 75 | 220 | 71 short; training and production monitoring coverage remains incomplete |
-| Generative AI Engineer | 4 | 75 | 220 | 71 short; RAG and evaluation coverage remains incomplete |
-| Agentic AI Engineer | 4 | 75 | 180 | 71 short; architecture and evaluation coverage remains incomplete |
+| Data Scientist | 8 | 75 | 240 | 67 short; evaluation and experiment coverage remains incomplete |
+| AI/ML Engineer | 8 | 75 | 220 | 67 short; training and production monitoring coverage remains incomplete |
+| Generative AI Engineer | 8 | 75 | 220 | 67 short; RAG, evaluation, and robustness coverage remains incomplete |
+| Agentic AI Engineer | 8 | 75 | 180 | 67 short; architecture and evaluation coverage remains incomplete |
 
-No code-bearing item is included, so code execution is not applicable to the 92 items. All items have source records and re-derivation notes; independent expert review remains pending.
+No code-bearing item is included, so code execution is not applicable to the 108 items. All items have source records and re-derivation notes; independent expert review remains pending.
 
 ## Not implemented or not verified
 

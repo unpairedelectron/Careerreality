@@ -297,5 +297,298 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-align-regression-score-with-prediction-target",
+    "bank": "data-scientist",
+    "topic": "Evaluation metrics and experiments",
+    "subtopic": "Scoring for statistical functionals",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A forecasting team wants both the expected delivery time and a conservative 90th-percentile estimate. Should both outputs be evaluated with the same loss?",
+    "what_is_assessed": "Alignment between the statistical quantity a model predicts and the scoring rule used to evaluate it.",
+    "short_answer": "Not necessarily. Squared error is aligned with predicting the conditional mean, absolute error with the median, and pinball loss with a chosen quantile. I would state which quantity each output is intended to estimate, then select and report a matching score. If the business ultimately acts on the forecast, I would also evaluate the decision outcomes separately from the quality of the underlying prediction.",
+    "deep_explanation": "A metric is meaningful only relative to the prediction target. Scikit-learn's model-evaluation guide describes strictly consistent scoring functions for statistical functionals: squared error for the mean, absolute error for the median, and pinball loss for a quantile. A team should therefore define whether it needs an expected value, a typical value, or a tail quantile before comparing models. The deployment decision can impose a different objective, so decision quality should not be conflated with the accuracy of the predicted functional.",
+    "strong_answer_signals": [
+      "Distinguishes the mean, median, and quantile as different prediction targets.",
+      "Matches squared, absolute, or pinball loss to the intended target.",
+      "Separates predictive scoring from downstream decision evaluation."
+    ],
+    "weak_answer_signals": [
+      "Chooses a metric only because it is common or easy to compute.",
+      "Assumes a low average error proves that a tail estimate is accurate."
+    ],
+    "common_mistakes": [
+      "Evaluating a quantile forecast with a mean-oriented score without explaining the mismatch.",
+      "Reporting one pooled score for outputs with different statistical meanings."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which target is absolute error aligned with in the guide?",
+        "short_answer": "The conditional median."
+      },
+      {
+        "question": "Does choosing a proper prediction score settle the business decision?",
+        "short_answer": "No. It evaluates the prediction target; the downstream decision may require separate utility or cost analysis."
+      }
+    ],
+    "visual_aid": {
+      "kind": "comparison-table",
+      "alt": "Different prediction targets call for different scores: squared error for the mean, absolute error for the median, and pinball loss for a quantile.",
+      "content": "Mean → squared error\\nMedian → absolute error\\nQuantile → pinball loss\\nDecision outcome → evaluate separately"
+    },
+    "code": null,
+    "references": [
+      {
+        "title": "Metrics and scoring: quantifying the quality of predictions",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable model-evaluation documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/model_evaluation.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked the mapping of squared error to the mean, absolute error to the median, and pinball loss to quantiles in the source table; downstream decision quality is kept separate."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-accuracy-hides-rare-class-failure"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-compare-two-conversion-rates-with-uncertainty",
+    "bank": "data-scientist",
+    "topic": "Experiment design and uncertainty",
+    "subtopic": "Confidence intervals for two proportions",
+    "level": "L2",
+    "type": "scenario",
+    "question": "An experiment reports conversion of 10.8% for a new design and 10.4% for the current design. What would you report before recommending a launch?",
+    "what_is_assessed": "Whether the candidate evaluates uncertainty in a difference of proportions and separates statistical evidence from practical value.",
+    "short_answer": "First confirm that the groups and outcome definition support a comparison of two independent proportions. Report the absolute difference and a confidence interval for that difference, with sample counts and the preselected primary metric. Then consider whether the plausible effect range is meaningful to the business, and check guardrail metrics and experiment quality. The point estimate alone does not establish that the design caused a dependable or worthwhile improvement.",
+    "deep_explanation": "A rate comparison should communicate both the estimated effect and uncertainty. The statsmodels reference documents confidence intervals for two independent binomial proportions and distinguishes intervals for a difference, ratio, or odds ratio. For an experiment, the analyst must also verify assignment and measurement assumptions, use the prespecified analysis plan, and interpret the interval against a practically meaningful effect rather than treating a single point estimate as a launch decision. The reference describes the interval calculation; it does not prescribe a universal launch rule.",
+    "strong_answer_signals": [
+      "Reports an absolute effect and uncertainty interval rather than only two percentages.",
+      "Checks that the comparison matches independent-group assumptions and the experiment design.",
+      "Separates practical impact and guardrail considerations from statistical uncertainty."
+    ],
+    "weak_answer_signals": [
+      "Ships because the treatment percentage is numerically higher.",
+      "Treats a confidence interval as proof that the observed effect will repeat exactly."
+    ],
+    "common_mistakes": [
+      "Ignoring denominators or changing the conversion definition between groups.",
+      "Choosing the effect measure or primary metric after viewing the results."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why report the absolute difference as well as a relative change?",
+        "short_answer": "The absolute difference communicates the rate-point change directly; a relative change can sound large when the baseline is small."
+      },
+      {
+        "question": "Does an interval alone determine whether to launch?",
+        "short_answer": "No. Interpret it alongside prespecified decision criteria, practical value, experiment validity, and guardrail metrics."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Confidence intervals for comparing two independent proportions",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.proportion.confint_proportions_2indep.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "statsmodels 0.15.0 stable API documentation; the method API is marked experimental and no default method is relied upon.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://www.statsmodels.org/stable/generated/statsmodels.stats.proportion.confint_proportions_2indep.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Confirmed the reference assumes two independent binomial samples and supports confidence intervals for a difference, ratio, or odds ratio; the answer avoids relying on the documented experimental default or prescribing a universal launch threshold."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-align-regression-score-with-prediction-target"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-macro-and-weighted-multiclass-scores",
+    "bank": "data-scientist",
+    "topic": "Evaluation metrics and experiments",
+    "subtopic": "Macro and support-weighted averaging",
+    "level": "L2",
+    "type": "concept",
+    "question": "A multiclass classifier has a much lower macro F1 than weighted F1. What might that difference reveal?",
+    "what_is_assessed": "Understanding of per-class versus support-weighted aggregation and how class imbalance can hide weak minority-class performance.",
+    "short_answer": "Macro F1 gives each class equal weight, while weighted F1 weights each class by its support. A lower macro score can indicate that performance is uneven and that lower-support classes are pulling down the unweighted average. I would inspect per-class precision, recall, F1, and support before deciding whether the gap matters for the use case; neither average alone identifies which class is failing.",
+    "deep_explanation": "Scikit-learn defines macro averaging as the unweighted mean of per-label metrics and weighted averaging as the mean weighted by the number of true instances in each class. In imbalanced data, weighted scores are dominated more by common classes, whereas macro scores give rare classes equal influence. The documentation also notes that weighted F-scores can have properties that differ from an ordinary harmonic mean of the aggregated precision and recall. Report per-class results and the chosen averaging convention so the aggregate is interpretable.",
+    "strong_answer_signals": [
+      "Explains equal class weighting for macro versus support weighting for weighted averages.",
+      "Treats the gap as a diagnostic cue and checks per-class results.",
+      "Chooses aggregation based on task importance rather than a universally preferred average."
+    ],
+    "weak_answer_signals": [
+      "Claims weighted F1 is always more accurate because it uses support.",
+      "Assumes macro F1 alone tells which class has poor performance."
+    ],
+    "common_mistakes": [
+      "Reporting an aggregate score without naming its averaging rule.",
+      "Ignoring class support when interpreting a rare-class metric."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does micro averaging aggregate in multiclass classification?",
+        "short_answer": "It totals true positives, false negatives, and false positives globally before calculating the metric."
+      },
+      {
+        "question": "What should accompany an aggregate when class performance matters?",
+        "short_answer": "Per-class scores and class support."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "precision_recall_fscore_support",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "scikit-learn 1.9.1 stable API documentation.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source definitions of micro, macro, and support-weighted averaging; preserved its note that weighted F-score has non-obvious aggregation behavior."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-accuracy-hides-rare-class-failure"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-investigate-sample-ratio-mismatch-before-reading-lift",
+    "bank": "data-scientist",
+    "topic": "Experiment data quality",
+    "subtopic": "Sample ratio mismatch",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A 50/50 experiment has a persistent 57/43 exposure split, and the treatment conversion rate looks higher. What should you do before interpreting the lift?",
+    "what_is_assessed": "Whether the candidate recognizes sample ratio mismatch as a potential data-quality or assignment problem that can undermine experiment interpretation.",
+    "short_answer": "Treat the persistent mismatch as a warning that the groups may no longer be comparable. Verify the configured allocation and exposure counts, then investigate assignment, eligibility, and exposure logging or filtering for a source of differential inclusion. Do not rely on the apparent lift until the cause is understood and the experiment data is trustworthy; depending on the diagnosis, correct the instrumentation or restart the experiment under a sound allocation.",
+    "deep_explanation": "Statsig documents sample ratio mismatch as an observed group allocation that differs from the configured split by more than expected from randomness. Its monitoring uses a chi-squared check on exposures and treats persistent alerts as a data-quality problem: metric lifts should not be trusted until the cause is found or the experiment is restarted. The specific check and alert behavior are platform guidance; analysts should use their experiment platform's validated diagnostic and avoid declaring a universal split threshold from this example alone.",
+    "strong_answer_signals": [
+      "Separates the configured allocation from the observed exposure split.",
+      "Investigates assignment, logging, eligibility, or filtering before interpreting metrics.",
+      "Withholds a launch conclusion until the mismatch is diagnosed."
+    ],
+    "weak_answer_signals": [
+      "Explains the mismatch away because the treatment rate is higher.",
+      "Treats a monitoring alert as proof of a specific bug without investigating."
+    ],
+    "common_mistakes": [
+      "Assuming a higher observed conversion rate is actionable despite questionable group comparability.",
+      "Checking only metric normalization rather than how units entered the exposure data."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does any unequal count prove an experiment is invalid?",
+        "short_answer": "No. Compare the observed split with the configured allocation and expected random variation using an appropriate diagnostic."
+      },
+      {
+        "question": "Why inspect exposure logging?",
+        "short_answer": "Differential missing or filtered exposures can make analyzed groups unrepresentative."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Managing SRM",
+        "publisher": "Statsig documentation",
+        "url": "https://docs.statsig.com/experiments/monitoring/srm",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Statsig experiment-monitoring guidance retrieved 2026-11-04; platform-specific alert behavior is not generalized.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://docs.statsig.com/experiments/monitoring/srm"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's definition and warning about persistent SRM; kept diagnosis open-ended and did not treat a 57/43 split as a universal statistical cutoff."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

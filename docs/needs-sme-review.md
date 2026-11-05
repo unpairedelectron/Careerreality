@@ -87,6 +87,10 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ds-brier-score-does-not-isolate-calibration` — Machine learning evaluation / Probability calibration: A classifier has a lower Brier loss than a baseline. Does that prove its probabilities are better calibrated?
 - `ds-isotonic-calibration-small-sample-overfit` — Machine learning evaluation / Probability calibration: You have limited calibration data and are choosing between sigmoid and isotonic calibration. What trade-off matters?
 - `ds-accuracy-hides-rare-class-failure` — Evaluation metrics and experiments / Rare classes and threshold decisions: A classifier reports 99% accuracy on a dataset where only 1% of cases are positive, but it misses every positive case. How would you evaluate it?
+- `ds-align-regression-score-with-prediction-target` — Evaluation metrics and experiments / Scoring for statistical functionals: A forecasting team wants both the expected delivery time and a conservative 90th-percentile estimate. Should both outputs be evaluated with the same loss?
+- `ds-compare-two-conversion-rates-with-uncertainty` — Experiment design and uncertainty / Confidence intervals for two proportions: An experiment reports conversion of 10.8% for a new design and 10.4% for the current design. What would you report before recommending a launch?
+- `ds-interpret-macro-and-weighted-multiclass-scores` — Evaluation metrics and experiments / Macro and support-weighted averaging: A multiclass classifier has a much lower macro F1 than weighted F1. What might that difference reveal?
+- `ds-investigate-sample-ratio-mismatch-before-reading-lift` — Experiment data quality / Sample ratio mismatch: A 50/50 experiment has a persistent 57/43 exposure split, and the treatment conversion rate looks higher. What should you do before interpreting the lift?
 
 ## AI/ML Engineer
 
@@ -94,6 +98,10 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ml-resume-training-needs-optimizer-state` — Training and reproducibility / Checkpoints and resuming training: A training job resumes from model weights but its learning trajectory changes sharply. What checkpoint state might be missing?
 - `ml-best-state-dict-reference-mutates` — Training and reproducibility / Checkpoint selection: A saved 'best validation' PyTorch model matches the final, overfit epoch. What could have gone wrong?
 - `ml-diagnose-training-serving-skew-and-model-drift` — Production ML testing and monitoring / Training-serving skew and prediction drift: An online model's business quality has fallen while its offline test score remains stable. How would you distinguish training-serving skew from changing production data?
+- `ml-block-candidate-model-with-slice-regression` — Production ML testing and monitoring / Candidate validation across data slices: A challenger model beats the current model on the aggregate test score but performs worse for one important region. What should the deployment gate consider?
+- `ml-enforce-latency-as-a-deployment-gate` — Production ML testing and monitoring / Serving latency and release gates: A candidate model improves predictive quality but exceeds the serving latency budget in staging. How would you decide whether it is ready?
+- `ml-gate-continuous-training-on-data-validation` — Production ML testing and monitoring / Training-data schema validation: A continuous-training pipeline starts failing after a source system adds a field and changes a feature's type. What should the pipeline do before training?
+- `ml-use-artifact-lineage-to-debug-retrained-model-change` — Training experiment tracking and lineage / Reproducing and tracing model artifacts: A retrained model changes production predictions even though its validation score is similar. What run information would help you trace the difference?
 
 ## Generative AI Engineer
 
@@ -101,6 +109,10 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `genai-evaluate-retrieval-separately-from-generation` — Retrieval-augmented generation / Component-level evaluation: A RAG system gives an unsupported answer. How would you tell whether retrieval or generation caused the failure?
 - `genai-faithfulness-does-not-prove-source-correctness` — Retrieval-augmented generation / Faithfulness metric boundaries: A RAG answer scores highly for faithfulness to its retrieved context. What important quality claim remains unproven?
 - `genai-eval-summary-objective-dataset-metrics` — Generative AI evaluation / Defining an evaluation workflow: A team is replacing a transcript-summary prompt. How would you build an evaluation that can show whether the change is actually better?
+- `genai-choose-evaluator-for-open-ended-outputs` — Generative AI evaluation / Choosing and calibrating evaluators: A team is judging open-ended support answers. When would you use a deterministic metric, a model grader, or human review?
+- `genai-red-team-rag-against-instruction-injection` — Generative AI safety and robustness / Adversarial evaluation of untrusted content: A document-answering system sometimes follows instructions embedded in retrieved documents instead of answering the user. How would you test and reduce this risk?
+- `genai-select-rag-or-fine-tuning-from-error-pattern` — Model optimization and adaptation / Choosing RAG versus fine-tuning: An assistant gives inconsistent answers about both frequently changing policy facts and a stable writing format. Would you use RAG or fine-tuning for both problems?
+- `genai-schema-valid-output-is-not-safe-business-action` — Structured outputs and data contracts / Schema compliance versus semantic validity: A model returns schema-valid JSON for a CRM update. Is that enough to apply the update automatically?
 
 ## Agentic AI Engineer
 
@@ -108,4 +120,8 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `agentic-sensitive-tool-action-human-approval` — Agent architecture / Human approval for sensitive tool actions: An agent can cancel accounts and issue refunds. What should happen before it executes a high-impact tool call?
 - `agentic-route-specialized-prompts-for-clear-categories` — Agent architecture / Routing workflows: Support requests fall into billing, account-access, and technical categories. When would routing to specialized prompts help?
 - `agentic-trace-grading-catches-wrong-tool-path` — Agent evaluation and observability / Trace-level grading: An agent eventually returns the right answer, but sometimes uses an unrelated tool or misses a required handoff first. What would you evaluate?
+- `agentic-turn-debug-traces-into-repeatable-evals` — Agent evaluation and observability / From debugging traces to repeatable datasets: A trace reveals that a prompt change fixed one missed handoff. How would you check whether the fix works reliably and did not break other workflows?
+- `agentic-place-guardrails-at-input-tool-and-output` — Agent architecture / Guardrail placement across workflow boundaries: A multi-step agent accepts user requests, calls tools, and returns a final answer. Where would you place automatic guardrails and human approval?
+- `agentic-check-side-effects-before-retrying-timeout` — Agent errors and recovery / Safe recovery after an ambiguous timeout: An agent run times out while processing a request that can update an external account. What should the recovery logic do before retrying?
+- `agentic-use-session-state-for-long-running-work` — Session state and turn control / Continuing and steering long-running work: A long-running agent task needs to preserve its work while a user provides follow-up guidance. How should the application manage the session?
 

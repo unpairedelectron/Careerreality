@@ -27,7 +27,7 @@
     },
     {
       "topic": "Production ML testing and monitoring",
-      "subtopics": ["training-serving skew", "data drift", "delayed labels"],
+      "subtopics": ["training-serving skew", "data drift", "delayed labels", "candidate validation across data slices", "serving latency and release gates", "training-data schema validation"],
       "sources": [{
         "title": "Guidelines for developing high-quality, predictive ML solutions",
         "publisher": "Google Cloud Architecture Center",
@@ -36,6 +36,19 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "Google Cloud Architecture Center guidance"
+      }]
+    },
+    {
+      "topic": "Training experiment tracking and lineage",
+      "subtopics": ["run parameters", "dataset and model artifacts", "artifact lineage"],
+      "sources": [{
+        "title": "Introduction to Vertex ML Metadata",
+        "publisher": "Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/ml-metadata/introduction",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Google Cloud ML Metadata documentation retrieved 2026-11-04"
       }]
     }
   ]

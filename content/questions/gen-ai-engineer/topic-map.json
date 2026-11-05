@@ -27,7 +27,7 @@
     },
     {
       "topic": "Generative AI evaluation",
-      "subtopics": ["evaluation objectives", "datasets and graders", "continuous evaluation"],
+      "subtopics": ["evaluation objectives", "datasets and graders", "continuous evaluation", "choosing and calibrating evaluators"],
       "sources": [{
         "title": "Evaluation best practices",
         "publisher": "OpenAI API documentation",
@@ -36,6 +36,45 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API documentation retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Generative AI safety and robustness",
+      "subtopics": ["adversarial evaluation", "untrusted content", "human review"],
+      "sources": [{
+        "title": "Safety best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI API safety guidance retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Model optimization and adaptation",
+      "subtopics": ["prompt engineering", "retrieval-augmented generation", "fine-tuning"],
+      "sources": [{
+        "title": "Optimizing LLM Accuracy",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/optimizing-llm-accuracy",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI API accuracy-optimization guidance retrieved 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Structured outputs and data contracts",
+      "subtopics": ["JSON schema adherence", "semantic validation", "refusal handling"],
+      "sources": [{
+        "title": "Structured model outputs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-04",
+        "versions_checked": "OpenAI Structured Outputs documentation retrieved 2026-11-04"
       }]
     }
   ]

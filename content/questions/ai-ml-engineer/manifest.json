@@ -2,24 +2,26 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 4,
+  "itemCount": 8,
   "countsByTopic": {
     "Training and reproducibility": 3,
-    "Production ML testing and monitoring": 1
+    "Production ML testing and monitoring": 4,
+    "Training experiment tracking and lineage": 1
   },
   "countsByLevel": {
     "L2": 3,
-    "L3": 1
+    "L3": 5
   },
   "countsByType": {
-    "debugging": 4
+    "debugging": 6,
+    "scenario": 2
   },
   "status": {
-    "schemaValid": 4,
-    "sourcesVerified": 4,
-    "rederived": 4,
+    "schemaValid": 8,
+    "sourcesVerified": 8,
+    "rederived": 8,
     "codeExecuted": 0,
-    "expertReviewPending": 4
+    "expertReviewPending": 8
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -44,6 +46,34 @@
       "expertReview": "pending"
     },
     "ml-diagnose-training-serving-skew-and-model-drift": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-block-candidate-model-with-slice-regression": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-enforce-latency-as-a-deployment-gate": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-gate-continuous-training-on-data-validation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-artifact-lineage-to-debug-retrained-model-change": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

@@ -2,25 +2,28 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 75,
-  "itemCount": 4,
+  "itemCount": 8,
   "countsByTopic": {
-    "Agent architecture": 3,
-    "Agent evaluation and observability": 1
+    "Agent architecture": 4,
+    "Agent evaluation and observability": 2,
+    "Agent errors and recovery": 1,
+    "Session state and turn control": 1
   },
   "countsByLevel": {
-    "L2": 4
+    "L2": 6,
+    "L3": 2
   },
   "countsByType": {
     "trade-off": 1,
-    "scenario": 2,
-    "debugging": 1
+    "scenario": 5,
+    "debugging": 2
   },
   "status": {
-    "schemaValid": 4,
-    "sourcesVerified": 4,
-    "rederived": 4,
+    "schemaValid": 8,
+    "sourcesVerified": 8,
+    "rederived": 8,
     "codeExecuted": 0,
-    "expertReviewPending": 4
+    "expertReviewPending": 8
   },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
@@ -45,6 +48,34 @@
       "expertReview": "pending"
     },
     "agentic-trace-grading-catches-wrong-tool-path": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-turn-debug-traces-into-repeatable-evals": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-place-guardrails-at-input-tool-and-output": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-check-side-effects-before-retrying-timeout": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-use-session-state-for-long-running-work": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

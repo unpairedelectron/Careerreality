@@ -294,5 +294,293 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-choose-evaluator-for-open-ended-outputs",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI evaluation",
+    "subtopic": "Choosing and calibrating evaluators",
+    "level": "L2",
+    "type": "trade-off",
+    "question": "A team is judging open-ended support answers. When would you use a deterministic metric, a model grader, or human review?",
+    "what_is_assessed": "Ability to choose complementary evaluator types based on task nuance, scale, and the need for human-anchored validity.",
+    "short_answer": "Use deterministic metrics for objective checks such as exact fields, citations, or executable behavior, while recognizing they may miss nuance. A model grader can scale rubric-based judgments, but its agreement should be checked against human-labeled examples. Human review is slower and more expensive but is important for refining criteria and resolving ambiguous cases. A robust evaluation usually combines these methods rather than treating one score as ground truth.",
+    "deep_explanation": "OpenAI's evaluation guidance describes metric-based evaluators as useful for automated regression checks but potentially too generic or insensitive to nuance; human judgment provides higher-quality feedback at greater cost and can involve reviewer disagreement; and model graders offer scalable judgments that should be calibrated against human labels. For open-ended answers, pairwise comparisons, classification, or rubric scoring can be more appropriate than asking a model to generate an unconstrained evaluation. The specific evaluator must still be validated for the task.",
+    "strong_answer_signals": [
+      "Matches deterministic metrics to objective, machine-checkable criteria.",
+      "Uses human-reviewed examples to test model-grader agreement.",
+      "Acknowledges trade-offs in cost, scale, nuance, and reviewer disagreement."
+    ],
+    "weak_answer_signals": [
+      "Assumes an LLM judge is automatically objective or unbiased.",
+      "Uses exact string match as the only measure of nuanced answers."
+    ],
+    "common_mistakes": [
+      "Changing the rubric after seeing candidate outputs without recording the change.",
+      "Reporting a grader score without checking representative disagreements with human reviewers."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can exact match be a poor sole metric for open-ended answers?",
+        "short_answer": "It can reject valid paraphrases and fail to measure task-specific nuance."
+      },
+      {
+        "question": "How would you check a model grader before relying on it?",
+        "short_answer": "Compare its judgments with human-labeled examples, review disagreements, and refine the rubric."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluation best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "OpenAI API evaluation guidance retrieved 2026-11-04; no API-specific workflow claim is made.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked the source's stated strengths and limitations for metric-based, human, and model-grader evaluation, including calibration of automated scoring against human feedback."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-eval-summary-objective-dataset-metrics"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-red-team-rag-against-instruction-injection",
+    "bank": "gen-ai-engineer",
+    "topic": "Generative AI safety and robustness",
+    "subtopic": "Adversarial evaluation of untrusted content",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A document-answering system sometimes follows instructions embedded in retrieved documents instead of answering the user. How would you test and reduce this risk?",
+    "what_is_assessed": "Ability to include adversarial behavior in safety evaluation and to combine input testing, guardrails, and human review without claiming perfect prevention.",
+    "short_answer": "Build a red-team set alongside representative normal questions, including retrieved content that attempts to redirect the system. Check whether the answer stays within the user's task, whether untrusted text can trigger unintended actions, and whether sensitive output is controlled. Add appropriate input/output or tool checks and human review for consequential use. Re-run the cases after changes; passing a finite set does not prove prompt-injection risk is eliminated.",
+    "deep_explanation": "OpenAI's safety guidance recommends adversarial testing across a wide range of inputs and user behaviors, including attempts to redirect an application through prompt injection. It also recommends human review where possible and evaluating behavior over varied potential inputs. This supports a test-and-mitigate approach, not a claim that a specific prompt or filter fully prevents the risk. The team's tests should reflect its own data sources, allowed behaviors, tools, and consequences.",
+    "strong_answer_signals": [
+      "Tests both representative usage and adversarial cases involving untrusted content.",
+      "Checks for off-task behavior and unintended downstream tool use, not only answer fluency.",
+      "Combines technical controls with human review where consequences warrant it and tracks residual risk."
+    ],
+    "weak_answer_signals": [
+      "Assumes a system prompt alone permanently prevents injection.",
+      "Tests only a handpicked attack string and declares the system safe."
+    ],
+    "common_mistakes": [
+      "Treating a successful red-team pass as proof that future inputs cannot cause failures.",
+      "Testing generated text without checking downstream actions or sensitive information handling."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why keep ordinary cases in the red-team evaluation?",
+        "short_answer": "Robustness should be checked alongside expected behavior so mitigations do not make normal use unusable."
+      },
+      {
+        "question": "What does a passing finite test set establish?",
+        "short_answer": "Evidence about the tested cases, not a guarantee that all prompt-injection risks are removed."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Safety best practices",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/safety-best-practices",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API safety guidance retrieved 2026-11-04; no model-specific prevention guarantee is asserted.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/safety-best-practices"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Confirmed the source recommends red-teaming representative and adversarial inputs, tests for prompt injection, and human review where possible; explicitly preserves the limitation that testing does not prove complete prevention."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-choose-evaluator-for-open-ended-outputs"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-select-rag-or-fine-tuning-from-error-pattern",
+    "bank": "gen-ai-engineer",
+    "topic": "Model optimization and adaptation",
+    "subtopic": "Choosing RAG versus fine-tuning",
+    "level": "L3",
+    "type": "trade-off",
+    "question": "An assistant gives inconsistent answers about both frequently changing policy facts and a stable writing format. Would you use RAG or fine-tuning for both problems?",
+    "what_is_assessed": "Ability to select an optimization lever based on the observed failure cause and the different roles of context retrieval and task adaptation.",
+    "short_answer": "Not automatically. First use evaluations to separate missing or stale knowledge from inconsistent task behavior. Retrieval can supply relevant, updateable reference context, while fine-tuning can help teach a stable task pattern or improve consistency when supported by suitable examples. Prompt and context improvements may be sufficient for some cases. Test each change against the failure cases; combining techniques can add complexity or noise rather than guarantee better output.",
+    "deep_explanation": "OpenAI's accuracy-optimization guidance treats prompt engineering, context optimization/RAG, and fine-tuning as levers that solve different problems rather than a fixed sequence. It describes retrieval as a way to provide relevant context and fine-tuning as a way to improve task-specific behavior or efficiency, and recommends evaluating the effect of changes. The cited case study found that adding retrieval could reduce performance for a task where the model had already learned the pattern; that result is specific to its setup and does not establish that RAG is generally harmful.",
+    "strong_answer_signals": [
+      "Diagnoses whether the failure is missing context or inconsistent task behavior before choosing a method.",
+      "Explains updateable retrieval context separately from examples used to adapt task behavior.",
+      "Uses task-specific evaluations and acknowledges that extra context or tuning can introduce regressions."
+    ],
+    "weak_answer_signals": [
+      "Treats RAG and fine-tuning as interchangeable or mandatory successive steps.",
+      "Assumes adding both techniques must improve accuracy."
+    ],
+    "common_mistakes": [
+      "Fine-tuning to encode frequently changing facts without addressing freshness.",
+      "Adding retrieval context without checking relevance, noise, or end-to-end results."
+    ],
+    "follow_ups": [
+      {
+        "question": "What failure pattern points toward improving retrieval?",
+        "short_answer": "The needed or current information is absent, irrelevant, or noisy in the supplied context."
+      },
+      {
+        "question": "What should be evaluated after adding either method?",
+        "short_answer": "The targeted failure cases and broader task quality, including regressions and added complexity."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Optimizing LLM Accuracy",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/optimizing-llm-accuracy",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API accuracy-optimization guidance retrieved 2026-11-04; examples are task-specific and not model-version performance claims.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/optimizing-llm-accuracy"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Cross-checked the source's distinction between context optimization/RAG and fine-tuning for learned task behavior; explicitly qualified the case-study outcome as specific rather than general."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-evaluate-retrieval-separately-from-generation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-schema-valid-output-is-not-safe-business-action",
+    "bank": "gen-ai-engineer",
+    "topic": "Structured outputs and data contracts",
+    "subtopic": "Schema compliance versus semantic validity",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A model returns schema-valid JSON for a CRM update. Is that enough to apply the update automatically?",
+    "what_is_assessed": "Whether the candidate distinguishes structural schema conformance from semantic correctness, authorization, and safe execution.",
+    "short_answer": "No. Schema adherence can make the output structurally predictable, but it does not prove that the values are factually correct, authorized, or appropriate for the requested action. Check for refusals or incomplete responses, validate business rules and permissions, and require confirmation or human approval when the action is consequential. Treat schema validation as one boundary, not as an end-to-end safety guarantee.",
+    "deep_explanation": "OpenAI's Structured Outputs guide distinguishes schema adherence from JSON mode, which guarantees valid JSON but not schema conformity, and describes explicit refusal handling. These features address response structure and refusal signaling; they do not establish that a schema-conforming value is true or that an external action should be authorized. Applications still need task-specific semantic checks and appropriate controls around side effects.",
+    "strong_answer_signals": [
+      "Separates valid structure from factual or task correctness.",
+      "Checks refusal and completion state before interpreting a response.",
+      "Validates authorization and applies stronger controls to consequential side effects."
+    ],
+    "weak_answer_signals": [
+      "Treats schema-valid output as proof the requested action is correct.",
+      "Assumes a constrained response format replaces business validation."
+    ],
+    "common_mistakes": [
+      "Executing a write action before checking values against application rules.",
+      "Treating the absence of a parsing error as evidence that the model understood the user."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does schema adherence establish?",
+        "short_answer": "That the output conforms to the supported structural schema, not that its content is true."
+      },
+      {
+        "question": "Which outputs need special handling?",
+        "short_answer": "Refusals and incomplete responses should not be treated as completed valid actions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Structured model outputs",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Structured Outputs documentation retrieved 2026-11-04; schema support and model availability may change.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/structured-outputs"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Confirmed the source's schema-adherence distinction and explicit refusal handling; semantic and authorization checks are labeled as application-level requirements, not guarantees of the format."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-red-team-rag-against-instruction-injection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

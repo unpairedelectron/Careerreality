@@ -292,5 +292,293 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-turn-debug-traces-into-repeatable-evals",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent evaluation and observability",
+    "subtopic": "From debugging traces to repeatable datasets",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A trace reveals that a prompt change fixed one missed handoff. How would you check whether the fix works reliably and did not break other workflows?",
+    "what_is_assessed": "Understanding of the progression from trace-level debugging to repeatable dataset evaluation for agent changes.",
+    "short_answer": "Keep the trace as a regression case, then build or update a representative dataset that includes the repaired handoff, expected behavior, and other important routing paths. Define graders for handoff correctness and end-to-end task success, and run the same evaluation set against the old and new behavior. Review regressions and grow the dataset with new failures; one successful trace is evidence about that run, not a reliability estimate.",
+    "deep_explanation": "OpenAI's agent-evaluation guidance recommends traces for diagnosing workflow behavior and structured trace graders for questions such as whether a handoff occurred as intended. Once the expected behavior is understood, the guide recommends moving from individual traces to repeatable datasets and evaluation runs to benchmark changes and compare prompts over time. Dataset coverage and evaluator validity remain important: a dataset assembled only from the single repaired trace cannot establish general reliability.",
+    "strong_answer_signals": [
+      "Retains the observed failure as a regression case without treating it as a complete test set.",
+      "Evaluates the fix and neighboring routing paths on a repeatable dataset.",
+      "Compares old and new behavior using distinct handoff and task-success criteria."
+    ],
+    "weak_answer_signals": [
+      "Concludes the change is reliable after one successful trace.",
+      "Measures only final answers and ignores workflow regressions."
+    ],
+    "common_mistakes": [
+      "Building a dataset containing only successful examples of the new behavior.",
+      "Changing prompts or routing while also changing the evaluation set, making comparison ambiguous."
+    ],
+    "follow_ups": [
+      {
+        "question": "What role does a trace play after the original debugging session?",
+        "short_answer": "It can become a targeted regression example in a broader repeatable evaluation dataset."
+      },
+      {
+        "question": "Why compare both handoff correctness and task success?",
+        "short_answer": "The workflow can complete a task while still taking an incorrect or brittle path."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Evaluate agent workflows",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API agent-evaluation guidance retrieved 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agent-evals"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Checked the source's distinction between trace-based debugging and moving to repeatable datasets/eval runs for benchmarking prompt changes; the regression-test details are stated as engineering application, not an API guarantee."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-trace-grading-catches-wrong-tool-path"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-place-guardrails-at-input-tool-and-output",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent architecture",
+    "subtopic": "Guardrail placement across workflow boundaries",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A multi-step agent accepts user requests, calls tools, and returns a final answer. Where would you place automatic guardrails and human approval?",
+    "what_is_assessed": "Whether the candidate matches controls to input, output, tool, and side-effect boundaries in an agent workflow.",
+    "short_answer": "Use input checks before the main workflow for disallowed requests, tool checks around function arguments or results, and output checks before content leaves the system. Pause for human approval before sensitive side effects such as cancellations, edits, or consequential external actions. These controls address different boundaries; none should be treated as a complete substitute for the others, and high-impact flows need end-to-end evaluation.",
+    "deep_explanation": "OpenAI's guardrails guidance distinguishes automatic checks on inputs, outputs, and tool behavior from human review that pauses a run for approval. Its decision table maps blocking requests to input guardrails, validating or redacting final responses to output guardrails, checking arguments/results to tool guardrails, and pausing before side effects to human-in-the-loop approval. These are implementation patterns in the cited SDK guidance; product teams still need to define their own policy boundaries and test failure cases.",
+    "strong_answer_signals": [
+      "Places controls at more than one workflow boundary rather than relying only on a final answer filter.",
+      "Distinguishes automatic validation from human approval of sensitive side effects.",
+      "Tests tool arguments and results as well as user input and final output."
+    ],
+    "weak_answer_signals": [
+      "Assumes a final output filter can undo an already executed tool action.",
+      "Treats human approval as necessary for every low-risk read or as unnecessary for all side effects."
+    ],
+    "common_mistakes": [
+      "Checking only the user prompt while leaving tool arguments unconstrained.",
+      "Failing to define which operations count as sensitive or consequential."
+    ],
+    "follow_ups": [
+      {
+        "question": "Where should a check for malformed function arguments run?",
+        "short_answer": "At the tool boundary, before execution, with validation of results where relevant."
+      },
+      {
+        "question": "When should a workflow pause for a person?",
+        "short_answer": "Before a policy-defined sensitive side effect that requires review or approval."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Guardrails and human review",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "Current OpenAI Agents SDK guardrails and approvals guidance retrieved 2026-11-04; no SDK version claim is made.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's separation of input, output, and tool guardrails from human approval before sensitive side effects; the answer does not claim these controls eliminate all risk."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-sensitive-tool-action-human-approval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-check-side-effects-before-retrying-timeout",
+    "bank": "agentic-ai-engineer",
+    "topic": "Agent errors and recovery",
+    "subtopic": "Safe recovery after an ambiguous timeout",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An agent run times out while processing a request that can update an external account. What should the recovery logic do before retrying?",
+    "what_is_assessed": "Whether the candidate considers partial completion and duplicate side effects when recovering from transient agent failures.",
+    "short_answer": "Check the run and tool outcomes first. A timeout does not prove that no side effect occurred, so inspect completed actions and current resource state before repeating the operation. Retry only transient failures, with a bounded attempt or deadline policy, and continue or start a new turn only after confirming what remains unfinished. Do not blindly replay a write action.",
+    "deep_explanation": "OpenAI's agent error-recovery guidance explicitly recommends checking whether the session, turn, or saved work completed and checking completed external actions before retrying, because a failed turn may already have called tools or changed files. It then recommends waiting and limiting retries for transient failures. This operational advice is specific to its agent platform documentation, but the underlying recovery concern—ambiguous completion and repeated side effects—applies broadly to systems that orchestrate external actions.",
+    "strong_answer_signals": [
+      "Checks persisted run state and external side effects before retrying.",
+      "Distinguishes transient failures from invalid input or policy errors.",
+      "Limits retries and resumes only work confirmed to be unfinished."
+    ],
+    "weak_answer_signals": [
+      "Retries every timeout immediately without checking the external resource.",
+      "Assumes a failed run necessarily means the tool action did not happen."
+    ],
+    "common_mistakes": [
+      "Reissuing a non-idempotent action after an ambiguous timeout.",
+      "Using unbounded retries that can amplify a transient outage."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should happen if the external action already completed?",
+        "short_answer": "Use its recorded result and avoid issuing the action a second time."
+      },
+      {
+        "question": "What should happen when an error is caused by invalid input?",
+        "short_answer": "Correct the input rather than treating it as a transient failure to retry."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Errors and recovery",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents-api/errors",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents API error and recovery guidance retrieved 2026-11-04; no SDK-specific retry implementation is asserted.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents-api/errors"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's instructions to check the run outcome and completed actions, then apply bounded retries only for transient failures; generalized the operational lesson without claiming API behavior outside the source."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-sensitive-tool-action-human-approval"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-use-session-state-for-long-running-work",
+    "bank": "agentic-ai-engineer",
+    "topic": "Session state and turn control",
+    "subtopic": "Continuing and steering long-running work",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A long-running agent task needs to preserve its work while a user provides follow-up guidance. How should the application manage the session?",
+    "what_is_assessed": "Understanding of persistent agent session state, asynchronous turns, and the distinction between steering active work and continuing an idle session.",
+    "short_answer": "Keep the task's session identity and relevant configuration, conversation, and saved work available across the follow-up. Track whether a turn is active or idle: a message can steer active work, while an idle session can begin a new turn. Because work may be asynchronous, expose progress and state transitions so the application knows when to wait, steer, or continue rather than creating an unrelated run that loses context.",
+    "deep_explanation": "OpenAI's Agents API session guide describes a session as retaining configuration, conversation, and saved work over time. It defines turns as cycles within a session: a message to an idle session starts a turn, while a message during an active turn steers that turn. Turns are asynchronous, with progress available through streaming or session state changes. These are the documented semantics for that API; other agent runtimes may represent persistence and continuation differently.",
+    "strong_answer_signals": [
+      "Preserves the session context needed for a follow-up instead of assuming each turn is independent.",
+      "Distinguishes messages that steer active work from messages that start a new turn.",
+      "Accounts for asynchronous progress and observes session state."
+    ],
+    "weak_answer_signals": [
+      "Starts a new unrelated session for every follow-up without transferring needed context.",
+      "Assumes a request returns only after all long-running work has finished."
+    ],
+    "common_mistakes": [
+      "Sending continuation input without checking whether the prior turn is active or idle.",
+      "Treating session persistence as a substitute for access control and data-retention policy."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should an application track while a turn runs?",
+        "short_answer": "Its progress and state transitions, through the runtime's supported streaming or event mechanism."
+      },
+      {
+        "question": "How does a follow-up differ for an active versus idle session?",
+        "short_answer": "It steers an active turn or starts a new turn in an idle session."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Run and continue sessions",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/agents-api/sessions",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Agents API session guidance retrieved 2026-11-04; API-specific turn semantics are not generalized to all runtimes.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/agents-api/sessions"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the source's description of persisted session context, asynchronous turns, and active-versus-idle message behavior; stated these as API-specific semantics."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-check-side-effects-before-retrying-timeout"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]
