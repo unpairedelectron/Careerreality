@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "Machine learning evaluation",
-      "subtopics": ["cross-validation", "leakage", "metrics", "calibration", "cross-validation uncertainty"],
+      "subtopics": ["cross-validation", "leakage", "metrics", "calibration", "cross-validation uncertainty", "nested cross-validation for model selection"],
       "sources": [
         {
           "title": "Cross-validation: evaluating estimator performance",
@@ -233,7 +233,7 @@
     },
     {
       "topic": "Feature attribution and correlated inputs",
-      "subtopics": ["permutation importance", "multicollinearity", "redundant predictors"],
+      "subtopics": ["permutation importance", "multicollinearity", "redundant predictors", "partial dependence outside joint support"],
       "sources": [{
         "title": "Permutation Importance with Multicollinear or Correlated Features",
         "publisher": "scikit-learn developers",
@@ -242,6 +242,14 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "scikit-learn 1.9.1 stable example"
+      }, {
+        "title": "Partial Dependence and Individual Conditional Expectation plots",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/1.9/modules/partial_dependence.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "scikit-learn 1.9.1 documentation accessed 2026-11-05"
       }]
     },
     {
@@ -351,7 +359,7 @@
     },
     {
       "topic": "Survival analysis",
-      "subtopics": ["right censoring", "observed event versus censor time", "follow-up windows", "competing events and cumulative incidence", "proportional hazards diagnostics", "cause-specific hazard and cumulative incidence", "IPCW survival prediction error"],
+      "subtopics": ["right censoring", "observed event versus censor time", "follow-up windows", "competing events and cumulative incidence", "proportional hazards diagnostics", "cause-specific hazard and cumulative incidence", "IPCW survival prediction error", "restricted mean survival time"],
       "sources": [{
         "title": "Introduction to survival analysis",
         "publisher": "lifelines documentation",
@@ -376,6 +384,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-05",
         "versions_checked": "Open-access methodological article accessed 2026-11-05"
+      }, {
+        "title": "Meta-analysis of time-to-event outcomes from randomized trials using restricted mean survival time: application to individual participant data",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5695659/",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Open-access methodological article accessed 2026-11-05"
       }]
     },
     {
@@ -393,7 +409,7 @@
     },
     {
       "topic": "Distribution shift",
-      "subtopics": ["covariate shift", "target-to-training density ratios", "support overlap"],
+      "subtopics": ["covariate shift", "target-to-training density ratios", "support overlap", "label shift and changing class priors"],
       "sources": [{
         "title": "Improving importance estimation in covariate shift for providing accurate prediction error",
         "publisher": "Expert Systems with Applications via arXiv",
@@ -402,6 +418,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "Peer-reviewed article accepted for publication; arXiv version 1"
+      }, {
+        "title": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure",
+        "publisher": "Neural Computation via MIT Press",
+        "url": "https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Peer-reviewed article published 2002; abstract and method description accessed 2026-11-05"
       }]
     },
     {
@@ -432,7 +456,7 @@
     },
     {
       "topic": "Instrumental variable analysis",
-      "subtopics": ["instrument relevance", "exclusion restriction", "exchangeability and weak instruments"],
+      "subtopics": ["instrument relevance", "exclusion restriction", "exchangeability and weak instruments", "weak-instrument-robust inference"],
       "sources": [{
         "title": "Understanding the Assumptions Underlying Instrumental Variable Analyses",
         "publisher": "Epidemiology via PubMed Central",
@@ -441,11 +465,19 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "Peer-reviewed review published 2018"
+      }, {
+        "title": "A Conditional Linear Combination Test with Many Weak Instruments",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2207.11137v3",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2207.11137v3 accessed 2026-11-05"
       }]
     },
     {
       "topic": "Cluster-randomized trial design",
-      "subtopics": ["intracluster correlation", "effective sample size", "cluster-level power planning", "cluster-aware uncertainty and unit of analysis"],
+      "subtopics": ["intracluster correlation", "effective sample size", "cluster-level power planning", "cluster-aware uncertainty and unit of analysis", "small-cluster degrees of freedom"],
       "sources": [{
         "title": "Key considerations for designing, conducting and analysing a cluster randomized trial",
         "publisher": "Trials via PubMed Central",
@@ -604,7 +636,7 @@
     },
     {
       "topic": "Multiple imputation pooling",
-      "subtopics": ["within-imputation variance", "between-imputation variability", "Rubin's rules"],
+      "subtopics": ["within-imputation variance", "between-imputation variability", "Rubin's rules", "finite-imputation Monte Carlo error"],
       "sources": [{
         "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines",
         "publisher": "PubMed Central",
@@ -677,7 +709,7 @@
     },
     {
       "topic": "Bayesian posterior predictive checks",
-      "subtopics": ["replicated data", "model adequacy", "convergence versus fit"],
+      "subtopics": ["replicated data", "model adequacy", "convergence versus fit", "prior predictive plausibility"],
       "sources": [{
         "title": "Posterior and Prior Predictive Checks",
         "publisher": "Stan User's Guide",

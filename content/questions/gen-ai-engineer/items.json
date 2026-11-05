@@ -3802,5 +3802,217 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-verify-speculative-decoding-tradeoffs",
+    "bank": "gen-ai-engineer",
+    "topic": "Speculative decoding and inference speedups",
+    "subtopic": "Draft proposals and target-model verification",
+    "level": "L3",
+    "type": "concept",
+    "question": "How can speculative decoding reduce autoregressive latency without changing the target model's output distribution, and what determines whether it is faster?",
+    "what_is_assessed": "Whether the candidate understands draft-token verification and the dependence of speedup on proposal acceptance and verification cost.",
+    "short_answer": "A faster draft model proposes several tokens, then the target model verifies them in parallel with a sampling rule that preserves the target distribution. Speedup depends on how many proposals are accepted and whether draft generation plus verification costs less than serial target decoding; it is not guaranteed for every model pair or workload.",
+    "deep_explanation": "The cited paper describes speculative decoding as sampling from the target autoregressive model faster by using a draft model to propose tokens and a target model to verify them. Its sampling procedure preserves the target model's output distribution. A useful deployment evaluation measures end-to-end latency and acceptance behavior on representative prompts because a weak draft model or expensive verification can erase the benefit.",
+    "strong_answer_signals": [
+      "Explains draft proposals followed by target-model verification.",
+      "States that the sampling method preserves the target distribution.",
+      "Treats speedup as dependent on acceptance and runtime costs."
+    ],
+    "weak_answer_signals": [
+      "Claims the draft model replaces the target model.",
+      "Assumes speculative decoding is always faster or changes outputs only slightly."
+    ],
+    "common_mistakes": [
+      "Measuring draft-model throughput without the verification cost.",
+      "Assuming acceptance rate is constant across prompts."
+    ],
+    "follow_ups": [
+      {
+        "question": "What role does the target model play?",
+        "short_answer": "It verifies proposed tokens and remains the distribution being sampled from."
+      },
+      {
+        "question": "What should a latency benchmark include?",
+        "short_answer": "Drafting, verification, accepted-token counts, and end-to-end response time."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Fast Inference from Transformers via Speculative Decoding",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2211.17192v2",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "arXiv:2211.17192v2 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2211.17192v2"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified draft proposals, target verification, and preservation of the target model's output distribution; qualified speedup as workload-dependent."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-sequence-dependent-tool-calls",
+    "bank": "gen-ai-engineer",
+    "topic": "Function calling and tool orchestration",
+    "subtopic": "Sequencing calls with result dependencies",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A model response contains two tool calls, but the second operation needs a value that only the first tool can return. Should the application run both calls in parallel?",
+    "what_is_assessed": "Whether the candidate parallelizes only independent calls and returns tool results to the model before dependent actions.",
+    "short_answer": "No. Execute the first call, return its result using its call identifier, and let the model produce the dependent next step. Parallel execution is appropriate only when the calls are independent and their inputs are already available.",
+    "deep_explanation": "Function-calling flows require the application to execute requested tools and return each result under the corresponding call identifier before continuing the model interaction. A call that depends on an unavailable result cannot be safely executed from the earlier response. Scheduling it concurrently would use guessed or stale inputs; preserve the dependency by completing the first call and resuming the model.",
+    "strong_answer_signals": [
+      "Distinguishes independent calls from result-dependent calls.",
+      "Returns the first result to the model before obtaining the dependent action.",
+      "Preserves call identifiers through the orchestration loop."
+    ],
+    "weak_answer_signals": [
+      "Executes the dependent call with guessed inputs.",
+      "Assumes calls in one response are always safe to run concurrently."
+    ],
+    "common_mistakes": [
+      "Using parallelism without checking data dependencies.",
+      "Skipping the model turn that should consume the first tool result."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is parallel tool execution appropriate?",
+        "short_answer": "When calls are independent and all required inputs are available."
+      },
+      {
+        "question": "What follows the first call in a dependency chain?",
+        "short_answer": "Return its identified result to the model, then obtain the next call."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Function calling",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI API function-calling guide accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/function-calling"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented application-side execution and result-return loop; the dependency-aware scheduling guidance follows from requiring the first result before the model can construct a dependent call."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-match-tool-results-by-call-id"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-preserve-visual-evidence-in-multimodal-rag",
+    "bank": "gen-ai-engineer",
+    "topic": "Multimodal retrieval-augmented generation",
+    "subtopic": "Text summaries versus native visual retrieval",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A RAG system answers questions about charts by retrieving only text captions generated from each page image. What information can this design lose, and what should you evaluate?",
+    "what_is_assessed": "Whether the candidate recognizes visual evidence loss in text-only indexing and evaluates retrieval strategies against image-grounded tasks.",
+    "short_answer": "Text summaries can omit spatial relationships, chart structure, or numerical detail needed to answer visual questions. Compare text-based and native image or multimodal retrieval on representative questions, and retain page or image provenance so answers can be checked against the original evidence.",
+    "deep_explanation": "The cited study compares text-based chunk retrieval, where images are summarized into text, with direct multimodal embedding retrieval. It identifies loss of contextual and visual details as a limitation of converting images to text. Its benchmark is specific, so treat the result as motivation to evaluate the alternatives on the target document types rather than as a universal ranking.",
+    "strong_answer_signals": [
+      "Names visual or spatial information that captions may omit.",
+      "Proposes evaluation on representative visual questions.",
+      "Preserves provenance to the underlying image or page."
+    ],
+    "weak_answer_signals": [
+      "Assumes a generated caption preserves all chart evidence.",
+      "Chooses a retrieval method based on a paper's benchmark without testing the target corpus."
+    ],
+    "common_mistakes": [
+      "Evaluating answer fluency without checking retrieved visual evidence.",
+      "Dropping page or image identifiers during indexing."
+    ],
+    "follow_ups": [
+      {
+        "question": "When may text-only image summaries be insufficient?",
+        "short_answer": "When the answer depends on layout, spatial relations, or precise visual values."
+      },
+      {
+        "question": "What should be compared before choosing an index?",
+        "short_answer": "Text-based and native visual retrieval on representative questions from the target corpus."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Comparison of Text-Based and Image-Based Retrieval in Modern Multimodal Retrieval Augmented Generation Large Language Model Systems",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2511.16654v2",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "arXiv:2511.16654v2 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2511.16654v2"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the paper's comparison of text summaries with direct multimodal retrieval and limited the claim to potential loss of visual context and detail."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

@@ -3775,5 +3775,76 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "agentic-default-unspecified-mcp-elicitation-mode-to-form",
+    "bank": "agentic-ai-engineer",
+    "topic": "MCP elicitation",
+    "subtopic": "Backward-compatible mode handling",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A client receives an MCP elicitation request with no `mode` field. How should it interpret the request?",
+    "what_is_assessed": "Whether the candidate follows the specification's backward-compatible default for elicitation mode.",
+    "short_answer": "Treat a missing `mode` as form mode. Validate and present the structured request according to the form-mode flow, while preserving the user's ability to review, decline, or cancel.",
+    "deep_explanation": "The MCP elicitation specification allows servers to omit the mode for backward compatibility and requires clients to interpret an omitted mode as form mode. This default is distinct from URL-mode elicitation, which directs the user to an external interaction. Clients should apply the appropriate handling and not infer URL mode from the absence of a field.",
+    "strong_answer_signals": [
+      "Defaults an omitted mode to form mode.",
+      "Does not treat omission as permission to open an external URL.",
+      "Retains the user review and cancellation flow."
+    ],
+    "weak_answer_signals": [
+      "Rejects every request without an explicit mode.",
+      "Assumes an omitted mode means URL mode."
+    ],
+    "common_mistakes": [
+      "Confusing backward-compatible defaults with an explicit server request."
+    ],
+    "follow_ups": [
+      {
+        "question": "What mode is used when the field is absent?",
+        "short_answer": "Form mode."
+      },
+      {
+        "question": "Does an omitted mode authorize external navigation?",
+        "short_answer": "No. URL mode must be explicit."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Elicitation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "MCP specification version 2026-07-28, accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the specification's requirement that clients treat omitted elicitation mode as form mode."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "agentic-handle-mcp-elicitation-with-user-control"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

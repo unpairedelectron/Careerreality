@@ -2,7 +2,7 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 59,
+  "itemCount": 60,
   "countsByTopic": {
     "Training and reproducibility": 3,
     "Production ML testing and monitoring": 5,
@@ -40,24 +40,25 @@
     "ONNX export dynamic dimensions": 1,
     "Model shadow testing": 1,
     "Quantization granularity": 1,
-    "Normalization for small-batch training": 1
+    "Normalization for small-batch training": 1,
+    "Training memory accounting": 1
   },
   "countsByLevel": {
-    "L2": 22,
+    "L2": 23,
     "L3": 37
   },
   "countsByType": {
-    "debugging": 35,
+    "debugging": 36,
     "scenario": 11,
     "trade-off": 8,
     "concept": 5
   },
   "status": {
-    "schemaValid": 59,
-    "sourcesVerified": 59,
-    "rederived": 59,
+    "schemaValid": 60,
+    "sourcesVerified": 60,
+    "rederived": 60,
     "codeExecuted": 0,
-    "expertReviewPending": 59
+    "expertReviewPending": 60
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -474,6 +475,13 @@
       "expertReview": "pending"
     },
     "ml-select-groupnorm-for-small-batches": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-budget-memory-for-mixed-precision-adam-training": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

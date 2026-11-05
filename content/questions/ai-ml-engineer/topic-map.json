@@ -622,6 +622,19 @@
         "last_verified": "2026-11-05",
         "versions_checked": "PyTorch 2.15 stable documentation accessed 2026-11-05"
       }]
+    },
+    {
+      "topic": "Training memory accounting",
+      "subtopics": ["weights and gradients", "optimizer states", "activation and temporary memory"],
+      "sources": [{
+        "title": "Model training anatomy",
+        "publisher": "Hugging Face Transformers documentation",
+        "url": "https://huggingface.co/docs/transformers/v4.50.0/model_memory_anatomy",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Transformers v4.50.0 documentation accessed 2026-11-05"
+      }]
     }
   ]
 }

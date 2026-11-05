@@ -242,7 +242,7 @@
     },
     {
       "topic": "MCP elicitation",
-      "subtopics": ["user consent", "form review and cancellation", "safe URL-mode elicitation"],
+      "subtopics": ["user consent", "form review and cancellation", "safe URL-mode elicitation", "backward-compatible default mode"],
       "sources": [{
         "title": "Elicitation",
         "publisher": "Model Context Protocol specification",
@@ -251,6 +251,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "MCP specification version 2025-11-25"
+      }, {
+        "title": "Elicitation",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2026-07-28"
       }]
     },
     {

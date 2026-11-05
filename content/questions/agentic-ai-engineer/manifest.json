@@ -2,7 +2,7 @@
   "bank": "agentic-ai-engineer",
   "target": 180,
   "minimum": 75,
-  "itemCount": 53,
+  "itemCount": 54,
   "countsByTopic": {
     "Agent architecture": 5,
     "Agent evaluation and observability": 3,
@@ -18,7 +18,7 @@
     "MCP tool error handling": 1,
     "MCP tool discovery updates": 1,
     "MCP pagination": 1,
-    "MCP elicitation": 1,
+    "MCP elicitation": 2,
     "MCP resource subscriptions": 1,
     "MCP progress notifications": 1,
     "MCP cancellation": 1,
@@ -42,21 +42,21 @@
     "MCP token audience validation": 1
   },
   "countsByLevel": {
-    "L2": 24,
+    "L2": 25,
     "L3": 29
   },
   "countsByType": {
     "trade-off": 7,
     "scenario": 20,
-    "debugging": 19,
+    "debugging": 20,
     "concept": 7
   },
   "status": {
-    "schemaValid": 53,
-    "sourcesVerified": 53,
-    "rederived": 53,
+    "schemaValid": 54,
+    "sourcesVerified": 54,
+    "rederived": 54,
     "codeExecuted": 0,
-    "expertReviewPending": 53
+    "expertReviewPending": 54
   },
   "itemStatus": {
     "agentic-workflow-before-autonomous-agent": {
@@ -424,6 +424,13 @@
       "expertReview": "pending"
     },
     "agentic-validate-mcp-token-audience-and-block-passthrough": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "agentic-default-unspecified-mcp-elicitation-mode-to-form": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

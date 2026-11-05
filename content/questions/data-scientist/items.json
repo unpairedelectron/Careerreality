@@ -4781,5 +4781,421 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-nest-cross-validation-around-model-selection",
+    "bank": "data-scientist",
+    "topic": "Machine learning evaluation",
+    "subtopic": "Nested cross-validation for model selection",
+    "level": "L3",
+    "type": "scenario",
+    "question": "You tune hyperparameters by cross-validation and report the best score from that same search as expected generalization performance. What is the risk, and how can you estimate performance more honestly?",
+    "what_is_assessed": "Whether the candidate recognizes selection bias from reusing tuning folds for final evaluation.",
+    "short_answer": "The best score is optimistically biased because the search selected the configuration that happened to score well on those folds. Use nested cross-validation: tune only within each outer training split and evaluate the selected model on that split's untouched outer fold. Keep a final test set separate if the deployment process permits it.",
+    "deep_explanation": "The scikit-learn nested cross-validation example contrasts nested and non-nested evaluation. When the same cross-validation results are used both to choose hyperparameters and report performance, model selection can overfit the evaluation criterion. An outer evaluation loop estimates the full selection procedure, while the inner loop performs tuning; the data roles must remain separated.",
+    "strong_answer_signals": [
+      "Identifies optimism from selecting the best observed score.",
+      "Keeps tuning inside the outer training fold.",
+      "Evaluates the selected pipeline on untouched outer data."
+    ],
+    "weak_answer_signals": [
+      "Reports the best tuning score as an unbiased final estimate.",
+      "Allows outer-fold information to influence model or hyperparameter selection."
+    ],
+    "common_mistakes": [
+      "Preprocessing or feature selection outside the inner training split.",
+      "Using the outer test folds to choose among candidate model families."
+    ],
+    "follow_ups": [
+      {
+        "question": "What happens inside an outer fold?",
+        "short_answer": "The inner loop selects a configuration using only the outer training portion; the outer fold evaluates that selected procedure."
+      },
+      {
+        "question": "Can a final test set still be useful?",
+        "short_answer": "Yes, when it remains untouched through model and process selection."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Cross-validation: evaluating estimator performance",
+        "publisher": "scikit-learn developers",
+        "url": "https://scikit-learn.org/1.9/modules/cross_validation.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "scikit-learn 1.9.1 documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://scikit-learn.org/1.9/modules/cross_validation.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the documented nested-versus-non-nested evaluation distinction and described the outer loop as evaluation of the selection procedure."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-avoid-naive-fold-se-for-cross-validation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-report-restricted-mean-survival-when-ph-fails",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Restricted mean survival time under non-proportional hazards",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A proportional-hazards diagnostic raises concerns and one hazard ratio may hide changing treatment effects over time. What complementary measure could you report?",
+    "what_is_assessed": "Whether the candidate can explain restricted mean survival time as an interpretable alternative when proportional hazards is questionable.",
+    "short_answer": "Report a between-group difference in restricted mean survival time up to a prespecified, clinically relevant horizon. It summarizes expected event-free time over that interval without requiring proportional hazards, but the horizon and follow-up support must be stated.",
+    "deep_explanation": "The cited methodological article explains that hazard-ratio analyses rely on a proportional-hazards assumption and that the restricted-mean difference avoids that assumption while allowing treatment effects to vary over time. The measure is the area under the survival curve up to a restriction time. Results depend on that time horizon, so choose it based on the study question and adequate follow-up rather than selecting it after seeing the result.",
+    "strong_answer_signals": [
+      "Names restricted mean survival time or its between-group difference.",
+      "States the restriction horizon explicitly.",
+      "Explains that it does not require proportional hazards and remains horizon-dependent."
+    ],
+    "weak_answer_signals": [
+      "Treats a single hazard ratio as sufficient despite time-varying effects.",
+      "Reports an RMST difference without defining its time horizon."
+    ],
+    "common_mistakes": [
+      "Choosing the restriction time after inspecting treatment differences.",
+      "Claiming RMST removes all survival-analysis assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "How is restricted mean survival time interpreted?",
+        "short_answer": "As expected event-free time accumulated up to the specified horizon."
+      },
+      {
+        "question": "What must accompany an RMST difference?",
+        "short_answer": "The restriction horizon and the follow-up support for that horizon."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Meta-analysis of time-to-event outcomes from randomized trials using restricted mean survival time: application to individual participant data",
+        "publisher": "PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5695659/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Open-access methodological article accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5695659/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that RMST avoids the proportional-hazards assumption and that the restricted time horizon is part of its interpretation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-check-proportional-hazards-before-reporting-cox-hr"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-account-for-few-clusters-in-trial-inference",
+    "bank": "data-scientist",
+    "topic": "Cluster-randomized trial design",
+    "subtopic": "Small-cluster degrees of freedom",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A cluster-randomized trial has many participants but only a few clusters per arm. Why can participant-level large-sample standard errors be misleading, and what should you consider?",
+    "what_is_assessed": "Whether the candidate bases inference on the number of randomized clusters and considers small-sample degrees-of-freedom methods.",
+    "short_answer": "Treatment was randomized at the cluster level, so the number of independent assignment units—not just the participant count—limits precision. Use cluster-aware analysis and a small-sample degrees-of-freedom approach appropriate to the design; cluster-level methods may also be considered. State assumptions and avoid treating a large number of people within a few clusters as many independent randomized units.",
+    "deep_explanation": "The cited cluster-trial guidance discusses the difficulty of selecting degrees of freedom in parallel cluster trials and lists corrections such as 2K−2, where K is the number of clusters per arm. It notes that performance depends on conditions such as cluster-size variation and also discusses cluster-level approaches. The analyst should preselect a design-appropriate method rather than defaulting to participant-level degrees of freedom.",
+    "strong_answer_signals": [
+      "Identifies clusters as the randomization units.",
+      "Recognizes that few clusters limit independent information.",
+      "Names small-sample degrees-of-freedom or cluster-level methods with design assumptions."
+    ],
+    "weak_answer_signals": [
+      "Uses participant count as the independent sample size without accounting for clustering.",
+      "Assumes one correction works for every cluster design."
+    ],
+    "common_mistakes": [
+      "Ignoring cluster-size variation when selecting a correction.",
+      "Reporting precision as if all participants were independently randomized."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does K represent in a 2K−2 degrees-of-freedom correction?",
+        "short_answer": "The number of clusters per arm in the cited parallel-arm setting."
+      },
+      {
+        "question": "Does a large cluster size compensate fully for very few clusters?",
+        "short_answer": "No. The number of independent randomized clusters still constrains inference."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Key considerations for designing, conducting and analysing a cluster randomized trial",
+        "publisher": "Trials via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10555937/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed methodological guidance accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10555937/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guidance's discussion of cluster-level randomization, few-cluster degrees of freedom, and the context-specific 2K−2 option."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-account-for-clustering-in-cluster-rct-inference"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-weak-instrument-robust-inference",
+    "bank": "data-scientist",
+    "topic": "Instrumental variable analysis",
+    "subtopic": "Inference with weak instruments",
+    "level": "L3",
+    "type": "scenario",
+    "question": "The first stage suggests weak identification. Is a conventional 2SLS confidence interval alone enough for reporting the causal effect?",
+    "what_is_assessed": "Whether the candidate distinguishes instrument strength diagnostics from inference that remains reliable under weak identification.",
+    "short_answer": "Do not rely on a conventional interval alone. Report the first-stage evidence and consider weak-instrument-robust inference, such as an Anderson–Rubin-based test or confidence set, while stating its assumptions and limitations. Such intervals may be wide or unbounded; they do not establish instrument validity or repair a violated exclusion restriction.",
+    "deep_explanation": "The cited econometric paper develops inference procedures that include Anderson–Rubin-based tests for settings with many weak instruments and heteroskedasticity. The practical point is that weak identification changes the reliability of conventional inference. The analyst should use methods suited to the instrument design and separately justify relevance, exclusion, and exchangeability assumptions.",
+    "strong_answer_signals": ["Does not treat conventional 2SLS inference as automatically reliable under weak identification.", "Names weak-instrument-robust inference such as Anderson–Rubin methods.", "Separates instrument strength from instrument validity."],
+    "weak_answer_signals": ["Uses a first-stage cutoff as proof that the instrument is valid.", "Reports only the conventional 2SLS interval without discussing weak identification."],
+    "common_mistakes": ["Assuming a robust test fixes a violated exclusion restriction.", "Omitting that weak-instrument confidence sets can be wide or unbounded."],
+    "follow_ups": [
+      { "question": "Does a weak-instrument-robust interval prove exclusion?", "short_answer": "No. It addresses inference under weak identification, not instrument validity." },
+      { "question": "What should be reported alongside the estimate?", "short_answer": "Instrument-strength evidence, the robust inference method, and its assumptions." }
+    ],
+    "code": null,
+    "references": [{ "title": "A Conditional Linear Combination Test with Many Weak Instruments", "publisher": "arXiv", "url": "https://arxiv.org/html/2207.11137v3", "retrieved_date": "2026-11-05" }],
+    "volatility": "Stable",
+    "versions_checked": "arXiv:2207.11137v3 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": ["https://arxiv.org/html/2207.11137v3"],
+      "rederivation_agreement": true,
+      "rederivation_notes": ["Verified the paper's weak-identification inference procedures, including Anderson-Rubin-based methods; kept validity assumptions separate."],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "medium"
+    },
+    "related": ["ds-check-instrumental-variable-assumptions"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-joint-support-before-reading-partial-dependence",
+    "bank": "data-scientist",
+    "topic": "Feature attribution and correlated inputs",
+    "subtopic": "Partial dependence outside joint feature support",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A partial-dependence plot varies one feature while pairing it with values of strongly correlated features that rarely occur together. What is the risk?",
+    "what_is_assessed": "Whether the candidate recognizes unsupported feature combinations in marginal partial-dependence calculations.",
+    "short_answer": "The plot may average predictions over unrealistic combinations outside the observed joint support, so its apparent effect can be misleading. Inspect the feature relationships and support, avoid interpreting extrapolated regions, and use an explanation method aligned with the conditional question when dependence is strong.",
+    "deep_explanation": "Scikit-learn's partial-dependence documentation explains that PDP and ICE calculations vary a feature while marginalizing over complement features. With correlated inputs, this can create data points that are implausible in practice. The curve describes the model's response to those constructed inputs, not necessarily a relationship supported by observed data or a causal effect.",
+    "strong_answer_signals": ["Identifies the independence or marginalization issue.", "Checks whether the constructed combinations occur in the data.", "Avoids causal interpretation of a model explanation plot."],
+    "weak_answer_signals": ["Treats the PDP curve as an observed conditional relationship.", "Ignores regions with little or no joint feature support."],
+    "common_mistakes": ["Confusing a model-response summary with a causal effect.", "Reporting extrapolated regions without support diagnostics."],
+    "follow_ups": [
+      { "question": "Why can correlated features distort a PDP?", "short_answer": "Marginalizing can combine feature values that rarely or never occur together." },
+      { "question": "What should be checked before interpreting the curve?", "short_answer": "The joint support of the feature of interest and its correlated complements." }
+    ],
+    "code": null,
+    "references": [{ "title": "Partial Dependence and Individual Conditional Expectation plots", "publisher": "scikit-learn developers", "url": "https://scikit-learn.org/1.9/modules/partial_dependence.html", "retrieved_date": "2026-11-05" }],
+    "volatility": "Moderate",
+    "versions_checked": "scikit-learn 1.9.1 documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": ["https://scikit-learn.org/1.9/modules/partial_dependence.html"],
+      "rederivation_agreement": true,
+      "rederivation_notes": ["Verified that marginalizing over complement features can create unrealistic points when features are correlated."],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": ["ds-permutation-importance-correlated-predictors"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-adjust-probabilities-under-label-shift",
+    "bank": "data-scientist",
+    "topic": "Distribution shift",
+    "subtopic": "Label shift and changing class priors",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A classifier is deployed where class prevalence differs from training, while the feature distribution within each class appears stable. Why may its probabilities be miscalibrated, and what can be adjusted?",
+    "what_is_assessed": "Whether the candidate identifies prior-probability shift and states the class-conditional stability assumption needed for posterior adjustment.",
+    "short_answer": "Posterior probabilities depend on class priors, so changed class prevalence can make the original probabilities miscalibrated even when class-conditional feature distributions are stable. Estimate or obtain the target class priors and adjust the posterior probabilities under that label-shift assumption, then validate when target labels become available. Do not apply this correction if the class-conditional feature distributions also changed.",
+    "deep_explanation": "The cited paper describes adjusting classifier outputs when the a priori class probabilities in real-world data differ from those in the training sample, including an iterative procedure when target priors are not known in advance. This is a specific shift assumption: class-conditional feature behavior is treated as stable while class proportions change. The correction does not address arbitrary distribution shift, so monitor calibration and test the assumption with target data when possible.",
+    "strong_answer_signals": ["Identifies changed class priors as the source of probability miscalibration.", "States the class-conditional stability assumption.", "Distinguishes label shift from arbitrary distribution shift and validates after deployment."],
+    "weak_answer_signals": ["Assumes any prevalence change can be corrected by prior adjustment.", "Treats the training-set class fraction as the deployment prior."],
+    "common_mistakes": ["Confusing prior-probability shift with covariate shift.", "Failing to check calibration once target labels arrive."],
+    "follow_ups": [
+      { "question": "Which distribution must remain stable for this correction?", "short_answer": "The feature distribution conditional on each class." },
+      { "question": "Does prior adjustment repair arbitrary covariate shift?", "short_answer": "No. It relies on a label-shift assumption." }
+    ],
+    "code": null,
+    "references": [{ "title": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure", "publisher": "Neural Computation via MIT Press", "url": "https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext", "retrieved_date": "2026-11-05" }],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed article published 2002; abstract and method description accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": ["https://direct.mit.edu/neco/article-abstract/14/1/21/6577/Adjusting-the-Outputs-of-a-Classifier-to-New-a?redirectedFrom=fulltext"],
+      "rederivation_agreement": true,
+      "rederivation_notes": ["Verified the paper's adjustment of classifier posterior outputs to changed class priors and kept the claim conditional on label-shift assumptions."],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": ["ds-recalibrate-risk-from-case-control-sampling"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-distinguish-imputation-uncertainty-from-monte-carlo-error",
+    "bank": "data-scientist",
+    "topic": "Multiple imputation pooling",
+    "subtopic": "Finite-imputation Monte Carlo error",
+    "level": "L3",
+    "type": "concept",
+    "question": "Increasing the number of imputations makes a pooled confidence interval more stable. Does that mean uncertainty caused by missing data has disappeared?",
+    "what_is_assessed": "Whether the candidate distinguishes finite-imputation Monte Carlo error from between-imputation uncertainty.",
+    "short_answer": "No. More imputations reduce Monte Carlo error from using a finite number of completed datasets, but between-imputation variability still represents uncertainty due to missing values. Under Rubin's rules, increasing the number of imputations reduces the finite-m term; it does not make the missing-data uncertainty vanish.",
+    "deep_explanation": "The cited guidance describes total variance as combining within-imputation variance with between-imputation variance and a finite-imputation adjustment. It explains that increasing the number of imputations improves efficiency when the between-imputation component is substantial. This reduces simulation error in the pooled estimate rather than eliminating uncertainty from missing data or repairing an unsuitable imputation model.",
+    "strong_answer_signals": ["Separates Monte Carlo error from missing-data uncertainty.", "Identifies between-imputation variability as an enduring uncertainty component.", "Avoids treating a larger number of imputations as a cure for model misspecification."],
+    "weak_answer_signals": ["Claims enough imputations remove missing-data uncertainty.", "Confuses stable numerical estimates with valid imputation assumptions."],
+    "common_mistakes": ["Stopping at an arbitrary small number of imputations without checking stability.", "Increasing imputations instead of improving a misspecified imputation model."],
+    "follow_ups": [
+      { "question": "What does increasing the number of imputations reduce?", "short_answer": "Finite-imputation Monte Carlo error." },
+      { "question": "Which variance component remains relevant?", "short_answer": "Between-imputation variability due to missing values." }
+    ],
+    "code": null,
+    "references": [{ "title": "Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines", "publisher": "PubMed Central", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/", "retrieved_date": "2026-11-05" }],
+    "volatility": "Stable",
+    "versions_checked": "Peer-reviewed methodological guidance accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC2727536/"],
+      "rederivation_agreement": true,
+      "rederivation_notes": ["Verified the finite-imputation adjustment and the role of between-imputation variability in pooled uncertainty."],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": ["ds-pool-estimates-across-multiple-imputations"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-prior-predictive-check-before-fitting",
+    "bank": "data-scientist",
+    "topic": "Bayesian posterior predictive checks",
+    "subtopic": "Prior predictive plausibility",
+    "level": "L2",
+    "type": "concept",
+    "question": "Before fitting a Bayesian model, what can you learn by simulating data from the prior and likelihood?",
+    "what_is_assessed": "Whether the candidate distinguishes prior predictive checks from posterior predictive checks and uses them to assess implied data plausibility.",
+    "short_answer": "A prior predictive check shows what data the model and prior can generate before conditioning on observed data. It can reveal implausible scales, rates, or patterns and motivate revising the model or prior before fitting. It does not test fit to observed data; that is the role of posterior predictive checks.",
+    "deep_explanation": "The Stan User's Guide distinguishes prior predictive checks, which evaluate the prior's implications for possible data, from posterior predictive checks, which simulate replicated data using fitted parameters and compare them with observed data. Prior predictive simulation can expose implausible model behavior early, but a plausible prior predictive distribution does not establish that the fitted model describes the observed data.",
+    "strong_answer_signals": ["Simulates from the prior and data-generating model before fitting.", "Checks whether the implied data are plausible for the application.", "Distinguishes this from posterior predictive assessment against observed data."],
+    "weak_answer_signals": ["Uses observed-data fit as the definition of a prior predictive check.", "Treats a plausible prior predictive simulation as proof of model adequacy."],
+    "common_mistakes": ["Skipping prior predictive checks when priors imply impossible values.", "Confusing prior checks with convergence diagnostics."],
+    "follow_ups": [
+      { "question": "What does a prior predictive check simulate from?", "short_answer": "The prior distribution and the model's likelihood before conditioning on observed data." },
+      { "question": "How does a posterior predictive check differ?", "short_answer": "It uses fitted posterior parameters and compares replicated data with observed data." }
+    ],
+    "code": null,
+    "references": [{ "title": "Posterior and Prior Predictive Checks", "publisher": "Stan User's Guide", "url": "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html", "retrieved_date": "2026-11-05" }],
+    "volatility": "Moderate",
+    "versions_checked": "Stan User's Guide, posterior and prior predictive checks accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": ["https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"],
+      "rederivation_agreement": true,
+      "rederivation_notes": ["Verified that prior predictive checks simulate from prior implications before fitting, distinct from posterior checks against observed data."],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": ["ds-check-bayesian-model-with-posterior-predictions"],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": { "fresher_level": null, "senior_level": null },
+    "content_tier": "complete-guide"
   }
 ]

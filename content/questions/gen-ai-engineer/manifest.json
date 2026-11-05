@@ -2,7 +2,7 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 53,
+  "itemCount": 56,
   "countsByTopic": {
     "Retrieval-augmented generation": 11,
     "Generative AI evaluation": 3,
@@ -18,7 +18,7 @@
     "Embedding representations": 3,
     "Rate limits and retries": 1,
     "Long-context reliability": 1,
-    "Function calling and tool orchestration": 2,
+    "Function calling and tool orchestration": 3,
     "Grounded generation and abstention": 1,
     "Hybrid retrieval evaluation": 1,
     "Token budgeting and counting": 1,
@@ -32,25 +32,27 @@
     "Vision input fidelity and cost": 1,
     "Realtime API turn control": 1,
     "Pairwise judge position consistency": 1,
-    "Parameter-efficient fine-tuning with LoRA": 2
+    "Parameter-efficient fine-tuning with LoRA": 2,
+    "Speculative decoding and inference speedups": 1,
+    "Multimodal retrieval-augmented generation": 1
   },
   "countsByLevel": {
-    "L2": 27,
-    "L3": 26
+    "L2": 28,
+    "L3": 28
   },
   "countsByType": {
-    "scenario": 16,
-    "concept": 7,
+    "scenario": 18,
+    "concept": 8,
     "trade-off": 11,
     "debugging": 18,
     "design": 1
   },
   "status": {
-    "schemaValid": 53,
-    "sourcesVerified": 53,
-    "rederived": 53,
+    "schemaValid": 56,
+    "sourcesVerified": 56,
+    "rederived": 56,
     "codeExecuted": 0,
-    "expertReviewPending": 53
+    "expertReviewPending": 56
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -418,6 +420,27 @@
       "expertReview": "pending"
     },
     "genai-distinguish-qlora-base-quantization-from-adapter-training": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-verify-speculative-decoding-tradeoffs": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-sequence-dependent-tool-calls": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-preserve-visual-evidence-in-multimodal-rag": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

@@ -248,7 +248,7 @@
     },
     {
       "topic": "Function calling and tool orchestration",
-      "subtopics": ["application-side execution", "argument validation", "authorization and side-effect controls", "correlating parallel tool results"],
+      "subtopics": ["application-side execution", "argument validation", "authorization and side-effect controls", "correlating parallel tool results", "dependency-aware sequencing"],
       "sources": [{
         "title": "Function calling",
         "publisher": "OpenAI API documentation",
@@ -455,6 +455,32 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-05",
         "versions_checked": "arXiv:2305.14314 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Speculative decoding and inference speedups",
+      "subtopics": ["draft-token proposals", "target-model verification", "acceptance-dependent latency"],
+      "sources": [{
+        "title": "Fast Inference from Transformers via Speculative Decoding",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2211.17192v2",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2211.17192v2 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Multimodal retrieval-augmented generation",
+      "subtopics": ["text summaries versus native image retrieval", "visual evidence preservation", "page-level provenance"],
+      "sources": [{
+        "title": "Comparison of Text-Based and Image-Based Retrieval in Modern Multimodal Retrieval Augmented Generation Large Language Model Systems",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2511.16654v2",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2511.16654v2 accessed 2026-11-05"
       }]
     }
   ]

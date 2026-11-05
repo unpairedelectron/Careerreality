@@ -4194,5 +4194,77 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-budget-memory-for-mixed-precision-adam-training",
+    "bank": "ai-ml-engineer",
+    "topic": "Training memory accounting",
+    "subtopic": "Weights, gradients, optimizer states, and activations",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A model fits on a GPU for inference but runs out of memory during mixed-precision AdamW training. Which memory components are missing from a weights-only estimate?",
+    "what_is_assessed": "Whether the candidate accounts for training-only states and activations instead of estimating memory from parameter weights alone.",
+    "short_answer": "Include gradients, Adam's first- and second-moment states, saved forward activations, and temporary or framework-specific buffers in addition to model weights. A published rule of thumb for typical mixed-precision AdamW is about 18 bytes per parameter plus activation memory, but the actual requirement depends on implementation and workload.",
+    "deep_explanation": "The cited model-memory guide separates weights, optimizer states, gradients, saved activations, temporary buffers, and other functionality-specific allocations. It estimates a typical mixed-precision AdamW setup at 18 bytes per parameter before activations, but this is not a universal guarantee. Batch size, sequence length, implementation, optimizer precision, and transient workspaces affect the measured peak.",
+    "strong_answer_signals": [
+      "Names optimizer moments and gradients as additional persistent states.",
+      "Includes saved activations and temporary buffers.",
+      "Treats bytes-per-parameter figures as estimates rather than exact limits."
+    ],
+    "weak_answer_signals": [
+      "Estimates training memory from weights alone.",
+      "Presents one byte-per-parameter figure as universal."
+    ],
+    "common_mistakes": [
+      "Forgetting optimizer state when comparing AdamW training with inference.",
+      "Ignoring activation memory that scales with batch and sequence dimensions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What accounts for AdamW optimizer-state memory?",
+        "short_answer": "The optimizer's first- and second-moment tensors."
+      },
+      {
+        "question": "Why can actual peak memory exceed a parameter-based estimate?",
+        "short_answer": "Activations, temporary workspaces, allocator behavior, and implementation details add memory."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Model training anatomy",
+        "publisher": "Hugging Face Transformers documentation",
+        "url": "https://huggingface.co/docs/transformers/v4.50.0/model_memory_anatomy",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Transformers v4.50.0 documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://huggingface.co/docs/transformers/v4.50.0/model_memory_anatomy"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the guide's memory categories and qualified 18 bytes per parameter as a typical mixed-precision AdamW estimate plus activations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-use-gradient-accumulation-for-memory-limited-batches"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

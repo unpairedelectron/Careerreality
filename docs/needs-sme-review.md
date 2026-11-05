@@ -150,6 +150,9 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ds-estimate-uncertainty-for-ratio-experiment-metric` — Ratio metrics in online experiments / Joint numerator-denominator uncertainty: An experiment's primary metric is total clicks divided by total impressions. The analyst computes separate confidence intervals for clicks and impressions, then divides their endpoints. What should change?
 - `ds-choose-bounded-interval-for-small-binomial-proportion` — Binomial proportion confidence intervals / Limitations of the Wald interval: A small binomial sample has a proportion near zero, and the normal-approximation confidence interval extends below zero. What should you do?
 - `ds-avoid-individual-inference-from-ecological-data` — Ecological inference and levels of analysis / Aggregate associations versus individual relationships: A county-level analysis finds that areas with higher average education have lower disease rates. Can you conclude that individuals with more education had lower disease risk?
+- `ds-nest-cross-validation-around-model-selection` — Machine learning evaluation / Nested cross-validation for model selection: You tune hyperparameters by cross-validation and report the best score from that same search as expected generalization performance. What is the risk, and how can you estimate performance more honestly?
+- `ds-report-restricted-mean-survival-when-ph-fails` — Survival analysis / Restricted mean survival time under non-proportional hazards: A proportional-hazards diagnostic raises concerns and one hazard ratio may hide changing treatment effects over time. What complementary measure could you report?
+- `ds-account-for-few-clusters-in-trial-inference` — Cluster-randomized trial design / Small-cluster degrees of freedom: A cluster-randomized trial has many participants but only a few clusters per arm. Why can participant-level large-sample standard errors be misleading, and what should you consider?
 
 ## AI/ML Engineer
 
@@ -212,6 +215,7 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `ml-shadow-test-new-model-without-serving-its-output` — Model shadow testing / Mirrored production traffic without user-facing responses: A new model passed offline evaluation, but you want to measure its operational behavior on live inputs without changing user-visible predictions. What rollout pattern fits?
 - `ml-use-per-channel-scales-for-uneven-weight-ranges` — Quantization granularity / Per-channel versus per-tensor quantization: A tensor has channels with very different value ranges. Why might per-channel quantization preserve more detail than per-tensor quantization?
 - `ml-select-groupnorm-for-small-batches` — Normalization for small-batch training / Group statistics and channel divisibility: A vision model must train with tiny per-device batches, making batch statistics unstable. What does GroupNorm change, and what configuration constraint must you check?
+- `ml-budget-memory-for-mixed-precision-adam-training` — Training memory accounting / Weights, gradients, optimizer states, and activations: A model fits on a GPU for inference but runs out of memory during mixed-precision AdamW training. Which memory components are missing from a weights-only estimate?
 
 ## Generative AI Engineer
 
@@ -268,6 +272,9 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `genai-diagnose-pairwise-judge-position-bias` — Pairwise judge position consistency / Order-swap diagnostics for LLM evaluators: A pairwise LLM judge picks answer A when it appears first, then picks answer B when the same two answers are swapped. What does this indicate, and how should you test the evaluator?
 - `genai-explain-lora-parameter-efficient-adaptation` — Parameter-efficient fine-tuning with LoRA / Frozen base weights and low-rank updates: You need task-specific adaptation of a large language model but cannot afford to train and store a full copy of all its weights. How does LoRA help?
 - `genai-distinguish-qlora-base-quantization-from-adapter-training` — Parameter-efficient fine-tuning with LoRA / QLoRA quantized base weights and trainable adapters: A frozen model still does not fit in memory for LoRA fine-tuning. What does QLoRA change, and which parameters remain trainable?
+- `genai-verify-speculative-decoding-tradeoffs` — Speculative decoding and inference speedups / Draft proposals and target-model verification: How can speculative decoding reduce autoregressive latency without changing the target model's output distribution, and what determines whether it is faster?
+- `genai-sequence-dependent-tool-calls` — Function calling and tool orchestration / Sequencing calls with result dependencies: A model response contains two tool calls, but the second operation needs a value that only the first tool can return. Should the application run both calls in parallel?
+- `genai-preserve-visual-evidence-in-multimodal-rag` — Multimodal retrieval-augmented generation / Text summaries versus native visual retrieval: A RAG system answers questions about charts by retrieving only text captions generated from each page image. What information can this design lose, and what should you evaluate?
 
 ## Agentic AI Engineer
 
@@ -324,4 +331,5 @@ All entries below are drafts. No human reviewer or approval is recorded. AI-assi
 - `agentic-send-negotiated-version-header-over-http` — MCP HTTP protocol version header / Negotiated version on subsequent requests: An MCP client initializes successfully over HTTP, but later requests are rejected. Which protocol-version header should it check?
 - `agentic-do-not-assume-mcp-sse-stream-resumption` — MCP Streamable HTTP SSE recovery / No Last-Event-ID stream resumption: A client loses an MCP Streamable HTTP SSE response and reconnects with `Last-Event-ID` to replay missed events. Is that recovery strategy supported?
 - `agentic-validate-mcp-token-audience-and-block-passthrough` — MCP token audience validation / Preventing token passthrough to downstream APIs: An MCP server accepts a client's access token and forwards the same token to a downstream API. What security boundary is missing?
+- `agentic-default-unspecified-mcp-elicitation-mode-to-form` — MCP elicitation / Backward-compatible mode handling: A client receives an MCP elicitation request with no `mode` field. How should it interpret the request?
 
