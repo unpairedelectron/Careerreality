@@ -8,6 +8,7 @@ export const primaryRoutes: NavigationRoute[] = [
   { path: "/guides", title: "Career Guides for India" },
   { path: "/layoffs", title: "Layoff Support Hub for India" },
   { path: "/companies", title: "Verify an Indian Employer and Job Offer | CareerReality" },
+  { path: "/interview-guides", title: "Interview Guides" },
 ];
 
 export const searchRoute: NavigationRoute = {
