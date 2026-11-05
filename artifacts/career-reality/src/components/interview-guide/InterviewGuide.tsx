@@ -201,7 +201,7 @@ export function InterviewGuide({
   return (
     <main className="interview-guide" data-testid={`interview-guide-${roleSlug}`}>
       <header className="ig-header">
-        <div className="ig-topline"><span className="ig-brand-mark">CR</span><span>CareerReality <b>/</b> Interview workspace</span><span className="ig-live-label"><i /> Evidence-led study</span></div>
+        <div className="ig-topline"><span className="ig-brand-mark">CR</span><span>CareerReality <b>/</b> Interview workspace</span><a className="ig-library-link" href="/interview-guides" data-testid="link-interview-guides">All role guides <ArrowRight size={13} aria-hidden="true" /></a><span className="ig-live-label"><i /> Evidence-led study</span></div>
         <div className="ig-hero">
           <div>
             <p className="ig-eyebrow">COMPLETE INTERVIEW GUIDE <span>·</span> ROLE STUDY</p>

@@ -1140,7 +1140,8 @@ function renderStaticPage(
   const excerpt = content.lead === meta.description || content.sections.some((section) => section.body === meta.description)
     ? ""
     : `<p class="snapshot-excerpt">${escapeHtml(meta.description)}</p>`;
-  const body = `<div class="snapshot-shell${route === "/" ? " snapshot-home" : ""}">
+  const isInterviewGuide = route === "/interview-guides" || route.startsWith("/interview-guides/");
+  const body = `<div class="snapshot-shell${route === "/" ? " snapshot-home" : ""}${isInterviewGuide ? " snapshot-interview-guide" : ""}${route === "/interview-guides" ? " snapshot-interview-hub" : ""}">
     ${renderSnapshotBreadcrumbs(breadcrumbs)}
     <header class="snapshot-header">
       <p class="snapshot-kicker">${escapeHtml(meta.eyebrow)}</p>
@@ -1175,6 +1176,28 @@ function renderStaticPage(
   html = replaceOrAppend(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/i, renderStaticSchemas(route, meta, canonical));
   html = html.replace(/<div id="root"><\/div>/i, `<div id="root">${body}</div>`);
   html = html.replace("</head>", `<style>
+      .snapshot-shell.snapshot-interview-guide{max-width:1120px;color:#202b2b;background:radial-gradient(ellipse at 92% 0%,rgba(31,111,94,.07),transparent 30rem),#fbfaf6}
+      .snapshot-interview-guide .snapshot-header{padding:32px 0 28px;border-bottom:1px solid #d9ded8}
+      .snapshot-interview-guide .snapshot-kicker{color:#176f5e;font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+      .snapshot-interview-guide h1{max-width:13ch;margin:18px 0;font:500 clamp(42px,7vw,76px)/.98 Georgia,serif;letter-spacing:-.055em;text-wrap:balance}
+      .snapshot-interview-guide .snapshot-excerpt{max-width:68ch;margin:0;color:#5d6966;font-size:17px;line-height:1.75}
+      .snapshot-interview-guide .snapshot-lead{max-width:70ch;margin:28px 0;padding:18px 22px;border-left:2px solid #c48a54;background:rgba(196,138,84,.06);font:400 clamp(18px,2.1vw,22px)/1.55 Georgia,serif}
+      .snapshot-interview-guide main>section{margin-top:30px}
+      .snapshot-interview-guide main>section>h2{margin:0 0 16px;font:500 clamp(25px,3.2vw,36px)/1.1 Georgia,serif;letter-spacing:-.035em}
+      .snapshot-interview-guide main>section>p{max-width:72ch;color:#53615e;font-size:15px;line-height:1.75}
+      .snapshot-interview-guide .snapshot-question-topic{margin-top:26px;padding-top:22px;border-top:1px solid #d9ded8}
+      .snapshot-interview-guide .snapshot-question-topic>h3{margin:0 0 10px;color:#176f5e;font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase}
+      .snapshot-interview-guide .snapshot-question-topic ol{margin:0;padding:0;list-style:none}
+      .snapshot-interview-guide .snapshot-question-topic li{margin:0;padding:0;border-bottom:1px solid #e1e4df}
+      .snapshot-interview-guide .snapshot-question-topic article{padding:20px 12px;font:inherit}
+      .snapshot-interview-guide .snapshot-question-topic h4{max-width:68ch;margin:0 0 10px;color:#202b2b;font:500 clamp(19px,2.2vw,25px)/1.28 Georgia,serif}
+      .snapshot-interview-guide .snapshot-question-meta{margin:0 0 8px;color:#697572;font:600 10px/1.5 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
+      .snapshot-interview-guide .snapshot-question-topic article p:last-child{max-width:72ch;margin:0;color:#53615e;font-size:14px;line-height:1.7}
+      .snapshot-interview-hub main>section:first-of-type ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px;margin:0;padding:0;list-style:none}
+      .snapshot-interview-hub main>section:first-of-type li{padding:18px;border:1px solid #d9ded8;border-radius:8px;background:rgba(255,255,255,.72);font-size:13px;line-height:1.65}
+      .snapshot-interview-hub main>section:first-of-type li a{display:block;margin-bottom:7px;color:#176f5e;font:600 20px/1.2 Georgia,serif}
+      .snapshot-interview-guide .snapshot-related a{color:#176f5e}
+      @media(max-width:640px){.snapshot-shell.snapshot-interview-guide{padding:32px 18px}.snapshot-interview-guide .snapshot-header{padding-top:20px}.snapshot-interview-guide .snapshot-question-topic article{padding:16px 8px}.snapshot-interview-hub main>section:first-of-type ul{grid-template-columns:1fr}}
      .snapshot-shell{max-width:860px;margin:0 auto;padding:64px 24px;font-family:system-ui,sans-serif;color:#26313a}
      .snapshot-breadcrumbs{margin-bottom:28px;font-size:12px}.snapshot-breadcrumbs ol{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}.snapshot-breadcrumbs li{display:flex;align-items:center;gap:8px}.snapshot-breadcrumbs a{color:#176f5e;font-weight:700}.snapshot-breadcrumbs span[aria-current="page"]{color:#66727a}
     .snapshot-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#176f5e}

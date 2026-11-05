@@ -127,3 +127,108 @@
 @media (prefers-reduced-motion: reduce) {
   .ig-role-link, .ig-arrow { transition: none; }
 }
+
+/* The directory is the cover sheet for the same editorial study workspace. */
+.ig-redesign {
+  --ink: hsl(var(--foreground));
+  --paper: hsl(var(--background));
+  --teal: hsl(var(--primary));
+  --quiet: hsl(var(--muted-foreground));
+  --line: hsl(var(--border));
+  background:
+    radial-gradient(ellipse at 92% 2%, hsl(var(--primary) / .075), transparent 30rem),
+    linear-gradient(180deg, hsl(var(--secondary) / .16), transparent 31rem),
+    var(--paper);
+}
+.ig-topbar { border-bottom-color: hsl(var(--border) / .72); }
+.ig-brand-mark {
+  border-radius: 7px;
+  background: hsl(var(--primary) / .075);
+}
+.ig-main { padding-top: clamp(3.5rem, 7vw, 5.8rem); }
+.ig-redesign .ig-intro { gap: clamp(2.5rem, 7vw, 6.5rem); margin-bottom: clamp(2.7rem, 5vw, 4.2rem); }
+.ig-redesign .ig-eyebrow { margin-bottom: 1.2rem; }
+.ig-title { max-width: 12ch; font-size: clamp(3.3rem, 6.4vw, 5.3rem); line-height: .94; }
+.ig-deck { max-width: 36rem; margin-top: 1.6rem; font-size: .95rem; line-height: 1.8; }
+.ig-edition {
+  padding: 1rem 0 1rem 1.15rem;
+  border-left-width: 2px;
+  border-left-color: hsl(var(--accent) / .48);
+  background: linear-gradient(90deg, hsl(var(--accent) / .045), transparent);
+  font-size: .75rem;
+}
+.ig-edition strong { font-size: .8rem; }
+.ig-edition span { display: block; margin-top: .45rem; font-size: .69rem; }
+.ig-directory-head {
+  padding-block: 1rem;
+  border-top-color: hsl(var(--border) / .85);
+}
+.ig-directory-title { font-size: .8rem; }
+.ig-directory-meta { letter-spacing: .06em; }
+.ig-role-list { gap: .75rem; }
+.ig-role-link {
+  min-height: 7.5rem;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: .55rem;
+  background: hsl(var(--card) / .76);
+  box-shadow: 0 3px 14px hsl(var(--foreground) / .018);
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.ig-role-link:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / .48);
+  background: hsl(var(--card));
+  box-shadow: 0 12px 28px hsl(var(--foreground) / .055);
+}
+.ig-role-index {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid hsl(var(--accent) / .24);
+  border-radius: 50%;
+  background: hsl(var(--accent) / .05);
+}
+.ig-role-name { font-size: 1.05rem; }
+.ig-role-note { max-width: 30rem; font-size: .72rem; line-height: 1.6; }
+.ig-role-tail { gap: 1rem; }
+.ig-count b { font-size: 1.55rem; }
+.ig-arrow { width: 1rem; height: 1rem; }
+.ig-foot { margin-top: 2rem; padding-top: 1.15rem; }
+.ig-disclaimer { font-size: .7rem; }
+.ig-bottom { padding-top: 1.3rem; font-size: .56rem; }
+.ig-redesign a:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .ig-main { padding-top: 2.9rem; }
+  .ig-redesign .ig-intro { margin-bottom: 2.5rem; }
+  .ig-title { max-width: 10ch; }
+  .ig-deck { max-width: 33rem; }
+  .ig-edition { padding-block: .65rem; }
+  .ig-role-list { gap: .6rem; }
+  .ig-role-link {
+    min-height: 6.5rem;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    padding: 1rem .9rem;
+  }
+  .ig-role-index { width: 1.75rem; height: 1.75rem; font-size: .61rem; }
+}
+@media (max-width: 390px) {
+  .ig-shell { width: calc(100% - 28px); }
+  .ig-top-note { max-width: 11rem; text-align: right; line-height: 1.5; }
+  .ig-role-link { grid-template-columns: 1.7rem minmax(0, 1fr) auto; gap: .65rem; padding-inline: .7rem; }
+  .ig-role-tail { gap: .55rem; }
+  .ig-role-name { font-size: .9rem; }
+  .ig-role-note { font-size: .66rem; }
+  .ig-count b { font-size: 1.3rem; }
+  .ig-arrow { width: .85rem; height: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ig-role-link, .ig-arrow { transition: none; }
+}
