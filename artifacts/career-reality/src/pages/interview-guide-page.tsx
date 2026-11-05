@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { InterviewGuide } from "@/components/interview-guide/InterviewGuide";
 import { InterviewGuideChooser } from "@/components/interview-guide/InterviewGuideChooser";
+import { PublicFooter } from "@/components/shared/public-footer";
 import type { InterviewGuideQuestion } from "@/components/interview-guide/types";
 import dataEngineerItems from "../../../../content/questions/data-engineer/items.json";
 import dataScientistItems from "../../../../content/questions/data-scientist/items.json";
@@ -94,7 +95,12 @@ export function InterviewGuidePage() {
         note: topicNotes[roleSlug],
       };
     });
-    return <InterviewGuideChooser roles={chooserRoles} />;
+    return (
+      <>
+        <InterviewGuideChooser roles={chooserRoles} />
+        <PublicFooter />
+      </>
+    );
   }
 
   return (
@@ -132,6 +138,7 @@ export function InterviewGuidePage() {
       onCompletedQuestionIdsChange={(completed) => save({ ...progress, completed })}
       onReadinessChecksChange={(readiness) => save({ ...progress, readiness })}
     />
+     <PublicFooter />
     </>
   );
 }
