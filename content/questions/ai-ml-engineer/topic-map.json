@@ -95,7 +95,7 @@
     },
     {
       "topic": "Distributed training",
-      "subtopics": ["process groups", "multi-process training", "gradient synchronization", "unused parameters in conditional models", "NCCL collective hang diagnostics", "epoch-aware distributed shuffling", "DistributedSampler padding versus dropping"],
+      "subtopics": ["process groups", "multi-process training", "gradient synchronization", "unused parameters in conditional models", "NCCL collective hang diagnostics", "epoch-aware distributed shuffling", "DistributedSampler padding versus dropping", "gradient views into all-reduce buckets", "static graph with activation checkpointing"],
       "sources": [{
         "title": "Getting Started with Distributed Data Parallel",
         "publisher": "PyTorch documentation",
@@ -112,6 +112,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "PyTorch DistributedDataParallel documentation retrieved 2026-11-04"
+      }, {
+        "title": "DistributedDataParallel",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.parallel.DistributedDataParallel.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 DistributedDataParallel documentation accessed 2026-11-05"
       }, {
         "title": "Distributed communication package",
         "publisher": "PyTorch documentation",
@@ -344,7 +352,7 @@
     },
     {
       "topic": "Data loading and throughput",
-      "subtopics": ["persistent DataLoader worker lifecycle", "worker memory and dataset state", "IterableDataset worker sharding", "out-of-order DataLoader delivery"],
+      "subtopics": ["persistent DataLoader worker lifecycle", "worker memory and dataset state", "IterableDataset worker sharding", "out-of-order DataLoader delivery", "weighted sampling with replacement"],
       "sources": [{
         "title": "torch.utils.data",
         "publisher": "PyTorch documentation",
@@ -430,7 +438,7 @@
     },
     {
       "topic": "CUDA benchmarking",
-      "subtopics": ["asynchronous execution and timing", "CUDA events", "device synchronization"],
+      "subtopics": ["asynchronous execution and timing", "CUDA events", "device synchronization", "CUDA graph capture and replay"],
       "sources": [{
         "title": "CUDA semantics",
         "publisher": "PyTorch documentation",
@@ -634,6 +642,152 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-05",
         "versions_checked": "Transformers v4.50.0 documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Model deployment and rollout",
+      "subtopics": ["canary traffic and rollback decisions", "shadow testing without serving candidate responses"],
+      "sources": [{
+        "title": "Canary Deployments to Cloud Run",
+        "publisher": "Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/deploy/docs/deployment-strategies/canary/cloud-run",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Google Cloud canary deployment documentation retrieved 2026-11-04; rollout mechanics are platform-specific"
+      }, {
+        "title": "Create a shadow test",
+        "publisher": "Amazon SageMaker AI documentation",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-create.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Amazon SageMaker AI shadow-testing documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Imbalanced classification training",
+      "subtopics": ["class-weighted cross entropy", "evaluation on target prevalence"],
+      "sources": [{
+        "title": "CrossEntropyLoss",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.CrossEntropyLoss.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 CrossEntropyLoss documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Training-serving skew and prediction drift",
+      "subtopics": ["point-in-time feature retrieval", "future-feature leakage"],
+      "sources": [{
+        "title": "Point-in-time joins",
+        "publisher": "Feast documentation",
+        "url": "https://docs.feast.dev/getting-started/concepts/point-in-time-joins",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Feast point-in-time joins documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Recommendation with implicit feedback",
+      "subtopics": ["negative sampling from unobserved interactions", "pairwise Bayesian personalized ranking"],
+      "sources": [{
+        "title": "Label of data",
+        "publisher": "RecBole documentation",
+        "url": "https://recbole.io/docs/user_guide/data/label_of_data.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "RecBole 1.2.1 documentation verified via official search excerpt on 2026-11-05"
+      }, {
+        "title": "BPR: Bayesian Personalized Ranking from Implicit Feedback",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/1205.2618",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Low",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Original BPR paper, arXiv:1205.2618, accessed via arXiv record on 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Multi-label classification",
+      "subtopics": ["independent label logits", "binary cross entropy with logits", "per-label threshold selection"],
+      "sources": [{
+        "title": "BCEWithLogitsLoss",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BCEWithLogitsLoss.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 BCEWithLogitsLoss documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Group-aware model validation",
+      "subtopics": ["preventing entity leakage across splits", "group and time split alignment"],
+      "sources": [{
+        "title": "Cross-validation: evaluating estimator performance",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "scikit-learn cross-validation documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Preprocessing pipeline consistency",
+      "subtopics": ["fit transformations on training data only", "reuse fitted preprocessing at serving"],
+      "sources": [{
+        "title": "Common pitfalls and recommended practices",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/common_pitfalls",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "scikit-learn common pitfalls documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Target encoding and leakage controls",
+      "subtopics": ["cross-fitting training target statistics", "unseen-category and smoothing behavior"],
+      "sources": [{
+        "title": "TargetEncoder",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.TargetEncoder.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "scikit-learn 1.8 TargetEncoder documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Exported-model parity validation",
+      "subtopics": ["numerical comparison across runtimes", "representative and dynamic input shapes"],
+      "sources": [{
+        "title": "torch.onnx",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/onnx.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 ONNX documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Validation integrity for augmented data",
+      "subtopics": ["split source examples before augmentation", "grouping related views"],
+      "sources": [{
+        "title": "Common pitfalls and recommended practices",
+        "publisher": "scikit-learn documentation",
+        "url": "https://scikit-learn.org/stable/common_pitfalls",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "scikit-learn common-pitfalls guidance on splitting before preprocessing accessed 2026-11-05"
       }]
     }
   ]

@@ -432,7 +432,7 @@
     },
     {
       "topic": "MCP Streamable HTTP session lifecycle",
-      "subtopics": ["session ID handling", "404 recovery", "secure session management"],
+      "subtopics": ["session ID handling", "404 recovery", "secure session management", "authorization independent of session identifiers"],
       "sources": [{
         "title": "Transports",
         "publisher": "Model Context Protocol specification",
@@ -441,6 +441,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "MCP specification version 2025-11-25"
+      }, {
+        "title": "Security Best Practices",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2025-06-18 security guidance accessed 2026-11-05"
       }]
     },
     {
@@ -532,6 +540,118 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-05",
         "versions_checked": "MCP security best practices, specification version 2026-07-28"
+      }]
+    },
+    {
+      "topic": "MCP tool content blocks",
+      "subtopics": ["mixed content types", "type-aware rendering", "content annotations"],
+      "sources": [{
+        "title": "Tools",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2025-06-18 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Trace privacy and data minimization",
+      "subtopics": ["redacting generation and function span data", "retaining safe operational metadata"],
+      "sources": [{
+        "title": "Tracing",
+        "publisher": "OpenAI Agents SDK documentation",
+        "url": "https://openai.github.io/openai-agents-js/guides/tracing",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI Agents SDK JavaScript tracing guide accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Agent memory scope",
+      "subtopics": ["thread state versus cross-session memory", "namespaced long-term memory"],
+      "sources": [{
+        "title": "Memory overview",
+        "publisher": "LangChain documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "LangGraph memory overview accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "MCP OAuth client security",
+      "subtopics": ["PKCE for authorization-code protection", "S256 challenge method", "refresh-token rotation for public clients", "HTTPS or localhost redirect URIs"],
+      "sources": [{
+        "title": "Authorization Security Considerations",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2026-07-28 authorization security considerations accessed 2026-11-05"
+      }, {
+        "title": "Authorization Security Considerations",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2026-07-28 authorization security considerations accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Parallel agent state management",
+      "subtopics": ["reducers for concurrent state updates", "deterministic merge semantics"],
+      "sources": [{
+        "title": "INVALID_CONCURRENT_GRAPH_UPDATE",
+        "publisher": "LangChain documentation",
+        "url": "https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "LangGraph concurrent-update guidance accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "MCP Streamable HTTP server-initiated streams",
+      "subtopics": ["optional GET SSE stream support", "405 behavior when streams are unavailable"],
+      "sources": [{
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2025-11-25 Streamable HTTP transport accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "MCP SSE message routing",
+      "subtopics": ["responses on server-initiated event streams", "resumption exception"],
+      "sources": [{
+        "title": "Transports",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2025-11-25 Streamable HTTP transport accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "MCP sampling context capability",
+      "subtopics": ["capability-gated context inclusion", "includeContext default and deprecation"],
+      "sources": [{
+        "title": "Sampling",
+        "publisher": "Model Context Protocol specification",
+        "url": "https://modelcontextprotocol.io/specification/2025-11-25/client/sampling",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "MCP specification version 2025-11-25 sampling capability guidance accessed 2026-11-05"
       }]
     }
   ]

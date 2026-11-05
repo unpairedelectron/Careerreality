@@ -3,7 +3,7 @@
   "topics": [
     {
       "topic": "Retrieval-augmented generation",
-      "subtopics": ["retriever and generator roles", "retrieval evaluation", "grounded answers", "hit rate and mean reciprocal rank", "chunk size and overlap", "metadata filtering and access boundaries", "vector-store deletion consistency", "asynchronous vector-store ingestion", "semantic and keyword search", "hybrid ranking controls", "two-stage candidate retrieval and reranking"],
+      "subtopics": ["retriever and generator roles", "retrieval evaluation", "grounded answers", "hit rate and mean reciprocal rank", "chunk size and overlap", "metadata filtering and access boundaries", "vector-store deletion consistency", "asynchronous vector-store ingestion", "semantic and keyword search", "hybrid ranking controls", "two-stage candidate retrieval and reranking", "table structure preservation", "asymmetric query and passage encoders", "query rewriting after retrieval failure", "multi-step query decomposition"],
       "sources": [
         {
           "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
@@ -58,6 +58,42 @@
           "volatility": "Moderate",
           "last_verified": "2026-11-04",
           "versions_checked": "Sentence Transformers documentation retrieved 2026-11-04"
+        },
+        {
+          "title": "Benchmarking RAG on tables",
+          "publisher": "LangChain",
+          "url": "https://www.langchain.com/blog/benchmarking-rag-on-tables",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "LangChain table-RAG benchmark article accessed 2026-11-05"
+        },
+        {
+          "title": "Increase search relevance",
+          "publisher": "Pinecone documentation",
+          "url": "https://docs.pinecone.io/guides/optimize/increase-relevance",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "Pinecone relevance guidance accessed 2026-11-05"
+        },
+        {
+          "title": "Build a custom RAG agent with LangGraph",
+          "publisher": "LangChain documentation",
+          "url": "https://docs.langchain.com/oss/python/langgraph/agentic-rag",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "LangGraph agentic RAG documentation accessed 2026-11-05"
+        },
+        {
+          "title": "Query Transform Cookbook",
+          "publisher": "LlamaIndex documentation",
+          "url": "https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/",
+          "retrieved_date": "2026-11-05",
+          "volatility": "Moderate",
+          "last_verified": "2026-11-05",
+          "versions_checked": "LlamaIndex query transformation cookbook accessed 2026-11-05"
         }
       ]
     },
@@ -115,7 +151,7 @@
     },
     {
       "topic": "Latency and inference efficiency",
-      "subtopics": ["output length", "sequential requests", "model choice and quality"],
+      "subtopics": ["output length", "sequential requests", "model choice and quality", "time to first token versus inter-token latency"],
       "sources": [{
         "title": "Latency optimization",
         "publisher": "OpenAI API documentation",
@@ -124,6 +160,14 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API latency guidance retrieved 2026-11-04"
+      }, {
+        "title": "Metrics",
+        "publisher": "NVIDIA NIM Benchmarking documentation",
+        "url": "https://docs.nvidia.com/nim/benchmarking/llm/metrics",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "NVIDIA NIM LLM benchmarking metrics documentation accessed 2026-11-05"
       }]
     },
     {
@@ -188,7 +232,7 @@
     },
     {
       "topic": "Conversation context management",
-      "subtopics": ["context compaction", "preserved task state", "continuation contracts"],
+      "subtopics": ["context compaction", "preserved task state", "continuation contracts", "Responses API input truncation policy"],
       "sources": [{
         "title": "Compaction",
         "publisher": "OpenAI API documentation",
@@ -197,6 +241,14 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI Compaction guide retrieved 2026-11-04"
+      }, {
+        "title": "Responses API reference",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/api-reference/responses/input_item_object_input_item",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI Responses API reference accessed 2026-11-05"
       }]
     },
     {
@@ -222,7 +274,7 @@
     },
     {
       "topic": "Rate limits and retries",
-      "subtopics": ["Retry-After", "exponential backoff with jitter", "bounded retries", "quota and billing errors"],
+      "subtopics": ["Retry-After", "exponential backoff with jitter", "bounded retries", "quota and billing errors", "independent request and token budgets"],
       "sources": [{
         "title": "Rate limits",
         "publisher": "OpenAI API documentation",
@@ -231,6 +283,14 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI API rate-limit guide retrieved 2026-11-04"
+      }, {
+        "title": "Rate limits",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/rate-limits",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI API rate-limit guide accessed 2026-11-05"
       }]
     },
     {
@@ -391,7 +451,7 @@
     },
     {
       "topic": "Vision input fidelity and cost",
-      "subtopics": ["image detail selection", "model-specific resizing", "visual quality versus token cost"],
+      "subtopics": ["image detail selection", "model-specific resizing", "visual quality versus token cost", "small-text fidelity and focused crops"],
       "sources": [{
         "title": "Images and vision",
         "publisher": "OpenAI API documentation",
@@ -400,6 +460,14 @@
         "volatility": "Fast-moving",
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI Images and vision guide retrieved 2026-11-04"
+      }, {
+        "title": "Images and vision",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/images-vision",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI Images and vision guide accessed 2026-11-05"
       }]
     },
     {
@@ -481,6 +549,32 @@
         "volatility": "Stable",
         "last_verified": "2026-11-05",
         "versions_checked": "arXiv:2511.16654v2 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Retrieval result fusion",
+      "subtopics": ["deduplication across retrievers", "reciprocal-rank fusion", "preserving source provenance"],
+      "sources": [{
+        "title": "Query fusion",
+        "publisher": "LlamaIndex documentation",
+        "url": "https://developers.llamaindex.ai/python/framework-api-reference/retrievers/query_fusion/",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "LlamaIndex query-fusion documentation verified via official search excerpt on 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Video generation workflows",
+      "subtopics": ["reference image establishes the initial frame", "prompting motion and shot details", "asynchronous render job status and content retrieval"],
+      "sources": [{
+        "title": "Video generation with Sora",
+        "publisher": "OpenAI API documentation",
+        "url": "https://platform.openai.com/docs/guides/video-generation",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI video-generation guide accessed 2026-11-05"
       }]
     }
   ]
