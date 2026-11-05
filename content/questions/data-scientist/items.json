@@ -4135,5 +4135,651 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-align-time-zero-to-avoid-immortal-time-bias",
+    "bank": "data-scientist",
+    "topic": "Target trial emulation and time zero",
+    "subtopic": "Eligibility, assignment, and follow-up alignment",
+    "level": "L3",
+    "type": "scenario",
+    "question": "In an observational cohort, patients are labeled treated if they start therapy during the next 30 days, but follow-up begins at eligibility. What bias should you investigate, and how can the design address it?",
+    "what_is_assessed": "Whether the candidate detects immortal time from future treatment classification and aligns the target-trial protocol's eligibility, assignment, and follow-up.",
+    "short_answer": "Investigate immortal time bias: patients classified as treated must remain alive and eligible until treatment starts, so the pre-treatment period can be incorrectly credited to the treated group. Align eligibility, treatment assignment, and follow-up start at time zero. If treatment can begin within a grace period, define that strategy explicitly and use a design and analysis that handles the grace period rather than classifying exposure using future information.",
+    "deep_explanation": "Target-trial emulation makes the causal protocol explicit, including eligibility, treatment strategies, assignment, outcome, and follow-up. The cited target-trial papers explain that follow-up should begin when the strategy is assigned and that using post-baseline events to define eligibility or exposure can create bias. When treatment can start within a grace period, approaches such as clone-censor-weight methods can represent the strategies and avoid assigning guaranteed event-free time to the treated group.",
+    "strong_answer_signals": [
+      "Identifies immortal time created by classifying exposure from future treatment initiation.",
+      "Aligns eligibility, assignment, and follow-up at time zero.",
+      "Defines and handles any treatment grace period explicitly."
+    ],
+    "weak_answer_signals": [
+      "Treats future treatment status as a baseline covariate without considering the time before initiation.",
+      "Assumes ordinary adjustment removes the design-induced bias."
+    ],
+    "common_mistakes": [
+      "Starting follow-up before a patient's treatment strategy is assigned.",
+      "Crediting pre-treatment survival time to the treated group.",
+      "Ignoring selection caused by requiring patients to survive until treatment."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can future treatment classification create immortal time?",
+        "short_answer": "The treated group must survive until initiation, so that pre-initiation time is guaranteed event-free by the classification rule."
+      },
+      {
+        "question": "What should be explicit when treatment can start within a window?",
+        "short_answer": "The treatment strategy and grace-period handling, with eligibility and follow-up anchored at a clearly defined time zero."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4832051/",
+        "retrieved_date": "2026-11-04"
+      },
+      {
+        "title": "Target Trial Emulation Using Hospital-Based Observational Data: Demonstration and Application in COVID-19",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10053871/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Open-access target-trial emulation papers accessed 2026-11-04.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4832051/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10053871/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that target-trial emulation aligns eligibility, treatment assignment, and follow-up, and that clone-censor-weight methods can address immortal time under defined treatment strategies."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-review-staggered-did-under-effect-heterogeneity",
+    "bank": "data-scientist",
+    "topic": "Staggered difference-in-differences",
+    "subtopic": "Two-way fixed effects under heterogeneous treatment effects",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A policy is adopted by different regions at different times, and its effect changes with exposure duration. What should you check before interpreting a single two-way fixed-effects difference-in-differences coefficient?",
+    "what_is_assessed": "Whether the candidate recognizes that staggered treatment timing and heterogeneous effects can make conventional two-way fixed-effects estimates combine problematic comparisons.",
+    "short_answer": "Check whether the two-way fixed-effects estimate combines already-treated groups as controls or uses negative weights. With staggered adoption and heterogeneous effects, its coefficient may not represent the intended average treatment effect. Define the target estimand and consider group-time ATT or another heterogeneity-robust estimator, while still assessing parallel trends and other design assumptions.",
+    "deep_explanation": "The cited methodological review explains that under treatment-effect heterogeneity, conventional two-way fixed-effects DiD can be written as a weighted average of multiple 2×2 comparisons, including comparisons that may be inappropriate for the target estimand and weights that can be negative. More recent DiD estimators target group-time effects or otherwise address heterogeneous treatment timing; their assumptions and interpretation should be stated rather than treating estimator choice as a substitute for design checks.",
+    "strong_answer_signals": [
+      "Names staggered treatment timing and heterogeneous effects as the concern.",
+      "Checks for already-treated controls and negative or unintended weights.",
+      "Defines an estimand and chooses an estimator designed for it.",
+      "Retains parallel-trends and no-anticipation checks where applicable."
+    ],
+    "weak_answer_signals": [
+      "Treats the two-way fixed-effects coefficient as an automatic average treatment effect.",
+      "Claims an alternative estimator removes the need for identifying assumptions."
+    ],
+    "common_mistakes": [
+      "Using already-treated cohorts as clean controls without examining the comparison.",
+      "Choosing an estimator by popularity instead of the target estimand and assumptions."
+    ],
+    "follow_ups": [
+      {
+        "question": "What can negative weights indicate in this setting?",
+        "short_answer": "The regression coefficient can combine group-time effects in a way that does not represent the intended average and may be driven by unintended comparisons."
+      },
+      {
+        "question": "Does a heterogeneity-robust estimator remove the need for parallel trends?",
+        "short_answer": "No. The relevant estimator still requires its own identifying assumptions, including an appropriate parallel-trends condition."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Advances in Difference-in-differences Methods for Policy Evaluation Research",
+        "publisher": "Epidemiology via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11305929/",
+        "retrieved_date": "2026-11-04"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Epidemiology 2024;35(5):628–637.",
+    "last_verified": "2026-11-04",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11305929/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that staggered adoption with heterogeneous treatment effects can produce negative weights and forbidden comparisons in conventional two-way fixed-effects DiD."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-fit-hurdle-model-with-zero-truncated-count-component",
+    "bank": "data-scientist",
+    "topic": "Count-data regression",
+    "subtopic": "Hurdle models and zero-truncated counts",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A team models whether a customer has any events separately from the number of events among customers with at least one. How does a hurdle count model represent these two stages?",
+    "what_is_assessed": "Whether the candidate understands the hurdle model's separate zero-versus-positive process and its truncated positive-count distribution.",
+    "short_answer": "It fits a binary component for zero versus positive counts, then fits a zero-truncated count distribution to observations greater than zero. The count component cannot generate additional zeros because it is truncated at zero. Choose this structure when the separate hurdle between no event and one-or-more events is substantively defensible, and assess fit for both parts.",
+    "deep_explanation": "Statsmodels describes a hurdle model as a binary model for zero versus greater than zero plus a zero-truncated count model for positive counts. The two parts can use different predictors and distributions. This is a model structure, not a default fix for every dataset with many zeros; compare it with plausible alternatives based on the data-generating process and validate the zero and positive-count predictions separately.",
+    "strong_answer_signals": [
+      "Names the binary zero-versus-positive component.",
+      "States that the positive-count distribution is zero-truncated.",
+      "Justifies separate stages with a plausible process and checks both components."
+    ],
+    "weak_answer_signals": [
+      "Uses an ordinary count distribution for the positive component without truncating its zero probability.",
+      "Selects a hurdle model solely because the observed data contain many zeros."
+    ],
+    "common_mistakes": [
+      "Confusing a hurdle model with a generic overdispersion correction.",
+      "Evaluating only total likelihood while ignoring calibration of the zero probability and positive counts."
+    ],
+    "follow_ups": [
+      {
+        "question": "Can the positive-count component generate zeros?",
+        "short_answer": "No. It uses a zero-truncated count distribution."
+      },
+      {
+        "question": "What does the binary component model?",
+        "short_answer": "The probability of zero versus one-or-more events."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Hurdle and truncated count models",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/examples/notebooks/generated/count_hurdle.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "statsmodels 0.15.0 documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://www.statsmodels.org/stable/examples/notebooks/generated/count_hurdle.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the hurdle model's binary zero-versus-positive component and zero-truncated positive-count component in the statsmodels documentation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-use-ipcw-for-horizon-specific-survival-brier-score",
+    "bank": "data-scientist",
+    "topic": "Survival analysis",
+    "subtopic": "Censoring-aware prediction error",
+    "level": "L3",
+    "type": "scenario",
+    "question": "You compare survival models with a Brier score at one year, but some subjects are censored before that horizon. How can you evaluate prediction error without inventing their one-year outcomes?",
+    "what_is_assessed": "Whether the candidate accounts for censoring in survival prediction metrics and checks the censoring model required by inverse-probability weighting.",
+    "short_answer": "Use an inverse-probability-of-censoring-weighted Brier score, with weights based on the estimated probability of remaining uncensored through the evaluation time. Do not label outcomes censored before one year as event-free or simply discard them without considering the resulting selection. The censoring distribution must be adequately specified, and extreme weights or poor support can make the estimate unstable.",
+    "deep_explanation": "For a fixed horizon, a subject censored before that time has an unknown event status. IPCW uses the censoring distribution to reweight observations whose status is observed, approximating the target prediction error under the relevant censoring assumptions. The cited methodological study notes that consistency depends on correctly specifying the censoring distribution, so the metric is not assumption-free; check model fit, support, and weight stability.",
+    "strong_answer_signals": [
+      "Uses an IPCW survival prediction metric for the fixed horizon.",
+      "Does not invent event status or ignore censoring without considering selection.",
+      "States that the censoring distribution must be estimated adequately and checks weight stability."
+    ],
+    "weak_answer_signals": [
+      "Counts everyone censored before the horizon as event-free.",
+      "Drops censored observations and assumes the remaining sample is representative."
+    ],
+    "common_mistakes": [
+      "Treating IPCW as assumption-free.",
+      "Ignoring very large weights or weak support in the estimated censoring distribution."
+    ],
+    "follow_ups": [
+      {
+        "question": "What probability appears in the censoring weight?",
+        "short_answer": "The estimated probability of remaining uncensored through the evaluation time."
+      },
+      {
+        "question": "What model issue can destabilize IPCW?",
+        "short_answer": "A misspecified censoring distribution, weak support, or extreme weights."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "On the estimation of inverse-probability-of-censoring weights for the evaluation of survival prediction error",
+        "publisher": "PLOS ONE via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11785332/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Open-access methodological article accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11785332/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that IPCW Brier-score consistency depends on correctly specifying the censoring distribution."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-interpret-nonsignificant-result-without-post-hoc-power",
+    "bank": "data-scientist",
+    "topic": "Statistical power and sample size",
+    "subtopic": "Limitations of post-hoc power",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A study is not statistically significant, so an analyst reports 18% observed power and concludes that no effect exists. How would you respond?",
+    "what_is_assessed": "Whether the candidate understands the limits of post-hoc power and communicates uncertainty without treating a nonsignificant result as evidence of no effect.",
+    "short_answer": "That conclusion is not justified. Post-hoc power calculated from the observed result is largely a transformation of the p-value and adds no independent evidence that the effect is absent. Report the effect estimate and confidence interval, compare the plausible effects with a pre-defined threshold for practical importance, and use a prospective power analysis when planning a future study.",
+    "deep_explanation": "The cited methodological review explains that post-hoc power is a monotone function of the observed p-value and provides no additional helpful information. A nonsignificant result does not establish that the effect is zero. The estimate and its uncertainty interval show which effect sizes remain compatible with the data; if the goal is to establish practical equivalence, define an acceptable margin and use an appropriate equivalence procedure. Power calculations are most useful prospectively, under explicit assumptions about the effect and design.",
+    "strong_answer_signals": [
+      "Rejects the claim that low observed power proves absence of an effect.",
+      "Explains that post-hoc power adds no independent information beyond the observed test result.",
+      "Uses an effect estimate and uncertainty interval to discuss practical implications."
+    ],
+    "weak_answer_signals": [
+      "Treats low observed power as proof of a null effect.",
+      "Claims a nonsignificant p-value demonstrates no meaningful difference."
+    ],
+    "common_mistakes": [
+      "Using post-hoc power to explain away an inconclusive result.",
+      "Failing to define what effect size would be practically negligible."
+    ],
+    "follow_ups": [
+      {
+        "question": "What should be reported instead of observed power?",
+        "short_answer": "The effect estimate and its confidence interval, interpreted against a meaningful effect threshold."
+      },
+      {
+        "question": "When is a power calculation most useful?",
+        "short_answer": "Prospectively, when planning a study under explicit design and effect-size assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "The Interpretation of Statistical Power after the Data have been Gathered",
+        "publisher": "Current Psychology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286546/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Open-access methodological review accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286546/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the review's conclusion that post-hoc power is a monotone function of the p-value and adds no helpful information; it discusses confidence intervals as an alternative."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-plan-experiment-power-before-data-collection"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-check-bayesian-model-with-posterior-predictions",
+    "bank": "data-scientist",
+    "topic": "Bayesian posterior predictive checks",
+    "subtopic": "Model adequacy versus computational convergence",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A Bayesian model has converged chains and acceptable R-hat values. What check would help determine whether it reproduces important features of the observed data?",
+    "what_is_assessed": "Whether the candidate distinguishes computational convergence from model adequacy and uses replicated data to evaluate fit.",
+    "short_answer": "Run posterior predictive checks: simulate replicated datasets from the fitted model's posterior predictive distribution, then compare relevant summaries or visual patterns with the observed data. Good convergence shows that sampling behaved acceptably; it does not show that the model captures the data-generating patterns that matter.",
+    "deep_explanation": "The Stan User's Guide describes posterior predictive checking as simulating new replicated datasets from fitted model parameters and comparing statistics of those replications with the same statistics from observed data. Choose checks tied to the application, such as means, dispersion, tails, zero counts, or group-level patterns. A mismatch can reveal model inadequacy even when the sampler converges; a match on selected summaries is useful evidence but does not prove the model is correct in every respect.",
+    "strong_answer_signals": [
+      "Separates sampler convergence from whether the model reproduces the data.",
+      "Simulates replicated data under the fitted posterior.",
+      "Chooses checks that reflect meaningful features of the application."
+    ],
+    "weak_answer_signals": [
+      "Treats good R-hat values as proof that the model fits.",
+      "Checks only a generic average without considering the data's important structure."
+    ],
+    "common_mistakes": [
+      "Using posterior predictive checks as a guarantee of model truth.",
+      "Choosing diagnostics after seeing results without explaining which failures matter."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is compared in a posterior predictive check?",
+        "short_answer": "Statistics or patterns from replicated datasets and the corresponding observed data."
+      },
+      {
+        "question": "Do good convergence diagnostics establish model adequacy?",
+        "short_answer": "No. They assess computation, not whether the model captures relevant data patterns."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Posterior and Prior Predictive Checks",
+        "publisher": "Stan User's Guide",
+        "url": "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Stan User's Guide, posterior and prior predictive checks accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that posterior predictive checks simulate replicated datasets from fitted model parameters and compare relevant statistics with observed data."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-estimate-uncertainty-for-ratio-experiment-metric",
+    "bank": "data-scientist",
+    "topic": "Ratio metrics in online experiments",
+    "subtopic": "Joint numerator-denominator uncertainty",
+    "level": "L3",
+    "type": "debugging",
+    "question": "An experiment's primary metric is total clicks divided by total impressions. The analyst computes separate confidence intervals for clicks and impressions, then divides their endpoints. What should change?",
+    "what_is_assessed": "Whether the candidate treats a ratio metric as a joint estimand and accounts for dependence between its numerator and denominator.",
+    "short_answer": "Do not divide the endpoints of two separate intervals. Define the ratio estimand and estimate its uncertainty with a ratio-aware method, such as a delta-method calculation or a user-level bootstrap that resamples the numerator and denominator together at the randomization unit. Their covariance can affect the variance of the ratio.",
+    "deep_explanation": "Online-experiment ratio metrics are often ratios of sums of additive metrics, such as clicks over impressions. The cited analysis models numerator and denominator behavior jointly, includes their covariance, and derives inference using the delta method. A valid analysis should preserve the pairing and randomization structure, state whether the estimand is a ratio of totals or an average of per-user ratios, and avoid treating the two components as independent unless that assumption is justified.",
+    "strong_answer_signals": [
+      "Rejects dividing endpoints from separate confidence intervals.",
+      "Recognizes covariance between numerator and denominator.",
+      "Names a joint method such as the delta method or a design-respecting user-level bootstrap.",
+      "States the ratio estimand and randomization unit."
+    ],
+    "weak_answer_signals": [
+      "Treats numerator and denominator uncertainty as independent by default.",
+      "Changes between a ratio of totals and an average of user-level ratios without stating it."
+    ],
+    "common_mistakes": [
+      "Resampling clicks and impressions independently and losing their pairing.",
+      "Reporting a ratio without defining its aggregation or denominator."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why can numerator-denominator covariance matter?",
+        "short_answer": "It contributes to the sampling variance of their ratio."
+      },
+      {
+        "question": "What must a bootstrap preserve?",
+        "short_answer": "The paired numerator and denominator observations and the experiment's randomization unit."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Setting the duration of online A/B experiments",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2408.02830",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "arXiv:2408.02830 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2408.02830"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the paper's ratio-of-additive-metrics definition, joint numerator-denominator covariance, and delta-method inference."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 12,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-choose-bounded-interval-for-small-binomial-proportion",
+    "bank": "data-scientist",
+    "topic": "Binomial proportion confidence intervals",
+    "subtopic": "Limitations of the Wald interval",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A small binomial sample has a proportion near zero, and the normal-approximation confidence interval extends below zero. What should you do?",
+    "what_is_assessed": "Whether the candidate recognizes boundary and coverage problems with the Wald interval and selects a method appropriate for binomial data.",
+    "short_answer": "Do not simply clip the interval at zero. The Wald approximation can perform poorly for small samples or proportions near the boundaries. Use a binomial interval such as the Wilson score, Agresti-Coull, or an exact method, and report the successes and denominator. Choose based on the design and desired coverage properties rather than treating one interval as universally best.",
+    "deep_explanation": "The NIST technical note reviews confidence intervals for binomial proportions, including Wald, Wilson, Agresti-Coull, and exact methods. It explains that normal-approximation intervals rely on large-sample behavior and that Wilson or Agresti-Coull may be preferable to the standard Wald interval in some smaller-sample settings. The interval should reflect the binomial model and sampling design; clipping an invalid Wald endpoint does not repair its coverage properties.",
+    "strong_answer_signals": [
+      "Identifies the normal/Wald approximation as problematic near boundaries or with limited data.",
+      "Names a score or exact interval as an alternative.",
+      "Reports the numerator and denominator and avoids a universal cutoff claim."
+    ],
+    "weak_answer_signals": [
+      "Clips the endpoint and assumes the resulting interval is valid.",
+      "Uses a normal interval without checking sample size or the boundary case."
+    ],
+    "common_mistakes": [
+      "Treating Wilson as universally optimal for every design.",
+      "Reporting a percentage without its denominator."
+    ],
+    "follow_ups": [
+      {
+        "question": "Why is clipping the Wald interval not enough?",
+        "short_answer": "It does not correct the method's coverage behavior."
+      },
+      {
+        "question": "What should accompany a small-sample proportion?",
+        "short_answer": "The number of successes, total trials, and a binomial-appropriate uncertainty interval."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Estimating Instrument Performance: with Confidence Intervals and Confidence Bounds",
+        "publisher": "National Institute of Standards and Technology",
+        "url": "https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.2119.pdf",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "NIST Technical Note 2119 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.2119.pdf"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the NIST discussion of Wald, Wilson, Agresti-Coull, and exact binomial intervals and its caution for smaller samples."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-compare-two-conversion-rates-with-uncertainty"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ds-avoid-individual-inference-from-ecological-data",
+    "bank": "data-scientist",
+    "topic": "Ecological inference and levels of analysis",
+    "subtopic": "Aggregate associations versus individual relationships",
+    "level": "L2",
+    "type": "concept",
+    "question": "A county-level analysis finds that areas with higher average education have lower disease rates. Can you conclude that individuals with more education had lower disease risk?",
+    "what_is_assessed": "Whether the candidate distinguishes a population-level association from an individual-level relationship and avoids an unsupported cross-level inference.",
+    "short_answer": "No—not from the county-level association alone. Many different individual-level relationships can produce the same aggregate pattern. State whether the target is a population or contextual effect; if you need an individual-level conclusion, use individual-level data or an ecological-inference method with explicit assumptions.",
+    "deep_explanation": "The cited review defines ecological inference as drawing conclusions about individual-level behavior from aggregate data and explains that many individual relationships can be consistent with the same aggregate observations. It also cautions against labeling every ecological study a fallacy: a population-level or contextual question can be valid when the analysis does not claim an individual-level result. The key is to match the unit of analysis to the conclusion and make any cross-level assumptions explicit.",
+    "strong_answer_signals": [
+      "Rejects the individual-level conclusion from aggregate data alone.",
+      "Explains that multiple individual patterns may produce the same group-level association.",
+      "Distinguishes a population-level target from an individual-level inference."
+    ],
+    "weak_answer_signals": [
+      "Assumes a group-level relationship necessarily holds for individuals.",
+      "Dismisses all ecological analyses as invalid regardless of their target."
+    ],
+    "common_mistakes": [
+      "Confusing an ecological association with an individual causal effect.",
+      "Ignoring the unit at which exposure and outcome were measured."
+    ],
+    "follow_ups": [
+      {
+        "question": "When is an ecological study not making this error?",
+        "short_answer": "When its target is a population or contextual effect and it does not infer an individual-level relationship."
+      },
+      {
+        "question": "What can support an individual-level conclusion?",
+        "short_answer": "Individual-level data or an ecological-inference model with justified assumptions."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Three Criteria for Ecological Fallacy",
+        "publisher": "Environmental Health Perspectives via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3237367/",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Stable",
+    "versions_checked": "Open-access article accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3237367/"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the article's distinction between inferring individual-level relationships from ecological data and analyzing population or contextual effects."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ds-investigate-reversals-between-strata-and-aggregate"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

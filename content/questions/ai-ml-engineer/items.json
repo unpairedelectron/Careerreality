@@ -3697,5 +3697,432 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-disable-unused-attention-weights-for-fast-path",
+    "bank": "ai-ml-engineer",
+    "topic": "MultiheadAttention fast-path selection",
+    "subtopic": "Skipping unused attention weights",
+    "level": "L2",
+    "type": "scenario",
+    "question": "An inference path calls `nn.MultiheadAttention` but never consumes the returned attention weights. What parameter can reduce unnecessary work, and what should you verify?",
+    "what_is_assessed": "Whether the candidate uses the module's documented optimization path while validating performance under the actual model configuration.",
+    "short_answer": "Set `need_weights=False`. PyTorch documents that this enables the optimized scaled-dot-product attention path for best performance when supported. Benchmark the actual device, dtype, masks, and shapes because the optimized implementation is conditional and should not be assumed from the flag alone.",
+    "deep_explanation": "`nn.MultiheadAttention` can use optimized implementations of scaled-dot-product attention when its conditions are met. The API specifically recommends `need_weights=False` when attention weights are not needed, since returning them can prevent the best-performing path. Confirm the result with a representative benchmark; backend availability depends on the actual workload and hardware.",
+    "strong_answer_signals": [
+      "Sets `need_weights=False` when weights are unused.",
+      "Connects the setting to optimized scaled-dot-product attention.",
+      "Benchmarks with production-like inputs and hardware instead of promising a universal speedup."
+    ],
+    "weak_answer_signals": [
+      "Keeps computing and returning weights that no caller uses.",
+      "Assumes the flag guarantees a specific kernel or performance gain for every workload."
+    ],
+    "common_mistakes": [
+      "Comparing benchmark runs with different masks, shapes, or dtypes.",
+      "Removing attention weights from a path that relies on them for diagnostics or downstream behavior."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which attention implementation can be used when weights are not requested?",
+        "short_answer": "An optimized scaled-dot-product attention implementation, when the workload supports it."
+      },
+      {
+        "question": "Does setting need_weights false guarantee a particular kernel?",
+        "short_answer": "No. The available optimized path depends on the workload and hardware."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "MultiheadAttention",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch stable MultiheadAttention API documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that need_weights=False enables optimized scaled-dot-product attention when possible and is documented for best performance."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-set-sdpa-dropout-to-zero-during-evaluation",
+    "bank": "ai-ml-engineer",
+    "topic": "Scaled dot-product attention dropout behavior",
+    "subtopic": "Functional dropout control during evaluation",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A model using `F.scaled_dot_product_attention` still produces stochastic inference outputs after `model.eval()`. What should you inspect?",
+    "what_is_assessed": "Whether the candidate knows that functional scaled-dot-product attention applies the explicit dropout probability independently of module training mode.",
+    "short_answer": "Inspect `dropout_p`. The functional API applies dropout whenever the argument is nonzero, even if the surrounding module is in evaluation mode. Pass `0.0` during evaluation, for example `dropout_p=(p if self.training else 0.0)`.",
+    "deep_explanation": "Unlike a module that automatically switches behavior through `train()` and `eval()`, `torch.nn.functional.scaled_dot_product_attention` applies dropout according to the supplied `dropout_p` value. Calling `model.eval()` does not rewrite that function argument. Explicitly set it to zero for evaluation and benchmark or test deterministic inference on the actual code path.",
+    "strong_answer_signals": [
+      "Checks the functional call's dropout_p argument.",
+      "Sets dropout_p to zero when the model is not training.",
+      "Distinguishes module mode from an explicit functional parameter."
+    ],
+    "weak_answer_signals": [
+      "Assumes `model.eval()` disables every functional dropout call.",
+      "Removes unrelated model randomness without inspecting the attention argument."
+    ],
+    "common_mistakes": [
+      "Passing the training dropout probability in both train and eval paths.",
+      "Relying on inference_mode or no_grad to disable dropout."
+    ],
+    "follow_ups": [
+      {
+        "question": "Does model.eval change dropout_p passed to the functional API?",
+        "short_answer": "No. The caller must pass zero during evaluation."
+      },
+      {
+        "question": "Does inference_mode disable this explicit dropout?",
+        "short_answer": "No. The functional dropout argument still controls it."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.nn.functional.scaled_dot_product_attention",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 scaled_dot_product_attention API documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the API always applies dropout according to dropout_p and documents passing 0.0 during evaluation."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-declare-dynamic-shapes-in-onnx-export",
+    "bank": "ai-ml-engineer",
+    "topic": "ONNX export dynamic dimensions",
+    "subtopic": "Shape specification for exported inputs",
+    "level": "L2",
+    "type": "debugging",
+    "question": "A PyTorch model exported to ONNX works for the example batch size but rejects other batch sizes. What should you check in the export configuration?",
+    "what_is_assessed": "Whether the candidate understands that example-input shapes may be specialized unless variable dimensions are declared in the exporter.",
+    "short_answer": "For the `torch.export`-based exporter (`dynamo=True`), specify the dimensions that should vary with `dynamic_shapes`. The legacy exporter uses `dynamic_axes` instead. Then test the exported model with representative shapes in its target runtime; do not assume that tracing one example makes every dimension dynamic.",
+    "deep_explanation": "PyTorch's ONNX FAQ notes that the tracer records example-input shapes and directs users to set `dynamic_shapes` when dynamic input sizes are required. The API distinguishes `dynamic_shapes` for the `dynamo=True` exporter from `dynamic_axes` for the legacy path. Only dimensions that are intended to vary should be declared, and the exported artifact should be validated against the supported shape range in the actual runtime.",
+    "strong_answer_signals": [
+      "Declares batch or sequence dimensions that are meant to vary.",
+      "Uses `dynamic_shapes` with the dynamo exporter and recognizes the legacy `dynamic_axes` path.",
+      "Validates the exported model with multiple supported shapes."
+    ],
+    "weak_answer_signals": [
+      "Assumes the example input automatically creates a fully dynamic graph.",
+      "Changes model code without checking the exporter's shape configuration."
+    ],
+    "common_mistakes": [
+      "Using `dynamic_axes` with the dynamo exporter without checking the current API path.",
+      "Declaring every dimension dynamic when only selected dimensions vary."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which argument is preferred for the dynamo-based exporter?",
+        "short_answer": "`dynamic_shapes`."
+      },
+      {
+        "question": "What should you test after exporting?",
+        "short_answer": "Run the artifact with representative values for every declared dynamic dimension in the target runtime."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "torch.onnx",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/onnx.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 ONNX exporter documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/onnx.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the example-shape specialization note and the dynamic_shapes versus legacy dynamic_axes distinction."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-batchnorm-breaks-large-batch-accumulation-equivalence",
+    "bank": "ai-ml-engineer",
+    "topic": "Memory-constrained training",
+    "subtopic": "BatchNorm statistics across microbatches",
+    "level": "L3",
+    "type": "scenario",
+    "question": "Gradient accumulation matches the loss scaling of a physical batch, but training still differs when the model uses BatchNorm. Why?",
+    "what_is_assessed": "Whether the candidate recognizes that accumulating gradients does not combine batch-dependent forward statistics across microbatches.",
+    "short_answer": "BatchNorm computes normalization statistics from each forward mini-batch. Gradient accumulation sums gradients across separate microbatch forwards; it does not combine their activations into the statistics of one physical batch. The forward values and running-stat updates can therefore differ, so accumulation is not exactly equivalent to a larger physical batch.",
+    "deep_explanation": "PyTorch documents that BatchNorm computes its mean and standard deviation over mini-batches during training and updates running estimates. With gradient accumulation, each microbatch performs a separate forward pass and uses its own batch statistics before gradients are accumulated. Matching the loss scaling does not make those forward computations identical to a single pass over the combined batch. If the difference matters, compare against a larger physical batch where feasible or evaluate a normalization strategy that does not depend on the current batch statistics.",
+    "strong_answer_signals": [
+      "Explains that each microbatch has separate BatchNorm statistics.",
+      "Distinguishes gradient accumulation from combining activations into one forward batch.",
+      "Mentions running-stat updates or a batch-independent normalization alternative."
+    ],
+    "weak_answer_signals": [
+      "Claims correct loss scaling guarantees exact physical-batch equivalence.",
+      "Assumes accumulated gradients also merge BatchNorm statistics."
+    ],
+    "common_mistakes": [
+      "Ignoring batch-dependent layers when interpreting effective batch size.",
+      "Treating running-stat updates across microbatches as one update from the combined batch."
+    ],
+    "follow_ups": [
+      {
+        "question": "What statistics does BatchNorm use during a training forward pass?",
+        "short_answer": "Statistics calculated over the current mini-batch."
+      },
+      {
+        "question": "Does gradient accumulation merge those forward statistics?",
+        "short_answer": "No. It accumulates gradients after separate microbatch forwards."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "BatchNorm1d",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BatchNorm1d.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.15 BatchNorm1d documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BatchNorm1d.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that BatchNorm computes training statistics over mini-batches and maintains running estimates; distinguished these forward statistics from accumulated gradients."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-use-gradient-accumulation-for-memory-limited-batches"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-shadow-test-new-model-without-serving-its-output",
+    "bank": "ai-ml-engineer",
+    "topic": "Model shadow testing",
+    "subtopic": "Mirrored production traffic without user-facing responses",
+    "level": "L3",
+    "type": "scenario",
+    "question": "A new model passed offline evaluation, but you want to measure its operational behavior on live inputs without changing user-visible predictions. What rollout pattern fits?",
+    "what_is_assessed": "Whether the candidate distinguishes shadow testing from canary traffic that serves candidate outputs to users.",
+    "short_answer": "Use a shadow test: keep the production model responsible for all user responses and mirror a controlled share of requests to the candidate, whose outputs are not returned to users. Compare operational measures such as latency and error rate before promotion, while handling production data and costs appropriately.",
+    "deep_explanation": "AWS documents shadow testing as sending copies of production inference requests to a shadow variant while the production variant continues to receive and answer the original traffic. The shadow variant does not return responses to users. This lets a team assess configuration and operational performance before promotion, but it is different from a canary that exposes candidate responses to a limited user share. Quality comparisons may require labels or another evaluation source, and traffic mirroring should follow the system's privacy and data-handling rules.",
+    "strong_answer_signals": [
+      "Keeps the current model responsible for user-facing responses.",
+      "Mirrors only a controlled share of requests to the shadow model.",
+      "Compares operational behavior before deciding on promotion.",
+      "Distinguishes shadow testing from a user-facing canary."
+    ],
+    "weak_answer_signals": [
+      "Routes user responses to the candidate and calls it a shadow test.",
+      "Promotes based only on offline metrics without checking production behavior."
+    ],
+    "common_mistakes": [
+      "Treating shadow output as ground truth without labels.",
+      "Ignoring production data handling, resource cost, or duplicated side effects."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which variant returns responses to users during a shadow test?",
+        "short_answer": "The production variant; the shadow variant's outputs are not returned."
+      },
+      {
+        "question": "How does a canary differ?",
+        "short_answer": "A canary sends some user traffic to the candidate and serves its responses to those users."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Shadow tests",
+        "publisher": "Amazon SageMaker AI documentation",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "Amazon SageMaker AI shadow testing documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that production handles all user responses while the shadow variant receives mirrored requests and returns no user-facing responses."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-advance-canary-only-after-production-analysis"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "ml-use-per-channel-scales-for-uneven-weight-ranges",
+    "bank": "ai-ml-engineer",
+    "topic": "Quantization granularity",
+    "subtopic": "Per-channel versus per-tensor quantization",
+    "level": "L2",
+    "type": "concept",
+    "question": "A tensor has channels with very different value ranges. Why might per-channel quantization preserve more detail than per-tensor quantization?",
+    "what_is_assessed": "Whether the candidate understands how quantization granularity changes the effect of outliers on representable resolution.",
+    "short_answer": "Per-tensor quantization shares one set of quantization parameters across the whole tensor, so a large-range channel can reduce resolution for the others. Per-channel quantization uses separate parameters for each channel, limiting an outlier's effect to its own channel and potentially reducing conversion error. Confirm that the target operators and runtime support the chosen scheme, then measure model quality and performance.",
+    "deep_explanation": "PyTorch's quantization documentation distinguishes per-tensor parameters from per-channel parameters, typically along a channel dimension. It explains that per-channel quantization can reduce conversion error because outliers in one channel affect that channel rather than the entire tensor. This is a representational advantage, not a guarantee of end-to-end accuracy or speed; operator support, calibration, model structure, and deployment backend still matter.",
+    "strong_answer_signals": [
+      "Explains that per-tensor quantization shares parameters across the tensor.",
+      "Explains how separate per-channel scales localize outlier effects.",
+      "Checks target-runtime support and evaluates actual model quality."
+    ],
+    "weak_answer_signals": [
+      "Claims per-channel quantization is always more accurate or faster.",
+      "Assumes every backend supports every quantization scheme."
+    ],
+    "common_mistakes": [
+      "Confusing quantization granularity with the bit width.",
+      "Ignoring operator and runtime support when selecting a scheme."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does per-channel quantization change?",
+        "short_answer": "It uses distinct quantization parameters along a selected channel dimension."
+      },
+      {
+        "question": "Does it guarantee higher end-to-end accuracy?",
+        "short_answer": "No. Validate the model and target runtime."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Quantization",
+        "publisher": "PyTorch documentation",
+        "url": "https://pytorch.org/docs/2.0/quantization.html",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "PyTorch 2.0 quantization documentation accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://pytorch.org/docs/2.0/quantization.html"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the distinction between shared per-tensor parameters and channel-specific parameters, and the source's explanation of localized outlier effects."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "ml-validate-post-training-quantization-calibration"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 8,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

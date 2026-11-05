@@ -2,7 +2,7 @@
   "bank": "gen-ai-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 49,
+  "itemCount": 53,
   "countsByTopic": {
     "Retrieval-augmented generation": 11,
     "Generative AI evaluation": 3,
@@ -29,25 +29,28 @@
     "Token log probabilities": 1,
     "Responses API conversation state": 1,
     "API data retention controls": 1,
-    "Vision input fidelity and cost": 1
+    "Vision input fidelity and cost": 1,
+    "Realtime API turn control": 1,
+    "Pairwise judge position consistency": 1,
+    "Parameter-efficient fine-tuning with LoRA": 2
   },
   "countsByLevel": {
-    "L2": 25,
-    "L3": 24
+    "L2": 27,
+    "L3": 26
   },
   "countsByType": {
-    "scenario": 15,
-    "concept": 5,
+    "scenario": 16,
+    "concept": 7,
     "trade-off": 11,
-    "debugging": 17,
+    "debugging": 18,
     "design": 1
   },
   "status": {
-    "schemaValid": 49,
-    "sourcesVerified": 49,
-    "rederived": 49,
+    "schemaValid": 53,
+    "sourcesVerified": 53,
+    "rederived": 53,
     "codeExecuted": 0,
-    "expertReviewPending": 49
+    "expertReviewPending": 53
   },
   "itemStatus": {
     "genai-rag-retrieval-is-not-proof-of-grounding": {
@@ -387,6 +390,34 @@
       "expertReview": "pending"
     },
     "genai-measure-cost-before-assuming-low-image-detail-is-cheaper": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-retain-vad-but-gate-response-creation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-diagnose-pairwise-judge-position-bias": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-explain-lora-parameter-efficient-adaptation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "genai-distinguish-qlora-base-quantization-from-adapter-training": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

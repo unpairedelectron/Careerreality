@@ -401,6 +401,61 @@
         "last_verified": "2026-11-04",
         "versions_checked": "OpenAI Images and vision guide retrieved 2026-11-04"
       }]
+    },
+    {
+      "topic": "Realtime API turn control",
+      "subtopics": ["server VAD", "client-controlled response creation", "speech-to-speech turn handling"],
+      "sources": [{
+        "title": "Realtime conversations",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI Realtime conversations guide accessed 2026-11-05"
+      }, {
+        "title": "Voice activity detection (VAD)",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/realtime-vad",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Fast-moving",
+        "last_verified": "2026-11-05",
+        "versions_checked": "OpenAI Realtime VAD guide accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Pairwise judge position consistency",
+      "subtopics": ["answer-order swaps", "position consistency", "human-label validation"],
+      "sources": [{
+        "title": "Judging the Judges: A Systematic Investigation of Position Bias in Pairwise Comparative LLM-as-a-Judge",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2406.07791v5",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2406.07791v5 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Parameter-efficient fine-tuning with LoRA",
+      "subtopics": ["frozen pretrained weights", "low-rank trainable updates", "rank and quality trade-offs", "QLoRA 4-bit base weights and trainable adapters"],
+      "sources": [{
+        "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2106.09685v2 accessed 2026-11-05"
+      }, {
+        "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2305.14314",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2305.14314 accessed 2026-11-05"
+      }]
     }
   ]
 }

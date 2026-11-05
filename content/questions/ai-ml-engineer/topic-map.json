@@ -216,7 +216,7 @@
     },
     {
       "topic": "Memory-constrained training",
-      "subtopics": ["gradient accumulation", "effective batch size", "peak GPU memory", "scheduler timing with gradient accumulation"],
+      "subtopics": ["gradient accumulation", "effective batch size", "peak GPU memory", "scheduler timing with gradient accumulation", "BatchNorm statistics across microbatches"],
       "sources": [{
         "title": "Methods and tools for efficient training on a single GPU",
         "publisher": "Hugging Face Transformers documentation",
@@ -233,6 +233,14 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "Hugging Face Accelerate gradient accumulation guide retrieved 2026-11-04"
+      }, {
+        "title": "BatchNorm1d",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.BatchNorm1d.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 BatchNorm1d documentation accessed 2026-11-05"
       }]
     },
     {
@@ -535,6 +543,71 @@
         "volatility": "Moderate",
         "last_verified": "2026-11-04",
         "versions_checked": "PyTorch 2.15 CUDA API documentation"
+      }]
+    },
+    {
+      "topic": "MultiheadAttention fast-path selection",
+      "subtopics": ["need_weights configuration", "scaled-dot-product attention", "workload-specific benchmarking"],
+      "sources": [{
+        "title": "MultiheadAttention",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch stable MultiheadAttention API documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Scaled dot-product attention dropout behavior",
+      "subtopics": ["dropout_p argument", "training and evaluation mode", "deterministic inference"],
+      "sources": [{
+        "title": "torch.nn.functional.scaled_dot_product_attention",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 scaled_dot_product_attention API documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "ONNX export dynamic dimensions",
+      "subtopics": ["dynamic_shapes for dynamo exporter", "legacy dynamic_axes", "target-runtime validation"],
+      "sources": [{
+        "title": "torch.onnx",
+        "publisher": "PyTorch documentation",
+        "url": "https://docs.pytorch.org/docs/2.15/onnx.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.15 ONNX exporter documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Model shadow testing",
+      "subtopics": ["mirrored production traffic", "non-user-facing candidate outputs", "shadow versus canary rollout"],
+      "sources": [{
+        "title": "Shadow tests",
+        "publisher": "Amazon SageMaker AI documentation",
+        "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Amazon SageMaker AI shadow testing documentation accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Quantization granularity",
+      "subtopics": ["per-channel scales", "per-tensor scales", "outlier localization", "backend operator support"],
+      "sources": [{
+        "title": "Quantization",
+        "publisher": "PyTorch documentation",
+        "url": "https://pytorch.org/docs/2.0/quantization.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "PyTorch 2.0 quantization documentation accessed 2026-11-05"
       }]
     }
   ]

@@ -3508,5 +3508,299 @@
       "senior_level": null
     },
     "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-retain-vad-but-gate-response-creation",
+    "bank": "gen-ai-engineer",
+    "topic": "Realtime API turn control",
+    "subtopic": "Server VAD with client-controlled response creation",
+    "level": "L2",
+    "type": "scenario",
+    "question": "A Realtime speech-to-speech app should keep server VAD for turn detection but wait for an application check before generating a response. How should it configure turn detection?",
+    "what_is_assessed": "Whether the candidate separates automatic turn detection from automatic response creation in a Realtime session.",
+    "short_answer": "Keep server VAD enabled, but set `turn_detection.create_response` and `turn_detection.interrupt_response` to `false`. The client can then wait for the speech boundary, run its application check, and explicitly send `response.create` when it is ready.",
+    "deep_explanation": "OpenAI's Realtime conversation guide documents a mode that keeps VAD enabled while disabling automatic response creation and interruption. This preserves server-side speech boundary detection without letting it decide when to answer. The `create_response` and `interrupt_response` fields apply to speech-to-speech conversations; transcription sessions use VAD for audio chunking and do not use those controls in the same way.",
+    "strong_answer_signals": [
+      "Keeps `server_vad` enabled.",
+      "Sets both automatic response controls to false for manual gating.",
+      "Triggers `response.create` only after application policy or authorization passes.",
+      "Scopes the controls to speech-to-speech conversation mode."
+    ],
+    "weak_answer_signals": [
+      "Turns off VAD even though server-side turn detection is still needed.",
+      "Assumes `model.eval()`-style behavior will gate Realtime response creation."
+    ],
+    "common_mistakes": [
+      "Confusing end-of-speech detection with permission to generate a response.",
+      "Applying speech-to-speech turn controls to a transcription-only session."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which field disables automatic response creation?",
+        "short_answer": "`turn_detection.create_response: false`."
+      },
+      {
+        "question": "Do these controls work the same way in transcription-only sessions?",
+        "short_answer": "No. The guide says these fields apply to speech-to-speech conversations; VAD in transcription sessions controls audio chunking."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Realtime conversations",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
+        "retrieved_date": "2026-11-05"
+      },
+      {
+        "title": "Voice activity detection (VAD)",
+        "publisher": "OpenAI API documentation",
+        "url": "https://developers.openai.com/api/docs/guides/realtime-vad",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Fast-moving",
+    "versions_checked": "OpenAI Realtime conversations and VAD guides accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://developers.openai.com/api/docs/guides/realtime-conversations",
+        "https://developers.openai.com/api/docs/guides/realtime-vad"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the manual-response mode keeps VAD enabled while setting create_response and interrupt_response to false; those fields apply to speech-to-speech conversations."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-diagnose-pairwise-judge-position-bias",
+    "bank": "gen-ai-engineer",
+    "topic": "Pairwise judge position consistency",
+    "subtopic": "Order-swap diagnostics for LLM evaluators",
+    "level": "L3",
+    "type": "debugging",
+    "question": "A pairwise LLM judge picks answer A when it appears first, then picks answer B when the same two answers are swapped. What does this indicate, and how should you test the evaluator?",
+    "what_is_assessed": "Whether the candidate identifies position bias and evaluates pairwise judge stability under counterbalanced answer order.",
+    "short_answer": "This is evidence of position bias: the verdict changes with prompt order rather than staying with the same candidate. On a representative set, run each pair in both orders, map the reversed verdict back to the original candidates, and measure position consistency. Treat disagreement as a reliability signal and validate the judge against human labels before relying on it.",
+    "deep_explanation": "A systematic study of pairwise LLM-as-a-judge evaluation defines position consistency by checking whether the same candidate wins after the answer order is swapped. A changed winner reveals position sensitivity, although one pair alone does not establish the evaluator's overall bias rate. Measure the behavior across representative tasks and candidates, and compare decisions with trusted human judgments before using the judge for scaled evaluation.",
+    "strong_answer_signals": [
+      "Names position bias rather than answer quality as the immediate issue.",
+      "Swaps answer order and maps the verdict back to the original candidates.",
+      "Measures consistency across a representative sample and checks human agreement."
+    ],
+    "weak_answer_signals": [
+      "Keeps whichever verdict appears first.",
+      "Treats one order swap as a complete calibration study."
+    ],
+    "common_mistakes": [
+      "Failing to reverse the label mapping after swapping candidates.",
+      "Assuming order randomization by itself proves the judge is reliable."
+    ],
+    "follow_ups": [
+      {
+        "question": "What is position consistency in this test?",
+        "short_answer": "Whether the same candidate wins after the pair order is reversed."
+      },
+      {
+        "question": "Does a single disagreement establish the population bias rate?",
+        "short_answer": "No. Repeat across representative tasks and candidates."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "Judging the Judges: A Systematic Investigation of Position Bias in Pairwise Comparative LLM-as-a-Judge",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2406.07791v5",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "arXiv:2406.07791v5 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/html/2406.07791v5"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that the study detects position bias by swapping candidate order and checking whether the same candidate remains preferred."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-calibrate-model-grader-against-human-judgments"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-explain-lora-parameter-efficient-adaptation",
+    "bank": "gen-ai-engineer",
+    "topic": "Parameter-efficient fine-tuning with LoRA",
+    "subtopic": "Frozen base weights and low-rank updates",
+    "level": "L2",
+    "type": "concept",
+    "question": "You need task-specific adaptation of a large language model but cannot afford to train and store a full copy of all its weights. How does LoRA help?",
+    "what_is_assessed": "Whether the candidate understands LoRA's frozen-base, trainable low-rank update design and its resource trade-offs.",
+    "short_answer": "LoRA freezes the pretrained weights and adds trainable low-rank matrices that represent weight updates in selected layers. This can substantially reduce trainable parameters and optimizer memory compared with full fine-tuning. The rank and target modules still require validation; lower adaptation cost does not guarantee equal quality for every task.",
+    "deep_explanation": "The LoRA paper describes freezing pretrained model weights and injecting trainable rank-decomposition matrices into Transformer layers. The task-specific update is represented through the low-rank factors rather than training every base parameter. This is a parameter-efficiency strategy, not a universal quality guarantee; evaluate the chosen rank, target layers, and downstream behavior on held-out task data.",
+    "strong_answer_signals": [
+      "States that pretrained base weights remain frozen.",
+      "Describes trainable low-rank matrices as the update representation.",
+      "Connects fewer trainable parameters to lower optimizer-state cost while requiring quality evaluation."
+    ],
+    "weak_answer_signals": [
+      "Describes LoRA as training a complete duplicate of the base model.",
+      "Claims low-rank adaptation always matches full fine-tuning."
+    ],
+    "common_mistakes": [
+      "Treating LoRA rank as a quality guarantee.",
+      "Selecting target layers or rank without downstream evaluation."
+    ],
+    "follow_ups": [
+      {
+        "question": "Which weights are trained in the basic LoRA setup?",
+        "short_answer": "The low-rank adapter matrices; the pretrained base weights are frozen."
+      },
+      {
+        "question": "Does fewer trainable parameters guarantee task quality?",
+        "short_answer": "No. Validate the adaptation on representative held-out data."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2106.09685",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "arXiv:2106.09685v2 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2106.09685"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified the paper's frozen pretrained weights and trainable low-rank matrices design."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-select-rag-or-fine-tuning-from-error-pattern"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 2,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
+  },
+  {
+    "id": "genai-distinguish-qlora-base-quantization-from-adapter-training",
+    "bank": "gen-ai-engineer",
+    "topic": "Parameter-efficient fine-tuning with LoRA",
+    "subtopic": "QLoRA quantized base weights and trainable adapters",
+    "level": "L3",
+    "type": "concept",
+    "question": "A frozen model still does not fit in memory for LoRA fine-tuning. What does QLoRA change, and which parameters remain trainable?",
+    "what_is_assessed": "Whether the candidate distinguishes quantizing the frozen base model from training the low-rank adaptation parameters.",
+    "short_answer": "QLoRA loads the frozen pretrained base weights in 4-bit form, using techniques such as NF4 and double quantization to reduce memory, while training the LoRA adapter parameters. It does not mean that all 4-bit base weights are being fully fine-tuned. Validate downstream quality and runtime support for the selected quantization and adapter setup.",
+    "deep_explanation": "The QLoRA paper describes backpropagating through a frozen 4-bit quantized pretrained model into trainable low-rank adapters. Its memory techniques include 4-bit NormalFloat (NF4), double quantization of quantization constants, and paged optimizers for memory spikes. These methods reduce resource requirements, but they do not guarantee the same results for every model, task, or deployment backend.",
+    "strong_answer_signals": [
+      "Identifies the base weights as frozen and quantized to 4-bit.",
+      "Identifies LoRA adapters as the trainable parameters.",
+      "Names an appropriate memory technique without claiming universal quality equivalence."
+    ],
+    "weak_answer_signals": [
+      "Claims QLoRA fully updates all base weights in 4-bit.",
+      "Confuses weight quantization with the precision used for every training computation."
+    ],
+    "common_mistakes": [
+      "Assuming the base model's quantization eliminates the need to validate the adapter.",
+      "Treating NF4, double quantization, and paged optimizers as interchangeable operations."
+    ],
+    "follow_ups": [
+      {
+        "question": "What does NF4 represent in the QLoRA method?",
+        "short_answer": "A 4-bit NormalFloat representation used for the frozen base weights."
+      },
+      {
+        "question": "Which parameters receive task-specific updates?",
+        "short_answer": "The trainable low-rank adapter parameters."
+      }
+    ],
+    "code": null,
+    "references": [
+      {
+        "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/abs/2305.14314",
+        "retrieved_date": "2026-11-05"
+      }
+    ],
+    "volatility": "Moderate",
+    "versions_checked": "arXiv:2305.14314 accessed 2026-11-05.",
+    "last_verified": "2026-11-05",
+    "verification": {
+      "sources_checked": [
+        "https://arxiv.org/abs/2305.14314"
+      ],
+      "rederivation_agreement": true,
+      "rederivation_notes": [
+        "Verified that QLoRA backpropagates through a frozen 4-bit base model into trainable low-rank adapters and documents NF4, double quantization, and paged optimizers."
+      ],
+      "disagreements": [],
+      "code_executed": "n.a.",
+      "confidence": "high"
+    },
+    "related": [
+      "genai-explain-lora-parameter-efficient-adaptation"
+    ],
+    "review_status": "Drafted with AI assistance; code executed; sources cited; independent expert review pending",
+    "core": false,
+    "priority": 2,
+    "estimated_reading_minutes": 3,
+    "estimated_practice_minutes": 10,
+    "answer_tiers": {
+      "fresher_level": null,
+      "senior_level": null
+    },
+    "content_tier": "complete-guide"
   }
 ]

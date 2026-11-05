@@ -2,7 +2,7 @@
   "bank": "ai-ml-engineer",
   "target": 220,
   "minimum": 75,
-  "itemCount": 52,
+  "itemCount": 58,
   "countsByTopic": {
     "Training and reproducibility": 3,
     "Production ML testing and monitoring": 5,
@@ -15,7 +15,7 @@
     "Model serving performance": 1,
     "Training performance and data pipelines": 2,
     "Mixed-precision training": 1,
-    "Memory-constrained training": 2,
+    "Memory-constrained training": 3,
     "Optimization and regularization": 1,
     "Activation checkpointing": 2,
     "Distributed checkpointing": 1,
@@ -34,24 +34,29 @@
     "Embedding max-norm autograd behavior": 1,
     "Embedding padding indices": 1,
     "Tensor detach and storage aliasing": 1,
-    "CUDA allocator and empty_cache": 1
+    "CUDA allocator and empty_cache": 1,
+    "MultiheadAttention fast-path selection": 1,
+    "Scaled dot-product attention dropout behavior": 1,
+    "ONNX export dynamic dimensions": 1,
+    "Model shadow testing": 1,
+    "Quantization granularity": 1
   },
   "countsByLevel": {
-    "L2": 17,
-    "L3": 35
+    "L2": 21,
+    "L3": 37
   },
   "countsByType": {
-    "debugging": 33,
-    "scenario": 7,
+    "debugging": 35,
+    "scenario": 10,
     "trade-off": 8,
-    "concept": 4
+    "concept": 5
   },
   "status": {
-    "schemaValid": 52,
-    "sourcesVerified": 52,
-    "rederived": 52,
+    "schemaValid": 58,
+    "sourcesVerified": 58,
+    "rederived": 58,
     "codeExecuted": 0,
-    "expertReviewPending": 52
+    "expertReviewPending": 58
   },
   "itemStatus": {
     "ml-seed-does-not-guarantee-reproducibility": {
@@ -419,6 +424,48 @@
       "expertReview": "pending"
     },
     "ml-understand-what-empty-cache-releases": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-disable-unused-attention-weights-for-fast-path": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-set-sdpa-dropout-to-zero-during-evaluation": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-declare-dynamic-shapes-in-onnx-export": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-batchnorm-breaks-large-batch-accumulation-equivalence": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-shadow-test-new-model-without-serving-its-output": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ml-use-per-channel-scales-for-uneven-weight-ranges": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

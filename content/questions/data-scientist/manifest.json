@@ -2,14 +2,14 @@
   "bank": "data-scientist",
   "target": 240,
   "minimum": 75,
-  "itemCount": 58,
+  "itemCount": 67,
   "countsByTopic": {
     "Machine learning evaluation": 3,
     "Evaluation metrics and experiments": 3,
     "Experiment design and uncertainty": 7,
     "Experiment data quality": 1,
     "Missing-data strategy": 2,
-    "Statistical power and sample size": 1,
+    "Statistical power and sample size": 2,
     "Multiple testing and false discovery": 1,
     "Statistical test design": 1,
     "Statistical test interpretation": 2,
@@ -20,7 +20,7 @@
     "Uncertainty estimation": 2,
     "Subgroup analysis and effect heterogeneity": 1,
     "Aggregated and stratified analysis": 1,
-    "Survival analysis": 4,
+    "Survival analysis": 5,
     "Logistic regression interpretation": 1,
     "Distribution shift": 1,
     "Negative controls for confounding": 1,
@@ -28,7 +28,7 @@
     "Instrumental variable analysis": 1,
     "Cluster-randomized trial design": 2,
     "Effect measures and noncollapsibility": 1,
-    "Count-data regression": 1,
+    "Count-data regression": 2,
     "Hierarchical modeling": 1,
     "Regression to the mean": 1,
     "Mediation analysis": 1,
@@ -40,24 +40,30 @@
     "Multiple imputation pooling": 1,
     "Complex survey sampling": 1,
     "Cross-validation uncertainty": 1,
-    "Measurement error in predictors": 1
+    "Measurement error in predictors": 1,
+    "Target trial emulation and time zero": 1,
+    "Staggered difference-in-differences": 1,
+    "Bayesian posterior predictive checks": 1,
+    "Ratio metrics in online experiments": 1,
+    "Binomial proportion confidence intervals": 1,
+    "Ecological inference and levels of analysis": 1
   },
   "countsByLevel": {
-    "L2": 19,
-    "L3": 39
+    "L2": 23,
+    "L3": 44
   },
   "countsByType": {
     "trade-off": 7,
-    "concept": 19,
-    "scenario": 27,
-    "debugging": 5
+    "concept": 20,
+    "scenario": 33,
+    "debugging": 7
   },
   "status": {
-    "schemaValid": 58,
-    "sourcesVerified": 58,
-    "rederived": 58,
+    "schemaValid": 67,
+    "sourcesVerified": 67,
+    "rederived": 67,
     "codeExecuted": 0,
-    "expertReviewPending": 58
+    "expertReviewPending": 67
   },
   "itemStatus": {
     "ds-separate-selection-and-final-test": {
@@ -460,6 +466,69 @@
       "expertReview": "pending"
     },
     "ds-state-assumptions-before-correcting-measurement-error": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-align-time-zero-to-avoid-immortal-time-bias": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-review-staggered-did-under-effect-heterogeneity": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-fit-hurdle-model-with-zero-truncated-count-component": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-use-ipcw-for-horizon-specific-survival-brier-score": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-interpret-nonsignificant-result-without-post-hoc-power": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-check-bayesian-model-with-posterior-predictions": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-estimate-uncertainty-for-ratio-experiment-metric": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-choose-bounded-interval-for-small-binomial-proportion": {
+      "schemaValid": true,
+      "sourcesVerified": true,
+      "rederivation": "agree",
+      "codeExecution": "n.a.",
+      "expertReview": "pending"
+    },
+    "ds-avoid-individual-inference-from-ecological-data": {
       "schemaValid": true,
       "sourcesVerified": true,
       "rederivation": "agree",

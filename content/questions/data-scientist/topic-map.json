@@ -152,7 +152,7 @@
     },
     {
       "topic": "Statistical power and sample size",
-      "subtopics": ["effect size", "Type I and Type II errors", "prospective sample-size planning"],
+      "subtopics": ["effect size", "Type I and Type II errors", "prospective sample-size planning", "limitations of post-hoc power"],
       "sources": [{
         "title": "TTestIndPower.solve_power",
         "publisher": "statsmodels documentation",
@@ -161,6 +161,14 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "statsmodels 0.15.0 stable documentation; independent two-sample t-test"
+      }, {
+        "title": "The Interpretation of Statistical Power after the Data have been Gathered",
+        "publisher": "Current Psychology via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286546/",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Open-access methodological review accessed 2026-11-05"
       }]
     },
     {
@@ -343,7 +351,7 @@
     },
     {
       "topic": "Survival analysis",
-      "subtopics": ["right censoring", "observed event versus censor time", "follow-up windows", "competing events and cumulative incidence", "proportional hazards diagnostics", "cause-specific hazard and cumulative incidence"],
+      "subtopics": ["right censoring", "observed event versus censor time", "follow-up windows", "competing events and cumulative incidence", "proportional hazards diagnostics", "cause-specific hazard and cumulative incidence", "IPCW survival prediction error"],
       "sources": [{
         "title": "Introduction to survival analysis",
         "publisher": "lifelines documentation",
@@ -360,6 +368,14 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "Peer-reviewed review published 2024"
+      }, {
+        "title": "On the estimation of inverse-probability-of-censoring weights for the evaluation of survival prediction error",
+        "publisher": "PLOS ONE via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11785332/",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Open-access methodological article accessed 2026-11-05"
       }]
     },
     {
@@ -463,7 +479,7 @@
     },
     {
       "topic": "Count-data regression",
-      "subtopics": ["Poisson mean-variance assumption", "overdispersion diagnostics", "negative-binomial and zero-inflated alternatives"],
+      "subtopics": ["Poisson mean-variance assumption", "overdispersion diagnostics", "negative-binomial and zero-inflated alternatives", "hurdle and zero-truncated count models"],
       "sources": [{
         "title": "An empirical approach to determine a threshold for assessing overdispersion in Poisson and negative binomial models for count data",
         "publisher": "Communications in Statistics via PubMed Central",
@@ -472,6 +488,14 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "Peer-reviewed article published 2018"
+      }, {
+        "title": "Hurdle and truncated count models",
+        "publisher": "statsmodels documentation",
+        "url": "https://www.statsmodels.org/stable/examples/notebooks/generated/count_hurdle.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "statsmodels 0.15.0 documentation accessed 2026-11-05"
       }]
     },
     {
@@ -615,6 +639,92 @@
         "volatility": "Stable",
         "last_verified": "2026-11-04",
         "versions_checked": "Peer-reviewed STRATOS guidance published 2020"
+      }]
+    },
+    {
+      "topic": "Target trial emulation and time zero",
+      "subtopics": ["eligibility and assignment alignment", "immortal time bias", "treatment grace periods"],
+      "sources": [{
+        "title": "Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4832051/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Open-access target-trial emulation paper accessed 2026-11-04"
+      }, {
+        "title": "Target Trial Emulation Using Hospital-Based Observational Data: Demonstration and Application in COVID-19",
+        "publisher": "PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10053871/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Stable",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Open-access target-trial emulation paper accessed 2026-11-04"
+      }]
+    },
+    {
+      "topic": "Staggered difference-in-differences",
+      "subtopics": ["heterogeneous treatment effects", "negative weights", "forbidden comparisons", "group-time average treatment effects"],
+      "sources": [{
+        "title": "Advances in Difference-in-differences Methods for Policy Evaluation Research",
+        "publisher": "Epidemiology via PMC",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11305929/",
+        "retrieved_date": "2026-11-04",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-04",
+        "versions_checked": "Epidemiology 2024;35(5):628–637"
+      }]
+    },
+    {
+      "topic": "Bayesian posterior predictive checks",
+      "subtopics": ["replicated data", "model adequacy", "convergence versus fit"],
+      "sources": [{
+        "title": "Posterior and Prior Predictive Checks",
+        "publisher": "Stan User's Guide",
+        "url": "https://mc-stan.org/docs/stan-users-guide/posterior-predictive-checks.html",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Stan User's Guide, posterior and prior predictive checks accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Ratio metrics in online experiments",
+      "subtopics": ["ratio of additive metrics", "numerator-denominator covariance", "delta-method inference"],
+      "sources": [{
+        "title": "Setting the duration of online A/B experiments",
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2408.02830",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Moderate",
+        "last_verified": "2026-11-05",
+        "versions_checked": "arXiv:2408.02830 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Binomial proportion confidence intervals",
+      "subtopics": ["Wald interval boundaries", "Wilson and Agresti-Coull intervals", "exact intervals"],
+      "sources": [{
+        "title": "Estimating Instrument Performance: with Confidence Intervals and Confidence Bounds",
+        "publisher": "National Institute of Standards and Technology",
+        "url": "https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.2119.pdf",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "NIST Technical Note 2119 accessed 2026-11-05"
+      }]
+    },
+    {
+      "topic": "Ecological inference and levels of analysis",
+      "subtopics": ["aggregate-to-individual inference", "population versus contextual effects", "cross-level assumptions"],
+      "sources": [{
+        "title": "Three Criteria for Ecological Fallacy",
+        "publisher": "Environmental Health Perspectives via PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3237367/",
+        "retrieved_date": "2026-11-05",
+        "volatility": "Stable",
+        "last_verified": "2026-11-05",
+        "versions_checked": "Open-access article accessed 2026-11-05"
       }]
     }
   ]
