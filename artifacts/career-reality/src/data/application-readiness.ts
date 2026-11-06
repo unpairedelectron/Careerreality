@@ -88,13 +88,13 @@ export const applicationReadiness: ApplicationReadinessEntry[] = [
       { label: "Mobile", status: "warning", detail: "Responsive UI exists; device-specific calculator verification remains incomplete." },
       { label: "Privacy", status: "warning", detail: "Personal salary inputs are calculated in the browser and must not be added to URLs or analytics." },
       { label: "Security", status: "blocked", detail: "The workspace dependency audit reports 1 critical, 12 high, and 10 moderate findings. HoundDog returned zero findings; dependency remediation remains open." },
-      { label: "Indexability", status: "blocked", detail: "Keep the calculator noindex until tax-review and staging release gates are satisfied." },
+      { label: "Indexability", status: "warning", detail: "The owner authorized indexing on 6 November 2026 while qualified tax/payroll review remains incomplete; keep estimate-only and manual-PF disclosures." },
     ],
     tests: [
       { name: "CTC/tax calculation unit suite", status: "passed", detail: "13 focused boundary and worked-example tests passed; this does not replace qualified tax review." },
       { name: "Route/browser verification", status: "partial", detail: "Three calculator UI scenarios and the public route hydration check passed; signed-in, assistive-technology, and device interaction review remains incomplete." },
     ],
-    recommendation: "BLOCKED BY HUMAN INPUT — retain estimate-only language, noindex the route, and request qualified review of tax-year rules and payroll assumptions before release.",
+    recommendation: "BLOCKED BY HUMAN INPUT — retain estimate-only language and manual PF inputs; qualified review of tax-year rules and payroll assumptions remains incomplete. Local indexing is owner-authorized; publication is separate.",
   },
   {
     id: "salary-reality",

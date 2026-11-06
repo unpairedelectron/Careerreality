@@ -97,11 +97,11 @@ test.describe("public SEO foundations", () => {
       expect(head.canonicalCount).toBe(1);
       expect(head.ogType).toBe(route.type);
       expect(head.schemaCount).toBe(3);
-      expect(head.robots).toMatch(/noindex/);
+      expect(head.robots).toMatch(/index, follow/);
     }
   });
 
-  test("serves an XML sitemap without quarantined routes or calculator state", async ({ request }) => {
+  test("serves an XML sitemap with the CTC calculator but without quarantined routes or calculator state", async ({ request }) => {
     const response = await request.get("/sitemap.xml");
     const body = await response.text();
 
@@ -112,7 +112,7 @@ test.describe("public SEO foundations", () => {
       .map((match) => new URL(match[1]).pathname);
     expect(sitemapPaths).not.toContain("/search/");
     expect(sitemapPaths).not.toContain("/articles/");
-    expect(sitemapPaths).not.toContain("/salary-calculator/");
+    expect(sitemapPaths).toContain("/salary-calculator/");
     expect(sitemapPaths.some((path) => /^\/article\//.test(path))).toBe(false);
     expect(sitemapPaths.some((path) => /^\/companies\/[^/]+\/$/.test(path))).toBe(false);
     expect(sitemapPaths.some((path) => /^\/(?:category|topic-clusters)\//.test(path))).toBe(false);
@@ -179,7 +179,7 @@ test.describe("public SEO foundations", () => {
     expect(response.ok()).toBeTruthy();
     const guide = await response.text();
     expect(guide).toContain("# CareerReality");
-    expect(guide).not.toContain("https://careerreality.in/salary-calculator/");
+    expect(guide).toContain("https://careerreality.in/salary-calculator/");
     for (const path of ["/guides/", "/rules/", "/layoffs/", "/layoff-runway/", "/compass/", "/offer-comparison/"]) {
       expect(guide).toContain(`https://careerreality.in${path}`);
     }

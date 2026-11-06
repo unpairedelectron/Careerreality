@@ -26,4 +26,4 @@
 - Worked examples are generated from the same calculation module used by the UI and route snapshots. They are hypothetical examples, not typical or recommended compensation.
 - Four examples use ₹8L, ₹12L, ₹20L and ₹40L CTC. Their fixed/target-variable split, 50% basic-pay input, manual PF, professional-tax and other employer-cost inputs are recorded in `CLAIM_REGISTER.csv`.
 - Tax tests passed 14/14, including tax-band/rebate boundaries, zero/full target-variable cases, PF handling, surcharge cases and the ₹20L illustration. The example outputs are covered by the shared-model tests.
-- No qualified Indian tax/payroll reviewer has signed off. Keep the calculator `noindex` until an independent reviewer checks the rules, assumptions, edge cases and examples.
+- No qualified Indian tax/payroll reviewer has signed off. On 2026-11-06, the owner directed local search indexability before sign-off. Preserve estimate-only and manual-PF disclosures; do not describe the model as independently reviewed. Publishing remains a separate decision.
