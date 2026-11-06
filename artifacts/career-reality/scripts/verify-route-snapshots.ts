@@ -622,10 +622,24 @@ if (!notFoundHtml.includes('content="noindex, follow"') || !notFoundHtml.include
 const advertisingMarkers = [
   "pagead2.googlesyndication.com",
   "adsbygoogle",
-  "ca-pub-",
   "doubleclick.net",
 ];
-const advertisingMarker = advertisingMarkers.find((marker) => publicText.toLowerCase().includes(marker.toLowerCase()));
+const adsenseAccountTags = [...publicText.matchAll(/<meta\b(?=[^>]*\bname=["']google-adsense-account["'])[^>]*>/gi)]
+  .map(([tag]) => tag);
+if (
+  adsenseAccountTags.length === 0 ||
+  adsenseAccountTags.some((tag) =>
+    !/^<meta\s+name="google-adsense-account"\s+content="ca-pub-3766621537317806"\s*\/?>$/i.test(tag)
+  )
+) {
+  throw new Error("The public build must contain only the approved AdSense ownership meta tag.");
+}
+const publicTextWithoutOwnershipTag = publicText.replace(
+  /<meta\b(?=[^>]*\bname=["']google-adsense-account["'])[^>]*>/gi,
+  "",
+);
+const advertisingMarker = advertisingMarkers.find((marker) => publicTextWithoutOwnershipTag.toLowerCase().includes(marker.toLowerCase()))
+  ?? (publicTextWithoutOwnershipTag.toLowerCase().includes("ca-pub-") ? "ca-pub-" : undefined);
 if (advertisingMarker) throw new Error(`Advertising marker found in public build output: ${advertisingMarker}`);
 const forbiddenStrings = [
   "source citation unavailable",
