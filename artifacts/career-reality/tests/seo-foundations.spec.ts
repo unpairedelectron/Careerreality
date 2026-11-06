@@ -17,11 +17,11 @@ test.describe("public SEO foundations", () => {
   test("renders complete, route-specific trust pages", async ({ page }) => {
     const routes = [
       { path: "/about", heading: "CareerReality, made for consequential decisions.", marker: "Current public scope" },
-      { path: "/team", heading: "Author and review details.", marker: "Attribution status" },
+      { path: "/team", heading: "People behind CareerReality.", marker: "Affiliation" },
       { path: "/editorial", heading: "Evidence, limits, and uncertainty.", marker: "Evidence before conclusion" },
-      { path: "/privacy-policy", heading: "What the public tools and contact form store.", marker: "Contact message records" },
+      { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "Contact message records" },
       { path: "/terms", heading: "Limits and use of CareerReality.", marker: "Tools and guides" },
-      { path: "/contact", heading: "Contact CareerReality Editorial.", marker: "Send a message." },
+      { path: "/contact", heading: "Contact CareerReality Editorial.", marker: "Email and operator" },
     ];
 
     for (const route of routes) {
@@ -31,24 +31,20 @@ test.describe("public SEO foundations", () => {
       await expect(page.getByText(route.marker, { exact: true })).toBeVisible();
       await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
       await expect(page.getByRole("link", { name: "Contact" }).first()).toBeVisible();
-      await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(2);
+      await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(3);
     }
 
     await page.goto("/about", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("#identity")).toContainText("No owner-approved individual author or reviewer record is available for publication.");
-    await expect(page.locator("#identity")).toContainText("No legal entity name is published.");
+    await expect(page.locator("#identity")).toContainText("Doffysoft pvt. Limited");
+    await expect(page.locator("#identity")).toContainText("Hinjewadi Phase 3, Pune");
     const siteSchema = JSON.parse((await page.locator('script[data-career-seo-schema="site"]').textContent()) ?? "{}");
     const graph = siteSchema["@graph"] as Array<Record<string, unknown>>;
     expect(graph.some((entry) => entry["@type"] === "Person")).toBe(false);
-    expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "CareerReality" && entry.email === "hello@careerreality.in")).toBe(true);
+    expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
 
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
-    const contactForm = page.getByTestId("form-contact");
-    await expect(contactForm.locator('input[autocomplete="name"]')).toBeVisible();
-    await expect(contactForm.locator('input[autocomplete="email"]')).toBeVisible();
-    await expect(contactForm.locator("select")).toBeVisible();
-    await expect(contactForm.locator("textarea")).toBeVisible();
-    await expect(page.getByText("hello@careerreality.in", { exact: false }).first()).toBeVisible();
+    await expect(page.locator('a[href="mailto:hello@careerreality.in"]').first()).toBeVisible();
+    await expect(page.getByTestId("form-contact")).toHaveCount(0);
   });
 
   test("does not render unknown article routes in the client application", async ({ page }) => {
