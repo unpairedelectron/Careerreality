@@ -27,7 +27,9 @@ export type LayoffEvent = {
   updatedAt: string;
   geography: string;
   sector?: string;
-  coverageNote?: string;
+  coverageNote: string;
+  readerCheck: string;
+  updateNote: string;
 };
 
 const events = eventData as LayoffEvent[];
@@ -306,19 +308,26 @@ function LayoffEventDetail() {
           <div><span>REPORTED SCALE</span><strong data-testid="text-event-scale">{event.scale}</strong></div>
           <div><span>GEOGRAPHY</span><strong data-testid="text-event-geography">{event.geography}</strong></div>
           <div><span>EVENT DATE</span><strong>{formatDate(event.date)}</strong></div>
-          <div><span>RECORD UPDATED</span><strong>{formatDate(event.updatedAt)}</strong></div>
+          <div><span>COPY UPDATED</span><strong>{formatDate(event.updatedAt)}</strong></div>
         </div>
+        <aside className="detail-method" data-testid="text-event-update-note"><strong>Page update</strong><p>{event.updateNote}</p></aside>
         <section className="detail-source" aria-labelledby="detail-source-heading">
           <div className="detail-source-icon"><ExternalLink size={18} aria-hidden="true" /></div>
           <div><p className="layoff-eyebrow">Primary reporting / {event.sourceLabel}</p><h2 id="detail-source-heading">Go back to what was published.</h2><p>Source published {formatDate(event.sourcePublishedAt)}. The scale and summary above are attributed to this report. A reported plan is not proof of a completed count or present-day company conditions.</p><a href={event.sourceUrl} target="_blank" rel="noreferrer" data-testid="link-event-source">Read the original source <ArrowUpRight size={15} aria-hidden="true" /></a></div>
         </section>
         <aside className="detail-method" data-testid="text-event-method"><strong>How to read this record</strong><p>{event.status === 'Confirmed' ? 'Confirmed means the linked reporting describes a direct company confirmation. This does not establish a final affected-role count.' : event.status === 'Reported' ? 'Reported means the information was published by a named media source. It is not represented here as a direct company confirmation.' : 'Rumour means the claim remains unverified. Do not use it as a basis for decisions.'} Dates make this record auditable; they do not make it current.</p></aside>
+        <section className="detail-method" aria-labelledby="event-coverage-heading">
+          <strong id="event-coverage-heading">What this report does not establish</strong>
+          <p>{event.coverageNote}</p>
+          <strong>What to verify for your situation</strong>
+          <p>{event.readerCheck}</p>
+        </section>
         <LayoffResponsePlanner
           company={event.company}
           geography={event.geography}
           status={event.status}
           summary={event.summary}
-          coverageNote={event.coverageNote ?? 'The available report may not cover every team, location, or role. Check the source and seek a direct clarification before treating it as personal news.'}
+          coverageNote={event.coverageNote}
         />
         <div className="detail-next"><Link href="/layoffs/#event-tracker" data-testid="link-detail-more-events">Back to all sourced records <ArrowLeft size={14} aria-hidden="true" /></Link><Link href="/layoffs/#first-24-hours" data-testid="link-detail-support">Need practical next steps? <ArrowUpRight size={14} aria-hidden="true" /></Link></div>
       </main>

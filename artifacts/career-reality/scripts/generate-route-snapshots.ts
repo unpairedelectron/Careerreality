@@ -1597,7 +1597,10 @@ function renderLayoffSnapshotContent(route: string, meta: StaticRouteMeta): Snap
     lead: event.summary,
     sections: [
       { heading: "What the source says", body: event.scale },
-      { heading: "Status and limits", body: `${event.status} · ${event.geography} · Event date: ${event.date}. Last reviewed: ${event.updatedAt}. This entry does not establish current headcount, a future layoff, or an individual worker’s job security.` },
+      { heading: "Status and limits", body: `${event.status} · ${event.geography} · Event date: ${event.date}. Copy updated: ${event.updatedAt}. This entry does not establish current headcount, a future layoff, or an individual worker’s job security.` },
+      { heading: "Page update", body: event.updateNote },
+      { heading: "What this report does not establish", body: event.coverageNote },
+      { heading: "What to verify for your situation", body: event.readerCheck },
       { heading: "Source", html: `<p><a href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(event.sourceLabel)} report, published ${escapeHtml(event.sourcePublishedAt)}</a></p>` },
     ],
     relatedLinks: [

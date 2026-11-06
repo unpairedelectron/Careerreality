@@ -21,7 +21,18 @@ test("layoff event records have unique slugs, dated sources, and valid statuses"
     assert.match(event.updatedAt, /^\d{4}-\d{2}-\d{2}$/);
     assert.match(event.sourceUrl, /^https:\/\//);
     assert.ok(event.sourceLabel.trim());
+    assert.ok(event.coverageNote.length >= 40, `${event.slug} needs a specific evidence limit`);
+    assert.ok(event.readerCheck.length >= 40, `${event.slug} needs a practical verification step`);
+    assert.ok(event.updateNote.length >= 30, `${event.slug} needs a transparent change note`);
   }
+});
+
+test("each event report explains its evidence limits and a case-specific next check", () => {
+  const normalizedChecks = events.map((event) => event.readerCheck.trim().toLowerCase());
+  assert.equal(new Set(normalizedChecks).size, events.length, "Next checks should not be duplicated across event pages.");
+  const normalizedLimits = events.map((event) => event.coverageNote.trim().toLowerCase());
+  assert.equal(new Set(normalizedLimits).size, events.length, "Evidence limits should be specific to each event.");
+  for (const event of events) assert.ok(event.readerCheck.includes(".") || event.readerCheck.includes("?"));
 });
 
 test("every layoff event has a registered public record route", () => {
@@ -35,16 +46,21 @@ test("every layoff event has a registered public record route", () => {
 });
 
 test("recent sourced reports identify their sector and preserve source uncertainty", () => {
-  const added = events.filter((event) => event.updatedAt === "2026-10-28");
-  assert.equal(added.length, 5);
-  assert.ok(added.every((event) => event.sector && event.sourceLabel === "Reuters"));
+  const added = events.filter((event) => event.sourcePublishedAt >= "2026-09-01");
+  assert.equal(added.length, 6);
+  assert.ok(added.every((event) => event.sector));
   assert.match(added.find((event) => event.company === "PayPal").summary, /citing a person familiar/i);
   assert.match(added.find((event) => event.company === "Adidas").scale, /exact number not disclosed/i);
-  assert.match(added.find((event) => event.company === "Amazon").scale, /India count not disclosed/i);
+  assert.match(added.find((event) => event.slug === "amazon-stores-workforce-reduction-2026").scale, /India count not disclosed/i);
   const hsbc = events.find((event) => event.company === "HSBC");
   assert.equal(hsbc.status, "Reported");
   assert.equal(hsbc.sourceLabel, "Reuters");
   assert.match(hsbc.coverageNote, /not an India-wide reduction/i);
+});
+
+test("the event copy update date and note are explicit rather than presented as a source review", () => {
+  assert.ok(events.every((event) => event.updatedAt === "2026-11-06"));
+  assert.ok(events.every((event) => event.updateNote.includes("; no ") || /remains unverified/i.test(event.updateNote)));
 });
 
 test("homepage latest event cards include the newest Amazon and Microsoft reports", () => {

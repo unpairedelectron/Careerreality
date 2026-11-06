@@ -9,10 +9,12 @@
     "sourceLabel": "Reuters via U.S. News",
     "sourceUrl": "https://money.usnews.com/investing/news/articles/2026-10-28/amazon-cuts-more-jobs-in-devices-unit-after-flurry-of-product-rollouts",
     "sourcePublishedAt": "2026-10-28",
-    "updatedAt": "2026-10-30",
+    "updatedAt": "2026-11-06",
     "geography": "United States · Devices and Services",
     "sector": "Technology / Consumer devices",
-    "coverageNote": "The report concerns Amazon's U.S. Devices and Services unit. It does not establish an India impact or a final count beyond the estimate attributed to a person familiar with the matter."
+    "coverageNote": "The report concerns Amazon's U.S. Devices and Services unit. It does not establish an India impact or a final count beyond the estimate attributed to a person familiar with the matter.",
+    "readerCheck": "If you work for Amazon outside this U.S. unit, check your own team and location through company communications. Do not apply this estimate to another business or country.",
+    "updateNote": "Clarified that the U.S. unit report does not establish India impact; no new company data was checked."
   },
   {
     "slug": "microsoft-voluntary-buyout-offer-2026",
@@ -24,10 +26,12 @@
     "sourceLabel": "BBC News",
     "sourceUrl": "https://www.bbc.co.uk/news/articles/c6m24klyjr8no",
     "sourcePublishedAt": "2026-10-29",
-    "updatedAt": "2026-10-30",
+    "updatedAt": "2026-11-06",
     "geography": "Canada, India, UK and US · eligible teams",
     "sector": "Technology",
-    "coverageNote": "This is a reported voluntary buyout offer, not a confirmed count of job losses. The reported 60,000 figure is the offer's reach; it does not show how many people accepted or whether any particular India-based role is affected."
+    "coverageNote": "This is a reported voluntary buyout offer, not a confirmed count of job losses. The reported 60,000 figure is the offer's reach; it does not show how many people accepted or whether any particular India-based role is affected.",
+    "readerCheck": "For an affected team, distinguish offer eligibility from accepted offers and actual departures. The reported reach alone cannot answer either question.",
+    "updateNote": "Added the distinction between offer reach and departures; no acceptance count was added."
   },
   {
     "slug": "byjus-workforce-restructuring-2023",
@@ -39,9 +43,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/indias-byjus-says-aims-profitability-by-march-2023-2022-10-12",
     "sourcePublishedAt": "2022-10-12",
-    "updatedAt": "2026-10-27",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Education technology"
+    "sector": "Education technology",
+    "coverageNote": "This is a 2022 report about a planned reduction. It does not establish how many roles were ultimately cut or BYJU'S current workforce or hiring position.",
+    "readerCheck": "Treat this as historical context only. It cannot establish current openings, present-day financial health, or the conditions of an individual role.",
+    "updateNote": "Marked the record as historical and separated the announced plan from an outcome; no current headcount was checked."
   },
   {
     "slug": "swiggy-workforce-reduction-2023",
@@ -53,9 +60,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/markets/asia/indias-swiggy-lay-off-380-employees-document-2023-01-20",
     "sourcePublishedAt": "2023-01-20",
-    "updatedAt": "2026-10-27",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Delivery / E-commerce"
+    "sector": "Delivery / E-commerce",
+    "coverageNote": "The 380 figure comes from contemporaneous reporting in January 2023. This record does not establish the completed outcome or Swiggy's present workforce and hiring position.",
+    "readerCheck": "Use the event date and source date—not the company name alone—to assess relevance. For a current role decision, check recent, role-specific information.",
+    "updateNote": "Clarified that the 2023 figure does not establish current workforce conditions; no new staffing data was checked."
   },
   {
     "slug": "paytm-restructuring-2023",
@@ -67,9 +77,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/technology/indias-paytm-confirms-axing-jobs-bid-cut-costs-2023-12-25",
     "sourcePublishedAt": "2023-12-25",
-    "updatedAt": "2026-10-27",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Fintech"
+    "sector": "Fintech",
+    "coverageNote": "Reuters reported that Paytm confirmed job reductions but did not provide a final affected-role count in this record. The report does not identify every team or establish current staffing.",
+    "readerCheck": "Do not infer the size or team-level impact from the confirmation alone. Look for a dated company statement or ask for written information about the specific role.",
+    "updateNote": "Clarified the absence of a final role count and team-level scope; no new count was checked."
   },
   {
     "slug": "tcs-layoffs",
@@ -81,9 +94,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/indian-tech-company-tcs-cut-workforce-by-2-affecting-more-than-12000-jobs-2025-07-27/",
     "sourcePublishedAt": "2025-07-27",
-    "updatedAt": "2026-10-27",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Information technology"
+    "sector": "Information technology",
+    "coverageNote": "This records an announced FY2026 reduction, not a verified count of completed exits. The reported 2% and more than 12,000 roles describe the announcement; they do not identify an individual's role or team.",
+    "readerCheck": "Separate the announced plan from completed departures. For a specific position, check the relevant business unit, timeline, and written company communication.",
+    "updateNote": "Separated the FY2026 announcement from completed exits; no completion count was added."
   },
   {
     "slug": "ola-electric-layoffs",
@@ -95,9 +111,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/business/world-at-work/indian-electric-scooter-firm-ola-electric-says-it-will-lay-off-5-workforce-2026-01-30/",
     "sourcePublishedAt": "2026-01-30",
-    "updatedAt": "2026-10-27",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Electric vehicles"
+    "sector": "Electric vehicles",
+    "coverageNote": "Reuters described a planned reduction of about 5% and an estimate of roughly 620 roles based on reported headcount. The estimate is not a final exit count or a current workforce total.",
+    "readerCheck": "Keep the percentage and estimated role count attributed to the report. This source does not identify which individual teams or roles were affected.",
+    "updateNote": "Clarified that the headcount-derived estimate is not an exit count; no updated workforce data was checked."
   },
   {
     "slug": "opendoor-india-operations-closure-2026",
@@ -109,9 +128,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/us-real-estate-firm-opendoor-shuts-india-operations-lays-off-250-2026-06-11",
     "sourcePublishedAt": "2026-06-11",
-    "updatedAt": "2026-10-28",
+    "updatedAt": "2026-11-06",
     "geography": "India · Hyderabad and Bengaluru",
-    "sector": "Real estate technology"
+    "sector": "Real estate technology",
+    "coverageNote": "Reuters reported an announced closure of Opendoor's India operations affecting 250 local employees. This dated report does not describe current hiring or establish terms for any individual's employment.",
+    "readerCheck": "For a personal employment question, rely on the individual's written employer communication and contract. This company-level report cannot establish benefits, notice, or settlement terms.",
+    "updateNote": "Separated the announced closure from individual employment terms; no later hiring status was checked."
   },
   {
     "slug": "paypal-india-workforce-reduction-2026",
@@ -123,9 +145,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/paypal-cuts-220-india-jobs-part-previously-announced-restructuring-plan-source-2026-09-03",
     "sourcePublishedAt": "2026-09-03",
-    "updatedAt": "2026-10-28",
+    "updatedAt": "2026-11-06",
     "geography": "India",
-    "sector": "Fintech"
+    "sector": "Fintech",
+    "coverageNote": "The roughly 220 India-role figure is attributed to a person familiar with the matter. PayPal confirmed staffing changes but did not confirm that India-specific count in the cited statement.",
+    "readerCheck": "Keep the India count labelled as reported, not company-confirmed. Do not treat a global transformation statement as confirmation of a particular local role.",
+    "updateNote": "Clarified the source attribution for the India estimate; no additional company statement was checked."
   },
   {
     "slug": "adidas-india-technology-reduction-2026",
@@ -137,9 +162,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/adidas-cuts-jobs-india-technology-team-2026-09-16",
     "sourcePublishedAt": "2026-09-16",
-    "updatedAt": "2026-10-28",
+    "updatedAt": "2026-11-06",
     "geography": "India · Gurgaon and Chennai",
-    "sector": "Consumer goods / Technology"
+    "sector": "Consumer goods / Technology",
+    "coverageNote": "Adidas confirmed reductions in its India technology team and described the impact as less than 20%, without disclosing an exact count. The separate nearly 650 figure for Gurgaon and Chennai hubs is not stated as the same denominator.",
+    "readerCheck": "Do not convert the percentage into a precise number using the hub headcount: the source does not establish that denominator. The exact affected-role count remains undisclosed.",
+    "updateNote": "Clarified why the percentage cannot be converted using the separate hub headcount; no exact count was added."
   },
   {
     "slug": "amazon-stores-workforce-reduction-2026",
@@ -151,10 +179,12 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/business/world-at-work/amazon-makes-fresh-job-cuts-mainly-retail-division-2026-10-08",
     "sourcePublishedAt": "2026-10-08",
-    "updatedAt": "2026-10-28",
+    "updatedAt": "2026-11-06",
     "geography": "Global · India affected; local count not disclosed",
     "sector": "Technology / Retail",
-    "coverageNote": "Reuters described cuts mainly in Amazon's Stores unit and said employees in India, the US, and the UK were among those affected. No India-only count or complete list of affected teams was stated; this report does not establish that any particular Amazon role is affected."
+    "coverageNote": "Reuters described cuts mainly in Amazon's Stores unit and said employees in India, the US, and the UK were among those affected. No India-only count or complete list of affected teams was stated; this report does not establish that any particular Amazon role is affected.",
+    "readerCheck": "Keep the global estimate separate from local impact. The report does not say how many India roles were affected or identify a complete list of teams.",
+    "updateNote": "Separated the global estimate from undisclosed India impact; no local count was added."
   },
   {
     "slug": "hsbc-uk-wealth-restructuring-2026",
@@ -166,9 +196,11 @@
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/business/finance/hsbc-plans-job-cuts-across-uk-wealth-business-ai-push-ft-reports-2026-10-07",
     "sourcePublishedAt": "2026-10-07",
-    "updatedAt": "2026-10-28",
+    "updatedAt": "2026-11-06",
     "geography": "United Kingdom · wealth management; India impact not reported",
     "sector": "Banking / Wealth management",
-    "coverageNote": "The report concerns HSBC's UK wealth-management business, not an India-wide reduction. Reuters said consultation was underway and the affected staff were expected to leave by the end of October; the later outcome and an absolute headcount are not established here. This planner uses INR and does not model UK employment terms."
+    "coverageNote": "The report concerns HSBC's UK wealth-management business, not an India-wide reduction. Reuters said consultation was underway and the affected staff were expected to leave by the end of October; the later outcome and an absolute headcount are not established here. This planner uses INR and does not model UK employment terms.",
+    "readerCheck": "This is a reported UK proposal, and its stated expected departure period has passed. Check for a later outcome before treating it as current; do not apply UK reporting to an India role.",
+    "updateNote": "Flagged that the reported departure period has passed; the later outcome remains unverified."
   }
 ]
