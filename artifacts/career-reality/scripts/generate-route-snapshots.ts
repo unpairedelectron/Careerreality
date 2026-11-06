@@ -641,7 +641,7 @@ function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotConte
       lead: "CareerReality helps Indian professionals look beyond an offer headline—at money, the work, the evidence, and the life around it. Start with what you can check.",
       sections: [
         { heading: "Layoff support and sourced updates", body: "Recent dated reports are historical source records, not a current headcount, job-safety signal, prediction, or advice to act. Rumours are excluded; check each source date and scope." },
-        { heading: "Latest sourced event records", html: `<p>Data reviewed through ${escapeHtml(formatSnapshotDate(lastUpdated))}.</p><ul>${recentEventRows}</ul><p><a href="${escapeHtml(publicPath("/layoffs"))}">Open the Layoff Hub</a> · <a href="${escapeHtml(publicPath("/layoff-runway"))}">Plan a cash runway</a> · <a href="${escapeHtml(publicPath("/layoffs"))}#email-alerts">Request sourced email alerts</a></p>` },
+        { heading: "Latest sourced event records", html: `<p>Record copy updated through ${escapeHtml(formatSnapshotDate(lastUpdated))}. This date marks edits to these records, not a fresh confirmation of current workforce conditions or every reported outcome.</p><ul>${recentEventRows}</ul><p><a href="${escapeHtml(publicPath("/layoffs"))}">Open the Layoff Hub</a> · <a href="${escapeHtml(publicPath("/layoff-runway"))}">Plan a cash runway</a> · <a href="${escapeHtml(publicPath("/layoffs"))}#email-alerts">Request sourced email alerts</a></p>` },
         { heading: "Start with a decision tool", html: `<ul>${tools.map((entry) => `<li><a href="${escapeHtml(publicPath(entry.path))}">${escapeHtml(entry.title)}</a> — ${escapeHtml(entry.description)}</li>`).join("")}</ul>` },
         { heading: "Read a sourced guide", html: `<ul>${guides.map((entry) => `<li><a href="${escapeHtml(publicPath(entry.path))}">${escapeHtml(entry.title)}</a> — ${escapeHtml(entry.description)}</li>`).join("")}</ul>` },
         { heading: "Browse CareerReality", html: `<ul><li><a href="${escapeHtml(publicPath("/tools"))}">All tools</a></li><li><a href="${escapeHtml(publicPath("/guides"))}">All guides</a></li><li><a href="${escapeHtml(publicPath("/rules"))}">Rules and Data Library</a></li><li><a href="${escapeHtml(publicPath("/companies"))}">Employer due-diligence checklist</a></li><li><a href="${escapeHtml(publicPath("/sources"))}">Sources and data</a></li></ul>` },
@@ -1572,7 +1572,7 @@ function renderLayoffSnapshotContent(route: string, meta: StaticRouteMeta): Snap
     ).join("");
     const lastUpdated = layoffEvents.reduce((latest, event) => event.updatedAt > latest ? event.updatedAt : latest, "");
     return {
-      lead: `Use the dated tracker as a starting point, not a prediction about your role. Last updated ${formatSnapshotDate(lastUpdated)}. Company announcements, reported events, and rumours are different evidence states.`,
+      lead: `Use the dated tracker as a starting point, not a prediction about your role. Record copy updated ${formatSnapshotDate(lastUpdated)}; this is not confirmation of current outcomes. Company announcements, reported events, and rumours are different evidence states.`,
       sections: [
         { heading: "Dated company reports", html: `<ul>${rows}</ul>` },
         { heading: "Request sourced email alerts", body: "The interactive alert form asks for an email address; city and sector are optional. Confirm by email before alerts begin. Rumours are never sent. The form appears when the interactive page loads.", id: "email-alerts" },

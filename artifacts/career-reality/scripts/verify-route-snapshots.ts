@@ -167,8 +167,8 @@ for (const route of routeRegistry.routes.filter((entry) => entry.render === "sna
   if (!navigation) throw new Error(`Missing public navigation in initial HTML on ${route.path}`);
   const navigationLinks = [...navigation.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)];
   if (route.path === "/") {
-    const principalRoutes = [
-      "/tools", "/salary-calculator", "/guides", "/rules", "/layoffs", "/sitemap",
+      const principalRoutes = [
+        "/tools", "/guides", "/rules", "/layoffs", "/sitemap",
       ...routeRegistry.routes.filter((entry) => entry.kind === "trust" && entry.indexability === "indexable").map((entry) => entry.path),
     ];
     for (const destination of principalRoutes) {

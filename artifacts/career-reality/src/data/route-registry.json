@@ -196,8 +196,8 @@
       "title": "CTC Calculator India: Estimate In-Hand Pay",
       "description": "Enter fixed pay, target variable, a PF basis and professional tax to estimate Tax Year 2026–27 default-regime in-hand cash; assumptions and limits are shown.",
       "render": "snapshot",
-      "indexability": "indexable",
-      "sitemap": true
+      "indexability": "noindex",
+      "sitemap": false
     },
     {
       "path": "/offer-comparison",

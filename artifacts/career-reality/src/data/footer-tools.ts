@@ -11,7 +11,7 @@ const footerToolLabels = [
 
 const routesByToolId = new Map(
   routeRegistry.routes
-    .filter((route) => route.kind === "tool" && route.indexability === "indexable")
+    .filter((route) => route.kind === "tool")
     .map((route) => [route.toolId, route]),
 );
 

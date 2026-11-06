@@ -106,7 +106,7 @@ function EventTracker() {
             {sectors.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
         </label>
-        <p data-testid="text-events-last-updated">Last updated {lastUpdated ? formatDate(lastUpdated) : '—'}</p>
+        <p data-testid="text-events-last-updated">Record copy updated {lastUpdated ? formatDate(lastUpdated) : '—'} · outcomes are not refreshed by this date.</p>
       </div>
       <p className="event-state-note" data-testid="text-event-state-note">Rumour means unverified. We do not treat it as fact or advice to act.</p>
       <div className="event-list" aria-live="polite" data-testid="list-layoff-events">

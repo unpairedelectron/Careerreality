@@ -37,7 +37,6 @@ Cite the specific page and its original sources where provided. Preserve source 
 
 ## Career tools and calculators
 
-- [CTC Calculator India: Estimate In-Hand Pay](https://careerreality.in/salary-calculator/): Enter fixed pay, target variable, a PF basis and professional tax to estimate Tax Year 2026–27 default-regime in-hand cash; assumptions and limits are shown.
 - [Compare Job Offers: CTC and Take-Home](https://careerreality.in/offer-comparison/): Compare two written CTC breakdowns with separate zero-variable and full-target take-home estimates, employer costs, and entered first-year transition costs.
 - [Compare Old vs New Tax for AY 2026–27](https://careerreality.in/tax-regime-comparison/): Compare Indian salary tax under old and new regimes for AY 2026–27, with deductions and rebate limits for residents under 60; verify against official sources.
 - [Gratuity Worksheet: Limited Formula Illustration](https://careerreality.in/gratuity-estimator/): Test a limited gratuity formula against entered wage and service details, with dated Ministry sources and clear exclusions; it is not an eligibility decision.

@@ -83,6 +83,7 @@ test.describe("public SEO foundations", () => {
         canonicalCount: document.querySelectorAll('link[rel="canonical"]').length,
         ogType: document.querySelector('meta[property="og:type"]')?.getAttribute("content"),
         schemaCount: document.querySelectorAll('script[type="application/ld+json"]').length,
+        robots: document.querySelector('meta[name="robots"]')?.getAttribute("content") ?? "",
         articleSchema: document.querySelector('script[data-career-seo-schema="article"]')?.textContent ?? "",
       }));
 
@@ -91,6 +92,7 @@ test.describe("public SEO foundations", () => {
       expect(head.canonicalCount).toBe(1);
       expect(head.ogType).toBe(route.type);
       expect(head.schemaCount).toBe(3);
+      expect(head.robots).toMatch(/noindex/);
     }
   });
 
@@ -105,6 +107,7 @@ test.describe("public SEO foundations", () => {
       .map((match) => new URL(match[1]).pathname);
     expect(sitemapPaths).not.toContain("/search/");
     expect(sitemapPaths).not.toContain("/articles/");
+    expect(sitemapPaths).not.toContain("/salary-calculator/");
     expect(sitemapPaths.some((path) => /^\/article\//.test(path))).toBe(false);
     expect(sitemapPaths.some((path) => /^\/companies\/[^/]+\/$/.test(path))).toBe(false);
     expect(sitemapPaths.some((path) => /^\/(?:category|topic-clusters)\//.test(path))).toBe(false);
@@ -171,7 +174,7 @@ test.describe("public SEO foundations", () => {
     expect(response.ok()).toBeTruthy();
     const guide = await response.text();
     expect(guide).toContain("# CareerReality");
-    expect(guide).toContain("https://careerreality.in/salary-calculator/");
+    expect(guide).not.toContain("https://careerreality.in/salary-calculator/");
     for (const path of ["/guides/", "/rules/", "/layoffs/", "/layoff-runway/", "/compass/", "/offer-comparison/"]) {
       expect(guide).toContain(`https://careerreality.in${path}`);
     }
