@@ -1601,6 +1601,12 @@ function renderLayoffSnapshotContent(route: string, meta: StaticRouteMeta): Snap
       { heading: "Page update", body: event.updateNote },
       { heading: "What this report does not establish", body: event.coverageNote },
       { heading: "What to verify for your situation", body: event.readerCheck },
+      ...(event.sourceUpdates?.length ? [{
+        heading: "Later reporting and clarifications",
+        html: event.sourceUpdates.map((update) =>
+          `<p><strong>${escapeHtml(update.sourceLabel)} · ${escapeHtml(formatSnapshotDate(update.sourcePublishedAt))}:</strong> ${escapeHtml(update.summary)} <a href="${escapeHtml(update.sourceUrl)}" target="_blank" rel="noopener noreferrer">Read this report</a></p>`,
+        ).join(""),
+      }] : []),
       { heading: "Source", html: `<p><a href="${escapeHtml(event.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(event.sourceLabel)} report, published ${escapeHtml(event.sourcePublishedAt)}</a></p>` },
     ],
     relatedLinks: [

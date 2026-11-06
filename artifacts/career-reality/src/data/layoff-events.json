@@ -54,18 +54,18 @@
     "slug": "swiggy-workforce-reduction-2023",
     "company": "Swiggy",
     "date": "2023-01-20",
-    "scale": "380 roles reported",
+    "scale": "380 roles reported in a planned reduction",
     "status": "Reported",
-    "summary": "Contemporaneous reporting described a reduction affecting 380 employees. This archive record reflects the published report and does not imply a current hiring or workforce position.",
+    "summary": "Reuters reported that Swiggy planned to lay off 380 employees, citing an internal email. This archive record does not establish the final outcome or Swiggy's current hiring or workforce position.",
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/markets/asia/indias-swiggy-lay-off-380-employees-document-2023-01-20",
     "sourcePublishedAt": "2023-01-20",
     "updatedAt": "2026-11-06",
     "geography": "India",
     "sector": "Delivery / E-commerce",
-    "coverageNote": "The 380 figure comes from contemporaneous reporting in January 2023. This record does not establish the completed outcome or Swiggy's present workforce and hiring position.",
+    "coverageNote": "Reuters described a planned reduction of 380 employees, citing an internal email; it did not establish in this report how many departures were completed. This record does not establish Swiggy's present workforce or hiring position.",
     "readerCheck": "Use the event date and source date—not the company name alone—to assess relevance. For a current role decision, check recent, role-specific information.",
-    "updateNote": "Clarified that the 2023 figure does not establish current workforce conditions; no new staffing data was checked."
+    "updateNote": "Corrected the summary to preserve Reuters' description as a plan; the later outcome was not verified."
   },
   {
     "slug": "paytm-restructuring-2023",
@@ -88,7 +88,7 @@
     "slug": "tcs-layoffs",
     "company": "Tata Consultancy Services",
     "date": "2025-07-27",
-    "scale": "Announced reduction of about 2% of its workforce; Reuters reported this as more than 12,000 roles.",
+    "scale": "Announced reduction of about 2% of its workforce; Reuters reported roughly 12,200 roles.",
     "status": "Confirmed",
     "summary": "Reuters reported that TCS said it would reduce its workforce by about 2% during FY2026, primarily affecting middle and senior management. This is an announcement, not a live measure of completed exits.",
     "sourceLabel": "Reuters",
@@ -97,9 +97,17 @@
     "updatedAt": "2026-11-06",
     "geography": "India",
     "sector": "Information technology",
-    "coverageNote": "This records an announced FY2026 reduction, not a verified count of completed exits. The reported 2% and more than 12,000 roles describe the announcement; they do not identify an individual's role or team.",
+    "coverageNote": "Reuters reported a plan for roughly 12,200 role reductions in FY2026. Later reporting says TCS's total headcount fell by 23,460 in FY2026 and that its layoff cycle was over, but a net headcount change is not a count of layoffs and does not establish how the announced plan was completed.",
     "readerCheck": "Separate the announced plan from completed departures. For a specific position, check the relevant business unit, timeline, and written company communication.",
-    "updateNote": "Separated the FY2026 announcement from completed exits; no completion count was added."
+    "updateNote": "Added FY2026 follow-up reporting while keeping net headcount change separate from the announced layoff count.",
+    "sourceUpdates": [
+      {
+        "sourceLabel": "People Matters",
+        "sourceUrl": "https://www.peoplematters.in/news/business/tcs-workforce-shrinks-by-24000-in-fy26-says-layoffs-over-hiring-remains-on-track-49257",
+        "sourcePublishedAt": "2026-04-15",
+        "summary": "Reports FY2026 headcount fell by 23,460 and says TCS's layoff cycle was complete. The net change includes more than layoffs and is not a final count for the 2025 announcement."
+      }
+    ]
   },
   {
     "slug": "ola-electric-layoffs",
@@ -139,18 +147,26 @@
     "slug": "paypal-india-workforce-reduction-2026",
     "company": "PayPal",
     "date": "2026-08-31",
-    "scale": "About 220 India roles reported",
-    "status": "Reported",
-    "summary": "Reuters reported roughly 220 India job cuts, citing a person familiar with the matter. PayPal confirmed staffing changes were part of its previously announced multi-year transformation but did not confirm the India count in the cited statement.",
+    "scale": "About 220 India employees affected",
+    "status": "Confirmed",
+    "summary": "Reuters initially reported roughly 220 India job cuts, citing a person familiar with the matter. In a September 3 response to The Hindu, PayPal said about 220 India employees were affected on August 31.",
     "sourceLabel": "Reuters",
     "sourceUrl": "https://www.reuters.com/world/india/paypal-cuts-220-india-jobs-part-previously-announced-restructuring-plan-source-2026-09-03",
     "sourcePublishedAt": "2026-09-03",
     "updatedAt": "2026-11-06",
     "geography": "India",
     "sector": "Fintech",
-    "coverageNote": "The roughly 220 India-role figure is attributed to a person familiar with the matter. PayPal confirmed staffing changes but did not confirm that India-specific count in the cited statement.",
-    "readerCheck": "Keep the India count labelled as reported, not company-confirmed. Do not treat a global transformation statement as confirmation of a particular local role.",
-    "updateNote": "Clarified the source attribution for the India estimate; no additional company statement was checked."
+    "coverageNote": "Reuters initially attributed the roughly 220 India-role figure to a source. In a September 3 response to The Hindu, PayPal said about 220 India employees were affected on August 31. The company disputed reports of larger cuts; its response did not detail contract-worker impacts.",
+    "readerCheck": "The company-confirmed figure applies to employees in India. The cited response does not establish effects on contract workers or any particular team or role.",
+    "updateNote": "Added PayPal's later statement to The Hindu confirming about 220 India employees were affected.",
+    "sourceUpdates": [
+      {
+        "sourceLabel": "The Hindu",
+        "sourceUrl": "https://www.thehindu.com/business/Industry/paypal-says-220-india-employees-affected-in-latest-restructuring/article71423168.ece",
+        "sourcePublishedAt": "2026-09-03",
+        "summary": "PayPal told The Hindu that about 220 India employees were affected by August 31 reductions, and disputed reports of higher counts."
+      }
+    ]
   },
   {
     "slug": "adidas-india-technology-reduction-2026",
@@ -165,9 +181,17 @@
     "updatedAt": "2026-11-06",
     "geography": "India · Gurgaon and Chennai",
     "sector": "Consumer goods / Technology",
-    "coverageNote": "Adidas confirmed reductions in its India technology team and described the impact as less than 20%, without disclosing an exact count. The separate nearly 650 figure for Gurgaon and Chennai hubs is not stated as the same denominator.",
-    "readerCheck": "Do not convert the percentage into a precise number using the hub headcount: the source does not establish that denominator. The exact affected-role count remains undisclosed.",
-    "updateNote": "Clarified why the percentage cannot be converted using the separate hub headcount; no exact count was added."
+    "coverageNote": "Adidas told Reuters the impact was below 20% of its India Technology organisation and did not give a count. A September 17 Times of India report cited an unverified estimate of 350 or more at the Gurgaon hub, while also reporting Adidas's below-20% statement. The figures have different stated scopes and do not establish an exact affected count.",
+    "readerCheck": "Keep the Gurgaon estimate attributed to the report and unverified; do not treat it as the company's count or combine it with a separate hub headcount to calculate an exact figure.",
+    "updateNote": "Added the conflicting, explicitly unverified Gurgaon estimate and retained the company's narrower statement.",
+    "sourceUpdates": [
+      {
+        "sourceLabel": "Times of India",
+        "sourceUrl": "https://timesofindia.indiatimes.com/articleshowprint/134302315.cms",
+        "sourcePublishedAt": "2026-09-17",
+        "summary": "Reports an unverified estimate of 350 or more affected at the Gurgaon hub, and separately says Adidas did not confirm that count and described the impact as below 20% of its India Technology organisation."
+      }
+    ]
   },
   {
     "slug": "amazon-stores-workforce-reduction-2026",
@@ -182,9 +206,17 @@
     "updatedAt": "2026-11-06",
     "geography": "Global · India affected; local count not disclosed",
     "sector": "Technology / Retail",
-    "coverageNote": "Reuters described cuts mainly in Amazon's Stores unit and said employees in India, the US, and the UK were among those affected. No India-only count or complete list of affected teams was stated; this report does not establish that any particular Amazon role is affected.",
-    "readerCheck": "Keep the global estimate separate from local impact. The report does not say how many India roles were affected or identify a complete list of teams.",
-    "updateNote": "Separated the global estimate from undisclosed India impact; no local count was added."
+    "coverageNote": "Reuters described cuts mainly in Amazon's Stores unit and said employees in India, the US, and the UK were among those affected, but its report gave no India-only count. A later Times of India report cited sources for about 130 India employees in the latest round and about 400 across three rounds that year; those are reported figures, not a company-confirmed total.",
+    "readerCheck": "Keep the Reuters global estimate separate from the later India figures attributed to sources. Neither report identifies whether a particular role or team was affected.",
+    "updateNote": "Added later India-specific reporting attributed to sources; the company has not confirmed a local count.",
+    "sourceUpdates": [
+      {
+        "sourceLabel": "Times of India",
+        "sourceUrl": "https://timesofindia.indiatimes.com/business/india-business/amazon-india-lays-off-130-employees-400-affected-in-three-rounds-this-yr/articleshow/134796156.cms",
+        "sourcePublishedAt": "2026-10-08",
+        "summary": "Reports about 130 India employees affected in the latest round and around 400 in three rounds that year, citing sources; these figures are not presented as a direct company confirmation."
+      }
+    ]
   },
   {
     "slug": "hsbc-uk-wealth-restructuring-2026",

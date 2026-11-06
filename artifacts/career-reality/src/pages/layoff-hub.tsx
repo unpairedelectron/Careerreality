@@ -30,6 +30,12 @@ export type LayoffEvent = {
   coverageNote: string;
   readerCheck: string;
   updateNote: string;
+  sourceUpdates?: {
+    sourceLabel: string;
+    sourceUrl: string;
+    sourcePublishedAt: string;
+    summary: string;
+  }[];
 };
 
 const events = eventData as LayoffEvent[];
@@ -315,6 +321,17 @@ function LayoffEventDetail() {
           <div className="detail-source-icon"><ExternalLink size={18} aria-hidden="true" /></div>
           <div><p className="layoff-eyebrow">Primary reporting / {event.sourceLabel}</p><h2 id="detail-source-heading">Go back to what was published.</h2><p>Source published {formatDate(event.sourcePublishedAt)}. The scale and summary above are attributed to this report. A reported plan is not proof of a completed count or present-day company conditions.</p><a href={event.sourceUrl} target="_blank" rel="noreferrer" data-testid="link-event-source">Read the original source <ArrowUpRight size={15} aria-hidden="true" /></a></div>
         </section>
+        {event.sourceUpdates?.length ? (
+          <section className="detail-method" aria-labelledby="event-updates-heading">
+            <strong id="event-updates-heading">Later reporting and clarifications</strong>
+            {event.sourceUpdates.map((update) => (
+              <p key={update.sourceUrl}>
+                <strong>{update.sourceLabel} · {formatDate(update.sourcePublishedAt)}:</strong> {update.summary}{' '}
+                <a href={update.sourceUrl} target="_blank" rel="noreferrer">Read this report</a>
+              </p>
+            ))}
+          </section>
+        ) : null}
         <aside className="detail-method" data-testid="text-event-method"><strong>How to read this record</strong><p>{event.status === 'Confirmed' ? 'Confirmed means the linked reporting describes a direct company confirmation. This does not establish a final affected-role count.' : event.status === 'Reported' ? 'Reported means the information was published by a named media source. It is not represented here as a direct company confirmation.' : 'Rumour means the claim remains unverified. Do not use it as a basis for decisions.'} Dates make this record auditable; they do not make it current.</p></aside>
         <section className="detail-method" aria-labelledby="event-coverage-heading">
           <strong id="event-coverage-heading">What this report does not establish</strong>

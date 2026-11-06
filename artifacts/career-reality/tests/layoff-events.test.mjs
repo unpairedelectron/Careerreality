@@ -24,6 +24,11 @@ test("layoff event records have unique slugs, dated sources, and valid statuses"
     assert.ok(event.coverageNote.length >= 40, `${event.slug} needs a specific evidence limit`);
     assert.ok(event.readerCheck.length >= 40, `${event.slug} needs a practical verification step`);
     assert.ok(event.updateNote.length >= 30, `${event.slug} needs a transparent change note`);
+    for (const update of event.sourceUpdates ?? []) {
+      assert.match(update.sourceUrl, /^https:\/\//);
+      assert.match(update.sourcePublishedAt, /^\d{4}-\d{2}-\d{2}$/);
+      assert.ok(update.summary.length >= 40);
+    }
   }
 });
 
@@ -58,9 +63,28 @@ test("recent sourced reports identify their sector and preserve source uncertain
   assert.match(hsbc.coverageNote, /not an India-wide reduction/i);
 });
 
-test("the event copy update date and note are explicit rather than presented as a source review", () => {
+test("the event copy update date and change note are explicit", () => {
   assert.ok(events.every((event) => event.updatedAt === "2026-11-06"));
-  assert.ok(events.every((event) => event.updateNote.includes("; no ") || /remains unverified/i.test(event.updateNote)));
+  assert.ok(events.every((event) => event.updateNote.length >= 30));
+  const swiggy = events.find((event) => event.slug === "swiggy-workforce-reduction-2023");
+  assert.match(swiggy.summary, /planned to lay off 380 employees/i);
+  assert.match(swiggy.coverageNote, /did not establish .* departures were completed/i);
+  const paypal = events.find((event) => event.slug === "paypal-india-workforce-reduction-2026");
+  assert.equal(paypal.status, "Confirmed");
+  assert.match(paypal.summary, /PayPal said about 220 India employees were affected/i);
+  assert.match(paypal.sourceUpdates[0].sourceUrl, /thehindu\.com/i);
+
+  const tcs = events.find((event) => event.slug === "tcs-layoffs");
+  assert.match(tcs.coverageNote, /net headcount change is not a count of layoffs/i);
+  assert.match(tcs.sourceUpdates[0].summary, /23,460/);
+
+  const adidas = events.find((event) => event.slug === "adidas-india-technology-reduction-2026");
+  assert.match(adidas.coverageNote, /unverified estimate of 350 or more/i);
+  assert.match(adidas.sourceUpdates[0].summary, /did not confirm that count/i);
+
+  const amazon = events.find((event) => event.slug === "amazon-stores-workforce-reduction-2026");
+  assert.match(amazon.coverageNote, /about 130 India employees/i);
+  assert.match(amazon.sourceUpdates[0].sourcePublishedAt, /^2026-10-08$/);
 });
 
 test("homepage latest event cards include the newest Amazon and Microsoft reports", () => {
