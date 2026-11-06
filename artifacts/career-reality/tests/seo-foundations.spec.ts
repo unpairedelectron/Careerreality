@@ -43,8 +43,12 @@ test.describe("public SEO foundations", () => {
     expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
 
     await page.goto("/team", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("#authors")).toContainText("Only the name and affiliation are owner-approved here.");
-    await expect(page.locator("#authors")).toContainText("or identify a qualified payroll/tax reviewer or review scope");
+    await expect(page.locator("#authors")).toContainText("Founder, Product Builder & Lead Author");
+    await expect(page.locator("#authors")).toContainText("Bachelor of Technology (B.Tech.)");
+    await expect(page.locator("#authors")).toContainText("Individual article authorship is identified only where that article credits him.");
+    await expect(page.locator("#reviewer")).toContainText("Aman Mishra");
+    await expect(page.locator("#reviewer")).toContainText("The supplied sign-off document is incomplete");
+    await expect(page.locator("#reviewer")).toContainText("No completed review conclusion or independent certification is claimed here.");
 
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
     await expect(page.locator('a[href="mailto:hello@careerreality.in"]').first()).toBeVisible();

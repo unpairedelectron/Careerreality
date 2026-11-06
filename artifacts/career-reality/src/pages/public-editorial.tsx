@@ -820,9 +820,9 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   team: {
     eyebrow: "Team / affiliation",
     title: "People behind CareerReality.",
-    intro: "Shiv Mishra — Doffysoft pvt. Limited.",
+    intro: "Shiv Mishra is the founder, product builder, and lead author of CareerReality.in.",
     seoTitle: "Team and Affiliation | CareerReality",
-    seoDescription: "Find the affiliation stated for Shiv Mishra and contact CareerReality by email.",
+    seoDescription: "Meet CareerReality founder and lead author Shiv Mishra, and see the limits of the pending payroll review attribution.",
     path: "/team",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Team", path: "/team" }],
   },
@@ -920,9 +920,17 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p>CareerReality is operated by Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
         </TrustSection>
       </>}
-      {kind === "team" && <TrustSection id="authors" title="Affiliation">
-        <p>Shiv Mishra — Doffysoft pvt. Limited.</p>
-        <p className="mt-4">Only the name and affiliation are owner-approved here. This page does not state a job title or biography, assign article authorship, or identify a qualified payroll/tax reviewer or review scope.</p>
+      {kind === "team" && <>
+        <TrustSection id="authors" title="Founder and lead author">
+          <p><strong>Shiv Mishra</strong> — Founder, Product Builder &amp; Lead Author; CareerReality.in. Qualification: Bachelor of Technology (B.Tech.).</p>
+          <p className="mt-4">Shiv is a technology enthusiast and founder of CareerReality.in. He leads product vision, architecture, development, product research, user experience and editorial planning. His work includes interactive career decision tools, salary comparison systems, compensation calculators and practical employment resources.</p>
+          <p className="mt-4">His stated authorship scope includes product vision, original explanatory content, technical development, research, feature validation and internal quality assurance. Individual article authorship is identified only where that article credits him. Internal product checks are not independent specialist review.</p>
+        </TrustSection>
+        <TrustSection id="reviewer" title="Payroll review attribution">
+          <p><strong>Aman Mishra</strong> is identified by the site owner as the proposed reviewer for Indian payroll calculation methodology and related test cases. The supplied documentation lists a Chartered Accountant and HR/Payroll Professional designation, an independent personal-capacity affiliation, and a review date of 05 November 2026.</p>
+          <p className="mt-4">The supplied sign-off document is incomplete: it leaves the implementation reviewed, evidence, findings, outcome, limitations, final credential wording and signature blank. It instructs that the review must not be represented as completed until Aman confirms and signs those details. No completed review conclusion or independent certification is claimed here.</p>
+        </TrustSection>
+      </>}
       </TrustSection>}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
@@ -1076,7 +1084,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
     },
     ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about` }] : []),
     ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact`, mainEntity: { "@id": organizationId } }] : []),
-    ...(kind === "team" ? [{ "@type": "Person", "@id": `${siteOrigin}/team#shiv-mishra`, name: "Shiv Mishra", affiliation: { "@id": organizationId } }] : []),
+    ...(kind === "team" ? [{ "@type": "Person", "@id": `${siteOrigin}/team#shiv-mishra`, name: "Shiv Mishra", jobTitle: "Founder, Product Builder & Lead Author", description: "B.Tech graduate and founder of CareerReality.in; leads product vision, technical development, research, user experience and editorial planning.", affiliation: { "@id": organizationId } }] : []),
   ];
   return (
     <PublicPage
