@@ -17,7 +17,7 @@ test.describe("public SEO foundations", () => {
   test("renders complete, route-specific trust pages", async ({ page }) => {
     const routes = [
       { path: "/about", heading: "CareerReality, made for consequential decisions.", marker: "Current public scope" },
-      { path: "/team", heading: "People behind CareerReality.", marker: "Affiliation" },
+      { path: "/team", heading: "People behind CareerReality.", marker: "Founder and lead author" },
       { path: "/editorial", heading: "Evidence, limits, and uncertainty.", marker: "Evidence before conclusion" },
       { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "Contact message records" },
       { path: "/terms", heading: "Limits and use of CareerReality.", marker: "Tools and guides" },
@@ -43,6 +43,7 @@ test.describe("public SEO foundations", () => {
     expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
 
     await page.goto("/team", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("Information updated: 6 November 2026.")).toBeVisible();
     await expect(page.locator("#authors")).toContainText("Founder, Product Builder & Lead Author");
     await expect(page.locator("#authors")).toContainText("Bachelor of Technology (B.Tech.)");
     await expect(page.locator("#authors")).toContainText("Individual article authorship is identified only where that article credits him.");

@@ -927,11 +927,10 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p className="mt-4">His stated authorship scope includes product vision, original explanatory content, technical development, research, feature validation and internal quality assurance. Individual article authorship is identified only where that article credits him. Internal product checks are not independent specialist review.</p>
         </TrustSection>
         <TrustSection id="reviewer" title="Payroll review attribution">
-          <p><strong>Aman Mishra</strong> is identified by the site owner as the proposed reviewer for Indian payroll calculation methodology and related test cases. The supplied documentation lists a Chartered Accountant and HR/Payroll Professional designation, an independent personal-capacity affiliation, and a review date of 05 November 2026.</p>
+          <p><strong>Aman Mishra</strong> is identified by the site owner as the reviewer for Indian payroll calculation methodology and related test cases. The owner reports that Aman inspected the calculation logic and tests and agreed to be identified. The supplied documentation lists a Chartered Accountant and HR/Payroll Professional designation, an independent personal-capacity affiliation, and a review date of 05 November 2026.</p>
           <p className="mt-4">The supplied sign-off document is incomplete: it leaves the implementation reviewed, evidence, findings, outcome, limitations, final credential wording and signature blank. It instructs that the review must not be represented as completed until Aman confirms and signs those details. No completed review conclusion or independent certification is claimed here.</p>
         </TrustSection>
       </>}
-      </TrustSection>}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
           <p>Legal, tax, payroll, and market claims require a relevant source, an access date when known, and a clear statement of scope. When a source does not support a claim, the claim is removed, qualified, or withheld.</p>
@@ -1100,7 +1099,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
       }}
     >
       <div className="mb-6 rounded-xl border border-border bg-muted/30 p-4 text-sm">
-        <p><strong>Information updated:</strong> 2 November 2026.</p>
+        <p><strong>Information updated:</strong> {kind === "team" ? "6 November 2026." : "2 November 2026."}</p>
       </div>
       <PublishedTrustBody kind={kind} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />
