@@ -922,6 +922,7 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
       </>}
       {kind === "team" && <TrustSection id="authors" title="Affiliation">
         <p>Shiv Mishra — Doffysoft pvt. Limited.</p>
+        <p className="mt-4">Only the name and affiliation are owner-approved here. This page does not state a job title or biography, assign article authorship, or identify a qualified payroll/tax reviewer or review scope.</p>
       </TrustSection>}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
