@@ -41,6 +41,8 @@ const salaryCheck = comparison("1800000", "2100000");
 const remoteCompare = comparison("2400000", "2000000");
 const layoffScenario = salaryDrop("1800000", "1200000", "15", "70000", "3");
 const exitPlan = plannedHours("2", "4");
+const negotiationCompare = comparison("1800000", "2100000");
+const jobSearchPlan = plannedHours("4", "4");
 
 export const guideWorkedExamples = {
   "read-the-offer-beyond-ctc": {
@@ -177,6 +179,100 @@ export const guideWorkedExamples = {
     checks: ["Do not infer market rates from these illustrative offer inputs.", "Record each claim's source, date, sample and definition.", "Use written offer terms for an individual decision."],
     tool: { label: "Compare written offer amounts", href: "/offer-comparison" },
   },
+  "notice-period-buyout-india": {
+    caption: "Calendar arithmetic for a hypothetical 60-day notice period and a proposed start date 45 days away. Contract terms, employer approval, and any buyout amount are not inferred.",
+    headers: ["Written notice", "Proposed start", "Date gap to resolve"],
+    rows: [["60 days", "45 days from today", "15 days"]],
+    checks: ["Check whether the contract permits notice pay, a waiver, or another arrangement.", "Ask the employer to confirm the last working day and any amount in writing.", "Do not assume a buyout is available or that the employee can choose it unilaterally."],
+    tool: { label: "Review notice and final-pay inputs", href: "/final-pay-estimator" },
+  },
+  "gratuity-four-years-eight-months": {
+    caption: "A timeline check only: the stated service is 4 years and 8 months (56 months). This does not determine eligibility, qualifying service, or gratuity payable.",
+    headers: ["Stated service", "What the example establishes", "What still needs checking"],
+    rows: [["4 years, 8 months", "A timeline to compare with the employment record", "Applicable rule, service dates, wage base, and eligibility"]],
+    checks: ["Reconcile joining and exit dates with employer records.", "Check the official rule that applies to this employment and date.", "Do not treat the six-month phrase alone as a final eligibility decision."],
+    tool: { label: "Open the limited gratuity worksheet", href: "/gratuity-estimator" },
+  },
+  "first-24-hours-after-layoff": {
+    caption: "A short document-and-question checklist for the first day; it makes no legal or financial entitlement calculation.",
+    headers: ["Step", "Example action", "Record to keep"],
+    rows: [
+      ["1", "Save the notice and signed employment terms you may lawfully retain.", "Original documents and dates"],
+      ["2", "Ask for the last working day and final-pay breakdown in writing.", "Written response or unanswered question"],
+      ["3", "Separate received amounts from amounts still being reconciled.", "A dated list of confirmed and open items"],
+    ],
+    checks: ["Protect confidential employer and customer information.", "Avoid signing a release before understanding its terms.", "Use qualified advice for a dispute or an unclear legal position."],
+    tool: { label: "Plan a cash runway", href: "/layoff-runway" },
+  },
+  "severance-notice-leave-after-layoff": {
+    caption: "A separation statement split into distinct items so each can be checked against written terms; no entitlement or amount is assumed.",
+    headers: ["Item", "Document to compare", "Status in this example"],
+    rows: [
+      ["Notice pay", "Contract, notice letter, and final settlement", "Confirm the applicable dates and basis"],
+      ["Leave balance", "Leave statement and applicable policy or law", "Reconcile days and calculation basis"],
+      ["Severance or other payment", "Written offer, policy, and applicable rule", "Do not combine with undisputed pay"],
+    ],
+    checks: ["Ask for an itemised statement rather than one unexplained total.", "Keep disputed amounts separate from amounts already received.", "Verify the rule and contract that apply to the specific employment."],
+    tool: { label: "Review notice and leave-pay inputs", href: "/final-pay-estimator" },
+  },
+  "pf-withdrawal-after-job-loss": {
+    caption: "A records checklist for an EPFO withdrawal question; the example does not decide eligibility or calculate a withdrawal amount.",
+    headers: ["Record", "Example check", "Why it matters"],
+    rows: [
+      ["Employment dates", "Confirm the last working date in the service record.", "The timeline may affect the applicable process."],
+      ["Account details", "Check the member account and service history.", "Correct records help identify missing or mismatched entries."],
+      ["Current EPFO guidance", "Use the official process and current form instructions.", "Rules and available options can depend on the case."],
+    ],
+    checks: ["Use official EPFO guidance for the current process.", "Do not share account credentials or authentication codes.", "Check tax treatment and eligibility before acting."],
+    tool: { label: "Review official EPF sources", href: "/rules/employee-pf" },
+  },
+  "old-vs-new-tax-regime-salaried-india": {
+    caption: "A like-for-like comparison setup for AY 2026–27; enter the same verified income details in the official calculator before comparing its results.",
+    headers: ["Input", "Old regime", "New regime"],
+    rows: [
+      ["Assessment year", "AY 2026–27", "AY 2026–27"],
+      ["Income details", "Use the same verified figures", "Use the same verified figures"],
+      ["Deductions and exemptions", "Enter only amounts supported by records and rules", "Apply only items allowed under this regime"],
+    ],
+    checks: ["Compare the official results for the same assessment year.", "Check which deductions the chosen regime permits.", "Do not treat a generic example as a personal tax calculation."],
+    tool: { label: "Compare official tax results", href: "/tax-regime-comparison" },
+  },
+  "offer-letter-red-flags-india": {
+    caption: "A document-review example that turns vague or conditional language into questions; it does not determine whether a clause is lawful.",
+    headers: ["Offer wording to inspect", "Question to ask", "Evidence to retain"],
+    rows: [
+      ["Target bonus included in headline CTC", "What conditions govern payment and when?", "Bonus plan and payout terms"],
+      ["Employer-side contribution included", "Which components are included in the stated CTC?", "Component-wise compensation breakup"],
+      ["Unclear notice or recovery clause", "Which dates, amounts, and exceptions apply?", "Signed offer and referenced policy"],
+    ],
+    checks: ["Request clarification in writing before accepting.", "Compare the final signed document with the draft.", "Get qualified advice on a disputed or unclear clause."],
+    tool: { label: "Compare offer amounts", href: "/offer-comparison" },
+  },
+  "negotiate-salary-offer-with-numbers": {
+    caption: `Hypothetical headline comparison from the offer-comparison model: ₹18L current CTC versus ₹21L offer CTC, a ${money(negotiationCompare.annualDifference)} annual difference. This is not a market benchmark or take-home estimate.`,
+    headers: ["Current CTC", "Offer CTC", "Headline difference"],
+    rows: [[money(negotiationCompare.currentCtc), money(negotiationCompare.offerCtc), money(negotiationCompare.annualDifference)]],
+    checks: ["Compare fixed cash, variable conditions, and employer-side components separately.", "Choose one specific written term to negotiate.", "Use role scope and verifiable evidence; do not present hypothetical figures as market data."],
+    tool: { label: "Compare written offer amounts", href: "/offer-comparison" },
+  },
+  "labour-codes-and-layoffs-india": {
+    caption: "A source-check workflow for a layoff-related question; the example does not decide which labour provision applies to an individual.",
+    headers: ["Question", "Evidence to collect", "Next verification"],
+    rows: [
+      ["What event occurred?", "Notice, contract, and dated employer communication", "Match the event to the terms used in the relevant rule."],
+      ["Which location and employment details matter?", "Work location, role, dates, and available records", "Check the applicable official source and current date."],
+      ["What remains disputed?", "A short list of facts and unresolved amounts", "Ask a qualified adviser about the specific case."],
+    ],
+    checks: ["Separate legal rules from contract, policy, and employer practice.", "Read the publication date and transition language of official guidance.", "Do not infer an individual entitlement from a general summary."],
+    tool: { label: "Review official source links", href: "/sources" },
+  },
+  "90-day-post-layoff-job-search": {
+    caption: `A four-week planning window computed by the career-planning model: four hours per week gives ${jobSearchPlan} planned hours. It is a time budget, not a hiring forecast.`,
+    headers: ["Weekly time budget", "Review window", "Planned hours"],
+    rows: [["4 hours", "4 weeks", `${jobSearchPlan} hours`]],
+    checks: ["Choose one or two role hypotheses based on evidence you can share lawfully.", "Review responses and adjust the search process without treating silence as a measure of personal worth.", "Change the pace to fit finances, care responsibilities, health, and local opportunities."],
+    tool: { label: "Plan a bounded career experiment", href: "/escape-plan" },
+  },
 } as const;
 
 export const guideToolLinks: Record<string, { href: string; label: string }> = {
@@ -198,4 +294,14 @@ export const guideToolLinks: Record<string, { href: string; label: string }> = {
   "culture-fit-and-product-management": { href: "/resign-or-stay", label: "resign-or-stay worksheet" },
   "workplace-culture-and-boundaries": { href: "/resign-or-stay", label: "resign-or-stay worksheet" },
   "how-to-read-salary-and-hiring-claims": { href: "/offer-comparison", label: "offer comparison" },
+  "notice-period-buyout-india": { href: "/final-pay-estimator", label: "notice and final-pay worksheet" },
+  "gratuity-four-years-eight-months": { href: "/gratuity-estimator", label: "gratuity worksheet" },
+  "first-24-hours-after-layoff": { href: "/layoff-runway", label: "cash-runway planner" },
+  "severance-notice-leave-after-layoff": { href: "/final-pay-estimator", label: "notice and leave-pay worksheet" },
+  "pf-withdrawal-after-job-loss": { href: "/rules/employee-pf", label: "official EPF guidance" },
+  "old-vs-new-tax-regime-salaried-india": { href: "/tax-regime-comparison", label: "tax-regime comparison" },
+  "offer-letter-red-flags-india": { href: "/offer-comparison", label: "offer comparison" },
+  "negotiate-salary-offer-with-numbers": { href: "/offer-comparison", label: "offer comparison" },
+  "labour-codes-and-layoffs-india": { href: "/sources", label: "official source register" },
+  "90-day-post-layoff-job-search": { href: "/escape-plan", label: "career experiment planner" },
 };

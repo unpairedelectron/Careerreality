@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildContentQualityReport, parseCsvRows } from "../scripts/content-quality-audit.ts";
 import guideCatalog from "../src/data/generated-pillar-guides.json";
-import { guideWorkedExamples } from "../src/data/guide-worked-examples";
+import { guideToolLinks, guideWorkedExamples } from "../src/data/guide-worked-examples";
 import rulesLibrary from "../src/data/rules-library.json";
 
 test("each Rules Library page has a verification date and official government sources", () => {
@@ -40,21 +40,24 @@ test("professional-tax guidance keeps rates state-specific and links the five na
   assert.match(page.rows.find(([state]) => state === "Telangana")?.[1] ?? "", /₹15,001–20,000 ₹150\/month; above ₹20,000 ₹200\/month/);
 });
 
-test("every published guide has one model-backed worked example", () => {
+test("every published guide has one scoped worked example and next-step tool", () => {
   const guideSlugs = guideCatalog.guides.map((guide) => guide.slug).sort();
   const exampleSlugs = Object.keys(guideWorkedExamples).sort();
+  const toolSlugs = Object.keys(guideToolLinks).sort();
   assert.deepEqual(exampleSlugs, guideSlugs);
+  assert.deepEqual(toolSlugs, guideSlugs);
 
   for (const slug of guideSlugs) {
     const example = guideWorkedExamples[slug as keyof typeof guideWorkedExamples];
     assert.ok(example.caption.length > 40);
     assert.ok(example.rows.length > 0);
     assert.ok(example.checks.length > 0);
+    assert.ok(guideToolLinks[slug].href.startsWith("/"));
   }
 });
 
-test("all 18 published guides keep prose paragraphs within the 90-word limit", () => {
-  assert.equal(guideCatalog.guides.length, 18);
+test("all 28 published guides keep prose paragraphs within the 90-word limit", () => {
+  assert.equal(guideCatalog.guides.length, 28);
   for (const guide of guideCatalog.guides) {
     for (const section of guide.sections) {
       for (const paragraph of section.content.split(/\n\s*\n/).filter(Boolean)) {
@@ -99,7 +102,8 @@ test("content audit reports missing editorial gates without granting readiness",
   assert.ok(!report.readiness.blockers.articlePublication.includes("archived-article-duplicate-review"));
   assert.ok(report.readiness.blockers.data.includes("production-market-data-provenance"));
   assert.ok(!report.readiness.blockers.engineering.includes("archived-article-duplicate-review"));
-  assert.equal(report.reapplicationAllowed, false);
+  assert.equal(report.reapplicationAllowed, null);
+  assert.match(report.reapplicationNote, /does not assess AdSense readiness of the current public pages/);
   assert.equal(report.inventory.articles, 0);
   assert.equal(report.inventory.archivedArticles, 44);
   assert.equal(report.inventory.originalArchiveFiles, 44);
@@ -191,7 +195,7 @@ test("content audit reports missing editorial gates without granting readiness",
     gate.detail.includes("not an approved freshness policy"),
   ));
   assert.ok(report.gates.some((gate) => gate.id === "company-score-methodology" && gate.status === "blocked"));
-  assert.equal(report.indexability.sitemapPathCount, 55);
+  assert.equal(report.indexability.sitemapPathCount, 87);
   assert.ok(report.gates.some((gate) =>
     gate.id === "sitemap-robots-alignment" &&
     gate.status === "pass",
@@ -199,8 +203,8 @@ test("content audit reports missing editorial gates without granting readiness",
   assert.equal(report.indexability.indexedUrlExport.rowCount, 74);
   assert.equal(report.indexability.indexedUrlExport.uniquePathCount, 61);
   assert.equal(report.indexability.indexedUrlExport.outsideSitemap.length, 49);
-  assert.equal(report.indexability.indexedUrlExport.sitemapNotInExport.length, 43);
-  assert.equal(report.indexability.indexedUrlExport.routes.length, 104);
+  assert.equal(report.indexability.indexedUrlExport.sitemapNotInExport.length, 75);
+  assert.equal(report.indexability.indexedUrlExport.routes.length, 136);
 });
 
 test("indexed URL CSV parser preserves quoted commas, quotes, and line breaks", () => {

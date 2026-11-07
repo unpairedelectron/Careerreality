@@ -475,61 +475,61 @@ type TrustPageMeta = {
 const trustPageMeta: Record<TrustKind, TrustPageMeta> = {
   about: {
     eyebrow: "The desk / about",
-    title: "CareerReality: current release-candidate scope.",
-    intro: "The local release candidate features a CTC calculator. Editorial articles and unsupported company and market records are withheld; operating details remain unverified.",
-    seoTitle: "About CareerReality | Current Scope",
-    seoDescription: "See what this local release candidate contains, what remains withheld, and which operating details have not been verified.",
+    title: "Career tools and guides for consequential decisions.",
+    intro: "CareerReality publishes career tools, 28 guides, and dated public layoff records for people in India.",
+    seoTitle: "About CareerReality",
+    seoDescription: "Explore CareerReality’s career tools, guides, public records, and evidence limits for India-focused career decisions.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
   },
   editorial: {
     eyebrow: "Trust / editorial standards",
-    title: "Editorial rules for a future publication.",
-    intro: "These are proposed evidence and disclosure rules for future content, not proof of past authoring, review, or correction practices.",
+    title: "Evidence, attribution, and corrections.",
+    intro: "CareerReality separates cited material, editorial interpretation, and user-entered estimates, and states when a claim or record is unresolved.",
     seoTitle: "Editorial Standards and Sources | CareerReality",
     seoDescription: "Read the publication rules for sourcing and uncertainty; archived articles remain withheld because their authorship and review record are unverified.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Editorial standards", path: "/editorial" }],
   },
   privacy: {
     eyebrow: "Trust / privacy",
-    title: "Privacy practices are not fully verified.",
-    intro: "This page records limited observations about the local code. It is not an owner-approved privacy policy or a statement of all production data practices.",
-    seoTitle: "Privacy Information | CareerReality",
-    seoDescription: "Review limited code-level observations and the production privacy, retention, vendor, and contact details that remain unverified.",
+    title: "Privacy and data handling.",
+    intro: "This page describes observed data flows on the current site and identifies retention or service details that have not been established.",
+    seoTitle: "Privacy and Data Handling | CareerReality",
+    seoDescription: "Review the data flows CareerReality uses, how features handle inputs, and which retention details remain unknown.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Privacy policy", path: "/privacy-policy" }],
   },
   terms: {
-    eyebrow: "Terms / status",
-    title: "Approved terms are not available.",
-    intro: "The operating entity and approved legal terms have not been verified. This route is a status notice, not a contract or legal notice.",
-    seoTitle: "Terms Status | CareerReality",
-    seoDescription: "Approved legal terms and operating-entity details have not been verified for this release candidate.",
+    eyebrow: "Terms / use limits",
+    title: "Terms for using CareerReality.",
+    intro: "These terms describe the use and limits of CareerReality tools and guides. They do not create a professional advisory relationship.",
+    seoTitle: "Terms of Use | CareerReality",
+    seoDescription: "Read the terms and limits for CareerReality tools and guides, including estimates, source context, and professional advice.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Terms of use", path: "/terms" }],
   },
   contact: {
     eyebrow: "The desk / contact",
-    title: "No verified public inbox.",
-    intro: "A monitored contact channel for corrections, privacy requests, or account questions has not been verified for this release candidate.",
-    seoTitle: "Contact Status | CareerReality",
-    seoDescription: "No monitored public contact channel has been verified for this release candidate. Do not send private or confidential information to addresses in older copy.",
+    title: "Contact CareerReality.",
+    intro: "Email hello@careerreality.in for questions, corrections, privacy requests, or security reports. No response time is promised.",
+    seoTitle: "Contact CareerReality",
+    seoDescription: "Contact CareerReality by email for questions, corrections, privacy requests, or security reports; no response time is promised.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }],
   },
 };
 
 const trustFaqs: Record<TrustKind, { question: string; answer: string }[]> = {
   about: [
-    { question: "Do I need an account to use the CTC calculator?", answer: "No account is required to use the public calculator. Articles and unsupported company and market records are withheld in this local release candidate." },
+    { question: "Do I need an account to use the CTC calculator?", answer: "No account is required. The public site also includes compensation tools, decision worksheets, and career guides." },
     { question: "Is the CTC estimate payroll or tax advice?", answer: "No. It is an estimate based on the inputs and assumptions shown. Verify the offer and applicable tax and payroll treatment with a qualified professional." },
   ],
   editorial: [
     { question: "Are archived articles reviewed and ready to publish?", answer: "No. The 44 article records remain quarantined. The supplied records do not establish real authors, publication dates, or human review." },
-    { question: "How can I challenge a claim?", answer: "No monitored public correction channel was verified for this review. This page does not provide a working submission route." },
+    { question: "How can I challenge a claim?", answer: "Email hello@careerreality.in with the page, claim, and a supporting public source where possible. No response time is promised." },
   ],
   privacy: [
-    { question: "Is this an owner-approved privacy policy?", answer: "No. These are limited observations about the local code, not verified production practices or an approved policy." },
+    { question: "Does this page cover every privacy or retention detail?", answer: "No. Known data flows and unresolved retention or backup details are stated separately; this page is not legal advice." },
     { question: "Where can I send a privacy request?", answer: "Use the contact form and select Privacy request. The form stores your message; a receipt does not confirm review, action, or a response time." },
   ],
   terms: [
-    { question: "Are approved terms available?", answer: "No. The operating entity and approved legal terms were not verified for this release candidate. This page is not a contract or legal notice." },
+    { question: "What do these terms cover?", answer: "They describe the use and limits of CareerReality tools and guides. They do not create a professional advisory relationship." },
     { question: "Is the calculator a guarantee?", answer: "No. It is an estimate, not a guarantee or professional advice." },
   ],
   contact: [
@@ -593,10 +593,10 @@ function TrustIndex({ kind }: { kind: TrustKind }) {
 function TrustAside({ kind }: { kind: TrustKind }) {
   const aside = {
     about: { icon: ShieldCheck, label: "The operating idea", title: "Useful context, not false certainty.", body: "Every answer should show what it knows, how fresh it is, and what you should verify next.", href: "/career-reality-index", link: "Read the index methodology" },
-    editorial: { icon: FileCheck2, label: "Current status", title: "The archived articles are withheld.", body: "The local release candidate does not publish the archived article corpus. The operating history and human review record remain unverified.", href: "/sources", link: "Review source status" },
+    editorial: { icon: FileCheck2, label: "Current status", title: "Archived source articles remain withheld.", body: "The 44 archived source articles are separate from the current guides. Review the source register and current evidence limits.", href: "/sources", link: "Review source status" },
     privacy: { icon: LockKeyhole, label: "Privacy posture", title: "Collect less. Explain more.", body: "Public utility should not require a profile. Signed-in continuity should be intentional and visible.", href: "/workspace", link: "See the private workspace" },
-    terms: { icon: Scale, label: "Current status", title: "Approved terms are unavailable.", body: "The operating entity and approved legal terms were not verified for this release candidate.", href: "/about", link: "Review current scope" },
-    contact: { icon: MessageSquare, label: "Contact status", title: "No monitored inbox is verified.", body: "Do not send private, salary, account, or confidential information to an address found in older page copy.", href: "/about", link: "Review current scope" },
+    terms: { icon: Scale, label: "Use limits", title: "Tools are not professional advice.", body: "Verify written terms and current sources before acting on estimates or worksheets.", href: "/about", link: "Review current scope" },
+    contact: { icon: MessageSquare, label: "Contact status", title: "Email the published address.", body: "Use hello@careerreality.in for questions or corrections. No response time is promised.", href: "/contact", link: "Contact CareerReality" },
   }[kind];
   const Icon = aside.icon;
   return (
@@ -629,15 +629,15 @@ function AboutTrust() {
   return (
     <div className="space-y-10">
       <TrustSection id="purpose" eyebrow="Why this exists" title="A decision desk for the part after the headline.">
-        <p>This local release candidate exposes a CTC calculator and a set of decision prompts. The archived editorial corpus, company signals, and unsupported market records are withheld because their evidence and provenance have not been established for publication.</p>
+        <p>CareerReality helps people in India examine career choices with practical tools, source-linked guides, and dated public records. Each tool separates entered facts from estimates and explains what its result cannot establish.</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">A user-entered CTC estimate, with visible assumptions and limits.</p></div>
-          <div className="rounded-[16px] border border-border bg-card p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-muted-foreground">Not established</p><p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">A verified company score, market salary benchmark, published article, or employment forecast.</p></div>
+          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 28 career guides, and dated layoff records.</p></div>
+          <div className="rounded-[16px] border border-border bg-card p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-muted-foreground">Not provided</p><p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">Private-sector salary benchmarks, scored company ratings, or predictions of an individual’s employment outcome.</p></div>
         </div>
       </TrustSection>
-      <TrustSection id="product" eyebrow="Current product scope" title="One calculator; other claims stay withheld.">
-        <p>The <Link href="/salary-calculator" className="font-bold text-primary">CTC calculator</Link> estimates cash from offer details entered by the user. <Link href="/offer-comparison" className="font-bold text-primary">Offer comparison</Link> is the destination for side-by-side compensation comparisons; no market salary benchmark is published. The <Link href="/layoff-radar" className="font-bold text-primary">Layoff Radar</Link> publishes no company records in this build. Decision prompts are not predictions or evidence about the labour market.</p>
-        <p className="mt-4">Archived articles are not linked from this page. Account, membership, support, and privacy practices require owner verification before they can be described as established services.</p>
+      <TrustSection id="product" eyebrow="Tools and editorial guides" title="Practical inputs, visible limits.">
+        <p>The <Link href="/salary-calculator" className="font-bold text-primary">CTC calculator</Link> estimates take-home cash from compensation and payroll details you enter; PF remains manual. <Link href="/offer-comparison" className="font-bold text-primary">Offer comparison</Link> compares written scenarios, not market averages. The <Link href="/companies" className="font-bold text-primary">employer due-diligence checklist</Link> helps organize evidence and questions; it does not rate or certify a company. The guides explain their sources, context, and limits.</p>
+        <p className="mt-4">Archived source articles and market records without complete provenance are not presented as current public evidence. Layoff records are dated reports, not predictions of future job security.</p>
         <div className="mt-7 grid gap-3 md:grid-cols-3">
           {[["01", "Enter", "Use written offer components; leave unknown amounts unknown."], ["02", "Check", "Read the calculator assumptions and official sources."], ["03", "Verify", "Ask a qualified payroll or tax professional about your specific case."]].map(([number, label, body]) => <div key={number} className="border-l-2 border-primary/35 pl-4"><p className="font-data text-[10px] text-primary">{number} / {label}</p><p className="mt-2 text-[12px] leading-[1.7] text-muted-foreground">{body}</p></div>)}
         </div>
@@ -658,7 +658,7 @@ function AboutTrust() {
         <p className="mt-5">See <Link href="/sources" className="font-bold text-primary">Sources and data status</Link> for checked materials and withheld records.</p>
       </TrustSection>
       <TrustSection id="boundaries" eyebrow="Independence" title="Commercial boundaries are part of the product.">
-        <p>The operator, ownership, funding, and commercial relationships have not been verified for this review. No independence or conflict-of-interest claim is made here. Membership is not offered in this local release candidate.</p>
+        <p>CareerReality is operated by Doffysoft pvt. Limited. No employer endorsement or independent professional certification is claimed. Company scores and private-sector salary benchmarks are not published; commercial claims are kept separate from the evidence shown in tools and guides.</p>
       </TrustSection>
       <TrustSection id="start" eyebrow="A practical starting point" title="Start with the decision in front of you.">
         <div className="flex flex-wrap gap-3">
@@ -813,7 +813,7 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
     title: "CareerReality, made for consequential decisions.",
     intro: "CareerReality publishes career decision tools and guides. It is operated by Doffysoft pvt. Limited.",
     seoTitle: "About CareerReality",
-    seoDescription: "Learn what CareerReality publishes and find its contact email.",
+    seoDescription: "Explore CareerReality’s career tools, India-focused guides, evidence limits, and operator details before using a worksheet.",
     path: "/about",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
   },
@@ -914,7 +914,9 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
     <div className="space-y-8">
       {kind === "about" && <>
         <TrustSection id="scope" title="Current public scope">
-          <p>The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. The checklist creates no employer score, and the salary evidence worksheet creates no private-sector benchmark.</p>
+          <p>CareerReality helps people in India examine career choices with practical tools, 28 career guides, and dated public layoff records. Tools explain their assumptions and limits; guides distinguish source-backed claims from editorial interpretation.</p>
+          <p className="mt-4">The CTC calculator estimates take-home cash from details entered by the user, with PF kept manual. Offer comparisons use written scenarios rather than market averages. Employer due diligence organizes evidence and questions but does not rate or certify a company.</p>
+          <p className="mt-4">Archived source articles and market records without complete provenance are not presented as current public evidence. CareerReality does not publish private-sector salary benchmarks, company scores, or predictions of an individual’s employment outcome.</p>
         </TrustSection>
         <TrustSection id="identity" title="Operator details">
           <p>CareerReality is operated by Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
@@ -1099,7 +1101,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
       }}
     >
       <div className="mb-6 rounded-xl border border-border bg-muted/30 p-4 text-sm">
-        <p><strong>Information updated:</strong> {kind === "team" ? "7 November 2026." : "2 November 2026."}</p>
+        <p><strong>Information updated:</strong> {kind === "team" || kind === "about" ? "7 November 2026." : "2 November 2026."}</p>
       </div>
       <PublishedTrustBody kind={kind} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />

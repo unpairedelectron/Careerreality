@@ -35,6 +35,9 @@ test.describe("public SEO foundations", () => {
     }
 
     await page.goto("/about", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
+    await expect(page.locator("#scope")).toContainText("28 career guides");
+    await expect(page.locator("#scope")).not.toContainText("local release candidate");
     await expect(page.locator("#identity")).toContainText("Doffysoft pvt. Limited");
     await expect(page.locator("#identity")).toContainText("Hinjewadi Phase 3, Pune");
     const siteSchema = JSON.parse((await page.locator('script[data-career-seo-schema="site"]').textContent()) ?? "{}");
@@ -55,6 +58,28 @@ test.describe("public SEO foundations", () => {
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
     await expect(page.locator('a[href="mailto:hello@careerreality.in"]').first()).toBeVisible();
     await expect(page.getByTestId("form-contact")).toHaveCount(0);
+  });
+
+  test("renders a scoped example and next-step link on recently added guides", async ({ page }) => {
+    const guides = [
+      "notice-period-buyout-india",
+      "gratuity-four-years-eight-months",
+      "first-24-hours-after-layoff",
+      "severance-notice-leave-after-layoff",
+      "pf-withdrawal-after-job-loss",
+      "old-vs-new-tax-regime-salaried-india",
+      "offer-letter-red-flags-india",
+      "negotiate-salary-offer-with-numbers",
+      "labour-codes-and-layoffs-india",
+      "90-day-post-layoff-job-search",
+    ];
+
+    for (const slug of guides) {
+      await page.goto(`/guides/${slug}`, { waitUntil: "domcontentloaded" });
+      await expect(page.getByRole("heading", { name: "Worked example" })).toBeVisible();
+      await expect(page.getByRole("region", { name: "Scrollable worked example table" })).toBeVisible();
+      await expect(page.getByRole("link", { name: /Open the/ }).first()).toBeVisible();
+    }
   });
 
   test("does not render unknown article routes in the client application", async ({ page }) => {

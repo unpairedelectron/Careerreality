@@ -736,8 +736,8 @@ export function buildContentQualityReport(generatedAt = new Date().toISOString()
     },
     productionMarketData: productionSnapshot,
     gates,
-    reapplicationAllowed: false,
-    reapplicationNote: "Do not resubmit to AdSense until the editorial and evidence gates are reviewed and passed.",
+    reapplicationAllowed: null,
+    reapplicationNote: "This audit evaluates archived article restoration and suppressed market data; it does not assess AdSense readiness of the current public pages.",
   };
 }
 
@@ -766,8 +766,12 @@ function renderMarkdown(
   return `# CareerReality content quality and AdSense readiness audit
 
 - Generated: ${report.generatedAt}
-- Readiness: **${report.readiness}**
-- Reapplication: **Not allowed by this gate**
+- Engineering/build readiness: **${report.readiness.engineering}**
+- Archived article publication readiness: **${report.readiness.articlePublication}**
+- Market-data publication readiness: **${report.readiness.data}**
+- Operational verification: **${report.readiness.operationalVerification}**
+- AdSense reapplication: **Not assessed by this archive-and-data audit**
+- ${report.reapplicationNote}
 - Scope: ${report.scope.evidenceBoundary}
 
 ## Inventory

@@ -41,3 +41,9 @@ description: User-specified scope, verification, and publication constraints for
 **Why:** the static SEO build validates route-kind coverage in crawler guidance and rejects repeated long paragraphs across public snapshots.
 
 **How to apply:** for a new indexable content family, update crawler-guidance categories and write route-specific snapshot copy before running one complete build.
+
+- Assess AdSense readiness against the current public pages separately from the quarantined-article and suppressed-market-data audit; those unpublished-content gates are not an AdSense verdict.
+
+**Why:** the archive/data audit does not evaluate the site visitors or reviewers currently see, so mapping its blocked state to AdSense readiness creates a false blocker.
+
+**How to apply:** keep AdSense status “not assessed” until a public-page review is run; do not use missing archive authorship or suppressed-data provenance as a public-site rejection reason.
