@@ -1023,6 +1023,10 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
         <TrustSection id="analytics" title="Analytics and technical requests">
           <p>Fonts are served from CareerReality's own site. The six public pages checked did not load Google Fonts or an analytics provider. The site host sets a cookie named GAESA that expires after 30 days. CareerReality does not read this cookie, and its purpose is not identified here. Layoff-alert email is delivered by Resend after double opt-in.</p>
         </TrustSection>
+        <TrustSection id="advertising" title="Advertising and Google AdSense">
+          <p>Google AdSense ads are not currently served on this site. If AdSense is enabled, Google and other third-party vendors may use cookies or similar technologies to collect or receive information, including IP addresses and other identifiers, when ads are served. Google and its partners may use advertising cookies to show ads based on a visitor's prior visits to this site or other sites.</p>
+          <p className="mt-4">Visitors can manage personalized advertising through <a className="font-bold text-primary underline" href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Read <a className="font-bold text-primary underline" href="https://www.google.com/policies/privacy/partners/" target="_blank" rel="noopener noreferrer">how Google uses data on partner sites and apps</a>. Before any other ad vendor or network is enabled, this notice will identify it and link to its privacy and opt-out information where available. The technologies used and available choices may vary by configuration and location; this notice does not mean ads are active.</p>
+        </TrustSection>
         <TrustSection id="dpdp" title="India data-protection law status">
           <p>As of 2 November 2026, the DPDP Act and Rules have staged commencement. Core notice, consent, rights, grievance, breach, and child-data provisions in Act sections 3–17 and Rules 3, 5–16, 22–23 are scheduled to commence on 13 May 2027. Rule 4 and Act section 6(9) / section 27(1)(d) are scheduled for 13 November 2026. Rules 1, 2, and 17–21 took effect on 13 November 2025. This is a date-based summary, not legal advice.</p>
         </TrustSection>
@@ -1101,7 +1105,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
       }}
     >
       <div className="mb-6 rounded-xl border border-border bg-muted/30 p-4 text-sm">
-        <p><strong>Information updated:</strong> {kind === "team" || kind === "about" ? "7 November 2026." : "2 November 2026."}</p>
+        <p><strong>Information updated:</strong> {kind === "team" || kind === "about" || kind === "privacy" ? "7 November 2026." : "2 November 2026."}</p>
       </div>
       <PublishedTrustBody kind={kind} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />

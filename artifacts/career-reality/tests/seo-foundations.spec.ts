@@ -45,6 +45,12 @@ test.describe("public SEO foundations", () => {
     expect(graph.some((entry) => entry["@type"] === "Person")).toBe(false);
     expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
 
+    await page.goto("/privacy-policy", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
+    await expect(page.locator("#advertising")).toContainText("Google AdSense ads are not currently served");
+    await expect(page.locator("#advertising")).toContainText("based on a visitor's prior visits");
+    await expect(page.locator("#advertising").getByRole("link", { name: "Google Ads Settings" })).toHaveAttribute("href", "https://www.google.com/settings/ads");
+
     await page.goto("/team", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
     await expect(page.locator("#authors")).toContainText("Founder, Product Builder & Lead Author");

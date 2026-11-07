@@ -288,7 +288,7 @@ const routeContentChecks: Record<string, string[]> = {
   "/corrections": ["When a material correction is made"],
   "/methodology": ["estimates old and new salary-only tax for AY 2026–27", "limited monthly-rate illustration uses 15/26", "₹20 lakh maximum as then current", "piece-rated or seasonal cases"],
   "/sources": ["revised EPFO ceiling", "Guides provide editorial framing and practical prompts", "incometax.gov.in/iec/foportal/help/individual/return-applicable-1", "Tax Year 2026–27 under the 2025 Act"],
-  "/privacy-policy": ["web address", "hello@careerreality.in", "GAESA", "13 May 2027"],
+  "/privacy-policy": ["web address", "hello@careerreality.in", "GAESA", "13 May 2027", "Google AdSense ads are not currently served", "Google Ads Settings", "IP addresses and other identifiers"],
   "/terms": ["Governing law: India", "Doffysoft pvt. Limited"],
   "/contact": ["Use hello@careerreality.in", "Email is the only published contact route"],
   "/accessibility": ["axe-core 4.10.3", "no automated violations", "Report a barrier"],
