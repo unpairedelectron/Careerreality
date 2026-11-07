@@ -19,7 +19,7 @@ test.describe("public SEO foundations", () => {
       { path: "/about", heading: "CareerReality, made for consequential decisions.", marker: "Current public scope" },
       { path: "/team", heading: "People behind CareerReality.", marker: "Founder and lead author" },
       { path: "/editorial", heading: "Evidence, limits, and uncertainty.", marker: "Evidence before conclusion" },
-      { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "Contact message records" },
+      { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "What this notice covers" },
       { path: "/terms", heading: "Limits and use of CareerReality.", marker: "Tools and guides" },
       { path: "/contact", heading: "Contact CareerReality Editorial.", marker: "Email and operator" },
     ];
@@ -50,6 +50,10 @@ test.describe("public SEO foundations", () => {
     await expect(page.locator("#advertising")).toContainText("Google AdSense ads are not currently served");
     await expect(page.locator("#advertising")).toContainText("based on a visitor's prior visits");
     await expect(page.locator("#advertising").getByRole("link", { name: "Google Ads Settings" })).toHaveAttribute("href", "https://www.google.com/settings/ads");
+    await expect(page.locator("#services")).toContainText("TheirStack");
+    await expect(page.locator("#analytics")).toContainText("Whether an analytics script is enabled");
+    await expect(page.locator("#rights-requests")).toContainText("A request does not itself confirm that information has been found");
+    await expect(page.locator("#scope")).toContainText("not legal advice");
 
     await page.goto("/team", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
