@@ -4,6 +4,7 @@ import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import type guideCatalog from "@/data/generated-pillar-guides.json";
 import routeRegistry from "@/data/route-registry";
+import { SITE_FOUNDER } from "@/data/site-founder";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 
 type GuideSource = { url: string; label: string; year?: string };
@@ -80,6 +81,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           datePublished: guide.datePublished ?? null,
           dateModified: guide.dateModified ?? null,
           section: "Career guidance",
+          authoredByFounder: true,
           keywords: [route.title, "career decisions", "India"],
         },
         faqs: guide.faqs,
@@ -91,6 +93,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
             <BookOpenText size={14} className="text-primary" aria-hidden="true" />
             Practical guide
           </span>
+          <span data-testid="guide-byline">By <Link href="/team" rel="author" className="font-semibold text-foreground underline underline-offset-4">{SITE_FOUNDER.name}</Link></span>
           {guide.datePublished && <span>Published {guide.datePublished}</span>}
           {guide.lastVerified && <span>Last verified {guide.lastVerified}</span>}
           {!guide.lastVerified && guide.dateModified && <span>Substantively updated {guide.dateModified}</span>}

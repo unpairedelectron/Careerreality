@@ -1,3 +1,5 @@
+import { founderPersonId } from "./site-founder";
+
 /** Shared by crawler snapshots and hydrated Article / WebSite structured data. */
 export function createSiteOrganization(siteUrl: string, assetBasePath = "") {
   const origin = siteUrl.replace(/\/+$/, "");
@@ -8,8 +10,9 @@ export function createSiteOrganization(siteUrl: string, assetBasePath = "") {
     name: "Doffysoft pvt. Limited.",
     alternateName: "CareerReality",
     url: origin,
-    logo: new URL(`${base ? `/${base}` : ""}/logo.svg`, `${origin}/`).href,
+    logo: new URL(`${base ? `/${base}` : ""}/logo.png`, `${origin}/`).href,
     email: "hello@careerreality.in",
+    founder: { "@id": founderPersonId(origin) },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Hinjewadi Phase 3, Pune",

@@ -16,6 +16,8 @@ import { calculateCareerTool } from "../../../lib/career-tools/src/index.ts";
 import { getSiteUrl } from "./seo-site-url.mjs";
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
+import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
+import { aboutCopy, teamCopy, type PeopleCopySection } from "../src/data/trust-people-copy.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
 import {
   audiences,
@@ -513,15 +515,22 @@ function getTrustSnapshotContent(route: string): SnapshotContent | undefined {
   return trustContent[route];
 }
 
+function peopleCopySnapshot(lead: string, sections: PeopleCopySection[]): SnapshotContent {
+  return {
+    lead,
+    sections: sections.map((section) => ({
+      id: section.id,
+      heading: section.heading,
+      html: section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+        + (section.bullets ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "")
+        + (section.links ? `<p>${section.links.map((link) => /^https?:/.test(link.href) ? `<a href="${escapeHtml(link.href)}" rel="me noopener noreferrer">${escapeHtml(link.label)}</a>` : `<a href="${escapeHtml(publicPath(link.href))}">${escapeHtml(link.label)}</a>`).join(" · ")}</p>` : ""),
+    })),
+  };
+}
+
 function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefined {
   const content: Record<string, SnapshotContent> = {
-    "/about": {
-      lead: "CareerReality publishes practical career decision tools and editorial guides. Operator: Doffysoft pvt. Limited.",
-      sections: [
-        { heading: "Current public scope", body: "The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. No employer score or private-sector salary benchmark is published." },
-        { heading: "Operator and contact", body: "Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in." },
-      ],
-    },
+    "/about": peopleCopySnapshot(aboutCopy.lead, aboutCopy.sections),
     "/editorial": {
       lead: "CareerReality separates source-backed claims from editorial interpretation, user-entered assumptions, and questions that remain unresolved.",
       sections: [
@@ -530,12 +539,7 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
         { heading: "Interpretation and uncertainty", body: "Editorial framing, checklists, and prompts are not reported facts. A source date appears only when stated in the preserved note. A missing result is not evidence of safety, demand, or a future outcome." },
       ],
     },
-    "/team": {
-      lead: "Shiv Mishra — Doffysoft pvt. Limited.",
-      sections: [
-        { heading: "Affiliation", body: "Shiv Mishra — Doffysoft pvt. Limited." },
-      ],
-    },
+    "/team": peopleCopySnapshot(teamCopy.lead, teamCopy.sections),
     "/corrections": {
       lead: "Email hello@careerreality.in to report an error or request a correction. No response-time promise is made.",
       sections: [
@@ -1154,6 +1158,7 @@ function renderStaticPage(
       <p class="snapshot-kicker">${escapeHtml(meta.eyebrow)}</p>
        <h1>${escapeHtml(heading)}</h1>
       ${excerpt}
+      ${isGuide ? `<p class="snapshot-byline">By <a href="${escapeHtml(publicPath("/team"))}" rel="author">${escapeHtml(SITE_FOUNDER.name)}</a></p>` : ""}
     </header>
     <main>
       <p class="snapshot-lead">${escapeHtml(content.lead)}</p>
@@ -1281,11 +1286,13 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
           inLanguage: "en-IN",
         }] : []),
         ...(route === "/team" ? [{
-          "@type": "Person",
-          "@id": `${siteUrl}/team#shiv-mishra`,
-          name: "Shiv Mishra",
-          affiliation: { "@id": `${siteUrl}/#organization` },
-        }] : []),
+          "@type": "ProfilePage",
+          "@id": `${siteUrl}/team/#webpage`,
+          name: meta.title,
+          url: canonical,
+          mainEntity: { "@id": createFounderPerson(siteUrl)["@id"] },
+          inLanguage: "en-IN",
+        }, createFounderPerson(siteUrl)] : []),
         ...(route === "/interview-guides" ? [{
           "@type": "CollectionPage",
           name: meta.title,
@@ -1333,6 +1340,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
       ...(guide?.datePublished ? { datePublished: guide.datePublished } : {}),
       ...(guide?.dateModified ? { dateModified: guide.dateModified } : {}),
       mainEntityOfPage: canonical,
+      author: createFounderAuthor(siteUrl),
       publisher: organization,
       inLanguage: "en-IN",
     });

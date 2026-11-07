@@ -11,6 +11,8 @@ import routeRegistry from "@/data/route-registry";
 import { getLegacyArticleReplacement } from "@/data/legacy-routes";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
+import { aboutCopy, teamCopy, type PeopleCopySection } from "@/data/trust-people-copy";
+import { createFounderPerson } from "@/data/site-founder";
 
 export function TopicClustersPage() {
   const [selected, setSelected] = useState("all");
@@ -809,20 +811,20 @@ type PublishedTrustKind = TrustKind | "corrections" | "methodology" | "sources" 
 
 const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: string }> = {
   about: {
-    eyebrow: "About / the work",
-    title: "CareerReality, made for consequential decisions.",
-    intro: "CareerReality publishes career decision tools and guides. It is operated by Doffysoft pvt. Limited.",
+    eyebrow: aboutCopy.eyebrow,
+    title: aboutCopy.title,
+    intro: aboutCopy.intro,
     seoTitle: "About CareerReality",
-    seoDescription: "Explore CareerReality’s career tools, India-focused guides, evidence limits, and operator details before using a worksheet.",
+    seoDescription: "Why CareerReality exists, the house rules every tool and guide follows, and the independent engineer who builds it for career decisions in India.",
     path: "/about",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
   },
   team: {
-    eyebrow: "Team / affiliation",
-    title: "People behind CareerReality.",
-    intro: "Shiv Mishra is the founder, product builder, and lead author of CareerReality.in.",
-    seoTitle: "Team and Affiliation | CareerReality",
-    seoDescription: "Meet CareerReality founder and lead author Shiv Mishra, and see the limits of the pending payroll review attribution.",
+    eyebrow: teamCopy.eyebrow,
+    title: teamCopy.title,
+    intro: teamCopy.intro,
+    seoTitle: "Shiv Shakti Mishra, Founder | CareerReality Team",
+    seoDescription: "Meet Shiv Shakti Mishra, the ML/AI engineer who researches, builds, tests and writes CareerReality, and what one-person authorship can promise.",
     path: "/team",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Team", path: "/team" }],
   },
@@ -909,30 +911,28 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   },
 };
 
+function PeopleCopy({ lead, sections }: { lead: string; sections: PeopleCopySection[] }) {
+  return (
+    <>
+      <p className="max-w-[790px] text-base leading-8 text-foreground">{lead}</p>
+      {sections.map((section) => (
+        <TrustSection key={section.id} id={section.id} title={section.heading}>
+          {section.paragraphs.map((paragraph, index) => <p key={index} className={index ? "mt-4" : undefined}>{paragraph}</p>)}
+          {section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
+          {section.links && <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2">{section.links.map((link) => /^https?:/.test(link.href)
+            ? <a key={link.href} href={link.href} rel="me noopener noreferrer" target="_blank" className="font-bold text-primary">{link.label} <ArrowUpRight size={13} className="inline" /></a>
+            : <Link key={link.href} href={link.href} className="font-bold text-primary">{link.label} <ArrowUpRight size={13} className="inline" /></Link>)}</p>}
+        </TrustSection>
+      ))}
+    </>
+  );
+}
+
 function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
   return (
     <div className="space-y-8">
-      {kind === "about" && <>
-        <TrustSection id="scope" title="Current public scope">
-          <p>CareerReality helps people in India examine career choices with practical tools, 28 career guides, and dated public layoff records. Tools explain their assumptions and limits; guides distinguish source-backed claims from editorial interpretation.</p>
-          <p className="mt-4">The CTC calculator estimates take-home cash from details entered by the user, with PF kept manual. Offer comparisons use written scenarios rather than market averages. Employer due diligence organizes evidence and questions but does not rate or certify a company.</p>
-          <p className="mt-4">Archived source articles and market records without complete provenance are not presented as current public evidence. CareerReality does not publish private-sector salary benchmarks, company scores, or predictions of an individual’s employment outcome.</p>
-        </TrustSection>
-        <TrustSection id="identity" title="Operator details">
-          <p>CareerReality is operated by Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
-        </TrustSection>
-      </>}
-      {kind === "team" && <>
-        <TrustSection id="authors" title="Founder and lead author">
-          <p><strong>Shiv Mishra</strong> — Founder, Product Builder &amp; Lead Author; CareerReality.in. Qualification: Bachelor of Technology (B.Tech.).</p>
-          <p className="mt-4">Shiv is a technology enthusiast and founder of CareerReality.in. He leads product vision, architecture, development, product research, user experience and editorial planning. His work includes interactive career decision tools, salary comparison systems, compensation calculators and practical employment resources.</p>
-          <p className="mt-4">His stated authorship scope includes product vision, original explanatory content, technical development, research, feature validation and internal quality assurance. Individual article authorship is identified only where that article credits him. Internal product checks are not independent specialist review.</p>
-        </TrustSection>
-        <TrustSection id="reviewer" title="Payroll review attribution">
-          <p><strong>Aman Mishra</strong> is identified by the site owner as the reviewer for Indian payroll calculation methodology and related test cases. The owner reports that Aman inspected the calculation logic and tests and agreed to be identified. The supplied documentation lists a Chartered Accountant and HR/Payroll Professional designation, an independent personal-capacity affiliation, and a review date of 05 November 2026.</p>
-          <p className="mt-4">The supplied reviewer document does not record a confirmed implementation/version, evidence list, findings, outcome, limitations, or final credential wording. A separate owner-prepared QA record dated 7 November 2026 reports internal tests as passed but explicitly says independent payroll review is not formally completed or documented. No completed review conclusion or independent certification is claimed here.</p>
-        </TrustSection>
-      </>}
+      {kind === "about" && <PeopleCopy lead={aboutCopy.lead} sections={aboutCopy.sections} />}
+      {kind === "team" && <PeopleCopy lead={teamCopy.lead} sections={teamCopy.sections} />}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
           <p>Legal, tax, payroll, and market claims require a relevant source, an access date when known, and a clear statement of scope. When a source does not support a claim, the claim is removed, qualified, or withheld.</p>
@@ -1111,7 +1111,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
     },
     ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about` }] : []),
     ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact`, mainEntity: { "@id": organizationId } }] : []),
-    ...(kind === "team" ? [{ "@type": "Person", "@id": `${siteOrigin}/team#shiv-mishra`, name: "Shiv Mishra", jobTitle: "Founder, Product Builder & Lead Author", description: "B.Tech graduate and founder of CareerReality.in; leads product vision, technical development, research, user experience and editorial planning.", affiliation: { "@id": organizationId } }] : []),
+    ...(kind === "team" ? [{ "@type": "ProfilePage", "@id": `${siteOrigin}/team/#webpage`, name: page.seoTitle, url: `${siteOrigin}/team/`, mainEntity: { "@id": createFounderPerson(siteOrigin)["@id"] } }, createFounderPerson(siteOrigin)] : []),
   ];
   return (
     <PublicPage

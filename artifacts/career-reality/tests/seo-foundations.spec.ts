@@ -16,8 +16,8 @@ function decodeHtmlValue(value: string): string {
 test.describe("public SEO foundations", () => {
   test("renders complete, route-specific trust pages", async ({ page }) => {
     const routes = [
-      { path: "/about", heading: "CareerReality, made for consequential decisions.", marker: "Current public scope" },
-      { path: "/team", heading: "People behind CareerReality.", marker: "Founder and lead author" },
+      { path: "/about", heading: "Most career decisions arrive as one number.", marker: "House rules" },
+      { path: "/team", heading: "One builder, the whole stack.", marker: "What one person cannot promise" },
       { path: "/editorial", heading: "Evidence, limits, and uncertainty.", marker: "Evidence before conclusion" },
       { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "What this notice covers" },
       { path: "/terms", heading: "Limits and use of CareerReality.", marker: "Tools and guides" },
@@ -57,13 +57,12 @@ test.describe("public SEO foundations", () => {
 
     await page.goto("/team", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
-    await expect(page.locator("#authors")).toContainText("Founder, Product Builder & Lead Author");
-    await expect(page.locator("#authors")).toContainText("Bachelor of Technology (B.Tech.)");
-    await expect(page.locator("#authors")).toContainText("Individual article authorship is identified only where that article credits him.");
+    await expect(page.locator("#founder")).toContainText("Shiv Shakti Mishra");
+    await expect(page.locator("#founder")).toContainText("machine learning and AI engineer");
+    await expect(page.locator("#limits")).toContainText("not personal tax, legal or financial advice");
     await expect(page.locator("#reviewer")).toContainText("Aman Mishra");
-    await expect(page.locator("#reviewer")).toContainText("does not record a confirmed implementation/version");
-    await expect(page.locator("#reviewer")).toContainText("independent payroll review is not formally completed or documented");
-    await expect(page.locator("#reviewer")).toContainText("No completed review conclusion or independent certification is claimed here.");
+    await expect(page.locator("#reviewer")).toContainText("independent payroll review is not yet formally completed");
+    await expect(page.locator("#reviewer")).toContainText("No completed review or certification is claimed.");
 
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
     await expect(page.locator('a[href="mailto:hello@careerreality.in"]').first()).toBeVisible();
@@ -166,6 +165,11 @@ test.describe("public SEO foundations", () => {
     const logo = await request.get("/logo.svg");
     expect(logo.ok()).toBeTruthy();
     expect(logo.headers()["content-type"]).toMatch(/image\/svg\+xml/);
+
+    const pngLogo = await request.get("/logo.png");
+    expect(pngLogo.ok()).toBeTruthy();
+    expect(pngLogo.headers()["content-type"]).toMatch(/image\/png/);
+    expect((await pngLogo.body()).readUInt32BE(16)).toBe(512);
   });
 
   test("redirects retired company routes to the due-diligence hub", async ({ page }) => {

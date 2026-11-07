@@ -107,8 +107,8 @@ Cite the specific page and its original sources where provided. Preserve source 
 
 ## About, standards, sources, and policies
 
-- [About CareerReality](https://careerreality.in/about/): Explore CareerReality's practical career decision tools and editorial guides, review their scope, and find a contact address.
-- [Team and Affiliation | CareerReality](https://careerreality.in/team/): Read about Shiv Mishra's affiliation with Doffysoft pvt. Limited. Contact CareerReality by email with editorial questions.
+- [About CareerReality](https://careerreality.in/about/): Why CareerReality exists, the house rules every tool and guide follows, and the independent engineer who builds it for career decisions in India.
+- [Shiv Shakti Mishra, Founder | CareerReality Team](https://careerreality.in/team/): Meet Shiv Shakti Mishra, the ML/AI engineer who researches, builds, tests and writes CareerReality, and what one-person authorship can promise.
 - [Editorial Standards](https://careerreality.in/editorial/): See how CareerReality separates source-backed facts, editorial analysis, assumptions, and uncertainty when evidence is incomplete or disputed.
 - [Corrections and Updates](https://careerreality.in/corrections/): Email CareerReality to report an error, learn what information to include, and see how material corrections are described.
 - [Tools and Calculation Methods](https://careerreality.in/methodology/): Review each tool's inputs, formulas, worked examples, dated assumptions, and limits, including what its results cannot establish.

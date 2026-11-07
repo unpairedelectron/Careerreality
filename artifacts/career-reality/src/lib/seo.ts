@@ -3,6 +3,7 @@ import { categoryMeta } from "@/data/category-meta";
 import { ARTICLE_TITLE_SUFFIX, formatSeoTitle } from "@/data/seo-title";
 import routeRegistry from "@/data/route-registry";
 import { createSiteOrganization } from "@/data/seo-organization";
+import { createFounderAuthor } from "@/data/site-founder";
 
 const SITE_NAME = "CareerReality";
 
@@ -19,6 +20,8 @@ export type ArticleSchemaInput = {
   section: string;
   keywords: string[];
   citations?: Array<{ name: string; url: string }>;
+  /** Credit the site founder as author (guides he wrote). */
+  authoredByFounder?: boolean;
 };
 
 export type FaqSchemaInput = {
@@ -95,8 +98,8 @@ const routeSeo: Record<string, { title: string; description: string; noIndex?: b
     noIndex: true,
   },
   "/about": {
-    title: "About CareerReality | Current Scope",
-    description: "See what this local CareerReality build contains, what remains withheld, and which operating details are not verified.",
+    title: "About CareerReality",
+    description: "Why CareerReality exists, the house rules every tool and guide follows, and the independent engineer who builds it for career decisions in India.",
   },
   "/editorial": {
     title: "Editorial Standards | CareerReality",
@@ -340,6 +343,7 @@ export function useSeo(config: SeoConfig) {
         articleSection: config.article.section,
         keywords: config.article.keywords,
         mainEntityOfPage: canonical,
+        ...(config.article.authoredByFounder ? { author: createFounderAuthor(siteUrl()) } : {}),
         publisher: organization,
          citation: config.article.citations,
       });

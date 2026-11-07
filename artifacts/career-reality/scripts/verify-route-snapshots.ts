@@ -14,6 +14,7 @@ import {
 import { getSiteUrl } from "./seo-site-url.mjs";
 import { ctcWorkedExampleResults } from "../src/lib/ctc-calculator.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
+import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { assertArticlePublisherLogos } from "./lib/verify-publisher-logo.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
@@ -134,16 +135,9 @@ function assertSharedSchema(html: string, route: string): void {
     throw new Error(`Person structured data is not approved on ${route}`);
   }
   if (route === "/team") {
-    const person = people[0];
-    const affiliation = person?.affiliation as Record<string, unknown> | undefined;
-    const allowed = new Set(["@type", "@id", "name", "affiliation"]);
-    if (
-      people.length !== 1 ||
-      person?.name !== "Shiv Mishra" ||
-      affiliation?.["@id"] !== `${siteUrl}/#organization` ||
-      Object.keys(person ?? {}).some((key) => !allowed.has(key))
-    ) {
-      throw new Error("Team Person schema must contain only the owner-approved name and organization affiliation");
+    const expected = createFounderPerson(siteUrl);
+    if (people.length !== 1 || JSON.stringify(people[0]) !== JSON.stringify(expected)) {
+      throw new Error("Team Person schema must match the owner-approved founder record in src/data/site-founder.ts");
     }
   }
   assertArticlePublisherLogos(nodes, createSiteOrganization(siteUrl, process.env.BASE_PATH || "/").logo, route);
@@ -282,8 +276,8 @@ const legacyDestinations: Record<string, string> = {
 
 const routeContentChecks: Record<string, string[]> = {
   "/salary-calculator": ["Questions worth checking", "employer PF, gratuity, and other costs that you enter from the offer", "id=\"method\"", "For Tax Year 2026–27", "estimated month by month from a user-entered start date", "incometax.gov.in/iec/foportal/help/individual/return-applicable-1", "Salaried Individuals for AY 2026–27"],
-  "/about": ["Doffysoft pvt. Limited", "Hinjewadi Phase 3, Pune"],
-  "/team": ["Shiv Mishra", "Doffysoft pvt. Limited"],
+  "/about": ["Doffysoft pvt. Limited", "Hinjewadi Phase 3, Pune", "House rules", "Shiv Shakti Mishra"],
+  "/team": ["Shiv Shakti Mishra", "ML/AI engineer", "Doffysoft pvt. Limited", "What one person cannot promise"],
   "/editorial": ["Authorship, review, publication dates, and substantive updates are identified where available"],
   "/corrections": ["When a material correction is made"],
   "/methodology": ["estimates old and new salary-only tax for AY 2026–27", "limited monthly-rate illustration uses 15/26", "₹20 lakh maximum as then current", "piece-rated or seasonal cases"],
@@ -822,8 +816,11 @@ for (const slug of authoredGuideSlugs) {
       actualModifiedDate !== guideMetadata.dateModified) {
     throw new Error(`Guide ${slug} Article JSON-LD dates must match the available editorial metadata exactly.`);
   }
-  if ("author" in articleSchema) {
-    throw new Error(`Guide ${slug} Article JSON-LD must omit unverified author details.`);
+  if (JSON.stringify(articleSchema.author) !== JSON.stringify(createFounderAuthor(siteUrl))) {
+    throw new Error(`Guide ${slug} Article JSON-LD must credit the founder as author.`);
+  }
+  if (!html.includes(`rel="author">${SITE_FOUNDER.name}</a>`)) {
+    throw new Error(`Guide ${slug} is missing its visible author byline.`);
   }
   if (!breadcrumbItems || breadcrumbItems.length !== 3 || breadcrumbItems[1]?.name !== "Guides" || breadcrumbItems[2]?.name !== route.title) {
     throw new Error(`Guide ${slug} has an invalid BreadcrumbList.`);

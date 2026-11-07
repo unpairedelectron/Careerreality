@@ -47,8 +47,8 @@ test("snippet guard reports both short and long descriptions but permits concise
 });
 
 test("static and hydrated schema use the same absolute publisher logo, including preview bases", () => {
-  assert.equal(createSiteOrganization("https://example.test/").logo, "https://example.test/logo.svg");
-  assert.equal(createSiteOrganization("https://example.test", "/preview/").logo, "https://example.test/preview/logo.svg");
+  assert.equal(createSiteOrganization("https://example.test/").logo, "https://example.test/logo.png");
+  assert.equal(createSiteOrganization("https://example.test", "/preview/").logo, "https://example.test/preview/logo.png");
 });
 
 test("publisher verification accepts inline or referenced organizations and ImageObjects", () => {
