@@ -47,6 +47,7 @@
     "check:question-bank-links": "node scripts/check-question-bank-links.mjs",
     "test:pillar-guide-metadata": "node --test tests/pillar-guide-metadata.test.mjs",
     "test:on-page-seo": "tsx --test tests/on-page-seo.test.ts",
+    "test:internal-href": "tsx --test tests/internal-href.test.ts",
     "audit:content": "pnpm --filter @workspace/scripts exec tsx ../artifacts/career-reality/scripts/content-quality-audit.ts",
     "audit:content:strict": "pnpm --filter @workspace/scripts exec tsx ../artifacts/career-reality/scripts/content-quality-audit.ts --strict",
     "test:content-audit": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/career-reality/tests/content-quality-audit.test.ts"

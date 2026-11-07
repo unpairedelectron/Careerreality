@@ -1,5 +1,5 @@
 import { ArrowUpRight, LockKeyhole, Sparkles, Waypoints } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { Logo } from "@/components/shared/app-nav";
 
 export function AuthFrame({

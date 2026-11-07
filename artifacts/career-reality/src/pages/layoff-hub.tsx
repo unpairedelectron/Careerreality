@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Link, useLocation, useParams } from 'wouter';
+import { useLocation, useParams } from 'wouter';
+import { Link } from '@/components/shared/app-link';
 import { ArrowDown, ArrowLeft, ArrowUpRight, Check, Clipboard, Clock3, ExternalLink, ShieldCheck, Wallet } from 'lucide-react';
 import {
   useConfirmLayoffAlertSubscription,

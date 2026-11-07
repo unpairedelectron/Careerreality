@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import type { FaqSchemaInput } from "@/lib/seo";
 import { trackNextAction } from "@/lib/analytics";
 import { compareCtcOffers, ctcWorkedExampleResults } from "@/lib/ctc-calculator";
@@ -200,7 +200,7 @@ export function ToolGuideSection({ guide }: { guide: ToolGuide }) {
       <div className="mt-7 grid gap-2 border-t border-border pt-6">
         {guide.faqs.map((faq) => <details key={faq.question} className="rounded-xl border border-border bg-secondary/30 px-4 py-3"><summary className="cursor-pointer text-[12px] font-bold">{faq.question}</summary><p className="mt-3 max-w-[760px] text-[11px] leading-[1.7] text-muted-foreground">{faq.answer}</p></details>)}
       </div>
-      {guide.sources && <div className="mt-7 border-t border-border pt-6"><h3 className="text-[11px] font-bold">Official sources to check</h3><ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">{guide.sources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-primary underline underline-offset-4">{source.label} <ArrowUpRight size={12} className="inline" /></a></li>)}</ul></div>}
+      {guide.sources && <div className="mt-7 border-t border-border pt-6"><h3 className="text-[11px] font-bold">Official sources to check</h3><ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">{guide.sources.map((source) => <li key={source.href}><a href={withTrailingSlash(source.href)} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-primary underline underline-offset-4">{source.label} <ArrowUpRight size={12} className="inline" /></a></li>)}</ul></div>}
     </section>
   );
 }

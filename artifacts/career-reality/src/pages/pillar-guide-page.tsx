@@ -1,5 +1,6 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from "react";
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import type guideCatalog from "@/data/generated-pillar-guides.json";
@@ -138,7 +139,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
                 <ul className="mt-4 space-y-2 text-xs">
                   {section.sourceLinks.map((source) => (
                     <li key={source.url}>
-                      <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">
+                      <a href={withTrailingSlash(source.url)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">
                         {source.label}
                       </a>
                       <span className="text-muted-foreground"> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
@@ -183,7 +184,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           <ul className="mt-4 space-y-2">
             {guide.sources.map((source) => (
               <li key={source.url}>
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
+                <a href={withTrailingSlash(source.url)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
                 <span> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
               </li>
             ))}

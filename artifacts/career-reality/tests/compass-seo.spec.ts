@@ -25,7 +25,7 @@ test.describe("Compass client-navigation metadata", () => {
       // A document marker proves this is an SPA transition, not a new snapshot.
       await page.evaluate(() => { document.documentElement.dataset.spaNavigation = "preserved"; });
       if (origin.link) {
-        await page.locator('a[href="/compass"]').first().click();
+        await page.locator('a[href="/compass/"]').first().click();
       } else {
         // Wouter observes pushState, the same history operation used by its links.
         await page.evaluate(() => window.history.pushState(null, "", "/compass"));

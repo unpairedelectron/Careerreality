@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { Logo } from "@/components/shared/app-nav";
 import { publicSiteMap } from "@/data/site-map";
 import "./public-chrome.css";

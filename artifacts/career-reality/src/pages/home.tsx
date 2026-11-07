@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowDown, ArrowUpRight, Check, CircleHelp, ShieldAlert } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { AppNav } from "@/components/shared/app-nav";
 import { useHomeSeo } from "@/lib/home-seo";
 import "./home.css";

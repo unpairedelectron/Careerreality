@@ -479,7 +479,7 @@ test.describe("save and watch loops", () => {
     await page.getByTestId("input-index-ai").selectOption("Neutral");
     await expect(page.getByTestId("result-career-index")).toContainText("Company confidence, Ability to move");
     await expect(page.getByTestId("result-career-index")).toContainText("company confidence Not satisfied");
-    await expect(page.getByRole("link", { name: "Check employer evidence" })).toHaveAttribute("href", "/companies");
+    await expect(page.getByRole("link", { name: "Check employer evidence" })).toHaveAttribute("href", "/companies/");
     await page.getByTestId("input-index-stability").selectOption("Satisfied");
     await page.getByTestId("input-index-optionality").selectOption("Satisfied");
     await page.getByTestId("input-index-ai").selectOption("Not satisfied");
@@ -487,7 +487,7 @@ test.describe("save and watch loops", () => {
     await expect(page.getByTestId("index-response-summary")).toContainText(/Ability to move\s*Satisfied/);
     await expect(page.getByTestId("index-response-summary")).toContainText(/AI readiness\s*Not satisfied/);
     await expect(page.getByTestId("result-career-index")).toContainText("AI readiness for a closer look");
-    await expect(page.getByRole("link", { name: "Assess task-level AI changes" })).toHaveAttribute("href", "/ai");
+    await expect(page.getByRole("link", { name: "Assess task-level AI changes" })).toHaveAttribute("href", "/ai/");
     await expect(page.getByTestId("result-career-index")).not.toContainText("/ 100");
 
     await page.setViewportSize({ width: 390, height: 844 });

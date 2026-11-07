@@ -1,4 +1,5 @@
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import { ArrowUpRight } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import library from "@/data/rules-library.json";
@@ -51,7 +52,7 @@ export function RulesLibraryPage() {
         ) : null}
         <section>
           <h2 className="font-display text-2xl">Official sources</h2>
-          <ul className="mt-3 space-y-3">{page.sources.map((source) => <li key={source.url}><a className="inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4" href={source.url} target="_blank" rel="noopener noreferrer">{source.label}<ArrowUpRight size={14} aria-hidden="true" /></a><span className="block text-xs text-muted-foreground">Opened and verified 10 October 2026.</span></li>)}</ul>
+          <ul className="mt-3 space-y-3">{page.sources.map((source) => <li key={source.url}><a className="inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4" href={withTrailingSlash(source.url)} target="_blank" rel="noopener noreferrer">{source.label}<ArrowUpRight size={14} aria-hidden="true" /></a><span className="block text-xs text-muted-foreground">Opened and verified 10 October 2026.</span></li>)}</ul>
         </section>
         <section>
           <h2 className="font-display text-2xl">Related tools and guides</h2>

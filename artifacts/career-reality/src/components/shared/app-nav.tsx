@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowUpRight, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { primaryRoutes, searchRoute, ctcCalculatorRoute } from "@/data/navigation-routes";
 import { useAppAuth } from "@/lib/app-auth-context";
