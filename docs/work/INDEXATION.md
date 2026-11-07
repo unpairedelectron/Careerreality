@@ -1,12 +1,12 @@
 # Indexation and route status
 
-**Checked:** 2026-10-09  
+**Updated:** 2026-11-07
 **Release state:** local-only; no deployment
 
 ## Local build
 
-- Generated sitemap: exactly two URLs, `https://careerreality.in/` and `https://careerreality.in/tools/`; both local snapshots have self-canonicals and `index, follow`.
-- The CTC route (`/salary-calculator/`) and all other decision-tool routes are `noindex, follow` and excluded from the sitemap. The CTC calculator is available in the local product but is not being targeted for search while qualified review is pending.
+- The earlier 2026-10-09 local snapshot contained two sitemap URLs (`/` and `/tools/`). On 2026-11-06, the owner authorized local indexability for `/salary-calculator/`; it is now registered as indexable and included in the generated sitemap. Regenerate the sitemap during the next build to verify the current complete route set.
+- `/salary-calculator/` is locally indexable and included in the generated sitemap by owner direction on 2026-11-06, while independent professional payroll review remains incomplete. Keep estimate-only and manual-PF disclosures. Other decision-tool routes retain their individual registry settings.
 - Editorial, source, privacy, terms, about, contact, corrections and methodology pages are present locally, but remain `noindex, follow` until required human facts and review are supplied.
 - The build generated and verified 27 crawler-visible snapshots and 12 app shells. It contains no original article snapshots for the 44 archived article records and no company-detail snapshots.
 - Four `/ai/:slug` legacy paths render generic `noindex, follow` handoffs canonicalized to `/ai/`; they contain no original article body and are not in the sitemap.

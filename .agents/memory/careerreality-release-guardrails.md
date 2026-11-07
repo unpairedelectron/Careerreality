@@ -11,11 +11,16 @@ description: User-specified scope, verification, and publication constraints for
 - Keep the route registry authoritative for routes, navigation, redirects, and sitemap inclusion.
 - Keep the two retired legacy AI-news URLs as real 404s; do not restore them or redirect them to unrelated pages without explicit approval.
 - Keep engineering, article, data, operations, account-QA, and release readiness separate. A release decision must evaluate the scope and risk of the changes being deployed; unrelated evidence gaps remain visible but do not block safe engineering-only changes.
+- Owner-reported internal payroll QA is not independent professional approval. Missing external review must not block unrelated engineering, testing, or local SEO work, but it continues to limit payroll claims and release decisions that depend on professional validation.
 - Remove exact repeated paragraphs only from assembled archive drafts, preserve the original archive exports, and keep source-level duplicate counts visible.
 
 **Why:** the user set these release constraints to protect archived content and prevent unbounded verification work.
 
 **How to apply:** use these rules for remaining CareerReality restoration work; do not publish or create the final note before the stated gates. Treat a copied draft excerpt or distinctive paragraph in a public guide as an editorial gate, not a false positive to suppress.
+
+**Why:** the owner QA record dated 2026-11-07 separates reported internal test status from formal independent payroll review and explicitly allows engineering and non-public QA to continue.
+
+**How to apply:** keep internal results labeled as reported unless their logs are independently checked; preserve estimate-only/manual-PF and no-certification disclosures, while scoping external-review gates only to claims or release decisions that require them.
 
 **Why:** the user explicitly chose to preserve the original article URLs while publication requirements are unmet.
 

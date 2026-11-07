@@ -8,7 +8,7 @@
 1. **Production does not match the local remediation, and the live evidence conflicts.** The earlier baseline recorded three sitemap entries and 44 article URLs as `noindex`. A later captured read-only published-SEO output recorded 69 sitemap entries, 66 outside that run's three-URL local set, and sampled two article routes as `index, follow`. Its gate failed (three local checks and one published check). No local changes were deployed, and the discrepancy is unresolved. Do not claim production quarantine or post-remediation verification.
 2. **Article trust evidence is absent.** All 44 archived article records fail the hard duplicate/evidence gate. The supplied export has no verified byline, publication date or update date for any of them. They remain unpublished locally.
 3. **Market/company provenance is missing.** All 392 production rows have empty source URLs; 360 salary, 26 company and 6 layoff rows remain unchanged and suppressed. No company formula, score or narrative is approved.
-4. **The CTC calculator lacks qualified review and complete PF rules.** The tax-year 2026–27 rates, deduction, rebate, surcharge and cess were checked against official Income-tax Act 2025 sources and the Finance Bill 2026 memorandum, but no tax-qualified reviewer is assigned. A PIB release verifies the ₹25,000 EPFO ceiling announcement; the EPFO contribution-rate reference and linked FAQ could not be retrieved, and the statutory wage definition/basic-pay mapping remains unverified. PF amounts therefore remain manual; the calculator is noindex.
+4. **Independent payroll review remains incomplete.** The owner QA record reports internal tax/PF tests, September PF transition tests, the build, and four focused SEO checks as passed, but supporting logs were not attached. No completed independent professional review is documented; do not claim CA approval or certification. This is not a gate for unrelated engineering, testing, or local SEO work. Keep payroll outputs estimate-only and PF manual. The calculator's local indexability is owner-authorized; publication remains separate and unauthorized.
 5. **Trust and compliance facts need a human owner.** Legal entity, responsible people, reviewed privacy/retention practices, terms, correction history and a monitored public contact channel are not established. Trust pages accurately state these unknowns and remain noindex.
 6. **Current static hosting does not implement the requested 410/301 responses.** The 80 URL decisions are editorial actions. Local static output relies on missing-path 404 behavior; no production status after the local change is verified.
 
@@ -24,7 +24,7 @@
 
 - Keep all 44 articles out of local navigation, sitemap, structured data and article snapshots; preserve originals in `archive/articles/`.
 - Keep unsupported company narratives and all source-URL-missing market rows suppressed. Do not alter the production database.
-- Keep only the CTC calculator featured; it and the other decision tools remain noindex until their gates pass.
+- Keep the estimate-only and manual-PF disclosures on the CTC calculator; its local indexability is owner-authorized. Do not treat missing external review as a blocker for unrelated engineering, testing, or local SEO work.
 - Keep legal/editorial trust pages noindex until the missing human facts are confirmed.
 - Do not add or enable ads, AdSense scripts or an AdSense submission.
 - Do not deploy. A successful local build is not approval to publish.

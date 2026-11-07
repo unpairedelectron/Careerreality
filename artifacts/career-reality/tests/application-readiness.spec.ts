@@ -50,16 +50,16 @@ test("signed-in readiness view shows the threshold, blocker override, and noinde
   await expect(jobPostingReview).toContainText("required-field and fetch-error announcements");
   await expect(jobPostingReview).toContainText("No additional route-level gate was identified by this scoped review");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, follow");
-  await expect(page.getByTestId("readiness-entry-ctc-calculator")).toContainText("BLOCKED BY HUMAN INPUT");
+  await expect(page.getByTestId("readiness-entry-ctc-calculator")).toContainText("NOT READY");
   await expect(page.getByTestId("readiness-entry-company-intelligence")).toContainText("BLOCKED BY HUMAN INPUT");
   await expect(page.getByTestId("readiness-entry-layoff-radar")).toContainText("NOT READY");
 
   await page.getByTestId("readiness-entry-ctc-calculator").locator("summary").click();
   await expect(page.getByTestId("readiness-entry-ctc-calculator").getByText(/internal release target is 90\/100/i)).toBeVisible();
-  await expect(page.getByText(/qualified tax reviewer has not approved/i)).toBeVisible();
+  await expect(page.getByText(/independent professional review is not formally completed/i)).toBeVisible();
 
   await page.getByTestId("filter-status-blocked-by-human-input").click();
-  await expect(page.getByText("Showing 3 of 11")).toBeVisible();
+  await expect(page.getByText("Showing 2 of 11")).toBeVisible();
   await expect(page.getByTestId("readiness-entry-career-compass")).toHaveCount(0);
 });
 
