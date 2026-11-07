@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { categoryMeta } from "@/data/category-meta";
-import { ARTICLE_TITLE_SUFFIX, formatSeoTitle } from "@/data/seo-title";
+import { ARTICLE_TITLE_SUFFIX, formatSeoTitle, routeSeoTitle } from "@/data/seo-title";
 import routeRegistry from "@/data/route-registry";
 import { createSiteOrganization } from "@/data/seo-organization";
 
@@ -75,7 +75,7 @@ const routeSeo: Record<string, { title: string; description: string; noIndex?: b
   },
   "/salary-drop": {
     title: "Salary Change Planner | CareerReality",
-    description: "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details are excluded.",
+    description: "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details excluded.",
   },
   "/escape-plan": {
     title: "Career Escape Plan: Turn Stuck Into Next Steps | CareerReality",
@@ -219,7 +219,7 @@ export function getRouteSeo(path: string): { title?: string; description?: strin
   const registeredRoute = getRegisteredRoute(normalized);
   if (registeredRoute) {
     return {
-      title: formatSeoTitle(registeredRoute.title),
+      title: routeSeoTitle(registeredRoute),
       description: registeredRoute.description,
       noIndex: registeredRoute.indexability === "noindex",
     };
@@ -272,7 +272,7 @@ export function useSeo(config: SeoConfig) {
     // Registered public routes use exactly the same copy before and after hydration.
     const description = routePolicy?.render === "snapshot" ? routePolicy.description : config.description;
     const title = routePolicy?.render === "snapshot"
-      ? formatSeoTitle(routePolicy.title)
+      ? routeSeoTitle(routePolicy)
       : config.article
         ? (config.title.endsWith(ARTICLE_TITLE_SUFFIX) ? config.title : `${config.title}${ARTICLE_TITLE_SUFFIX}`)
         : formatSeoTitle(config.title);

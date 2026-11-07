@@ -1,6 +1,6 @@
 import { expect, test } from "./fixtures";
 import registry from "../src/data/route-registry";
-import { formatSeoTitle } from "../src/data/seo-title";
+import { routeSeoTitle } from "../src/data/seo-title";
 
 const compass = registry.routes.find((route) => route.path === "/compass")!;
 
@@ -31,7 +31,7 @@ test.describe("Compass client-navigation metadata", () => {
         await page.evaluate(() => window.history.pushState(null, "", "/compass"));
       }
       await expect(page).toHaveURL(/\/compass\/?$/);
-      await expect(page).toHaveTitle(formatSeoTitle(compass.title));
+      await expect(page).toHaveTitle(routeSeoTitle(compass));
       await expect(page.locator("html")).toHaveAttribute("data-spa-navigation", "preserved");
       await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", compass.description);
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
@@ -42,7 +42,7 @@ test.describe("Compass client-navigation metadata", () => {
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", canonicalUrl!);
       await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "website");
       for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) {
-        await expect(page.locator(selector)).toHaveAttribute("content", formatSeoTitle(compass.title));
+        await expect(page.locator(selector)).toHaveAttribute("content", routeSeoTitle(compass));
       }
       for (const selector of ['meta[property="og:description"]', 'meta[name="twitter:description"]']) {
         await expect(page.locator(selector)).toHaveAttribute("content", compass.description);

@@ -4,6 +4,7 @@ import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import type guideCatalog from "@/data/generated-pillar-guides.json";
 import routeRegistry from "@/data/route-registry";
+import { routeSeoTitle } from "@/data/seo-title";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 
 type GuideSource = { url: string; label: string; year?: string };
@@ -70,7 +71,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
       title={route.title}
       intro={route.description}
       seo={{
-        title: `${route.title} | CareerReality`,
+        title: routeSeoTitle(route),
         description: route.description,
         path: guide.path,
         breadcrumbs: crumbs,

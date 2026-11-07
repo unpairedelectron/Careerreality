@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const HOME_TITLE = "Career Decisions in Context | CareerReality";
+const HOME_TITLE = "Career Tools & Salary Calculators for India | CareerReality";
 const HOME_DESCRIPTION = "Career tools for India: compare written job offers, estimate take-home pay with stated tax assumptions, and use sourced guides to plan your next career move.";
 
 function setMeta(attribute: "name" | "property", key: string, content: string) {
