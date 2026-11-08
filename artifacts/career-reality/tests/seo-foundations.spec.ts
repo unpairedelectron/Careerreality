@@ -98,13 +98,13 @@ test.describe("public SEO foundations", () => {
     await expect(page.locator('script[data-career-seo-schema="article"]')).toHaveCount(0);
   });
 
-  test("published archived article URL returns 404 or 410 after the approved release", async ({ request }) => {
+  test("published archived article URL redirects to its replacement guide", async ({ request }) => {
     test.skip(process.env.PLAYWRIGHT_PUBLISHED !== "true", "This check runs against the published custom origin.");
 
     const articlePath = "/article/indian-it-layoff-cycle-2026/";
-    const response = await request.get(articlePath);
-    expect([404, 410]).toContain(response.status());
-    expect(await response.text()).not.toContain('"@type":"Article"');
+    const response = await request.get(articlePath, { maxRedirects: 0 });
+    expect(response.status()).toBe(301);
+    expect(response.headers().location).toContain("/guides/");
   });
 
   test("publishes unique route metadata and one canonical URL", async ({ page }) => {

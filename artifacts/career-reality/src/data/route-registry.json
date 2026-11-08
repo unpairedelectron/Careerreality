@@ -1369,6 +1369,226 @@
       "from": "/category/software-engineering",
       "to": "/guides/engineering-careers-without-the-title-trap/",
       "status": 301
+    },
+    {
+      "from": "/article/10x-developer-myth-productivity-killing-careers/",
+      "to": "/guides/ai-at-work-questions-to-ask/",
+      "status": 301
+    },
+    {
+      "from": "/article/ai-job-market-2026-india-show-your-working/",
+      "to": "/guides/ai-at-work-questions-to-ask/",
+      "status": 301
+    },
+    {
+      "from": "/article/ai-upskilling-trap-india-api-wrapper-reality/",
+      "to": "/guides/ai-at-work-questions-to-ask/",
+      "status": 301
+    },
+    {
+      "from": "/article/american-dream-indian-engineers/",
+      "to": "/guides/cross-border-and-remote-pay/",
+      "status": 301
+    },
+    {
+      "from": "/article/broke-at-30-money-mistakes-nobody-warned/",
+      "to": "/guides/runway-debt-and-big-decisions/",
+      "status": 301
+    },
+    {
+      "from": "/article/career-switch-illusion-changing-jobs-not-career/",
+      "to": "/guides/independent-work-without-romanticising-it/",
+      "status": 301
+    },
+    {
+      "from": "/article/culture-fit-trap-hiring-reality/",
+      "to": "/guides/culture-fit-and-product-management/",
+      "status": 301
+    },
+    {
+      "from": "/article/cybersecurity-privacy-careers-beyond-tech-india-2026/",
+      "to": "/guides/cybersecurity-and-green-work/",
+      "status": 301
+    },
+    {
+      "from": "/article/data-science-bubble-excel-work-reality/",
+      "to": "/guides/data-science-career-claims/",
+      "status": 301
+    },
+    {
+      "from": "/article/devops-sre-reality-india-oncall/",
+      "to": "/guides/senior-engineering-and-operations-work/",
+      "status": 301
+    },
+    {
+      "from": "/article/engineering-career-ceiling-peak-at-35/",
+      "to": "/guides/engineering-careers-without-the-title-trap/",
+      "status": 301
+    },
+    {
+      "from": "/article/freelancing-reality-india-freedom-myth/",
+      "to": "/guides/independent-work-without-romanticising-it/",
+      "status": 301
+    },
+    {
+      "from": "/article/gcc-gold-rush-india-captive-center-reality/",
+      "to": "/guides/how-to-read-salary-and-hiring-claims/",
+      "status": 301
+    },
+    {
+      "from": "/article/gcc-return-to-office-hybrid-reality-india-2026/",
+      "to": "/guides/notice-period-and-return-to-office/",
+      "status": 301
+    },
+    {
+      "from": "/article/green-careers-esg-renewable-sustainability-india-2026/",
+      "to": "/guides/cybersecurity-and-green-work/",
+      "status": 301
+    },
+    {
+      "from": "/article/home-loan-trap-dream-house-financial-prison/",
+      "to": "/guides/runway-debt-and-big-decisions/",
+      "status": 301
+    },
+    {
+      "from": "/article/hr-conversations-what-matters-india/",
+      "to": "/guides/getting-hired-through-evidence-and-conversations/",
+      "status": 301
+    },
+    {
+      "from": "/article/humour-in-workplace-culture-2026-joke-is-on-promotion/",
+      "to": "/guides/workplace-culture-and-boundaries/",
+      "status": 301
+    },
+    {
+      "from": "/article/indian-education-trap-degree-career-mistake/",
+      "to": "/guides/career-switches-and-education/",
+      "status": 301
+    },
+    {
+      "from": "/article/indian-it-layoff-cycle-2026/",
+      "to": "/guides/layoff-recovery-and-employment-documents/",
+      "status": 301
+    },
+    {
+      "from": "/article/job-hopping-stops-working-after-35/",
+      "to": "/guides/performance-reviews-and-career-choices/",
+      "status": 301
+    },
+    {
+      "from": "/article/joining-bonus-clawback-offer-letter-traps-2026/",
+      "to": "/guides/read-the-offer-beyond-ctc/",
+      "status": 301
+    },
+    {
+      "from": "/article/junior-data-scientist-reality-india/",
+      "to": "/guides/data-science-career-claims/",
+      "status": 301
+    },
+    {
+      "from": "/article/layoff-recovery-timeline-india/",
+      "to": "/guides/layoff-recovery-and-employment-documents/",
+      "status": 301
+    },
+    {
+      "from": "/article/manager-vs-ic-career-path-india/",
+      "to": "/guides/performance-reviews-and-career-choices/",
+      "status": 301
+    },
+    {
+      "from": "/article/mba-reality-india-worth-it-2026/",
+      "to": "/guides/career-switches-and-education/",
+      "status": 301
+    },
+    {
+      "from": "/article/networking-reality-india-introverts/",
+      "to": "/guides/getting-hired-through-evidence-and-conversations/",
+      "status": 301
+    },
+    {
+      "from": "/article/passion-luxury-not-strategy-india/",
+      "to": "/guides/skills-passion-and-career-constraints/",
+      "status": 301
+    },
+    {
+      "from": "/article/performance-review-reality-ratings-india/",
+      "to": "/guides/performance-reviews-and-career-choices/",
+      "status": 301
+    },
+    {
+      "from": "/article/pm-prestige-trap-escape-from-engineering/",
+      "to": "/guides/culture-fit-and-product-management/",
+      "status": 301
+    },
+    {
+      "from": "/article/portfolio-first-hiring-gig-economy-careers-india-2026/",
+      "to": "/guides/getting-hired-through-evidence-and-conversations/",
+      "status": 301
+    },
+    {
+      "from": "/article/relieving-letter-hostage-notice-period-india-2026/",
+      "to": "/guides/notice-period-and-return-to-office/",
+      "status": 301
+    },
+    {
+      "from": "/article/remote-work-salary-trap-india/",
+      "to": "/guides/cross-border-and-remote-pay/",
+      "status": 301
+    },
+    {
+      "from": "/article/salary-transparency-india-2026-number-in-room/",
+      "to": "/guides/read-the-offer-beyond-ctc/",
+      "status": 301
+    },
+    {
+      "from": "/article/self-learning-trap-online-courses-expensive-entertainment/",
+      "to": "/guides/career-switches-and-education/",
+      "status": 301
+    },
+    {
+      "from": "/article/senior-developer-salary-ceiling-india/",
+      "to": "/guides/senior-engineering-and-operations-work/",
+      "status": 301
+    },
+    {
+      "from": "/article/side-hustle-myth-india-reality/",
+      "to": "/guides/independent-work-without-romanticising-it/",
+      "status": 301
+    },
+    {
+      "from": "/article/staff-engineer-promotion-freeze-india-2026/",
+      "to": "/guides/engineering-careers-without-the-title-trap/",
+      "status": 301
+    },
+    {
+      "from": "/article/startup-equity-esop-reality-india/",
+      "to": "/guides/runway-debt-and-big-decisions/",
+      "status": 301
+    },
+    {
+      "from": "/article/tech-lead-trap-responsibility-authority/",
+      "to": "/guides/engineering-careers-without-the-title-trap/",
+      "status": 301
+    },
+    {
+      "from": "/article/ux-salary-myth-design-careers-plateau/",
+      "to": "/guides/how-to-read-salary-and-hiring-claims/",
+      "status": 301
+    },
+    {
+      "from": "/article/what-20-lpa-actually-feels-like-india-purchasing-power/",
+      "to": "/guides/read-the-offer-beyond-ctc/",
+      "status": 301
+    },
+    {
+      "from": "/article/why-upskilling-stops-working-career-trap/",
+      "to": "/guides/skills-passion-and-career-constraints/",
+      "status": 301
+    },
+    {
+      "from": "/article/work-life-balance-myth-high-performers/",
+      "to": "/guides/workplace-culture-and-boundaries/",
+      "status": 301
     }
   ],
   "drafts": {

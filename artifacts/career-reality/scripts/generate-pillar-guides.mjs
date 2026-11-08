@@ -323,9 +323,10 @@ if (sourceOwners.size !== registry.drafts.articles.length) {
   throw new Error(`Guide groups cover ${sourceOwners.size} of ${registry.drafts.articles.length} archived articles.`);
 }
 for (const article of registry.drafts.articles) {
+  const owner = Object.keys(sourceMap).find((guideSlug) => sourceMap[guideSlug].includes(article.slug));
   const redirect = registry.redirects.find((entry) => entry.from === `/article/${article.slug}/`);
-  if (redirect) {
-    throw new Error(`Archived article URL must remain in place pending editorial approval: ${article.slug}.`);
+  if (!redirect || redirect.status !== 301 || redirect.to !== `/guides/${owner}/`) {
+    throw new Error(`Archived article URL must 301 to its replacement guide: ${article.slug}.`);
   }
 }
 

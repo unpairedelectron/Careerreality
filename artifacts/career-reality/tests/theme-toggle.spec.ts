@@ -15,8 +15,8 @@ test("theme toggle switches modes and persists across navigation", async ({ page
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(page.getByTestId("button-theme-toggle")).toHaveAttribute("aria-label", "Switch to light mode");
 
-  await page.goto("/article/indian-it-layoff-cycle-2026");
-  const heldArticleHeading = page.getByRole("heading", { level: 1, name: "This article is not published." });
+  await page.goto("/article/not-a-registered-article-slug");
+  const heldArticleHeading = page.getByRole("heading", { level: 1, name: /not found/i });
   await expect(heldArticleHeading).toBeVisible();
   const headingUsesThemeForeground = await heldArticleHeading.evaluate((element) => {
     const foreground = getComputedStyle(document.documentElement).getPropertyValue("--foreground").trim();

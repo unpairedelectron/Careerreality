@@ -1682,8 +1682,7 @@ const appShellRoutes = routeRegistry.routes
       return ["/sign-up", "/sign-up/sso-callback", "/sign-up/continue"];
     }
     return [route.path];
-  })
-  .concat(archivedArticleRecords.map((article) => `/article/${article.slug}`));
+  });
 
 function renderAppShell(route: string): string {
   const canonical = `${siteUrl}${publicPath(route)}`;

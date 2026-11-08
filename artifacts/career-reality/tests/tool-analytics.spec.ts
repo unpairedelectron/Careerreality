@@ -78,10 +78,9 @@ test("counts a valid edited CTC estimate without sending salary inputs", async (
   }]);
 });
 
-test("keeps the old article behind its review hold", async ({ page }) => {
+test("sends the old article to its replacement guide", async ({ page }) => {
   await page.goto("/article/what-20-lpa-actually-feels-like-india-purchasing-power/");
-  await expect(page.getByRole("heading", { name: "This article is not published." })).toBeVisible();
-  await expect(page.getByRole("link", { name: "View current tools" })).toHaveAttribute("href", "/tools/");
+  await expect(page).toHaveURL(/\/guides\/read-the-offer-beyond-ctc\/?$/);
 });
 
 test("shows the qualified ₹20L example on the published CTC guide", async ({ page }) => {
