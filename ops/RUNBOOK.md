@@ -104,7 +104,7 @@ Owner inputs still open: <count from OWNER-INPUTS-REQUIRED.md>
 | System | Status |
 |---|---|
 | GitHub repo (push to `main`) | Working |
-| Replit (publish) | Connector reaches Repl `IndigoBowedMegabyte` (replId `550f1a95-3316-4c4f-8c0d-2fef08d3b25f`). Used only by the deploy routine |
+| Replit (publish) | Connector reaches Repl `IndigoBowedMegabyte` (replId `550f1a95-3316-4c4f-8c0d-2fef08d3b25f`). Used only by the deploy routine. Tested 8 Nov 2026: `update_app_using_prompt` returns at once and runs in the background, its Agent can merge and push to GitHub, `ask_question` answers directly. `publish_app` itself was not exercised yet: a manual publish was in progress |
 | Google Search Console | Working from the owner PC: `sc-domain:careerreality.in`, Full, via service account `claude-seo@careerreality-seo.iam.gserviceaccount.com` (key at `~/.config/claude-seo/`, never in the repo). Python is not installed there, so the claude-seo scripts do not run yet; use a Node client |
 | GA4 | Property `563172819`, tag `G-KV3S0BK3KK`. Readable from the owner PC through the same service account |
 | Bing Webmaster Tools | Not connected (API key pending, local only) |

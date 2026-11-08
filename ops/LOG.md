@@ -2,6 +2,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-08 — Publish verified; deploy path tested
+
+- Publish status `success`. Live: GA4 tag (realtime showed 4 active users), Form 130 guide with byline and 15 June 2027 date, Finance Bill 2026 note on `/rules/income-tax-new-regime`, GA4 text on `/privacy-policy`, all 88 sitemap URLs 200.
+- Hands-off test: Replit Agent merged `origin/main` and pushed by prompt alone (`87d68d0`, only empty publish commits added). `ask_question` returned the hash directly. `publish_app` could not be tried because a publish was already running; first real use is the 12 Nov deploy.
+- `ops/LAST-DEPLOY` set to `c1e70fa`, the last site change published.
+
 ## 2026-11-08 — Form 130 guide and tax-year wording (owner approved)
 
 - Checked the cloud draft against official sources from the owner PC. Read directly: Form No. 130 page and Rule 215 on incometaxindia.gov.in. PDFs (Form 130 FAQs, transition FAQs, Finance Bill 2026 memorandum) were only seen through search-engine extracts of the official files, because the site blocks direct download; re-read them if a claim is disputed.
