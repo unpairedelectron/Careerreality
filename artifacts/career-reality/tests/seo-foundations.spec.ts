@@ -36,7 +36,7 @@ test.describe("public SEO foundations", () => {
 
     await page.goto("/about", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();
-    await expect(page.locator("#scope")).toContainText("28 career guides");
+    await expect(page.locator("#scope")).toContainText("29 career guides");
     await expect(page.locator("#scope")).not.toContainText("local release candidate");
     await expect(page.locator("#identity")).toContainText("Doffysoft pvt. Limited");
     await expect(page.locator("#identity")).toContainText("Hinjewadi Phase 3, Pune");

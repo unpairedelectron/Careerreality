@@ -479,7 +479,7 @@ const trustPageMeta: Record<TrustKind, TrustPageMeta> = {
   about: {
     eyebrow: "The desk / about",
     title: "Career tools and guides for consequential decisions.",
-    intro: "CareerReality publishes career tools, 28 guides, and dated public layoff records for people in India.",
+    intro: "CareerReality publishes career tools, 29 guides, and dated public layoff records for people in India.",
     seoTitle: "About CareerReality",
     seoDescription: "Explore CareerReality’s career tools, guides, public records, and evidence limits for India-focused career decisions.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
@@ -634,7 +634,7 @@ function AboutTrust() {
       <TrustSection id="purpose" eyebrow="Why this exists" title="A decision desk for the part after the headline.">
         <p>CareerReality helps people in India examine career choices with practical tools, source-linked guides, and dated public records. Each tool separates entered facts from estimates and explains what its result cannot establish.</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 28 career guides, and dated layoff records.</p></div>
+          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 29 career guides, and dated layoff records.</p></div>
           <div className="rounded-[16px] border border-border bg-card p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-muted-foreground">Not provided</p><p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">Private-sector salary benchmarks, scored company ratings, or predictions of an individual’s employment outcome.</p></div>
         </div>
       </TrustSection>
@@ -729,7 +729,7 @@ function PrivacyTrust() {
         </div>
       </TrustSection>
       <TrustSection id="analytics" eyebrow="03 / Product measurement" title="Analytics should describe the product, not your private life.">
-        <p>In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Deployment-level analytics configuration, event destinations, retention, and any wider site measurement were not verified.</p>
+        <p>CareerReality uses Google Analytics 4 to measure visits, page views, and tool use, with advertising features turned off. In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Analytics retention was not verified.</p>
       </TrustSection>
       <TrustSection id="storage" eyebrow="04 / Browser storage and services" title="Small pieces of storage, stated plainly.">
         <p>The codebase includes Clerk authentication and API/database-backed routes. This code-level observation does not identify the production operator, all service providers, infrastructure logs, or the actual production data flows.</p>
@@ -1032,7 +1032,8 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p className="mt-4">The production configuration, processing locations, and complete list of infrastructure and service providers have not been independently verified. This page does not claim that information stays in one country or that third-party providers use a specific retention period.</p>
         </TrustSection>
         <TrustSection id="analytics" title="Analytics, cookies, and technical logs">
-          <p>The application code can send limited event names and route, tool, or catalogue identifiers to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. Whether an analytics script is enabled in every production environment, where its events are sent, and how long any analytics or server logs are retained have not been verified.</p>
+          <p>CareerReality uses Google Analytics 4 on careerreality.in to measure visits, page views, and tool use. Google receives the page address and browser and device details, processes your IP address to work out approximate location, and sets first-party cookies such as _ga to recognise a returning browser. Advertising storage, Google signals, and ad personalization are turned off. Visitors in the EEA, the UK, and Switzerland are measured without analytics cookies. Analytics does not start when you open a link that carries an access token.</p>
+          <p className="mt-4">The application also sends limited event names and route, tool, or catalogue identifiers to Google Analytics, and to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. How long analytics or server logs are retained has not been verified.</p>
           <p className="mt-4">The site host sets a cookie named GAESA that expires after 30 days; CareerReality does not read it, and its purpose is not identified here. The app may also use browser storage for preferences and feature progress. Web servers and providers may process technical request information such as IP address, browser/device details, timestamps, and error records to deliver and protect the service; complete log contents and retention are not established here.</p>
         </TrustSection>
         <TrustSection id="advertising" title="Advertising and Google AdSense">

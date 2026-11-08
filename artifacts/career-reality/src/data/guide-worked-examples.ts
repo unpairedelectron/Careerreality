@@ -226,6 +226,17 @@ export const guideWorkedExamples = {
     checks: ["Use official EPFO guidance for the current process.", "Do not share account credentials or authentication codes.", "Check tax treatment and eligibility before acting."],
     tool: { label: "Review official EPF sources", href: "/rules/employee-pf" },
   },
+  "form-130-salary-tds-certificate-india": {
+    caption: "Illustrative reconciliation of a salary TDS certificate against payslips; the figures are an example, not a tax calculation.",
+    headers: ["Line", "Payslips", "Certificate", "What explains a gap"],
+    rows: [
+      ["Gross salary", "₹18,00,000 (12 regular payslips)", "₹18,60,000", "₹60,000 March bonus on an off-cycle payslip"],
+      ["Tax deducted", "Sum of monthly TDS lines", "Total TDS shown", "Compare with your annual tax statement on the portal"],
+      ["Deductions", "Declarations and proofs given to payroll", "Deductions shown in the salary details", "Late or rejected proofs; check with payroll"],
+    ],
+    checks: ["Collect every payslip, including off-cycle bonus or arrears slips.", "Match tax deducted with the credit in your annual tax statement.", "Ask payroll in writing to correct any line you cannot explain."],
+    tool: { label: "Estimate salary and tax cash flow", href: "/salary-calculator" },
+  },
   "old-vs-new-tax-regime-salaried-india": {
     caption: "A like-for-like comparison setup for AY 2026–27; enter the same verified income details in the official calculator before comparing its results.",
     headers: ["Input", "Old regime", "New regime"],
@@ -299,6 +310,7 @@ export const guideToolLinks: Record<string, { href: string; label: string }> = {
   "first-24-hours-after-layoff": { href: "/layoff-runway", label: "cash-runway planner" },
   "severance-notice-leave-after-layoff": { href: "/final-pay-estimator", label: "notice and leave-pay worksheet" },
   "pf-withdrawal-after-job-loss": { href: "/rules/employee-pf", label: "official EPF guidance" },
+  "form-130-salary-tds-certificate-india": { href: "/salary-calculator", label: "salary and tax estimator" },
   "old-vs-new-tax-regime-salaried-india": { href: "/tax-regime-comparison", label: "tax-regime comparison" },
   "offer-letter-red-flags-india": { href: "/offer-comparison", label: "offer comparison" },
   "negotiate-salary-offer-with-numbers": { href: "/offer-comparison", label: "offer comparison" },

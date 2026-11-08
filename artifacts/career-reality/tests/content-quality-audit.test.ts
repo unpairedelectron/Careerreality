@@ -56,8 +56,8 @@ test("every published guide has one scoped worked example and next-step tool", (
   }
 });
 
-test("all 28 published guides keep prose paragraphs within the 90-word limit", () => {
-  assert.equal(guideCatalog.guides.length, 28);
+test("all 29 published guides keep prose paragraphs within the 90-word limit", () => {
+  assert.equal(guideCatalog.guides.length, 29);
   for (const guide of guideCatalog.guides) {
     for (const section of guide.sections) {
       for (const paragraph of section.content.split(/\n\s*\n/).filter(Boolean)) {
