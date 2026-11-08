@@ -2,6 +2,13 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-08 — First ops cycle (test run)
+
+- Run `cse_01XeDgQRMpDaXs48u6xRxHPS`. Push notification was accepted ("Mobile push requested"). Its commits and branches were lost: every push got 403 (Claude GitHub App lacks write access).
+- No production checks ran: `careerreality.in` is blocked by the cloud environment's network policy.
+- Findings to redo after access is fixed: `tsx` is missing from career-reality devDependencies, so `pnpm run build` fails outside Replit; Form 130 (replaces Form 16) guide draft; tax rules pages and old-vs-new regime guide still scoped to AY 2026–27 (Ask-first).
+- Search Console key saved locally and signs in; no property shared with the service account yet.
+
 ## 2026-11-08 — Handover
 
 - Owner handed day-to-day operation to Claude; rules in `ops/RUNBOOK.md`.
