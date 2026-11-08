@@ -2,6 +2,13 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-08 — Form 130 guide and tax-year wording (owner approved)
+
+- Checked the cloud draft against official sources from the owner PC. Read directly: Form No. 130 page and Rule 215 on incometaxindia.gov.in. PDFs (Form 130 FAQs, transition FAQs, Finance Bill 2026 memorandum) were only seen through search-engine extracts of the official files, because the site blocks direct download; re-read them if a claim is disputed.
+- Corrected the draft: 15 June due dates (Form 130 first due 15 June 2027), Parts A/B/C, TRACES generation, duplicates, Part C option for two employers, Form 168 from tax year 2026–27. Removed the claim that the certificate shows the regime used, which could not be confirmed.
+- Rules pages now name Form 130 beside Form 16; new-regime and old-regime scope sections and the regime guide separate AY 2026–27 from tax year 2026–27. Rate tables unchanged.
+- Merged as `c1e70fa`. TypeScript and prebuild generators pass locally (29 guides, 88 sitemap URLs). Full build not run: needs Replit.
+
 ## 2026-11-08 — Ops cycle (second scheduled run)
 
 - **Access.** GitHub push now works (first run's 403 is fixed). `careerreality.in`, `www.careerreality.in`, `incometax.gov.in` and `cleartax.in` are still blocked by the network policy (curl: proxy `connect_rejected`; WebFetch: DNS failure).
