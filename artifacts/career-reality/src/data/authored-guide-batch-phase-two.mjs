@@ -64,6 +64,7 @@ export default {
       { url: "/tax-regime-comparison", label: "Compare tax regimes" },
       { url: "/rules/income-tax-new-regime", label: "New-regime rule notes" },
       { url: "/rules/income-tax-old-regime", label: "Old-regime rule notes" },
+      { url: "/guides/form-130-salary-tds-certificate-india", label: "Check your salary TDS certificate" },
     ],
     sources: [taxFaq, salariedTax],
     sourceDisclosure: disclaimer,
