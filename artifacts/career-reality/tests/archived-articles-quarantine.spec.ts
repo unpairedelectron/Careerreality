@@ -19,19 +19,13 @@ test("archived article catalogue stays out of the public UI and structured data"
     const redirect = routeRegistry.redirects.find(
       (entry) => entry.from.replace(/\/+$/, "") === `/article/${article.slug}`,
     );
-    expect(redirect, `${article.slug} must keep its original URL until approved`).toBeUndefined();
+    expect(redirect?.status, `${article.slug} must 301 to its replacement guide`).toBe(301);
+    expect(redirect?.to, `${article.slug} must 301 to a guide`).toMatch(/^\/guides\//);
     expect(article.heroImage?.alt, `${article.slug} must have meaningful hero-image alt text`).toBeTruthy();
 
     const path = `/article/${article.slug}`;
-    const response = await request.get(path);
-    expect(response.ok(), `${article.slug} must remain accessible`).toBeTruthy();
-    await page.evaluate((nextPath) => {
-      window.history.pushState(null, "", nextPath);
-      window.dispatchEvent(new PopStateEvent("popstate", { state: window.history.state }));
-    }, path);
-    const actualPath = new URL(page.url()).pathname.replace(/\/+$/, "");
-    expect(actualPath, `${article.slug} must remain on the preserved URL`).toBe(`/article/${article.slug}`);
-    await expect(page.getByRole("heading", { level: 1, name: "This article is not published." })).toBeVisible({ timeout: 15_000 });
-    await expect(page.getByRole("heading", { level: 1, name: article.title })).toHaveCount(0);
+    const response = await request.get(path, { maxRedirects: 0 });
+    expect(response.status(), `${article.slug} must redirect`).toBe(301);
+    expect(response.headers().location, `${article.slug} must go to its guide`).toContain(redirect?.to ?? "/guides/");
   }
 });

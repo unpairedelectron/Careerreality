@@ -578,11 +578,11 @@ const retiredRoutes = urlDecisions.filter((decision) => decision.action === "410
 const preservedArticleRoutes = archivedArticleRecords.map((article) => `/article/${article.slug}`);
 const normalizeDecisionRoute = (route: string) => route.replace(/\/+$/, "") || "/";
 const noindexArticleDecisions = urlDecisions
-  .filter((decision) => decision.action === "200_NOINDEX")
+  .filter((decision) => decision.action === "301" && decision.route.startsWith("/article/"))
   .map((decision) => normalizeDecisionRoute(decision.route))
   .sort();
 if (urlDecisions.length !== 80 || retiredRoutes.length !== 35 || JSON.stringify(noindexArticleDecisions) !== JSON.stringify(preservedArticleRoutes.map(normalizeDecisionRoute).sort())) {
-  throw new Error(`Expected 80 reviewed URL decisions, 35 retired URLs, and ${preservedArticleRoutes.length} preserved noindex article URLs; found ${urlDecisions.length}, ${retiredRoutes.length}, and ${noindexArticleDecisions.length}.`);
+  throw new Error(`Expected 80 reviewed URL decisions, 35 retired URLs, and ${preservedArticleRoutes.length} article URLs redirected to guides; found ${urlDecisions.length}, ${retiredRoutes.length}, and ${noindexArticleDecisions.length}.`);
 }
 const withoutBasePath = (pathname: string) => {
   if (basePath && pathname === basePath) return "/";
@@ -871,8 +871,7 @@ const appShellRoutes = routeRegistry.routes
       return ["/sign-up", "/sign-up/sso-callback", "/sign-up/continue"];
     }
     return [route.path];
-  })
-  .concat(archivedArticleRecords.map((article) => `/article/${article.slug}`));
+  });
 
 for (const route of appShellRoutes) {
   const file = path.join(distRoot, route.replace(/^\/+/, ""), "index.html");

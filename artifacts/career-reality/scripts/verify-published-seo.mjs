@@ -828,7 +828,7 @@ function validateArchiveOnly() {
 async function fetchRoute(route) {
   const url = expectedUrl(route);
   const expectedRedirect = legacyRedirects.get(route.replace(/\/+$/, "") || "/");
-  const articleHoldRoute = route === routes.article || route === cleanupRoutes.candidate;
+  const articleHoldRoute = !expectedRedirect && (route === routes.article || route === cleanupRoutes.candidate);
   try {
     const response = await fetch(url, { redirect: expectedRedirect || articleHoldRoute ? "manual" : "follow" });
     const body = await response.text();
@@ -1102,16 +1102,17 @@ function isMappedRedirect(response, baseOrigin, expectedPath) {
 async function verifyPublishedLegacyArticleHolds() {
   const articles = routeRegistry.drafts?.articles ?? [];
   addCheck(
-    "Published archived article hold inventory",
+    "Published archived article redirect inventory",
     articles.length === 44,
     "44 archived article slugs checked",
     `${articles.length} archived slugs`,
   );
   const requests = articles.flatMap(({ slug }) => {
     const source = `/article/${slug}`;
+    const target = legacyRedirects.get(source);
     return [
-      { route: source, kind: "slash-normalization", canonicalRoute: `${source}/` },
-      { route: `${source}/`, kind: "hold", canonicalRoute: `${source}/` },
+      { route: source, kind: "guide-redirect", canonicalRoute: target },
+      { route: `${source}/`, kind: "guide-redirect", canonicalRoute: target },
     ];
   });
   let cursor = 0;
@@ -1123,12 +1124,12 @@ async function verifyPublishedLegacyArticleHolds() {
         const body = await response.text();
         const location = response.headers.get("location");
         let passed = false;
-        if (current.kind === "slash-normalization") {
+        if (current.kind === "guide-redirect") {
           try {
             const destination = new URL(location ?? "", response.url);
             passed = response.status === 301
               && destination.origin === origin
-              && destination.pathname === current.canonicalRoute;
+              && (destination.pathname.replace(/\/+$/, "") || "/") === (current.canonicalRoute ?? "").replace(/\/+$/, "");
           } catch {
             passed = false;
           }
@@ -1232,7 +1233,7 @@ function verifyAlternateRoute(alternateOrigin, route, result) {
   if (route === routes.search) {
     verifyPublishedTitle(`${label} search`, result.body, "alternate");
     verifySharedRoute(`${label} search`, result.body, route, { noIndex: true, requireBreadcrumbs: false, kind: "alternate" });
-  } else if (route === routes.article) {
+  } else if (route === routes.article && !legacyRedirects.has(route.replace(/\/+$/, ""))) {
     const finalPath = new URL(result.response.url).pathname.replace(/\/+$/, "");
     addCheck(`${label} legacy article hold path`, finalPath === route.replace(/\/+$/, ""), route.replace(/\/+$/, ""), finalPath, "alternate");
     addCheck(`${label} legacy article hold canonical`, canonical(result.body) === expected, expected, canonical(result.body) || "(missing)", "alternate");
@@ -1315,10 +1316,10 @@ function verifySnapshotContract() {
     "local",
   );
   addCheck(
-    "Local build archived article stays on editorial hold",
-    Boolean(articleSnapshot) && metaContent(articleSnapshot, "robots") === "noindex, follow",
-    "noindex, follow hold shell",
-    articleSnapshot ? metaContent(articleSnapshot, "robots") || "(missing robots)" : "hold snapshot missing",
+    "Local build redirected article has no snapshot",
+    !articleSnapshot,
+    "no snapshot; served as a 301 to its guide",
+    articleSnapshot ? "snapshot present" : "absent",
     "local",
   );
   const articleRedirects = routeRegistry.redirects.filter((entry) => entry.from.startsWith("/article/"));
@@ -1342,10 +1343,10 @@ function verifySnapshotContract() {
   );
   if (trustSnapshot) verifySharedRoute("Local build trust route", trustSnapshot, routes.trust, { kind: "local" });
   addCheck(
-    "Local build archived candidate stays on editorial hold",
-    Boolean(candidateSnapshot) && metaContent(candidateSnapshot, "robots") === "noindex, follow",
-    "noindex, follow hold shell",
-    candidateSnapshot ? metaContent(candidateSnapshot, "robots") || "(missing robots)" : "hold snapshot missing",
+    "Local build redirected candidate has no snapshot",
+    !candidateSnapshot,
+    "no snapshot; served as a 301 to its guide",
+    candidateSnapshot ? "snapshot present" : "absent",
     "local",
   );
   addCheck(
@@ -1403,7 +1404,7 @@ function verifyLiveContract() {
     verifyPublishedTitle("Published search", search);
     verifySharedRoute("Published search", search, routes.search, { noIndex: true, requireBreadcrumbs: false });
   }
-  verifyRetiredRouteStatus("Published retired article", article, "live", { holdOnly: true });
+  verifyRetiredRouteStatus("Published retired article", article, "live");
   if (trust) {
     verifyPublishedTitle("Published trust route", trust);
     verifySharedRoute("Published trust route", trust, routes.trust);
@@ -1449,7 +1450,7 @@ function verifyLiveContract() {
     addCheck("Published robots sitemap", new RegExp(`^Sitemap:\\s*${origin.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/sitemap\\.xml$`, "im").test(robots), `Sitemap: ${origin}/sitemap.xml`, robots.match(/^Sitemap:.*$/im)?.[0] ?? "(missing)");
     addCheck("Published robots has no legacy origin", !/replit\.app/i.test(robots), "no replit.app URL", /replit\.app/i.test(robots) ? "legacy origin present" : "absent");
   }
-  verifyRetiredRouteStatus("Published retired candidate article", candidate, "live", { holdOnly: true });
+  verifyRetiredRouteStatus("Published retired candidate article", candidate, "live");
   verifyRetiredRouteStatus("Published retired company route", legacyCompany);
   for (const [label, body, route] of [["Pro", pro, cleanupRoutes.pro], ["Mobile app", mobile, cleanupRoutes.mobile]]) {
     if (body) {

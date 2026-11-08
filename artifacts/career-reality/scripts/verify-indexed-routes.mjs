@@ -52,7 +52,8 @@ function readRetiredRoutes(redirectedRoutes = new Set()) {
     !row.route ||
     (row.action === "410" && row.target) ||
     (row.action === "200_NOINDEX" && (!row.route.startsWith("/article/") || row.target)) ||
-    (row.action !== "410" && row.action !== "200_NOINDEX" && !(row.route === "/companies/" && row.action === "200" && !row.target))
+    (row.action === "301" && (!row.route.startsWith("/article/") || !row.target)) ||
+    (row.action !== "410" && row.action !== "200_NOINDEX" && row.action !== "301" && !(row.route === "/companies/" && row.action === "200" && !row.target))
   );
   if (invalid) throw new Error(`Unsupported retired-route decision for ${invalid.route || "(missing route)"}.`);
   return [...new Set(rows.filter((row) => row.action === "410" && !redirectedRoutes.has(row.route)).map((row) => row.route))];
