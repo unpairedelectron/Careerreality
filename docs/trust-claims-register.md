@@ -11,6 +11,7 @@ Reviewed 2 November 2026. “Verified” here means supported by current code or
 | Contact email is hello@careerreality.in | Owner-supplied input | Use for listed contact purposes; no reply-time promise |
 | Contact form stored name, email, topic, message and receipt time | API implementation | Form withdrawn; historical records may remain; retention/deletion unverified |
 | Pure worksheets run in-browser | Tool implementations and privacy tests | Limit statement to pure worksheets; do not generalize to API-backed pages |
+| Google Analytics 4 measures visits and tool use on careerreality.in, advertising features off, no cookies for EEA/UK/CH visitors, not started on links carrying access tokens | Inline tag in `artifacts/career-reality/index.html` | Named on `/privacy`; retention is set in the owner Google account and is unverified |
 | Optional Umami integration receives selected event labels | Client analytics helper and tests | Production script, cookies, recipients and retention are unverified |
 | Account flows use Clerk and application data | Auth and workspace code | Describe observed feature boundary; provider and operational retention review remains |
 | Resume upload/job-link processing | Production-approval memory and guarded route code | Do not describe as a live public feature pending safeguards |
