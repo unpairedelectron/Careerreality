@@ -2,6 +2,23 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-08 — Ops cycle (second scheduled run)
+
+- **Access.** GitHub push now works (first run's 403 is fixed). `careerreality.in`, `www.careerreality.in`, `incometax.gov.in` and `cleartax.in` are still blocked by the network policy (curl: proxy `connect_rejected`; WebFetch: DNS failure).
+- **Health: not run.** The `/`, ads.txt, robots.txt, sitemap.xml, favicon.ico, www/http redirect and byline checks could not reach production. `pnpm run verify:indexed-routes` ran and failed only with "fetch failed" on every URL (network), not with content errors. Local sitemap on `main`: 87 URLs, unchanged.
+- **Deploy drift: not checked live.** `main` was `292bc43` (ops files only) at the start of the run, then `108f5c8` (build tooling). Neither changes page output.
+- **Build.** `pnpm install` + `SITE_URL=https://careerreality.in pnpm run build` failed at postbuild with `tsx: not found`. Shipped `108f5c8`: added `tsx` (^4.23.15, the version already in the lockfile) to career-reality devDependencies. Build then passed: 91 route snapshots and 57 app shells verified. The lockfile also re-resolved orval's TypeScript peer in `lib/api-spec` from 5.9.3 to 6.0.3 (pnpm peer dedupe; site build unaffected).
+- **Guide draft.** Branch `claude/guide-form-130-salary-tds-certificate` (`6ab8888`): new Form 130 guide plus a link from the old-vs-new regime guide. Build passes (1,369 words; 92 snapshots; sitemap 88). Facts come from consistent secondary reporting (taxguru, Business Today, ClearTax, SCC Online), not a primary source; dates left null for the owner to verify.
+- **Trends** (web search, 8 Nov):
+  1. Form 130 replacing Form 16 under the Income-tax Act, 2025: employees are making tax year 2026–27 declarations now. Maps to the new draft and to `/rules` salary pages.
+  2. First anniversary of the Labour Codes (in force 21 Nov 2025): the 50% wage rule and its effect on take-home, PF and gratuity; state rules still rolling out. Maps to `/guides/labour-codes-and-layoffs-india`, `/rules/gratuity-wages`, `/salary-calculator`.
+  3. IT layoffs and net-zero hiring: reports of TCS, Cognizant and Oracle India cuts, while top IT firms added almost no net staff in FY26. Maps to the layoffs hub and `/guides/first-24-hours-after-layoff`.
+  4. Budget 2027 (Feb 2027) expectations: old-regime future, health-insurance deduction in new regime. Maps to `/guides/old-vs-new-tax-regime-salaried-india`; worth a pre-budget refresh in January.
+  5. EPFO 3.0 (faster withdrawals planned for 2026). Maps to `/guides/pf-withdrawal-after-job-loss`; verify on epfindia.gov.in before writing anything.
+- **Date-sensitive figures.** The rules library still names Form 16 as the annual salary statement (12 mentions in `rules-library-content.ts`, 1 in `rules-library.json`), and the old-vs-new guide is scoped to AY 2026–27. Both are still right for FY 2025–26 income; listed as an Ask-first decision. The CTC calculator already offers Tax Year 2026–27. No figure was changed.
+- **IndexNow:** not run (no URL-changing release went live).
+- Notification: sent via PushNotification.
+
 ## 2026-11-08 — First ops cycle (test run)
 
 - Run `cse_01XeDgQRMpDaXs48u6xRxHPS`. Push notification was accepted ("Mobile push requested"). Its commits and branches were lost: every push got 403 (Claude GitHub App lacks write access).
