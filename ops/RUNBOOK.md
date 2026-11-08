@@ -31,6 +31,8 @@ Gotchas:
 
 ## 3. Weekly check (every Monday)
 
+Runs automatically as the cloud routine "CareerReality weekly check" (`trig_011FfvPEJ5QKG2S96bPebGGd`, Mondays 03:30 UTC = 09:00 IST, Sonnet 5.5, no connectors so it cannot deploy). Manage it at https://claude.ai/code/routines/trig_011FfvPEJ5QKG2S96bPebGGd.
+
 1. Live smoke test: `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` return 200; `www` and `http` 301 to `https://careerreality.in/`.
 2. Every sitemap `<loc>` returns 200 (87 URLs on 8 November 2026; the count should only change with an intentional release).
 3. A guide page still shows the server-rendered byline and Article JSON-LD with the author.
