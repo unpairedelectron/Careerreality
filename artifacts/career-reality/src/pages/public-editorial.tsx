@@ -729,7 +729,7 @@ function PrivacyTrust() {
         </div>
       </TrustSection>
       <TrustSection id="analytics" eyebrow="03 / Product measurement" title="Analytics should describe the product, not your private life.">
-        <p>In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Deployment-level analytics configuration, event destinations, retention, and any wider site measurement were not verified.</p>
+        <p>CareerReality uses Google Analytics 4 to measure visits, page views, and tool use, with advertising features turned off. In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Analytics retention was not verified.</p>
       </TrustSection>
       <TrustSection id="storage" eyebrow="04 / Browser storage and services" title="Small pieces of storage, stated plainly.">
         <p>The codebase includes Clerk authentication and API/database-backed routes. This code-level observation does not identify the production operator, all service providers, infrastructure logs, or the actual production data flows.</p>
@@ -1032,7 +1032,8 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p className="mt-4">The production configuration, processing locations, and complete list of infrastructure and service providers have not been independently verified. This page does not claim that information stays in one country or that third-party providers use a specific retention period.</p>
         </TrustSection>
         <TrustSection id="analytics" title="Analytics, cookies, and technical logs">
-          <p>The application code can send limited event names and route, tool, or catalogue identifiers to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. Whether an analytics script is enabled in every production environment, where its events are sent, and how long any analytics or server logs are retained have not been verified.</p>
+          <p>CareerReality uses Google Analytics 4 on careerreality.in to measure visits, page views, and tool use. Google receives the page address and browser and device details, processes your IP address to work out approximate location, and sets first-party cookies such as _ga to recognise a returning browser. Advertising storage, Google signals, and ad personalization are turned off. Visitors in the EEA, the UK, and Switzerland are measured without analytics cookies. Analytics does not start when you open a link that carries an access token.</p>
+          <p className="mt-4">The application also sends limited event names and route, tool, or catalogue identifiers to Google Analytics, and to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. How long analytics or server logs are retained has not been verified.</p>
           <p className="mt-4">The site host sets a cookie named GAESA that expires after 30 days; CareerReality does not read it, and its purpose is not identified here. The app may also use browser storage for preferences and feature progress. Web servers and providers may process technical request information such as IP address, browser/device details, timestamps, and error records to deliver and protect the service; complete log contents and retention are not established here.</p>
         </TrustSection>
         <TrustSection id="advertising" title="Advertising and Google AdSense">

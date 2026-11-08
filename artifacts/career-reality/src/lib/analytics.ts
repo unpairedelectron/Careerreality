@@ -5,6 +5,7 @@ declare global {
     umami?: {
       track(name: string, data?: AnalyticsData): void;
     };
+    gtag?: (command: "event", name: string, data?: AnalyticsData) => void;
   }
 }
 
@@ -13,6 +14,7 @@ export function trackEvent(name: string, data?: AnalyticsData): void {
 
   try {
     window.umami?.track(name, data);
+    window.gtag?.("event", name, data);
   } catch {
     // Analytics must never interrupt a user flow.
   }
