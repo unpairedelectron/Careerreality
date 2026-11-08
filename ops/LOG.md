@@ -2,6 +2,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-08 — Archived article redirects (owner approved)
+
+- Search Console: 28 clicks in 3 months, mostly to /article/ pages that served a noindex shell with no route to the replacement guides.
+- Added 44 single-hop 301s from /article/<slug>/ to the owning guide (18 guides receive them), from pillar-guide-sources.json. Build, verifier and test guards updated; archived text stays unpublished.
+- Checks: TypeScript and prebuild generators pass; node tests same as before (54 pass, the same 2 fail). Full build not run on the owner PC; the 12 Nov deploy gates on it. Playwright specs not run.
+
 ## 2026-11-08 — Publish verified; deploy path tested
 
 - Publish status `success`. Live: GA4 tag (realtime showed 4 active users), Form 130 guide with byline and 15 June 2027 date, Finance Bill 2026 note on `/rules/income-tax-new-regime`, GA4 text on `/privacy-policy`, all 88 sitemap URLs 200.
