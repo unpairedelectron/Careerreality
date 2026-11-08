@@ -13,45 +13,60 @@ Set by the owner on 8 November 2026:
 2. **Grow ad revenue.** AdSense is not serving ads yet (only the account meta tag is present, and `/privacy` says ads are off), so revenue starts once the owner turns ads on. Until then, revenue growth means growing traffic on high-value topics and keeping the site AdSense-policy-ready.
 3. **Topics are the operator's call**, driven by what Indian salaried workers and job seekers are searching for right now: layoffs, offers and CTC, tax regime and budget changes, labour codes, PF and gratuity, notice periods, AI and jobs, return-to-office. Prefer topics with real search demand that the site can answer better than existing results, and that fit existing hubs (guides, tools, layoffs, rules library).
 
-Priorities per cycle, in order: (1) anything broken on the live site, (2) ship-tier improvements to existing pages that already get traffic, (3) one new or substantially expanded piece of content (Ask-first, drafted on a branch), (4) internal linking from strong pages to new or weak ones.
+Priorities per 4-day cycle, in order: (1) anything broken on the live site, (2) ship-tier improvements to existing pages that already get traffic, (3) one new or substantially expanded piece of content (Ask-first, drafted on a branch), (4) internal linking from strong pages to new or weak ones.
 
 ## 1. Approval tiers
 
 | Tier | What | Rule |
 |---|---|---|
-| **Ship** | Bug fixes, technical/SEO fixes, build and verifier failures, internal links, schema fixes, titles and meta descriptions, dependency patch/minor updates, copy refreshes that change no legal, tax or statutory figure | Do it, full build must pass, commit and push to `main`, log it, and add "Republish needed" to `ops/OWNER-ACTIONS.md` |
-| **Ask first** | New guides or tools; any changed tax slab, rate, threshold, legal rule or statutory number; design/layout changes; anything touching ads, AdSense or ad placement; major dependency upgrades; production publish (until the Replit publish path is proven) | Prepare it on a `claude/…` branch, push the branch, list it in `ops/OWNER-ACTIONS.md` with what to check |
+| **Ship** | Bug fixes, technical/SEO fixes, build and verifier failures, internal links, schema fixes, titles and meta descriptions, dependency patch/minor updates, copy refreshes that change no legal, tax or statutory figure | Do it, full build must pass, commit and push to `main`, log it. The next deploy day publishes it |
+| **Ask first** | New guides or tools; any changed tax slab, rate, threshold, legal rule or statutory number; design/layout changes; anything touching ads, AdSense or ad placement; major dependency upgrades | Prepare it on a `claude/…` branch, push the branch, list it in `ops/OWNER-ACTIONS.md` with what to check. Only what the owner has approved and merged to `main` gets published |
 | **Never** | Deleting pages or sitemap URLs; redirects to external sites; account, billing, domain or credential changes; sending email or messages as the owner; claims of author credentials, reviews or dates that are not verified | Do not do it; raise it in the report if it seems needed |
 
 Facts only the owner can supply are tracked in `OWNER-INPUTS-REQUIRED.md`. Never invent them in public copy.
 
 ## 2. Deploy path
 
-1. Change lands on GitHub `main` (`unpairedelectron/Careerreality`).
-2. In Replit: `git pull --no-rebase origin main`.
-3. `cd artifacts/career-reality && pnpm run build` — must pass, including postbuild route-snapshot verification.
-4. Publish in Replit.
-5. `git push origin main` from Replit (pushes the empty "Published your App" commit Replit adds on every publish, so the copies don't diverge).
-6. Run the live check (section 3, step 1–3) and clear "Republish needed" from `ops/OWNER-ACTIONS.md`.
+Production is published automatically on deploy day (owner decision, 8 November 2026), by the deploy routine in section 3. Only what is on `main` goes live. The routine:
 
-To approve a `claude/…` branch: merge it into `main` (GitHub PR or `git merge`), then follow the deploy path.
+1. Stops at once if nothing under `artifacts/`, `lib/` or `pnpm-lock.yaml` changed since the commit in `ops/LAST-DEPLOY`. No Replit Agent call, no publish.
+2. Runs `pnpm install` and `SITE_URL=https://careerreality.in pnpm run build` in the cloud. If it fails, it does not deploy.
+3. Asks the Replit Agent to pull `origin main` with `--no-rebase`, run `pnpm install` and `pnpm run build` in `artifacts/career-reality`, make no source edits, and report the result.
+4. Publishes with the Replit connector only if that build passed, and waits for status `success`.
+5. Asks the Replit Agent to `git push origin main` (Replit adds an empty "Published your App" commit on every publish).
+6. Runs the live check, writes the deployed commit to `ops/LAST-DEPLOY`, and logs it.
+
+The owner can still publish by hand: pull, `pnpm install`, build, Publish, then push from Replit.
+
+To approve a `claude/…` branch: merge it into `main`. The next deploy day publishes it.
 
 Gotchas:
 - `public/_redirects` is generated by `scripts/generate-sitemap.mjs` from `src/data/route-registry.json`. Change redirects in the registry, never in `_redirects`.
 - Prebuild needs `SITE_URL=https://careerreality.in` outside Replit.
 - The owner's Windows PC cannot run `vite build` (Linux-installed `node_modules`). Run full builds in Replit or a Linux environment.
 
-## 3. Ops cycle (every 3 days)
+## 3. Four-day cycle
 
-Runs automatically as the cloud routine "CareerReality ops cycle" (`trig_011FfvPEJ5QKG2S96bPebGGd`, 03:30 UTC = 09:00 IST on days 1, 4, 7 … 31 of each month, so the 31st and the 1st run back to back). It has no connectors and cannot deploy. Manage it at https://claude.ai/code/routines/trig_011FfvPEJ5QKG2S96bPebGGd.
+Two cloud routines, 03:30 UTC = 09:00 IST, both on Sonnet 5.5 to control cost:
 
-1. **Health.** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` return 200; `www` and `http` 301 to `https://careerreality.in/`. Every sitemap `<loc>` returns 200 (count should only change with an intentional release). A guide still shows the server-rendered byline and Article JSON-LD author. `pnpm run verify:indexed-routes`.
-2. **Deploy drift.** Compare live pages with `main`: if `main` has shipped commits that are not live yet, keep "Republish needed" in `ops/OWNER-ACTIONS.md`.
-3. **Trends.** Web-search what Indian job seekers and salaried workers are asking about this week (news, budget/tax notifications, EPFO/labour-ministry changes, layoffs, hiring). Note 3–5 candidate topics in the log with why they matter and which existing page they map to.
-4. **Growth work.** Do priority (2)–(4) from section 0 within the tiers. At most one new guide draft per cycle, on `claude/guide-<slug>`, passing the build gates.
-5. **Date-sensitive figures.** Flag any guide citing a figure tied to a financial year, notified rule or effective date that has passed (Ask-first to change).
-6. **After a release that adds or changes URLs:** `pnpm run indexnow:submit`.
-7. **Report and notify** (section 5).
+- **"CareerReality ops cycle"** (`trig_011FfvPEJ5QKG2S96bPebGGd`), work days: every day except deploy days. No connectors. Manage at https://claude.ai/code/routines/trig_011FfvPEJ5QKG2S96bPebGGd.
+- **"CareerReality deploy"**, deploy days: the 4th, 8th, 12th, 16th, 20th, 24th and 28th of each month. Replit connector attached.
+
+Phase on a work day = (day of month − 1) mod 4: **0 = audit, 1 = build, 2 = test**. The days after the 28th carry on with the same formula, so the gap between the 28th and the next month's 4th is the one longer stretch.
+
+**Budget rules.** Do the least that the phase needs. Stop early when there is nothing to do. At most 3 standard web searches per cycle, no extended searches. Do not re-read whole data files when a search will do. One new guide per cycle at most. Only the test and deploy phases run a full build, and only if something changed.
+
+**Audit (phase 0).**
+1. Health: `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` return 200; `www` and `http` 301 to `https://careerreality.in/`. Every sitemap `<loc>` returns 200 (count should only change with an intentional release). A guide still shows the server-rendered byline and Article JSON-LD author. If production is unreachable from the network policy, say so and move on.
+2. Trends: what Indian job seekers and salaried workers are asking about now. 3–5 candidate topics.
+3. Date-sensitive figures tied to a financial year, notified rule or effective date that has passed.
+4. Write the plan for this cycle to `ops/PLAN.md`: what the build phase should do, in priority order (section 0), small enough for one run.
+
+**Build (phase 1).** Carry out `ops/PLAN.md` within the tiers. Ship-tier work goes on `claude/cycle-<YYYY-MM-DD>`, not `main`. At most one new guide draft, on `claude/guide-<slug>`.
+
+**Test (phase 2).** If the build phase produced no branch, stop. Otherwise run the full build and the relevant tests on `claude/cycle-…`. If they pass, merge it to `main`. If they fail and the fix is small, fix it; if not, leave the branch and report it.
+
+**Deploy (day 4).** Section 2. After a release that adds or changes URLs, run `pnpm run indexnow:submit` if the network allows.
 
 When Search Console, GA4 and Bing Webmaster access exist (local sessions only; credentials stay on the owner's PC), add: index coverage errors, pages losing clicks, queries with high impressions and low CTR, and use real query data to pick topics.
 
@@ -65,12 +80,12 @@ When Search Console, GA4 and Bing Webmaster access exist (local sessions only; c
 
 ## 5. Report and notification
 
-Every cycle ends by:
+Every run ends by:
 
-1. Rewriting `ops/OWNER-ACTIONS.md` so it lists only what is still waiting on the owner, newest first, each with a one-line "what to do".
+1. Updating `ops/OWNER-ACTIONS.md` if anything changed, so it lists only what is still waiting on the owner, newest first, each with a one-line "what to do".
 2. Appending the cycle entry to `ops/LOG.md`.
 3. Committing both and pushing to `main`.
-4. Finishing the run with this report (it is what the owner reads in the routine's run):
+4. Finishing the run with this report (it is what the owner reads in the routine's run). Work days stay silent unless something is broken or needs the owner; the deploy routine always sends one notification:
 
 ```
 CareerReality — <date>
@@ -89,8 +104,8 @@ Owner inputs still open: <count from OWNER-INPUTS-REQUIRED.md>
 | System | Status |
 |---|---|
 | GitHub repo (push to `main`) | Working |
-| Replit (publish) | Connector reaches Repl `IndigoBowedMegabyte` (replId `550f1a95-3316-4c4f-8c0d-2fef08d3b25f`) and reads publish status; publishing through it not yet tried (Ask-first until it is) |
+| Replit (publish) | Connector reaches Repl `IndigoBowedMegabyte` (replId `550f1a95-3316-4c4f-8c0d-2fef08d3b25f`). Used only by the deploy routine |
 | Google Search Console | Working from the owner PC: `sc-domain:careerreality.in`, Full, via service account `claude-seo@careerreality-seo.iam.gserviceaccount.com` (key at `~/.config/claude-seo/`, never in the repo). Python is not installed there, so the claude-seo scripts do not run yet; use a Node client |
-| GA4 | Not installed on the site (no tag or measurement ID); owner to create the property |
+| GA4 | Property `563172819`, tag `G-KV3S0BK3KK`. Readable from the owner PC through the same service account |
 | Bing Webmaster Tools | Not connected (API key pending, local only) |
 | AdSense | Ads not serving; reports not connected |
