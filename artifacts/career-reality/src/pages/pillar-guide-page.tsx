@@ -1,5 +1,6 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from "react";
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import type guideCatalog from "@/data/generated-pillar-guides.json";
@@ -13,7 +14,7 @@ type GuideSource = { url: string; label: string; year?: string };
 /** Internal source links open in the same tab at the canonical trailing-slash URL; external ones open a new tab. */
 function sourceLinkProps(url: string) {
   return url.startsWith("/")
-    ? { href: `${url.replace(/\/+$/, "")}/` }
+    ? { href: withTrailingSlash(url) }
     : { href: url, target: "_blank", rel: "noopener noreferrer" };
 }
 type GuideRecord = (typeof guideCatalog.guides)[number];

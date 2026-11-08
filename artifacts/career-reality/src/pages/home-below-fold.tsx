@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { ArrowUpRight, Calculator, Check } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { PublicFooter } from "@/components/shared/public-footer";
 import layoffEvents from "@/data/layoff-events.json";
 

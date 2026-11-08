@@ -1,5 +1,6 @@
 import { test, expect } from "./fixtures";
 import { readFileSync } from "node:fs";
+import { withTrailingSlash } from "../src/lib/internal-href";
 
 const registry = JSON.parse(readFileSync(new URL("../src/data/route-registry.json", import.meta.url), "utf8")) as {
   routes: Array<{ path: string; kind: string; description: string }>;
@@ -33,7 +34,7 @@ test("hydration and client navigation keep registry descriptions and publisher l
   }
   await page.goto("/guides", { waitUntil: "domcontentloaded" });
   const target = registry.routes.find((entry) => entry.path === "/guides/read-the-offer-beyond-ctc")!;
-  await page.locator(`a[href="${target.path}"]`).first().click();
+  await page.locator(`a[href="${withTrailingSlash(target.path)}"]`).first().click();
   await expect(page).toHaveURL(new RegExp(`${target.path}/?$`));
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", target.description);
 });

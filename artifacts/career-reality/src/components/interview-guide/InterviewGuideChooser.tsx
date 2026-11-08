@@ -41,7 +41,7 @@ export function InterviewGuideChooser({ roles }: InterviewGuideChooserProps) {
               <li className="ig-role-item" key={role.id}>
                 <a
                   className="ig-role-link"
-                  href={`/interview-guides/${role.id}`}
+                  href={`/interview-guides/${role.id}/`}
                   data-testid={`link-interview-guide-${role.id}`}
                 >
                   <span className="ig-role-index" aria-hidden="true">{role.index}</span>

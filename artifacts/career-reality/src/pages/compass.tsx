@@ -17,7 +17,7 @@ import {
   TrendingUp,
   WalletCards,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import {
   useCreateCareerCatalogSuggestion,
   useListPublicCareerCatalog,

@@ -1,5 +1,6 @@
 import { ArrowUpRight, FileText, ShieldCheck, Wrench } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { PublicPage } from "@/components/shared/public-shell";
 import { sitemapSections } from "@/data/site-map";
 

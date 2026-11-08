@@ -1,5 +1,5 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { useAppAuth } from "@/lib/app-auth-context";
 
 export default function AccountMenu() {

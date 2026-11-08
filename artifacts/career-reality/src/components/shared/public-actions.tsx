@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { Bookmark, Check, ArrowUpRight } from "lucide-react";
 import {
   getGetWorkspaceSummaryQueryKey,

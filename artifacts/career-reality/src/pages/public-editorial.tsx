@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Link, Redirect, useParams } from "wouter";
+import { Redirect, useParams } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowLeft, ArrowUpRight, BadgeCheck, BookOpen, CircleAlert, Database, FileCheck2, LockKeyhole, MessageSquare, Scale, Search, ShieldCheck } from "lucide-react";
 import { ArticleCard, FreshnessBadge, PublicBreadcrumbs, PublicPage } from "@/components/shared/public-shell";
 import { PublicFooter } from "@/components/shared/public-footer";

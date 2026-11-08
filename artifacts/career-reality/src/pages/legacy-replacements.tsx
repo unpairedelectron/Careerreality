@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight, CircleAlert } from "lucide-react";
-import { Link, useParams } from "wouter";
+import { useParams } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { PublicPage } from "@/components/shared/public-shell";
 import {
   getLegacyAiReplacement,

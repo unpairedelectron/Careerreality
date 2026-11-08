@@ -555,7 +555,7 @@ test("correcting garbled pasted text removes the confirmation gate", async ({ pa
 test("lists the checker in the public tools directory", async ({ page }) => {
   await page.goto("/tools");
   const link = page.getByTestId("link-directory-tools--job-posting-reality-check");
-  await expect(link).toHaveAttribute("href", "/job-posting-reality-check");
+  await expect(link).toHaveAttribute("href", "/job-posting-reality-check/");
 });
 
 test("reviews fetched job text and keeps structured details separate from requirement parsing", async ({ page }) => {

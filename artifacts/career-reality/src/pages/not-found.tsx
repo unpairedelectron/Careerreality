@@ -1,5 +1,5 @@
 import { ArrowUpRight, Calculator } from 'lucide-react';
-import { Link } from 'wouter';
+import { Link } from '@/components/shared/app-link';
 import { AppNav } from '@/components/shared/app-nav';
 import { PublicFooter } from '@/components/shared/public-footer';
 import { useSeo } from '@/lib/seo';

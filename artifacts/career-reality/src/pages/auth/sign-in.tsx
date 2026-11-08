@@ -1,5 +1,6 @@
 import { SignIn } from '@clerk/react';
-import { Link, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
+import { Link } from '@/components/shared/app-link';
 import { Logo } from '@/components/shared/app-nav';
 import { useAppAuth } from '@/lib/app-auth-context';
 import { useSeo } from '@/lib/seo';

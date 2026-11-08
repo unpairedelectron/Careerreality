@@ -2,7 +2,8 @@ import { SignUp } from '@clerk/react';
 import { useSeo } from '@/lib/seo';
 import { AuthFrame } from '@/components/shared/auth-frame';
 import { useAppAuth } from '@/lib/app-auth-context';
-import { Link, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
+import { Link } from '@/components/shared/app-link';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 

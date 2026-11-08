@@ -694,6 +694,7 @@ for (const quarantinedRoot of ["article", "companies"]) {
   );
   if (fs.existsSync(directory)) {
     const staleSnapshots = fs.readdirSync(directory, { recursive: true })
+      .map((entry) => (typeof entry === "string" ? entry.replaceAll("\\", "/") : entry))
       .filter((entry) =>
         typeof entry === "string" &&
         entry.endsWith(".html") &&

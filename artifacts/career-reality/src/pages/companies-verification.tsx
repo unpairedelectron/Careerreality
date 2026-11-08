@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowUpRight, Check, Clipboard, Printer, RotateCcw, Share2 } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";

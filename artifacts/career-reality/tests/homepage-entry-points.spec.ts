@@ -6,7 +6,7 @@ test.describe("homepage entry points", () => {
     await page.getByTestId("home-below-fold-trigger").scrollIntoViewIfNeeded();
 
     await expect(page.getByTestId("form-home-ctc")).toContainText("does not collect or pass salary amounts");
-    await expect(page.getByTestId("button-home-calculator")).toHaveAttribute("href", "/salary-calculator");
+    await expect(page.getByTestId("button-home-calculator")).toHaveAttribute("href", "/salary-calculator/");
     await page.getByTestId("button-home-calculator").click();
 
     await expect(page).toHaveURL(/\/salary-calculator\/?$/);

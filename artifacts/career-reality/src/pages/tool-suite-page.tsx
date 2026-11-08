@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import { ArrowUpRight, Calculator, Download, RotateCcw } from "lucide-react";
 import {
   calculateCareerTool,
@@ -626,7 +627,7 @@ export function ToolSuitePage() {
               {result.links?.length ? (
                 <ul className="mt-4 space-y-2">
                   {result.links.map((link) => (
-                    <li key={link.url}><a href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-bold text-primary underline underline-offset-4">{link.label}<ArrowUpRight size={13} aria-hidden="true" /></a></li>
+                    <li key={link.url}><a href={withTrailingSlash(link.url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-bold text-primary underline underline-offset-4">{link.label}<ArrowUpRight size={13} aria-hidden="true" /></a></li>
                   ))}
                 </ul>
               ) : null}
