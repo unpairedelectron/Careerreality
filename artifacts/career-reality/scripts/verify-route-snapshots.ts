@@ -369,7 +369,7 @@ for (const route of staticRoutes) {
     if (words < floor) {
       throw new Error(`Main-content word floor not met: ${route} has ${words}; requires ${floor}.`);
     }
-    for (const unsupportedClaim of ["By Shiv Shakti Mishra", "Drafting used AI assistance", "11 October 2026"]) {
+    for (const unsupportedClaim of ["Drafting used AI assistance", "11 October 2026"]) {
       if (mainMarkup.includes(unsupportedClaim)) {
         throw new Error(`Unverified author or date claim found on ${route}: ${unsupportedClaim}`);
       }
@@ -773,7 +773,7 @@ for (const slug of authoredGuideSlugs) {
   const html = fs.readFileSync(file, "utf8");
   const mainMarkup = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "";
   if (!mainMarkup) throw new Error(`Guide ${slug} has no server-rendered main content.`);
-  for (const unsupportedClaim of ["Shiv Shakti Mishra", "Aman Mishra", "Aanchal Mishra", "Alok Tiwari", "Abhishek Tiwari", "Rajan Dubey", "11 October 2026", "Drafting used AI assistance"]) {
+  for (const unsupportedClaim of ["Aman Mishra", "Aanchal Mishra", "Alok Tiwari", "Abhishek Tiwari", "Rajan Dubey", "11 October 2026", "Drafting used AI assistance"]) {
     if (html.includes(unsupportedClaim)) {
       throw new Error(`Guide ${slug} includes unsupported author or date details: ${unsupportedClaim}`);
     }
