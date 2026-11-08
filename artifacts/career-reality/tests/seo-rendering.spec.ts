@@ -56,6 +56,8 @@ test.describe("crawler and client route identity", () => {
             twitterImage: content('meta[name="twitter:image"]'),
             site: schema("site"),
             breadcrumbs: schema("breadcrumbs"),
+            webApplication: schema("webapp"),
+            rulesPage: schema("webpage"),
           };
         }
         return { initial: metadata(new DOMParser().parseFromString(html, "text/html")), hydrated: metadata(document) };

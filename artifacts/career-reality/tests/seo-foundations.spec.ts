@@ -43,7 +43,7 @@ test.describe("public SEO foundations", () => {
     const siteSchema = JSON.parse((await page.locator('script[data-career-seo-schema="site"]').textContent()) ?? "{}");
     const graph = siteSchema["@graph"] as Array<Record<string, unknown>>;
     expect(graph.some((entry) => entry["@type"] === "Person")).toBe(false);
-    expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
+    expect(graph.some((entry) => entry["@type"] === "Organization" && entry.name === "CareerReality" && entry.legalName === "Doffysoft pvt. Limited." && entry.email === "hello@careerreality.in")).toBe(true);
 
     await page.goto("/privacy-policy", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Information updated: 7 November 2026.")).toBeVisible();

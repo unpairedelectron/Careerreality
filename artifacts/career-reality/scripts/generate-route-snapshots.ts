@@ -18,6 +18,7 @@ import { assertPublicRouteDescription } from "../src/data/seo-description-policy
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
 import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
 import { aboutCopy, teamCopy, type PeopleCopySection } from "../src/data/trust-people-copy.ts";
+import { createRulesPageSchema, createToolApplicationSchema, isApplicationToolRoute, SITE_SOCIAL_IMAGE_PATH } from "../src/data/seo-page-schemas.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
 import {
   audiences,
@@ -150,6 +151,13 @@ function escapeJson(value: unknown): string {
 function publicPath(route: string): string {
   const normalizedRoute = route === "/" ? "/" : `${route.replace(/\/+$/, "")}/`;
   return `${basePath}${normalizedRoute}`;
+}
+
+/** Source links can be internal routes or external URLs; internal ones use the canonical slash form. */
+function sourceLink(url: string, label: string): string {
+  return url.startsWith("/")
+    ? `<a href="${escapeHtml(publicPath(url))}">${escapeHtml(label)}</a>`
+    : `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
 }
 
 type StaticRouteMeta = {
@@ -1022,7 +1030,7 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
     .map((section, index) => ({
     id: `guide-section-${index + 1}`,
     heading: section.heading,
-    html: `${section.content.split(/\n{2,}/).filter(Boolean).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}${section.sourceNotes.length ? `<p class="snapshot-source-note"><strong>Source context:</strong> ${section.sourceNotes.map(escapeHtml).join(" · ")}</p>` : ""}${section.sourceLinks.length ? `<ul class="snapshot-source-links">${section.sourceLinks.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a> — ${source.year ? `source year stated as ${escapeHtml(source.year)}` : "date not stated in the archived source note"}</li>`).join("")}</ul>` : ""}`,
+    html: `${section.content.split(/\n{2,}/).filter(Boolean).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}${section.sourceNotes.length ? `<p class="snapshot-source-note"><strong>Source context:</strong> ${section.sourceNotes.map(escapeHtml).join(" · ")}</p>` : ""}${section.sourceLinks.length ? `<ul class="snapshot-source-links">${section.sourceLinks.map((source) => `<li>${sourceLink(source.url, source.label)} —${source.year ? `source year stated as ${escapeHtml(source.year)}` : "date not stated in the archived source note"}</li>`).join("")}</ul>` : ""}`,
     })),
   ];
   const workedExample = guideWorkedExamples[guide.slug as keyof typeof guideWorkedExamples];
@@ -1050,7 +1058,7 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
   if (guide.sources.length > 0) {
     sections.push({
       heading: "Sources",
-      html: `<ul>${guide.sources.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a>${source.year ? ` — ${escapeHtml(source.year)}` : ""}</li>`).join("")}</ul>`,
+      html: `<ul>${guide.sources.map((source) => `<li>${sourceLink(source.url, source.label)}${source.year ? ` — ${escapeHtml(source.year)}` : ""}</li>`).join("")}</ul>`,
     });
   }
   return {
@@ -1270,7 +1278,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
         organization,
         ...(route === "/about" ? [{
           "@type": "AboutPage",
-          "@id": `${siteUrl}/about#webpage`,
+          "@id": `${siteUrl}/about/#webpage`,
           name: meta.title,
           url: canonical,
           about: { "@id": `${siteUrl}/#organization` },
@@ -1278,7 +1286,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
         }] : []),
         ...(route === "/contact" ? [{
           "@type": "ContactPage",
-          "@id": `${siteUrl}/contact#webpage`,
+          "@id": `${siteUrl}/contact/#webpage`,
           name: meta.title,
           url: canonical,
           about: { "@id": `${siteUrl}/#organization` },
@@ -1329,21 +1337,35 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
     },
   ];
 
-  if (routeRegistry.routes.find((entry) => entry.path === route)?.kind === "guide") {
-    const guideSlug = routeRegistry.routes.find((entry) => entry.path === route)?.guideSlug;
-    const guide = generatedGuideData.guides.find((entry) => entry.slug === guideSlug);
+  const registryRoute = routeRegistry.routes.find((entry) => entry.path === route);
+  // Article headline and description come from the route registry, matching src/lib/seo.ts after hydration.
+  const articleHeadline = registryRoute?.title ?? meta.title;
+  const articleImage = [`${siteUrl}${SITE_SOCIAL_IMAGE_PATH}`];
+
+  if (registryRoute?.kind === "guide") {
+    const guide = generatedGuideData.guides.find((entry) => entry.slug === registryRoute.guideSlug);
     schemas.push({
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: meta.title,
+      headline: articleHeadline,
       description: meta.description,
       ...(guide?.datePublished ? { datePublished: guide.datePublished } : {}),
       ...(guide?.dateModified ? { dateModified: guide.dateModified } : {}),
+      image: articleImage,
       mainEntityOfPage: canonical,
       author: createFounderAuthor(siteUrl),
       publisher: organization,
       inLanguage: "en-IN",
     });
+  }
+
+  if (registryRoute && isApplicationToolRoute(registryRoute)) {
+    schemas.push(createToolApplicationSchema(siteUrl, registryRoute));
+  }
+
+  const rulesPage = rulesLibraryData.pages.find((page) => page.path === route);
+  if (rulesPage) {
+    schemas.push(createRulesPageSchema(siteUrl, rulesPage));
   }
 
   if (route === "/layoffs") {
@@ -1362,13 +1384,14 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
       schemas.push({
         "@context": "https://schema.org",
         "@type": "Article",
-        headline: meta.title,
+        headline: articleHeadline,
         description: meta.description,
-        datePublished: event.sourcePublishedAt,
+        // The source report's date belongs to the cited work, not to this page's publication.
         dateModified: event.updatedAt,
+        image: articleImage,
         mainEntityOfPage: canonical,
         publisher: organization,
-        citation: [event.sourceUrl],
+        citation: [{ "@type": "CreativeWork", name: event.sourceLabel, url: event.sourceUrl, datePublished: event.sourcePublishedAt }],
         inLanguage: "en-IN",
       });
     }
@@ -1390,7 +1413,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
 
   return schemas.map((schema, index) => {
     const type = (schema as { "@type"?: string })["@type"];
-    const schemaId = type === "BreadcrumbList" ? "breadcrumbs" : type === "Article" ? "article" : type === "FAQPage" ? "faq" : index === 0 ? "site" : `schema-${index}`;
+    const schemaId = type === "BreadcrumbList" ? "breadcrumbs" : type === "Article" ? "article" : type === "FAQPage" ? "faq" : type === "WebApplication" ? "webapp" : type === "WebPage" ? "webpage" : index === 0 ? "site" : `schema-${index}`;
     return `<script type="application/ld+json" data-career-seo-schema="${schemaId}">${escapeJson(schema)}</script>`;
   }).join("");
 }

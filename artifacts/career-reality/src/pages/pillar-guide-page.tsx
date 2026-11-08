@@ -8,6 +8,13 @@ import { SITE_FOUNDER } from "@/data/site-founder";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 
 type GuideSource = { url: string; label: string; year?: string };
+
+/** Internal source links open in the same tab at the canonical trailing-slash URL; external ones open a new tab. */
+function sourceLinkProps(url: string) {
+  return url.startsWith("/")
+    ? { href: `${url.replace(/\/+$/, "")}/` }
+    : { href: url, target: "_blank", rel: "noopener noreferrer" };
+}
 type GuideRecord = (typeof guideCatalog.guides)[number];
 type Guide = Omit<GuideRecord, "sources" | "sections"> & {
   lastVerified?: string;
@@ -141,7 +148,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
                 <ul className="mt-4 space-y-2 text-xs">
                   {section.sourceLinks.map((source) => (
                     <li key={source.url}>
-                      <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">
+                      <a {...sourceLinkProps(source.url)} className="font-semibold text-primary underline underline-offset-4">
                         {source.label}
                       </a>
                       <span className="text-muted-foreground"> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
@@ -186,7 +193,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           <ul className="mt-4 space-y-2">
             {guide.sources.map((source) => (
               <li key={source.url}>
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
+                <a {...sourceLinkProps(source.url)} className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
                 <span> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
               </li>
             ))}

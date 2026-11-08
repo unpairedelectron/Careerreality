@@ -1093,24 +1093,12 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
 
 export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
   const page = publishedTrustMeta[kind];
-  const siteOrigin = (import.meta.env.VITE_SITE_URL || "https://www.careerreality.in").replace(/\/+$/, "");
+  const siteOrigin = (import.meta.env.VITE_SITE_URL || "https://careerreality.in").replace(/\/+$/, "");
+  // The Organization node is declared once in the site-wide "site" schema; trust pages reference it by @id.
   const organizationId = `${siteOrigin}/#organization`;
   const graph = [
-    {
-      "@type": "Organization",
-      "@id": organizationId,
-      name: "Doffysoft pvt. Limited.",
-      alternateName: "CareerReality",
-      url: siteOrigin,
-      email: "hello@careerreality.in",
-      address: { "@type": "PostalAddress", addressLocality: "Hinjewadi Phase 3, Pune", addressCountry: "IN" },
-      publishingPrinciples: `${siteOrigin}/editorial`,
-      correctionsPolicy: `${siteOrigin}/corrections`,
-      privacyPolicy: `${siteOrigin}/privacy-policy`,
-      contactPoint: { "@type": "ContactPoint", contactType: "general, corrections, privacy, security, press, and complaints", email: "hello@careerreality.in" },
-    },
-    ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about` }] : []),
-    ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact`, mainEntity: { "@id": organizationId } }] : []),
+    ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about/#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about/` }] : []),
+    ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact/#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact/`, mainEntity: { "@id": organizationId } }] : []),
     ...(kind === "team" ? [{ "@type": "ProfilePage", "@id": `${siteOrigin}/team/#webpage`, name: page.seoTitle, url: `${siteOrigin}/team/`, mainEntity: { "@id": createFounderPerson(siteOrigin)["@id"] } }, createFounderPerson(siteOrigin)] : []),
   ];
   return (
@@ -1130,7 +1118,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
         <p><strong>Information updated:</strong> {kind === "team" || kind === "about" || kind === "privacy" ? "7 November 2026." : "2 November 2026."}</p>
       </div>
       <PublishedTrustBody kind={kind} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />
+      {graph.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />}
     </PublicPage>
   );
 }

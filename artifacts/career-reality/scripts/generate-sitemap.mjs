@@ -44,8 +44,25 @@ function escapeXml(value) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
+// <lastmod> only where the repo records a verified modification date; other routes omit it.
+const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+const lastModified = new Map();
+const guideData = JSON.parse(fs.readFileSync(path.join(root, "src/data/generated-pillar-guides.json"), "utf8"));
+for (const guide of guideData.guides ?? []) {
+  const routeEntry = routeRegistry.routes.find((entry) => entry.guideSlug === guide.slug);
+  if (routeEntry && validDate(guide.dateModified)) lastModified.set(routeEntry.path, guide.dateModified);
+}
+const layoffEvents = JSON.parse(fs.readFileSync(path.join(root, "src/data/layoff-events.json"), "utf8"));
+for (const event of layoffEvents) {
+  const updated = typeof event.updatedAt === "string" ? event.updatedAt.slice(0, 10) : null;
+  if (validDate(updated)) lastModified.set(`/layoffs/${event.slug}`, updated);
+}
+
 const body = sitemapRoutes
-  .map((route) => `  <url><loc>${escapeXml(`${siteUrl}${publicPath(route)}`)}</loc></url>`)
+  .map((route) => {
+    const lastmod = lastModified.get(route);
+    return `  <url><loc>${escapeXml(`${siteUrl}${publicPath(route)}`)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`;
+  })
   .join("\n");
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
