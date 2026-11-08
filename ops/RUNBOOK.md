@@ -90,7 +90,7 @@ Owner inputs still open: <count from OWNER-INPUTS-REQUIRED.md>
 |---|---|
 | GitHub repo (push to `main`) | Working |
 | Replit (publish) | Connector reaches Repl `IndigoBowedMegabyte` (replId `550f1a95-3316-4c4f-8c0d-2fef08d3b25f`) and reads publish status; publishing through it not yet tried (Ask-first until it is) |
-| Google Search Console | Service account `claude-seo@careerreality-seo.iam.gserviceaccount.com` authenticates (key on owner PC at `~/.config/claude-seo/`, never in the repo). No property shared with it yet as of 8 Nov 2026 |
-| GA4 | Not connected (same service account) |
+| Google Search Console | Working from the owner PC: `sc-domain:careerreality.in`, Full, via service account `claude-seo@careerreality-seo.iam.gserviceaccount.com` (key at `~/.config/claude-seo/`, never in the repo). Python is not installed there, so the claude-seo scripts do not run yet; use a Node client |
+| GA4 | Not installed on the site (no tag or measurement ID); owner to create the property |
 | Bing Webmaster Tools | Not connected (API key pending, local only) |
 | AdSense | Ads not serving; reports not connected |
