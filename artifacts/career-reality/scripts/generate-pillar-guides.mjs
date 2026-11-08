@@ -16,6 +16,7 @@ const authoredBatch = {
   ...(await import("../src/data/authored-guide-batch-next.mjs")).default,
   ...(await import("../src/data/authored-guide-batch-phase-one.mjs")).default,
   ...(await import("../src/data/authored-guide-batch-phase-two.mjs")).default,
+  ...(await import("../src/data/authored-guide-batch-phase-three.mjs")).default,
 };
 const guideRoutes = registry.routes.filter((route) => route.kind === "guide");
 const guideBySlug = new Map(guideRoutes.map((route) => [route.guideSlug, route]));
@@ -299,8 +300,8 @@ function parseArticle(article) {
 }
 
 const archiveRecords = new Map(registry.drafts.articles.map((article) => [article.slug, article]));
-if (guideRoutes.length !== 28 || Object.keys(sourceMap).length !== guideRoutes.length) {
-  throw new Error("The public guide route count and source map must both be 28.");
+if (guideRoutes.length !== 29 || Object.keys(sourceMap).length !== guideRoutes.length) {
+  throw new Error("The public guide route count and source map must both be 29.");
 }
 if (registry.drafts.articles.length !== 44) {
   throw new Error("The preserved archive must contain exactly 44 article records.");

@@ -627,6 +627,18 @@
       "sitemap": true
     },
     {
+      "path": "/guides/form-130-salary-tds-certificate-india",
+      "component": "guide",
+      "kind": "guide",
+      "guideSlug": "form-130-salary-tds-certificate-india",
+      "title": "Form 130: The Salary TDS Certificate After Form 16",
+      "seoTitle": "Form 130 vs Form 16: Salary TDS Certificate",
+      "description": "Form 130 replaces Form 16 for salary from tax year 2026–27. Learn which certificate covers which year and how to reconcile it with payslips and tax credit.",
+      "render": "snapshot",
+      "indexability": "indexable",
+      "sitemap": true
+    },
+    {
       "path": "/guides/old-vs-new-tax-regime-salaried-india",
       "component": "guide",
       "kind": "guide",
