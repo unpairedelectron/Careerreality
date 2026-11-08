@@ -38,6 +38,7 @@ type RegistryRoute = {
   component: string;
   kind: string;
   title: string;
+  seoTitle?: string;
   description: string;
   render: "snapshot" | "app-shell";
   indexability: "indexable" | "noindex";
@@ -171,6 +172,7 @@ type StaticRouteMeta = {
 
 const routeToMeta = (route: RegistryRoute): StaticRouteMeta => ({
   title: route.title,
+  seoTitle: route.seoTitle,
   description: route.description,
   heading: route.path === "/layoffs"
     ? "When work changes, steady the ground."

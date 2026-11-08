@@ -11,6 +11,10 @@ import {
   STATIC_TITLE_MAX_LENGTH,
   STATIC_TITLE_MIN_LENGTH,
 } from "./seo-title-policy.mjs";
+import { formatSeoTitle } from "../src/data/seo-title.ts";
+
+// Stricter than the shared live-site limit: registry titles must not truncate in results.
+const REGISTRY_TITLE_MAX_LENGTH = 60;
 import { getSiteUrl } from "./seo-site-url.mjs";
 import { ctcWorkedExampleResults } from "../src/lib/ctc-calculator.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
@@ -56,7 +60,7 @@ const routeRegistry = JSON.parse(
   fs.readFileSync(path.join(root, "src/data/route-registry.json"), "utf8"),
 ) as {
   sitemapPolicy: { humanRoute: string; xmlRoute: string; humanRouteIndexability: string };
-  routes: Array<{ path: string; title?: string; description: string; kind: string; render: "snapshot" | "app-shell"; indexability: "indexable" | "noindex"; sitemap: boolean; guideSlug?: string }>;
+  routes: Array<{ path: string; title?: string; seoTitle?: string; description: string; kind: string; render: "snapshot" | "app-shell"; indexability: "indexable" | "noindex"; sitemap: boolean; guideSlug?: string }>;
 };
 const generatedGuideMetadata = JSON.parse(
   fs.readFileSync(path.join(root, "src/data/generated-pillar-guides.json"), "utf8"),
@@ -407,6 +411,15 @@ for (const route of staticRoutes) {
       throw new Error(
         `Invalid indexable title: ${route} is ${title.length} characters; expected ${STATIC_TITLE_MIN_LENGTH}-${STATIC_TITLE_MAX_LENGTH}: ${title || "(missing)"}`,
       );
+    }
+    // Registry routes render their `seoTitle` (or `title`) and must fit a SERP line.
+    const expectedTitle = formatSeoTitle(routePolicy.seoTitle ?? routePolicy.title ?? "");
+    const decodedTitle = decodeHtmlValue(title);
+    if (decodedTitle !== expectedTitle) {
+      throw new Error(`Snapshot title on ${route} does not match the route registry: ${decodedTitle} !== ${expectedTitle}`);
+    }
+    if (decodedTitle.length > REGISTRY_TITLE_MAX_LENGTH) {
+      throw new Error(`Registry title on ${route} is ${decodedTitle.length} characters; expected at most ${REGISTRY_TITLE_MAX_LENGTH}: ${decodedTitle}`);
     }
     const descriptionLength = decodeHtmlValue(metaContent(html, "description")).length;
     if (descriptionLength < 100 || descriptionLength > 160) {

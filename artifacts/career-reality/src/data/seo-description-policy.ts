@@ -17,7 +17,7 @@ export function assertPublicRouteDescription(route: {
   // Legal and trust pages should be concise rather than padded to fit a snippet.
   if (route.kind === "trust") return;
   const length = route.description.trim().length;
-  if (length < 150 || length > 160) {
-    throw new Error(`Meta description on ${route.path} is ${length} characters; expected 150–160.`);
+  if (length < 150 || length > 158) {
+    throw new Error(`Meta description on ${route.path} is ${length} characters; expected 150–158.`);
   }
 }

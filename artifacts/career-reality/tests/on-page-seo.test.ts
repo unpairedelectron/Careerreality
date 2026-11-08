@@ -38,8 +38,8 @@ test("indexable public metadata meets snippet budgets and remains distinct", () 
 test("snippet guard reports both short and long descriptions but permits concise trust pages", () => {
   const route = { path: "/tools", kind: "hub", indexability: "indexable", description: "Too short." };
   assert.throws(() => assertPublicRouteDescription(route), /\/tools.*10 characters/);
-  assert.throws(() => assertPublicRouteDescription({ ...route, description: "x".repeat(161) }), /161 characters/);
-  for (const length of [150, 160]) {
+  assert.throws(() => assertPublicRouteDescription({ ...route, description: "x".repeat(159) }), /159 characters/);
+  for (const length of [150, 158]) {
     assert.doesNotThrow(() => assertPublicRouteDescription({ ...route, description: "x".repeat(length) }));
   }
   assert.doesNotThrow(() => assertPublicRouteDescription({ ...route, kind: "trust" }));
