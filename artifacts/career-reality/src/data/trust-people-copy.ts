@@ -32,7 +32,7 @@ export const aboutCopy = {
       heading: "What is here today",
       paragraphs: [
         "Calculators and worksheets for the money questions: CTC to take-home, old versus new tax regime, gratuity, notice-period and leave encashment, a layoff cash runway, a home-loan stress test, and a resign-or-stay worksheet. An employer due-diligence checklist helps you check who you would actually be working for. None of them need an account.",
-        "Alongside them sit 28 practical guides on offers, layoffs, labour codes, career switches and reading hiring claims, plus dated public layoff records that show their source and status.",
+        "Alongside them sit 29 practical guides on offers, layoffs, labour codes, career switches and reading hiring claims, plus dated public layoff records that show their source and status.",
       ],
       links: [
         { href: "/tools", label: "Browse the tools" },

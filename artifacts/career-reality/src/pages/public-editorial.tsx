@@ -479,7 +479,7 @@ const trustPageMeta: Record<TrustKind, TrustPageMeta> = {
   about: {
     eyebrow: "The desk / about",
     title: "Career tools and guides for consequential decisions.",
-    intro: "CareerReality publishes career tools, 28 guides, and dated public layoff records for people in India.",
+    intro: "CareerReality publishes career tools, 29 guides, and dated public layoff records for people in India.",
     seoTitle: "About CareerReality",
     seoDescription: "Explore CareerReality’s career tools, guides, public records, and evidence limits for India-focused career decisions.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
@@ -634,7 +634,7 @@ function AboutTrust() {
       <TrustSection id="purpose" eyebrow="Why this exists" title="A decision desk for the part after the headline.">
         <p>CareerReality helps people in India examine career choices with practical tools, source-linked guides, and dated public records. Each tool separates entered facts from estimates and explains what its result cannot establish.</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 28 career guides, and dated layoff records.</p></div>
+          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 29 career guides, and dated layoff records.</p></div>
           <div className="rounded-[16px] border border-border bg-card p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-muted-foreground">Not provided</p><p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">Private-sector salary benchmarks, scored company ratings, or predictions of an individual’s employment outcome.</p></div>
         </div>
       </TrustSection>

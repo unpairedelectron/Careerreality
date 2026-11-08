@@ -231,10 +231,10 @@ export const guideWorkedExamples = {
     headers: ["Line", "Payslips", "Certificate", "What explains a gap"],
     rows: [
       ["Gross salary", "₹18,00,000 (12 regular payslips)", "₹18,60,000", "₹60,000 March bonus on an off-cycle payslip"],
-      ["Tax deducted", "Sum of monthly TDS lines", "Total TDS shown", "Compare with the tax credit statement on the portal"],
-      ["Regime used", "Declaration given to payroll", "Regime shown for withholding", "Return choice is checked separately"],
+      ["Tax deducted", "Sum of monthly TDS lines", "Total TDS shown", "Compare with your annual tax statement on the portal"],
+      ["Deductions", "Declarations and proofs given to payroll", "Deductions shown in the salary details", "Late or rejected proofs; check with payroll"],
     ],
-    checks: ["Collect every payslip, including off-cycle bonus or arrears slips.", "Match tax deducted with the tax credit shown against your PAN.", "Ask payroll in writing to correct any line you cannot explain."],
+    checks: ["Collect every payslip, including off-cycle bonus or arrears slips.", "Match tax deducted with the credit in your annual tax statement.", "Ask payroll in writing to correct any line you cannot explain."],
     tool: { label: "Estimate salary and tax cash flow", href: "/salary-calculator" },
   },
   "old-vs-new-tax-regime-salaried-india": {
