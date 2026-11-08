@@ -50,7 +50,7 @@ Gotchas:
 Two cloud routines, 03:30 UTC = 09:00 IST, both on Sonnet 5.5 to control cost:
 
 - **"CareerReality ops cycle"** (`trig_011FfvPEJ5QKG2S96bPebGGd`), work days: every day except deploy days. No connectors. Manage at https://claude.ai/code/routines/trig_011FfvPEJ5QKG2S96bPebGGd.
-- **"CareerReality deploy"**, deploy days: the 4th, 8th, 12th, 16th, 20th, 24th and 28th of each month. Replit connector attached.
+- **"CareerReality deploy"** (`trig_01LJZBHr7meQ2hJqYi2Fd8ur`), deploy days: the 4th, 8th, 12th, 16th, 20th, 24th and 28th of each month. Replit connector attached.
 
 Phase on a work day = (day of month − 1) mod 4: **0 = audit, 1 = build, 2 = test**. The days after the 28th carry on with the same formula, so the gap between the 28th and the next month's 4th is the one longer stretch.
 
