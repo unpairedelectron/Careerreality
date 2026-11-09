@@ -22,6 +22,9 @@ import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/d
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { assertArticlePublisherLogos } from "./lib/verify-publisher-logo.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
+import { getPageHeading } from "../src/data/page-headings.ts";
+import { getToolFaqs } from "../src/data/tool-faqs.ts";
+import { mobileAppFaqs } from "../src/data/mobile-app-faqs.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 const workspaceRoot = path.resolve(root, "../..");
@@ -879,6 +882,30 @@ for (const route of appShellRoutes) {
   const html = fs.readFileSync(file, "utf8");
   if (!html.includes('content="noindex, follow"') || !html.includes('<link rel="canonical"')) {
     throw new Error(`Invalid app shell: ${route}`);
+  }
+}
+
+// Snapshot and React read the same heading and FAQ modules, so a snapshot that matches the module matches the hydrated page.
+for (const route of routeRegistry.routes.filter((entry) => entry.render === "snapshot")) {
+  const file = path.join(distRoot, route.path.replace(/^\/+/, ""), "index.html");
+  if (!fs.existsSync(file)) continue;
+  const html = fs.readFileSync(file, "utf8");
+  const plain = (markup: string) => decodeHtmlValue(markup.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+  const expectedH1 = getPageHeading(route.path)?.h1;
+  const h1 = plain(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? "");
+  if (expectedH1 && h1 !== expectedH1) {
+    throw new Error(`Snapshot H1 differs from page-headings.ts on ${route.path}: "${h1}" vs "${expectedH1}"`);
+  }
+  const expectedFaqs = route.path === "/mobile-app" ? mobileAppFaqs : route.kind === "tool" ? getToolFaqs(route.path) : undefined;
+  if (expectedFaqs) {
+    const visible = new Set([...html.matchAll(/<dt>([\s\S]*?)<\/dt>/gi)].map((match) => plain(match[1])));
+    const missing = expectedFaqs.filter((faq) => !visible.has(faq.question));
+    if (missing.length) throw new Error(`Snapshot FAQ on ${route.path} is missing: ${missing.map((faq) => faq.question).join("; ")}`);
+    const script = html.match(/<script[^>]*data-career-seo-schema="faq"[^>]*>([\s\S]*?)<\/script>/i)?.[1];
+    const schemaQuestions = script ? (JSON.parse(script) as { mainEntity: Array<{ name: string }> }).mainEntity.map((item) => item.name) : [];
+    if (JSON.stringify(schemaQuestions) !== JSON.stringify(expectedFaqs.map((faq) => faq.question))) {
+      throw new Error(`FAQPage JSON-LD differs from the shared FAQ list on ${route.path}`);
+    }
   }
 }
 
