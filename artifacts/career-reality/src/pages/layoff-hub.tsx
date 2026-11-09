@@ -12,6 +12,8 @@ import { LayoffRunwayCalculator } from '@/components/shared/layoff-runway-calcul
 import { PublicFooter } from '@/components/shared/public-footer';
 import { useSeo } from '@/lib/seo';
 import eventData from '@/data/layoff-events.json';
+import { layoffEventHeadings as H } from '@/data/layoff-event-headings';
+import { getPageHeading } from '@/data/page-headings';
 import './layoff-hub.css';
 
 export type LayoffEvent = {
@@ -307,23 +309,25 @@ function LayoffEventDetail() {
         <div className="detail-breadcrumb"><Link href="/layoffs/" data-testid="link-detail-hub"><ArrowLeft size={14} aria-hidden="true" /> Layoff Hub</Link><span>Company event record / India</span></div>
         <header className="detail-header">
           <p className="layoff-eyebrow">DATED RECORD / {formatDate(event.date)}</p>
-          <div className="detail-title-row"><h1 data-testid="heading-event-detail">{event.company}<br /><em>workforce report.</em></h1><StatusTag status={event.status} id="detail" /></div>
+          <p className="detail-kicker" data-testid="page-kicker">{event.company} <em>workforce report.</em></p>
+          <div className="detail-title-row"><h1 data-testid="heading-event-detail">{getPageHeading(`/layoffs/${event.slug}`)?.h1 ?? `${event.company} workforce report`}</h1><StatusTag status={event.status} id="detail" /></div>
           <p className="detail-lead">{event.summary}</p>
         </header>
+        <h2 className="detail-section-label">{H.source}</h2>
         <div className="detail-facts">
           <div><span>REPORTED SCALE</span><strong data-testid="text-event-scale">{event.scale}</strong></div>
           <div><span>GEOGRAPHY</span><strong data-testid="text-event-geography">{event.geography}</strong></div>
           <div><span>EVENT DATE</span><strong>{formatDate(event.date)}</strong></div>
           <div><span>COPY UPDATED</span><strong>{formatDate(event.updatedAt)}</strong></div>
         </div>
-        <aside className="detail-method" data-testid="text-event-update-note"><strong>Page update</strong><p>{event.updateNote}</p></aside>
+        <aside className="detail-method" data-testid="text-event-update-note"><h2 className="detail-method-heading">{H.update}</h2><p>{event.updateNote}</p></aside>
         <section className="detail-source" aria-labelledby="detail-source-heading">
           <div className="detail-source-icon"><ExternalLink size={18} aria-hidden="true" /></div>
-          <div><p className="layoff-eyebrow">Primary reporting / {event.sourceLabel}</p><h2 id="detail-source-heading">Go back to what was published.</h2><p>Source published {formatDate(event.sourcePublishedAt)}. The scale and summary above are attributed to this report. A reported plan is not proof of a completed count or present-day company conditions.</p><a href={event.sourceUrl} target="_blank" rel="noreferrer" data-testid="link-event-source">Read the original source <ArrowUpRight size={15} aria-hidden="true" /></a></div>
+          <div><p className="layoff-eyebrow">Primary reporting / {event.sourceLabel}</p><h2 id="detail-source-heading">{H.primarySource}</h2><p>Source published {formatDate(event.sourcePublishedAt)}. The scale and summary above are attributed to this report. A reported plan is not proof of a completed count or present-day company conditions.</p><a href={event.sourceUrl} target="_blank" rel="noreferrer" data-testid="link-event-source">Read the original source <ArrowUpRight size={15} aria-hidden="true" /></a></div>
         </section>
         {event.sourceUpdates?.length ? (
           <section className="detail-method" aria-labelledby="event-updates-heading">
-            <strong id="event-updates-heading">Later reporting and clarifications</strong>
+            <h2 id="event-updates-heading" className="detail-method-heading">{H.laterReporting}</h2>
             {event.sourceUpdates.map((update) => (
               <p key={update.sourceUrl}>
                 <strong>{update.sourceLabel} · {formatDate(update.sourcePublishedAt)}:</strong> {update.summary}{' '}
@@ -332,11 +336,11 @@ function LayoffEventDetail() {
             ))}
           </section>
         ) : null}
-        <aside className="detail-method" data-testid="text-event-method"><strong>How to read this record</strong><p>{event.status === 'Confirmed' ? 'Confirmed means the linked reporting describes a direct company confirmation. This does not establish a final affected-role count.' : event.status === 'Reported' ? 'Reported means the information was published by a named media source. It is not represented here as a direct company confirmation.' : 'Rumour means the claim remains unverified. Do not use it as a basis for decisions.'} Dates make this record auditable; they do not make it current.</p></aside>
+        <aside className="detail-method" data-testid="text-event-method"><h2 className="detail-method-heading">{H.status}</h2><p>{event.status === 'Confirmed' ? 'Confirmed means the linked reporting describes a direct company confirmation. This does not establish a final affected-role count.' : event.status === 'Reported' ? 'Reported means the information was published by a named media source. It is not represented here as a direct company confirmation.' : 'Rumour means the claim remains unverified. Do not use it as a basis for decisions.'} Dates make this record auditable; they do not make it current.</p></aside>
         <section className="detail-method" aria-labelledby="event-coverage-heading">
-          <strong id="event-coverage-heading">What this report does not establish</strong>
+          <h2 id="event-coverage-heading" className="detail-method-heading">{H.coverage}</h2>
           <p>{event.coverageNote}</p>
-          <strong>What to verify for your situation</strong>
+          <h2 className="detail-method-heading">{H.readerCheck}</h2>
           <p>{event.readerCheck}</p>
         </section>
         <LayoffResponsePlanner

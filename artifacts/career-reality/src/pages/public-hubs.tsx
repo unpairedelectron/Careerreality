@@ -6,6 +6,7 @@ import { PublicFooter } from "@/components/shared/public-footer";
 import { guideRoutes, toolRoutes } from "@/data/public-routes";
 import { getToolDirectoryCategoryLabel, toolDirectoryCategories, toolDirectoryItems } from "@/data/tool-directory";
 import { useSeo } from "@/lib/seo";
+import { getPageHeading } from "@/data/page-headings";
 import "./public-hubs.css";
 
 function RouteIndex({
@@ -18,7 +19,8 @@ function RouteIndex({
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<"all" | (typeof toolDirectoryCategories)[number]["id"]>("all");
   const guides = kind === "guides";
-  const title = guides ? "Guides for the questions behind the move." : "Tools for the parts you can check.";
+  const pageHeading = getPageHeading(guides ? "/guides" : "/tools");
+  const title = pageHeading?.subhead ?? (guides ? "Guides for the questions behind the move." : "Tools for the parts you can check.");
   const intro = guides
     ? "Practical reading for compensation, career changes, engineering work, layoffs, and workplace decisions, with clear limits on what each page can establish."
     : "Compare written offers, estimate take-home pay, map job-posting requirements to resume evidence, or organize a career decision. Every tool shows its inputs and limits.";
@@ -63,7 +65,8 @@ function RouteIndex({
           <div className="directory-eyebrow"><span /> CareerReality / {guides ? "Reading room" : "Working desk"}</div>
           <div className="directory-title-row">
             <div>
-              <h1>{title}</h1>
+              <h1 className="directory-keyword-title">{pageHeading?.h1 ?? title}</h1>
+              <p className="directory-display" data-testid="page-subhead">{title}</p>
               <p>{intro}</p>
             </div>
             <div className="directory-index-mark" aria-hidden="true">

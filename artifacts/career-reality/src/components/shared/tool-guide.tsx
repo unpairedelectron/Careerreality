@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
-import type { FaqSchemaInput } from "@/lib/seo";
 import { trackNextAction } from "@/lib/analytics";
 import { compareCtcOffers, ctcWorkedExampleResults } from "@/lib/ctc-calculator";
 
@@ -11,7 +10,6 @@ export type ToolGuide = {
   steps: string[];
   checks: string[];
   limitation: string;
-  faqs: FaqSchemaInput[];
   related: Array<{ label: string; href: string; catalogSlug: string }>;
   example?: string;
   sources?: Array<{ label: string; href: string }>;
@@ -24,9 +22,8 @@ const guide = (
   steps: string[],
   checks: string[],
   limitation: string,
-  faqs: FaqSchemaInput[],
   related: ToolGuide["related"],
-): ToolGuide => ({ eyebrow, heading, summary, steps, checks, limitation, faqs, related });
+): ToolGuide => ({ eyebrow, heading, summary, steps, checks, limitation, related });
 
 export const toolGuides: Record<string, ToolGuide> = {
   "/offer-comparison": {
@@ -46,11 +43,6 @@ export const toolGuides: Record<string, ToolGuide> = {
       "Are the notice, relocation, and commute figures one-time or recurring, and are they already taxed or reimbursed?",
     ],
      limitation: "The shared salary model estimates salary-only tax under the selected 2026–27 period: Tax Year 2026–27 under the Income-tax Act, 2025, or Assessment Year 2026–27 for income earned in FY 2025–26 under the Income-tax Act, 1961. It is for a resident individual below age 60 and does not model the old regime, other income, all exemptions, employer-specific payroll rules, benefit value, foreign payroll, or whether an entered cost is deductible or reimbursed. Use the signed offer and payslip; confirm individual tax treatment with a qualified adviser.",
-    faqs: [
-      { question: "Why show zero-variable and full-target results?", answer: "The zero-variable case uses fixed pay only. The target case assumes the entire stated annual target is paid and spreads the resulting annual take-home over 12 months. A target is not a guarantee; check the plan rules and consider a lower payout scenario." },
-      { question: "How does the first-year cost comparison work?", answer: "The tool subtracts the entered joining-bonus clawback, notice-period cost, relocation cost, and additional commute cost from the new offer’s first-year estimate. Commute is entered as a 12-month total; the tool does not estimate a tax treatment or reimbursement." },
-      { question: "Does a higher monthly result mean I should accept?", answer: "No. It compares only entered cash arithmetic. Role scope, manager, probation, workload, location, family needs, and the reliability of each written promise remain separate decisions." },
-    ],
     related: [
       { label: "Read the CTC offer guide", href: "/guides/read-the-offer-beyond-ctc", catalogSlug: "read-the-offer-beyond-ctc" },
       { label: "Review EPF wage rules", href: "/rules/employee-pf", catalogSlug: "employee-pf" },
@@ -84,11 +76,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Enter annual CTC exactly as it appears in the offer letter.", "Separate guaranteed fixed pay from variable, bonus, equity, and reimbursements.", "Compare estimated monthly cash with your current baseline and recurring expenses.", "Take unresolved items back to HR as written questions, not assumptions."],
     ["Is variable pay guaranteed, target-based, or discretionary?", "Does the offer include a joining bonus or clawback?", "Are employer PF, gratuity, insurance, and ESOPs being counted as cash?", "If using manual PF, are the PF and professional-tax amounts from the offer or payslip?"],
     "This is a planning estimate under the new regime, not a payroll statement or tax filing. PF uses your selected basis or manual amounts; professional tax is entered manually. Confirm the offer structure, exemptions, other income, and employer policy with payroll or a qualified tax professional.",
-    [
-      { question: "What is the difference between CTC and take-home salary?", answer: "CTC includes employer costs, variable pay, benefits, and sometimes deferred or conditional amounts. Take-home salary is the cash that reaches your account after deductions." },
-       { question: "Should I compare CTC or fixed pay?", answer: "Compare fixed annual cash and expected monthly take-home first. Treat variable pay, equity, and one-time bonuses as separate upside until their conditions are clear." },
-       { question: "Is the tax result a filing amount?", answer: "No. It is an illustrative 2026–27 estimate for a resident salaried person under 60 with salary only; payroll, the notified rebate and your return can differ." },
-    ],
     [{ label: "Read the calculator method", href: "/methodology", catalogSlug: "methodology" }, { label: "Review official sources", href: "/sources", catalogSlug: "sources" }],
   ),
   "/resign-or-stay": guide(
@@ -98,10 +85,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Estimate how many months of essential expenses liquid savings can cover.", "Check the real notice period, buyout language, joining date, and document handover.", "Score the next offer on written certainty rather than verbal enthusiasm.", "Choose one risk-reducing action before setting a resignation date."],
     ["Can runway cover the full notice period and a slower search?", "Is the next role's location, pay mix, and start date written down?", "What happens if the offer is delayed or withdrawn?", "Which document or conversation would reduce the most uncertainty?"],
     "The result cannot predict a manager, market, health, family, or employer decision. It is a structured planning aid and should not replace legal or financial advice.",
-    [
-      { question: "How much runway should I have before resigning?", answer: "There is no universal number. Model essential expenses, notice-period cash flow, dependents, debt, and the likelihood of a delayed start rather than relying on a single threshold." },
-      { question: "Is a signed offer enough to resign?", answer: "A signed offer improves certainty but does not remove risk. Confirm the joining date, conditions, compensation structure, background checks, and notice dependencies." },
-    ],
     [{ label: "Decode the next offer", href: "/salary-calculator", catalogSlug: "ctc-calculator" }, { label: "Build an escape plan", href: "/escape-plan", catalogSlug: "escape-plan" }, { label: "Use the Compass", href: "/compass", catalogSlug: "compass" }],
   ),
   "/layoff-runway": guide(
@@ -111,10 +94,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Count savings you can access now; include severance only when confirmed in writing.", "Add essential recurring costs and debt payments, then subtract other income that is expected to continue.", "Review the month-by-month closing balance and note when it reaches zero.", "Recalculate when income, costs, or payment timing changes; keep one-off expenses separate."],
     ["Are the funds liquid and available after tax or withdrawal restrictions?", "Are debt instalments already included in essential costs, or should they be added separately?", "When will severance and other income actually arrive?", "Which likely one-off costs are missing from the monthly baseline?"],
     "The projection assumes the same net monthly outflow throughout. It excludes inflation, emergencies, investment losses, taxes on severance, benefit changes, and future job income. It cannot estimate how long a search will take.",
-    [
-      { question: "How is runway calculated?", answer: "The tool divides liquid savings plus confirmed severance by essential costs and debt payments after subtracting continuing monthly income. It also shows a 12-month fixed-burn projection." },
-      { question: "Does runway say when I will find work?", answer: "No. It is a cash-flow calculation using your inputs and makes no prediction about hiring or job-search time." },
-    ],
     [{ label: "Review resignation timing", href: "/resign-or-stay", catalogSlug: "resign-or-stay" }, { label: "Plan a reversible career step", href: "/escape-plan", catalogSlug: "escape-plan" }],
   ),
   "/salary-drop": guide(
@@ -124,10 +103,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Compare fixed cash, not just headline CTC, across current and new roles.", "Calculate monthly and six-month impact after recurring expenses.", "Write the non-cash benefit in a form you can review later.", "Set a checkpoint for testing whether the trade-off delivered what it promised."],
     ["How much monthly cash disappears after tax and deductions?", "How many months of runway remain after the move?", "Which benefit is concrete, and which is only a promise?", "What would make you reverse or revisit the decision?"],
     "The model does not price health, family obligations, learning, or happiness precisely. It makes cash impact visible so you can discuss the rest honestly.",
-    [
-      { question: "When is taking a pay cut worth it?", answer: "It may be rational when the new role improves a clearly defined constraint such as health, manager quality, location, scope, or future demand and the cash impact remains survivable." },
-      { question: "How should I explain a salary cut?", answer: "Name the specific trade-off, the evidence that it is real, the time horizon, and the review date. Avoid calling an unverified promise a long-term investment." },
-    ],
     [{ label: "Decode monthly cash", href: "/salary-calculator", catalogSlug: "ctc-calculator" }, { label: "Plan the next move", href: "/escape-plan", catalogSlug: "escape-plan" }],
   ),
   "/escape-plan": guide(
@@ -137,10 +112,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Choose the outcome you want to test, not a vague identity change.", "Break it into visible proof: conversations, applications, portfolio work, or market checks.", "Set a weekly action pace small enough to repeat.", "Review evidence every few weeks and change the plan, not your self-worth."],
     ["What can you complete in the next seven days?", "Which action creates evidence rather than only consuming information?", "Who can give you a specific response or introduction?", "What is the smallest reversible experiment?"],
     "The plan is a pacing tool, not a promise of a new job. Your market, constraints, health, and response rate will change the timeline.",
-    [
-      { question: "How long does a career change take?", answer: "It varies by role, market, experience, runway, and proof. A weekly evidence loop is more useful than an arbitrary deadline because it shows whether the plan is gaining traction." },
-      { question: "What should I do first if I feel stuck?", answer: "Name the decision, write the current baseline, and take one small action that produces new information from a person, document, application, or experiment." },
-    ],
     [{ label: "Check resignation timing", href: "/resign-or-stay", catalogSlug: "resign-or-stay" }, { label: "Use the Compass", href: "/compass", catalogSlug: "compass" }],
   ),
   "/career-reality-index": guide(
@@ -150,10 +121,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Choose Not satisfied, Somewhat satisfied, Neutral, Satisfied, or Super satisfied from current evidence.", "Read the uncomfortable truth and the evidence behind it.", "Choose the highest-leverage change instead of reacting to the loudest feeling.", "Save the diagnosis, then update it when one of your responses meaningfully changes."],
     ["What is the most important risk or opportunity in this profile?", "Which input is weakest or least evidenced?", "What fact would change the diagnosis?", "Which next step is reversible and useful this week?"],
     "The Index is illustrative and directional. It cannot know private company plans, manager decisions, personal wellbeing, or whether a change will make you happier.",
-    [
-      { question: "What does the Career Reality Index do?", answer: "It asks how satisfied you are with four parts of your working life, identifies the most important pattern in those responses, and gives you a concrete next move." },
-      { question: "How should I use the Index?", answer: "Four self-reported satisfaction responses select a conditional diagnosis and next question. They are not added or weighted into a score, benchmark, or forecast." },
-    ],
     [{ label: "Decode the offer", href: "/salary-calculator", catalogSlug: "ctc-calculator" }, { label: "Start with Compass", href: "/compass", catalogSlug: "compass" }],
   ),
   "/ai": guide(
@@ -163,10 +130,6 @@ export const toolGuides: Record<string, ToolGuide> = {
     ["Choose the role and identify the task mix actually changing.", "Separate first-pass automation from review, judgement, context, and accountability.", "Move development effort toward decisions and outcomes, not tool collecting.", "Create one work sample that makes the durable part of your contribution visible."],
     ["Which recurring tasks are becoming easier or faster?", "Who reviews the output and owns the consequence?", "What domain context cannot be delegated to a generic tool?", "Can your portfolio show judgement, constraints, and outcomes?"],
     "Role exposure is an illustrative signal, not a forecast of employment. Adoption differs by company, manager, regulation, customer, and task quality.",
-    [
-      { question: "Will AI replace my job?", answer: "A job is a bundle of tasks, and the tasks may change at different speeds. Track what is automated, what is reviewed, and what decisions remain accountable to people." },
-      { question: "What skills are more durable as AI improves?", answer: "Context, judgement, problem framing, communication, domain knowledge, system ownership, and evaluating outcomes tend to matter more when first drafts become cheaper." },
-    ],
     [{ label: "Build an escape plan", href: "/escape-plan", catalogSlug: "escape-plan" }, { label: "Use the Index", href: "/career-reality-index", catalogSlug: "career-reality-index" }],
   ),
 };
@@ -196,9 +159,6 @@ export function ToolGuideSection({ guide }: { guide: ToolGuide }) {
       <div className="mt-7 grid gap-5 border-t border-border pt-6 lg:grid-cols-[1fr_.9fr]">
          <div><h3 className="text-[11px] font-bold">What this tool cannot know</h3><p className="mt-2 text-[11px] leading-[1.7] text-muted-foreground">{guide.limitation}</p></div>
          {related.length > 0 && <div><h3 className="text-[11px] font-bold">Related decision paths</h3><div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">{related.map((link) => <Link key={link.href} href={link.href} onClick={() => trackNextAction(link.catalogSlug)} className="text-[11px] font-bold text-primary hover:underline">{link.label} <ArrowUpRight size={12} className="inline" /></Link>)}</div></div>}
-      </div>
-      <div className="mt-7 grid gap-2 border-t border-border pt-6">
-        {guide.faqs.map((faq) => <details key={faq.question} className="rounded-xl border border-border bg-secondary/30 px-4 py-3"><summary className="cursor-pointer text-[12px] font-bold">{faq.question}</summary><p className="mt-3 max-w-[760px] text-[11px] leading-[1.7] text-muted-foreground">{faq.answer}</p></details>)}
       </div>
       {guide.sources && <div className="mt-7 border-t border-border pt-6"><h3 className="text-[11px] font-bold">Official sources to check</h3><ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">{guide.sources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-primary underline underline-offset-4">{source.label} <ArrowUpRight size={12} className="inline" /></a></li>)}</ul></div>}
     </section>

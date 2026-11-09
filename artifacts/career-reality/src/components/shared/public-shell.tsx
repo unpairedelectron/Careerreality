@@ -7,6 +7,10 @@ import routeRegistry from "@/data/route-registry";
 import { getRouteSeo, useSeo, type Breadcrumb, type SeoConfig } from "@/lib/seo";
 import { ToolGuideSection, toolGuides } from "@/components/shared/tool-guide";
 import { PublicFooter } from "@/components/shared/public-footer";
+import { ToolFaqSection, ToolMethodSection } from "@/components/shared/tool-content";
+import { getPageHeading } from "@/data/page-headings";
+import { getToolFaqs } from "@/data/tool-faqs";
+import { getToolContentBlocks } from "@/data/tool-page-content";
 import "./public-chrome.css";
 
 const toolRelatedPages: Record<string, Array<{ href: string; label: string }>> = {
@@ -74,6 +78,12 @@ export function PublicPage({
   const rawGuideKey = currentPath.replace(/\/+$/, "") || "/";
   const guideKey = ({ "/tools/ctc": "/salary-calculator", "/tools/risk": "/resign-or-stay", "/tools/layoffs": "/layoff-runway" } as Record<string, string>)[rawGuideKey] ?? rawGuideKey;
   const routeDefinition = routeRegistry.routes.find((route) => route.path === guideKey);
+  // Snapshot and React read the same heading, FAQ and method sources (see page-headings.ts).
+  const pageHeading = getPageHeading(guideKey);
+  const heading = pageHeading?.h1 ?? title;
+  const subhead = pageHeading?.subhead;
+  const toolFaqs = routeDefinition?.kind === "tool" ? getToolFaqs(guideKey) : undefined;
+  const toolBlocks = routeDefinition?.kind === "tool" ? getToolContentBlocks(guideKey) : [];
   const breadcrumbs = seo?.breadcrumbs ?? (
     guideKey === "/companies"
       ? [
@@ -105,7 +115,7 @@ export function PublicPage({
     noIndex: seo?.noIndex ?? routeSeo.noIndex,
     breadcrumbs,
     article: seo?.article,
-    faqs: seo?.faqs ?? toolGuide?.faqs,
+    faqs: seo?.faqs ?? toolFaqs,
   });
 
   return (
@@ -117,12 +127,15 @@ export function PublicPage({
           {isToolPage && <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-36 size-80 rounded-full border border-primary/10 bg-primary/[.025] shadow-[0_0_0_28px_hsl(var(--primary)/.02),0_0_0_72px_hsl(var(--accent)/.025)]" />}
           <div className={`pointer-events-none absolute -left-20 -top-24 size-72 rounded-full bg-secondary/45 blur-3xl ${isToolPage ? "opacity-60" : ""}`} />
           <p className="relative font-data text-[10px] uppercase tracking-[.2em] text-primary">{eyebrow}</p>
-          <h1 className="relative mt-4 max-w-[820px] font-display text-[52px] leading-[.92] tracking-[-.05em] sm:text-[78px]">{title}</h1>
+          <h1 className="relative mt-4 max-w-[820px] font-display text-[52px] leading-[.92] tracking-[-.05em] sm:text-[78px]">{heading}</h1>
+          {subhead && <p className="relative mt-4 max-w-[820px] font-display text-[30px] leading-[1] tracking-[-.035em] text-foreground/75 sm:text-[42px]" data-testid="page-subhead">{subhead}</p>}
           {pageIntro && <p className="relative mt-6 max-w-[640px] text-[14px] leading-[1.75] text-muted-foreground">{pageIntro}</p>}
         </div>
         <div className={`reveal reveal-3 ${isToolPage ? "mt-8 sm:mt-10" : "mt-12"}`}>{children}</div>
         {relatedPages && <nav className="mt-10 rounded-2xl border border-border bg-card p-5" aria-label="Related guides and rules"><h2 className="font-display text-2xl">Related guides and rules</h2><ul className="mt-3 flex flex-wrap gap-x-5 gap-y-3 text-sm">{relatedPages.map((page) => <li key={page.href}><Link href={page.href} className="font-semibold text-primary underline underline-offset-4">{page.label}</Link></li>)}</ul></nav>}
         {toolGuide && <ToolGuideSection guide={toolGuide} />}
+        <ToolMethodSection blocks={toolBlocks} />
+        {toolFaqs && <ToolFaqSection faqs={toolFaqs} />}
       </main>
       <PublicFooter />
     </div>

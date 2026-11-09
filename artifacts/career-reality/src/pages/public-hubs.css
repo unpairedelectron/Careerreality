@@ -51,7 +51,7 @@
   padding-block: clamp(2.8rem, 7vw, 6rem) 3rem;
 }
 
-.directory-title-row h1 {
+.directory-title-row .directory-display {
   max-width: 12ch;
   margin: 0;
   font-family: var(--app-font-serif);
@@ -60,6 +60,18 @@
   letter-spacing: -.065em;
   line-height: .87;
   text-wrap: balance;
+  color: hsl(var(--foreground));
+}
+
+.directory-title-row .directory-keyword-title {
+  margin: 0 0 1rem;
+  font-family: var(--app-font-mono, ui-monospace, monospace);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
 }
 
 .directory-title-row p {
@@ -520,7 +532,7 @@
     gap: .8rem;
     padding-block: 2.5rem 2rem;
   }
-  .directory-title-row h1 {
+  .directory-title-row .directory-display {
     font-size: clamp(3rem, 15vw, 4.8rem);
   }
   .directory-title-row p {

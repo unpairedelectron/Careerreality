@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import type { InterviewGuideProps, InterviewGuideTab, InterviewGuideQuestion } from "./types";
 import { StudyModules } from "./StudyModules";
+import { getPageHeading } from "@/data/page-headings";
 import "./interview-guide.css";
 
 const tabs: Array<{ id: InterviewGuideTab; label: string; icon: typeof BookOpen }> = [
@@ -205,7 +206,8 @@ export function InterviewGuide({
         <div className="ig-hero">
           <div>
             <p className="ig-eyebrow">COMPLETE INTERVIEW GUIDE <span>·</span> ROLE STUDY</p>
-            <h1>{roleTitle}<br /><em>interview guide</em></h1>
+            <h1 className="ig-keyword-title">{getPageHeading(`/interview-guides/${roleSlug}`)?.h1 ?? `${roleTitle} interview guide`}</h1>
+            <p className="ig-display" data-testid="page-kicker">{roleTitle}<br /><em>interview guide</em></p>
             <p className="ig-intro">Build a clear understanding, practise explaining your reasoning, and keep track of what you have revised.</p>
           </div>
           <aside className="ig-hero-aside">

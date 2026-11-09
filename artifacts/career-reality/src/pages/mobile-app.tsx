@@ -1,3 +1,5 @@
+import { getPageHeading } from "@/data/page-headings";
+import { mobileAppFaqs } from "@/data/mobile-app-faqs";
 import { ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Building2, CircleAlert, Compass, LockKeyhole, Smartphone, WalletCards } from "lucide-react";
 import { Link } from "wouter";
 import { AppNav } from "@/components/shared/app-nav";
@@ -31,20 +33,8 @@ const briefings = [
   },
 ];
 
-const faqs = [
-  {
-    question: "When will the CareerReality mobile app be available?",
-    answer: "The app is in preparation now. We are keeping the launch timing honest rather than collecting sign-ups before there is a product to use.",
-  },
-  {
-    question: "Can I use CareerReality before the app launches?",
-    answer: "Yes. The web product is available today with the Compass, salary tools, company intelligence, and private workspace.",
-  },
-  {
-    question: "Will the app replace the web product?",
-    answer: "No. The app is being designed as a carry-with-you layer for decisions you begin on the web, not as a replacement for the full desk.",
-  },
-];
+const mobileHeading = getPageHeading("/mobile-app");
+
 
 export default function MobileAppPage() {
   useSeo({
@@ -55,7 +45,7 @@ export default function MobileAppPage() {
       { name: "Home", path: "/" },
       { name: "Mobile app", path: "/mobile-app" },
     ],
-    faqs,
+    faqs: mobileAppFaqs,
   });
 
   return (
@@ -70,9 +60,10 @@ export default function MobileAppPage() {
                 <span className="pulse-dot size-1.5 rounded-full bg-primary" />
                 Coming soon · mobile briefing
               </div>
-              <h1 className="mt-6 max-w-[9ch] font-display text-[clamp(4rem,8vw,7.7rem)] leading-[.82] tracking-[-.07em]" data-testid="heading-mobile-app">
+              <h1 className="mt-6 font-data text-[12px] font-semibold uppercase tracking-[.14em] text-foreground" data-testid="heading-mobile-app">{mobileHeading?.h1}</h1>
+              <p className="mt-4 max-w-[9ch] font-display text-[clamp(4rem,8vw,7.7rem)] leading-[.82] tracking-[-.07em]" data-testid="page-subhead">
                 Take the <span className="text-primary">context</span> with you.
-              </h1>
+              </p>
               <p className="mt-8 max-w-[34rem] text-[15px] leading-[1.8] text-muted-foreground" data-testid="text-mobile-app-intro">
                 Career decisions rarely happen at a desk. The CareerReality mobile app will keep the salary, company, risk, and next-step context close when the conversation moves to a call, a commute, or a late-night rethink.
               </p>
@@ -194,7 +185,7 @@ export default function MobileAppPage() {
           <p className="font-data text-[10px] uppercase tracking-[.2em] text-primary">A few honest answers</p>
           <h2 id="mobile-app-faq-heading" className="mt-4 font-display text-[clamp(2.8rem,5vw,4.5rem)] leading-[.9] tracking-[-.06em]" data-testid="heading-mobile-app-faq">Before you bookmark this.</h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
-            {faqs.map((faq, index) => (
+            {mobileAppFaqs.map((faq, index) => (
               <details key={faq.question} className="group py-5" data-testid={`disclosure-mobile-app-faq-${index + 1}`}>
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-[13px] font-bold marker:hidden" data-testid={`button-mobile-app-faq-${index + 1}`}>{faq.question}<span className="grid size-7 shrink-0 place-items-center rounded-full border border-border text-primary transition-transform group-open:rotate-45"><span className="text-lg font-normal leading-none">+</span></span></summary>
                 <p className="max-w-[620px] pt-4 text-[12px] leading-[1.75] text-muted-foreground">{faq.answer}</p>

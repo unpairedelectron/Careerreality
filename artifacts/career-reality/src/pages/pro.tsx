@@ -1,3 +1,4 @@
+import { getPageHeading } from "@/data/page-headings";
 import { Link } from "wouter";
 import { ArrowUpRight, CircleAlert } from "lucide-react";
 import { AppNav } from "@/components/shared/app-nav";
@@ -17,9 +18,10 @@ export default function ProPage() {
       <AppNav />
       <main className="mx-auto max-w-[920px] px-5 py-16 sm:px-8 sm:py-24">
         <span className="font-data text-[10px] uppercase tracking-[.2em] text-primary">Membership / unavailable</span>
-        <h1 className="mt-5 max-w-[800px] font-display text-[48px] leading-[.96] tracking-[-.045em] sm:text-[72px]">
-          Membership is not available in this release candidate.
-        </h1>
+        <h1 className="mt-5 font-data text-[12px] font-semibold uppercase tracking-[.14em] text-foreground">{getPageHeading("/pro")?.h1}</h1>
+        <p className="mt-4 max-w-[800px] font-display text-[48px] leading-[.96] tracking-[-.045em] sm:text-[72px]" data-testid="page-subhead">
+          {getPageHeading("/pro")?.subhead}
+        </p>
         <p className="mt-7 max-w-[680px] text-[15px] leading-[1.75] text-muted-foreground">
           Pricing, included features, terms, payment, and delivery have not been verified. This page has no checkout, subscription, or request form.
         </p>

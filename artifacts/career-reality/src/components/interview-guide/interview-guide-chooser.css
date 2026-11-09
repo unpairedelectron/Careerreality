@@ -232,3 +232,5 @@
 @media (prefers-reduced-motion: reduce) {
   .ig-role-link, .ig-arrow { transition: none; }
 }
+
+.ig-keyword-title { margin: 0 0 1rem; font: 600 .78rem/1.5 var(--app-font-mono, ui-monospace, monospace); letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }

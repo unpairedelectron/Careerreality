@@ -1,3 +1,4 @@
+import { getPageHeading } from "@/data/page-headings";
 import "./interview-guide-chooser.css";
 
 export type GuideRoleSummary = {
@@ -19,7 +20,8 @@ export function InterviewGuideChooser({ roles }: InterviewGuideChooserProps) {
         <section className="ig-intro" aria-labelledby="ig-heading">
           <div>
             <p className="ig-eyebrow">A practical place to begin</p>
-            <h1 className="ig-title" id="ig-heading">Choose your<br /><em>interview guide.</em></h1>
+            <h1 className="ig-keyword-title" id="ig-heading">{getPageHeading("/interview-guides")?.h1}</h1>
+            <p className="ig-title" data-testid="page-subhead">Choose your<br /><em>interview guide.</em></p>
             <p className="ig-deck">
               Explore role-specific questions and see what each guide covers. Choose a role to prepare at your own pace.
             </p>

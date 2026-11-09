@@ -27,6 +27,10 @@ import {
 } from "@workspace/api-client-react";
 import { AppNav } from "@/components/shared/app-nav";
 import { PublicFooter } from "@/components/shared/public-footer";
+import { ToolFaqSection, ToolMethodSection } from "@/components/shared/tool-content";
+import { getPageHeading } from "@/data/page-headings";
+import { getToolFaqs } from "@/data/tool-faqs";
+import { getToolContentBlocks } from "@/data/tool-page-content";
 import { SaveDecisionButton } from "@/components/shared/public-actions";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { getRouteSeo, useSeo } from "@/lib/seo";
@@ -154,6 +158,10 @@ function formatLakhs(value?: number): string {
     : "Unavailable";
 }
 
+const compassHeading = getPageHeading("/compass");
+const compassFaqs = getToolFaqs("/compass") ?? [];
+const compassBlocks = getToolContentBlocks("/compass");
+
 export default function CareerRealityCompassPage() {
   const seo = getRouteSeo("/compass");
   useSeo({
@@ -161,6 +169,7 @@ export default function CareerRealityCompassPage() {
     description: seo.description!,
     path: "/compass",
     noIndex: seo.noIndex,
+    faqs: compassFaqs,
   });
   const [selected, setSelected] = useState<DecisionKey>("offer");
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -388,7 +397,10 @@ export default function CareerRealityCompassPage() {
             <div className="compass-hero">
                <div className="compass-eyebrow">One question at a time · 04 personal signals</div>
               <div className="compass-title-row">
-                <h1 className="compass-display">Make the next move<br /><em>make sense.</em></h1>
+                <div>
+                  <h1 className="compass-keyword-title">{compassHeading?.h1}</h1>
+                  <p className="compass-display" data-testid="page-subhead">Make the next move<br /><em>make sense.</em></p>
+                </div>
                 <div className="compass-orbit" aria-hidden="true"><span /><span /><span /></div>
               </div>
               <p className="compass-hero-copy">A calmer way to work through a high-stakes career decision. Choose the question you actually have; we will put the useful evidence around it.</p>
@@ -552,6 +564,10 @@ export default function CareerRealityCompassPage() {
              <div className="compass-lower-card is-warm"><div className="compass-lower-top"><span>Next useful move</span><MoveRight size={15} /></div><div className="compass-lower-title">{company ? `Ask ${company.name} what changed in the last planning cycle.` : roleProfile.question}</div><p className="compass-next-step-note">A prompt to verify—not a readiness score.</p></div>
              <div className="compass-lower-card"><div className="compass-lower-top"><span>Make it yours</span><WalletCards size={15} /></div><div className="compass-range-wrap"><div className="compass-range-label"><span>Notice period in days</span><strong>{noticePeriod}</strong></div><input className="compass-range" type="range" min="15" max="90" value={noticePeriod} onChange={(event) => { const nextValue = Number(event.target.value); setNoticePeriod(nextValue); trackEvent("notice_period_changed", { route: "/compass" }); }} style={{ background: `linear-gradient(90deg, var(--compass-teal) 0 ${((noticePeriod - 15) / 75) * 100}%, #cfc7ba ${((noticePeriod - 15) / 75) * 100}%)` }} aria-label="Notice period in days" /><div className="compass-range-scale"><span>15</span><span>90 days</span></div></div><div className="compass-saved-note"><ShieldCheck size={13} /> Personal inputs stay in your workspace</div></div>
           </section>
+          <div className="compass-shared-content">
+            <ToolMethodSection blocks={compassBlocks} />
+            <ToolFaqSection faqs={compassFaqs} />
+          </div>
         </main>
       </div>
       <PublicFooter />

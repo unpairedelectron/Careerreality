@@ -22,8 +22,8 @@
 .ig-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, .52fr); gap: clamp(2rem, 8vw, 9rem); align-items: end; padding: clamp(3.5rem, 8vw, 7.2rem) 0 clamp(2.3rem, 5vw, 4rem); }
 .ig-eyebrow, .ig-section-label { margin: 0; color: var(--ig-teal); font: 500 .62rem/1.4 var(--app-font-mono); letter-spacing: .15em; text-transform: uppercase; }
 .ig-eyebrow span, .ig-section-label span { padding-inline: .4rem; color: var(--ig-rust); }
-.ig-hero h1 { margin: 1.2rem 0 1rem; font: 400 clamp(3.5rem, 8vw, 7.6rem)/.84 var(--app-font-serif); letter-spacing: -.065em; text-wrap: balance; }
-.ig-hero h1 em { color: var(--ig-teal); font-weight: 400; }
+.ig-hero .ig-display { margin: 1.2rem 0 1rem; font: 400 clamp(3.5rem, 8vw, 7.6rem)/.84 var(--app-font-serif); letter-spacing: -.065em; text-wrap: balance; }
+.ig-hero .ig-display em { color: var(--ig-teal); font-weight: 400; }
 .ig-intro { max-width: 31rem; margin: 1.6rem 0 0; color: var(--ig-muted); font-size: clamp(.9rem, 1.4vw, 1.05rem); line-height: 1.75; }
 .ig-hero-aside { position: relative; margin-bottom: .35rem; padding: 1.35rem 0 1.1rem 1.5rem; border-left: 1px solid hsl(var(--primary) / .35); }
 .ig-aside-kicker, .ig-aside-foot { display: block; color: var(--ig-teal); font: 500 .58rem/1.4 var(--app-font-mono); letter-spacing: .14em; text-transform: uppercase; }
@@ -221,7 +221,7 @@
   .ig-topline { font-size: .62rem; }
   .ig-live-label { font-size: .5rem; }
   .ig-hero { grid-template-columns: 1fr; gap: 1.6rem; padding-top: 3rem; padding-bottom: 1.8rem; }
-  .ig-hero h1 { font-size: clamp(3.55rem, 15vw, 5.4rem); }
+  .ig-hero .ig-display { font-size: clamp(3.55rem, 15vw, 5.4rem); }
   .ig-hero-aside { max-width: 100%; margin-left: .2rem; padding-top: .2rem; padding-bottom: .2rem; }
   .ig-hero-aside p { max-width: 27rem; font-size: 1.1rem; }
   .ig-aside-rule, .ig-aside-foot { display: none; }
@@ -332,7 +332,7 @@
 }
 .ig-library-link:hover { background: hsl(var(--primary) / .08); }
 .ig-hero { padding-top: clamp(3.25rem, 7vw, 6.3rem); }
-.ig-hero h1 { max-width: 11ch; line-height: .9; }
+.ig-hero .ig-display { max-width: 11ch; line-height: .9; }
 .ig-hero-aside {
   border-left-color: hsl(var(--accent) / .56);
   background: linear-gradient(90deg, hsl(var(--accent) / .045), transparent 85%);
@@ -434,7 +434,7 @@
   .ig-live-label { margin-left: auto; }
   .ig-library-link { order: 4; width: 100%; margin: .05rem 0 0; padding-left: 0; }
   .ig-hero { padding-top: 2.65rem; }
-  .ig-hero h1 { max-width: 10ch; }
+  .ig-hero .ig-display { max-width: 10ch; }
   .ig-review-notice { flex-wrap: wrap; }
   .ig-review-notice p { flex-basis: calc(100% - 3rem); }
   .ig-review-status { margin-left: 2.65rem; }
@@ -481,3 +481,5 @@
   .ig-module-section { margin-top: 1rem; }
   a { color: #111; text-decoration: underline; }
 }
+
+.ig-hero .ig-keyword-title { margin: 1rem 0 0; font: 600 .78rem/1.5 var(--app-font-mono, ui-monospace, monospace); letter-spacing: .14em; text-transform: uppercase; color: var(--ig-teal); max-width: none; }
