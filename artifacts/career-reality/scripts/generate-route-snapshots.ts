@@ -16,6 +16,9 @@ import { calculateCareerTool } from "../../../lib/career-tools/src/index.ts";
 import { getSiteUrl } from "./seo-site-url.mjs";
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
+import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
+import { aboutCopy, teamCopy, type PeopleCopySection } from "../src/data/trust-people-copy.ts";
+import { createRulesPageSchema, createToolApplicationSchema, isApplicationToolRoute, SITE_SOCIAL_IMAGE_PATH } from "../src/data/seo-page-schemas.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
 import {
   audiences,
@@ -35,6 +38,7 @@ type RegistryRoute = {
   component: string;
   kind: string;
   title: string;
+  seoTitle?: string;
   description: string;
   render: "snapshot" | "app-shell";
   indexability: "indexable" | "noindex";
@@ -150,6 +154,13 @@ function publicPath(route: string): string {
   return `${basePath}${normalizedRoute}`;
 }
 
+/** Source links can be internal routes or external URLs; internal ones use the canonical slash form. */
+function sourceLink(url: string, label: string): string {
+  return url.startsWith("/")
+    ? `<a href="${escapeHtml(publicPath(url))}">${escapeHtml(label)}</a>`
+    : `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+}
+
 type StaticRouteMeta = {
   title: string;
   description: string;
@@ -161,6 +172,7 @@ type StaticRouteMeta = {
 
 const routeToMeta = (route: RegistryRoute): StaticRouteMeta => ({
   title: route.title,
+  seoTitle: route.seoTitle,
   description: route.description,
   heading: route.path === "/layoffs"
     ? "When work changes, steady the ground."
@@ -513,15 +525,22 @@ function getTrustSnapshotContent(route: string): SnapshotContent | undefined {
   return trustContent[route];
 }
 
+function peopleCopySnapshot(lead: string, sections: PeopleCopySection[]): SnapshotContent {
+  return {
+    lead,
+    sections: sections.map((section) => ({
+      id: section.id,
+      heading: section.heading,
+      html: section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")
+        + (section.bullets ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "")
+        + (section.links ? `<p>${section.links.map((link) => /^https?:/.test(link.href) ? `<a href="${escapeHtml(link.href)}" rel="me noopener noreferrer">${escapeHtml(link.label)}</a>` : `<a href="${escapeHtml(publicPath(link.href))}">${escapeHtml(link.label)}</a>`).join(" · ")}</p>` : ""),
+    })),
+  };
+}
+
 function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefined {
   const content: Record<string, SnapshotContent> = {
-    "/about": {
-      lead: "CareerReality publishes practical career decision tools and editorial guides. Operator: Doffysoft pvt. Limited.",
-      sections: [
-        { heading: "Current public scope", body: "The public site includes career decision tools, an employer due-diligence checklist, and editorial guides. No employer score or private-sector salary benchmark is published." },
-        { heading: "Operator and contact", body: "Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in." },
-      ],
-    },
+    "/about": peopleCopySnapshot(aboutCopy.lead, aboutCopy.sections),
     "/editorial": {
       lead: "CareerReality separates source-backed claims from editorial interpretation, user-entered assumptions, and questions that remain unresolved.",
       sections: [
@@ -530,12 +549,7 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
         { heading: "Interpretation and uncertainty", body: "Editorial framing, checklists, and prompts are not reported facts. A source date appears only when stated in the preserved note. A missing result is not evidence of safety, demand, or a future outcome." },
       ],
     },
-    "/team": {
-      lead: "Shiv Mishra — Doffysoft pvt. Limited.",
-      sections: [
-        { heading: "Affiliation", body: "Shiv Mishra — Doffysoft pvt. Limited." },
-      ],
-    },
+    "/team": peopleCopySnapshot(teamCopy.lead, teamCopy.sections),
     "/corrections": {
       lead: "Email hello@careerreality.in to report an error or request a correction. No response-time promise is made.",
       sections: [
@@ -588,7 +602,7 @@ function getReleaseTrustSnapshotContent(route: string): SnapshotContent | undefi
         { heading: "Layoff alert subscriptions", body: "If you request layoff alerts, the subscription database stores your email address, an email hash, optional city and sector preferences, confirmation status, and token hashes and timestamps used to manage confirmation and unsubscribe links. Resend delivers confirmation and alert emails. Alerts begin only after email confirmation and include Confirmed or Reported events, never Rumours. Unsubscribing makes the record ineligible for alerts, but the record remains in the database to prevent accidental reactivation; a separate deletion schedule has not been established. Do not forward confirmation or unsubscribe links because they contain account-management tokens." },
         { heading: "Accounts, profiles, and mobile storage", body: "Clerk provides sign-in and session authentication. Signed-in career features can store profile answers such as role, company, city, experience, compensation, situation, and target direction, along with generated career-brief history. Up to 24 brief-history snapshots are kept per account; this is not a general deletion or backup-retention promise. The mobile app keeps account-scoped career information on the device and syncs profile information with CareerReality's API. “Clear saved intelligence” removes extracted resume fields from the account profile and current account-scoped device data; it does not remove profile answers or earlier career-brief history. Retention of older unscoped device copies and infrastructure backups has not been established. The public website does not offer resume upload or job-link processing as a public service; use a feature-specific notice before submitting an upload." },
         { heading: "Service providers and live-data requests", body: "Clerk provides sign-in and Resend delivers layoff-alert email. If the signed-in live job-market feature is configured and used, the API may send role, target direction, and city search terms to TheirStack to retrieve job listings. Provider handling is also subject to each provider's terms and privacy information. Production configuration, processing locations, and the complete list of infrastructure and service providers have not been independently verified; no country-specific storage or provider retention period is promised here." },
-        { heading: "Analytics, cookies, and technical logs", body: "Application code can send limited event names and route, tool, or catalogue identifiers to an Umami analytics script if present. Event calls are designed not to include values typed into calculators. Whether analytics is enabled in every production environment, where events are sent, and retention of analytics or server logs have not been verified. The site host sets a cookie named GAESA that expires after 30 days; CareerReality does not read it, and its purpose is not identified here. Servers and providers may process technical request information such as IP address, browser or device details, timestamps, and error records; complete log contents and retention are not established." },
+        { heading: "Analytics, cookies, and technical logs", body: "CareerReality uses Google Analytics 4 on careerreality.in to measure visits, page views, and tool use. Google receives the page address and browser and device details, processes your IP address to work out approximate location, and sets first-party cookies such as _ga to recognise a returning browser. Advertising storage, Google signals, and ad personalization are turned off. Visitors in the EEA, the UK, and Switzerland are measured without analytics cookies. Analytics does not start when you open a link that carries an access token. The application also sends limited event names and route, tool, or catalogue identifiers to Google Analytics, and to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. How long analytics or server logs are retained has not been verified. The site host sets a cookie named GAESA that expires after 30 days; CareerReality does not read it, and its purpose is not identified here. Servers and providers may process technical request information such as IP address, browser or device details, timestamps, and error records; complete log contents and retention are not established." },
         { heading: "Advertising and Google AdSense", html: '<p>Google AdSense ads are not currently served on this site. If AdSense is enabled, Google and other third-party vendors may use cookies or similar technologies to collect or receive information, including IP addresses and other identifiers, when ads are served. Google and its partners may use advertising cookies to show ads based on a visitor&#39;s prior visits to this site or other sites.</p><p>Visitors can manage personalized advertising through <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Read <a href="https://www.google.com/policies/privacy/partners/" target="_blank" rel="noopener noreferrer">how Google uses data on partner sites and apps</a>. Before any other ad vendor or network is enabled, this notice will identify it and link to its privacy and opt-out information where available. The technologies used and available choices may vary by configuration and location; this notice does not mean ads are active.</p>' },
         { heading: "External sites and decision limits", body: "CareerReality links to government, employer, research, and service-provider sites. Those sites control their own content, cookies, and privacy practices; opening an external link may send technical request information to that site. Tool results are estimates or decision prompts based on displayed inputs and assumptions, not a promise, professional recommendation, employment outcome, or complete assessment of your circumstances." },
         { heading: "Security limits", body: "CareerReality uses access controls for account features, but no website, email, device, or transmission method can be guaranteed completely secure. Do not send credentials or unnecessary sensitive information. Contact hello@careerreality.in about a suspected exposure without including passwords or access tokens." },
@@ -1018,7 +1032,7 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
     .map((section, index) => ({
     id: `guide-section-${index + 1}`,
     heading: section.heading,
-    html: `${section.content.split(/\n{2,}/).filter(Boolean).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}${section.sourceNotes.length ? `<p class="snapshot-source-note"><strong>Source context:</strong> ${section.sourceNotes.map(escapeHtml).join(" · ")}</p>` : ""}${section.sourceLinks.length ? `<ul class="snapshot-source-links">${section.sourceLinks.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a> — ${source.year ? `source year stated as ${escapeHtml(source.year)}` : "date not stated in the archived source note"}</li>`).join("")}</ul>` : ""}`,
+    html: `${section.content.split(/\n{2,}/).filter(Boolean).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}${section.sourceNotes.length ? `<p class="snapshot-source-note"><strong>Source context:</strong> ${section.sourceNotes.map(escapeHtml).join(" · ")}</p>` : ""}${section.sourceLinks.length ? `<ul class="snapshot-source-links">${section.sourceLinks.map((source) => `<li>${sourceLink(source.url, source.label)} —${source.year ? `source year stated as ${escapeHtml(source.year)}` : "date not stated in the archived source note"}</li>`).join("")}</ul>` : ""}`,
     })),
   ];
   const workedExample = guideWorkedExamples[guide.slug as keyof typeof guideWorkedExamples];
@@ -1046,7 +1060,7 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
   if (guide.sources.length > 0) {
     sections.push({
       heading: "Sources",
-      html: `<ul>${guide.sources.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a>${source.year ? ` — ${escapeHtml(source.year)}` : ""}</li>`).join("")}</ul>`,
+      html: `<ul>${guide.sources.map((source) => `<li>${sourceLink(source.url, source.label)}${source.year ? ` — ${escapeHtml(source.year)}` : ""}</li>`).join("")}</ul>`,
     });
   }
   return {
@@ -1154,6 +1168,7 @@ function renderStaticPage(
       <p class="snapshot-kicker">${escapeHtml(meta.eyebrow)}</p>
        <h1>${escapeHtml(heading)}</h1>
       ${excerpt}
+      ${isGuide ? `<p class="snapshot-byline">By <a href="${escapeHtml(publicPath("/team"))}" rel="author">${escapeHtml(SITE_FOUNDER.name)}</a></p>` : ""}
     </header>
     <main>
       <p class="snapshot-lead">${escapeHtml(content.lead)}</p>
@@ -1265,7 +1280,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
         organization,
         ...(route === "/about" ? [{
           "@type": "AboutPage",
-          "@id": `${siteUrl}/about#webpage`,
+          "@id": `${siteUrl}/about/#webpage`,
           name: meta.title,
           url: canonical,
           about: { "@id": `${siteUrl}/#organization` },
@@ -1273,7 +1288,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
         }] : []),
         ...(route === "/contact" ? [{
           "@type": "ContactPage",
-          "@id": `${siteUrl}/contact#webpage`,
+          "@id": `${siteUrl}/contact/#webpage`,
           name: meta.title,
           url: canonical,
           about: { "@id": `${siteUrl}/#organization` },
@@ -1281,11 +1296,13 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
           inLanguage: "en-IN",
         }] : []),
         ...(route === "/team" ? [{
-          "@type": "Person",
-          "@id": `${siteUrl}/team#shiv-mishra`,
-          name: "Shiv Mishra",
-          affiliation: { "@id": `${siteUrl}/#organization` },
-        }] : []),
+          "@type": "ProfilePage",
+          "@id": `${siteUrl}/team/#webpage`,
+          name: meta.title,
+          url: canonical,
+          mainEntity: { "@id": createFounderPerson(siteUrl)["@id"] },
+          inLanguage: "en-IN",
+        }, createFounderPerson(siteUrl)] : []),
         ...(route === "/interview-guides" ? [{
           "@type": "CollectionPage",
           name: meta.title,
@@ -1322,20 +1339,35 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
     },
   ];
 
-  if (routeRegistry.routes.find((entry) => entry.path === route)?.kind === "guide") {
-    const guideSlug = routeRegistry.routes.find((entry) => entry.path === route)?.guideSlug;
-    const guide = generatedGuideData.guides.find((entry) => entry.slug === guideSlug);
+  const registryRoute = routeRegistry.routes.find((entry) => entry.path === route);
+  // Article headline and description come from the route registry, matching src/lib/seo.ts after hydration.
+  const articleHeadline = registryRoute?.title ?? meta.title;
+  const articleImage = [`${siteUrl}${SITE_SOCIAL_IMAGE_PATH}`];
+
+  if (registryRoute?.kind === "guide") {
+    const guide = generatedGuideData.guides.find((entry) => entry.slug === registryRoute.guideSlug);
     schemas.push({
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: meta.title,
+      headline: articleHeadline,
       description: meta.description,
       ...(guide?.datePublished ? { datePublished: guide.datePublished } : {}),
       ...(guide?.dateModified ? { dateModified: guide.dateModified } : {}),
+      image: articleImage,
       mainEntityOfPage: canonical,
+      author: createFounderAuthor(siteUrl),
       publisher: organization,
       inLanguage: "en-IN",
     });
+  }
+
+  if (registryRoute && isApplicationToolRoute(registryRoute)) {
+    schemas.push(createToolApplicationSchema(siteUrl, registryRoute));
+  }
+
+  const rulesPage = rulesLibraryData.pages.find((page) => page.path === route);
+  if (rulesPage) {
+    schemas.push(createRulesPageSchema(siteUrl, rulesPage));
   }
 
   if (route === "/layoffs") {
@@ -1354,13 +1386,14 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
       schemas.push({
         "@context": "https://schema.org",
         "@type": "Article",
-        headline: meta.title,
+        headline: articleHeadline,
         description: meta.description,
-        datePublished: event.sourcePublishedAt,
+        // The source report's date belongs to the cited work, not to this page's publication.
         dateModified: event.updatedAt,
+        image: articleImage,
         mainEntityOfPage: canonical,
         publisher: organization,
-        citation: [event.sourceUrl],
+        citation: [{ "@type": "CreativeWork", name: event.sourceLabel, url: event.sourceUrl, datePublished: event.sourcePublishedAt }],
         inLanguage: "en-IN",
       });
     }
@@ -1382,7 +1415,7 @@ function renderStaticSchemas(route: string, meta: StaticRouteMeta, canonical: st
 
   return schemas.map((schema, index) => {
     const type = (schema as { "@type"?: string })["@type"];
-    const schemaId = type === "BreadcrumbList" ? "breadcrumbs" : type === "Article" ? "article" : type === "FAQPage" ? "faq" : index === 0 ? "site" : `schema-${index}`;
+    const schemaId = type === "BreadcrumbList" ? "breadcrumbs" : type === "Article" ? "article" : type === "FAQPage" ? "faq" : type === "WebApplication" ? "webapp" : type === "WebPage" ? "webpage" : index === 0 ? "site" : `schema-${index}`;
     return `<script type="application/ld+json" data-career-seo-schema="${schemaId}">${escapeJson(schema)}</script>`;
   }).join("");
 }
@@ -1649,8 +1682,7 @@ const appShellRoutes = routeRegistry.routes
       return ["/sign-up", "/sign-up/sso-callback", "/sign-up/continue"];
     }
     return [route.path];
-  })
-  .concat(archivedArticleRecords.map((article) => `/article/${article.slug}`));
+  });
 
 function renderAppShell(route: string): string {
   const canonical = `${siteUrl}${publicPath(route)}`;

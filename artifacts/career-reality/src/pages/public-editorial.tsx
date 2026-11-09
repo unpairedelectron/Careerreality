@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Link, Redirect, useParams } from "wouter";
+import { Redirect, useParams } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowLeft, ArrowUpRight, BadgeCheck, BookOpen, CircleAlert, Database, FileCheck2, LockKeyhole, MessageSquare, Scale, Search, ShieldCheck } from "lucide-react";
 import { ArticleCard, FreshnessBadge, PublicBreadcrumbs, PublicPage } from "@/components/shared/public-shell";
 import { PublicFooter } from "@/components/shared/public-footer";
@@ -11,6 +12,8 @@ import routeRegistry from "@/data/route-registry";
 import { getLegacyArticleReplacement } from "@/data/legacy-routes";
 import { trackEvent, trackNextAction } from "@/lib/analytics";
 import { useSeo } from "@/lib/seo";
+import { aboutCopy, teamCopy, type PeopleCopySection } from "@/data/trust-people-copy";
+import { createFounderPerson } from "@/data/site-founder";
 
 export function TopicClustersPage() {
   const [selected, setSelected] = useState("all");
@@ -476,7 +479,7 @@ const trustPageMeta: Record<TrustKind, TrustPageMeta> = {
   about: {
     eyebrow: "The desk / about",
     title: "Career tools and guides for consequential decisions.",
-    intro: "CareerReality publishes career tools, 28 guides, and dated public layoff records for people in India.",
+    intro: "CareerReality publishes career tools, 29 guides, and dated public layoff records for people in India.",
     seoTitle: "About CareerReality",
     seoDescription: "Explore CareerReality’s career tools, guides, public records, and evidence limits for India-focused career decisions.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
@@ -631,7 +634,7 @@ function AboutTrust() {
       <TrustSection id="purpose" eyebrow="Why this exists" title="A decision desk for the part after the headline.">
         <p>CareerReality helps people in India examine career choices with practical tools, source-linked guides, and dated public records. Each tool separates entered facts from estimates and explains what its result cannot establish.</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 28 career guides, and dated layoff records.</p></div>
+          <div className="rounded-[16px] border border-primary/20 bg-primary/[.06] p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-primary">Available here</p><p className="mt-3 text-[12px] leading-[1.7] text-foreground">Compensation calculators, decision worksheets, employer due diligence, 29 career guides, and dated layoff records.</p></div>
           <div className="rounded-[16px] border border-border bg-card p-5"><p className="font-data text-[9px] uppercase tracking-[.16em] text-muted-foreground">Not provided</p><p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">Private-sector salary benchmarks, scored company ratings, or predictions of an individual’s employment outcome.</p></div>
         </div>
       </TrustSection>
@@ -726,7 +729,7 @@ function PrivacyTrust() {
         </div>
       </TrustSection>
       <TrustSection id="analytics" eyebrow="03 / Product measurement" title="Analytics should describe the product, not your private life.">
-        <p>In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Deployment-level analytics configuration, event destinations, retention, and any wider site measurement were not verified.</p>
+        <p>CareerReality uses Google Analytics 4 to measure visits, page views, and tool use, with advertising features turned off. In the inspected CTC calculator code, event calls contain event names and route or catalogue labels, not entered salary amounts. Analytics retention was not verified.</p>
       </TrustSection>
       <TrustSection id="storage" eyebrow="04 / Browser storage and services" title="Small pieces of storage, stated plainly.">
         <p>The codebase includes Clerk authentication and API/database-backed routes. This code-level observation does not identify the production operator, all service providers, infrastructure logs, or the actual production data flows.</p>
@@ -809,20 +812,20 @@ type PublishedTrustKind = TrustKind | "corrections" | "methodology" | "sources" 
 
 const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: string }> = {
   about: {
-    eyebrow: "About / the work",
-    title: "CareerReality, made for consequential decisions.",
-    intro: "CareerReality publishes career decision tools and guides. It is operated by Doffysoft pvt. Limited.",
+    eyebrow: aboutCopy.eyebrow,
+    title: aboutCopy.title,
+    intro: aboutCopy.intro,
     seoTitle: "About CareerReality",
-    seoDescription: "Explore CareerReality’s career tools, India-focused guides, evidence limits, and operator details before using a worksheet.",
+    seoDescription: "Why CareerReality exists, the house rules every tool and guide follows, and the independent engineer who builds it for career decisions in India.",
     path: "/about",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "About CareerReality", path: "/about" }],
   },
   team: {
-    eyebrow: "Team / affiliation",
-    title: "People behind CareerReality.",
-    intro: "Shiv Mishra is the founder, product builder, and lead author of CareerReality.in.",
-    seoTitle: "Team and Affiliation | CareerReality",
-    seoDescription: "Meet CareerReality founder and lead author Shiv Mishra, and see the limits of the pending payroll review attribution.",
+    eyebrow: teamCopy.eyebrow,
+    title: teamCopy.title,
+    intro: teamCopy.intro,
+    seoTitle: "Shiv Shakti Mishra, Founder | CareerReality Team",
+    seoDescription: "Meet Shiv Shakti Mishra, the ML/AI engineer who researches, builds, tests and writes CareerReality, and what one-person authorship can promise.",
     path: "/team",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Team", path: "/team" }],
   },
@@ -909,30 +912,28 @@ const publishedTrustMeta: Record<PublishedTrustKind, TrustPageMeta & { path: str
   },
 };
 
+function PeopleCopy({ lead, sections }: { lead: string; sections: PeopleCopySection[] }) {
+  return (
+    <>
+      <p className="max-w-[790px] text-base leading-8 text-foreground">{lead}</p>
+      {sections.map((section) => (
+        <TrustSection key={section.id} id={section.id} title={section.heading}>
+          {section.paragraphs.map((paragraph, index) => <p key={index} className={index ? "mt-4" : undefined}>{paragraph}</p>)}
+          {section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5">{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
+          {section.links && <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2">{section.links.map((link) => /^https?:/.test(link.href)
+            ? <a key={link.href} href={link.href} rel="me noopener noreferrer" target="_blank" className="font-bold text-primary">{link.label} <ArrowUpRight size={13} className="inline" /></a>
+            : <Link key={link.href} href={link.href} className="font-bold text-primary">{link.label} <ArrowUpRight size={13} className="inline" /></Link>)}</p>}
+        </TrustSection>
+      ))}
+    </>
+  );
+}
+
 function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
   return (
     <div className="space-y-8">
-      {kind === "about" && <>
-        <TrustSection id="scope" title="Current public scope">
-          <p>CareerReality helps people in India examine career choices with practical tools, 28 career guides, and dated public layoff records. Tools explain their assumptions and limits; guides distinguish source-backed claims from editorial interpretation.</p>
-          <p className="mt-4">The CTC calculator estimates take-home cash from details entered by the user, with PF kept manual. Offer comparisons use written scenarios rather than market averages. Employer due diligence organizes evidence and questions but does not rate or certify a company.</p>
-          <p className="mt-4">Archived source articles and market records without complete provenance are not presented as current public evidence. CareerReality does not publish private-sector salary benchmarks, company scores, or predictions of an individual’s employment outcome.</p>
-        </TrustSection>
-        <TrustSection id="identity" title="Operator details">
-          <p>CareerReality is operated by Doffysoft pvt. Limited. Address: Hinjewadi Phase 3, Pune. Contact hello@careerreality.in.</p>
-        </TrustSection>
-      </>}
-      {kind === "team" && <>
-        <TrustSection id="authors" title="Founder and lead author">
-          <p><strong>Shiv Mishra</strong> — Founder, Product Builder &amp; Lead Author; CareerReality.in. Qualification: Bachelor of Technology (B.Tech.).</p>
-          <p className="mt-4">Shiv is a technology enthusiast and founder of CareerReality.in. He leads product vision, architecture, development, product research, user experience and editorial planning. His work includes interactive career decision tools, salary comparison systems, compensation calculators and practical employment resources.</p>
-          <p className="mt-4">His stated authorship scope includes product vision, original explanatory content, technical development, research, feature validation and internal quality assurance. Individual article authorship is identified only where that article credits him. Internal product checks are not independent specialist review.</p>
-        </TrustSection>
-        <TrustSection id="reviewer" title="Payroll review attribution">
-          <p><strong>Aman Mishra</strong> is identified by the site owner as the reviewer for Indian payroll calculation methodology and related test cases. The owner reports that Aman inspected the calculation logic and tests and agreed to be identified. The supplied documentation lists a Chartered Accountant and HR/Payroll Professional designation, an independent personal-capacity affiliation, and a review date of 05 November 2026.</p>
-          <p className="mt-4">The supplied reviewer document does not record a confirmed implementation/version, evidence list, findings, outcome, limitations, or final credential wording. A separate owner-prepared QA record dated 7 November 2026 reports internal tests as passed but explicitly says independent payroll review is not formally completed or documented. No completed review conclusion or independent certification is claimed here.</p>
-        </TrustSection>
-      </>}
+      {kind === "about" && <PeopleCopy lead={aboutCopy.lead} sections={aboutCopy.sections} />}
+      {kind === "team" && <PeopleCopy lead={teamCopy.lead} sections={teamCopy.sections} />}
       {kind === "editorial" && <>
         <TrustSection id="evidence" title="Evidence before conclusion">
           <p>Legal, tax, payroll, and market claims require a relevant source, an access date when known, and a clear statement of scope. When a source does not support a claim, the claim is removed, qualified, or withheld.</p>
@@ -1031,7 +1032,8 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
           <p className="mt-4">The production configuration, processing locations, and complete list of infrastructure and service providers have not been independently verified. This page does not claim that information stays in one country or that third-party providers use a specific retention period.</p>
         </TrustSection>
         <TrustSection id="analytics" title="Analytics, cookies, and technical logs">
-          <p>The application code can send limited event names and route, tool, or catalogue identifiers to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. Whether an analytics script is enabled in every production environment, where its events are sent, and how long any analytics or server logs are retained have not been verified.</p>
+          <p>CareerReality uses Google Analytics 4 on careerreality.in to measure visits, page views, and tool use. Google receives the page address and browser and device details, processes your IP address to work out approximate location, and sets first-party cookies such as _ga to recognise a returning browser. Advertising storage, Google signals, and ad personalization are turned off. Visitors in the EEA, the UK, and Switzerland are measured without analytics cookies. Analytics does not start when you open a link that carries an access token.</p>
+          <p className="mt-4">The application also sends limited event names and route, tool, or catalogue identifiers to Google Analytics, and to an Umami analytics script if that script is present. Those event calls are designed not to include values typed into calculators. How long analytics or server logs are retained has not been verified.</p>
           <p className="mt-4">The site host sets a cookie named GAESA that expires after 30 days; CareerReality does not read it, and its purpose is not identified here. The app may also use browser storage for preferences and feature progress. Web servers and providers may process technical request information such as IP address, browser/device details, timestamps, and error records to deliver and protect the service; complete log contents and retention are not established here.</p>
         </TrustSection>
         <TrustSection id="advertising" title="Advertising and Google AdSense">
@@ -1093,25 +1095,13 @@ function PublishedTrustBody({ kind }: { kind: PublishedTrustKind }) {
 
 export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
   const page = publishedTrustMeta[kind];
-  const siteOrigin = (import.meta.env.VITE_SITE_URL || "https://www.careerreality.in").replace(/\/+$/, "");
+  const siteOrigin = (import.meta.env.VITE_SITE_URL || "https://careerreality.in").replace(/\/+$/, "");
+  // The Organization node is declared once in the site-wide "site" schema; trust pages reference it by @id.
   const organizationId = `${siteOrigin}/#organization`;
   const graph = [
-    {
-      "@type": "Organization",
-      "@id": organizationId,
-      name: "Doffysoft pvt. Limited.",
-      alternateName: "CareerReality",
-      url: siteOrigin,
-      email: "hello@careerreality.in",
-      address: { "@type": "PostalAddress", addressLocality: "Hinjewadi Phase 3, Pune", addressCountry: "IN" },
-      publishingPrinciples: `${siteOrigin}/editorial`,
-      correctionsPolicy: `${siteOrigin}/corrections`,
-      privacyPolicy: `${siteOrigin}/privacy-policy`,
-      contactPoint: { "@type": "ContactPoint", contactType: "general, corrections, privacy, security, press, and complaints", email: "hello@careerreality.in" },
-    },
-    ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about` }] : []),
-    ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact`, mainEntity: { "@id": organizationId } }] : []),
-    ...(kind === "team" ? [{ "@type": "Person", "@id": `${siteOrigin}/team#shiv-mishra`, name: "Shiv Mishra", jobTitle: "Founder, Product Builder & Lead Author", description: "B.Tech graduate and founder of CareerReality.in; leads product vision, technical development, research, user experience and editorial planning.", affiliation: { "@id": organizationId } }] : []),
+    ...(kind === "about" ? [{ "@type": "AboutPage", "@id": `${siteOrigin}/about/#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/about/` }] : []),
+    ...(kind === "contact" ? [{ "@type": "ContactPage", "@id": `${siteOrigin}/contact/#webpage`, name: page.title, about: { "@id": organizationId }, url: `${siteOrigin}/contact/`, mainEntity: { "@id": organizationId } }] : []),
+    ...(kind === "team" ? [{ "@type": "ProfilePage", "@id": `${siteOrigin}/team/#webpage`, name: page.seoTitle, url: `${siteOrigin}/team/`, mainEntity: { "@id": createFounderPerson(siteOrigin)["@id"] } }, createFounderPerson(siteOrigin)] : []),
   ];
   return (
     <PublicPage
@@ -1130,7 +1120,7 @@ export function TrustPage({ kind }: { kind: PublishedTrustKind }) {
         <p><strong>Information updated:</strong> {kind === "team" || kind === "about" || kind === "privacy" ? "7 November 2026." : "2 November 2026."}</p>
       </div>
       <PublishedTrustBody kind={kind} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />
+      {graph.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />}
     </PublicPage>
   );
 }

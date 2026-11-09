@@ -25,7 +25,31 @@
     <meta name="twitter:image:alt" content="CareerReality career intelligence for India" />
     <link rel="canonical" href="__SITE_URL__/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="%BASE_URL%fonts/careerreality-fonts.css">
+    <script>
+      (() => {
+        const measurementId = "G-KV3S0BK3KK";
+        const { hostname, pathname, search } = window.location;
+        if (hostname !== "careerreality.in") return;
+        // Links can carry access tokens in the query string; page addresses are sent to Google.
+        const isAccountPage = ["/workspace", "/sign-in", "/sign-up"].some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"));
+        if (isAccountPage || /token|ticket|__clerk/i.test(search)) return;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function gtag() { window.dataLayer.push(arguments); };
+        window.gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "granted" });
+        window.gtag("consent", "default", { analytics_storage: "denied", region: ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"] });
+        window.gtag("js", new Date());
+        window.gtag("config", measurementId, { allow_google_signals: false, allow_ad_personalization_signals: false });
+        window.addEventListener("load", () => {
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=" + measurementId;
+          document.head.append(script);
+        }, { once: true });
+      })();
+    </script>
     <script>
       (() => {
         try {

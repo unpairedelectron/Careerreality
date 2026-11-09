@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Link, Redirect, useParams } from "wouter";
+import { Redirect, useParams } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowUpRight, Check, CircleAlert, Filter, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import {
   useCreateLayoffSignalReport,

@@ -1,12 +1,22 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from "react";
-import { useLocation, Link } from "wouter";
+import { useLocation } from "wouter";
+import { Link, withTrailingSlash } from "@/components/shared/app-link";
 import { ArrowUpRight, BookOpenText } from "lucide-react";
 import { PublicPage } from "@/components/shared/public-shell";
 import type guideCatalog from "@/data/generated-pillar-guides.json";
 import routeRegistry from "@/data/route-registry";
+import { SITE_FOUNDER } from "@/data/site-founder";
+import { routeSeoTitle } from "@/data/seo-title";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 
 type GuideSource = { url: string; label: string; year?: string };
+
+/** Internal source links open in the same tab at the canonical trailing-slash URL; external ones open a new tab. */
+function sourceLinkProps(url: string) {
+  return url.startsWith("/")
+    ? { href: withTrailingSlash(url) }
+    : { href: url, target: "_blank", rel: "noopener noreferrer" };
+}
 type GuideRecord = (typeof guideCatalog.guides)[number];
 type Guide = Omit<GuideRecord, "sources" | "sections"> & {
   lastVerified?: string;
@@ -70,7 +80,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
       title={route.title}
       intro={route.description}
       seo={{
-        title: `${route.title} | CareerReality`,
+        title: routeSeoTitle(route),
         description: route.description,
         path: guide.path,
         breadcrumbs: crumbs,
@@ -80,6 +90,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           datePublished: guide.datePublished ?? null,
           dateModified: guide.dateModified ?? null,
           section: "Career guidance",
+          authoredByFounder: true,
           keywords: [route.title, "career decisions", "India"],
         },
         faqs: guide.faqs,
@@ -91,6 +102,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
             <BookOpenText size={14} className="text-primary" aria-hidden="true" />
             Practical guide
           </span>
+          <span data-testid="guide-byline">By <Link href="/team" rel="author" className="font-semibold text-foreground underline underline-offset-4">{SITE_FOUNDER.name}</Link></span>
           {guide.datePublished && <span>Published {guide.datePublished}</span>}
           {guide.lastVerified && <span>Last verified {guide.lastVerified}</span>}
           {!guide.lastVerified && guide.dateModified && <span>Substantively updated {guide.dateModified}</span>}
@@ -138,7 +150,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
                 <ul className="mt-4 space-y-2 text-xs">
                   {section.sourceLinks.map((source) => (
                     <li key={source.url}>
-                      <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">
+                      <a {...sourceLinkProps(source.url)} className="font-semibold text-primary underline underline-offset-4">
                         {source.label}
                       </a>
                       <span className="text-muted-foreground"> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
@@ -183,7 +195,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           <ul className="mt-4 space-y-2">
             {guide.sources.map((source) => (
               <li key={source.url}>
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
+                <a {...sourceLinkProps(source.url)} className="font-semibold text-primary underline underline-offset-4">{source.label}</a>
                 <span> · {source.year ? `source year stated as ${source.year}` : "date not stated in the archived source note"}</span>
               </li>
             ))}

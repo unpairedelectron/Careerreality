@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ChevronRight, Clock3, ArrowUpRight } from "lucide-react";
 import type { Article } from "@/data/public-content";
 import { AppNav } from "@/components/shared/app-nav";

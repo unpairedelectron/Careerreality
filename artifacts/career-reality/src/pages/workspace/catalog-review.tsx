@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, Redirect } from "wouter";
+import { Redirect } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { AlertCircle, ArrowLeft, Check, Loader2, X } from "lucide-react";
 import {
   getListCatalogSuggestionsQueryKey,

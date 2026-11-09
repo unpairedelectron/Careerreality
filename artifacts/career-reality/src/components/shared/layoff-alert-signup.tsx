@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useCreateLayoffAlertSubscription, type LayoffAlertSubscriptionInputSector } from "@workspace/api-client-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import eventData from "@/data/layoff-events.json";
 import { trackEvent } from "@/lib/analytics";
 

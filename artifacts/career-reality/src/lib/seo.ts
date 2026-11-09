@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { categoryMeta } from "@/data/category-meta";
-import { ARTICLE_TITLE_SUFFIX, formatSeoTitle } from "@/data/seo-title";
+import { ARTICLE_TITLE_SUFFIX, formatSeoTitle, routeSeoTitle } from "@/data/seo-title";
 import routeRegistry from "@/data/route-registry";
 import { createSiteOrganization } from "@/data/seo-organization";
+import { createFounderAuthor } from "@/data/site-founder";
+import rulesLibrary from "@/data/rules-library.json";
+import { createRulesPageSchema, createToolApplicationSchema, isApplicationToolRoute, SITE_SOCIAL_IMAGE_PATH } from "@/data/seo-page-schemas";
 
 const SITE_NAME = "CareerReality";
 
@@ -18,7 +21,9 @@ export type ArticleSchemaInput = {
   dateModified: string | null;
   section: string;
   keywords: string[];
-  citations?: Array<{ name: string; url: string }>;
+  citations?: Array<{ name: string; url: string; datePublished?: string }>;
+  /** Credit the site founder as author (guides he wrote). */
+  authoredByFounder?: boolean;
 };
 
 export type FaqSchemaInput = {
@@ -75,7 +80,7 @@ const routeSeo: Record<string, { title: string; description: string; noIndex?: b
   },
   "/salary-drop": {
     title: "Salary Change Planner | CareerReality",
-    description: "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details are excluded.",
+    description: "Compare estimated take-home for two Indian salary packages across variable-pay outcomes using the 2026–27 new-regime model; PF and payroll details excluded.",
   },
   "/escape-plan": {
     title: "Career Escape Plan: Turn Stuck Into Next Steps | CareerReality",
@@ -95,8 +100,8 @@ const routeSeo: Record<string, { title: string; description: string; noIndex?: b
     noIndex: true,
   },
   "/about": {
-    title: "About CareerReality | Current Scope",
-    description: "See what this local CareerReality build contains, what remains withheld, and which operating details are not verified.",
+    title: "About CareerReality",
+    description: "Why CareerReality exists, the house rules every tool and guide follows, and the independent engineer who builds it for career decisions in India.",
   },
   "/editorial": {
     title: "Editorial Standards | CareerReality",
@@ -201,7 +206,7 @@ function setSchema(id: string, schema: Record<string, unknown>) {
 }
 
 function removeOptionalSchemas() {
-  document.head.querySelectorAll('script[data-career-seo-schema="breadcrumbs"], script[data-career-seo-schema="article"], script[data-career-seo-schema="faq"]').forEach((node) => node.remove());
+  document.head.querySelectorAll('script[data-career-seo-schema="breadcrumbs"], script[data-career-seo-schema="article"], script[data-career-seo-schema="faq"], script[data-career-seo-schema="webapp"], script[data-career-seo-schema="webpage"]').forEach((node) => node.remove());
 }
 
 function getRegisteredRoute(path: string) {
@@ -219,7 +224,7 @@ export function getRouteSeo(path: string): { title?: string; description?: strin
   const registeredRoute = getRegisteredRoute(normalized);
   if (registeredRoute) {
     return {
-      title: formatSeoTitle(registeredRoute.title),
+      title: routeSeoTitle(registeredRoute),
       description: registeredRoute.description,
       noIndex: registeredRoute.indexability === "noindex",
     };
@@ -272,7 +277,7 @@ export function useSeo(config: SeoConfig) {
     // Registered public routes use exactly the same copy before and after hydration.
     const description = routePolicy?.render === "snapshot" ? routePolicy.description : config.description;
     const title = routePolicy?.render === "snapshot"
-      ? formatSeoTitle(routePolicy.title)
+      ? routeSeoTitle(routePolicy)
       : config.article
         ? (config.title.endsWith(ARTICLE_TITLE_SUFFIX) ? config.title : `${config.title}${ARTICLE_TITLE_SUFFIX}`)
         : formatSeoTitle(config.title);
@@ -333,16 +338,27 @@ export function useSeo(config: SeoConfig) {
       setSchema("article", {
         "@context": "https://schema.org",
         "@type": "Article",
-        headline: config.article.headline,
-        description: routePolicy?.kind === "guide" ? description : config.article.description,
+        // Snapshot routes take headline and description from the registry, matching the crawler snapshot.
+        headline: routePolicy?.render === "snapshot" ? routePolicy.title : config.article.headline,
+        description: routePolicy?.render === "snapshot" ? description : config.article.description,
         ...(config.article.datePublished ? { datePublished: config.article.datePublished } : {}),
         ...(config.article.dateModified ? { dateModified: config.article.dateModified } : {}),
+        image: [absoluteUrl(SITE_SOCIAL_IMAGE_PATH)],
         articleSection: config.article.section,
         keywords: config.article.keywords,
         mainEntityOfPage: canonical,
+        ...(config.article.authoredByFounder ? { author: createFounderAuthor(siteUrl()) } : {}),
         publisher: organization,
-         citation: config.article.citations,
+        citation: config.article.citations?.map((citation) => ({ "@type": "CreativeWork", ...citation })),
+        inLanguage: "en-IN",
       });
+    }
+    if (routePolicy && isApplicationToolRoute(routePolicy)) {
+      setSchema("webapp", createToolApplicationSchema(siteUrl(), routePolicy));
+    }
+    const rulesPage = rulesLibrary.pages.find((page) => page.path === normalizedRoute);
+    if (rulesPage) {
+      setSchema("webpage", createRulesPageSchema(siteUrl(), rulesPage));
     }
     if (config.faqs?.length) {
       setSchema("faq", {

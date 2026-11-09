@@ -16,6 +16,7 @@ const authoredBatch = {
   ...(await import("../src/data/authored-guide-batch-next.mjs")).default,
   ...(await import("../src/data/authored-guide-batch-phase-one.mjs")).default,
   ...(await import("../src/data/authored-guide-batch-phase-two.mjs")).default,
+  ...(await import("../src/data/authored-guide-batch-phase-three.mjs")).default,
 };
 const guideRoutes = registry.routes.filter((route) => route.kind === "guide");
 const guideBySlug = new Map(guideRoutes.map((route) => [route.guideSlug, route]));
@@ -299,8 +300,8 @@ function parseArticle(article) {
 }
 
 const archiveRecords = new Map(registry.drafts.articles.map((article) => [article.slug, article]));
-if (guideRoutes.length !== 28 || Object.keys(sourceMap).length !== guideRoutes.length) {
-  throw new Error("The public guide route count and source map must both be 28.");
+if (guideRoutes.length !== 29 || Object.keys(sourceMap).length !== guideRoutes.length) {
+  throw new Error("The public guide route count and source map must both be 29.");
 }
 if (registry.drafts.articles.length !== 44) {
   throw new Error("The preserved archive must contain exactly 44 article records.");
@@ -322,9 +323,10 @@ if (sourceOwners.size !== registry.drafts.articles.length) {
   throw new Error(`Guide groups cover ${sourceOwners.size} of ${registry.drafts.articles.length} archived articles.`);
 }
 for (const article of registry.drafts.articles) {
+  const owner = Object.keys(sourceMap).find((guideSlug) => sourceMap[guideSlug].includes(article.slug));
   const redirect = registry.redirects.find((entry) => entry.from === `/article/${article.slug}/`);
-  if (redirect) {
-    throw new Error(`Archived article URL must remain in place pending editorial approval: ${article.slug}.`);
+  if (!redirect || redirect.status !== 301 || redirect.to !== `/guides/${owner}/`) {
+    throw new Error(`Archived article URL must 301 to its replacement guide: ${article.slug}.`);
   }
 }
 

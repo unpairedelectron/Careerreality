@@ -1,5 +1,5 @@
 import { getPageHeading } from "@/data/page-headings";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { ArrowUpRight, CircleAlert } from "lucide-react";
 import { AppNav } from "@/components/shared/app-nav";
 import { PublicFooter } from "@/components/shared/public-footer";

@@ -82,9 +82,10 @@
         ["Above ₹24 lakh", "30% on the amount in this band"],
         ["Section 87A", "For an eligible resident individual, total income up to ₹12 lakh; maximum rebate ₹60,000. Special-rate tax is excluded; marginal relief rules apply near the boundary."]
       ],
-      "change": "The official rate schedule opened for this entry covers AY 2025–26 and AY 2026–27; the linked Finance Act material describes the applicable new-regime bands.",
+      "change": "The official rate schedule opened for this entry covers AY 2025–26 and AY 2026–27; the linked Finance Act material describes the applicable new-regime bands. The Finance Bill 2026 memorandum said no change was proposed in rates for tax year 2026–27 (checked 8 November 2026).",
       "plainLanguage": "Apply each rate only to the slice of taxable income in that band. Check eligibility, rebate, surcharge, cess, and special-rate income separately.",
       "sources": [
+        { "label": "Memorandum explaining the Finance Bill, 2026", "url": "https://www.incometaxindia.gov.in/documents/81799/11848482/memo-2026.pdf" },
         { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
         { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
       ],
@@ -224,7 +225,7 @@
         ["Salary", "Income classified under the statutory employment provisions"],
         ["Allowance or reimbursement", "Treatment depends on purpose, evidence, and the applicable rule"],
         ["Perquisite", "Employer-provided benefit valued under its governing provision"],
-        ["Form 16", "Annual employer statement to reconcile with payslips and benefit records"]
+        ["Form 16 or Form 130", "Annual employer salary TDS certificate to reconcile with payslips and benefit records: Form 16 for salary paid up to March 2026, Form 130 from tax year 2026–27"]
       ],
       "change": "The Income Tax Department salary guidance and statutory section material were opened on 10 October 2026.",
       "plainLanguage": "A payroll label is a clue, not the whole analysis. Keep the agreement, approval, payment record, and tax classification together.",

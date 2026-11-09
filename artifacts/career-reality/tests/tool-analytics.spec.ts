@@ -18,7 +18,7 @@ test("tool completion analytics records only the fixed tool and platform", async
   await expect(page.getByTestId("tax-period-scope")).toContainText("Assessment Year 2026–27");
   await page.getByTestId("input-taxPeriod").selectOption("tax-year-2026-27");
   await expect(page.getByTestId("tax-period-scope")).toContainText("Tax Year 2026–27");
-  await expect(page.getByRole("link", { name: "Check employer risk before accepting" })).toHaveAttribute("href", "/companies");
+  await expect(page.getByRole("link", { name: "Check employer risk before accepting" })).toHaveAttribute("href", "/companies/");
   await page.getByTestId("input-currentCtc").fill("2400000");
   await page.getByTestId("input-currentFixed").fill("2200000");
   await page.getByTestId("input-offerCtc").fill("2800000");
@@ -78,10 +78,9 @@ test("counts a valid edited CTC estimate without sending salary inputs", async (
   }]);
 });
 
-test("keeps the old article behind its review hold", async ({ page }) => {
+test("sends the old article to its replacement guide", async ({ page }) => {
   await page.goto("/article/what-20-lpa-actually-feels-like-india-purchasing-power/");
-  await expect(page.getByRole("heading", { name: "This article is not published." })).toBeVisible();
-  await expect(page.getByRole("link", { name: "View current tools" })).toHaveAttribute("href", "/tools");
+  await expect(page).toHaveURL(/\/guides\/read-the-offer-beyond-ctc\/?$/);
 });
 
 test("shows the qualified ₹20L example on the published CTC guide", async ({ page }) => {
@@ -89,7 +88,7 @@ test("shows the qualified ₹20L example on the published CTC guide", async ({ p
   await expect(page.getByTestId("guide-worked-example-direct-answer")).toContainText("₹1,33,931 per month at zero variable pay");
   await expect(page.getByTestId("guide-worked-example-direct-answer")).toContainText("₹1,45,811 per month averaged across the year");
   await expect(page.getByText(/Tax Year 2026–27/).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open the CTC calculator" }).first()).toHaveAttribute("href", "/salary-calculator");
+  await expect(page.getByRole("link", { name: "Open the CTC calculator" }).first()).toHaveAttribute("href", "/salary-calculator/");
 });
 
 test("tax-regime comparison labels and calculates both sides for AY 2026–27", async ({ page }) => {

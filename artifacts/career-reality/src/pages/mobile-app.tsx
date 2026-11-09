@@ -1,7 +1,7 @@
 import { getPageHeading } from "@/data/page-headings";
 import { mobileAppFaqs } from "@/data/mobile-app-faqs";
 import { ArrowDown, ArrowRight, ArrowUpRight, BarChart3, Building2, CircleAlert, Compass, LockKeyhole, Smartphone, WalletCards } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "@/components/shared/app-link";
 import { AppNav } from "@/components/shared/app-nav";
 import { PublicFooter } from "@/components/shared/public-footer";
 import { useSeo } from "@/lib/seo";

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Link, useLocation, useParams } from 'wouter';
+import { useLocation, useParams } from 'wouter';
+import { Link } from '@/components/shared/app-link';
 import { ArrowDown, ArrowLeft, ArrowUpRight, Check, Clipboard, Clock3, ExternalLink, ShieldCheck, Wallet } from 'lucide-react';
 import {
   useConfirmLayoffAlertSubscription,
@@ -293,11 +294,12 @@ function LayoffEventDetail() {
     ...(event ? { article: {
       headline: `${event.company} workforce report`,
       description: event.summary,
-      datePublished: event.sourcePublishedAt,
+      // The source report's date is carried on the citation, not as this page's publication date.
+      datePublished: null,
       dateModified: event.updatedAt,
       section: 'Layoff reporting',
       keywords: [event.company, 'India', 'workforce report'],
-      citations: [{ name: event.sourceLabel, url: event.sourceUrl }],
+      citations: [{ name: event.sourceLabel, url: event.sourceUrl, datePublished: event.sourcePublishedAt }],
     } } : {}),
   });
   if (!event) {
