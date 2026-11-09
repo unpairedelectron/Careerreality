@@ -2,6 +2,15 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-09 — Ops cycle: audit
+
+- **Health (production reachable now):** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200. `www` 301 to `https://careerreality.in/`. All 88 sitemap URLs return 200. A guide (`/guides/read-the-offer-beyond-ctc/`) shows the Shiv Shakti Mishra byline and Article JSON-LD author. Archived `/article/pf-withdrawal/` returns 404 (no matching redirect in my sample; the 44 redirects were not individually checked).
+- **Watching:** `http://careerreality.in/` 301s to `https://careerreality.in:443/` (explicit :443). Works, but untidy; on the plan.
+- **Deploy drift:** `ops/LAST-DEPLOY` = `c1e70fa`; main has since added the article redirects (`d06a696`), so the 12 Nov deploy will publish them. Not checked live.
+- **Primary-source check:** not run (incometax/epfindia not tested this run).
+- **Trends (2 searches, secondary sources only):** labour codes take-home vs PF/gratuity one year on; Form 121 replacing 15G/15H for EPF withdrawal TDS from tax year 2026-27; EPFO 3.0 / UPI withdrawal and tax on early withdrawals; Budget 2027 expectations (nothing found). Layoff news search returned nothing specific.
+- Wrote `ops/PLAN.md`. No code changes.
+
 ## 2026-11-08 — Archived article redirects (owner approved)
 
 - Search Console: 28 clicks in 3 months, mostly to /article/ pages that served a noindex shell with no route to the replacement guides.
