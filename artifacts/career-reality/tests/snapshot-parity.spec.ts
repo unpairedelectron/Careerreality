@@ -19,7 +19,13 @@ test.describe("prerendered and hydrated pages say the same thing", () => {
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await expect(page.locator(".snapshot-shell")).toHaveCount(0, { timeout: 30_000 });
       await expect(page.locator("h1")).toHaveCount(1);
-      expect(normalize(await page.locator("h1").textContent())).toBe(heading.h1);
+      // A <br> in the React heading separates words, so count it as a space.
+      const hydratedH1 = await page.locator("h1").evaluate((element) => {
+        const copy = element.cloneNode(true) as HTMLElement;
+        copy.querySelectorAll("br").forEach((lineBreak) => lineBreak.replaceWith(" "));
+        return copy.textContent;
+      });
+      expect(normalize(hydratedH1)).toBe(heading.h1);
       for (const faq of toolFaqs[path] ?? []) {
         await expect(page.locator("summary", { hasText: faq.question }).first()).toBeAttached();
       }

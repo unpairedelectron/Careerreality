@@ -6,5 +6,5 @@ export const layoffEventHeadings = {
   coverage: "What this report does not establish",
   readerCheck: "What to verify for your situation",
   laterReporting: "Later reporting and clarifications",
-  primarySource: "Go back to what was published.",
+  primarySource: "Source",
 } as const;

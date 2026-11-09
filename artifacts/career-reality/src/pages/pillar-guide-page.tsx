@@ -109,7 +109,8 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           <span>See <Link href="/editorial" className="font-semibold text-primary underline underline-offset-4">editorial standards</Link>.</span>
         </div>
 
-        <p className="text-lg leading-8 text-foreground">{guide.editorialFrame}</p>
+        <h2 className="font-display text-3xl leading-tight">The direct answer</h2>
+        <p className="mt-3 text-lg leading-8 text-foreground">{guide.editorialFrame}</p>
         {guide.lead && <p className="mt-5 text-sm leading-7 text-muted-foreground">{guide.lead}</p>}
 
         {workedExample && <section className="mt-10 rounded-2xl border border-border bg-card p-5 sm:p-7" aria-labelledby="worked-example-title">
@@ -191,7 +192,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
         </nav>}
 
         {guide.sources.length > 0 && <aside className="mt-8 rounded-2xl border border-border bg-muted/40 p-5 text-xs leading-6 text-muted-foreground" aria-label="Sources">
-          <strong className="text-foreground">Sources</strong>
+          <h2 className="font-display text-xl text-foreground">Sources</h2>
           <ul className="mt-4 space-y-2">
             {guide.sources.map((source) => (
               <li key={source.url}>

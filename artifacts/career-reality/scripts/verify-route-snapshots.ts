@@ -292,12 +292,12 @@ const routeContentChecks: Record<string, string[]> = {
   "/privacy-policy": ["web address", "hello@careerreality.in", "GAESA", "13 May 2027", "Google AdSense ads are not currently served", "Google Ads Settings", "IP addresses and other identifiers", "TheirStack", "not legal advice", "24 brief-history snapshots", "backups"],
   "/terms": ["Governing law: India", "Doffysoft pvt. Limited"],
   "/contact": ["Use hello@careerreality.in", "Email is the only published contact route"],
-  "/accessibility": ["axe-core 4.10.3", "no automated violations", "Report a barrier"],
+  "/accessibility": ["axe-core 4.10.3", "no automated violations", "Report an accessibility barrier"],
   "/security": ["Report a security concern", "No response-time, bounty, or safe-harbor commitment is made", "security.txt"],
   "/escape-plan": ["5-action checklist", "The total is arithmetic", "refreshing clears them"],
   "/career-reality-index": ["Use four self-reported answers to identify career uncertainties", "No score or recommendation is produced here"],
   "/ai": ["What this tool is for", "task-level questions", "not measured exposure or a forecast"],
-  "/companies": ["Ten minutes to ask better questions", "Seven guided checks", "Couldn’t verify", "call 1930 promptly", "Questions by audience", "Official source register"],
+  "/companies": ["Ten minutes to ask better questions", "Follow the evidence, one question at a time", "Couldn’t verify", "call 1930 promptly", "Questions that fit the role", "Official source links and limits"],
 };
 
 const longParagraphOwners = new Map<string, string>();

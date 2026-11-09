@@ -62,8 +62,8 @@ export const pageHeadings: Record<string, PageHeading> = {
   "/ai": { h1: "AI at Work: Questions to Assess Task Changes", subhead: "Start with the task, not a role-level AI score." },
 
   // Trust
-  "/about": { h1: "About CareerReality", subhead: "CareerReality, made for consequential decisions." },
-  "/team": { h1: "Team and Affiliation", subhead: "People behind CareerReality." },
+  "/about": { h1: "About CareerReality", subhead: "Most career decisions arrive as one number." },
+  "/team": { h1: "Team and Affiliation", subhead: "One builder, the whole stack." },
   "/editorial": { h1: "Editorial Standards", subhead: "Evidence, limits, and uncertainty." },
   "/corrections": { h1: "Corrections and Updates", subhead: "Tell us what needs correcting." },
   "/methodology": { h1: "Tools and Calculation Methods", subhead: "How the tools calculate." },

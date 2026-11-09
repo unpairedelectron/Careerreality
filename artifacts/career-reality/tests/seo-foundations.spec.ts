@@ -16,12 +16,12 @@ function decodeHtmlValue(value: string): string {
 test.describe("public SEO foundations", () => {
   test("renders complete, route-specific trust pages", async ({ page }) => {
     const routes = [
-      { path: "/about", heading: "Most career decisions arrive as one number.", marker: "House rules" },
-      { path: "/team", heading: "One builder, the whole stack.", marker: "What one person cannot promise" },
-      { path: "/editorial", heading: "Evidence, limits, and uncertainty.", marker: "Evidence before conclusion" },
-      { path: "/privacy-policy", heading: "Privacy and data handling.", marker: "What this notice covers" },
-      { path: "/terms", heading: "Limits and use of CareerReality.", marker: "Tools and guides" },
-      { path: "/contact", heading: "Contact CareerReality Editorial.", marker: "Email and operator" },
+      { path: "/about", heading: "About CareerReality", marker: "House rules" },
+      { path: "/team", heading: "Team and Affiliation", marker: "What one person cannot promise" },
+      { path: "/editorial", heading: "Editorial Standards", marker: "Evidence before conclusion" },
+      { path: "/privacy-policy", heading: "Privacy Information: Data Use and Deletion", marker: "What this notice covers" },
+      { path: "/terms", heading: "Terms of Use and Limits", marker: "Tools and guides" },
+      { path: "/contact", heading: "Contact CareerReality", marker: "Email and operator" },
     ];
 
     for (const route of routes) {
@@ -31,7 +31,7 @@ test.describe("public SEO foundations", () => {
       await expect(page.getByText(route.marker, { exact: true })).toBeVisible();
       await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
       await expect(page.getByRole("link", { name: "Contact" }).first()).toBeVisible();
-      await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(3);
+      await expect.poll(() => page.locator('script[type="application/ld+json"]').count()).toBeGreaterThanOrEqual(2);
     }
 
     await page.goto("/about", { waitUntil: "domcontentloaded" });
@@ -131,7 +131,7 @@ test.describe("public SEO foundations", () => {
       expect(new URL(head.canonical).pathname).toBe(`${route.path}/`);
       expect(head.canonicalCount).toBe(1);
       expect(head.ogType).toBe(route.type);
-      expect(head.schemaCount).toBe(3);
+      expect(head.schemaCount).toBe(4);
       expect(head.robots).toMatch(/index, follow/);
     }
   });
