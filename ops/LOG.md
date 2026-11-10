@@ -2,6 +2,13 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-10 — Ops cycle: build
+
+- **Plan item 1 (http → https:443 redirect):** confirmed still live, but the repo has no source for it (not in `_redirects`, the registry or the scripts). It is host config; owner/hosting side only. No change.
+- **Plan item 2 (Form 121 vs 15G/15H):** searched the repo; no page mentions 15G, 15H or Form 121, so there is no wording to fix. Not adding the topic without a primary source.
+- **Plan item 3 (draft guide):** not started. Primary sources are unreachable from this environment (`www.incometaxindia.gov.in` 403, `www.epfindia.gov.in` connection failed, `labour.gov.in` 302 not followed), and the runbook bars figures from secondary blogs. Still blocked on the network-allowlist item in OWNER-ACTIONS.
+- No code changes, no branch, no build. The test phase should find nothing to do.
+
 ## 2026-11-09 — Ops cycle: audit
 
 - **Health (production reachable now):** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200. `www` 301 to `https://careerreality.in/`. All 88 sitemap URLs return 200. A guide (`/guides/read-the-offer-beyond-ctc/`) shows the Shiv Shakti Mishra byline and Article JSON-LD author. Archived `/article/pf-withdrawal/` returns 404 (no matching redirect in my sample; the 44 redirects were not individually checked).
