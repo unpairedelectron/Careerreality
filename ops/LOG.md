@@ -2,6 +2,10 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-11 — Ops cycle: test
+
+- No `claude/cycle-*` branch from the build phase, so no build or tests run. Nothing merged. (An unrelated `claude/seo-snapshot-parity-5e050c` branch exists on origin; not touched.)
+
 ## 2026-11-10 — Ops cycle: build
 
 - **Plan item 1 (http → https:443 redirect):** confirmed still live, but the repo has no source for it (not in `_redirects`, the registry or the scripts). It is host config; owner/hosting side only. No change.
