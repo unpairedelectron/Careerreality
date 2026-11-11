@@ -10,6 +10,14 @@ Newest first. One entry per session or scheduled run.
 - Guides: every guide (29) opens with a question and a 20–90 word direct answer (`src/data/guide-direct-answers.ts`), in the React page and the crawler snapshot (replaces the old snapshot-only "The direct answer" section that repeated the opening paragraph). Answers restate only what each guide already says; `tests/guide-direct-answers.test.ts` blocks any figure not already in the guide. The verifier now requires the box on every guide.
 - Checks on the owner PC: TypeScript passes; unit tests guide-direct-answers 4/4, on-page-seo 6/6, ctc-tax 27/27; pillar-guide-metadata 2/3 (pre-existing: Form 130 guide now has a modified date). Snapshots regenerated from an older dist template and the unmodified `verify-route-snapshots.ts` passed (92 snapshots, 13 shells). Rendered the real ledger component with the default example: rows reconcile, light and dark AA contrast pass (lowest 4.92:1), no horizontal scroll at 375px. Not run: `vite build` (Windows) and Playwright e2e (new assertions added to `salary-calculator.spec.ts` and `tool-analytics.spec.ts`).
 
+## 2026-11-11 — Issue #2: sitemap drift monitor (legacy /article/ redirects)
+
+- Alert lists 40 `/article/<slug>/` URLs answering 200 on production instead of the expected 301. Cause: the 44 article redirects (`d06a696`, merged 8 Nov) landed after the last publish (`c1e70fa`, 0 article redirects in its registry), and the monitor checks production against `main`. Not a code bug.
+- Production server `scripts/serve-published.mjs` reads `registry.redirects` from `route-registry.json` (not `_redirects`) and checks them before anything else. Ran it locally on `main` (owner PC, PowerShell): all 88 URLs (44 slugs, with and without trailing slash) return 301 to the right guide; first target guide 200.
+- No code change. Fix goes live with the 12 Nov deploy (main has article/registry changes since `ops/LAST-DEPLOY`); the next green monitor run closes the issue. Deploy day check: curl two `/article/` URLs for 301.
+- Gotcha: in Git Bash, `BASE_PATH=/` is rewritten to a Windows path and the local server 404s everything; run it from PowerShell or set `MSYS_NO_PATHCONV=1`.
+- Update 12 Nov: the 12 Nov deploy stopped (Replit has extra commit `b7eebe8` not on origin), so the redirects are still not live and the issue stays open until the next publish.
+
 ## 2026-11-11 — Ops cycle: test
 
 - No `claude/cycle-*` branch from the build phase, so no build or tests run. Nothing merged. (An unrelated `claude/seo-snapshot-parity-5e050c` branch exists on origin; not touched.)
