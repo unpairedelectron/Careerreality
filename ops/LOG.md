@@ -4,6 +4,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-12 — Payslip ledger and guide direct answers (owner approved: "complete end to end")
+
+- Branch `claude/ledger-direct-answer`. CTC calculator: the flat "Annual estimate at target" list is now a payslip-style ledger (`src/components/shared/payslip-ledger.tsx`): earnings, deductions, take-home, fixed-pay vs full-target columns, semantic table. Remaining detail rows (basic, employment-tax deduction, PF wage base/EPS/EPF schedule, effective rate) stay below it. No calculation changed.
+- Guides: every guide (29) opens with a question and a 20–90 word direct answer (`src/data/guide-direct-answers.ts`), in the React page and the crawler snapshot (replaces the old snapshot-only "The direct answer" section that repeated the opening paragraph). Answers restate only what each guide already says; `tests/guide-direct-answers.test.ts` blocks any figure not already in the guide. The verifier now requires the box on every guide.
+- Checks on the owner PC: TypeScript passes; unit tests guide-direct-answers 4/4, on-page-seo 6/6, ctc-tax 27/27; pillar-guide-metadata 2/3 (pre-existing: Form 130 guide now has a modified date). Snapshots regenerated from an older dist template and the unmodified `verify-route-snapshots.ts` passed (92 snapshots, 13 shells). Rendered the real ledger component with the default example: rows reconcile, light and dark AA contrast pass (lowest 4.92:1), no horizontal scroll at 375px. Not run: `vite build` (Windows) and Playwright e2e (new assertions added to `salary-calculator.spec.ts` and `tool-analytics.spec.ts`).
+
 ## 2026-11-11 — Ops cycle: test
 
 - No `claude/cycle-*` branch from the build phase, so no build or tests run. Nothing merged. (An unrelated `claude/seo-snapshot-parity-5e050c` branch exists on origin; not touched.)

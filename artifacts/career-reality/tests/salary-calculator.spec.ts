@@ -15,6 +15,13 @@ test.describe("CTC calculator page", () => {
     await expect(page.getByText(/Tax Year 2026–27 default-regime in-hand cash/)).toBeVisible();
     await expect(page.getByTestId("metric-fixed-monthly-cash")).toContainText("₹1,33,377");
     await expect(page.getByTestId("metric-target-monthly-average")).toContainText("₹1,45,257");
+    const ledger = page.getByTestId("payslip-ledger");
+    await expect(ledger.getByRole("columnheader", { name: "Fixed pay only" })).toBeVisible();
+    await expect(page.getByTestId("ledger-annual-take-home")).toContainText("₹16,00,528");
+    await expect(page.getByTestId("ledger-annual-take-home")).toContainText("₹17,43,088");
+    await expect(page.getByTestId("ledger-monthly-take-home")).toContainText("₹1,33,377");
+    await expect(page.getByTestId("ledger-monthly-take-home")).toContainText("₹1,45,257");
+    await expect(page.getByTestId("ledger-income-tax")).toContainText("−₹1,84,912");
     await expect(page.getByTestId("metric-target-monthly-average")).toContainText(
       "not a guaranteed monthly payslip",
     );

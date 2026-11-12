@@ -22,6 +22,7 @@
     "test:indexed-routes": "node --test tests/indexed-routes.test.mjs",
     "test:indexnow": "node --test tests/indexnow.test.mjs",
     "test:ctc-tax": "tsx --test tests/ctc-tax.test.ts",
+    "test:guide-direct-answers": "tsx --test tests/guide-direct-answers.test.ts",
     "test:company-verification": "tsx --test tests/company-verification-model.test.ts",
     "check:company-verification-links": "node scripts/check-company-verification-links.mjs",
     "serve": "node scripts/serve-published.mjs",

@@ -18,6 +18,7 @@ import { assertPublicRouteDescription } from "../src/data/seo-description-policy
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
 import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
 import { aboutCopy, teamCopy, type PeopleCopySection } from "../src/data/trust-people-copy.ts";
+import { getGuideDirectAnswer } from "../src/data/guide-direct-answers.ts";
 import { createRulesPageSchema, createToolApplicationSchema, isApplicationToolRoute, SITE_SOCIAL_IMAGE_PATH } from "../src/data/seo-page-schemas.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
 import {
@@ -1021,12 +1022,19 @@ function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotConte
 }
 
 function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[number], answer: string): SnapshotContent {
+  const directAnswer = getGuideDirectAnswer(guide.slug);
   const sections: SnapshotSection[] = [
-    {
-      id: "guide-direct-answer",
-      heading: "The direct answer",
-      html: `<p>${escapeHtml(guide.editorialFrame)}</p>`,
-    },
+    directAnswer
+      ? {
+        id: "guide-direct-answer",
+        heading: directAnswer.question,
+        html: `<p class="snapshot-direct-answer"><span class="snapshot-direct-label">Direct answer</span> ${escapeHtml(directAnswer.answer)}</p><p>${escapeHtml(guide.editorialFrame)}</p>`,
+      }
+      : {
+        id: "guide-direct-answer",
+        heading: "The direct answer",
+        html: `<p>${escapeHtml(guide.editorialFrame)}</p>`,
+      },
     ...guide.sections
     .filter((section) => section.heading !== "Questions to work through")
     .map((section, index) => ({
@@ -1226,7 +1234,7 @@ function renderStaticPage(
     .snapshot-navigation{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;border-top:1px solid #d8dedb;margin-top:32px;padding-top:24px;font:14px/1.8 system-ui,sans-serif}.snapshot-navigation h2{font-size:16px}.snapshot-navigation ul{list-style:none;padding:0}.snapshot-navigation a{color:#176f5e}
     .snapshot-shell h1{font-family:Georgia,serif;font-size:clamp(42px,7vw,80px);line-height:.94;letter-spacing:-.05em;margin:24px 0}
     .snapshot-home h1{max-width:13.5ch;font-size:clamp(3.8rem,16.5vw,5.2rem);line-height:.84;text-wrap:balance}
-    .snapshot-excerpt{font-size:18px;line-height:1.7;color:#66727a;max-width:700px}.snapshot-shell main{font-family:Georgia,serif;font-size:18px;line-height:1.9}.snapshot-lead{font-size:21px}.snapshot-related{display:flex;flex-wrap:wrap;gap:18px;border-top:1px solid #d8dedb;margin-top:56px;padding-top:24px;font-size:13px}.snapshot-related a{color:#176f5e;font-weight:700}
+    .snapshot-excerpt{font-size:18px;line-height:1.7;color:#66727a;max-width:700px}.snapshot-shell main{font-family:Georgia,serif;font-size:18px;line-height:1.9}.snapshot-lead{font-size:21px}.snapshot-direct-answer{border:1px solid rgba(31,113,106,.28);border-left:4px solid #1f716a;border-radius:14px 14px 14px 4px;background:rgba(31,113,106,.06);padding:16px 20px;margin:0 0 22px}.snapshot-direct-label{display:block;margin-bottom:6px;color:#1a6159;font:600 11px/1.4 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}.snapshot-related{display:flex;flex-wrap:wrap;gap:18px;border-top:1px solid #d8dedb;margin-top:56px;padding-top:24px;font-size:13px}.snapshot-related a{color:#176f5e;font-weight:700}
      .snapshot-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}.snapshot-table-hint{font:12px/1.5 system-ui,sans-serif;color:#66727a}.snapshot-table-wrap table{min-width:760px;border-collapse:collapse;font:14px/1.5 system-ui,sans-serif}.snapshot-table-wrap caption{text-align:left;font-weight:700;padding:8px 0}.snapshot-table-wrap th,.snapshot-table-wrap td{border:1px solid #d8dedb;padding:10px;text-align:left;vertical-align:top}.snapshot-table-wrap thead th{background:#f0f3f1}.snapshot-table-wrap tbody th{white-space:nowrap}
   </style></head>`);
   return html;

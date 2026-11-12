@@ -91,6 +91,13 @@ test("shows the qualified ₹20L example on the published CTC guide", async ({ p
   await expect(page.getByRole("link", { name: "Open the CTC calculator" }).first()).toHaveAttribute("href", "/salary-calculator/");
 });
 
+test("opens every guide with its direct answer", async ({ page }) => {
+  await page.goto("/guides/gratuity-four-years-eight-months/");
+  const box = page.getByTestId("guide-direct-answer");
+  await expect(box.getByRole("heading", { name: "Does 4 years 8 months count as 5 years for gratuity?" })).toBeVisible();
+  await expect(box).toContainText("That does not settle eligibility");
+});
+
 test("tax-regime comparison labels and calculates both sides for AY 2026–27", async ({ page }) => {
   await page.goto("/tax-regime-comparison/");
   await page.getByTestId("input-grossSalary").fill("2000000");
