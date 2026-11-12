@@ -1,34 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T11:37:07.519Z",
+  "generatedAt": "2026-11-11T06:09:16.710Z",
   "audits": [
-    {
-      "generatedAt": "2026-11-04T14:31:43.308Z",
-      "pageCount": 81,
-      "batchSize": 8,
-      "elapsedMs": 1423,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
-    {
-      "generatedAt": "2026-11-04T14:43:03.456Z",
-      "pageCount": 81,
-      "batchSize": 8,
-      "elapsedMs": 1393,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
-    {
-      "generatedAt": "2026-11-04T15:26:49.861Z",
-      "pageCount": 81,
-      "batchSize": 8,
-      "elapsedMs": 1057,
-      "warningThresholdMs": 5000,
-      "workerFailures": 0,
-      "slow": false
-    },
     {
       "generatedAt": "2026-11-04T15:32:44.597Z",
       "pageCount": 81,
@@ -178,6 +151,33 @@
       "pageCount": 87,
       "batchSize": 8,
       "elapsedMs": 1142,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-10T15:31:14.652Z",
+      "pageCount": 88,
+      "batchSize": 8,
+      "elapsedMs": 1218,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-10T15:51:36.986Z",
+      "pageCount": 88,
+      "batchSize": 8,
+      "elapsedMs": 1027,
+      "warningThresholdMs": 5000,
+      "workerFailures": 0,
+      "slow": false
+    },
+    {
+      "generatedAt": "2026-11-11T06:09:16.710Z",
+      "pageCount": 88,
+      "batchSize": 8,
+      "elapsedMs": 1635,
       "warningThresholdMs": 5000,
       "workerFailures": 0,
       "slow": false
