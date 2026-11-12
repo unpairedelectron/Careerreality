@@ -19,6 +19,7 @@ import { getSiteUrl } from "./seo-site-url.mjs";
 import { ctcWorkedExampleResults } from "../src/lib/ctc-calculator.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
 import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
+import { getGuideDirectAnswer } from "../src/data/guide-direct-answers.ts";
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { assertArticlePublisherLogos } from "./lib/verify-publisher-logo.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
@@ -857,6 +858,18 @@ for (const slug of authoredGuideSlugs) {
     const owner = longParagraphOwners.get(normalized);
     if (owner) throw new Error(`Duplicate paragraph of 25+ words appears in ${owner} and ${slug}.`);
     longParagraphOwners.set(normalized, slug);
+  }
+}
+
+// Every published guide opens with its direct answer (src/data/guide-direct-answers.ts).
+for (const route of routeRegistry.routes.filter((entry) => entry.kind === "guide" && entry.sitemap)) {
+  const slug = route.guideSlug ?? "";
+  const directAnswer = getGuideDirectAnswer(slug);
+  if (!directAnswer) throw new Error(`Guide ${slug} has no entry in src/data/guide-direct-answers.ts.`);
+  const html = fs.readFileSync(path.join(distRoot, route.path.replace(/^\/+/, ""), "index.html"), "utf8");
+  const text = visibleArticleText(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "");
+  if (!html.includes('class="snapshot-direct-answer"') || !text.includes(directAnswer.answer) || !text.includes(directAnswer.question)) {
+    throw new Error(`Guide ${slug} snapshot is missing its direct-answer box.`);
   }
 }
 

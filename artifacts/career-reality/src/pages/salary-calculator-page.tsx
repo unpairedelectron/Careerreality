@@ -5,6 +5,7 @@ import { Form } from "@/components/ui/form";
 import { PublicPage } from "@/components/shared/public-shell";
 import { trackDecisionToolCompletion } from "@/lib/analytics";
 import { ResultSharePanel } from "@/components/shared/result-share-panel";
+import { PayslipLedger } from "@/components/shared/payslip-ledger";
 import {
   calculateCtc,
   ctcWorkedExampleResults,
@@ -370,15 +371,45 @@ export function SalaryCalculatorPage() {
                   <Metric label="Target variable at risk" value={annual(inputs.annualVariablePay)} note="A target amount, not promised cash." testId="metric-variable-at-risk" />
                   <Metric label="Effective deductions" value={percent(result!.effectiveDeductionRateAtTarget)} note="Income tax, employee PF and professional tax as a share of target gross." testId="metric-effective-deduction" />
                 </div>
+                <PayslipLedger
+                  kicker="Payslip view · annual estimate"
+                  caption="Annual earnings, deductions and take-home, with zero variable pay and with the full variable target paid"
+                  columns={["Fixed pay only", "Full target"]}
+                  format={rupees}
+                  sections={[
+                    {
+                      title: "Earnings",
+                      rows: [
+                        { label: "Fixed gross pay", values: [result!.annualGrossAtZeroVariable, result!.annualGrossAtZeroVariable] },
+                        { label: "Variable pay", note: "A target, not promised cash.", values: [null, inputs.annualVariablePay] },
+                      ],
+                      subtotal: { label: "Gross cash", values: [result!.annualGrossAtZeroVariable, result!.annualGrossAtTarget] },
+                    },
+                    {
+                      title: "Deductions",
+                      rows: [
+                        { label: "Income tax", note: ctcTaxPeriodLabels[taxPeriod], values: [result!.annualTaxAtZeroVariable, result!.annualTaxAtTarget], deduct: true, testId: "ledger-income-tax" },
+                        { label: "Employee PF", note: draft.pfContributionBasis === "manual" ? "Amounts you entered." : "12% of the selected wage base.", values: [result!.annualEmployeePfAtZeroVariable, result!.annualEmployeePf], deduct: true },
+                        { label: "Professional tax", note: `Entered · ${inputs.stateOrUt}`, values: [inputs.annualProfessionalTax, inputs.annualProfessionalTax], deduct: true },
+                      ],
+                      subtotal: {
+                        label: "Total deductions",
+                        deduct: true,
+                        values: [
+                          result!.annualTaxAtZeroVariable + result!.annualEmployeePfAtZeroVariable + inputs.annualProfessionalTax,
+                          result!.annualTaxAtTarget + result!.annualEmployeePf + inputs.annualProfessionalTax,
+                        ],
+                      },
+                    },
+                  ]}
+                  total={{ label: "Annual take-home", values: [result!.annualTakeHomeAtZeroVariable, result!.annualTakeHomeAtTarget] }}
+                  monthly={{ label: "Per month (÷ 12)", values: [result!.monthlyInHandAtZeroVariable, result!.monthlyInHandAtTargetAverage] }}
+                  footnote="Gross cash minus deductions equals take-home. Each figure is rounded to the nearest rupee, so a column can differ from its total by ₹1. Employer PF, gratuity and other employer costs are not cash to you; they appear in the CTC check below."
+                />
                 <div className="rounded-xl border border-border/80 bg-background/65 p-4">
-                  <p className="mb-1 font-data text-[9px] uppercase tracking-[.15em] text-muted-foreground">Annual estimate at target</p>
-                  <BreakdownRow label="Target gross cash" value={annual(result!.annualGrossAtTarget)} />
-                  <BreakdownRow label="Fixed gross cash" value={annual(result!.annualGrossAtZeroVariable)} />
+                  <p className="mb-1 font-data text-[9px] uppercase tracking-[.15em] text-muted-foreground">Details behind the ledger</p>
                   <BreakdownRow label="Basic pay" value={annual(result!.annualBasic)} note={`${rupees(result!.monthlyBasic)} monthly basic`} />
-                  <BreakdownRow label="Income tax" value={annual(result!.annualTaxAtTarget)} />
                   <BreakdownRow label="Employment-tax deduction from taxable salary" value={annual(result!.taxAtTarget.employmentTaxDeduction)} note={taxPeriod === "tax-year-2026-27" ? "Allowed under section 19 for Tax Year 2026–27, up to the amount paid." : "Allowed under section 16(iii) for AY 2026–27, up to the amount paid."} testId="breakdown-employment-tax-deduction" />
-                  <BreakdownRow label="Employee PF at full target" value={annual(result!.annualEmployeePf)} note={`${rupees(result!.monthlyEmployeePf)} monthly average · ${draft.pfContributionBasis === "manual" ? "entered amount" : "12% of selected basic-wage base"}.`} />
-                  <BreakdownRow label="Employee PF at fixed pay" value={annual(result!.annualEmployeePfAtZeroVariable)} note={`${rupees(result!.monthlyEmployeePfAtZeroVariable)} monthly average.`} />
                   {draft.pfContributionBasis !== "manual" && <>
                     <BreakdownRow label="PF wage base for entered employment period" value={annual(result!.annualPfWageBase)} />
                     <BreakdownRow label="Employer EPS component at target" value={annual(result!.annualEmployerEps)} />
@@ -391,9 +422,6 @@ export function SalaryCalculatorPage() {
                       </table>
                     </div>
                   </>}
-                  <BreakdownRow label="Professional tax entered" value={annual(inputs.annualProfessionalTax)} note={inputs.stateOrUt} />
-                  <BreakdownRow label="Annual take-home at target" value={annual(result!.annualTakeHomeAtTarget)} />
-                  <BreakdownRow label="Annual take-home at zero variable" value={annual(result!.annualTakeHomeAtZeroVariable)} />
                   <BreakdownRow label="Effective tax rate" value={percent(result!.effectiveTaxRateAtTarget)} note="Income tax as a share of target gross." />
                 </div>
               </div>

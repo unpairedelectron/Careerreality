@@ -8,6 +8,7 @@ import routeRegistry from "@/data/route-registry";
 import { SITE_FOUNDER } from "@/data/site-founder";
 import { routeSeoTitle } from "@/data/seo-title";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
+import { getGuideDirectAnswer } from "@/data/guide-direct-answers";
 
 type GuideSource = { url: string; label: string; year?: string };
 
@@ -63,6 +64,7 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
   const route = routeRegistry.routes.find((item) => item.kind === "guide" && item.guideSlug === slug);
   const workedExample = slug ? guideWorkedExamples[slug as keyof typeof guideWorkedExamples] : undefined;
   const toolLink = slug ? guideToolLinks[slug] : undefined;
+  const directAnswer = getGuideDirectAnswer(slug);
 
   if (!route) {
     return <main className="p-8 text-sm text-muted-foreground" role="status">This guide is not available.</main>;
@@ -108,6 +110,13 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
           {!guide.lastVerified && guide.dateModified && <span>Substantively updated {guide.dateModified}</span>}
           <span>See <Link href="/editorial" className="font-semibold text-primary underline underline-offset-4">editorial standards</Link>.</span>
         </div>
+
+        {directAnswer && <section id="direct-answer" className="mb-9 rounded-[16px_16px_16px_4px] border border-l-4 border-primary/25 border-l-primary bg-primary/[.05] p-5 sm:p-6" aria-labelledby="direct-answer-heading" data-testid="guide-direct-answer">
+          <p className="font-data text-[10px] uppercase tracking-[.16em] text-primary">Direct answer</p>
+          <h2 id="direct-answer-heading" className="mt-2 font-display text-[1.55rem] leading-tight tracking-[-.03em] text-foreground sm:text-[1.8rem]">{directAnswer.question}</h2>
+          <p className="mt-3 text-base leading-7 text-foreground">{directAnswer.answer}</p>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">The checks, examples and limits behind this answer follow below.</p>
+        </section>}
 
         <p className="text-lg leading-8 text-foreground">{guide.editorialFrame}</p>
         {guide.lead && <p className="mt-5 text-sm leading-7 text-muted-foreground">{guide.lead}</p>}
