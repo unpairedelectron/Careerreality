@@ -1,3 +1,5 @@
+- 2026-11-12 deploy: NOT published. Local gate passed at cc4bff7. Replit built cc4bff7 OK but its copy has an extra unbuilt commit b7eebe8 (reports under artifacts/career-reality/reports/, not on origin). Could not confirm built == deployed, so stopped.
+
 # Operations log
 
 Newest first. One entry per session or scheduled run.
