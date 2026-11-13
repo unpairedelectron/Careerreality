@@ -1,9 +1,8 @@
-# Plan for build phase (12 Nov 2026 is a deploy day; build runs 10 Nov)
+# Plan for build phase (14 Nov 2026; deploy day is 16 Nov)
 
-Written 2026-11-09 (audit). Priority order per RUNBOOK section 0.
+Written 2026-11-13 (audit). Priority order per RUNBOOK section 0.
 
-1. **Broken/watching (ship tier):** `http://careerreality.in/` 301s to `https://careerreality.in:443/` (explicit :443). Harmless but untidy; find where the redirect is generated (host config vs `route-registry.json`/`_redirects`). Fix only if it lives in the repo; otherwise note for owner.
-2. **Ship-tier improvement:** EPF/PF withdrawal: reports say Form 121 replaces Form 15G/15H for TDS declaration on EPF withdrawal from tax year 2026-27. Check whether `/guides/pf-withdrawal-after-job-loss` and rules pages still say 15G/15H. Wording that changes no figure: ship. Any rule/threshold change: branch for owner. Verify against primary source first (incometaxindia.gov.in, if reachable) before editing.
-3. **One draft (Ask-first, branch `claude/guide-<slug>`):** pick one: (a) Labour Codes first anniversary: take-home vs PF/gratuity, with worked example (check existing `/guides/labour-codes-and-layoffs-india` first and expand it instead of adding a new page if overlap is high); (b) EPFO 3.0 / PF withdrawal tax. Do not use claims from secondary blogs as figures; cite primary sources.
-4. **Internal links:** link the new/expanded piece from `/rules/gratuity-wages`, `/salary-calculator`, layoffs hub.
-5. Branch `claude/guide-form-130-salary-tds-certificate` is already merged (c1e70fa) and can be left; `claude/article-redirects` and `claude/ga4-tag` also merged.
+1. **Broken/watching:** (a) 44 `/article/<slug>/` redirects are still not live (`/article/pf-withdrawal/` 404); waits on a publish. Next deploy (16 Nov) must not stop on Replit's extra unbuilt commit `b7eebe8`; owner action. (b) `http://` still 301s to `https://careerreality.in:443/`; host config, no repo source (see 10 Nov).
+2. **Ship-tier (branch `claude/cycle-2026-11-14`):** only if a primary source is reachable. Gov sites still answer 301/302 from this network, so test whether following redirects works (`curl -L`) before concluding they are blocked. Form 121 vs 15G/15H: no page mentions it; skip unless a source is confirmed.
+3. **One draft (Ask-first, `claude/guide-<slug>`):** expand `/guides/labour-codes-and-layoffs-india` with retrenchment compensation (15 days' average pay per completed year, IR Code) and the 50% wage rule effect on PF/gratuity, only with figures read from labour.gov.in / gazette text. If no primary source is reachable, write nothing.
+4. **Internal links:** from `/rules/gratuity-wages`, `/salary-calculator` and the layoffs hub to whatever item 3 produces.

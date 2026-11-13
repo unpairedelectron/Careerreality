@@ -4,6 +4,14 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-13 — Ops cycle: audit
+
+- **Health:** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200; `www` 301 to `https://careerreality.in/`; `http` still 301 to `https://careerreality.in:443/`. All 88 sitemap URLs 200. Guide byline present (Shiv Shakti Mishra, read-the-offer-beyond-ctc).
+- **Watching:** `/article/pf-withdrawal/` still 404 (redirects wait on a publish; the 12 Nov deploy stopped). `ops/LAST-DEPLOY` is still `c1e70fa`; main has several unpublished commits (ledger, direct answers, redirects).
+- **Primary sources:** incometaxindia.gov.in 302, epfindia.gov.in 301, labour.gov.in 302 (not followed; not read). Date-sensitive figure check not run.
+- **Trends (1 search, secondary sources):** labour codes one year on (retrenchment compensation, 50% wage rule, PF/gratuity take-home), no layoff headline found.
+- Wrote `ops/PLAN.md`. No code changes.
+
 ## 2026-11-12 — Payslip ledger and guide direct answers (owner approved: "complete end to end")
 
 - Branch `claude/ledger-direct-answer`. CTC calculator: the flat "Annual estimate at target" list is now a payslip-style ledger (`src/components/shared/payslip-ledger.tsx`): earnings, deductions, take-home, fixed-pay vs full-target columns, semantic table. Remaining detail rows (basic, employment-tax deduction, PF wage base/EPS/EPF schedule, effective rate) stay below it. No calculation changed.
