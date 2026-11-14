@@ -4,6 +4,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-13 — Status check (owner PC)
+
+- Publishing blocker already cleared: `b7eebe8` is on origin via Replit's merge `b629cf6` (12 Nov, 13:38 UTC). The 13 and 14 Nov cycles still listed it as an owner action; OWNER-ACTIONS item 1 corrected to "optional: publish before 16 Nov".
+- Live: still `c1e70fa`. `/article/indian-it-layoff-cycle-2026/` returns 200 (no redirect yet); guides have no direct-answer box yet. Issue #2 stays open until the next publish.
+- For deploy-day routines: Replit has nothing unpushed as of `b629cf6`; check again before publishing.
+
 ## 2026-11-14 — Ops cycle: build
 
 - **Plan item 1:** `/article/pf-withdrawal/` still 404 live; redirects wait on a publish (owner action 1 in OWNER-ACTIONS, Replit commit `b7eebe8`). `http` redirect is host config; unchanged.
