@@ -4,6 +4,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-14 — Ops cycle: build
+
+- **Plan item 1:** `/article/pf-withdrawal/` still 404 live; redirects wait on a publish (owner action 1 in OWNER-ACTIONS, Replit commit `b7eebe8`). `http` redirect is host config; unchanged.
+- **Plan items 2-4:** no ship-tier change and no guide draft. With `curl -L`, `labour.gov.in` now answers 200 (via `www.labour.gov.in`), but `/labour-codes` is a JS-rendered page with no gazette or IR Code text, and a guessed PDF path 404s. `www.incometaxindia.gov.in` 403, `www.epfindia.gov.in` connection fails. One search found only secondary sources, which disagree on notice period, so no retrenchment-compensation figures were added. No branch, no build; the test phase should find nothing to do.
+- Next step for a draft: owner can supply the IR Code gazette PDF URL, or allow egazette.gov.in / indiacode.nic.in.
+
 ## 2026-11-13 — Ops cycle: audit
 
 - **Health:** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200; `www` 301 to `https://careerreality.in/`; `http` still 301 to `https://careerreality.in:443/`. All 88 sitemap URLs 200. Guide byline present (Shiv Shakti Mishra, read-the-offer-beyond-ctc).
