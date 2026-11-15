@@ -4,6 +4,10 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-15 — Ops cycle: test
+
+- No `claude/cycle-*` branch from the 14 Nov build phase (only an older `claude/guide-form-130-salary-tds-certificate` draft awaiting owner), so no build run and nothing merged.
+
 ## 2026-11-13 — Status check (owner PC)
 
 - Publishing blocker already cleared: `b7eebe8` is on origin via Replit's merge `b629cf6` (12 Nov, 13:38 UTC). The 13 and 14 Nov cycles still listed it as an owner action; OWNER-ACTIONS item 1 corrected to "optional: publish before 16 Nov".
