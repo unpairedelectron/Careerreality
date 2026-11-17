@@ -19,6 +19,7 @@ import { createSiteOrganization } from "../src/data/seo-organization.ts";
 import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
 import { aboutCopy, teamCopy, type PeopleCopySection } from "../src/data/trust-people-copy.ts";
 import { getGuideDirectAnswer } from "../src/data/guide-direct-answers.ts";
+import { getRelatedGuideSlugs } from "../src/data/guide-related-guides.ts";
 import { createRulesPageSchema, createToolApplicationSchema, isApplicationToolRoute, SITE_SOCIAL_IMAGE_PATH } from "../src/data/seo-page-schemas.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
 import {
@@ -1057,6 +1058,17 @@ function renderGuideSnapshotContent(guide: (typeof generatedGuideData.guides)[nu
     sections.push({
       heading: "Frequently asked questions",
       html: guide.faqs.map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`).join(""),
+    });
+  }
+  const relatedGuides = getRelatedGuideSlugs(guide.slug).flatMap((relatedSlug) => {
+    const relatedRoute = routeRegistry.routes.find((entry) => entry.kind === "guide" && entry.guideSlug === relatedSlug && entry.sitemap);
+    return relatedRoute ? [{ route: relatedRoute, question: getGuideDirectAnswer(relatedSlug)?.question }] : [];
+  });
+  if (relatedGuides.length > 0) {
+    sections.push({
+      id: "guide-keep-reading",
+      heading: "Related guides",
+      html: `<ul>${relatedGuides.map(({ route, question }) => `<li><a href="${escapeHtml(publicPath(route.path))}">${escapeHtml(route.title)}</a>${question ? ` — ${escapeHtml(question)}` : ""}</li>`).join("")}</ul>`,
     });
   }
   if (guide.nextSteps.length > 0) {

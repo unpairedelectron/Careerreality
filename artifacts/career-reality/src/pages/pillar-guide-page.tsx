@@ -9,6 +9,7 @@ import { SITE_FOUNDER } from "@/data/site-founder";
 import { routeSeoTitle } from "@/data/seo-title";
 import { guideWorkedExamples, guideToolLinks } from "@/data/guide-worked-examples";
 import { getGuideDirectAnswer } from "@/data/guide-direct-answers";
+import { getRelatedGuideSlugs } from "@/data/guide-related-guides";
 
 type GuideSource = { url: string; label: string; year?: string };
 
@@ -65,6 +66,10 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
   const workedExample = slug ? guideWorkedExamples[slug as keyof typeof guideWorkedExamples] : undefined;
   const toolLink = slug ? guideToolLinks[slug] : undefined;
   const directAnswer = getGuideDirectAnswer(slug);
+  const relatedGuides = getRelatedGuideSlugs(slug).flatMap((relatedSlug) => {
+    const relatedRoute = routeRegistry.routes.find((item) => item.kind === "guide" && item.guideSlug === relatedSlug && item.sitemap);
+    return relatedRoute ? [{ slug: relatedSlug, path: relatedRoute.path, title: relatedRoute.title, question: getGuideDirectAnswer(relatedSlug)?.question }] : [];
+  });
 
   if (!route) {
     return <main className="p-8 text-sm text-muted-foreground" role="status">This guide is not available.</main>;
@@ -170,6 +175,19 @@ function PillarGuideContent({ slug, guide }: { slug: string; guide: Guide }) {
             </section>
           ))}
         </div>
+
+        {relatedGuides.length > 0 && <section className="mt-14 border-t border-border pt-8" aria-labelledby="guide-keep-reading-title" data-testid="guide-keep-reading">
+          <p className="text-[10px] font-bold uppercase tracking-[.16em] text-primary">Keep reading</p>
+          <h2 id="guide-keep-reading-title" className="mt-2 font-display text-3xl">Related guides</h2>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-3">
+            {relatedGuides.map((related) => <li key={related.slug}>
+              <Link href={related.path} className="group flex h-full flex-col rounded-[16px_16px_16px_4px] border border-border bg-card p-4 transition-colors hover:border-primary/45">
+                <span className="font-semibold leading-6 text-foreground group-hover:text-primary">{related.title}</span>
+                {related.question && <span className="mt-2 text-sm leading-6 text-muted-foreground">{related.question}</span>}
+              </Link>
+            </li>)}
+          </ul>
+        </section>}
 
         {guide.nextSteps.length > 0 && <section className="mt-14 rounded-[24px] border border-primary/20 bg-primary/[.04] p-6 sm:p-8" aria-labelledby="guide-next-title">
           <p className="text-[10px] font-bold uppercase tracking-[.16em] text-primary">Use this in your next conversation</p>
