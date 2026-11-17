@@ -13,6 +13,7 @@ Newest first. One entry per session or scheduled run.
 - **Live:** article redirects and guide direct-answer boxes are live (published after the 09:00 audit). `ops/LAST-DEPLOY` not updated; commit unknown from here. `http://` still 301s to `https://careerreality.in:443/`. Sitemap: 88 URLs, 0 errors, last downloaded 13 Nov.
 - **Internal links (live crawl of 88 pages):** guides had a median of 1 in-content inbound link (the hub). Shipped: every guide now has a "Related guides" block with three hand-picked guides (`src/data/guide-related-guides.ts`), in the page and the snapshot; test requires each guide be linked from ≥2 others, verifier requires the links in snapshot main content. After: min 3, median 4, max 7 in-content inbound links per guide. TypeScript, unit tests and the unmodified snapshot verifier pass (92 snapshots); guide length 1,318–1,731 words.
 - Owner actions updated: request indexing for 7 URLs, host `http` redirect, record last publish.
+- IndexNow: submitted 132 URLs (88 sitemap + 44 redirected `/article/` URLs) with the site key; HTTP 202. Google does not use IndexNow; Google recrawl relies on the sitemap and the owner's Request indexing.
 
 ## 2026-11-17 — Ops cycle: audit
 
