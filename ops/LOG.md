@@ -4,6 +4,16 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-17 — Search Console audit (owner PC) and guide cross-linking
+
+- **Access:** Node client with the service account, `webmasters.readonly`, property `sc-domain:careerreality.in` (siteFullUser). Script kept outside the repo.
+- **Performance (Search Analytics, data to 16 Nov):** last 28 days 10 clicks / 2,913 impressions vs prior 28 days 11 / 1,716. Impressions rose; average position slid from ~8 (Sept–mid Oct) to 14.6 and 17.4 in the two November weeks. The slide is mostly mix: new `/rules/*` pages entered at position ~42 and `/guides/*` at ~14, while old article URLs held ~7.5. Desktop 19.7 vs mobile 8.9. Over 90 days, `www` + `/article/*` URLs carry most impressions (top: `www…/article/what-20-lpa-actually-feels-like-india-purchasing-power/`, 1,145 impressions in 28 days, queries like "20 lpa means").
+- **Indexing (URL Inspection, all 88 sitemap URLs):** 78 indexed. Not indexed: never discovered `/ai/`, `/security/`, `/guides/data-science-career-claims/`, `/layoffs/amazon-devices-services-reduction-2026/`; discovered-not-crawled `/terms/`, `/accessibility/`; crawled-not-indexed `/about/`; Soft 404 `/guides/independent-work-without-romanticising-it/` (12 Nov crawl; live page is fine: 1,276 words, index,follow); `/contact/` Google canonical still `www`; `/companies/` alternate with canonical. 29 of 30 guide URLs inspected were indexed except the two above. Last crawl: 21 pages in Nov, 53 in Oct, 8 in Sept, 6 never.
+- **Legacy URLs (top 15 by impressions):** 5 old `/article/` URLs still indexed, 3 excluded by noindex, several www alternates. Google had grouped the old noindex shells as duplicates of each other (canonical pointed at an unrelated article). The 44 article redirects are live now (seen 17 Nov), which should consolidate them onto guides as Google recrawls.
+- **Live:** article redirects and guide direct-answer boxes are live (published after the 09:00 audit). `ops/LAST-DEPLOY` not updated; commit unknown from here. `http://` still 301s to `https://careerreality.in:443/`. Sitemap: 88 URLs, 0 errors, last downloaded 13 Nov.
+- **Internal links (live crawl of 88 pages):** guides had a median of 1 in-content inbound link (the hub). Shipped: every guide now has a "Related guides" block with three hand-picked guides (`src/data/guide-related-guides.ts`), in the page and the snapshot; test requires each guide be linked from ≥2 others, verifier requires the links in snapshot main content. After: min 3, median 4, max 7 in-content inbound links per guide. TypeScript, unit tests and the unmodified snapshot verifier pass (92 snapshots); guide length 1,318–1,731 words.
+- Owner actions updated: request indexing for 7 URLs, host `http` redirect, record last publish.
+
 ## 2026-11-17 — Ops cycle: audit
 
 - **Health:** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200; `www` 301 to `https://careerreality.in/`; `http` still 301 to `https://careerreality.in:443/`. All 88 sitemap URLs 200. Guide byline and Article JSON-LD present.
