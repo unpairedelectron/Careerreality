@@ -3,6 +3,9 @@
 # Operations log
 
 Newest first. One entry per session or scheduled run.
+## 2026-11-17 — Tax Year 2026–27 rules draft merged (owner approved)
+
+- Owner said "Merge it". Merged `claude/rules-tax-year-2026-27` into `main` as a merge commit. On the merged tree: TypeScript passes; on-page-seo 6/6, guide-related-guides 2/2, guide-direct-answers 4/4; unmodified snapshot verifier passes (92 snapshots, 13 shells). Goes live with the next publish (20 Nov deploy). Old-regime tax year 2026–27 slab rates remain unstated until a primary schedule is published.
 
 ## 2026-11-17 — Draft: Tax Year 2026–27 on the tax-slab rules pages (owner asked for the draft)
 
