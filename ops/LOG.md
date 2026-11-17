@@ -4,6 +4,12 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-17 — Rules pages: search titles (owner approved)
+
+- Search Console, `/rules/*` page × query, last 60 days: almost all impressions are on the two tax-slab pages. New regime: 39 queries, 138 impressions ("new tax regime" pos 57, "new tax regime slabs" 35, "tax slab new regime" 35). Old regime: 27 queries, 58 impressions ("old tax slab rate" 40, "old tax regime deductions" 50, "old tax regime slabs" 74). Other rules pages: under 10 impressions each.
+- Shipped `31a25aa`: registry `seoTitle` "New Tax Regime Slabs AY 2026–27, 87A Rebate" / "Old Tax Regime Slabs AY 2026–27, Deductions"; descriptions lead with figures already in each page's rate table (₹4 lakh nil band, 5–30%, 87A to ₹12 lakh; ₹2.5 lakh nil band, 5/20/30%, ₹5 lakh 87A). H1, page content, figures and scope unchanged. `llms.txt` regenerated. On-page SEO tests 6/6; unmodified snapshot verifier passes (92). Registry titles are capped at 60 characters total including " | CareerReality".
+- Head terms like "new tax regime slabs" are dominated by official and large tax sites; titles alone will not reach page one. The bigger lever, a Tax Year 2026–27 table, is Ask-first and added to OWNER-ACTIONS.
+
 ## 2026-11-17 — Search Console audit (owner PC) and guide cross-linking
 
 - **Access:** Node client with the service account, `webmasters.readonly`, property `sc-domain:careerreality.in` (siteFullUser). Script kept outside the repo.
