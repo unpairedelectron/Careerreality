@@ -730,7 +730,8 @@
       "component": "rulesLibrary",
       "kind": "library",
       "title": "New Tax Regime Slabs and Rebate",
-      "description": "Check India's AY 2026–27 new-regime income-tax slabs and rebate using dated official sources; review thresholds and limits before applying them to salary tax.",
+      "seoTitle": "New Tax Regime Slabs AY 2026–27, 87A Rebate",
+      "description": "New tax regime slabs for AY 2026–27: nil up to ₹4 lakh, then 5% to 30% by band, and the 87A rebate up to ₹12 lakh income, with official sources and steps.",
       "render": "snapshot",
       "indexability": "indexable",
       "sitemap": true
@@ -740,7 +741,8 @@
       "component": "rulesLibrary",
       "kind": "library",
       "title": "Old Tax Regime Slabs and Rebate",
-      "description": "Review AY 2026–27 old-regime income tax bands and rebate limits in India; keep age, deductions, surcharge and cess apart when checking salary-tax estimates.",
+      "seoTitle": "Old Tax Regime Slabs AY 2026–27, Deductions",
+      "description": "Old tax regime slabs for AY 2026–27: nil up to ₹2.5 lakh, then 5%, 20% and 30% bands, the ₹5 lakh 87A limit, and how to check a deduction before claiming.",
       "render": "snapshot",
       "indexability": "indexable",
       "sitemap": true
