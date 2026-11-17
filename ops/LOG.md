@@ -4,6 +4,14 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-17 — Ops cycle: audit
+
+- **Health:** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200; `www` 301 to `https://careerreality.in/`; `http` still 301 to `https://careerreality.in:443/`. All 88 sitemap URLs 200. Guide byline and Article JSON-LD present.
+- **Watching:** no 16 Nov deploy entry in this log, `ops/LAST-DEPLOY` still `c1e70fa`, `/article/pf-withdrawal/` still 404, and the live guide has no direct-answer box. The 16 Nov deploy appears not to have published; reason not visible from here.
+- **Trends (1 search, secondary sources, unverified):** TCS Pune layoffs and Labour Commissioner hearing, Oracle India cuts, InnoData ~550 cuts, survey on short-notice layoffs. Nothing found on income tax changes.
+- **Date-sensitive figures:** not checked (no primary source reachable).
+- Wrote `ops/PLAN.md`. No code changes.
+
 ## 2026-11-15 — Ops cycle: test
 
 - No `claude/cycle-*` branch from the 14 Nov build phase (only an older `claude/guide-form-130-salary-tds-certificate` draft awaiting owner), so no build run and nothing merged.
