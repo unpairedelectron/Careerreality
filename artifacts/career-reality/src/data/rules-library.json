@@ -82,12 +82,30 @@
         ["Above ₹24 lakh", "30% on the amount in this band"],
         ["Section 87A", "For an eligible resident individual, total income up to ₹12 lakh; maximum rebate ₹60,000. Special-rate tax is excluded; marginal relief rules apply near the boundary."]
       ],
+      "extraTables": [
+        {
+          "caption": "Tax Year 2026–27 (income earned from 1 April 2026) · Income-tax Act, 2025, sections 202 and 156 · read 17 November 2026",
+          "rows": [
+            ["Up to ₹4 lakh", "Nil rate"],
+            ["₹4–8 lakh", "5% on the amount in this band"],
+            ["₹8–12 lakh", "10% on the amount in this band"],
+            ["₹12–16 lakh", "15% on the amount in this band"],
+            ["₹16–20 lakh", "20% on the amount in this band"],
+            ["₹20–24 lakh", "25% on the amount in this band"],
+            ["Above ₹24 lakh", "30% on the amount in this band"],
+            ["Section 156(2) rebate", "For a resident individual taxed under section 202(1) with total income up to ₹12 lakh: the tax payable or ₹60,000, whichever is less. Above ₹12 lakh, relief limits the tax to the income above ₹12 lakh where that is lower. The rebate cannot exceed tax at the section 202(1) rates."],
+            ["Default and opting out", "Section 202(1) applies unless the person exercises the section 202(4) option. A person without business or professional income exercises it with the return of income for the tax year."]
+          ]
+        }
+      ],
       "change": "The official rate schedule opened for this entry covers AY 2025–26 and AY 2026–27; the linked Finance Act material describes the applicable new-regime bands. The Finance Bill 2026 memorandum said no change was proposed in rates for tax year 2026–27 (checked 8 November 2026).",
       "plainLanguage": "Apply each rate only to the slice of taxable income in that band. Check eligibility, rebate, surcharge, cess, and special-rate income separately.",
       "sources": [
         { "label": "Memorandum explaining the Finance Bill, 2026", "url": "https://www.incometaxindia.gov.in/documents/81799/11848482/memo-2026.pdf" },
         { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
-        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
+        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" },
+        { "label": "Income-tax Act, 2025: section 202 (new tax regime rates)", "url": "https://www.incometaxindia.gov.in/w/section-202-78" },
+        { "label": "Income-tax Act, 2025: section 156 (rebate for certain individuals)", "url": "https://www.incometaxindia.gov.in/w/section-156-88" }
       ],
       "verified": "2026-10-10",
       "related": [
@@ -107,11 +125,23 @@
         ["Above ₹10 lakh", "30% on the amount in this band"],
         ["Section 87A", "For an eligible resident individual, total income up to ₹5 lakh; rebate is limited to income tax or ₹12,500, whichever is lower"]
       ],
+      "extraTables": [
+        {
+          "caption": "Tax Year 2026–27 (income earned from 1 April 2026) · what the Income-tax Act, 2025 confirms · read 17 November 2026",
+          "rows": [
+            ["Which regime applies", "The new-regime rates in section 202(1) are the default. The older slab schedule applies only to a person who exercises the section 202(4) option; without business or professional income, that option is exercised with the return for the tax year."],
+            ["Section 156(1) rebate", "For a resident individual with total income up to ₹5 lakh: the tax payable or ₹12,500, whichever is less."],
+            ["Slab rates", "Not stated here yet. On 17 November 2026 the Income Tax Department's tax-rates page listed rates for AY 2025–26 and AY 2026–27 only. Confirm the tax year 2026–27 schedule in the enacted Finance Act, 2026 before applying the AY 2026–27 table above to income earned from April 2026."]
+          ]
+        }
+      ],
       "change": "The official rate page lists AY 2026–27. The old-regime rebate threshold is distinct from surcharge marginal relief and from new-regime rebate rules.",
       "plainLanguage": "Use the correct age category and year; treat deductions, rebate, surcharge, and cess as separate calculation steps.",
       "sources": [
         { "label": "Income Tax Department: Tax Rates", "url": "https://www.incometaxindia.gov.in/tax-rates" },
-        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" }
+        { "label": "Income Tax Department: Highlights to Finance Act 2025", "url": "https://incometaxindia.gov.in/Lists/Latest%20News/Attachments/708/Highlights-to-Finance-Act-2025.pdf" },
+        { "label": "Income-tax Act, 2025: section 202 (new tax regime rates)", "url": "https://www.incometaxindia.gov.in/w/section-202-78" },
+        { "label": "Income-tax Act, 2025: section 156 (rebate for certain individuals)", "url": "https://www.incometaxindia.gov.in/w/section-156-88" }
       ],
       "verified": "2026-10-10",
       "related": [

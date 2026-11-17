@@ -102,6 +102,7 @@ const rulesLibraryData = JSON.parse(
     description: string;
     intro: string;
     rows: string[][];
+    extraTables?: Array<{ caption: string; rows: string[][] }>;
     change: string;
     plainLanguage: string;
     sources: Array<{ label: string; url: string }>;
@@ -724,6 +725,10 @@ function renderRouteContent(route: string, meta: StaticRouteMeta): SnapshotConte
       lead: rulesPage.intro,
       sections: [
         { heading: `Rule summary · verified ${rulesPage.verified}`, html: `<p class="snapshot-table-hint">Scroll horizontally to view all columns on small screens.</p><div class="snapshot-table-wrap" role="region" aria-label="Scrollable rules summary table" tabindex="0"><table><thead><tr><th scope="col">Topic</th><th scope="col">Official summary</th></tr></thead><tbody>${tableRows}</tbody></table></div>` },
+        ...(rulesPage.extraTables ?? []).map((extra) => ({
+          heading: extra.caption,
+          html: `<div class="snapshot-table-wrap" role="region" aria-label="${escapeHtml(extra.caption)}" tabindex="0"><table><thead><tr><th scope="col">Topic</th><th scope="col">Official summary</th></tr></thead><tbody>${extra.rows.map(([label, value]) => `<tr><th scope="row">${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join("")}</tbody></table></div>`,
+        })),
         { heading: "What changed since last year", body: rulesPage.change },
         { heading: "In plain language", body: rulesPage.plainLanguage },
         ...copy.sections.map((section) => ({ heading: section.heading, body: section.body })),

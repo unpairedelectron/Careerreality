@@ -25,6 +25,14 @@ export function RulesLibraryPage() {
             <tbody>{page.rows.map(([label, value]) => <tr key={label} className="border-t border-border"><th scope="row" className="w-1/3 p-4 align-top font-semibold">{label}</th><td className="p-4 leading-6">{value}</td></tr>)}</tbody>
           </table>
         </div>
+        {(("extraTables" in page && page.extraTables) || []).map((extra) => (
+          <div key={extra.caption} className="overflow-x-auto rounded-2xl border border-primary/25 bg-primary/[.03]" role="region" aria-label={extra.caption} tabIndex={0} data-testid="rules-extra-table">
+            <table className="w-full min-w-[580px] border-collapse text-left text-sm">
+              <caption className="p-4 text-left font-semibold">{extra.caption}</caption>
+              <tbody>{extra.rows.map(([label, value]) => <tr key={label} className="border-t border-border"><th scope="row" className="w-1/3 p-4 align-top font-semibold">{label}</th><td className="p-4 leading-6">{value}</td></tr>)}</tbody>
+            </table>
+          </div>
+        ))}
         <section className="rounded-2xl border border-border bg-muted/30 p-5">
           <h2 className="font-display text-2xl">What changed since last year</h2>
           <p className="mt-3 text-sm leading-7">{page.change}</p>
