@@ -4,6 +4,13 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-17 — Draft: Tax Year 2026–27 on the tax-slab rules pages (owner asked for the draft)
+
+- Primary sources read in the built-in browser from the owner PC (curl gets 403): incometaxindia.gov.in section 202 and section 156 of the Income-tax Act, 2025, both "last reviewed and updated 25-Oct-2026". Section 202(1) bands for a tax year: nil to ₹4,00,000; 5% to ₹8,00,000; 10% to ₹12,00,000; 15% to ₹16,00,000; 20% to ₹20,00,000; 25% to ₹24,00,000; 30% above. Section 202(4): opt-out; without business income, exercised with the return. Section 156(1): resident individual, total income up to ₹5,00,000, rebate = tax or ₹12,500 (lower). Section 156(2): under 202(1), up to ₹12 lakh, tax or ₹60,000 (lower), with marginal relief above; 156(3) caps it at tax under 202(1) rates.
+- The Department's tax-rates page (updated 17 Nov 2026) lists rates for AY 2025–26 and AY 2026–27 only. The Finance Bill 2026 memorandum PDF downloads rather than opening, so it was not read. No primary source for old-regime tax year 2026–27 slab rates was found, so the draft does not state them.
+- Branch `claude/rules-tax-year-2026-27` (`97a222b`): new optional `extraTables` in `rules-library.json`, rendered in the page and the snapshot; new-regime Tax Year 2026–27 table; old-regime "what the 2025 Act confirms" table; scope paragraphs; sections 202 and 156 added to sources; new-regime search title "New Tax Regime Slabs 2026–27 and Rebate". AY 2026–27 tables unchanged. TypeScript, on-page SEO tests 6/6 and the unmodified snapshot verifier pass (92 snapshots).
+- Not merged: Ask-first (changes published tax content). Listed in OWNER-ACTIONS item 2.
+
 ## 2026-11-17 — Rules pages: search titles (owner approved)
 
 - Search Console, `/rules/*` page × query, last 60 days: almost all impressions are on the two tax-slab pages. New regime: 39 queries, 138 impressions ("new tax regime" pos 57, "new tax regime slabs" 35, "tax slab new regime" 35). Old regime: 27 queries, 58 impressions ("old tax slab rate" 40, "old tax regime deductions" 50, "old tax regime slabs" 74). Other rules pages: under 10 impressions each.
