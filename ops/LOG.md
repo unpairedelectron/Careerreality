@@ -3,6 +3,12 @@
 # Operations log
 
 Newest first. One entry per session or scheduled run.
+## 2026-11-18 — Ops cycle: build
+
+- Plan item 1: live `/article/pf-withdrawal/` still 404; live not yet carrying the 17 Nov repo state, 20 Nov deploy will publish. No change.
+- Plan items 2-4: no ship-tier change queued. Primary-source check for the layoff-rights draft: `indiacode.nic.in` and `egazette.gov.in` unreachable (no connection), `incometaxindia.gov.in` 403, `labour.gov.in` 200 but only JS pages found earlier. No primary source, so no guide drafted. No branch; test phase should find nothing to do.
+- Needs owner (already in OWNER-ACTIONS 4): allow `indiacode.nic.in` and `egazette.gov.in` in network settings to enable the draft.
+
 ## 2026-11-17 — Tax Year 2026–27 rules draft merged (owner approved)
 
 - Owner said "Merge it". Merged `claude/rules-tax-year-2026-27` into `main` as a merge commit. On the merged tree: TypeScript passes; on-page-seo 6/6, guide-related-guides 2/2, guide-direct-answers 4/4; unmodified snapshot verifier passes (92 snapshots, 13 shells). Goes live with the next publish (20 Nov deploy). Old-regime tax year 2026–27 slab rates remain unstated until a primary schedule is published.
