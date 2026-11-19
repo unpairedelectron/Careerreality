@@ -3,6 +3,10 @@
 # Operations log
 
 Newest first. One entry per session or scheduled run.
+## 2026-11-19 — Ops cycle: test
+
+- No `claude/cycle-*` branch from the 18 Nov build phase, so no build run and nothing merged.
+
 ## 2026-11-18 — Ops cycle: build
 
 - Plan item 1: live `/article/pf-withdrawal/` still 404; live not yet carrying the 17 Nov repo state, 20 Nov deploy will publish. No change.
