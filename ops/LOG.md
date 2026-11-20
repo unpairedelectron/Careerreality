@@ -3,6 +3,10 @@
 # Operations log
 
 Newest first. One entry per session or scheduled run.
+
+## 2026-11-20 — Deploy: published
+
+- Published main (content at 083067f, origin main 95d212e). Local gate passed (install, build, postbuild checks). Replit Agent merged origin main, build exit 0, publish status success. Replit pushed main to origin. Live check: / and /sitemap.xml 200; guide 301 to trailing slash then 200.
 ## 2026-11-19 — Ops cycle: test
 
 - No `claude/cycle-*` branch from the 18 Nov build phase, so no build run and nothing merged.
