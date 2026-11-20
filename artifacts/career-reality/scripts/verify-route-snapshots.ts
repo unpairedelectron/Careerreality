@@ -20,6 +20,7 @@ import { ctcWorkedExampleResults } from "../src/lib/ctc-calculator.ts";
 import { createSiteOrganization } from "../src/data/seo-organization.ts";
 import { SITE_FOUNDER, createFounderAuthor, createFounderPerson } from "../src/data/site-founder.ts";
 import { getGuideDirectAnswer } from "../src/data/guide-direct-answers.ts";
+import { getRelatedGuideSlugs } from "../src/data/guide-related-guides.ts";
 import { assertPublicRouteDescription } from "../src/data/seo-description-policy.ts";
 import { assertArticlePublisherLogos } from "./lib/verify-publisher-logo.ts";
 import { publicSiteMap, sitemapSections } from "../src/data/site-map.ts";
@@ -870,6 +871,13 @@ for (const route of routeRegistry.routes.filter((entry) => entry.kind === "guide
   const text = visibleArticleText(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "");
   if (!html.includes('class="snapshot-direct-answer"') || !text.includes(directAnswer.answer) || !text.includes(directAnswer.question)) {
     throw new Error(`Guide ${slug} snapshot is missing its direct-answer box.`);
+  }
+  const mainHtml = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? "";
+  for (const relatedSlug of getRelatedGuideSlugs(slug)) {
+    const relatedRoute = routeRegistry.routes.find((entry) => entry.kind === "guide" && entry.guideSlug === relatedSlug);
+    if (!relatedRoute || !mainHtml.includes(`href="${snapshotHref(relatedRoute.path)}"`)) {
+      throw new Error(`Guide ${slug} snapshot is missing its in-content link to related guide ${relatedSlug}.`);
+    }
   }
 }
 

@@ -3,6 +3,43 @@
 # Operations log
 
 Newest first. One entry per session or scheduled run.
+## 2026-11-19 — Ops cycle: test
+
+- No `claude/cycle-*` branch from the 18 Nov build phase, so no build run and nothing merged.
+
+## 2026-11-18 — Ops cycle: build
+
+- Plan item 1: live `/article/pf-withdrawal/` still 404; live not yet carrying the 17 Nov repo state, 20 Nov deploy will publish. No change.
+- Plan items 2-4: no ship-tier change queued. Primary-source check for the layoff-rights draft: `indiacode.nic.in` and `egazette.gov.in` unreachable (no connection), `incometaxindia.gov.in` 403, `labour.gov.in` 200 but only JS pages found earlier. No primary source, so no guide drafted. No branch; test phase should find nothing to do.
+- Needs owner (already in OWNER-ACTIONS 4): allow `indiacode.nic.in` and `egazette.gov.in` in network settings to enable the draft.
+
+## 2026-11-17 — Tax Year 2026–27 rules draft merged (owner approved)
+
+- Owner said "Merge it". Merged `claude/rules-tax-year-2026-27` into `main` as a merge commit. On the merged tree: TypeScript passes; on-page-seo 6/6, guide-related-guides 2/2, guide-direct-answers 4/4; unmodified snapshot verifier passes (92 snapshots, 13 shells). Goes live with the next publish (20 Nov deploy). Old-regime tax year 2026–27 slab rates remain unstated until a primary schedule is published.
+
+## 2026-11-17 — Draft: Tax Year 2026–27 on the tax-slab rules pages (owner asked for the draft)
+
+- Primary sources read in the built-in browser from the owner PC (curl gets 403): incometaxindia.gov.in section 202 and section 156 of the Income-tax Act, 2025, both "last reviewed and updated 25-Oct-2026". Section 202(1) bands for a tax year: nil to ₹4,00,000; 5% to ₹8,00,000; 10% to ₹12,00,000; 15% to ₹16,00,000; 20% to ₹20,00,000; 25% to ₹24,00,000; 30% above. Section 202(4): opt-out; without business income, exercised with the return. Section 156(1): resident individual, total income up to ₹5,00,000, rebate = tax or ₹12,500 (lower). Section 156(2): under 202(1), up to ₹12 lakh, tax or ₹60,000 (lower), with marginal relief above; 156(3) caps it at tax under 202(1) rates.
+- The Department's tax-rates page (updated 17 Nov 2026) lists rates for AY 2025–26 and AY 2026–27 only. The Finance Bill 2026 memorandum PDF downloads rather than opening, so it was not read. No primary source for old-regime tax year 2026–27 slab rates was found, so the draft does not state them.
+- Branch `claude/rules-tax-year-2026-27` (`97a222b`): new optional `extraTables` in `rules-library.json`, rendered in the page and the snapshot; new-regime Tax Year 2026–27 table; old-regime "what the 2025 Act confirms" table; scope paragraphs; sections 202 and 156 added to sources; new-regime search title "New Tax Regime Slabs 2026–27 and Rebate". AY 2026–27 tables unchanged. TypeScript, on-page SEO tests 6/6 and the unmodified snapshot verifier pass (92 snapshots).
+- Not merged: Ask-first (changes published tax content). Listed in OWNER-ACTIONS item 2.
+
+## 2026-11-17 — Rules pages: search titles (owner approved)
+
+- Search Console, `/rules/*` page × query, last 60 days: almost all impressions are on the two tax-slab pages. New regime: 39 queries, 138 impressions ("new tax regime" pos 57, "new tax regime slabs" 35, "tax slab new regime" 35). Old regime: 27 queries, 58 impressions ("old tax slab rate" 40, "old tax regime deductions" 50, "old tax regime slabs" 74). Other rules pages: under 10 impressions each.
+- Shipped `31a25aa`: registry `seoTitle` "New Tax Regime Slabs AY 2026–27, 87A Rebate" / "Old Tax Regime Slabs AY 2026–27, Deductions"; descriptions lead with figures already in each page's rate table (₹4 lakh nil band, 5–30%, 87A to ₹12 lakh; ₹2.5 lakh nil band, 5/20/30%, ₹5 lakh 87A). H1, page content, figures and scope unchanged. `llms.txt` regenerated. On-page SEO tests 6/6; unmodified snapshot verifier passes (92). Registry titles are capped at 60 characters total including " | CareerReality".
+- Head terms like "new tax regime slabs" are dominated by official and large tax sites; titles alone will not reach page one. The bigger lever, a Tax Year 2026–27 table, is Ask-first and added to OWNER-ACTIONS.
+
+## 2026-11-17 — Search Console audit (owner PC) and guide cross-linking
+
+- **Access:** Node client with the service account, `webmasters.readonly`, property `sc-domain:careerreality.in` (siteFullUser). Script kept outside the repo.
+- **Performance (Search Analytics, data to 16 Nov):** last 28 days 10 clicks / 2,913 impressions vs prior 28 days 11 / 1,716. Impressions rose; average position slid from ~8 (Sept–mid Oct) to 14.6 and 17.4 in the two November weeks. The slide is mostly mix: new `/rules/*` pages entered at position ~42 and `/guides/*` at ~14, while old article URLs held ~7.5. Desktop 19.7 vs mobile 8.9. Over 90 days, `www` + `/article/*` URLs carry most impressions (top: `www…/article/what-20-lpa-actually-feels-like-india-purchasing-power/`, 1,145 impressions in 28 days, queries like "20 lpa means").
+- **Indexing (URL Inspection, all 88 sitemap URLs):** 78 indexed. Not indexed: never discovered `/ai/`, `/security/`, `/guides/data-science-career-claims/`, `/layoffs/amazon-devices-services-reduction-2026/`; discovered-not-crawled `/terms/`, `/accessibility/`; crawled-not-indexed `/about/`; Soft 404 `/guides/independent-work-without-romanticising-it/` (12 Nov crawl; live page is fine: 1,276 words, index,follow); `/contact/` Google canonical still `www`; `/companies/` alternate with canonical. 29 of 30 guide URLs inspected were indexed except the two above. Last crawl: 21 pages in Nov, 53 in Oct, 8 in Sept, 6 never.
+- **Legacy URLs (top 15 by impressions):** 5 old `/article/` URLs still indexed, 3 excluded by noindex, several www alternates. Google had grouped the old noindex shells as duplicates of each other (canonical pointed at an unrelated article). The 44 article redirects are live now (seen 17 Nov), which should consolidate them onto guides as Google recrawls.
+- **Live:** article redirects and guide direct-answer boxes are live (published after the 09:00 audit). `ops/LAST-DEPLOY` not updated; commit unknown from here. `http://` still 301s to `https://careerreality.in:443/`. Sitemap: 88 URLs, 0 errors, last downloaded 13 Nov.
+- **Internal links (live crawl of 88 pages):** guides had a median of 1 in-content inbound link (the hub). Shipped: every guide now has a "Related guides" block with three hand-picked guides (`src/data/guide-related-guides.ts`), in the page and the snapshot; test requires each guide be linked from ≥2 others, verifier requires the links in snapshot main content. After: min 3, median 4, max 7 in-content inbound links per guide. TypeScript, unit tests and the unmodified snapshot verifier pass (92 snapshots); guide length 1,318–1,731 words.
+- Owner actions updated: request indexing for 7 URLs, host `http` redirect, record last publish.
+- IndexNow: submitted 132 URLs (88 sitemap + 44 redirected `/article/` URLs) with the site key; HTTP 202. Google does not use IndexNow; Google recrawl relies on the sitemap and the owner's Request indexing.
 
 ## 2026-11-17 — Ops cycle: audit
 
