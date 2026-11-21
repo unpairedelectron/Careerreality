@@ -4,6 +4,13 @@
 
 Newest first. One entry per session or scheduled run.
 
+## 2026-11-21 — Ops cycle: audit
+
+- **Health:** `/`, `/ads.txt`, `/robots.txt`, `/sitemap.xml`, `/favicon.ico` 200; `www` 301 to `https://careerreality.in/`; `http` 301 to `https://careerreality.in:443/` (unchanged). All 88 sitemap URLs 200 (count unchanged). Guide byline and Article JSON-LD author present. `/article/what-20-lpa-.../` 301s (redirects live). `/article/pf-withdrawal/` 404 is expected (not a registered redirect).
+- **Trends (1 search, secondary, unverified, nothing dated this week):** TCS "fluidity list" and severance allegations, InnoData ~550 India cuts (26 Oct), union complaints of forced resignations in Bengaluru IT, AI-linked layoffs.
+- **Date-sensitive figures:** not checked; `incometaxindia.gov.in` still 403 from here.
+- Wrote `ops/PLAN.md`. No code changes.
+
 ## 2026-11-20 — Deploy: published
 
 - Published main (content at 083067f, origin main 95d212e). Local gate passed (install, build, postbuild checks). Replit Agent merged origin main, build exit 0, publish status success. Replit pushed main to origin. Live check: / and /sitemap.xml 200; guide 301 to trailing slash then 200.
